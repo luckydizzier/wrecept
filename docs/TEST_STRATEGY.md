@@ -23,7 +23,7 @@ A Wrecept stabilitását több szinten biztosítjuk.
 
 ## Coverage és CI
 
-* Minimum 80% kódfedettségre törekszünk, de a kritikus útvonalakat minden esetben lefedjük.
-* A tesztek a CI folyamat részeként futnak, hibás build nem kerülhet kiadásra.
+* Minimum 80% kódfedettségre törekszünk. A Core és ViewModel rétegek kritikus útvonalait teljesen lefedjük.
+* A tesztek minden commit után futnak GitHub Actions alatt (`dotnet test`). Ha bármely teszt megbukik, a build elutasításra kerül.
 
 ---

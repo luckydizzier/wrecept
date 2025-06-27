@@ -25,4 +25,10 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 * A Storage réteg sikertelen műveletei naplóba kerülnek `%AppData%/Wrecept/logs` könyvtárba.
 * Kritikus hiba esetén a felhasználó dönthet a folytatásról vagy kilépésről.
 
+## Konkrét példák
+
+1. **Adatbázis fájl hiánya** – Ha a `wrecept.db` nem található indításkor, a Storage réteg új üres adatbázist hoz létre, majd figyelmeztető üzenetet jelenítünk meg.
+2. **Sérült import fájl** – Hibás formátumú vagy hiányzó adatfájl betöltésekor megszakítjuk a folyamatot, naplózzuk a fájl nevét és a kiváltó hibát, és lehetőséget adunk új fájl kiválasztására.
+3. **Hálózati kimaradás** – Külső frissítések letöltése közben kapcsolatvesztés esetén újrapróbálkozunk, majd offline módra váltunk, miközben a felhasználót tájékoztatjuk.
+
 ---

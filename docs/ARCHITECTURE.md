@@ -26,6 +26,13 @@ UI → ViewModel → Core → Storage
 
 A felhasználói események a ViewModelen keresztül jutnak el a Core-hoz, amely szükség esetén meghívja a Storage réteg szolgáltatásait.
 
+### Adatáramlás részletesen
+
+1. **View** – A felhasználói műveletek (billentyűleütések) eseményeket generálnak.
+2. **ViewModel** – A `RelayCommand` hívásain keresztül validálja az adatot, majd meghívja a Core szolgáltatásait.
+3. **Core** – Feldolgozza a kérést, számításokat végez, majd repositorykat hív.
+4. **Storage** – Az adatbázisműveletek végrehajtása után visszatér a Core réteghez, amely a ViewModelen keresztül értesíti a View-t.
+
 ## EF Core kezelése
 
 Az `DbContext` példányai a Storage rétegben élnek. A migrációk és a sémafrissítések parancssori eszközzel, CI környezetben futnak. A ViewModel soha nem fér közvetlenül az adatbázishoz.
