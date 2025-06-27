@@ -86,3 +86,15 @@ Reconstruction by: \[ChatGPT-Dev Agent – 2025 Edition]
 ---
 
 *Work in Progress – Not intended for production use (yet).*
+
+---
+
+## 📚 Dokumentációk
+
+- [ARCHITECTURE.md](ARCHITECTURE.md) – Rétegek és adatútvonalak
+- [AGENTS.md](AGENTS.md) – Agent feladatkiosztás
+- [CODE_STANDARDS.md](CODE_STANDARDS.md) – Kódolási irányelvek
+- [DEV_SPECS.md](DEV_SPECS.md) – Fejlesztési specifikáció
+- [ERROR_HANDLING.md](ERROR_HANDLING.md) – Hibatűrés
+- [FAULT_PLAN.md](FAULT_PLAN.md) – Hibabefecskendezési terv
+- [TEST_STRATEGY.md](TEST_STRATEGY.md) – Tesztstratégia
