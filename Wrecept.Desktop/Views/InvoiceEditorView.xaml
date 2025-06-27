@@ -5,8 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="800">
-    <Grid Background="{DynamicResource StageBackground}" Padding="10">
-        <StackPanel>
+    <Border Background="{DynamicResource StageBackground}" Padding="10">
+        <Grid>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                 <TextBlock Text="Számlaszám:" Width="80" />
                 <TextBox Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" Width="120" />
@@ -32,5 +32,6 @@
             </ListBox>
             <Button Content="Mentés" Command="{Binding SaveCommand}" Width="100" />
         </StackPanel>
-    </Grid>
+        </Grid>
+    </Border>
 </UserControl>
