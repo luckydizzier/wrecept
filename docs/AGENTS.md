@@ -1,5 +1,12 @@
 # 🤖 AGENTS.md
 
+---
+title: "AGENTS"
+purpose: "Defines agent workflow"
+author: "root_agent"
+date: "2025-06-27"
+---
+
 ## Overview
 
 This document defines the agent-based development workflow for the **Wrecept** desktop application. Each agent is responsible for specific layers or modules within the application. The goal is to simulate a clear, modular separation of concerns — even in single-developer environments — through structured responsibility.

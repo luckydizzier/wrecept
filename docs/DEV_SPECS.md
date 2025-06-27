@@ -1,5 +1,12 @@
 # 📘 Development Specification – Wrecept
 
+---
+title: "Development Specification"
+purpose: "Technical overview"
+author: "root_agent"
+date: "2025-06-27"
+---
+
 ## 🎯 Purpose
 
 Wrecept is a Windows-only, offline-first, single-user desktop application for invoice recording and basic procurement workflows. It draws heavily from the architecture and UI patterns of a legacy Clipper + dBase IV system, reimagined using modern C# and WPF technology.
