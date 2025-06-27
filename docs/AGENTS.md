@@ -103,8 +103,7 @@ This document defines the agent-based development workflow for the **Wrecept** d
 * **MINIMIZE** hard-coding; use centralized config and localization.
 * **FOLLOW** naming conventions: `Wrecept.Core.Models`, `Wrecept.Desktop.Views`, etc.
 * **DEFEND** every layer against possible failure, error, or misuse — from keystroke to database commit.
-
-> This file defines the orchestra. The music will follow.
+* Progress logs go to `docs/progress/[UTC-TIME]-[agent:name].md`
 
 ---
 
