@@ -57,6 +57,11 @@ The design must be:
 | `SupplierMaster`  | Simple list-and-edit view of vendors             |
 | `LookupDialog<T>` | Generic search/select component for lookups      |
 | `SettingsWindow`  | Audio/visual preferences and toggles             |
+| `MaintainingWindow`  | Application/Database maintenance              |
+| `HelpWindow`  | Shows the app usage from the documentations          |
+| `ExitDialog`  | Possible a question (Wanna quit? Enter/Esc)          |
+
+
 
 ---
 
