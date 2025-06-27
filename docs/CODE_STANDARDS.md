@@ -32,4 +32,9 @@ A kód minden rétegében egységes konvenciókat követünk, hogy a projekt át
 * A CommunityToolkit.Mvvm `ObservableProperty` és `RelayCommand` attribútumait használjuk a ViewModelben.
 * Az automatikusan generált fájlokat a `Generated` mappában tartjuk, hogy elkülönüljenek a kézzel írt kódtól.
 
+## Verziózási szabályok
+
+* A `main` ágba kizárólag olyan commit kerülhet, amelyhez kódfedettségi jelentés tartozik.
+* A merge csak akkor engedélyezett, ha minden itt rögzített szabálynak megfelel a kód.
+
 ---

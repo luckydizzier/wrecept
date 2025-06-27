@@ -61,6 +61,8 @@ This document defines the agent-based development workflow for the **Wrecept** d
 * Prepares service interfaces for data access and UI logic.
 * Validates all operations before passing to persistence.
 * Coordinates with `storage_agent` and `logic_agent`.
+* `InvoiceEditor` fejlesztését csak akkor kezdheti meg, ha az
+  [ARCHITECTURE.md](ARCHITECTURE.md) alapján megértette az adatútvonalakat.
 
 ---
 
