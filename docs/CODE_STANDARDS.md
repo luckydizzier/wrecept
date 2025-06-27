@@ -1,7 +1,7 @@
 ---
 title: "Code Standards"
 purpose: "Naming conventions and static analysis rules"
-author: "root_agent"
+author: "docs_agent"
 date: "2025-06-27"
 ---
 

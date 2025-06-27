@@ -101,6 +101,16 @@ This document defines the agent-based development workflow for the **Wrecept** d
 
 ---
 
+## 📝 docs_agent
+
+**Role:** Maintains documentation and progress logs.
+
+* Owns `ARCHITECTURE.md`, `ERROR_HANDLING.md`, `TEST_STRATEGY.md`, `FAULT_INJECTION.md`, and `CODE_STANDARDS.md`.
+* Rögzíti a feladatok előrehaladását a `docs/progress/` könyvtárban.
+* Egyeztet a `root_agent`-tel, ha a dokumentáció a többi réteg felépítését is érinti.
+
+---
+
 ## ✨ Guidelines
 
 * **DO NOT** let agents cross layers without coordination.
