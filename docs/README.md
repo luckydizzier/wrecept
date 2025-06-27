@@ -73,6 +73,7 @@ Wrecept.Desktop/
 2. Add keyboard navigation logic layer (Enter / Esc focus cycle)
 3. Integrate fake data into product and supplier modules
 4. Discuss minimal database model based on real .dbf structure
+5. Kötelező induló tennivalók a [DEV_SPECS.md](DEV_SPECS.md) "Kick OFF" szakaszában
 
 ---
 

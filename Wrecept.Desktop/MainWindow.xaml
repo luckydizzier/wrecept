@@ -1,0 +1,8 @@
+<Window x:Class="Wrecept.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:Wrecept.Desktop.Views"
+        Title="Wrecept" Height="450" Width="800"
+        KeyDown="Window_KeyDown">
+    <views:StageView />
+</Window>
