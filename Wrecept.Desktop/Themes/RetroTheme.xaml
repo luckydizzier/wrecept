@@ -4,10 +4,11 @@
     <local:EqualityConverter x:Key="EqualityConverter" />
     <Color x:Key="BackgroundColor">#202020</Color>
     <Color x:Key="ForegroundColor">#E0E0E0</Color>
+    <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
     <SolidColorBrush x:Key="StageBackground" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="MenuBackground" Color="#303030"/>
     <Style x:Key="MenuItemStyle" TargetType="Button">
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
         <Setter Property="Background" Value="{StaticResource MenuBackground}"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Template">
