@@ -14,6 +14,14 @@
 
         <views:MainMenu x:Name="Menu" />
 
-        <views:InvoiceEditorView x:Name="Editor" Grid.Row="1" Visibility="{Binding ShowEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <views:InvoiceEditorView x:Name="Editor"
+                                 DataContext="{Binding Editor}"
+                                 Grid.Row="1"
+                                 Visibility="{Binding ShowEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <views:SupplierLookupView x:Name="SupplierLookup"
+                                  DataContext="{Binding SupplierLookup}"
+                                  Grid.Row="1"
+                                  Visibility="{Binding ShowSupplierLookup, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>
