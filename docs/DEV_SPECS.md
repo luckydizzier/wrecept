@@ -110,7 +110,7 @@ The design must be:
 
 ---
 
-## ✅ Kick OFf
+## ✅ Kick OFF
 * Developer and user manuals/documentation in both English and Hungarian
 * Base project structure
 * Assigned tasks with agents
