@@ -123,6 +123,7 @@ This document defines the agent-based development workflow for the **Wrecept** d
 * **FOLLOW** naming conventions: `Wrecept.Core.Models`, `Wrecept.Desktop.Views`, etc.
 * **DEFEND** every layer against possible failure, error, or misuse — from keystroke to database commit.
 * Progress logs go to `docs/progress/[UTC-TIME]-[agent:name].md`
+* Milestone 1 deliverables: StageView és InvoiceEditor látványterv, billentyűnavigációs alapok
 
 ---
 

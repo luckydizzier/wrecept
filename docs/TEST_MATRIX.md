@@ -12,3 +12,4 @@ date: "2025-06-27"
 | UI lock          | Az alkalmazás újra fókuszálja az aktív elemet vagy visszaáll alapállapotba.       |
 | Network loss     | A lokális műveletek zavartalanul folytatódnak, figyelmeztető üzenet jelenik meg. |
 | Corrupted invoice| A betöltés megszakad, a hibát naplózzuk és a felhasználót tájékoztatjuk.          |
+| WPF build Linuxon | A windowsdesktop SDK hiánya miatt a build nem fut le, ezt naplózzuk. |

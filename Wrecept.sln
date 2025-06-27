@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Core", "Wrecept.Core\Wrecept.Core.csproj", "{05E15715-34B7-415E-A3A5-82FFB637CF8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Storage", "Wrecept.Storage\Wrecept.Storage.csproj", "{BA378FCA-B5E5-4A5A-99E3-9DA7BCDBAC10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Desktop", "Wrecept.Desktop\Wrecept.Desktop.csproj", "{0FFCB80E-7725-41E6-A160-AD4ED4BE3B31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Tests", "Wrecept.Tests\Wrecept.Tests.csproj", "{9C7276CD-DC8F-49EC-8821-E8B74C6A40B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05E15715-34B7-415E-A3A5-82FFB637CF8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E15715-34B7-415E-A3A5-82FFB637CF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E15715-34B7-415E-A3A5-82FFB637CF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E15715-34B7-415E-A3A5-82FFB637CF8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA378FCA-B5E5-4A5A-99E3-9DA7BCDBAC10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA378FCA-B5E5-4A5A-99E3-9DA7BCDBAC10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA378FCA-B5E5-4A5A-99E3-9DA7BCDBAC10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA378FCA-B5E5-4A5A-99E3-9DA7BCDBAC10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FFCB80E-7725-41E6-A160-AD4ED4BE3B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FFCB80E-7725-41E6-A160-AD4ED4BE3B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FFCB80E-7725-41E6-A160-AD4ED4BE3B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FFCB80E-7725-41E6-A160-AD4ED4BE3B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7276CD-DC8F-49EC-8821-E8B74C6A40B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7276CD-DC8F-49EC-8821-E8B74C6A40B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7276CD-DC8F-49EC-8821-E8B74C6A40B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7276CD-DC8F-49EC-8821-E8B74C6A40B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
