@@ -31,7 +31,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <Button Content="Mentés" Command="{Binding SaveCommand}" Width="100" />
-        </StackPanel>
         </Grid>
     </Border>
 </UserControl>
