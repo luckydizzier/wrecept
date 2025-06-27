@@ -75,6 +75,18 @@ Wrecept.Desktop/
 4. Discuss minimal database model based on real .dbf structure
 5. Kötelező induló tennivalók a [DEV_SPECS.md](DEV_SPECS.md) "Kick OFF" szakaszában
 
+## ✅ Kick OFF
+
+A WPF indító projekt helyes működéséhez a `Wrecept.Desktop` mappában az alábbi fájlok és beállítások szükségesek:
+
+* `App.xaml` benne `<Application StartupUri="MainWindow.xaml" />`
+* `App.xaml.cs` részleges osztály
+* `MainWindow.xaml` mint kezdő nézet
+* a projektfájlban `<OutputType>WinExe</OutputType>` és `<UseWPF>true</UseWPF>`
+* `[STAThread]` attribútummal ellátott `Main()` belépési pont (generált vagy `Program.cs`-ben)
+
+Ezen indító fájlok nélkül a build nem hoz létre futtatható `.exe` állományt.
+
 ---
 
 ## 🧾 Credits
