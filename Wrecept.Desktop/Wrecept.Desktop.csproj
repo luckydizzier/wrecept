@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
+    <StartupObject>Wrecept.Desktop.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
