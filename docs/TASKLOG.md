@@ -1,5 +1,12 @@
 # 📋 TASKLOG.md – Task Ledger for Wrecept
 
+---
+title: "Task Log"
+purpose: "Track tasks and agents"
+author: "root_agent"
+date: "2025-06-27"
+---
+
 This file defines the official task structure for the Wrecept project. Tasks are assigned to agents in alignment with `docs/AGENTS.md` and tracked across milestones. Each entry may include a status, responsible agent, and notes.
 
 ---

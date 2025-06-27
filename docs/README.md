@@ -1,3 +1,10 @@
+---
+title: "Wrecept README"
+purpose: "Project overview"
+author: "root_agent"
+date: "2025-06-27"
+---
+
 # 🎛️ Wrecept
 
 **A retro-modern invoice recording desktop application inspired by DOS-era logistics systems.**
