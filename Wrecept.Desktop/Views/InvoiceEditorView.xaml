@@ -5,20 +5,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="800">
-    <Grid Background="{DynamicResource StageBackground}">
+    <Grid Background="{DynamicResource StageBackground}" Padding="10">
         <StackPanel>
-            <TextBlock Text="Invoice Items" FontWeight="Bold" />
-            <ListBox ItemsSource="{Binding Items}">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                <TextBlock Text="Számlaszám:" Width="80" />
+                <TextBox Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" Width="120" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                <TextBlock Text="Beszállító:" Width="80" />
+                <TextBox Text="{Binding SupplierName, UpdateSourceTrigger=PropertyChanged}" Width="200" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Text="Dátum:" Width="80" />
+                <DatePicker SelectedDate="{Binding Date}" />
+            </StackPanel>
+            <ListBox ItemsSource="{Binding Items}" Margin="0 0 0 10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" Width="200" />
-                            <TextBlock Text="{Binding Net}" Width="100" />
-                            <TextBlock Text="{Binding Gross}" Width="100" />
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Width="200" />
+                            <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" Width="60" />
+                            <TextBox Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged}" Width="80" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Button Content="Mentés" Command="{Binding SaveCommand}" Width="100" />
         </StackPanel>
     </Grid>
 </UserControl>
