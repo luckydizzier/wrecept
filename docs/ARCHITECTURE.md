@@ -1,7 +1,7 @@
 ---
 title: "Architecture Blueprint"
 purpose: "Overall module and data flow overview"
-author: "root_agent"
+author: "docs_agent"
 date: "2025-06-27"
 ---
 

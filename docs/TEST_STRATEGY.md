@@ -1,7 +1,7 @@
 ---
 title: "Testing Strategy"
 purpose: "Unit, integration and UI testing principles"
-author: "root_agent"
+author: "docs_agent"
 date: "2025-06-27"
 ---
 

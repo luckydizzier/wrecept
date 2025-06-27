@@ -1,7 +1,7 @@
 ---
 title: "Error Handling"
 purpose: "Runtime and compile-time defense rules"
-author: "root_agent"
+author: "docs_agent"
 date: "2025-06-27"
 ---
 
