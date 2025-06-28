@@ -18,6 +18,7 @@ public partial class StageView : UserControl
         ViewModel.PropertyChanged += ViewModel_PropertyChanged;
         ViewModel.ShowMessageRequested += msg => MessageBox.Show(msg, "Névjegy");
         DataContext = ViewModel;
+        ViewModel.IsSubMenuOpen = true;
     }
 
     private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
