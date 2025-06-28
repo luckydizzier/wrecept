@@ -12,6 +12,7 @@ Az alkalmazás rétegei tisztán el vannak választva, hogy a karbantarthatósá
 ## Rétegzett felépítés
 
 1. **UI (Views / Themes)** – XAML nézetek és stílusfájlok. Csak vizuális elemeket tartalmaz, logikát nem.
+   *A globális RetroTheme.xaml minden vezérlőre egységes stílust ad.*
 2. **ViewModel** – A CommunityToolkit.Mvvm segítségével kezeli a felhasználói interakciókat és az adatkötéseket.
 3. **Core** – Domain modellek, szolgáltatás interfészek és belső számítások.
 4. **Storage** – SQLite + Entity Framework Core konténer, migrációk, repositoryk.
