@@ -6,6 +6,7 @@ namespace Wrecept.Desktop.ViewModels;
 public partial class MainWindowViewModel : ObservableObject
 {
     private readonly StageViewModel _stage;
+    private readonly int[] _itemCounts = { 2, 5, 4, 4, 1, 1 };
 
     private int SelectedIndex
     {
@@ -13,10 +14,10 @@ public partial class MainWindowViewModel : ObservableObject
         set => _stage.SelectedIndex = value;
     }
 
-    private int SelectedSubmenuIndex
+    private int SelectedSubIndex
     {
-        get => _stage.SelectedSubmenuIndex;
-        set => _stage.SelectedSubmenuIndex = value;
+        get => _stage.SelectedSubIndex;
+        set => _stage.SelectedSubIndex = value;
     }
 
     private bool IsSubMenuOpen
@@ -35,68 +36,66 @@ public partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel(StageViewModel stage)
     {
         _stage = stage;
-        MoveLeftCommand = new RelayCommand(() => { if(IsSubMenuOpen) IsSubMenuOpen = false; });
-        MoveRightCommand = new RelayCommand(() => { if(!IsSubMenuOpen) { IsSubMenuOpen = true; SelectedSubmenuIndex = 0; } });
-        MoveUpCommand = new RelayCommand(() =>
-        {
-            if (IsSubMenuOpen)
-                SelectNextSubmenu(-1);
-            else
-                ChangeMain(-1);
-        });
-        MoveDownCommand = new RelayCommand(() =>
-        {
-            if (IsSubMenuOpen)
-                SelectNextSubmenu(1);
-            else
-                ChangeMain(1);
-        });
-        EnterCommand = new RelayCommand(ExecuteSubmenuItem);
-        EscapeCommand = new RelayCommand(ReturnToMainTabs);
+        MoveLeftCommand = new RelayCommand(() => { if(!IsSubMenuOpen) ChangeMain(-1); });
+        MoveRightCommand = new RelayCommand(() => { if(!IsSubMenuOpen) ChangeMain(1); });
+        MoveUpCommand = new RelayCommand(() => { if(IsSubMenuOpen) ChangeSub(-1); });
+        MoveDownCommand = new RelayCommand(() => { if(IsSubMenuOpen) ChangeSub(1); });
+        EnterCommand = new RelayCommand(OnEnter);
+        EscapeCommand = new RelayCommand(OnEscape);
     }
 
     private void ChangeMain(int delta)
     {
-        const int mainCount = 6;
-        SelectedIndex = (SelectedIndex + delta + mainCount) % mainCount;
+        var count = _itemCounts.Length;
+        SelectedIndex = (SelectedIndex + delta + count) % count;
     }
 
     private void ChangeSub(int delta)
     {
-        var count = _stage.CurrentSubmenuItems.Count;
-        var newIndex = SelectedSubmenuIndex + delta;
+        var count = _itemCounts[SelectedIndex];
+        var newIndex = SelectedSubIndex + delta;
         if (newIndex < 0) newIndex = 0;
         if (newIndex >= count) newIndex = count - 1;
-        SelectedSubmenuIndex = newIndex;
+        SelectedSubIndex = newIndex;
     }
 
-    public void SelectNextSubmenu(int delta)
-    {
-        var count = _stage.CurrentSubmenuItems.Count;
-        if (count == 0) return;
-        var newIndex = SelectedSubmenuIndex + delta;
-        if (newIndex < 0) newIndex = 0;
-        if (newIndex >= count) newIndex = count - 1;
-        SelectedSubmenuIndex = newIndex;
-    }
-
-    public void ExecuteSubmenuItem()
+    private void OnEnter()
     {
         if (!IsSubMenuOpen)
         {
             IsSubMenuOpen = true;
-            SelectedSubmenuIndex = 0;
+            SelectedSubIndex = 0;
         }
         else
         {
-            _stage.ExecuteCurrentSubmenu();
-            IsSubMenuOpen = false;
+            ExecuteCurrent();
         }
     }
 
-    public void ReturnToMainTabs()
+    private void OnEscape()
     {
         if (IsSubMenuOpen)
             IsSubMenuOpen = false;
+    }
+
+    private void ExecuteCurrent()
+    {
+        _stage.HideAll();
+        if (SelectedIndex == 1)
+        {
+            switch (SelectedSubIndex)
+            {
+                case 1:
+                    _stage.ShowProductGroup = true;
+                    break;
+                case 3:
+                    _stage.ShowTaxRate = true;
+                    break;
+                case 4:
+                    _stage.ShowPaymentMethod = true;
+                    break;
+            }
+        }
+        IsSubMenuOpen = false;
     }
 }

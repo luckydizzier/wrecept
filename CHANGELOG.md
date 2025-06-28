@@ -37,5 +37,5 @@ date: "2025-06-27"
 
 
 ## 2025-06-28
-- Visszaállítottam a StageView horizontális főmenüjét, az almenü automatikusan megjelenik a Számlák pontnál.
-- A Névjegy menü a BuildInfo segítségével mutatja a build részleteit.
+- A menürendszert visszaállítottam a `fix-almenü-és-menü-hibák` állapotra.
+- Eltávolítottam a BuildInfo alapú Névjegy funkciót.

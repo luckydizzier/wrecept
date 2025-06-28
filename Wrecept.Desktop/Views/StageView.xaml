@@ -14,28 +14,84 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Vertical main menu -->
-        <views:MainMenu x:Name="MainMenu" />
+        <!-- Horizontal menu bar -->
+        <StackPanel Orientation="Horizontal" Background="{DynamicResource MenuBackground}">
+            <Button x:Name="MainMenuFirstButton" Content="Számlák" Style="{StaticResource MenuItemStyle}" Tag="{x:Int32 0}" />
+            <Button Content="Törzsek" Style="{StaticResource MenuItemStyle}" Tag="{x:Int32 1}" />
+            <Button Content="Listák" Style="{StaticResource MenuItemStyle}" Tag="{x:Int32 2}" />
+            <Button Content="Szerviz" Style="{StaticResource MenuItemStyle}" Tag="{x:Int32 3}" />
+            <Button Content="Névjegy" Style="{StaticResource MenuItemStyle}" Tag="{x:Int32 4}" />
+            <Button Content="Vége" Style="{StaticResource MenuItemStyle}" Tag="{x:Int32 5}" />
+        </StackPanel>
 
-        <!-- Dynamic submenu -->
-        <ItemsControl x:Name="SubmenuList"
-                      Grid.Row="1"
-                      ItemsSource="{Binding CurrentSubmenuItems}"
-                      Visibility="{Binding IsSubMenuOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical" Background="{DynamicResource MenuBackground}" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Content="{Binding Label}"
-                            Style="{StaticResource SubMenuItemStyle}"
-                            Tag="{Binding Index}"
-                            Click="SubmenuButton_Click" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <!-- Vertical sub menu panels -->
+        <StackPanel Grid.Row="1" Orientation="Vertical" Background="{DynamicResource MenuBackground}" Visibility="{Binding IsSubMenuOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <StackPanel Tag="{x:Int32 0}">
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource EqualityToVisibilityConverter}">
+                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="SelectedIndex" />
+                    </MultiBinding>
+                </StackPanel.Visibility>
+                <Button Content="Bejövő szállítólevelek" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 0}" />
+                <Button Content="Bejövő számlák aktualizálása" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 1}" />
+            </StackPanel>
+        <StackPanel Tag="{x:Int32 1}">
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource EqualityToVisibilityConverter}">
+                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="SelectedIndex" />
+                    </MultiBinding>
+                </StackPanel.Visibility>
+                <Button Content="Termékek" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 0}" />
+                <Button Content="Termékcsoportok" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 1}" />
+                <Button Content="Szállítók" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 2}" />
+                <Button Content="ÁFA-kulcsok" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 3}" />
+                <Button Content="Fizetési módok" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 4}" />
+            </StackPanel>
+        <StackPanel Tag="{x:Int32 2}">
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource EqualityToVisibilityConverter}">
+                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="SelectedIndex" />
+                    </MultiBinding>
+                </StackPanel.Visibility>
+                <Button Content="Terméklista" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 0}" />
+                <Button Content="Szállítók listája" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 1}" />
+                <Button Content="Számlák listája" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 2}" />
+                <Button Content="Készletkarton" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 3}" />
+            </StackPanel>
+        <StackPanel Tag="{x:Int32 3}">
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource EqualityToVisibilityConverter}">
+                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="SelectedIndex" />
+                    </MultiBinding>
+                </StackPanel.Visibility>
+                <Button Content="Állományok ellenőrzése" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 0}" />
+                <Button Content="Áramszünet után" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 1}" />
+                <Button Content="Képernyő beállítása" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 2}" />
+                <Button Content="Nyomtató beállítás" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 3}" />
+            </StackPanel>
+        <StackPanel Tag="{x:Int32 4}">
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource EqualityToVisibilityConverter}">
+                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="SelectedIndex" />
+                    </MultiBinding>
+                </StackPanel.Visibility>
+                <Button Content="A program felhasználójának adatai" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 0}" />
+            </StackPanel>
+        <StackPanel Tag="{x:Int32 5}">
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource EqualityToVisibilityConverter}">
+                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="SelectedIndex" />
+                    </MultiBinding>
+                </StackPanel.Visibility>
+                <Button Content="Kilépés" Style="{StaticResource SubMenuItemStyle}" Tag="{x:Int32 0}" />
+            </StackPanel>
+        </StackPanel>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
