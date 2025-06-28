@@ -6,9 +6,9 @@
              mc:Ignorable="d"
              d:DesignHeight="100" d:DesignWidth="800">
     <StackPanel Orientation="Vertical" Background="{DynamicResource MenuBackground}">
-        <Button Content="Számla rögzítés" Style="{StaticResource MenuItemStyle}" Tag="0"/>
-        <Button Content="Termékek" Style="{StaticResource MenuItemStyle}" Tag="1"/>
-        <Button Content="Beszállítók" Style="{StaticResource MenuItemStyle}" Tag="2"/>
-        <Button Content="Kilépés" Style="{StaticResource MenuItemStyle}" Tag="3"/>
+        <Button Content="Számla rögzítés" Style="{StaticResource MenuItemStyle}" Tag="{x:Int32 0}"/>
+        <Button Content="Termékek" Style="{StaticResource MenuItemStyle}" Tag="{x:Int32 1}"/>
+        <Button Content="Beszállítók" Style="{StaticResource MenuItemStyle}" Tag="{x:Int32 2}"/>
+        <Button Content="Kilépés" Style="{StaticResource MenuItemStyle}" Tag="{x:Int32 3}"/>
     </StackPanel>
 </UserControl>

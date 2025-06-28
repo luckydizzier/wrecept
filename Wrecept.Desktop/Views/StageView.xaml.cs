@@ -14,4 +14,9 @@ public partial class StageView : UserControl
         ViewModel = new StageViewModel();
         DataContext = ViewModel;
     }
+
+    private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        MainMenuFirstButton.Focus();
+    }
 }
