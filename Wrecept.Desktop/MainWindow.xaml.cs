@@ -9,7 +9,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        ViewModel = new ViewModels.MainWindowViewModel();
+        ViewModel = new ViewModels.MainWindowViewModel(Stage.ViewModel);
         DataContext = ViewModel;
     }
 
@@ -23,8 +23,17 @@ public partial class MainWindow : Window
             case System.Windows.Input.Key.Right:
                 ViewModel.MoveRightCommand.Execute(null);
                 break;
+            case System.Windows.Input.Key.Up:
+                ViewModel.MoveUpCommand.Execute(null);
+                break;
+            case System.Windows.Input.Key.Down:
+                ViewModel.MoveDownCommand.Execute(null);
+                break;
             case System.Windows.Input.Key.Enter:
                 ViewModel.EnterCommand.Execute(null);
+                break;
+            case System.Windows.Input.Key.Escape:
+                ViewModel.EscapeCommand.Execute(null);
                 break;
         }
     }

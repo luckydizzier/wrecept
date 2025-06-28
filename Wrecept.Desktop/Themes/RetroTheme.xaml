@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:Wrecept.Desktop">
     <!-- Converters -->
     <local:EqualityConverter x:Key="EqualityConverter" />
+    <local:EqualityToVisibilityConverter x:Key="EqualityToVisibilityConverter" />
 
     <!-- Base colors -->
     <!-- Stage background switched to warm yellow as requested -->
@@ -44,6 +45,21 @@
                 </Style>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- Sub Menu Item Buttons -->
+    <Style x:Key="SubMenuItemStyle" TargetType="Button" BasedOn="{StaticResource MenuItemStyle}">
+        <Style.Triggers>
+            <DataTrigger Value="True">
+                <DataTrigger.Binding>
+                    <MultiBinding Converter="{StaticResource EqualityConverter}">
+                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="SelectedSubIndex" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                    </MultiBinding>
+                </DataTrigger.Binding>
+                <Setter Property="Background" Value="{StaticResource HighlightBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
     <!-- Default text styles -->
