@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Desktop;
@@ -42,6 +43,8 @@ public partial class StageViewModel : ObservableObject
 
     private readonly Dictionary<int, List<SubmenuItem>> _submenuMap;
 
+    public event Action<string>? ShowMessageRequested;
+
     public StageViewModel()
     {
         _submenuMap = new()
@@ -75,7 +78,7 @@ public partial class StageViewModel : ObservableObject
             },
             [4] = new()
             {
-                new SubmenuItem(0, "A program felhasználójának adatai", () => { })
+                new SubmenuItem(0, "A program felhasználójának adatai", ShowAbout)
             },
             [5] = new()
             {
@@ -83,6 +86,11 @@ public partial class StageViewModel : ObservableObject
             }
         };
         LoadSubmenu(0);
+    }
+
+    private void ShowAbout()
+    {
+        ShowMessageRequested?.Invoke(BuildInfo.GetInfo());
     }
 
     private void LoadSubmenu(int mainIndex)

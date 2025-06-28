@@ -16,12 +16,13 @@ public partial class StageView : UserControl
         InitializeComponent();
         ViewModel = new StageViewModel();
         ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+        ViewModel.ShowMessageRequested += msg => MessageBox.Show(msg, "Névjegy");
         DataContext = ViewModel;
     }
 
     private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
     {
-        MainMenuFirstButton.Focus();
+        MainMenu.FirstButton.Focus();
     }
 
     private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -38,19 +39,8 @@ public partial class StageView : UserControl
             }
             else
             {
-                if (MainMenuPanel.Children[ViewModel.SelectedIndex] is Control btn)
-                    btn.Focus();
+                MainMenu.FirstButton.Focus();
             }
-        }
-    }
-
-    private void MainMenuButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is Button btn)
-        {
-            ViewModel.SelectedIndex = Convert.ToInt32(btn.Tag);
-            ViewModel.IsSubMenuOpen = true;
-            ViewModel.SelectedSubmenuIndex = 0;
         }
     }
 
