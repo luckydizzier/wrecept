@@ -4,32 +4,28 @@ namespace Wrecept.Desktop;
 
 public partial class MainWindow : Window
 {
+    public ViewModels.MainWindowViewModel ViewModel { get; }
+
     public MainWindow()
     {
         InitializeComponent();
+        ViewModel = new ViewModels.MainWindowViewModel();
+        DataContext = ViewModel;
     }
 
     private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
-        try
+        switch (e.Key)
         {
-            switch (e.Key)
-            {
-                case System.Windows.Input.Key.Up:
-                    ((Views.StageView)Content).Menu.ViewModel.MoveUpCommand.Execute(null);
-                    break;
-                case System.Windows.Input.Key.Down:
-                    ((Views.StageView)Content).Menu.ViewModel.MoveDownCommand.Execute(null);
-                    break;
-                case System.Windows.Input.Key.Enter:
-                    ((Views.StageView)Content).Menu.ViewModel.EnterCommand.Execute(null);
-                    System.Console.Beep();
-                    break;
-            }
-        }
-        catch
-        {
-            // suppress all runtime exceptions during prototype stage
+            case System.Windows.Input.Key.Left:
+                ViewModel.MoveLeftCommand.Execute(null);
+                break;
+            case System.Windows.Input.Key.Right:
+                ViewModel.MoveRightCommand.Execute(null);
+                break;
+            case System.Windows.Input.Key.Enter:
+                ViewModel.EnterCommand.Execute(null);
+                break;
         }
     }
 }

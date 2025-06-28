@@ -23,7 +23,8 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Width="200" />
+                            <TextBox Text="{Binding ProductId, UpdateSourceTrigger=PropertyChanged}" Width="40" />
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Width="160" />
                             <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" Width="60" />
                             <TextBox Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged}" Width="80" />
                         </StackPanel>

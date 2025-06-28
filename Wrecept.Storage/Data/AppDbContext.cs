@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Wrecept.Core.Models;
+using Wrecept.Core.Entities;
 
 namespace Wrecept.Storage.Data;
 
@@ -9,6 +10,9 @@ public class AppDbContext : DbContext
     public DbSet<InvoiceItem> InvoiceItems => Set<InvoiceItem>();
     public DbSet<Product> Products => Set<Product>();
     public DbSet<Supplier> Suppliers => Set<Supplier>();
+    public DbSet<ProductGroup> ProductGroups => Set<ProductGroup>();
+    public DbSet<TaxRate> TaxRates => Set<TaxRate>();
+    public DbSet<PaymentMethod> PaymentMethods => Set<PaymentMethod>();
 
     private readonly string _dbPath;
 

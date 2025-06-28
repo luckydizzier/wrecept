@@ -4,5 +4,5 @@
         xmlns:views="clr-namespace:Wrecept.Desktop.Views"
         Title="Wrecept" Height="450" Width="800"
         KeyDown="Window_KeyDown">
-    <views:StageView />
+    <views:StageView x:Name="Stage" />
 </Window>

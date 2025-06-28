@@ -7,7 +7,6 @@ public partial class StageView : UserControl
 {
     public StageViewModel ViewModel { get; }
 
-    public MainMenuViewModel MenuViewModel => ViewModel.Menu;
 
     public StageView()
     {

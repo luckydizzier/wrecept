@@ -17,6 +17,7 @@ public class InvoiceService : IInvoiceService
         if (string.IsNullOrWhiteSpace(invoice.Number)) return false;
         if (invoice.Items.Count == 0) return false;
         if (invoice.Items.Any(i => i.Quantity <= 0)) return false;
+        if (invoice.Items.Any(i => i.ProductId <= 0)) return false;
         await _invoices.AddAsync(invoice, ct);
         return true;
     }

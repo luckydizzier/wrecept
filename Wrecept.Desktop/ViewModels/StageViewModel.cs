@@ -5,7 +5,6 @@ namespace Wrecept.Desktop.ViewModels;
 
 public partial class StageViewModel : ObservableObject
 {
-    public MainMenuViewModel Menu { get; } = new();
     public InvoiceEditorViewModel Editor { get; } = new(ServiceLocator.InvoiceService);
     public SupplierLookupViewModel SupplierLookup { get; } = new();
 
@@ -17,10 +16,5 @@ public partial class StageViewModel : ObservableObject
 
     public StageViewModel()
     {
-        Menu.ItemActivated += idx =>
-        {
-            ShowEditor = idx == 0;
-            ShowSupplierLookup = idx == 2;
-        };
     }
 }
