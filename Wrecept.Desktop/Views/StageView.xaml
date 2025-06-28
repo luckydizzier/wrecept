@@ -14,14 +14,43 @@
 
         <views:MainMenu x:Name="Menu" />
 
-        <views:InvoiceEditorView x:Name="Editor"
-                                 DataContext="{Binding Editor}"
-                                 Grid.Row="1"
-                                 Visibility="{Binding ShowEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <views:SupplierLookupView x:Name="SupplierLookup"
-                                  DataContext="{Binding SupplierLookup}"
-                                  Grid.Row="1"
-                                  Visibility="{Binding ShowSupplierLookup, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <!-- Instrument positions placeholder -->
+            <ViewBox Margin="10" Stretch="Fill">
+                <Canvas Width="400" Height="300">
+                    <!-- Temporary visual layout -->
+                    <Rectangle Width="80" Height="80"
+                               Fill="{DynamicResource ControlBackgroundBrush}"
+                               Stroke="{DynamicResource BorderBrushColor}"
+                               StrokeThickness="1" />
+                </Canvas>
+            </ViewBox>
+
+            <!-- Amplifier positions placeholder -->
+            <ViewBox Grid.Column="1" Margin="10" Stretch="Fill">
+                <Canvas Width="400" Height="300">
+                    <!-- Temporary visual layout -->
+                    <Rectangle Width="80" Height="80"
+                               Fill="{DynamicResource ControlBackgroundBrush}"
+                               Stroke="{DynamicResource BorderBrushColor}"
+                               StrokeThickness="1" />
+                </Canvas>
+            </ViewBox>
+
+            <views:InvoiceEditorView x:Name="Editor"
+                                     DataContext="{Binding Editor}"
+                                     Grid.ColumnSpan="2"
+                                     Visibility="{Binding ShowEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <views:SupplierLookupView x:Name="SupplierLookup"
+                                      DataContext="{Binding SupplierLookup}"
+                                      Grid.ColumnSpan="2"
+                                      Visibility="{Binding ShowSupplierLookup, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Grid>
     </Grid>
 </UserControl>
