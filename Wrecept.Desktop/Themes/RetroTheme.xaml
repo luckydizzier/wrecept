@@ -47,20 +47,6 @@
         </Setter>
     </Style>
 
-    <!-- Sub Menu Item Buttons -->
-    <Style x:Key="SubMenuItemStyle" TargetType="Button" BasedOn="{StaticResource MenuItemStyle}">
-        <Style.Triggers>
-            <DataTrigger Value="True">
-                <DataTrigger.Binding>
-                    <MultiBinding Converter="{StaticResource EqualityConverter}">
-                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
-                        <Binding Path="SelectedSubIndex" RelativeSource="{RelativeSource AncestorType=UserControl}" />
-                    </MultiBinding>
-                </DataTrigger.Binding>
-                <Setter Property="Background" Value="{StaticResource HighlightBrush}" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
 
     <!-- Default text styles -->
     <Style TargetType="TextBlock">
@@ -176,6 +162,20 @@
         </Setter>
     </Style>
 
+    <!-- Sub Menu Item Buttons -->
+    <Style x:Key="SubMenuItemStyle" TargetType="Button" BasedOn="{StaticResource MenuItemStyle}">
+        <Style.Triggers>
+            <DataTrigger Value="True">
+                <DataTrigger.Binding>
+                    <MultiBinding Converter="{StaticResource EqualityConverter}">
+                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="SelectedSubIndex" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                    </MultiBinding>
+                </DataTrigger.Binding>
+                <Setter Property="Background" Value="{StaticResource HighlightBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
     <!-- Named Buttons -->
     <Style x:Key="AddRowButtonStyle" BasedOn="{StaticResource BaseButtonStyle}" TargetType="Button">
         <Setter Property="Background" Value="#FFA726" />
