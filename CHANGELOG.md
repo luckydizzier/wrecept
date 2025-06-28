@@ -35,3 +35,7 @@ date: "2025-06-27"
 - Létrehoztam onboarding és Test Matrix dokumentumokat.
 - Automatikus changelog generáló script készült.
 
+
+## 2025-06-28
+- Visszaállítottam a StageView horizontális főmenüjét, az almenü automatikusan megjelenik a Számlák pontnál.
+- A Névjegy menü a BuildInfo segítségével mutatja a build részleteit.

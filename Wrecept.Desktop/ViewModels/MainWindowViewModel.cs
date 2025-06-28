@@ -35,22 +35,10 @@ public partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel(StageViewModel stage)
     {
         _stage = stage;
-        MoveLeftCommand = new RelayCommand(() => { if(IsSubMenuOpen) IsSubMenuOpen = false; });
-        MoveRightCommand = new RelayCommand(() => { if(!IsSubMenuOpen) { IsSubMenuOpen = true; SelectedSubmenuIndex = 0; } });
-        MoveUpCommand = new RelayCommand(() =>
-        {
-            if (IsSubMenuOpen)
-                SelectNextSubmenu(-1);
-            else
-                ChangeMain(-1);
-        });
-        MoveDownCommand = new RelayCommand(() =>
-        {
-            if (IsSubMenuOpen)
-                SelectNextSubmenu(1);
-            else
-                ChangeMain(1);
-        });
+        MoveLeftCommand = new RelayCommand(() => { if(!IsSubMenuOpen) ChangeMain(-1); });
+        MoveRightCommand = new RelayCommand(() => { if(!IsSubMenuOpen) ChangeMain(1); });
+        MoveUpCommand = new RelayCommand(() => { if(IsSubMenuOpen) SelectNextSubmenu(-1); });
+        MoveDownCommand = new RelayCommand(() => { if(IsSubMenuOpen) SelectNextSubmenu(1); });
         EnterCommand = new RelayCommand(ExecuteSubmenuItem);
         EscapeCommand = new RelayCommand(ReturnToMainTabs);
     }
