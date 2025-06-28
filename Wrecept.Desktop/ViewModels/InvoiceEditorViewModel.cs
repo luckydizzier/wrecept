@@ -39,6 +39,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
             Supplier = new Supplier { Name = SupplierName },
             Items = Items.Select(i => new InvoiceItem
             {
+                ProductId = i.ProductId,
                 Description = i.Description,
                 Quantity = i.Quantity,
                 UnitPrice = i.UnitPrice
@@ -59,6 +60,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
 public partial class ItemRow : ObservableObject
 {
+    [ObservableProperty] private int productId;
     [ObservableProperty] private string description = string.Empty;
     [ObservableProperty] private decimal quantity = 1;
     [ObservableProperty] private decimal unitPrice;

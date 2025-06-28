@@ -12,7 +12,49 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <views:MainMenu x:Name="Menu" />
+        <TabControl x:Name="MenuTabs" SelectedIndex="{Binding SelectedTab, RelativeSource={RelativeSource AncestorType=Window}}">
+            <TabItem Header="Számlák">
+                <StackPanel>
+                    <Button Content="Bejövő szállítólevelek" Margin="2" />
+                    <Button Content="Bejövő számlák aktualizálása" Margin="2" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Törzsek">
+                <StackPanel>
+                    <Button Content="Termékek" Margin="2" />
+                    <Button Content="Termékcsoportok" Margin="2" />
+                    <Button Content="Szállítók" Margin="2" />
+                    <Button Content="ÁFA-kulcsok" Margin="2" />
+                    <Button Content="Fizetési módok" Margin="2" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Listák">
+                <StackPanel>
+                    <Button Content="Terméklista" Margin="2" />
+                    <Button Content="Szállítók listája" Margin="2" />
+                    <Button Content="Számlák listája" Margin="2" />
+                    <Button Content="Készletkarton" Margin="2" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Szerviz">
+                <StackPanel>
+                    <Button Content="Állományok ellenőrzése" Margin="2" />
+                    <Button Content="Áramszünet után" Margin="2" />
+                    <Button Content="Képernyő beállítása" Margin="2" />
+                    <Button Content="Nyomtató beállítás" Margin="2" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Névjegy">
+                <StackPanel>
+                    <Button Content="A program felhasználójának adatai" Margin="2" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Vége">
+                <StackPanel>
+                    <Button Content="Kilépés" Margin="2" />
+                </StackPanel>
+            </TabItem>
+        </TabControl>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
