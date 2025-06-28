@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows;
@@ -40,6 +41,26 @@ public partial class StageView : UserControl
                 if (MainMenuPanel.Children[ViewModel.SelectedIndex] is Control btn)
                     btn.Focus();
             }
+        }
+    }
+
+    private void MainMenuButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button btn)
+        {
+            ViewModel.SelectedIndex = Convert.ToInt32(btn.Tag);
+            ViewModel.IsSubMenuOpen = true;
+            ViewModel.SelectedSubmenuIndex = 0;
+        }
+    }
+
+    private void SubmenuButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button btn)
+        {
+            ViewModel.SelectedSubmenuIndex = Convert.ToInt32(btn.Tag);
+            ViewModel.ExecuteCurrentSubmenu();
+            ViewModel.IsSubMenuOpen = false;
         }
     }
 }

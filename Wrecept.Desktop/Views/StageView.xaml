@@ -16,12 +16,18 @@
 
         <!-- Horizontal menu bar -->
         <StackPanel x:Name="MainMenuPanel" Orientation="Horizontal" Background="{DynamicResource MenuBackground}">
-            <Button x:Name="MainMenuFirstButton" Content="Számlák" Style="{StaticResource MenuItemStyle}" Tag="0" />
-            <Button x:Name="MainMenuButton1" Content="Törzsek" Style="{StaticResource MenuItemStyle}" Tag="1" />
-            <Button x:Name="MainMenuButton2" Content="Listák" Style="{StaticResource MenuItemStyle}" Tag="2" />
-            <Button x:Name="MainMenuButton3" Content="Szerviz" Style="{StaticResource MenuItemStyle}" Tag="3" />
-            <Button x:Name="MainMenuButton4" Content="Névjegy" Style="{StaticResource MenuItemStyle}" Tag="4" />
-            <Button x:Name="MainMenuButton5" Content="Vége" Style="{StaticResource MenuItemStyle}" Tag="5" />
+            <Button x:Name="MainMenuFirstButton" Content="Számlák" Style="{StaticResource MenuItemStyle}" Tag="0"
+                    Click="MainMenuButton_Click" />
+            <Button x:Name="MainMenuButton1" Content="Törzsek" Style="{StaticResource MenuItemStyle}" Tag="1"
+                    Click="MainMenuButton_Click" />
+            <Button x:Name="MainMenuButton2" Content="Listák" Style="{StaticResource MenuItemStyle}" Tag="2"
+                    Click="MainMenuButton_Click" />
+            <Button x:Name="MainMenuButton3" Content="Szerviz" Style="{StaticResource MenuItemStyle}" Tag="3"
+                    Click="MainMenuButton_Click" />
+            <Button x:Name="MainMenuButton4" Content="Névjegy" Style="{StaticResource MenuItemStyle}" Tag="4"
+                    Click="MainMenuButton_Click" />
+            <Button x:Name="MainMenuButton5" Content="Vége" Style="{StaticResource MenuItemStyle}" Tag="5"
+                    Click="MainMenuButton_Click" />
         </StackPanel>
 
         <!-- Dynamic submenu -->
@@ -38,7 +44,8 @@
                 <DataTemplate>
                     <Button Content="{Binding Label}"
                             Style="{StaticResource SubMenuItemStyle}"
-                            Tag="{Binding Index}" />
+                            Tag="{Binding Index}"
+                            Click="SubmenuButton_Click" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
