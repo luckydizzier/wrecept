@@ -169,7 +169,7 @@
                 <DataTrigger.Binding>
                     <MultiBinding Converter="{StaticResource EqualityConverter}">
                         <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
-                        <Binding Path="SelectedSubIndex" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                        <Binding Path="SelectedSubmenuIndex" RelativeSource="{RelativeSource AncestorType=UserControl}" />
                     </MultiBinding>
                 </DataTrigger.Binding>
                 <Setter Property="Background" Value="{StaticResource HighlightBrush}" />
