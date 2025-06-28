@@ -6,7 +6,6 @@ namespace Wrecept.Desktop.ViewModels;
 public partial class MainWindowViewModel : ObservableObject
 {
     private readonly StageViewModel _stage;
-    private readonly int[] _itemCounts = { 2, 5, 4, 4, 1, 1 };
 
     private int SelectedIndex
     {
@@ -14,10 +13,10 @@ public partial class MainWindowViewModel : ObservableObject
         set => _stage.SelectedIndex = value;
     }
 
-    private int SelectedSubIndex
+    private int SelectedSubmenuIndex
     {
-        get => _stage.SelectedSubIndex;
-        set => _stage.SelectedSubIndex = value;
+        get => _stage.SelectedSubmenuIndex;
+        set => _stage.SelectedSubmenuIndex = value;
     }
 
     private bool IsSubMenuOpen
@@ -38,64 +37,54 @@ public partial class MainWindowViewModel : ObservableObject
         _stage = stage;
         MoveLeftCommand = new RelayCommand(() => { if(!IsSubMenuOpen) ChangeMain(-1); });
         MoveRightCommand = new RelayCommand(() => { if(!IsSubMenuOpen) ChangeMain(1); });
-        MoveUpCommand = new RelayCommand(() => { if(IsSubMenuOpen) ChangeSub(-1); });
-        MoveDownCommand = new RelayCommand(() => { if(IsSubMenuOpen) ChangeSub(1); });
-        EnterCommand = new RelayCommand(OnEnter);
-        EscapeCommand = new RelayCommand(OnEscape);
+        MoveUpCommand = new RelayCommand(() => { if(IsSubMenuOpen) SelectNextSubmenu(-1); });
+        MoveDownCommand = new RelayCommand(() => { if(IsSubMenuOpen) SelectNextSubmenu(1); });
+        EnterCommand = new RelayCommand(ExecuteSubmenuItem);
+        EscapeCommand = new RelayCommand(ReturnToMainTabs);
     }
 
     private void ChangeMain(int delta)
     {
-        var count = _itemCounts.Length;
-        SelectedIndex = (SelectedIndex + delta + count) % count;
+        const int mainCount = 6;
+        SelectedIndex = (SelectedIndex + delta + mainCount) % mainCount;
     }
 
     private void ChangeSub(int delta)
     {
-        var count = _itemCounts[SelectedIndex];
-        var newIndex = SelectedSubIndex + delta;
+        var count = _stage.CurrentSubmenuItems.Count;
+        var newIndex = SelectedSubmenuIndex + delta;
         if (newIndex < 0) newIndex = 0;
         if (newIndex >= count) newIndex = count - 1;
-        SelectedSubIndex = newIndex;
+        SelectedSubmenuIndex = newIndex;
     }
 
-    private void OnEnter()
+    public void SelectNextSubmenu(int delta)
+    {
+        var count = _stage.CurrentSubmenuItems.Count;
+        if (count == 0) return;
+        var newIndex = SelectedSubmenuIndex + delta;
+        if (newIndex < 0) newIndex = 0;
+        if (newIndex >= count) newIndex = count - 1;
+        SelectedSubmenuIndex = newIndex;
+    }
+
+    public void ExecuteSubmenuItem()
     {
         if (!IsSubMenuOpen)
         {
             IsSubMenuOpen = true;
-            SelectedSubIndex = 0;
+            SelectedSubmenuIndex = 0;
         }
         else
         {
-            ExecuteCurrent();
+            _stage.ExecuteCurrentSubmenu();
+            IsSubMenuOpen = false;
         }
     }
 
-    private void OnEscape()
+    public void ReturnToMainTabs()
     {
         if (IsSubMenuOpen)
             IsSubMenuOpen = false;
-    }
-
-    private void ExecuteCurrent()
-    {
-        _stage.HideAll();
-        if (SelectedIndex == 1)
-        {
-            switch (SelectedSubIndex)
-            {
-                case 1:
-                    _stage.ShowProductGroup = true;
-                    break;
-                case 3:
-                    _stage.ShowTaxRate = true;
-                    break;
-                case 4:
-                    _stage.ShowPaymentMethod = true;
-                    break;
-            }
-        }
-        IsSubMenuOpen = false;
     }
 }
