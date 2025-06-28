@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Instrument positions placeholder -->
-            <ViewBox Margin="10" Stretch="Fill">
+            <Viewbox Margin="10" Stretch="Fill">
                 <Canvas Width="400" Height="300">
                     <!-- Temporary visual layout -->
                     <Rectangle Width="80" Height="80"
@@ -29,10 +29,10 @@
                                Stroke="{DynamicResource BorderBrushColor}"
                                StrokeThickness="1" />
                 </Canvas>
-            </ViewBox>
+            </Viewbox>
 
             <!-- Amplifier positions placeholder -->
-            <ViewBox Grid.Column="1" Margin="10" Stretch="Fill">
+            <Viewbox Grid.Column="1" Margin="10" Stretch="Fill">
                 <Canvas Width="400" Height="300">
                     <!-- Temporary visual layout -->
                     <Rectangle Width="80" Height="80"
@@ -40,7 +40,7 @@
                                Stroke="{DynamicResource BorderBrushColor}"
                                StrokeThickness="1" />
                 </Canvas>
-            </ViewBox>
+            </Viewbox>
 
             <views:InvoiceEditorView x:Name="Editor"
                                      DataContext="{Binding Editor}"
