@@ -13,6 +13,9 @@ public partial class MainWindow : Window
         DataContext = ViewModel;
     }
 
+    // InputBindings a MainWindow.xaml-ben gondoskodik a billentyűkezelésről,
+    // ezért a korábbi Window_KeyDown kezelő inaktiválva marad.
+    /*
     private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         switch (e.Key)
@@ -37,4 +40,5 @@ public partial class MainWindow : Window
                 break;
         }
     }
+    */
 }
