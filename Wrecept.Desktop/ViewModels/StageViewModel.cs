@@ -1,5 +1,4 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using System.Collections.ObjectModel;
 using Wrecept.Core.Services;
 using Wrecept.Core.Repositories;
 
@@ -41,19 +40,6 @@ public partial class StageViewModel : ObservableObject
     [ObservableProperty]
     private bool showPaymentMethod;
 
-    private readonly string[][] _submenuItems =
-    {
-        new[] { "Bejövő számlák kezelése", "Bejövő számlák aktualizálása" },
-        new[] { "Termékek", "Termékcsoportok", "Szállítók", "ÁFA-kulcsok", "Fizetési módok" },
-        new[] { "Terméklista", "Szállítók listája", "Számlák listája", "Készletkarton" },
-        new[] { "Állományok ellenőrzése", "Áramszünet után", "Képernyő beállítása", "Nyomtató beállítás" },
-        new[] { "A program felhasználójának adatai" },
-        new[] { "Kilépés" }
-    };
-
-    [ObservableProperty]
-    private ObservableCollection<string> currentSubmenuItems = new();
-
     public StageViewModel(IInvoiceService invoiceService, IProductService productService, ISupplierRepository supplierRepository)
     {
         Editor = new InvoiceEditorViewModel(invoiceService);
@@ -62,23 +48,6 @@ public partial class StageViewModel : ObservableObject
         ProductGroup = new ProductGroupViewModel();
         TaxRate = new TaxRateViewModel();
         PaymentMethod = new PaymentMethodViewModel();
-
-        UpdateCurrentSubmenuItems(0);
-    }
-
-    partial void OnSelectedIndexChanged(int value)
-    {
-        UpdateCurrentSubmenuItems(value);
-    }
-
-    private void UpdateCurrentSubmenuItems(int index)
-    {
-        CurrentSubmenuItems.Clear();
-        if (index >= 0 && index < _submenuItems.Length)
-        {
-            foreach (var item in _submenuItems[index])
-                CurrentSubmenuItems.Add(item);
-        }
     }
 
     public void HideAll()
