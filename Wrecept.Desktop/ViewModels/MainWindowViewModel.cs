@@ -88,10 +88,10 @@ public partial class MainWindowViewModel : ObservableObject
         {
             switch (SelectedSubmenuIndex)
             {
-                case 1:
+                case 0:
                     _stage.OpenInvoiceEditor();
                     break;
-                case 2:
+                case 1:
                     // TODO: bejövő számlák aktualizálása
                     break;
             }
