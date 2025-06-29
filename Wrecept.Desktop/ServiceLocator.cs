@@ -8,6 +8,7 @@ namespace Wrecept.Desktop;
 public static class ServiceLocator
 {
     public static IInvoiceService InvoiceService { get; }
+    public static IProductService ProductService { get; }
     public static IProductGroupRepository ProductGroupRepository { get; }
     public static IProductRepository ProductRepository { get; }
     public static ISupplierRepository SupplierRepository { get; }
@@ -19,8 +20,10 @@ public static class ServiceLocator
         var db = new AppDbContext("wrecept.db");
         var invoiceRepo = new InvoiceRepository(db);
         InvoiceService = new InvoiceService(invoiceRepo);
+        var productRepo = new ProductRepository(db);
+        ProductRepository = productRepo;
+        ProductService = new ProductService(productRepo);
         ProductGroupRepository = new ProductGroupRepository(db);
-        ProductRepository = new ProductRepository(db);
         SupplierRepository = new SupplierRepository(db);
         TaxRateRepository = new TaxRateRepository(db);
         PaymentMethodRepository = new PaymentMethodRepository(db);
