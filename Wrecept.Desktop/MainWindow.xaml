@@ -16,7 +16,8 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem x:Name="MainMenuFirstItem" Header="Számlák" Tag="0" Click="MainMenuItem_Click">
                 <MenuItem Header="Bejövő szállítólevelek" Tag="0" Click="SubMenuItem_Click" />
-                <MenuItem Header="Bejövő számlák aktualizálása" Tag="1" Click="SubMenuItem_Click" />
+                <MenuItem Header="Bejövő számlák kezelése" Tag="1" Click="SubMenuItem_Click" />
+                <MenuItem Header="Bejövő számlák aktualizálása" Tag="2" Click="SubMenuItem_Click" />
             </MenuItem>
             <MenuItem Header="Törzsek" Tag="1" Click="MainMenuItem_Click">
                 <MenuItem Header="Termékek" Tag="0" Click="SubMenuItem_Click" />

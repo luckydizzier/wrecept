@@ -6,7 +6,7 @@ namespace Wrecept.Desktop.ViewModels;
 public partial class MainWindowViewModel : ObservableObject
 {
     private readonly StageViewModel _stage;
-    private readonly int[] _itemCounts = { 2, 5, 4, 4, 1, 1 };
+    private readonly int[] _itemCounts = { 3, 5, 4, 4, 1, 1 };
 
     private int SelectedIndex
     {
@@ -89,6 +89,9 @@ public partial class MainWindowViewModel : ObservableObject
             {
                 case 1:
                     _stage.ShowEditor = true;
+                    break;
+                case 2:
+                    // TODO: bejövő számlák aktualizálása
                     break;
             }
         }
