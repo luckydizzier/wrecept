@@ -12,7 +12,6 @@ public class TaxRateRepository : ITaxRateRepository
     public TaxRateRepository(AppDbContext db)
     {
         _db = db;
-        _db.Database.EnsureCreated();
     }
 
     public Task<List<TaxRate>> GetAllAsync(CancellationToken ct = default)

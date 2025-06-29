@@ -14,19 +14,8 @@ public class AppDbContext : DbContext
     public DbSet<TaxRate> TaxRates => Set<TaxRate>();
     public DbSet<PaymentMethod> PaymentMethods => Set<PaymentMethod>();
 
-    private readonly string _dbPath;
-
-    public AppDbContext(string dbPath)
-    {
-        _dbPath = dbPath;
-    }
-
-    public AppDbContext(DbContextOptions<AppDbContext> options, string dbPath)
+    public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
-        _dbPath = dbPath;
     }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite($"Data Source={_dbPath}");
 }

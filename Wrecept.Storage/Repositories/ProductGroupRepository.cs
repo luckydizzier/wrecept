@@ -12,7 +12,6 @@ public class ProductGroupRepository : IProductGroupRepository
     public ProductGroupRepository(AppDbContext db)
     {
         _db = db;
-        _db.Database.EnsureCreated();
     }
 
     public Task<List<ProductGroup>> GetAllAsync(CancellationToken ct = default)

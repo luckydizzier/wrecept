@@ -12,7 +12,6 @@ public class SupplierRepository : ISupplierRepository
     public SupplierRepository(AppDbContext db)
     {
         _db = db;
-        _db.Database.EnsureCreated();
     }
 
     public Task<List<Supplier>> GetAllAsync(CancellationToken ct = default)
