@@ -5,16 +5,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="400">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Up" Command="{Binding UpCommand}" />
+        <KeyBinding Key="Down" Command="{Binding DownCommand}" />
+        <KeyBinding Key="Enter" Command="{Binding EnterCommand}" />
+        <KeyBinding Key="Escape" Command="{Binding EscapeCommand}" />
+    </UserControl.InputBindings>
     <Border Background="{DynamicResource StageBackground}" Padding="10">
-        <StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <TextBlock Text="Termékek" FontWeight="Bold" />
-            <ListBox ItemsSource="{Binding Products}">
+            <ListBox Grid.Row="1"
+                     ItemsSource="{Binding Products}"
+                     SelectedIndex="{Binding SelectedIndex}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </StackPanel>
+            <StackPanel Grid.Row="2" Margin="0,10,0,0"
+                        Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Text="{Binding Net, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Text="{Binding Gross, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Enter = Mentés, Esc = Mégse" FontSize="10" />
+            </StackPanel>
+        </Grid>
     </Border>
 </UserControl>

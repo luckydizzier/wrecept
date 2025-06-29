@@ -1,8 +1,8 @@
 using Wrecept.Core.Models;
 
-namespace Wrecept.Core.Repositories;
+namespace Wrecept.Core.Services;
 
-public interface IProductRepository
+public interface IProductService
 {
     Task<List<Product>> GetAllAsync(CancellationToken ct = default);
     Task<int> AddAsync(Product product, CancellationToken ct = default);
