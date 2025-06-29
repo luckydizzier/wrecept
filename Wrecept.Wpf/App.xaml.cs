@@ -33,7 +33,9 @@ public partial class App : Application
         services.AddTransient<InvoiceEditorViewModel>();
         services.AddTransient<ProductMasterViewModel>();
         services.AddTransient<SupplierMasterViewModel>();
+        services.AddTransient<PlaceholderViewModel>();
         services.AddTransient<StageView>();
+        services.AddTransient<PlaceholderView>();
 
         services.AddSingleton<MainWindow>();
     }
