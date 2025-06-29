@@ -1,5 +1,5 @@
 ---
-title: "WPF Themes"
+title: "MAUI Themes"
 purpose: "Style guide for RetroTheme"
 author: "docs_agent"
 date: "2025-06-27"

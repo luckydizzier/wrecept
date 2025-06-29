@@ -7,5 +7,5 @@ date: "2025-06-27"
 
 # 📘 Fejlesztési specifikáció – Wrecept
 
-A Wrecept egy offline elsődleges, egyszemélyes számlázó alkalmazás C# és WPF technológiákkal.
+A Wrecept eredetileg csak Windowson futott WPF alapon, de most .NET MAUI segítségével több platformon is elérhető, továbbra is offline elsődleges szemlélettel.
 

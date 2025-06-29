@@ -11,12 +11,12 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
 
 ## Tipikus hibák
 
-- **Hiányzó Windows Desktop SDK** – a WPF projektekhez szükséges a `Microsoft.NET.Sdk.WindowsDesktop` telepítése. Enélkül a `dotnet build` nem fut le.
+- **Hiányzó MAUI workload** – a multiplatform buildhez telepíteni kell a `.NET MAUI` workloadot.
 - **Helytelen XAML elemnevek** – például `ViewBox` helyett `Viewbox` szerepelt, ami fordítási hibához vezetett.
 - **Nem támogatott `{x:Int32}` jelölés** – a Tag attribútumnál az egyszerű numerikus érték használata biztosítja a kompatibilitást.
 - **Hiányzó using direktíva** – a `StageView.xaml.cs` állományban a `System.Windows` névtér hiánya CS0246 hibát okozott.
 - **Elgépelés vagy hiányzó záró tag** – az `InvoiceEditorView.xaml` fájlban egy fölösleges `</StackPanel>` tag miatt a build meghiúsult.
-- **Teszt futtatásához szükséges csomag** – a `Xunit.StaFact` hiánya tesztfutási hibát eredményezett WPF környezetben.
+- **Teszt futtatásához szükséges csomag** – a `Xunit.StaFact` hiánya tesztfutási hibát eredményezhet Windows környezetben.
 
 ## Javaslatok
 

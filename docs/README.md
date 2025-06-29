@@ -13,7 +13,7 @@ date: "2025-06-27"
 
 ## 📦 Project Purpose
 
-Wrecept is a Windows desktop application designed to replicate the speed, clarity, and simplicity of classic Clipper + dBase IV-based systems, reimagined in C# and WPF. Its UI logic is entirely driven by keyboard navigation (Enter / Esc / Up / Down), and it focuses on rock-solid reliability and predictable behavior — even after a power outage.
+Wrecept started as a Windows-only desktop application but now aims to run on multiple platforms using .NET MAUI. It replicates the speed and clarity of classic Clipper + dBase IV systems with full keyboard navigation (Enter / Esc / Up / Down) and a focus on predictable behavior — even after a power outage.
 
 ---
 
@@ -45,14 +45,12 @@ Wrecept is a Windows desktop application designed to replicate the speed, clarit
 ## 📁 Folder Structure
 
 ```
-Wrecept.Desktop/
-├── App.xaml / MainWindow.xaml        # App entry point and shell
-├── Views/
-│   ├── StageView.xaml                # Main placeholder canvas
-│   ├── MenuBar.xaml                  # Visual top menu only
-│   └── StatusBar.xaml                # ESC/Enter hints footer
-├── Themes/RetroTheme.xaml           # Retro color scheme
-├── Assets/                          # Future icons, sounds, etc.
+Wrecept.Maui/
+├── App.xaml                          # Application definition
+├── MainPage.xaml                     # Cross-platform shell
+├── Views/                            # Future XAML pages
+├── Themes/RetroTheme.xaml            # Retro color scheme
+├── Assets/                           # Icons, sounds, etc.
 └── README.md
 ```
 
@@ -61,9 +59,9 @@ Wrecept.Desktop/
 ## 🛠 Technologies
 
 * Language: **C#** (.NET 8)
-* UI: **WPF**
-* Platform: **Windows-only** (for now)
-* IDE: **Visual Studio 2022+**
+* UI: **.NET MAUI**
+* Platform: **Cross-platform** (Windows, Android, iOS)
+* IDE: **Visual Studio 2022+ / VS Code**
 
 ---
 
@@ -77,15 +75,14 @@ Wrecept.Desktop/
 
 ## ✅ Kick OFF
 
-A WPF indító projekt helyes működéséhez a `Wrecept.Desktop` mappában az alábbi fájlok és beállítások szükségesek:
+A .NET MAUI projekt elindításához a `Wrecept.Maui` mappában az alábbi alapfájlok szerepelnek:
 
-* `App.xaml` benne `<Application StartupUri="MainWindow.xaml" />`
-* `App.xaml.cs` részleges osztály
-* `MainWindow.xaml` mint kezdő nézet
-* a projektfájlban `<OutputType>WinExe</OutputType>` és `<UseWPF>true</UseWPF>`
-* `[STAThread]` attribútummal ellátott `Main()` belépési pont (generált vagy `Program.cs`-ben)
+* `App.xaml` és `App.xaml.cs` – az alkalmazás beállításai
+* `MainPage.xaml` – kezdő nézet
+* `MauiProgram.cs` – DI és konfiguráció
+* platform-specifikus `Program.cs` a `Platforms/` mappában
 
-Ezen indító fájlok nélkül a build nem hoz létre futtatható `.exe` állományt.
+Ezek biztosítják, hogy minden támogatott platformon elinduljon az alkalmazás.
 
 ---
 

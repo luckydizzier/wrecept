@@ -1,4 +1,4 @@
-using Wrecept.Desktop.ViewModels;
+using Wrecept.Maui;
 
 namespace Wrecept.Tests;
 
