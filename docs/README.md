@@ -45,13 +45,13 @@ Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform 
 ## 📁 Folder Structure
 
 ```
-<tervezett WPF projekt>
-├── App.xaml                          # Alkalmazás definíció
-├── MainWindow.xaml                   # Főablak
-├── Views/                            # XAML nézetek
-├── Themes/RetroTheme.xaml            # Retro színséma
-├── Assets/                           # Ikonok, hangok
-└── README.md
+Wrecept.Core/          # Domain modellek és szolgáltatások
+Wrecept.Storage/       # EF Core adatkezelés és repositoryk
+<tervezett Wrecept.Wpf>  # Későbbi WPF UI projekt
+docs/                  # Dokumentációk
+tools/                 # Segédszkriptek
+CHANGELOG.md
+Wrecept.sln
 ```
 
 ---
