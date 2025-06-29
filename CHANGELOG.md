@@ -45,3 +45,4 @@ date: "2025-06-27"
 - Létrehoztam a Termékek nézetet és ViewModelt.
 - A StageViewModel bővült új függőségekkel és megjelenítési logikával.
 - A Kilépés menüpont bezárja az alkalmazást.
+- Termékek kezelése funkció: lista navigáció, szerkesztés és mentés.
