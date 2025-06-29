@@ -1,6 +1,6 @@
 using Xunit;
 using System.Threading;
-using Wrecept.Desktop;
+using Wrecept.Maui;
 
 namespace Wrecept.Tests;
 

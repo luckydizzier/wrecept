@@ -9,7 +9,7 @@ date: "2025-06-27"
 
 ## 🎯 Purpose
 
-Wrecept is a Windows-only, offline-first, single-user desktop application for invoice recording and basic procurement workflows. It draws heavily from the architecture and UI patterns of a legacy Clipper + dBase IV system, reimagined using modern C# and WPF technology.
+Wrecept is an offline-first, single-user application for invoice recording and procurement workflows. Originally Windows-only with WPF, the project now targets multiple platforms using .NET MAUI.
 
 The design must be:
 
@@ -45,7 +45,7 @@ The design must be:
 
 | Area           | Decision                                             |
 | -------------- | ---------------------------------------------------- |
-| UI Framework   | WPF (XAML-based)                                     |
+| UI Framework   | .NET MAUI (XAML-based)                                |
 | Persistence    | SQLite + Entity Framework Core                       |
 | Style          | Retro terminal (green/purple on black), themeable    |
 | Input          | Only Enter, Esc, Up, Down allowed for core workflows |

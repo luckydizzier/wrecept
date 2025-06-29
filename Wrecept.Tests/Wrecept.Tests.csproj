@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wrecept.Desktop\Wrecept.Desktop.csproj" />
+    <ProjectReference Include="..\Wrecept.Maui\Wrecept.Maui.csproj" />
     <ProjectReference Include="..\Wrecept.Storage\Wrecept.Storage.csproj" />
   </ItemGroup>
 
