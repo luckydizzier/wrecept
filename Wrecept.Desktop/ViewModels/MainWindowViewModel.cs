@@ -14,10 +14,10 @@ public partial class MainWindowViewModel : ObservableObject
         set => _stage.SelectedIndex = value;
     }
 
-    private int SelectedSubIndex
+    private int SelectedSubmenuIndex
     {
-        get => _stage.SelectedSubIndex;
-        set => _stage.SelectedSubIndex = value;
+        get => _stage.SelectedSubmenuIndex;
+        set => _stage.SelectedSubmenuIndex = value;
     }
 
     private bool IsSubMenuOpen
@@ -53,10 +53,10 @@ public partial class MainWindowViewModel : ObservableObject
     private void ChangeSub(int delta)
     {
         var count = _itemCounts[SelectedIndex];
-        var newIndex = SelectedSubIndex + delta;
+        var newIndex = SelectedSubmenuIndex + delta;
         if (newIndex < 0) newIndex = 0;
         if (newIndex >= count) newIndex = count - 1;
-        SelectedSubIndex = newIndex;
+        SelectedSubmenuIndex = newIndex;
     }
 
     private void OnEnter()
@@ -64,7 +64,7 @@ public partial class MainWindowViewModel : ObservableObject
         if (!IsSubMenuOpen)
         {
             IsSubMenuOpen = true;
-            SelectedSubIndex = 0;
+            SelectedSubmenuIndex = 0;
         }
         else
         {
@@ -83,7 +83,7 @@ public partial class MainWindowViewModel : ObservableObject
         _stage.HideAll();
         if (SelectedIndex == 1)
         {
-            switch (SelectedSubIndex)
+            switch (SelectedSubmenuIndex)
             {
                 case 1:
                     _stage.ShowProductGroup = true;
