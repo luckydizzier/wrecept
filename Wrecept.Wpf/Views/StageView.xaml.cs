@@ -14,13 +14,13 @@ public partial class StageView : UserControl
         InitializeComponent();
         _viewModel = viewModel;
         DataContext = viewModel;
-        FocusManager.AddGotFocusHandler(this, OnGotFocus);
+        Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
         => NavigationHelper.Handle(e);
 
-    private void OnGotFocus(object sender, KeyboardFocusChangedEventArgs e)
+    private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         var fe = e.NewFocus as FrameworkElement;
         _viewModel.StatusBar.FocusedElement = fe?.Name ?? fe?.GetType().Name ?? string.Empty;
