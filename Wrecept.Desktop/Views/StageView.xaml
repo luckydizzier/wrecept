@@ -4,47 +4,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:Wrecept.Desktop.Views"
+             xmlns:vm="clr-namespace:Wrecept.Desktop.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:InvoiceEditorViewModel}">
+            <views:InvoiceEditorView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SupplierLookupViewModel}">
+            <views:SupplierLookupView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ProductViewModel}">
+            <views:ProductView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ProductGroupViewModel}">
+            <views:ProductGroupView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:TaxRateViewModel}">
+            <views:TaxRateView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PaymentMethodViewModel}">
+            <views:PaymentMethodView />
+        </DataTemplate>
+    </UserControl.Resources>
+
     <Grid Background="{DynamicResource StageBackground}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <views:InvoiceEditorView x:Name="InvoiceEditorHost"
-                                 DataContext="{Binding Editor}"
-                                 Visibility="{Binding DataContext.ShowEditor,
-                                                     RelativeSource={RelativeSource AncestorType=views:StageView},
-                                                     Converter={StaticResource BooleanToVisibilityConverter}}" />
-
-        <views:SupplierLookupView x:Name="SupplierLookupHost"
-                                  DataContext="{Binding SupplierLookup}"
-                                  Visibility="{Binding DataContext.ShowSupplierLookup,
-                                                      RelativeSource={RelativeSource AncestorType=views:StageView},
-                                                      Converter={StaticResource BooleanToVisibilityConverter}}" />
-
-        <views:ProductView x:Name="ProductHost"
-                           DataContext="{Binding Product}"
-                           Visibility="{Binding DataContext.ShowProduct,
-                                                   RelativeSource={RelativeSource AncestorType=views:StageView},
-                                                   Converter={StaticResource BooleanToVisibilityConverter}}" />
-
-        <views:ProductGroupView x:Name="ProductGroupHost"
-                                DataContext="{Binding ProductGroup}"
-                                Visibility="{Binding DataContext.ShowProductGroup,
-                                                    RelativeSource={RelativeSource AncestorType=views:StageView},
-                                                    Converter={StaticResource BooleanToVisibilityConverter}}" />
-
-        <views:TaxRateView x:Name="TaxRateHost"
-                           DataContext="{Binding TaxRate}"
-                           Visibility="{Binding DataContext.ShowTaxRate,
-                                                   RelativeSource={RelativeSource AncestorType=views:StageView},
-                                                   Converter={StaticResource BooleanToVisibilityConverter}}" />
-
-        <views:PaymentMethodView x:Name="PaymentMethodHost"
-                                DataContext="{Binding PaymentMethod}"
-                                Visibility="{Binding DataContext.ShowPaymentMethod,
-                                                    RelativeSource={RelativeSource AncestorType=views:StageView},
-                                                    Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <ContentControl Content="{Binding ActiveViewModel}" />
     </Grid>
 </UserControl>

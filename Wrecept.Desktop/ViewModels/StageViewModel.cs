@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Core.Services;
 using Wrecept.Core.Repositories;
@@ -24,22 +23,7 @@ public partial class StageViewModel : ObservableObject
     private bool isSubMenuOpen;
 
     [ObservableProperty]
-    private bool showEditor;
-
-    [ObservableProperty]
-    private bool showSupplierLookup;
-
-    [ObservableProperty]
-    private bool showProduct;
-
-    [ObservableProperty]
-    private bool showProductGroup;
-
-    [ObservableProperty]
-    private bool showTaxRate;
-
-    [ObservableProperty]
-    private bool showPaymentMethod;
+    private ObservableObject? activeViewModel;
 
     public StageViewModel(IInvoiceService invoiceService, IProductService productService, ISupplierRepository supplierRepository)
     {
@@ -51,82 +35,23 @@ public partial class StageViewModel : ObservableObject
         PaymentMethod = new PaymentMethodViewModel();
     }
 
-    public void OpenInvoiceEditor()
-    {
-        HideAll();
-        ShowEditor = true;
-    }
+    public void OpenInvoiceEditor() => Activate(Editor);
 
-    public void OpenProductView()
-    {
-        HideAll();
-        ShowProduct = true;
-    }
+    public void OpenProductView() => Activate(Product);
 
-    public void OpenProductGroupView()
-    {
-        HideAll();
-        ShowProductGroup = true;
-    }
+    public void OpenProductGroupView() => Activate(ProductGroup);
 
-    public void OpenSupplierLookupView()
-    {
-        HideAll();
-        ShowSupplierLookup = true;
-    }
+    public void OpenSupplierLookupView() => Activate(SupplierLookup);
 
-    public void OpenTaxRateView()
-    {
-        HideAll();
-        ShowTaxRate = true;
-    }
+    public void OpenTaxRateView() => Activate(TaxRate);
 
-    public void OpenPaymentMethodView()
-    {
-        HideAll();
-        ShowPaymentMethod = true;
-    }
+    public void OpenPaymentMethodView() => Activate(PaymentMethod);
 
-    public void HideAll()
+    private void Activate(ObservableObject viewModel)
     {
-        ShowEditor = false;
-        ShowProduct = false;
-        ShowSupplierLookup = false;
-        ShowProductGroup = false;
-        ShowTaxRate = false;
-        ShowPaymentMethod = false;
-        IsSubMenuOpen = false;
-    }
-
-    partial void OnShowEditorChanged(bool value)
-    {
-        Debug.WriteLine($"ShowEditor set to {value}");
-    }
-
-    partial void OnShowSupplierLookupChanged(bool value)
-    {
-        Debug.WriteLine($"ShowSupplierLookup set to {value}");
-    }
-
-    partial void OnShowProductChanged(bool value)
-    {
-        Debug.WriteLine($"ShowProduct set to {value}");
-        if (value)
+        ActiveViewModel = viewModel;
+        if (viewModel == Product)
             _ = Product.LoadAsync();
-    }
-
-    partial void OnShowProductGroupChanged(bool value)
-    {
-        Debug.WriteLine($"ShowProductGroup set to {value}");
-    }
-
-    partial void OnShowTaxRateChanged(bool value)
-    {
-        Debug.WriteLine($"ShowTaxRate set to {value}");
-    }
-
-    partial void OnShowPaymentMethodChanged(bool value)
-    {
-        Debug.WriteLine($"ShowPaymentMethod set to {value}");
+        IsSubMenuOpen = false;
     }
 }
