@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
+             xmlns:views="clr-namespace:Wrecept.Wpf.Views.Controls"
              mc:Ignorable="d"
              KeyDown="OnKeyDown">
     <Grid Background="{DynamicResource StageBackground}">
@@ -81,6 +82,6 @@
 
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
 
-        <TextBlock Grid.Row="2" Text="Állapotsor" Margin="2" />
+        <views:StatusBar Grid.Row="2" DataContext="{Binding StatusBar}"/>
     </Grid>
 </UserControl>

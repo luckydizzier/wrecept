@@ -16,3 +16,4 @@ A Retro UI hangs on warm yellows and oranges reminiscent of classic terminals. T
 - **ControlBackgroundBrush:** Pale yellow surface for controls.
 
 Every control style sets `FocusVisualStyle` to display a dashed border so keyboard navigation is obvious.
+- The StatusBar uses `ControlBackgroundBrush` with subtle text to avoid distraction while conveying state.

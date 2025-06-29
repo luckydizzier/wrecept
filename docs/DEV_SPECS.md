@@ -58,7 +58,7 @@ The design must be:
 
 | Module            | Description                                      |
 | ----------------- | ------------------------------------------------ |
-| `MainWindow`      | Shell container with top menu and status bar     |
+| `MainWindow`      | Shell container with top menu and dynamic status bar |
 | `InvoiceEditor`   | Header + item rows UI with keyboard-only control |
 | `ProductMaster`   | Searchable product registry and editor           |
 | `SupplierMaster`  | Simple list-and-edit view of vendors             |
