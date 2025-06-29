@@ -13,30 +13,6 @@ public partial class StageViewModel : ObservableObject
     public TaxRateViewModel TaxRate { get; }
     public PaymentMethodViewModel PaymentMethod { get; }
 
-    private readonly string[] _mainMenu =
-    {
-        "Számlák",
-        "Törzsek",
-        "Listák",
-        "Szerviz",
-        "Névjegy",
-        "Vége"
-    };
-
-    private readonly string[][] _subMenus =
-    {
-        new[] { "Bejövő számlák kezelése", "Bejövő számlák aktualizálása" },
-        new[] { "Termékek", "Termékcsoportok", "Szállítók", "ÁFA-kulcsok", "Fizetési módok" },
-        new[] { "Terméklista", "Szállítók listája", "Számlák listája", "Készletkarton" },
-        new[] { "Állományok ellenőrzése", "Áramszünet után", "Képernyő beállítása", "Nyomtató beállítás" },
-        new[] { "A program felhasználójának adatai" },
-        new[] { "Kilépés" }
-    };
-
-    public IReadOnlyList<string> MainMenuItems => _mainMenu;
-
-    public IReadOnlyList<string> CurrentSubMenuItems => _subMenus[SelectedIndex];
-
     [ObservableProperty]
     private int selectedIndex;
 
