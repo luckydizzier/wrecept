@@ -11,7 +11,12 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        ViewModel = new ViewModels.MainWindowViewModel(Stage.ViewModel);
+        var stageVm = new ViewModels.StageViewModel(
+            ServiceLocator.InvoiceService,
+            ServiceLocator.ProductService,
+            ServiceLocator.SupplierRepository);
+        Stage.ViewModel = stageVm;
+        ViewModel = new ViewModels.MainWindowViewModel(stageVm);
         DataContext = ViewModel;
     }
 
