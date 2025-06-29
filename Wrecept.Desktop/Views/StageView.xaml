@@ -26,9 +26,16 @@
         <DataTemplate DataType="{x:Type vm:PaymentMethodViewModel}">
             <views:PaymentMethodView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ProductEditorViewModel}">
+            <views:ProductEditorView />
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid Background="{DynamicResource StageBackground}">
-        <ContentControl Content="{Binding ActiveViewModel}" />
+        <ContentControl Content="{Binding ActiveViewModel}"
+                        Visibility="{Binding ShowEditor, Converter={StaticResource InverseBooleanConverter}}" />
+        <views:ProductEditorView x:Name="ProductEditorHost"
+                                 DataContext="{Binding ActiveViewModel}"
+                                 Visibility="{Binding ShowEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>
