@@ -19,6 +19,8 @@ Az alkalmazás rétegei tisztán el vannak választva, hogy a karbantarthatósá
 
 Minden réteg csak az alatta lévőt éri el, közvetlen átjárás nem megengedett.
 Az elsődleges ablak a `MainWindow`, amely a `StageView` kontrollt jeleníti meg.
+`StageView` a menük és az állapotsáv kerete, `StageViewModel` cseréli a tartalmat
+ (`InvoiceEditor`, `ProductMaster`, `SupplierMaster`).
 
 ## Adatáramlás
 
@@ -40,6 +42,7 @@ A felhasználói események a ViewModelen keresztül jutnak el a Core-hoz, amely
 Az `DbContext` példányai a Storage rétegben élnek. A migrációk és a sémafrissítések parancssori eszközzel, CI környezetben futnak. A ViewModel soha nem fér közvetlenül az adatbázishoz.
 
 Az adatlekérést repositoryk végzik, amelyek `IInvoiceRepository`, `IProductRepository` és `ISupplierRepository` interfészeket valósítanak meg. Ezek felelősek a hibák naplózásáért és az üres listákkal való visszatérésért hiba esetén.
+Ezek fölött `InvoiceService`, `ProductService` és mostantól `SupplierService` gondoskodik a validálásról és a ViewModel réteg kiszolgálásáról.
 
 Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a service réteg inicializálja, így naplózható az adat módosításának ideje.
 

@@ -23,10 +23,10 @@ Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform 
 | -------------------------------- | ----------------------- |
 | Retro-style UI                   | ✅ Stage design complete |
 | Keyboard-only control            | ⏳ Logic in progress     |
-| Structured top menu              | ✅ Visual demo only      |
-| Invoice recording (header/items) | ⏳ Coming soon           |
-| Product master data              | ⏳ Basic editing available |
-| Supplier selection               | ⏳ Planned               |
+| Structured top menu              | ✅ StageView in place    |
+| Invoice recording (header/items) | ⏳ UI skeleton ready     |
+| Product master data              | ⏳ List view available   |
+| Supplier selection               | ⏳ List view available   |
 | SQLite-powered persistence       | 🔒 Deferred             |
 | Audio-visual feedback            | 🔒 Deferred             |
 | Backup & recovery after outage   | 🔒 Deferred             |
