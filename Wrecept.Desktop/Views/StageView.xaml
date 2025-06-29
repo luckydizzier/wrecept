@@ -16,12 +16,12 @@
 
         <!-- Horizontal menu bar -->
         <StackPanel Orientation="Horizontal" Background="{DynamicResource MenuBackground}">
-            <Button x:Name="MainMenuFirstButton" Content="Számlák" Style="{StaticResource MenuItemStyle}" Tag="0" />
-            <Button Content="Törzsek" Style="{StaticResource MenuItemStyle}" Tag="1" />
-            <Button Content="Listák" Style="{StaticResource MenuItemStyle}" Tag="2" />
-            <Button Content="Szerviz" Style="{StaticResource MenuItemStyle}" Tag="3" />
-            <Button Content="Névjegy" Style="{StaticResource MenuItemStyle}" Tag="4" />
-            <Button Content="Vége" Style="{StaticResource MenuItemStyle}" Tag="5" />
+            <Button x:Name="MainMenuFirstButton" Content="Számlák" Style="{StaticResource MenuItemStyle}" Tag="0" Click="MainMenuButton_Click" />
+            <Button Content="Törzsek" Style="{StaticResource MenuItemStyle}" Tag="1" Click="MainMenuButton_Click" />
+            <Button Content="Listák" Style="{StaticResource MenuItemStyle}" Tag="2" Click="MainMenuButton_Click" />
+            <Button Content="Szerviz" Style="{StaticResource MenuItemStyle}" Tag="3" Click="MainMenuButton_Click" />
+            <Button Content="Névjegy" Style="{StaticResource MenuItemStyle}" Tag="4" Click="MainMenuButton_Click" />
+            <Button Content="Vége" Style="{StaticResource MenuItemStyle}" Tag="5" Click="MainMenuButton_Click" />
         </StackPanel>
 
         <!-- Vertical sub menu panels -->
@@ -33,8 +33,8 @@
                         <Binding Path="SelectedIndex" />
                     </MultiBinding>
                 </StackPanel.Visibility>
-                <Button Content="Bejövő szállítólevelek" Style="{StaticResource SubMenuItemStyle}" Tag="0" />
-                <Button Content="Bejövő számlák aktualizálása" Style="{StaticResource SubMenuItemStyle}" Tag="1" />
+                <Button Content="Bejövő szállítólevelek" Style="{StaticResource SubMenuItemStyle}" Tag="0" Click="SubMenuButton_Click" />
+                <Button Content="Bejövő számlák aktualizálása" Style="{StaticResource SubMenuItemStyle}" Tag="1" Click="SubMenuButton_Click" />
             </StackPanel>
         <StackPanel Tag="1">
                 <StackPanel.Visibility>
@@ -43,11 +43,11 @@
                         <Binding Path="SelectedIndex" />
                     </MultiBinding>
                 </StackPanel.Visibility>
-                <Button Content="Termékek" Style="{StaticResource SubMenuItemStyle}" Tag="0" />
-                <Button Content="Termékcsoportok" Style="{StaticResource SubMenuItemStyle}" Tag="1" />
-                <Button Content="Szállítók" Style="{StaticResource SubMenuItemStyle}" Tag="2" />
-                <Button Content="ÁFA-kulcsok" Style="{StaticResource SubMenuItemStyle}" Tag="3" />
-                <Button Content="Fizetési módok" Style="{StaticResource SubMenuItemStyle}" Tag="4" />
+                <Button Content="Termékek" Style="{StaticResource SubMenuItemStyle}" Tag="0" Click="SubMenuButton_Click" />
+                <Button Content="Termékcsoportok" Style="{StaticResource SubMenuItemStyle}" Tag="1" Click="SubMenuButton_Click" />
+                <Button Content="Szállítók" Style="{StaticResource SubMenuItemStyle}" Tag="2" Click="SubMenuButton_Click" />
+                <Button Content="ÁFA-kulcsok" Style="{StaticResource SubMenuItemStyle}" Tag="3" Click="SubMenuButton_Click" />
+                <Button Content="Fizetési módok" Style="{StaticResource SubMenuItemStyle}" Tag="4" Click="SubMenuButton_Click" />
             </StackPanel>
         <StackPanel Tag="2">
                 <StackPanel.Visibility>
@@ -56,10 +56,10 @@
                         <Binding Path="SelectedIndex" />
                     </MultiBinding>
                 </StackPanel.Visibility>
-                <Button Content="Terméklista" Style="{StaticResource SubMenuItemStyle}" Tag="0" />
-                <Button Content="Szállítók listája" Style="{StaticResource SubMenuItemStyle}" Tag="1" />
-                <Button Content="Számlák listája" Style="{StaticResource SubMenuItemStyle}" Tag="2" />
-                <Button Content="Készletkarton" Style="{StaticResource SubMenuItemStyle}" Tag="3" />
+                <Button Content="Terméklista" Style="{StaticResource SubMenuItemStyle}" Tag="0" Click="SubMenuButton_Click" />
+                <Button Content="Szállítók listája" Style="{StaticResource SubMenuItemStyle}" Tag="1" Click="SubMenuButton_Click" />
+                <Button Content="Számlák listája" Style="{StaticResource SubMenuItemStyle}" Tag="2" Click="SubMenuButton_Click" />
+                <Button Content="Készletkarton" Style="{StaticResource SubMenuItemStyle}" Tag="3" Click="SubMenuButton_Click" />
             </StackPanel>
         <StackPanel Tag="3">
                 <StackPanel.Visibility>
@@ -68,10 +68,10 @@
                         <Binding Path="SelectedIndex" />
                     </MultiBinding>
                 </StackPanel.Visibility>
-                <Button Content="Állományok ellenőrzése" Style="{StaticResource SubMenuItemStyle}" Tag="0" />
-                <Button Content="Áramszünet után" Style="{StaticResource SubMenuItemStyle}" Tag="1" />
-                <Button Content="Képernyő beállítása" Style="{StaticResource SubMenuItemStyle}" Tag="2" />
-                <Button Content="Nyomtató beállítás" Style="{StaticResource SubMenuItemStyle}" Tag="3" />
+                <Button Content="Állományok ellenőrzése" Style="{StaticResource SubMenuItemStyle}" Tag="0" Click="SubMenuButton_Click" />
+                <Button Content="Áramszünet után" Style="{StaticResource SubMenuItemStyle}" Tag="1" Click="SubMenuButton_Click" />
+                <Button Content="Képernyő beállítása" Style="{StaticResource SubMenuItemStyle}" Tag="2" Click="SubMenuButton_Click" />
+                <Button Content="Nyomtató beállítás" Style="{StaticResource SubMenuItemStyle}" Tag="3" Click="SubMenuButton_Click" />
             </StackPanel>
         <StackPanel Tag="4">
                 <StackPanel.Visibility>
@@ -80,7 +80,7 @@
                         <Binding Path="SelectedIndex" />
                     </MultiBinding>
                 </StackPanel.Visibility>
-                <Button Content="A program felhasználójának adatai" Style="{StaticResource SubMenuItemStyle}" Tag="0" />
+                <Button Content="A program felhasználójának adatai" Style="{StaticResource SubMenuItemStyle}" Tag="0" Click="SubMenuButton_Click" />
             </StackPanel>
         <StackPanel Tag="5">
                 <StackPanel.Visibility>
@@ -89,7 +89,7 @@
                         <Binding Path="SelectedIndex" />
                     </MultiBinding>
                 </StackPanel.Visibility>
-                <Button Content="Kilépés" Style="{StaticResource SubMenuItemStyle}" Tag="0" />
+                <Button Content="Kilépés" Style="{StaticResource SubMenuItemStyle}" Tag="0" Click="SubMenuButton_Click" />
             </StackPanel>
         </StackPanel>
 
