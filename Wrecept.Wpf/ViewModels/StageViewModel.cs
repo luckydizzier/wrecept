@@ -33,6 +33,7 @@ public partial class StageViewModel : ObservableObject
     private readonly InvoiceEditorViewModel _invoiceEditor;
     private readonly ProductMasterViewModel _productMaster;
     private readonly SupplierMasterViewModel _supplierMaster;
+    private readonly AboutViewModel _about;
     private readonly PlaceholderViewModel _placeholder;
     private readonly StatusBarViewModel _statusBar;
 
@@ -42,12 +43,14 @@ public partial class StageViewModel : ObservableObject
         InvoiceEditorViewModel invoiceEditor,
         ProductMasterViewModel productMaster,
         SupplierMasterViewModel supplierMaster,
+        AboutViewModel about,
         PlaceholderViewModel placeholder,
         StatusBarViewModel statusBar)
     {
         _invoiceEditor = invoiceEditor;
         _productMaster = productMaster;
         _supplierMaster = supplierMaster;
+        _about = about;
         _placeholder = placeholder;
         _statusBar = statusBar;
         CurrentViewModel = _invoiceEditor;
@@ -82,8 +85,16 @@ public partial class StageViewModel : ObservableObject
             case StageMenuAction.ScreenSettings:
             case StageMenuAction.PrinterSettings:
             case StageMenuAction.UserInfo:
-                CurrentViewModel = _placeholder;
-                _statusBar.Message = "Funkció még nincs kész";
+                if (action == StageMenuAction.UserInfo)
+                {
+                    CurrentViewModel = _about;
+                    _statusBar.Message = "Névjegy megjelenítve";
+                }
+                else
+                {
+                    CurrentViewModel = _placeholder;
+                    _statusBar.Message = "Funkció még nincs kész";
+                }
                 break;
             case StageMenuAction.ExitApplication:
                 Application.Current.Shutdown();

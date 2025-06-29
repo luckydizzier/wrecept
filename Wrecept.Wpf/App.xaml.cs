@@ -34,9 +34,11 @@ public partial class App : Application
         services.AddTransient<InvoiceEditorViewModel>();
         services.AddTransient<ProductMasterViewModel>();
         services.AddTransient<SupplierMasterViewModel>();
+        services.AddTransient<AboutViewModel>();
         services.AddTransient<PlaceholderViewModel>();
         services.AddSingleton<StatusBarViewModel>();
         services.AddTransient<StageView>();
+        services.AddTransient<AboutView>();
         services.AddTransient<PlaceholderView>();
         services.AddTransient<Views.Controls.StatusBar>();
 

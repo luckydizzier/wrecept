@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="..\docs\about_hu.md" Link="Resources\about_hu.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Wrecept.Core\Wrecept.Core.csproj" />
     <ProjectReference Include="..\Wrecept.Storage\Wrecept.Storage.csproj" />
   </ItemGroup>
