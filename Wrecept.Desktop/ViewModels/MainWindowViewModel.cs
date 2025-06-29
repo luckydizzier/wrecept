@@ -67,8 +67,15 @@ public partial class MainWindowViewModel : ObservableObject
     {
         if (!IsSubMenuOpen)
         {
-            IsSubMenuOpen = true;
-            SelectedSubmenuIndex = 0;
+            if (_itemCounts[SelectedIndex] > 0)
+            {
+                IsSubMenuOpen = true;
+                SelectedSubmenuIndex = 0;
+            }
+            else
+            {
+                ExecuteCurrent();
+            }
         }
         else
         {
