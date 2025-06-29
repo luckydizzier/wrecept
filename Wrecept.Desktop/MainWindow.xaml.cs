@@ -41,9 +41,7 @@ public partial class MainWindow : Window
         {
             if (mi.Parent is MenuItem parent && int.TryParse(parent.Tag?.ToString(), out var mainIndex))
             {
-                ViewModel.Stage.SelectedIndex = mainIndex;
-                ViewModel.Stage.SelectedSubmenuIndex = subIndex;
-                ViewModel.EnterCommand.Execute(null);
+                ViewModel.ActivateMenuItem(mainIndex, subIndex);
             }
         }
     }

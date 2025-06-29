@@ -48,6 +48,14 @@ public partial class MainWindowViewModel : ObservableObject
         EscapeCommand = new RelayCommand(OnEscape);
     }
 
+    public void ActivateMenuItem(int mainIndex, int subIndex)
+    {
+        SelectedIndex = mainIndex;
+        SelectedSubmenuIndex = subIndex;
+        IsSubMenuOpen = true;
+        ExecuteCurrent();
+    }
+
     private void ChangeMain(int delta)
     {
         var count = _itemCounts.Length;
