@@ -12,7 +12,6 @@ public class PaymentMethodRepository : IPaymentMethodRepository
     public PaymentMethodRepository(AppDbContext db)
     {
         _db = db;
-        _db.Database.EnsureCreated();
     }
 
     public Task<List<PaymentMethod>> GetAllAsync(CancellationToken ct = default)

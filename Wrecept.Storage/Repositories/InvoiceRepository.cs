@@ -12,7 +12,6 @@ public class InvoiceRepository : IInvoiceRepository
     public InvoiceRepository(AppDbContext db)
     {
         _db = db;
-        _db.Database.EnsureCreated();
     }
 
     public async Task<int> AddAsync(Invoice invoice, CancellationToken ct = default)
