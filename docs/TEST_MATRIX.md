@@ -12,4 +12,4 @@ date: "2025-06-27"
 | UI lock          | Az alkalmazás újra fókuszálja az aktív elemet vagy visszaáll alapállapotba.       |
 | Network loss     | A lokális műveletek zavartalanul folytatódnak, figyelmeztető üzenet jelenik meg. |
 | Corrupted invoice| A betöltés megszakad, a hibát naplózzuk és a felhasználót tájékoztatjuk.          |
-| MAUI build Linuxon | Ha a MAUI workload nincs telepítve, a build nem fut le; ezt naplózzuk. |
+| WPF build Windowson | Ha a .NET Desktop Runtime nincs telepítve, a build nem fut le; ezt naplózzuk. |
