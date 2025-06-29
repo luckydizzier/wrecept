@@ -14,34 +14,57 @@
     </Window.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem x:Name="MainMenuFirstItem" Header="Számlák" Tag="0" Click="MainMenuItem_Click">
-                <MenuItem Header="Bejövő számlák kezelése" Tag="0" Click="SubMenuItem_Click" />
-                <MenuItem Header="Bejövő számlák aktualizálása" Tag="1" Click="SubMenuItem_Click" />
+            <MenuItem x:Name="MainMenuFirstItem" Header="Számlák" Tag="0"
+                      Command="{Binding SelectMainMenuCommand}" CommandParameter="0" Focusable="True">
+                <MenuItem Header="Bejövő számlák kezelése" Tag="0"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="0|0" Focusable="True" />
+                <MenuItem Header="Bejövő számlák aktualizálása" Tag="1"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="0|1" Focusable="True" />
             </MenuItem>
-            <MenuItem Header="Törzsek" Tag="1" Click="MainMenuItem_Click">
-                <MenuItem Header="Termékek" Tag="0" Click="SubMenuItem_Click" />
-                <MenuItem Header="Termékcsoportok" Tag="1" Click="SubMenuItem_Click" />
-                <MenuItem Header="Szállítók" Tag="2" Click="SubMenuItem_Click" />
-                <MenuItem Header="ÁFA-kulcsok" Tag="3" Click="SubMenuItem_Click" />
-                <MenuItem Header="Fizetési módok" Tag="4" Click="SubMenuItem_Click" />
+            <MenuItem Header="Törzsek" Tag="1"
+                      Command="{Binding SelectMainMenuCommand}" CommandParameter="1" Focusable="True">
+                <MenuItem Header="Termékek" Tag="0"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="1|0" Focusable="True" />
+                <MenuItem Header="Termékcsoportok" Tag="1"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="1|1" Focusable="True" />
+                <MenuItem Header="Szállítók" Tag="2"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="1|2" Focusable="True" />
+                <MenuItem Header="ÁFA-kulcsok" Tag="3"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="1|3" Focusable="True" />
+                <MenuItem Header="Fizetési módok" Tag="4"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="1|4" Focusable="True" />
             </MenuItem>
-            <MenuItem Header="Listák" Tag="2" Click="MainMenuItem_Click">
-                <MenuItem Header="Terméklista" Tag="0" Click="SubMenuItem_Click" />
-                <MenuItem Header="Szállítók listája" Tag="1" Click="SubMenuItem_Click" />
-                <MenuItem Header="Számlák listája" Tag="2" Click="SubMenuItem_Click" />
-                <MenuItem Header="Készletkarton" Tag="3" Click="SubMenuItem_Click" />
+            <MenuItem Header="Listák" Tag="2"
+                      Command="{Binding SelectMainMenuCommand}" CommandParameter="2" Focusable="True">
+                <MenuItem Header="Terméklista" Tag="0"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="2|0" Focusable="True" />
+                <MenuItem Header="Szállítók listája" Tag="1"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="2|1" Focusable="True" />
+                <MenuItem Header="Számlák listája" Tag="2"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="2|2" Focusable="True" />
+                <MenuItem Header="Készletkarton" Tag="3"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="2|3" Focusable="True" />
             </MenuItem>
-            <MenuItem Header="Szerviz" Tag="3" Click="MainMenuItem_Click">
-                <MenuItem Header="Állományok ellenőrzése" Tag="0" Click="SubMenuItem_Click" />
-                <MenuItem Header="Áramszünet után" Tag="1" Click="SubMenuItem_Click" />
-                <MenuItem Header="Képernyő beállítása" Tag="2" Click="SubMenuItem_Click" />
-                <MenuItem Header="Nyomtató beállítás" Tag="3" Click="SubMenuItem_Click" />
+            <MenuItem Header="Szerviz" Tag="3"
+                      Command="{Binding SelectMainMenuCommand}" CommandParameter="3" Focusable="True">
+                <MenuItem Header="Állományok ellenőrzése" Tag="0"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="3|0" Focusable="True" />
+                <MenuItem Header="Áramszünet után" Tag="1"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="3|1" Focusable="True" />
+                <MenuItem Header="Képernyő beállítása" Tag="2"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="3|2" Focusable="True" />
+                <MenuItem Header="Nyomtató beállítás" Tag="3"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="3|3" Focusable="True" />
             </MenuItem>
-            <MenuItem Header="Névjegy" Tag="4" Click="MainMenuItem_Click">
-                <MenuItem Header="A program felhasználójának adatai" Tag="0" Click="SubMenuItem_Click" />
+            <MenuItem Header="Névjegy" Tag="4"
+                      Command="{Binding SelectMainMenuCommand}" CommandParameter="4" Focusable="True">
+                <MenuItem Header="A program felhasználójának adatai" Tag="0"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="4|0" Focusable="True" />
             </MenuItem>
-            <MenuItem Header="Vége" Tag="5" Click="MainMenuItem_Click">
-                <MenuItem Header="Kilépés" Tag="0" Click="SubMenuItem_Click" />
+            <MenuItem Header="Vége" Tag="5"
+                      Command="{Binding SelectMainMenuCommand}" CommandParameter="5" Focusable="True">
+                <MenuItem Header="Kilépés" Tag="0"
+                          Command="{Binding SelectSubMenuCommand}" CommandParameter="5|0" Focusable="True" />
             </MenuItem>
         </Menu>
         <views:StageView x:Name="Stage" />
