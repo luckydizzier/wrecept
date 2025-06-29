@@ -41,32 +41,44 @@
             <views:InvoiceEditorView x:Name="InvoiceEditorHost"
                                      DataContext="{Binding Editor}"
                                      Grid.ColumnSpan="2"
-                                     Visibility="{Binding ShowEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                     Visibility="{Binding DataContext.ShowEditor,
+                                                         RelativeSource={RelativeSource AncestorType=UserControl},
+                                                         Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <views:SupplierLookupView x:Name="SupplierLookupHost"
                                       DataContext="{Binding SupplierLookup}"
                                       Grid.ColumnSpan="2"
-                                      Visibility="{Binding ShowSupplierLookup, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                      Visibility="{Binding DataContext.ShowSupplierLookup,
+                                                          RelativeSource={RelativeSource AncestorType=UserControl},
+                                                          Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <views:ProductView x:Name="ProductHost"
                                DataContext="{Binding Product}"
                                Grid.ColumnSpan="2"
-                               Visibility="{Binding ShowProduct, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                               Visibility="{Binding DataContext.ShowProduct,
+                                                       RelativeSource={RelativeSource AncestorType=UserControl},
+                                                       Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <views:ProductGroupView x:Name="ProductGroupHost"
                                     DataContext="{Binding ProductGroup}"
                                     Grid.ColumnSpan="2"
-                                    Visibility="{Binding ShowProductGroup, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    Visibility="{Binding DataContext.ShowProductGroup,
+                                                        RelativeSource={RelativeSource AncestorType=UserControl},
+                                                        Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <views:TaxRateView x:Name="TaxRateHost"
                                DataContext="{Binding TaxRate}"
                                Grid.ColumnSpan="2"
-                               Visibility="{Binding ShowTaxRate, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                               Visibility="{Binding DataContext.ShowTaxRate,
+                                                       RelativeSource={RelativeSource AncestorType=UserControl},
+                                                       Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <views:PaymentMethodView x:Name="PaymentMethodHost"
                                     DataContext="{Binding PaymentMethod}"
                                     Grid.ColumnSpan="2"
-                                    Visibility="{Binding ShowPaymentMethod, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    Visibility="{Binding DataContext.ShowPaymentMethod,
+                                                        RelativeSource={RelativeSource AncestorType=UserControl},
+                                                        Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
     </Grid>
 </UserControl>
