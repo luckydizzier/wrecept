@@ -1,0 +1,28 @@
+---
+title: "Build & Runtime Hibák"
+purpose: "Tanulságok a korábbi hibákból"
+author: "docs_agent"
+date: "2025-06-29"
+---
+
+# Összegyűjtött hibák és megelőzésük
+
+Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű problémák rövid kivonata. A felsorolt hibák elkerülése érdekében minden módosítás előtt érdemes ellenőrizni a XAML és C# fájlokat.
+
+## Tipikus hibák
+
+- **Hiányzó Windows Desktop SDK** – a WPF projektekhez szükséges a `Microsoft.NET.Sdk.WindowsDesktop` telepítése. Enélkül a `dotnet build` nem fut le.
+- **Helytelen XAML elemnevek** – például `ViewBox` helyett `Viewbox` szerepelt, ami fordítási hibához vezetett.
+- **Nem támogatott `{x:Int32}` jelölés** – a Tag attribútumnál az egyszerű numerikus érték használata biztosítja a kompatibilitást.
+- **Hiányzó using direktíva** – a `StageView.xaml.cs` állományban a `System.Windows` névtér hiánya CS0246 hibát okozott.
+- **Elgépelés vagy hiányzó záró tag** – az `InvoiceEditorView.xaml` fájlban egy fölösleges `</StackPanel>` tag miatt a build meghiúsult.
+- **Teszt futtatásához szükséges csomag** – a `Xunit.StaFact` hiánya tesztfutási hibát eredményezett WPF környezetben.
+
+## Javaslatok
+
+1. Minden nézetnél használjunk egyedi, a típus nevétől eltérő `x:Name` értékeket (pl. `InvoiceEditorHost`), így elkerülhető a névütközés.
+2. Fordítás előtt futtassunk `dotnet build`-et és figyeljük a figyelmeztetéseket.
+3. A XAML fájlokat mindig ellenőrizzük jól formázott XML szempontjából.
+4. Teszteléskor győződjünk meg róla, hogy a szükséges SDK-k és NuGet csomagok telepítve vannak.
+
+---
