@@ -15,7 +15,7 @@ public partial class StageViewModel : ObservableObject
     private int selectedIndex;
 
     [ObservableProperty]
-    private int selectedSubIndex;
+    private int selectedSubmenuIndex;
 
     [ObservableProperty]
     private bool isSubMenuOpen;
