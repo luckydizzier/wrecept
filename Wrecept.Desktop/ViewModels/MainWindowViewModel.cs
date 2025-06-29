@@ -81,7 +81,16 @@ public partial class MainWindowViewModel : ObservableObject
     private void ExecuteCurrent()
     {
         _stage.HideAll();
-        if (SelectedIndex == 1)
+        if (SelectedIndex == 0)
+        {
+            switch (SelectedSubmenuIndex)
+            {
+                case 1:
+                    _stage.ShowEditor = true;
+                    break;
+            }
+        }
+        else if (SelectedIndex == 1)
         {
             switch (SelectedSubmenuIndex)
             {
