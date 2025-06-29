@@ -16,6 +16,6 @@ public class MainWindowViewModelTests
 
         vm.EnterCommand.Execute(null);
 
-        Assert.True(stage.ShowEditor);
+        Assert.Equal(stage.Editor, stage.ActiveViewModel);
     }
 }
