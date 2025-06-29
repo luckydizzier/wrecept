@@ -69,19 +69,6 @@ public partial class MainWindowViewModel : ObservableObject
         });
     }
 
-    public void ActivateMenuItem(MainMenu item)
-    {
-        switch (item)
-        {
-            case MainMenu.MasterData:
-                _stage.ShowProductEditor();
-                break;
-            default:
-                ActivateMenuItem(item, 0);
-                break;
-        }
-    }
-
     public void ActivateMenuItem(MainMenu main, int subIndex)
     {
         SelectedIndex = (int)main;
