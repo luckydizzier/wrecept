@@ -8,4 +8,6 @@ public class Invoice
     public int SupplierId { get; set; }
     public Supplier? Supplier { get; set; }
     public ICollection<InvoiceItem> Items { get; set; } = new List<InvoiceItem>();
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

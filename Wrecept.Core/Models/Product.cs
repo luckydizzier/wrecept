@@ -6,4 +6,6 @@ public class Product
     public string Name { get; set; } = string.Empty;
     public decimal Net { get; set; }
     public decimal Gross { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
