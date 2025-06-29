@@ -33,6 +33,8 @@ public partial class MainWindowViewModel : ObservableObject
     public IRelayCommand EnterCommand { get; }
     public IRelayCommand EscapeCommand { get; }
 
+    public StageViewModel Stage => _stage;
+
     public MainWindowViewModel(StageViewModel stage)
     {
         _stage = stage;
