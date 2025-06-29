@@ -47,7 +47,7 @@ Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform 
 ```
 Wrecept.Core/          # Domain modellek és szolgáltatások
 Wrecept.Storage/       # EF Core adatkezelés és repositoryk
-<tervezett Wrecept.Wpf>  # Későbbi WPF UI projekt
+Wrecept.Wpf/           # WPF UI projekt
 docs/                  # Dokumentációk
 tools/                 # Segédszkriptek
 CHANGELOG.md
@@ -74,11 +74,12 @@ Wrecept.sln
 
 ## ✅ Kick OFF
 
-A WPF projekt a jövőben `Wrecept.Wpf` néven jön létre, és a tervek szerint az alábbi alapelemeket tartalmazza:
+A WPF projekt `Wrecept.Wpf` néven jött létre, és az alábbi alapelemeket tartalmazza:
 
 * `App.xaml` és `App.xaml.cs` – alkalmazásbeállítások
 * `MainWindow.xaml` – főablak
 * `App.xaml.cs` tartalmazza a DI és indítási logikát
+* A `MainWindow` betölti a `StageView` felületet
 
 Ezek garantálják, hogy a program Windows környezetben azonnal futtatható legyen.
 
