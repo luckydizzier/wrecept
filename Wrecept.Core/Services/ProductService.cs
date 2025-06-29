@@ -20,6 +20,11 @@ public class ProductService : IProductService
         ArgumentNullException.ThrowIfNull(product);
         if (string.IsNullOrWhiteSpace(product.Name))
             throw new ArgumentException("Name required", nameof(product));
+        if (product.Net < 0 || product.Gross < 0)
+            throw new ArgumentException("Price cannot be negative", nameof(product));
+
+        product.CreatedAt = DateTime.UtcNow;
+        product.UpdatedAt = DateTime.UtcNow;
         return await _products.AddAsync(product, ct);
     }
 
@@ -30,6 +35,10 @@ public class ProductService : IProductService
             throw new ArgumentException("Invalid Id", nameof(product));
         if (string.IsNullOrWhiteSpace(product.Name))
             throw new ArgumentException("Name required", nameof(product));
+        if (product.Net < 0 || product.Gross < 0)
+            throw new ArgumentException("Price cannot be negative", nameof(product));
+
+        product.UpdatedAt = DateTime.UtcNow;
         await _products.UpdateAsync(product, ct);
     }
 }
