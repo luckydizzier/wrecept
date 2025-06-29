@@ -121,27 +121,27 @@
                 </Canvas>
             </Viewbox>
 
-            <views:InvoiceEditorView x:Name="Editor"
+            <views:InvoiceEditorView x:Name="InvoiceEditorHost"
                                      DataContext="{Binding Editor}"
                                      Grid.ColumnSpan="2"
                                      Visibility="{Binding ShowEditor, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-            <views:SupplierLookupView x:Name="SupplierLookup"
+            <views:SupplierLookupView x:Name="SupplierLookupHost"
                                       DataContext="{Binding SupplierLookup}"
                                       Grid.ColumnSpan="2"
                                       Visibility="{Binding ShowSupplierLookup, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-            <views:ProductGroupView x:Name="ProductGroupView"
+            <views:ProductGroupView x:Name="ProductGroupHost"
                                     DataContext="{Binding ProductGroup}"
                                     Grid.ColumnSpan="2"
                                     Visibility="{Binding ShowProductGroup, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-            <views:TaxRateView x:Name="TaxRateView"
+            <views:TaxRateView x:Name="TaxRateHost"
                                DataContext="{Binding TaxRate}"
                                Grid.ColumnSpan="2"
                                Visibility="{Binding ShowTaxRate, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-            <views:PaymentMethodView x:Name="PaymentMethodView"
+            <views:PaymentMethodView x:Name="PaymentMethodHost"
                                     DataContext="{Binding PaymentMethod}"
                                     Grid.ColumnSpan="2"
                                     Visibility="{Binding ShowPaymentMethod, Converter={StaticResource BooleanToVisibilityConverter}}" />
