@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
              mc:Ignorable="d"
              KeyDown="OnKeyDown">
     <Grid Background="{DynamicResource StageBackground}">
@@ -12,11 +13,71 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Margin="2">
-            <Button Content="Számla" Command="{Binding ShowInvoiceEditorCommand}" Margin="2"/>
-            <Button Content="Termékek" Command="{Binding ShowProductMasterCommand}" Margin="2"/>
-            <Button Content="Beszállítók" Command="{Binding ShowSupplierMasterCommand}" Margin="2"/>
-        </StackPanel>
+        <Menu>
+            <MenuItem Header="Számlák">
+                <MenuItem Header="Bejövő szállítólevelek"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.InboundDeliveryNotes}" />
+                <MenuItem Header="Bejövő számlák aktualizálása"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.UpdateInboundInvoices}" />
+            </MenuItem>
+            <MenuItem Header="Törzsek">
+                <MenuItem Header="Termékek"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.EditProducts}" />
+                <MenuItem Header="Termékcsoportok"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.EditProductGroups}" />
+                <MenuItem Header="Szállítók"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.EditSuppliers}" />
+                <MenuItem Header="ÁFA-kulcsok"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.EditVatKeys}" />
+                <MenuItem Header="Fizetési módok"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.EditPaymentMethods}" />
+            </MenuItem>
+            <MenuItem Header="Listák">
+                <MenuItem Header="Terméklista"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.ListProducts}" />
+                <MenuItem Header="Szállítók listája"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.ListSuppliers}" />
+                <MenuItem Header="Számlák listája"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.ListInvoices}" />
+                <MenuItem Header="Készletkarton"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.InventoryCard}" />
+            </MenuItem>
+            <MenuItem Header="Szerviz">
+                <MenuItem Header="Állományok ellenőrzése"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.CheckFiles}" />
+                <MenuItem Header="Áramszünet után"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.AfterPowerOutage}" />
+                <MenuItem Header="Képernyő beállítása"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.ScreenSettings}" />
+                <MenuItem Header="Nyomtató beállítás"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.PrinterSettings}" />
+            </MenuItem>
+            <MenuItem Header="Névjegy">
+                <MenuItem Header="A program felhasználójának adatai"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.UserInfo}" />
+            </MenuItem>
+            <MenuItem Header="Vége">
+                <MenuItem Header="Kilépés"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.ExitApplication}" />
+            </MenuItem>
+        </Menu>
 
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
 
