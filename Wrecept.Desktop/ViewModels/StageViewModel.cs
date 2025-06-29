@@ -12,6 +12,10 @@ public partial class StageViewModel : ObservableObject
     public ProductGroupViewModel ProductGroup { get; }
     public TaxRateViewModel TaxRate { get; }
     public PaymentMethodViewModel PaymentMethod { get; }
+    public ProductEditorViewModel ProductEditor { get; }
+
+    [ObservableProperty]
+    private bool showEditor;
 
     [ObservableProperty]
     private int selectedIndex;
@@ -29,6 +33,7 @@ public partial class StageViewModel : ObservableObject
     {
         Editor = new InvoiceEditorViewModel(invoiceService);
         Product = new ProductViewModel(productService);
+        ProductEditor = new ProductEditorViewModel(productService);
         SupplierLookup = new SupplierLookupViewModel(supplierRepository);
         ProductGroup = new ProductGroupViewModel();
         TaxRate = new TaxRateViewModel();
@@ -47,11 +52,14 @@ public partial class StageViewModel : ObservableObject
 
     public void OpenPaymentMethodView() => Activate(PaymentMethod);
 
-    private void Activate(ObservableObject viewModel)
+    public void ShowProductEditor() => Activate(ProductEditor, true);
+
+    private void Activate(ObservableObject viewModel, bool editor = false)
     {
         ActiveViewModel = viewModel;
         if (viewModel == Product)
             _ = Product.LoadAsync();
+        ShowEditor = editor;
         IsSubMenuOpen = false;
     }
 }

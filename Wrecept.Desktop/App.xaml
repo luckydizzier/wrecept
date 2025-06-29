@@ -6,6 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/RetroTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
