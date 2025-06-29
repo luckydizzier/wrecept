@@ -11,6 +11,11 @@ public partial class StageView : UserControl
         set => DataContext = value;
     }
 
+    public void FocusMainMenu()
+    {
+        MainMenuBox.Focus();
+    }
+
 
     public StageView()
     {

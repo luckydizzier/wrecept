@@ -12,38 +12,7 @@
         <KeyBinding Key="Up" Command="{Binding MoveUpCommand}" />
         <KeyBinding Key="Down" Command="{Binding MoveDownCommand}" />
     </Window.InputBindings>
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem x:Name="MainMenuFirstItem" Header="Számlák" Tag="0" Click="MainMenuItem_Click">
-                <MenuItem Header="Bejövő számlák kezelése" Tag="0" Click="SubMenuItem_Click" />
-                <MenuItem Header="Bejövő számlák aktualizálása" Tag="1" Click="SubMenuItem_Click" />
-            </MenuItem>
-            <MenuItem Header="Törzsek" Tag="1" Click="MainMenuItem_Click">
-                <MenuItem Header="Termékek" Tag="0" Click="SubMenuItem_Click" />
-                <MenuItem Header="Termékcsoportok" Tag="1" Click="SubMenuItem_Click" />
-                <MenuItem Header="Szállítók" Tag="2" Click="SubMenuItem_Click" />
-                <MenuItem Header="ÁFA-kulcsok" Tag="3" Click="SubMenuItem_Click" />
-                <MenuItem Header="Fizetési módok" Tag="4" Click="SubMenuItem_Click" />
-            </MenuItem>
-            <MenuItem Header="Listák" Tag="2" Click="MainMenuItem_Click">
-                <MenuItem Header="Terméklista" Tag="0" Click="SubMenuItem_Click" />
-                <MenuItem Header="Szállítók listája" Tag="1" Click="SubMenuItem_Click" />
-                <MenuItem Header="Számlák listája" Tag="2" Click="SubMenuItem_Click" />
-                <MenuItem Header="Készletkarton" Tag="3" Click="SubMenuItem_Click" />
-            </MenuItem>
-            <MenuItem Header="Szerviz" Tag="3" Click="MainMenuItem_Click">
-                <MenuItem Header="Állományok ellenőrzése" Tag="0" Click="SubMenuItem_Click" />
-                <MenuItem Header="Áramszünet után" Tag="1" Click="SubMenuItem_Click" />
-                <MenuItem Header="Képernyő beállítása" Tag="2" Click="SubMenuItem_Click" />
-                <MenuItem Header="Nyomtató beállítás" Tag="3" Click="SubMenuItem_Click" />
-            </MenuItem>
-            <MenuItem Header="Névjegy" Tag="4" Click="MainMenuItem_Click">
-                <MenuItem Header="A program felhasználójának adatai" Tag="0" Click="SubMenuItem_Click" />
-            </MenuItem>
-            <MenuItem Header="Vége" Tag="5" Click="MainMenuItem_Click">
-                <MenuItem Header="Kilépés" Tag="0" Click="SubMenuItem_Click" />
-            </MenuItem>
-        </Menu>
+    <Grid>
         <views:StageView x:Name="Stage" />
-    </DockPanel>
+    </Grid>
 </Window>
