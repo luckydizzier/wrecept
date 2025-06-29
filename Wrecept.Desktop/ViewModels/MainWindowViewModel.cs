@@ -34,6 +34,8 @@ public partial class MainWindowViewModel : ObservableObject
     public IRelayCommand MoveDownCommand { get; }
     public IRelayCommand EnterCommand { get; }
     public IRelayCommand EscapeCommand { get; }
+    public IRelayCommand SelectMainMenuCommand { get; }
+    public IRelayCommand SelectSubMenuCommand { get; }
 
     public StageViewModel Stage => _stage;
 
@@ -46,11 +48,30 @@ public partial class MainWindowViewModel : ObservableObject
         MoveDownCommand = new RelayCommand(() => { if(IsSubMenuOpen) ChangeSub(1); });
         EnterCommand = new RelayCommand(OnEnter);
         EscapeCommand = new RelayCommand(OnEscape);
+        SelectMainMenuCommand = new RelayCommand<string>(p =>
+        {
+            if (int.TryParse(p, out var idx))
+            {
+                SelectedIndex = idx;
+                IsSubMenuOpen = true;
+                SelectedSubmenuIndex = 0;
+            }
+        });
+        SelectSubMenuCommand = new RelayCommand<string>(p =>
+        {
+            var parts = p.Split('|');
+            if (parts.Length == 2 &&
+                int.TryParse(parts[0], out var main) &&
+                int.TryParse(parts[1], out var sub))
+            {
+                ActivateMenuItem((MainMenu)main, sub);
+            }
+        });
     }
 
-    public void ActivateMenuItem(int mainIndex, int subIndex)
+    public void ActivateMenuItem(MainMenu main, int subIndex)
     {
-        SelectedIndex = mainIndex;
+        SelectedIndex = (int)main;
         SelectedSubmenuIndex = subIndex;
         IsSubMenuOpen = true;
         ExecuteCurrent();

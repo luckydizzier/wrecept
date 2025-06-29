@@ -25,24 +25,5 @@ public partial class MainWindow : Window
         MainMenuFirstItem.Focus();
     }
 
-    private void MainMenuItem_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is MenuItem mi && int.TryParse(mi.Tag?.ToString(), out var index))
-        {
-            ViewModel.Stage.SelectedIndex = index;
-            ViewModel.Stage.SelectedSubmenuIndex = 0;
-            ViewModel.Stage.IsSubMenuOpen = true;
-        }
-    }
-
-    private void SubMenuItem_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is MenuItem mi && int.TryParse(mi.Tag?.ToString(), out var subIndex))
-        {
-            if (mi.Parent is MenuItem parent && int.TryParse(parent.Tag?.ToString(), out var mainIndex))
-            {
-                ViewModel.ActivateMenuItem(mainIndex, subIndex);
-            }
-        }
-    }
+    // korábbi Click-kezelők helyett parancskötéseket használunk
 }
