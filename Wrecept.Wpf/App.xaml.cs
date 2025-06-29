@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core;
 using Wrecept.Storage;
 using Wrecept.Wpf.ViewModels;
-
+using Wrecept.Wpf.Views;
 namespace Wrecept.Wpf;
 
 public partial class App : Application
