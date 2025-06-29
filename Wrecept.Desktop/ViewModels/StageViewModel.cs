@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Core.Services;
 using Wrecept.Core.Repositories;
@@ -97,9 +98,35 @@ public partial class StageViewModel : ObservableObject
         IsSubMenuOpen = false;
     }
 
+    partial void OnShowEditorChanged(bool value)
+    {
+        Debug.WriteLine($"ShowEditor set to {value}");
+    }
+
+    partial void OnShowSupplierLookupChanged(bool value)
+    {
+        Debug.WriteLine($"ShowSupplierLookup set to {value}");
+    }
+
     partial void OnShowProductChanged(bool value)
     {
+        Debug.WriteLine($"ShowProduct set to {value}");
         if (value)
             _ = Product.LoadAsync();
+    }
+
+    partial void OnShowProductGroupChanged(bool value)
+    {
+        Debug.WriteLine($"ShowProductGroup set to {value}");
+    }
+
+    partial void OnShowTaxRateChanged(bool value)
+    {
+        Debug.WriteLine($"ShowTaxRate set to {value}");
+    }
+
+    partial void OnShowPaymentMethodChanged(bool value)
+    {
+        Debug.WriteLine($"ShowPaymentMethod set to {value}");
     }
 }
