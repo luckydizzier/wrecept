@@ -50,6 +50,42 @@ public partial class StageViewModel : ObservableObject
         PaymentMethod = new PaymentMethodViewModel();
     }
 
+    public void OpenInvoiceEditor()
+    {
+        HideAll();
+        ShowEditor = true;
+    }
+
+    public void OpenProductView()
+    {
+        HideAll();
+        ShowProduct = true;
+    }
+
+    public void OpenProductGroupView()
+    {
+        HideAll();
+        ShowProductGroup = true;
+    }
+
+    public void OpenSupplierLookupView()
+    {
+        HideAll();
+        ShowSupplierLookup = true;
+    }
+
+    public void OpenTaxRateView()
+    {
+        HideAll();
+        ShowTaxRate = true;
+    }
+
+    public void OpenPaymentMethodView()
+    {
+        HideAll();
+        ShowPaymentMethod = true;
+    }
+
     public void HideAll()
     {
         ShowEditor = false;

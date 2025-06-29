@@ -84,13 +84,12 @@ public partial class MainWindowViewModel : ObservableObject
 
     private void ExecuteCurrent()
     {
-        _stage.HideAll();
         if (SelectedIndex == 0)
         {
             switch (SelectedSubmenuIndex)
             {
                 case 1:
-                    _stage.ShowEditor = true;
+                    _stage.OpenInvoiceEditor();
                     break;
                 case 2:
                     // TODO: bejövő számlák aktualizálása
@@ -102,19 +101,19 @@ public partial class MainWindowViewModel : ObservableObject
             switch (SelectedSubmenuIndex)
             {
                 case 0:
-                    _stage.ShowProduct = true;
+                    _stage.OpenProductView();
                     break;
                 case 1:
-                    _stage.ShowProductGroup = true;
+                    _stage.OpenProductGroupView();
                     break;
                 case 2:
-                    _stage.ShowSupplierLookup = true;
+                    _stage.OpenSupplierLookupView();
                     break;
                 case 3:
-                    _stage.ShowTaxRate = true;
+                    _stage.OpenTaxRateView();
                     break;
                 case 4:
-                    _stage.ShowPaymentMethod = true;
+                    _stage.OpenPaymentMethodView();
                     break;
             }
         }
