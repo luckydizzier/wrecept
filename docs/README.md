@@ -48,9 +48,9 @@ Wrecept is a Windows desktop application designed to replicate the speed, clarit
 Wrecept.Desktop/
 ├── App.xaml / MainWindow.xaml        # App entry point and shell
 ├── Views/
-│   ├── StageView.xaml                # Main placeholder canvas
-│   ├── MenuBar.xaml                  # Visual top menu only
-│   └── StatusBar.xaml                # ESC/Enter hints footer
+│   ├── StageView.xaml                # Menü és tartalom egyben
+│   ├── InvoiceEditorView.xaml        # Számla rögzítés nézet
+│   └── ProductView.xaml              # Termékek kezelése
 ├── Themes/RetroTheme.xaml           # Retro color scheme
 ├── Assets/                          # Future icons, sounds, etc.
 └── README.md
