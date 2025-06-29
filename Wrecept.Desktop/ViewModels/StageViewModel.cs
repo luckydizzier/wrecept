@@ -1,15 +1,15 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using Wrecept.Desktop;
+using Wrecept.Core.Services;
 
 namespace Wrecept.Desktop.ViewModels;
 
 public partial class StageViewModel : ObservableObject
 {
-    public InvoiceEditorViewModel Editor { get; } = new(ServiceLocator.InvoiceService);
-    public SupplierLookupViewModel SupplierLookup { get; } = new();
-    public ProductGroupViewModel ProductGroup { get; } = new();
-    public TaxRateViewModel TaxRate { get; } = new();
-    public PaymentMethodViewModel PaymentMethod { get; } = new();
+    public InvoiceEditorViewModel Editor { get; }
+    public SupplierLookupViewModel SupplierLookup { get; }
+    public ProductGroupViewModel ProductGroup { get; }
+    public TaxRateViewModel TaxRate { get; }
+    public PaymentMethodViewModel PaymentMethod { get; }
 
     [ObservableProperty]
     private int selectedIndex;
@@ -35,8 +35,13 @@ public partial class StageViewModel : ObservableObject
     [ObservableProperty]
     private bool showPaymentMethod;
 
-    public StageViewModel()
+    public StageViewModel(IInvoiceService invoiceService)
     {
+        Editor = new InvoiceEditorViewModel(invoiceService);
+        SupplierLookup = new SupplierLookupViewModel();
+        ProductGroup = new ProductGroupViewModel();
+        TaxRate = new TaxRateViewModel();
+        PaymentMethod = new PaymentMethodViewModel();
     }
 
     public void HideAll()
