@@ -6,6 +6,7 @@ using Wrecept.Core;
 using Wrecept.Storage;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Views;
+using Wrecept.Wpf.Views.Controls;
 namespace Wrecept.Wpf;
 
 public partial class App : Application
@@ -34,8 +35,10 @@ public partial class App : Application
         services.AddTransient<ProductMasterViewModel>();
         services.AddTransient<SupplierMasterViewModel>();
         services.AddTransient<PlaceholderViewModel>();
+        services.AddSingleton<StatusBarViewModel>();
         services.AddTransient<StageView>();
         services.AddTransient<PlaceholderView>();
+        services.AddTransient<Views.Controls.StatusBar>();
 
         services.AddSingleton<MainWindow>();
     }
