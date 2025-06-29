@@ -4,6 +4,7 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core;
 using Wrecept.Storage;
+using Wrecept.Wpf.ViewModels;
 
 namespace Wrecept.Wpf;
 
@@ -27,6 +28,13 @@ public partial class App : Application
 
         services.AddCore();
         services.AddStorage(dbPath);
+
+        services.AddTransient<StageViewModel>();
+        services.AddTransient<InvoiceEditorViewModel>();
+        services.AddTransient<ProductMasterViewModel>();
+        services.AddTransient<SupplierMasterViewModel>();
+        services.AddTransient<StageView>();
+
         services.AddSingleton<MainWindow>();
     }
 

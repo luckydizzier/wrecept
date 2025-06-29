@@ -4,14 +4,11 @@ using Wrecept.Wpf.ViewModels;
 
 namespace Wrecept.Wpf.Views;
 
-public partial class StageView : UserControl
+public partial class InvoiceEditorView : UserControl
 {
-    private readonly StageViewModel _viewModel;
-
-    public StageView(StageViewModel viewModel)
+    public InvoiceEditorView(InvoiceEditorViewModel viewModel)
     {
         InitializeComponent();
-        _viewModel = viewModel;
         DataContext = viewModel;
     }
 

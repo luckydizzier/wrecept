@@ -1,0 +1,8 @@
+using Wrecept.Core.Models;
+
+namespace Wrecept.Core.Services;
+
+public interface ISupplierService
+{
+    Task<List<Supplier>> GetAllAsync(CancellationToken ct = default);
+}
