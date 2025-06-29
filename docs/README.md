@@ -25,7 +25,7 @@ Wrecept is a Windows desktop application designed to replicate the speed, clarit
 | Keyboard-only control            | ⏳ Logic in progress     |
 | Structured top menu              | ✅ Visual demo only      |
 | Invoice recording (header/items) | ⏳ Coming soon           |
-| Product master data              | ⏳ To be integrated      |
+| Product master data              | ⏳ Basic editing available |
 | Supplier selection               | ⏳ Planned               |
 | SQLite-powered persistence       | 🔒 Deferred             |
 | Audio-visual feedback            | 🔒 Deferred             |
@@ -38,7 +38,7 @@ Wrecept is a Windows desktop application designed to replicate the speed, clarit
 * **No mouse. No clutter.**
 * Only `Enter`, `Esc`, `↑`, `↓` keys are used.
 * All screens mimic DOS layouts — with color-coded panels, keyboard footer hints, and full-screen efficiency.
-* Menus are *visual placeholders* at this stage. The stage is being built, the cables come later.
+* Menük nagy része még helykitöltő, de a termékek kezelése már működik.
 
 ---
 

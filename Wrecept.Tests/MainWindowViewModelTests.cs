@@ -7,7 +7,7 @@ public class MainWindowViewModelTests
     [Fact]
     public void EnterCommand_OnInvoiceMenu_OpensEditor()
     {
-        var stage = new StageViewModel();
+        var stage = new StageViewModel(null!, null!, null!);
         var vm = new MainWindowViewModel(stage);
 
         stage.SelectedIndex = 0;

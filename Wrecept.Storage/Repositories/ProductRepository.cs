@@ -17,4 +17,17 @@ public class ProductRepository : IProductRepository
 
     public Task<List<Product>> GetAllAsync(CancellationToken ct = default)
         => _db.Products.ToListAsync(ct);
+
+    public async Task<int> AddAsync(Product product, CancellationToken ct = default)
+    {
+        _db.Products.Add(product);
+        await _db.SaveChangesAsync(ct);
+        return product.Id;
+    }
+
+    public async Task UpdateAsync(Product product, CancellationToken ct = default)
+    {
+        _db.Products.Update(product);
+        await _db.SaveChangesAsync(ct);
+    }
 }

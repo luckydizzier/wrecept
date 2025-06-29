@@ -14,7 +14,7 @@ public partial class StageView : UserControl
         InitializeComponent();
         ViewModel = new StageViewModel(
             ServiceLocator.InvoiceService,
-            ServiceLocator.ProductRepository,
+            ServiceLocator.ProductService,
             ServiceLocator.SupplierRepository);
         DataContext = ViewModel;
     }

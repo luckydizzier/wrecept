@@ -40,10 +40,10 @@ public partial class StageViewModel : ObservableObject
     [ObservableProperty]
     private bool showPaymentMethod;
 
-    public StageViewModel(IInvoiceService invoiceService, IProductRepository productRepository, ISupplierRepository supplierRepository)
+    public StageViewModel(IInvoiceService invoiceService, IProductService productService, ISupplierRepository supplierRepository)
     {
         Editor = new InvoiceEditorViewModel(invoiceService);
-        Product = new ProductViewModel(productRepository);
+        Product = new ProductViewModel(productService);
         SupplierLookup = new SupplierLookupViewModel(supplierRepository);
         ProductGroup = new ProductGroupViewModel();
         TaxRate = new TaxRateViewModel();
@@ -59,5 +59,11 @@ public partial class StageViewModel : ObservableObject
         ShowTaxRate = false;
         ShowPaymentMethod = false;
         IsSubMenuOpen = false;
+    }
+
+    partial void OnShowProductChanged(bool value)
+    {
+        if (value)
+            _ = Product.LoadAsync();
     }
 }
