@@ -45,7 +45,7 @@ Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform 
 ## 📁 Folder Structure
 
 ```
-Wrecept.Wpf/
+<tervezett WPF projekt>
 ├── App.xaml                          # Alkalmazás definíció
 ├── MainWindow.xaml                   # Főablak
 ├── Views/                            # XAML nézetek
@@ -74,7 +74,7 @@ Wrecept.Wpf/
 
 ## ✅ Kick OFF
 
-A WPF projekt a `Wrecept.Wpf` mappában indul az alábbi alapelemekkel:
+A WPF projekt a jövőben `Wrecept.Wpf` néven jön létre, és a tervek szerint az alábbi alapelemeket tartalmazza:
 
 * `App.xaml` és `App.xaml.cs` – alkalmazásbeállítások
 * `MainWindow.xaml` – főablak
