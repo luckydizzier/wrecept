@@ -13,7 +13,7 @@ date: "2025-06-27"
 
 ## 📦 Project Purpose
 
-Wrecept started as a Windows-only desktop application but now aims to run on multiple platforms using .NET MAUI. It replicates the speed and clarity of classic Clipper + dBase IV systems with full keyboard navigation (Enter / Esc / Up / Down) and a focus on predictable behavior — even after a power outage.
+Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform MAUI kitérő után ismét WPF-re építjük a felületet, megőrizve a Clipper + dBase IV rendszerek sebességét és tiszta billentyűs vezérlését (Enter / Esc / ↑ / ↓). A cél továbbra is a kiszámítható működés, akár áramszünet után is.
 
 ---
 
@@ -45,12 +45,12 @@ Wrecept started as a Windows-only desktop application but now aims to run on mul
 ## 📁 Folder Structure
 
 ```
-Wrecept.Maui/
-├── App.xaml                          # Application definition
-├── MainPage.xaml                     # Cross-platform shell
-├── Views/                            # Future XAML pages
-├── Themes/RetroTheme.xaml            # Retro color scheme
-├── Assets/                           # Icons, sounds, etc.
+Wrecept.Wpf/
+├── App.xaml                          # Alkalmazás definíció
+├── MainWindow.xaml                   # Főablak
+├── Views/                            # XAML nézetek
+├── Themes/RetroTheme.xaml            # Retro színséma
+├── Assets/                           # Ikonok, hangok
 └── README.md
 ```
 
@@ -59,9 +59,8 @@ Wrecept.Maui/
 ## 🛠 Technologies
 
 * Language: **C#** (.NET 8)
-* UI: **.NET MAUI**
-* Platform: **Cross-platform** (Windows, Android, iOS)
-* IDE: **Visual Studio 2022+ / VS Code**
+* UI: **WPF (.NET 8)**
+* Platform: **Windows**
 
 ---
 
@@ -75,14 +74,13 @@ Wrecept.Maui/
 
 ## ✅ Kick OFF
 
-A .NET MAUI projekt elindításához a `Wrecept.Maui` mappában az alábbi alapfájlok szerepelnek:
+A WPF projekt a `Wrecept.Wpf` mappában indul az alábbi alapelemekkel:
 
-* `App.xaml` és `App.xaml.cs` – az alkalmazás beállításai
-* `MainPage.xaml` – kezdő nézet
-* `MauiProgram.cs` – DI és konfiguráció
-* platform-specifikus `Program.cs` a `Platforms/` mappában
+* `App.xaml` és `App.xaml.cs` – alkalmazásbeállítások
+* `MainWindow.xaml` – főablak
+* `App.xaml.cs` tartalmazza a DI és indítási logikát
 
-Ezek biztosítják, hogy minden támogatott platformon elinduljon az alkalmazás.
+Ezek garantálják, hogy a program Windows környezetben azonnal futtatható legyen.
 
 ---
 

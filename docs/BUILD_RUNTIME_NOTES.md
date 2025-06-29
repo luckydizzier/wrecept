@@ -11,7 +11,7 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
 
 ## Tipikus hibák
 
-- **Hiányzó MAUI workload** – a multiplatform buildhez telepíteni kell a `.NET MAUI` workloadot.
+- **Hiányzó .NET Desktop Runtime** – a WPF futtatásához szükséges csomag telepítése elmaradt.
 - **Helytelen XAML elemnevek** – például `ViewBox` helyett `Viewbox` szerepelt, ami fordítási hibához vezetett.
 - **Nem támogatott `{x:Int32}` jelölés** – a Tag attribútumnál az egyszerű numerikus érték használata biztosítja a kompatibilitást.
 - **Hiányzó using direktíva** – a `StageView.xaml.cs` állományban a `System.Windows` névtér hiánya CS0246 hibát okozott.

@@ -7,5 +7,5 @@ date: "2025-06-27"
 
 # 🎛️ Wrecept
 
-**Retro modern számlázó alkalmazás, több platformra, .NET MAUI alapon.**
+**Retro modern számlázó alkalmazás, Windowsra, WPF alapon.**
 
