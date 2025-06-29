@@ -1,12 +1,29 @@
 <Application x:Class="Wrecept.Wpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
+             xmlns:view="clr-namespace:Wrecept.Wpf.Views">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/RetroTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <DataTemplate DataType="{x:Type vm:InvoiceEditorViewModel}">
+                <view:InvoiceEditorView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ProductMasterViewModel}">
+                <view:ProductMasterView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SupplierMasterViewModel}">
+                <view:SupplierMasterView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AboutViewModel}">
+                <view:AboutView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:PlaceholderViewModel}">
+                <view:PlaceholderView />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
