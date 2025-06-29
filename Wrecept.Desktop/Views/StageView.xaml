@@ -48,6 +48,11 @@
                                       Grid.ColumnSpan="2"
                                       Visibility="{Binding ShowSupplierLookup, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
+            <views:ProductView x:Name="ProductHost"
+                               DataContext="{Binding Product}"
+                               Grid.ColumnSpan="2"
+                               Visibility="{Binding ShowProduct, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
             <views:ProductGroupView x:Name="ProductGroupHost"
                                     DataContext="{Binding ProductGroup}"
                                     Grid.ColumnSpan="2"

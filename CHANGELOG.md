@@ -39,3 +39,9 @@ date: "2025-06-27"
 ## 2025-06-28
 - A menürendszert visszaállítottam a `fix-almenü-és-menü-hibák` állapotra.
 - Eltávolítottam a BuildInfo alapú Névjegy funkciót.
+
+## 2025-06-29
+- Visszahoztam a BuildInfo osztályt, a Névjegy menüpont kiírja a build adatait.
+- Létrehoztam a Termékek nézetet és ViewModelt.
+- A StageViewModel bővült új függőségekkel és megjelenítési logikával.
+- A Kilépés menüpont bezárja az alkalmazást.

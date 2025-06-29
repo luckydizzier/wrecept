@@ -12,7 +12,10 @@ public partial class StageView : UserControl
     public StageView()
     {
         InitializeComponent();
-        ViewModel = new StageViewModel(ServiceLocator.InvoiceService);
+        ViewModel = new StageViewModel(
+            ServiceLocator.InvoiceService,
+            ServiceLocator.ProductRepository,
+            ServiceLocator.SupplierRepository);
         DataContext = ViewModel;
     }
 

@@ -1,3 +1,5 @@
+using System.Windows;
+using Wrecept.Desktop;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -99,8 +101,14 @@ public partial class MainWindowViewModel : ObservableObject
         {
             switch (SelectedSubmenuIndex)
             {
+                case 0:
+                    _stage.ShowProduct = true;
+                    break;
                 case 1:
                     _stage.ShowProductGroup = true;
+                    break;
+                case 2:
+                    _stage.ShowSupplierLookup = true;
                     break;
                 case 3:
                     _stage.ShowTaxRate = true;
@@ -110,6 +118,25 @@ public partial class MainWindowViewModel : ObservableObject
                     break;
             }
         }
+        else if (SelectedIndex == 2)
+        {
+            MessageBox.Show("A listák funkció még nincs implementálva.", "Listák");
+        }
+        else if (SelectedIndex == 3)
+        {
+            MessageBox.Show("A szerviz funkció még nincs implementálva.", "Szerviz");
+        }
+        else if (SelectedIndex == 4)
+        {
+            var info = $"Felhasználó: {Environment.UserName}\nVerzió: {BuildInfo.Version}\nCommit: {BuildInfo.CommitHash}\nBuild idő: {BuildInfo.BuildTime:u}";
+            MessageBox.Show(info, "Wrecept");
+        }
+        else if (SelectedIndex == 5)
+        {
+            if (SelectedSubmenuIndex == 0)
+                Application.Current.Shutdown();
+        }
+
         IsSubMenuOpen = false;
     }
 }
