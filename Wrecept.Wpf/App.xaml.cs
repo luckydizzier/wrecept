@@ -12,6 +12,7 @@ namespace Wrecept.Wpf;
 public partial class App : Application
 {
     public IServiceProvider Services { get; }
+    public static IServiceProvider Provider => ((App)Current).Services;
 
     public App()
     {
@@ -38,6 +39,9 @@ public partial class App : Application
         services.AddTransient<PlaceholderViewModel>();
         services.AddSingleton<StatusBarViewModel>();
         services.AddTransient<StageView>();
+        services.AddTransient<InvoiceEditorView>();
+        services.AddTransient<ProductMasterView>();
+        services.AddTransient<SupplierMasterView>();
         services.AddTransient<AboutView>();
         services.AddTransient<PlaceholderView>();
         services.AddTransient<Views.Controls.StatusBar>();
