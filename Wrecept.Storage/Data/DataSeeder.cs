@@ -14,14 +14,18 @@ public static class DataSeeder
     private const string SampleTax = "ÁFA 27%";
     private const string SamplePayment = "Készpénz";
 
-    public static async Task<SeedStatus> SeedAsync(AppDbContext db, string dbPath, ILogService logService, CancellationToken ct = default)
+    public static async Task<SeedStatus> SeedAsync(string dbPath, ILogService logService, CancellationToken ct = default)
     {
         _ = File.Exists(dbPath);
 
-        await DbInitializer.EnsureCreatedAndMigratedAsync(db, logService, ct);
+        var opts = new DbContextOptionsBuilder<AppDbContext>()
+            .UseSqlite($"Data Source={dbPath}")
+            .Options;
+
+        await using var ctx = new AppDbContext(opts);
+        await DbInitializer.EnsureCreatedAndMigratedAsync(ctx, logService, ct);
 
         bool hasData;
-        var ctx = db;
         try
         {
             hasData = await ctx.Products.AnyAsync(ct) || await ctx.Suppliers.AnyAsync(ct);
@@ -31,12 +35,8 @@ public static class DataSeeder
             await DbInitializer.EnsureCreatedAndMigratedAsync(ctx, logService, ct);
             try
             {
-                var cs = ctx.Database.GetDbConnection().ConnectionString;
-                var opts = new DbContextOptionsBuilder<AppDbContext>()
-                    .UseSqlite(cs)
-                    .Options;
-                ctx = new AppDbContext(opts);
-                hasData = await ctx.Products.AnyAsync(ct) || await ctx.Suppliers.AnyAsync(ct);
+                await using var retryCtx = new AppDbContext(opts);
+                hasData = await retryCtx.Products.AnyAsync(ct) || await retryCtx.Suppliers.AnyAsync(ct);
             }
             catch (SqliteException ex)
             {

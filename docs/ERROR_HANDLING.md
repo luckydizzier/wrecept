@@ -30,10 +30,11 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 
 1. **Adatbázis fájl hiánya** – Ha a `wrecept.db` nem található indításkor, a Storage réteg új üres adatbázist hoz létre, majd figyelmeztető üzenetet jelenítünk meg.
 2. **Üres adatbázis** – Ha egyetlen táblában sincs adat, minta rekordokat szúrunk be és figyelmeztetjük a felhasználót.
-3. **Sémahibák indításkor** – A `DbInitializer` gondoskodik a migrációk lefuttatásáról. Sikertelenség esetén `EnsureCreated()` hívással létrehozza az alap sémát, majd ismét migrál. A `DataSeeder` csak ezután próbál adatot lekérni vagy beszúrni.
+3. **Sémahibák indításkor** – A `DbInitializer` gondoskodik a migrációk lefuttatásáról. Sikertelenség esetén `EnsureCreated()` hívással létrehozza az alap sémát, majd ismét migrál. A `DataSeeder` külön kontextust használ, így a DI-ből kapott példány nem marad használatban.
 4. **Sérült import fájl** – Hibás formátumú vagy hiányzó adatfájl betöltésekor megszakítjuk a folyamatot, naplózzuk a fájl nevét és a kiváltó hibát, és lehetőséget adunk új fájl kiválasztására.
 5. **Hálózati kimaradás** – Külső frissítések letöltése közben kapcsolatvesztés esetén újrapróbálkozunk, majd offline módra váltunk, miközben a felhasználót tájékoztatjuk.
 6. **Sikertelen adatbázis írás** – Ha a fájl zárolt vagy elfogy a tárhely, hibaüzenetet jelenítünk meg, a műveletet naplózzuk, majd biztonsági mentés után újrapróbáljuk.
 7. **Indítási hiba** – Ha a `DataSeeder` másodszori próbálkozásra is `SqliteException`-t kap, a részleteket az `ILogService` naplózza a `logs` mappába, majd hibaüzenetet jelenítünk meg.
+8. **Egyéb inicializációs hiba** – A `DbInitializer` általános kivételt is naplóz. Ha a második migrációs kísérlet sikertelen, a program leáll.
 
 ---
