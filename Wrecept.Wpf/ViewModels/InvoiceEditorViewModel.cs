@@ -47,7 +47,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     private string supplier = string.Empty;
 
     [ObservableProperty]
-    private Guid supplierId;
+    private int supplierId;
 
     [ObservableProperty]
     private DateOnly? invoiceDate;
