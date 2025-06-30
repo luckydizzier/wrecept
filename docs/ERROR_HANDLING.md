@@ -22,7 +22,8 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 
 ## Naplózás
 
-* A Storage réteg sikertelen műveletei naplóba kerülnek `%AppData%/Wrecept/logs` könyvtárba.
+* A `ILogService` a `%AppData%/Wrecept/logs` könyvtárba ír naplóbejegyzéseket.
+* A Storage réteg hibáit a `LogService` rögzíti napi bontású fájlokba.
 * Kritikus hiba esetén a felhasználó dönthet a folytatásról vagy kilépésről.
 
 ## Konkrét példák
@@ -33,6 +34,6 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 4. **Sérült import fájl** – Hibás formátumú vagy hiányzó adatfájl betöltésekor megszakítjuk a folyamatot, naplózzuk a fájl nevét és a kiváltó hibát, és lehetőséget adunk új fájl kiválasztására.
 5. **Hálózati kimaradás** – Külső frissítések letöltése közben kapcsolatvesztés esetén újrapróbálkozunk, majd offline módra váltunk, miközben a felhasználót tájékoztatjuk.
 6. **Sikertelen adatbázis írás** – Ha a fájl zárolt vagy elfogy a tárhely, hibaüzenetet jelenítünk meg, a műveletet naplózzuk, majd biztonsági mentés után újrapróbáljuk.
-7. **Indítási hiba** – Ha a `DataSeeder` másodszori próbálkozásra is `SqliteException`-t kap, a részleteket `logs/startup.log` fájlba írjuk és hibaüzenetet jelenítünk meg.
+7. **Indítási hiba** – Ha a `DataSeeder` másodszori próbálkozásra is `SqliteException`-t kap, a részleteket az `ILogService` naplózza a `logs` mappába, majd hibaüzenetet jelenítünk meg.
 
 ---
