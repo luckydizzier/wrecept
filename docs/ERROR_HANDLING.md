@@ -36,5 +36,6 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 6. **Sikertelen adatbázis írás** – Ha a fájl zárolt vagy elfogy a tárhely, hibaüzenetet jelenítünk meg, a műveletet naplózzuk, majd biztonsági mentés után újrapróbáljuk.
 7. **Indítási hiba** – Ha a `DataSeeder` másodszori próbálkozásra is `SqliteException`-t kap, a részleteket az `ILogService` naplózza a `logs` mappába, majd hibaüzenetet jelenítünk meg.
 8. **Egyéb inicializációs hiba** – A `DbInitializer` általános kivételt is naplóz. Ha a második migrációs kísérlet sikertelen, a program leáll.
+9. **Hiányzó tábla új modell után** – A `DataSeeder` felismeri a `no such table` hibát, ismét migrációt futtat és naplózza az eseményt.
 
 ---
