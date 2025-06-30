@@ -14,4 +14,7 @@ public class SupplierService : ISupplierService
 
     public Task<List<Supplier>> GetAllAsync(CancellationToken ct = default)
         => _suppliers.GetAllAsync(ct);
+
+    public Task<List<Supplier>> GetActiveAsync(CancellationToken ct = default)
+        => _suppliers.GetActiveAsync(ct);
 }
