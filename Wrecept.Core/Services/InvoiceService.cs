@@ -6,10 +6,12 @@ namespace Wrecept.Core.Services;
 public class InvoiceService : IInvoiceService
 {
     private readonly IInvoiceRepository _invoices;
+    private readonly InvoiceCalculator _calculator;
 
-    public InvoiceService(IInvoiceRepository invoices)
+    public InvoiceService(IInvoiceRepository invoices, InvoiceCalculator calculator)
     {
         _invoices = invoices;
+        _calculator = calculator;
     }
 
     public async Task<bool> CreateAsync(Invoice invoice, CancellationToken ct = default)
@@ -28,6 +30,8 @@ public class InvoiceService : IInvoiceService
             item.CreatedAt = DateTime.UtcNow;
             item.UpdatedAt = DateTime.UtcNow;
         }
+
+        _calculator.Calculate(invoice);
 
         await _invoices.AddAsync(invoice, ct);
         return true;
