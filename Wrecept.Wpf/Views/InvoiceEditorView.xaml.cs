@@ -15,6 +15,7 @@ public partial class InvoiceEditorView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
+        Loaded += async (_, _) => await viewModel.LoadAsync();
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
