@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISupplierService, SupplierService>();
         services.AddScoped<IProductGroupService, ProductGroupService>();
         services.AddScoped<ITaxRateService, TaxRateService>();
+        services.AddScoped<IPaymentMethodService, PaymentMethodService>();
         return services;
     }
 }
