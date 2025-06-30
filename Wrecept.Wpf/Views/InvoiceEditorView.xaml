@@ -13,6 +13,15 @@
             <TextBlock Text="Szám" Width="70" />
             <TextBox Width="120" Text="{Binding Number}" />
         </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+            <TextBlock Text="Fiz. mód" Width="70" />
+            <ComboBox Width="200"
+                      ItemsSource="{Binding PaymentMethods}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id"
+                      SelectedValue="{Binding PaymentMethodId}" />
+        </StackPanel>
+        <CheckBox Content="Bruttó ár" IsChecked="{Binding IsGross}" Margin="0,0,0,4" />
 
         <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" Height="120">
             <DataGrid.Columns>
