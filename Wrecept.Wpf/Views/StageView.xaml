@@ -39,6 +39,9 @@
                 <MenuItem Header="Fizetési módok"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.EditPaymentMethods}" />
+                <MenuItem Header="Mértékegységek"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.EditUnits}" />
             </MenuItem>
             <MenuItem Header="Listák">
                 <MenuItem Header="Terméklista"

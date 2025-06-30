@@ -130,6 +130,7 @@ Ez a dokumentum definiálja a **Wrecept** rendszer üzleti logikáját. A rendsz
 ## 10. 🔐 Bővíthetőség
 
 * Törzsadatok (Product, TaxRate, PaymentMethod, ProductGroup, Unit) adminisztrálhatók.
+  * A Unit entitás a termékek mértékegységét tárolja (pl. "kg", "db"), archiválható.
 * A rendszer moduláris felépítésű, bővíthető:
 
   * `InvoiceService` üzleti logika,
