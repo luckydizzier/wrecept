@@ -15,6 +15,9 @@ public class ProductService : IProductService
     public Task<List<Product>> GetAllAsync(CancellationToken ct = default)
         => _products.GetAllAsync(ct);
 
+    public Task<List<Product>> GetActiveAsync(CancellationToken ct = default)
+        => _products.GetActiveAsync(ct);
+
     public async Task<int> AddAsync(Product product, CancellationToken ct = default)
     {
         ArgumentNullException.ThrowIfNull(product);

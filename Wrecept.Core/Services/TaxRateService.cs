@@ -15,6 +15,6 @@ public class TaxRateService : ITaxRateService
     public Task<List<TaxRate>> GetAllAsync(CancellationToken ct = default)
         => _taxRates.GetAllAsync(ct);
 
-    public Task<TaxRate?> GetActiveAsync(DateTime asOf, CancellationToken ct = default)
+    public Task<List<TaxRate>> GetActiveAsync(DateTime asOf, CancellationToken ct = default)
         => _taxRates.GetActiveAsync(asOf, ct);
 }

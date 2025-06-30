@@ -16,4 +16,7 @@ public class SupplierRepository : ISupplierRepository
 
     public Task<List<Supplier>> GetAllAsync(CancellationToken ct = default)
         => _db.Suppliers.ToListAsync(ct);
+
+    public Task<List<Supplier>> GetActiveAsync(CancellationToken ct = default)
+        => _db.Suppliers.Where(s => !s.IsArchived).ToListAsync(ct);
 }
