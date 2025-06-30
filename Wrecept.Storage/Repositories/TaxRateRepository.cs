@@ -22,4 +22,17 @@ public class TaxRateRepository : ITaxRateRepository
             .Where(t => t.EffectiveFrom <= asOf && (!t.EffectiveTo.HasValue || t.EffectiveTo >= asOf) && !t.IsArchived)
             .OrderByDescending(t => t.EffectiveFrom)
             .ToListAsync(ct);
+
+    public async Task<Guid> AddAsync(TaxRate taxRate, CancellationToken ct = default)
+    {
+        _db.Add(taxRate);
+        await _db.SaveChangesAsync(ct);
+        return taxRate.Id;
+    }
+
+    public async Task UpdateAsync(TaxRate taxRate, CancellationToken ct = default)
+    {
+        _db.Update(taxRate);
+        await _db.SaveChangesAsync(ct);
+    }
 }

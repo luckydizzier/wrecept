@@ -19,4 +19,17 @@ public class SupplierRepository : ISupplierRepository
 
     public Task<List<Supplier>> GetActiveAsync(CancellationToken ct = default)
         => _db.Suppliers.Where(s => !s.IsArchived).ToListAsync(ct);
+
+    public async Task<int> AddAsync(Supplier supplier, CancellationToken ct = default)
+    {
+        _db.Suppliers.Add(supplier);
+        await _db.SaveChangesAsync(ct);
+        return supplier.Id;
+    }
+
+    public async Task UpdateAsync(Supplier supplier, CancellationToken ct = default)
+    {
+        _db.Suppliers.Update(supplier);
+        await _db.SaveChangesAsync(ct);
+    }
 }
