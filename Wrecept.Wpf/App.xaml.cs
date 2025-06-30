@@ -1,12 +1,17 @@
 using System;
 using System.IO;
 using System.Windows;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core;
 using Wrecept.Storage;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Views;
 using Wrecept.Wpf.Views.Controls;
+using CommunityToolkit.Mvvm.Input;
+using Wrecept.Core.Utilities;
+using Wrecept.Storage.Data;
 namespace Wrecept.Wpf;
 
 public partial class App : Application
@@ -44,6 +49,9 @@ public partial class App : Application
         services.AddTransient<AboutViewModel>();
         services.AddTransient<PlaceholderViewModel>();
         services.AddSingleton<StatusBarViewModel>();
+        services.AddTransient<ProgressViewModel>();
+        services.AddTransient<StartupWindow>();
+        services.AddTransient<StartupOrchestrator>();
         services.AddTransient<StageView>();
         services.AddTransient<InvoiceEditorView>();
         services.AddTransient<ProductMasterView>();
@@ -63,9 +71,24 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        var logger = Services.GetRequiredService<Wrecept.Core.Services.ILogService>();
-        var status = await Wrecept.Storage.Data.DataSeeder.SeedAsync(DbPath, logger);
-        if (status == Wrecept.Storage.Data.SeedStatus.Failed)
+        var orchestrator = Services.GetRequiredService<StartupOrchestrator>();
+        var progressVm = Services.GetRequiredService<ProgressViewModel>();
+        using var cts = new CancellationTokenSource();
+        progressVm.CancelCommand = new RelayCommand(() => cts.Cancel());
+        var progress = new Progress<ProgressReport>(r =>
+        {
+            progressVm.GlobalProgress = r.GlobalPercent;
+            progressVm.SubProgress = r.SubtaskPercent;
+            progressVm.StatusMessage = r.Message;
+        });
+
+        var startupWindow = Services.GetRequiredService<StartupWindow>();
+        startupWindow.DataContext = progressVm;
+        startupWindow.Show();
+        var status = await orchestrator.RunAsync(progress, cts.Token);
+        startupWindow.Close();
+
+        if (status == SeedStatus.Failed)
         {
             MessageBox.Show(
                 "Az adatbázis nem inicializálható. Részletek a logs/startup.log fájlban.",
@@ -73,7 +96,7 @@ public partial class App : Application
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
         }
-        else if (status != Wrecept.Storage.Data.SeedStatus.None)
+        else if (status != SeedStatus.None)
         {
             MessageBox.Show(
                 "A(z) app.db hiányzott vagy csak mintaadatokat tartalmazott. Mintaadatok betöltve.",

@@ -2,6 +2,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Wpf.ViewModels;
+using Wrecept.Core.Utilities;
 
 namespace Wrecept.Wpf.Views;
 
@@ -15,7 +16,20 @@ public partial class InvoiceEditorView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
-        Loaded += async (_, _) => await viewModel.LoadAsync();
+        Loaded += async (_, _) =>
+        {
+            var progressVm = new ProgressViewModel();
+            var progressWindow = new StartupWindow { DataContext = progressVm };
+            progressWindow.Show();
+            var progress = new Progress<ProgressReport>(r =>
+            {
+                progressVm.GlobalProgress = r.SubtaskPercent;
+                progressVm.SubProgress = r.SubtaskPercent;
+                progressVm.StatusMessage = r.Message;
+            });
+            await viewModel.LoadAsync(progress);
+            progressWindow.Close();
+        };
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)

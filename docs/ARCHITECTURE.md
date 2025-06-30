@@ -56,4 +56,8 @@ kontextust hoz létre és egy minimális mintaadatkészletet tölt be.
 Amennyiben csak ez a mintaadatkészlet érhető el, a UI figyelmezteti a felhasználót.
 Ha a második adatlekérdezés is hibát jelez, a részleteket az `ILogService` naplózza a `logs` mappába, és a program hibát jelez.
 
+## Indítási folyamat
+
+Az alkalmazás betöltésekor a `StartupOrchestrator` fut le, amely két szintű előrehaladási értéket jelent az UI felé. A `ProgressViewModel` által kötött nézet két `ProgressBar`-on keresztül mutatja a globális és részfeladatok százalékos állását, így a felhasználó valós időben látja a migráció és a mintaadatok betöltésének állapotát.
+
 ---
