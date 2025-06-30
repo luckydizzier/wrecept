@@ -4,8 +4,15 @@
              KeyDown="OnKeyDown">
     <DataGrid ItemsSource="{Binding Units}" AutoGenerateColumns="False" Margin="4">
         <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Code}" Header="Kód" />
             <DataGridTextColumn Binding="{Binding Name}" Header="Név" />
-            <DataGridCheckBoxColumn Binding="{Binding IsArchived}" Header="Archivált" />
+            <DataGridCheckBoxColumn Binding="{Binding IsArchived}" Header="Archivált">
+                <DataGridCheckBoxColumn.ElementStyle>
+                    <Style TargetType="CheckBox">
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </Style>
+                </DataGridCheckBoxColumn.ElementStyle>
+            </DataGridCheckBoxColumn>
             <DataGridTextColumn Binding="{Binding UpdatedAt}" Header="Módosítva" />
         </DataGrid.Columns>
     </DataGrid>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Core.Models;
@@ -19,7 +20,7 @@ public partial class TaxRateMasterViewModel : ObservableObject
 
     public async Task LoadAsync()
     {
-        var items = await _service.GetAllAsync();
+        var items = await _service.GetActiveAsync(DateTime.UtcNow);
         TaxRates.Clear();
         foreach (var item in items)
             TaxRates.Add(item);
