@@ -4,5 +4,6 @@ public enum SeedStatus
 {
     None,
     Seeded,
-    OnlySampleData
+    OnlySampleData,
+    Failed
 }

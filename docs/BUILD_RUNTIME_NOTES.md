@@ -27,5 +27,6 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
 5. Sémafrissítés után futtassuk le az EF Core migrációkat (`Database.Migrate()`),
    különben futásidőben "no such column" hibát kaphatunk.
 6. Indításkor a `DbInitializer` futtatja a migrációkat, majd a `DataSeeder` – ha kell – mintaadatokat tölt be. Ha csak ezek az adatok vannak, a felület figyelmeztet.
+7. Ha a második adatlekérdezés is `SqliteException`-t dob, a `DataSeeder` a `logs/startup.log` fájlba ír és `Failed` állapotot jelez.
 
 ---

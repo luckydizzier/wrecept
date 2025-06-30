@@ -63,12 +63,22 @@ public partial class App : Application
 
         var ctx = Services.GetRequiredService<Wrecept.Storage.Data.AppDbContext>();
         var status = await Wrecept.Storage.Data.DataSeeder.SeedAsync(ctx, DbPath);
-        if (status != Wrecept.Storage.Data.SeedStatus.None)
+        if (status == Wrecept.Storage.Data.SeedStatus.Failed)
+        {
+            MessageBox.Show(
+                "Az adatbázis nem inicializálható. Részletek a logs/startup.log fájlban.",
+                "Indítási hiba",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+        else if (status != Wrecept.Storage.Data.SeedStatus.None)
+        {
             MessageBox.Show(
                 "A(z) app.db hiányzott vagy csak mintaadatokat tartalmazott. Mintaadatok betöltve.",
                 "Első indítás",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
+        }
 
         var window = Services.GetRequiredService<MainWindow>();
         window.Show();
