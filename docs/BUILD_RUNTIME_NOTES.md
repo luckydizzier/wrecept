@@ -24,5 +24,7 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
 2. Fordítás előtt futtassunk `dotnet build`-et és figyeljük a figyelmeztetéseket.
 3. A XAML fájlokat mindig ellenőrizzük jól formázott XML szempontjából.
 4. Teszteléskor győződjünk meg róla, hogy a szükséges SDK-k és NuGet csomagok telepítve vannak.
+5. Sémafrissítés után futtassuk le az EF Core migrációkat (`Database.Migrate()`),
+   különben futásidőben "no such column" hibát kaphatunk.
 
 ---
