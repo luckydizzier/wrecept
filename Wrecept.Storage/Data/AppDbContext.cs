@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Wrecept.Core.Models;
-using Wrecept.Core.Entities;
 
 namespace Wrecept.Storage.Data;
 

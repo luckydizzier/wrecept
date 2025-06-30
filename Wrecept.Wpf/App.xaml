@@ -21,6 +21,9 @@
             <DataTemplate DataType="{x:Type vm:TaxRateMasterViewModel}">
                 <view:TaxRateMasterView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:PaymentMethodMasterViewModel}">
+                <view:PaymentMethodMasterView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:AboutViewModel}">
                 <view:AboutView />
             </DataTemplate>

@@ -1,8 +1,8 @@
 using Wrecept.Core.Models;
 
-namespace Wrecept.Core.Repositories;
+namespace Wrecept.Core.Services;
 
-public interface IPaymentMethodRepository
+public interface IPaymentMethodService
 {
     Task<List<PaymentMethod>> GetAllAsync(CancellationToken ct = default);
     Task<List<PaymentMethod>> GetActiveAsync(CancellationToken ct = default);

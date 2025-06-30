@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Wrecept.Core.Entities;
 using Wrecept.Core.Models;
 
 namespace Wrecept.Storage.Data;
@@ -14,7 +13,15 @@ public static class DataSeeder
         if (hasData) return false;
 
         var now = DateTime.UtcNow;
-        db.PaymentMethods.Add(new PaymentMethod { Id = Guid.NewGuid(), Name = "Készpénz", CreatedAt = now, UpdatedAt = now });
+        db.PaymentMethods.Add(new PaymentMethod
+        {
+            Id = Guid.NewGuid(),
+            Name = "Készpénz",
+            DueInDays = 0,
+            IsArchived = false,
+            CreatedAt = now,
+            UpdatedAt = now
+        });
         db.ProductGroups.Add(new ProductGroup { Id = Guid.NewGuid(), Name = "Általános", CreatedAt = now, UpdatedAt = now });
         db.TaxRates.Add(new TaxRate
         {
