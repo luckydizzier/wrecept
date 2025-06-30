@@ -13,6 +13,7 @@ public partial class App : Application
 {
     public IServiceProvider Services { get; }
     public static IServiceProvider Provider => ((App)Current).Services;
+    public static string DbPath { get; private set; } = string.Empty;
 
     public App()
     {
@@ -27,6 +28,7 @@ public partial class App : Application
         var dataDir = Path.Combine(appData, "Wrecept");
         Directory.CreateDirectory(dataDir);
         var dbPath = Path.Combine(dataDir, "app.db");
+        DbPath = dbPath;
 
         services.AddCore();
         services.AddStorage(dbPath);
@@ -58,8 +60,9 @@ public partial class App : Application
         base.OnStartup(e);
 
         var ctx = Services.GetRequiredService<Wrecept.Storage.Data.AppDbContext>();
+        var dbMissing = !File.Exists(DbPath);
         var seeded = await Wrecept.Storage.Data.DataSeeder.SeedAsync(ctx);
-        if (seeded)
+        if (seeded || dbMissing)
             MessageBox.Show(
                 "A(z) app.db hiányzott vagy üres volt. Mintaadatok betöltve.",
                 "Első indítás",

@@ -26,5 +26,7 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
 4. Teszteléskor győződjünk meg róla, hogy a szükséges SDK-k és NuGet csomagok telepítve vannak.
 5. Sémafrissítés után futtassuk le az EF Core migrációkat (`Database.Migrate()`),
    különben futásidőben "no such column" hibát kaphatunk.
+6. Az alkalmazás indításakor a `DataSeeder` automatikusan végrehajtja a migrációkat
+   és szükség esetén mintaadatokat tölt be, így a kézi frissítés ritkán szükséges.
 
 ---
