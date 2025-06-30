@@ -89,6 +89,7 @@ public partial class StageViewModel : ObservableObject
                 break;
             case StageMenuAction.InboundDeliveryNotes:
             case StageMenuAction.UpdateInboundInvoices:
+            case StageMenuAction.EditProductGroups:
             case StageMenuAction.EditPaymentMethods:
             case StageMenuAction.ListInvoices:
             case StageMenuAction.InventoryCard:
