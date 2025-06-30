@@ -1,8 +1,8 @@
 using Wrecept.Core.Models;
 
-namespace Wrecept.Core.Repositories;
+namespace Wrecept.Core.Services;
 
-public interface IProductGroupRepository
+public interface IProductGroupService
 {
     Task<List<ProductGroup>> GetAllAsync(CancellationToken ct = default);
     Task<List<ProductGroup>> GetActiveAsync(CancellationToken ct = default);
