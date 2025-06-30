@@ -19,7 +19,7 @@ public partial class SupplierMasterViewModel : ObservableObject
 
     public async Task LoadAsync()
     {
-        var items = await _service.GetAllAsync();
+        var items = await _service.GetActiveAsync();
         Suppliers.Clear();
         foreach (var item in items)
             Suppliers.Add(item);

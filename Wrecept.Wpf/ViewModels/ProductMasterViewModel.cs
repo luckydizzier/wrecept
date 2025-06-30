@@ -19,7 +19,7 @@ public partial class ProductMasterViewModel : ObservableObject
 
     public async Task LoadAsync()
     {
-        var items = await _service.GetAllAsync();
+        var items = await _service.GetActiveAsync();
         Products.Clear();
         foreach (var item in items)
             Products.Add(item);
