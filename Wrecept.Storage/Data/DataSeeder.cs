@@ -23,7 +23,7 @@ public static class DataSeeder
         {
             hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
         }
-        catch (SqliteException)
+        catch (Exception)
         {
             await db.Database.EnsureCreatedAsync(ct);
             await db.Database.MigrateAsync(ct);
