@@ -62,11 +62,10 @@ public partial class App : Application
         base.OnStartup(e);
 
         var ctx = Services.GetRequiredService<Wrecept.Storage.Data.AppDbContext>();
-        var dbMissing = !File.Exists(DbPath);
-        var seeded = await Wrecept.Storage.Data.DataSeeder.SeedAsync(ctx);
-        if (seeded || dbMissing)
+        var status = await Wrecept.Storage.Data.DataSeeder.SeedAsync(ctx, DbPath);
+        if (status != Wrecept.Storage.Data.SeedStatus.None)
             MessageBox.Show(
-                "A(z) app.db hiányzott vagy üres volt. Mintaadatok betöltve.",
+                "A(z) app.db hiányzott vagy csak mintaadatokat tartalmazott. Mintaadatok betöltve.",
                 "Első indítás",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);

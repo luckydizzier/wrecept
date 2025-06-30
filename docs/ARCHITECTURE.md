@@ -48,5 +48,6 @@ Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a se
 
 Az alkalmazás indításakor a `DbInitializer` futtatja a szükséges migrációkat.
 Ezt követően a `DataSeeder` – ha az adatbázis üres vagy hiányzik – egy minimális mintaadatkészletet tölt be.
+Amennyiben csak ez a mintaadatkészlet érhető el, a UI figyelmezteti a felhasználót.
 
 ---
