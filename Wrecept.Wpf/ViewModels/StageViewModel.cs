@@ -32,6 +32,7 @@ public partial class StageViewModel : ObservableObject
 
     private readonly InvoiceEditorViewModel _invoiceEditor;
     private readonly ProductMasterViewModel _productMaster;
+    private readonly ProductGroupMasterViewModel _productGroupMaster;
     private readonly SupplierMasterViewModel _supplierMaster;
     private readonly TaxRateMasterViewModel _taxRateMaster;
     private readonly AboutViewModel _about;
@@ -43,6 +44,7 @@ public partial class StageViewModel : ObservableObject
     public StageViewModel(
         InvoiceEditorViewModel invoiceEditor,
         ProductMasterViewModel productMaster,
+        ProductGroupMasterViewModel productGroupMaster,
         SupplierMasterViewModel supplierMaster,
         TaxRateMasterViewModel taxRateMaster,
         AboutViewModel about,
@@ -51,6 +53,7 @@ public partial class StageViewModel : ObservableObject
     {
         _invoiceEditor = invoiceEditor;
         _productMaster = productMaster;
+        _productGroupMaster = productGroupMaster;
         _supplierMaster = supplierMaster;
         _taxRateMaster = taxRateMaster;
         _about = about;
@@ -75,6 +78,10 @@ public partial class StageViewModel : ObservableObject
             case StageMenuAction.ListSuppliers:
                 CurrentViewModel = _supplierMaster;
                 _statusBar.Message = "Szállító nézet megnyitva";
+                break;
+            case StageMenuAction.EditProductGroups:
+                CurrentViewModel = _productGroupMaster;
+                _statusBar.Message = "Termékcsoport nézet megnyitva";
                 break;
             case StageMenuAction.EditVatKeys:
                 CurrentViewModel = _taxRateMaster;
