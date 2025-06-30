@@ -32,7 +32,9 @@ public partial class StageViewModel : ObservableObject
 
     private readonly InvoiceEditorViewModel _invoiceEditor;
     private readonly ProductMasterViewModel _productMaster;
+    private readonly ProductGroupMasterViewModel _productGroupMaster;
     private readonly SupplierMasterViewModel _supplierMaster;
+    private readonly TaxRateMasterViewModel _taxRateMaster;
     private readonly AboutViewModel _about;
     private readonly PlaceholderViewModel _placeholder;
     private readonly StatusBarViewModel _statusBar;
@@ -42,14 +44,18 @@ public partial class StageViewModel : ObservableObject
     public StageViewModel(
         InvoiceEditorViewModel invoiceEditor,
         ProductMasterViewModel productMaster,
+        ProductGroupMasterViewModel productGroupMaster,
         SupplierMasterViewModel supplierMaster,
+        TaxRateMasterViewModel taxRateMaster,
         AboutViewModel about,
         PlaceholderViewModel placeholder,
         StatusBarViewModel statusBar)
     {
         _invoiceEditor = invoiceEditor;
         _productMaster = productMaster;
+        _productGroupMaster = productGroupMaster;
         _supplierMaster = supplierMaster;
+        _taxRateMaster = taxRateMaster;
         _about = about;
         _placeholder = placeholder;
         _statusBar = statusBar;
@@ -73,10 +79,16 @@ public partial class StageViewModel : ObservableObject
                 CurrentViewModel = _supplierMaster;
                 _statusBar.Message = "Szállító nézet megnyitva";
                 break;
+            case StageMenuAction.EditProductGroups:
+                CurrentViewModel = _productGroupMaster;
+                _statusBar.Message = "Termékcsoport nézet megnyitva";
+                break;
+            case StageMenuAction.EditVatKeys:
+                CurrentViewModel = _taxRateMaster;
+                _statusBar.Message = "Adókulcs nézet megnyitva";
+                break;
             case StageMenuAction.InboundDeliveryNotes:
             case StageMenuAction.UpdateInboundInvoices:
-            case StageMenuAction.EditProductGroups:
-            case StageMenuAction.EditVatKeys:
             case StageMenuAction.EditPaymentMethods:
             case StageMenuAction.ListInvoices:
             case StageMenuAction.InventoryCard:

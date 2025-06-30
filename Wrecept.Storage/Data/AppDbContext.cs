@@ -18,4 +18,10 @@ public class AppDbContext : DbContext
         : base(options)
     {
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<TaxRate>()
+            .HasIndex(t => new { t.EffectiveFrom, t.EffectiveTo, t.IsArchived });
+    }
 }

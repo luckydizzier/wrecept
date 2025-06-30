@@ -34,14 +34,18 @@ public partial class App : Application
         services.AddTransient<StageViewModel>();
         services.AddTransient<InvoiceEditorViewModel>();
         services.AddTransient<ProductMasterViewModel>();
+        services.AddTransient<ProductGroupMasterViewModel>();
         services.AddTransient<SupplierMasterViewModel>();
+        services.AddTransient<TaxRateMasterViewModel>();
         services.AddTransient<AboutViewModel>();
         services.AddTransient<PlaceholderViewModel>();
         services.AddSingleton<StatusBarViewModel>();
         services.AddTransient<StageView>();
         services.AddTransient<InvoiceEditorView>();
         services.AddTransient<ProductMasterView>();
+        services.AddTransient<ProductGroupMasterView>();
         services.AddTransient<SupplierMasterView>();
+        services.AddTransient<TaxRateMasterView>();
         services.AddTransient<AboutView>();
         services.AddTransient<PlaceholderView>();
         services.AddTransient<Views.Controls.StatusBar>();

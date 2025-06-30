@@ -1,0 +1,14 @@
+<UserControl x:Class="Wrecept.Wpf.Views.TaxRateMasterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             KeyDown="OnKeyDown">
+    <DataGrid ItemsSource="{Binding TaxRates}" AutoGenerateColumns="False" Margin="4">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Name}" Header="Név" />
+            <DataGridTextColumn Binding="{Binding Percentage}" Header="Százalék" />
+            <DataGridTextColumn Binding="{Binding EffectiveFrom}" Header="Érvényes tól" />
+            <DataGridTextColumn Binding="{Binding EffectiveTo}" Header="Érvényes ig" />
+            <DataGridCheckBoxColumn Binding="{Binding IsArchived}" Header="Archivált" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>
