@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
 using Wrecept.Core.Models;
 
 namespace Wrecept.Storage.Data;
@@ -9,7 +10,16 @@ public static class DataSeeder
     {
         await db.Database.MigrateAsync(ct);
 
-        var hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
+        bool hasData;
+        try
+        {
+            hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
+        }
+        catch (SqliteException)
+        {
+            await db.Database.EnsureCreatedAsync(ct);
+            hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
+        }
         if (hasData) return false;
 
         var now = DateTime.UtcNow;
