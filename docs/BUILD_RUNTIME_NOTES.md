@@ -29,5 +29,6 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
 6. Indításkor a `DbInitializer` futtatja a migrációkat, majd a `DataSeeder` – ha kell – saját kontextusban mintaadatokat tölt be. Ha csak ezek az adatok vannak, a felület figyelmeztet.
 7. Az `AddStorage` kiterjesztés migrációhoz `IDbContextFactory`-t használ, így a munkakontextus az inicializálás végén eldobásra kerül.
 8. Ha a második adatlekérdezés is `SqliteException`-t dob, a `DataSeeder` a `logs/startup.log` fájlba ír és `Failed` állapotot jelez.
+9. Új modell bevezetésekor, ha valamely tábla hiányzik, a `DataSeeder` ismét migrációt futtat és naplózza a hibát.
 
 ---

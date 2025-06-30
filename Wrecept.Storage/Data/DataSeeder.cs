@@ -52,7 +52,7 @@ public static class DataSeeder
             return SeedStatus.Seeded;
         }
 
-        var onlySamples = await HasOnlySampleDataAsync(ctx, ct);
+        var onlySamples = await HasOnlySampleDataAsync(ctx, logService, ct);
         return onlySamples ? SeedStatus.OnlySampleData : SeedStatus.None;
     }
 
@@ -91,26 +91,47 @@ public static class DataSeeder
         await db.SaveChangesAsync(ct);
     }
 
-    private static async Task<bool> HasOnlySampleDataAsync(AppDbContext db, CancellationToken ct)
+    private static async Task<bool> HasOnlySampleDataAsync(AppDbContext db, ILogService logService, CancellationToken ct)
     {
-        var supplierCount = await db.Suppliers.CountAsync(ct);
-        var productCount = await db.Products.CountAsync(ct);
-        var groupCount = await db.ProductGroups.CountAsync(ct);
-        var taxCount = await db.TaxRates.CountAsync(ct);
-        var paymentCount = await db.PaymentMethods.CountAsync(ct);
-        var unitCount = await db.Units.CountAsync(ct);
+        async Task<bool> CheckAsync()
+        {
+            var supplierCount = await db.Suppliers.CountAsync(ct);
+            var productCount = await db.Products.CountAsync(ct);
+            var groupCount = await db.ProductGroups.CountAsync(ct);
+            var taxCount = await db.TaxRates.CountAsync(ct);
+            var paymentCount = await db.PaymentMethods.CountAsync(ct);
+            var unitCount = await db.Units.CountAsync(ct);
 
-        if (supplierCount != 1 || productCount != 1 || groupCount != 1 || taxCount != 1 || paymentCount != 1 || unitCount != 1)
-            return false;
+            if (supplierCount != 1 || productCount != 1 || groupCount != 1 || taxCount != 1 || paymentCount != 1 || unitCount != 1)
+                return false;
 
-        var sampleMatch =
-            await db.Suppliers.AnyAsync(s => s.Name == SampleSupplier, ct) &&
-            await db.Products.AnyAsync(p => p.Name == SampleProduct, ct) &&
-            await db.ProductGroups.AnyAsync(g => g.Name == SampleGroup, ct) &&
-            await db.TaxRates.AnyAsync(t => t.Name == SampleTax, ct) &&
-            await db.PaymentMethods.AnyAsync(m => m.Name == SamplePayment, ct) &&
-            await db.Units.AnyAsync(u => u.Name == SampleUnit, ct);
+            var sampleMatch =
+                await db.Suppliers.AnyAsync(s => s.Name == SampleSupplier, ct) &&
+                await db.Products.AnyAsync(p => p.Name == SampleProduct, ct) &&
+                await db.ProductGroups.AnyAsync(g => g.Name == SampleGroup, ct) &&
+                await db.TaxRates.AnyAsync(t => t.Name == SampleTax, ct) &&
+                await db.PaymentMethods.AnyAsync(m => m.Name == SamplePayment, ct) &&
+                await db.Units.AnyAsync(u => u.Name == SampleUnit, ct);
 
-        return sampleMatch;
+            return sampleMatch;
+        }
+        try
+        {
+            return await CheckAsync();
+        }
+        catch (SqliteException ex)
+        {
+            await logService.LogError("Sample data check failed", ex);
+            await DbInitializer.EnsureCreatedAndMigratedAsync(db, logService, ct);
+            try
+            {
+                return await CheckAsync();
+            }
+            catch (Exception inner)
+            {
+                await logService.LogError("Sample data retry failed", inner);
+                return false;
+            }
+        }
     }
 }
