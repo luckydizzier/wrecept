@@ -2,27 +2,17 @@
 
 ## ✅ Passed Checks
 
-- Minden modell tartalmazza az `CreatedAt` és `UpdatedAt` mezőket.
-- `Invoice`, `InvoiceItem`, `Product`, `Supplier` és `PaymentMethod` modellek megfelelnek a RefactorPlan szerinti mezőknek.
-- `InvoiceCalculator` helyesen kezeli az `IsGross` logikát és a negatív mennyiségeket.
-- `PaymentMethodService.GetActiveAsync` használata biztosítja a nem archivált elemek szűrését a számlaszerkesztőben.
+- Modellek megfelelnek a RefactorPlan előírásainak (`Invoice`, `InvoiceItem`, `Product`, `Supplier`, `TaxRate`, `PaymentMethod`, `Unit`, `ProductGroup`).
+- A viewmodel-ek tartalmazzák a szükséges bindolható tulajdonságokat (pl. `InvoiceEditorViewModel` már kezeli a dátumot, szállítót, fizetési módot és bruttó/nettó állapotot).
+- A fő XAML nézetek helyesen kötik a mezőket (pl. `InvoiceEditorView` ComboBox-ok és CheckBox a megfelelő propertykre).
+- A negatív mennyiségek vizuális jelzése `NegativeValueForegroundConverter` segítségével működik.
+- A start folyamatban a `StartupWindow` két ProgressBaron jelzi az előrehaladást.
 
 ## ⚠️ Issues Detected
 
-- A `TaxRate.Code` és `Unit.Code` mezők nem opcionálisak, holott a tervben `string?` szerepel.
-- Számos ViewModel nem tükrözi a kibővített modelleket:
-  - `InvoiceEditorViewModel` nem tartalmaz dátumot, beszállító ID-t és tétel szintű TaxRate kezelést.
-  - A törzsadatok ViewModeljei (`ProductMasterViewModel`, `SupplierMasterViewModel`, stb.) minden rekordot betöltenek, archiválási szűrő nélkül.
-- A hozzá tartozó XAML nézetek hiányosak:
-  - `InvoiceEditorView` nem rendelkezik dátumválasztóval és beszállító-választó ComboBox-szal.
-  - A tételsorok nem kezelik a TaxRate felülbírálását, illetve a negatív mennyiségek vizuális jelzését.
-  - `TaxRateMasterView` és `UnitMasterView` nem jelenítik meg a `Code` mezőt.
-- A legtöbb lista `GetAllAsync` hívást alkalmaz, így archivált rekordok is megjelennek.
+- `PaymentMethodMasterViewModel` és `ProductGroupMasterViewModel` még `GetAllAsync` hívást használnak, így az archivált elemek is megjelennek.
 
 ## 💡 Suggested Fixes
 
-- Módosítsuk a `TaxRate` és `Unit` modellek `Code` mezőit opcionálisra, ha nincs rá üzleti kényszer.
-- Egészítsük ki az `InvoiceEditorViewModel`-t a hiányzó mezőkkel (dátum, beszállító ID, TaxRate választás).
-- Használjuk a `GetActiveAsync` metódusokat minden törzsadat ViewModelben, és frissítsük a nézeteket ennek megfelelően.
-- Bővítsük a XAML felületeket a hiányzó mezőkkel és vizuális visszajelzésekkel (pl. negatív mennyiségek piros kiemelése).
+- Cseréljük `GetActiveAsync` hívásra a fenti viewmodelleket, hogy az archivált rekordok kiszűrve legyenek.
 
