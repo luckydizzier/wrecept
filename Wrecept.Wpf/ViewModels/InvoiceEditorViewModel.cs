@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
+using Wrecept.Core.Utilities;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -86,32 +87,38 @@ public partial class InvoiceEditorViewModel : ObservableObject
             Enumerable.Range(1, 3).Select(_ => new InvoiceItemRowViewModel(this)));
     }
 
-    public async Task LoadAsync()
+    public async Task LoadAsync(IProgress<ProgressReport>? progress = null)
     {
+        progress?.Report(new ProgressReport { SubtaskPercent = 0, Message = "Fizetési módok betöltése..." });
         var methods = await _paymentMethods.GetActiveAsync();
         PaymentMethods.Clear();
         foreach (var m in methods)
             PaymentMethods.Add(m);
 
+        progress?.Report(new ProgressReport { SubtaskPercent = 20, Message = "Szállítók betöltése..." });
         var supplierItems = await _suppliers.GetActiveAsync();
         Suppliers.Clear();
         foreach (var s in supplierItems)
             Suppliers.Add(s);
 
+        progress?.Report(new ProgressReport { SubtaskPercent = 40, Message = "ÁFA kulcsok betöltése..." });
         var taxRates = await _taxRates.GetActiveAsync(DateTime.UtcNow);
         TaxRates.Clear();
         foreach (var t in taxRates)
             TaxRates.Add(t);
 
+        progress?.Report(new ProgressReport { SubtaskPercent = 60, Message = "Termékek betöltése..." });
         var productItems = await _productsService.GetActiveAsync();
         Products.Clear();
         foreach (var p in productItems)
             Products.Add(p);
 
+        progress?.Report(new ProgressReport { SubtaskPercent = 80, Message = "Mértékegységek betöltése..." });
         var unitItems = await _unitsService.GetActiveAsync();
         Units.Clear();
         foreach (var u in unitItems)
             Units.Add(u);
+        progress?.Report(new ProgressReport { SubtaskPercent = 100, Message = "Betöltés kész." });
     }
 
     public async Task CheckProductAsync(InvoiceItemRowViewModel row, string name)

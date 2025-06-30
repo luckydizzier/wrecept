@@ -3,6 +3,7 @@ using Microsoft.Data.Sqlite;
 using Wrecept.Core.Models;
 using System.IO;
 using Wrecept.Core.Services;
+using Wrecept.Core.Utilities;
 
 namespace Wrecept.Storage.Data;
 
@@ -15,7 +16,11 @@ public static class DataSeeder
     private const string SamplePayment = "Készpénz";
     private const string SampleUnit = "db";
 
-    public static async Task<SeedStatus> SeedAsync(string dbPath, ILogService logService, CancellationToken ct = default)
+    public static async Task<SeedStatus> SeedAsync(
+        string dbPath,
+        ILogService logService,
+        IProgress<ProgressReport>? progress = null,
+        CancellationToken ct = default)
     {
         _ = File.Exists(dbPath);
 
@@ -24,7 +29,9 @@ public static class DataSeeder
             .Options;
 
         await using var ctx = new AppDbContext(opts);
+        progress?.Report(new ProgressReport { GlobalPercent = 20, Message = "Migráció ellenőrzése..." });
         await DbInitializer.EnsureCreatedAndMigratedAsync(ctx, logService, ct);
+        progress?.Report(new ProgressReport { GlobalPercent = 40, Message = "Adatok ellenőrzése..." });
 
         bool hasData;
         try
@@ -48,18 +55,22 @@ public static class DataSeeder
 
         if (!hasData)
         {
-            await InsertSampleDataAsync(ctx, ct);
+            progress?.Report(new ProgressReport { GlobalPercent = 60, Message = "Mintaadatok beszúrása..." });
+            await InsertSampleDataAsync(ctx, progress, ct);
+            progress?.Report(new ProgressReport { GlobalPercent = 80, Message = "Mintaadatok kész." });
             return SeedStatus.Seeded;
         }
 
+        progress?.Report(new ProgressReport { GlobalPercent = 90, Message = "Adatok vizsgálata..." });
         var onlySamples = await HasOnlySampleDataAsync(ctx, logService, ct);
         return onlySamples ? SeedStatus.OnlySampleData : SeedStatus.None;
     }
 
-    private static async Task InsertSampleDataAsync(AppDbContext db, CancellationToken ct)
+    private static async Task InsertSampleDataAsync(AppDbContext db, IProgress<ProgressReport>? progress, CancellationToken ct)
     {
         var now = DateTime.UtcNow;
         var paymentId = Guid.NewGuid();
+        progress?.Report(new ProgressReport { SubtaskPercent = 10, Message = "Fizetési módok..." });
         db.PaymentMethods.Add(new PaymentMethod
         {
             Id = paymentId,
@@ -71,6 +82,7 @@ public static class DataSeeder
         });
 
         var unitId = Guid.NewGuid();
+        progress?.Report(new ProgressReport { SubtaskPercent = 30, Message = "Mértékegységek..." });
         db.Units.Add(new Unit
         {
             Id = unitId,
@@ -82,9 +94,11 @@ public static class DataSeeder
         });
 
         var groupId = Guid.NewGuid();
+        progress?.Report(new ProgressReport { SubtaskPercent = 50, Message = "Termékcsoportok..." });
         db.ProductGroups.Add(new ProductGroup { Id = groupId, Name = SampleGroup, CreatedAt = now, UpdatedAt = now });
 
         var taxId = Guid.NewGuid();
+        progress?.Report(new ProgressReport { SubtaskPercent = 70, Message = "ÁFA kulcsok..." });
         db.TaxRates.Add(new TaxRate
         {
             Id = taxId,
@@ -96,6 +110,7 @@ public static class DataSeeder
             UpdatedAt = now
         });
 
+        progress?.Report(new ProgressReport { SubtaskPercent = 90, Message = "Szállító és termék..." });
         db.Suppliers.Add(new Supplier { Name = SampleSupplier, TaxId = "12345678-1-42", IsArchived = false, CreatedAt = now, UpdatedAt = now });
         db.Products.Add(new Product
         {
@@ -110,6 +125,7 @@ public static class DataSeeder
             UpdatedAt = now
         });
         await db.SaveChangesAsync(ct);
+        progress?.Report(new ProgressReport { SubtaskPercent = 100, Message = "Mentve." });
     }
 
     private static async Task<bool> HasOnlySampleDataAsync(AppDbContext db, ILogService logService, CancellationToken ct)
