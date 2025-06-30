@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
 using Wrecept.Core.Models;
 using System.IO;
 
@@ -15,6 +16,9 @@ public static class DataSeeder
     public static async Task<SeedStatus> SeedAsync(AppDbContext db, string dbPath, CancellationToken ct = default)
     {
         _ = File.Exists(dbPath);
+        var logDir = Path.Combine(Path.GetDirectoryName(dbPath) ?? string.Empty, "logs");
+        var logPath = Path.Combine(logDir, "startup.log");
+
         await DbInitializer.EnsureCreatedAndMigratedAsync(db, ct);
 
         bool hasData;
@@ -25,7 +29,16 @@ public static class DataSeeder
         catch (Exception)
         {
             await DbInitializer.EnsureCreatedAndMigratedAsync(db, ct);
-            hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
+            try
+            {
+                hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
+            }
+            catch (SqliteException ex)
+            {
+                Directory.CreateDirectory(logDir);
+                await File.AppendAllTextAsync(logPath, $"{DateTime.UtcNow:u} {ex}\n", ct);
+                return SeedStatus.Failed;
+            }
         }
 
         if (!hasData)
