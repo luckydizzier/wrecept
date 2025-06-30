@@ -7,6 +7,8 @@ public class InvoiceItem
     public Invoice? Invoice { get; set; }
     public int ProductId { get; set; }
     public Product? Product { get; set; }
+    public Guid TaxRateId { get; set; }
+    public TaxRate? TaxRate { get; set; }
     public string Description { get; set; } = string.Empty;
     public decimal Quantity { get; set; }
     public decimal UnitPrice { get; set; }
