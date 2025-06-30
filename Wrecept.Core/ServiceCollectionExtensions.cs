@@ -9,6 +9,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IInvoiceService, InvoiceService>();
+        services.AddScoped<InvoiceCalculator>();
         services.AddScoped<ISupplierService, SupplierService>();
         services.AddScoped<IProductGroupService, ProductGroupService>();
         services.AddScoped<ITaxRateService, TaxRateService>();
