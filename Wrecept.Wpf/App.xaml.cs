@@ -49,9 +49,19 @@ public partial class App : Application
         services.AddSingleton<MainWindow>();
     }
 
-    protected override void OnStartup(StartupEventArgs e)
+    protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+
+        var ctx = Services.GetRequiredService<Wrecept.Storage.Data.AppDbContext>();
+        var seeded = await Wrecept.Storage.Data.DataSeeder.SeedAsync(ctx);
+        if (seeded)
+            MessageBox.Show(
+                "A(z) app.db hiányzott vagy üres volt. Mintaadatok betöltve.",
+                "Első indítás",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+
         var window = Services.GetRequiredService<MainWindow>();
         window.Show();
     }
