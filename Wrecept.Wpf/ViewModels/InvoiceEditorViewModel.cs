@@ -121,10 +121,10 @@ public partial class InvoiceEditorViewModel : ObservableObject
         progress?.Report(new ProgressReport { SubtaskPercent = 100, Message = "Betöltés kész." });
     }
 
-    public async Task CheckProductAsync(InvoiceItemRowViewModel row, string name)
+    public Task CheckProductAsync(InvoiceItemRowViewModel row, string name)
     {
         if (string.IsNullOrWhiteSpace(name))
-            return;
+            return Task.CompletedTask;
 
         var exists = Products.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         if (exists is null)
@@ -138,5 +138,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
         {
             row.Product = exists.Name;
         }
+
+        return Task.CompletedTask;
     }
 }
