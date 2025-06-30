@@ -15,6 +15,9 @@
             <DataTemplate DataType="{x:Type vm:ProductMasterViewModel}">
                 <view:ProductMasterView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ProductGroupMasterViewModel}">
+                <view:ProductGroupMasterView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:SupplierMasterViewModel}">
                 <view:SupplierMasterView />
             </DataTemplate>
