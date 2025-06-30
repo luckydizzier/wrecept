@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Linq;
@@ -17,6 +18,9 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     [ObservableProperty]
     private decimal unitPrice;
+
+    [ObservableProperty]
+    private Guid taxRateId;
 }
 
 public partial class InvoiceEditorViewModel : ObservableObject
@@ -24,9 +28,17 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public ObservableCollection<InvoiceItemRowViewModel> Items { get; }
 
     public ObservableCollection<PaymentMethod> PaymentMethods { get; } = new();
+    public ObservableCollection<TaxRate> TaxRates { get; } = new();
+    public ObservableCollection<Supplier> Suppliers { get; } = new();
 
     [ObservableProperty]
     private string supplier = string.Empty;
+
+    [ObservableProperty]
+    private Guid supplierId;
+
+    [ObservableProperty]
+    private DateOnly? invoiceDate;
 
     [ObservableProperty]
     private string number = string.Empty;
@@ -38,10 +50,14 @@ public partial class InvoiceEditorViewModel : ObservableObject
     private bool isGross;
 
     private readonly IPaymentMethodService _paymentMethods;
+    private readonly ITaxRateService _taxRates;
+    private readonly ISupplierService _suppliers;
 
-    public InvoiceEditorViewModel(IPaymentMethodService paymentMethods)
+    public InvoiceEditorViewModel(IPaymentMethodService paymentMethods, ITaxRateService taxRates, ISupplierService suppliers)
     {
         _paymentMethods = paymentMethods;
+        _taxRates = taxRates;
+        _suppliers = suppliers;
         Items = new ObservableCollection<InvoiceItemRowViewModel>(
             Enumerable.Range(1, 3).Select(_ => new InvoiceItemRowViewModel()));
     }
@@ -52,5 +68,15 @@ public partial class InvoiceEditorViewModel : ObservableObject
         PaymentMethods.Clear();
         foreach (var m in methods)
             PaymentMethods.Add(m);
+
+        var supplierItems = await _suppliers.GetActiveAsync();
+        Suppliers.Clear();
+        foreach (var s in supplierItems)
+            Suppliers.Add(s);
+
+        var taxRates = await _taxRates.GetActiveAsync(DateTime.UtcNow);
+        TaxRates.Clear();
+        foreach (var t in taxRates)
+            TaxRates.Add(t);
     }
 }

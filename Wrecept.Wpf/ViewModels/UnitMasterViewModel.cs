@@ -19,7 +19,7 @@ public partial class UnitMasterViewModel : ObservableObject
 
     public async Task LoadAsync()
     {
-        var items = await _service.GetAllAsync();
+        var items = await _service.GetActiveAsync();
         Units.Clear();
         foreach (var item in items)
             Units.Add(item);
