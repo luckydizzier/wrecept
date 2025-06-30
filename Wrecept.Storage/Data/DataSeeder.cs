@@ -21,16 +21,22 @@ public static class DataSeeder
         await DbInitializer.EnsureCreatedAndMigratedAsync(db, logService, ct);
 
         bool hasData;
+        var ctx = db;
         try
         {
-            hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
+            hasData = await ctx.Products.AnyAsync(ct) || await ctx.Suppliers.AnyAsync(ct);
         }
         catch (Exception)
         {
-            await DbInitializer.EnsureCreatedAndMigratedAsync(db, logService, ct);
+            await DbInitializer.EnsureCreatedAndMigratedAsync(ctx, logService, ct);
             try
             {
-                hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
+                var cs = ctx.Database.GetDbConnection().ConnectionString;
+                var opts = new DbContextOptionsBuilder<AppDbContext>()
+                    .UseSqlite(cs)
+                    .Options;
+                ctx = new AppDbContext(opts);
+                hasData = await ctx.Products.AnyAsync(ct) || await ctx.Suppliers.AnyAsync(ct);
             }
             catch (SqliteException ex)
             {
@@ -41,11 +47,11 @@ public static class DataSeeder
 
         if (!hasData)
         {
-            await InsertSampleDataAsync(db, ct);
+            await InsertSampleDataAsync(ctx, ct);
             return SeedStatus.Seeded;
         }
 
-        var onlySamples = await HasOnlySampleDataAsync(db, ct);
+        var onlySamples = await HasOnlySampleDataAsync(ctx, ct);
         return onlySamples ? SeedStatus.OnlySampleData : SeedStatus.None;
     }
 
