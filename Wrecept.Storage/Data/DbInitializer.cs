@@ -1,11 +1,12 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Wrecept.Core.Services;
 
 namespace Wrecept.Storage.Data;
 
 public static class DbInitializer
 {
-    public static async Task EnsureCreatedAndMigratedAsync(AppDbContext db, CancellationToken ct = default)
+    public static async Task EnsureCreatedAndMigratedAsync(AppDbContext db, ILogService logService, CancellationToken ct = default)
     {
         try
         {
@@ -13,8 +14,9 @@ public static class DbInitializer
             if (pending.Any())
                 await db.Database.MigrateAsync(ct);
         }
-        catch (SqliteException)
+        catch (SqliteException ex)
         {
+            await logService.LogError("Migration failed", ex);
             await db.Database.EnsureCreatedAsync(ct);
             await db.Database.MigrateAsync(ct);
         }

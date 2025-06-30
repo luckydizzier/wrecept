@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using Wrecept.Core.Models;
 using System.IO;
+using Wrecept.Core.Services;
 
 namespace Wrecept.Storage.Data;
 
@@ -13,13 +14,11 @@ public static class DataSeeder
     private const string SampleTax = "ÁFA 27%";
     private const string SamplePayment = "Készpénz";
 
-    public static async Task<SeedStatus> SeedAsync(AppDbContext db, string dbPath, CancellationToken ct = default)
+    public static async Task<SeedStatus> SeedAsync(AppDbContext db, string dbPath, ILogService logService, CancellationToken ct = default)
     {
         _ = File.Exists(dbPath);
-        var logDir = Path.Combine(Path.GetDirectoryName(dbPath) ?? string.Empty, "logs");
-        var logPath = Path.Combine(logDir, "startup.log");
 
-        await DbInitializer.EnsureCreatedAndMigratedAsync(db, ct);
+        await DbInitializer.EnsureCreatedAndMigratedAsync(db, logService, ct);
 
         bool hasData;
         try
@@ -28,15 +27,14 @@ public static class DataSeeder
         }
         catch (Exception)
         {
-            await DbInitializer.EnsureCreatedAndMigratedAsync(db, ct);
+            await DbInitializer.EnsureCreatedAndMigratedAsync(db, logService, ct);
             try
             {
                 hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
             }
             catch (SqliteException ex)
             {
-                Directory.CreateDirectory(logDir);
-                await File.AppendAllTextAsync(logPath, $"{DateTime.UtcNow:u} {ex}\n", ct);
+                await logService.LogError("Startup data check failed", ex);
                 return SeedStatus.Failed;
             }
         }
