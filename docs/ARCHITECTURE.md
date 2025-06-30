@@ -46,7 +46,7 @@ Ezek fölött `InvoiceService`, `ProductService` és mostantól `SupplierService
 
 Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a service réteg inicializálja, így naplózható az adat módosításának ideje.
 
-Az alkalmazás indításakor a `DataSeeder` gondoskodik a szükséges migrációk lefuttatásáról
-és – ha az adatbázis üres vagy hiányzik – egy minimális mintaadatkészlet betöltéséről.
+Az alkalmazás indításakor a `DbInitializer` futtatja a szükséges migrációkat.
+Ezt követően a `DataSeeder` – ha az adatbázis üres vagy hiányzik – egy minimális mintaadatkészletet tölt be.
 
 ---
