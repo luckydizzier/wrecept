@@ -8,7 +8,15 @@ public static class DataSeeder
 {
     public static async Task<bool> SeedAsync(AppDbContext db, CancellationToken ct = default)
     {
-        await db.Database.MigrateAsync(ct);
+        try
+        {
+            await db.Database.MigrateAsync(ct);
+        }
+        catch (SqliteException)
+        {
+            await db.Database.EnsureCreatedAsync(ct);
+            await db.Database.MigrateAsync(ct);
+        }
 
         bool hasData;
         try
@@ -18,6 +26,7 @@ public static class DataSeeder
         catch (SqliteException)
         {
             await db.Database.EnsureCreatedAsync(ct);
+            await db.Database.MigrateAsync(ct);
             hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
         }
         if (hasData) return false;
