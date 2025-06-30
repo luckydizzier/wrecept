@@ -8,6 +8,8 @@ public static class DataSeeder
 {
     public static async Task<bool> SeedAsync(AppDbContext db, CancellationToken ct = default)
     {
+        await db.Database.MigrateAsync(ct);
+
         var hasData = await db.Products.AnyAsync(ct) || await db.Suppliers.AnyAsync(ct);
         if (hasData) return false;
 
