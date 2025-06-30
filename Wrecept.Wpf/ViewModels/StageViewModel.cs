@@ -104,6 +104,9 @@ public partial class StageViewModel : ObservableObject
                 break;
             case StageMenuAction.InboundDeliveryNotes:
             case StageMenuAction.UpdateInboundInvoices:
+                CurrentViewModel = _invoiceEditor;
+                _statusBar.Message = "Számla szerkesztő";
+                break;
             case StageMenuAction.ListInvoices:
             case StageMenuAction.InventoryCard:
             case StageMenuAction.CheckFiles:
