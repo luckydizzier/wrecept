@@ -21,7 +21,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITaxRateRepository, TaxRateRepository>();
 
         using var provider = services.BuildServiceProvider();
-        var ctx = provider.GetRequiredService<AppDbContext>();
+        using var scope = provider.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         DbInitializer.EnsureCreatedAndMigratedAsync(ctx).GetAwaiter().GetResult();
 
         return services;

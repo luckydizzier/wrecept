@@ -47,6 +47,8 @@ Ezek fölött `InvoiceService`, `ProductService` és mostantól `SupplierService
 Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a service réteg inicializálja, így naplózható az adat módosításának ideje.
 
 Az alkalmazás indításakor a `DbInitializer` futtatja a szükséges migrációkat.
+Az `AddStorage` kiterjesztés ehhez scopolt `AppDbContext` példányt használ,
+így a context élettartama pontosan egy scope-ra korlátozódik.
 Ezt követően a `DataSeeder` – ha az adatbázis üres vagy hiányzik – egy minimális mintaadatkészletet tölt be.
 Amennyiben csak ez a mintaadatkészlet érhető el, a UI figyelmezteti a felhasználót.
 Ha a második adatlekérdezés is hibát jelez, a részletek a `logs/startup.log` fájlba kerülnek és a program hibát jelez.
