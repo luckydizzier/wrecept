@@ -49,9 +49,10 @@ Minden hibát az `ILogService` rögzít, amelyet a Storage réteg `LogService` i
 Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a service réteg inicializálja, így naplózható az adat módosításának ideje.
 
 Az alkalmazás indításakor a `DbInitializer` futtatja a szükséges migrációkat.
-Az `AddStorage` kiterjesztés ehhez scopolt `AppDbContext` példányt használ,
-így a context élettartama pontosan egy scope-ra korlátozódik.
-Ezt követően a `DataSeeder` – ha az adatbázis üres vagy hiányzik – egy minimális mintaadatkészletet tölt be.
+Az `AddStorage` kiterjesztés ehhez már `IDbContextFactory`-t vesz igénybe,
+így a migráció egy külön kontextuson történik és azonnal eldobásra kerül.
+Ezt követően a `DataSeeder` – ha az adatbázis üres vagy hiányzik – saját
+kontextust hoz létre és egy minimális mintaadatkészletet tölt be.
 Amennyiben csak ez a mintaadatkészlet érhető el, a UI figyelmezteti a felhasználót.
 Ha a második adatlekérdezés is hibát jelez, a részleteket az `ILogService` naplózza a `logs` mappába, és a program hibát jelez.
 

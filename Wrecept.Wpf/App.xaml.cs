@@ -61,9 +61,8 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        var ctx = Services.GetRequiredService<Wrecept.Storage.Data.AppDbContext>();
         var logger = Services.GetRequiredService<Wrecept.Core.Services.ILogService>();
-        var status = await Wrecept.Storage.Data.DataSeeder.SeedAsync(ctx, DbPath, logger);
+        var status = await Wrecept.Storage.Data.DataSeeder.SeedAsync(DbPath, logger);
         if (status == Wrecept.Storage.Data.SeedStatus.Failed)
         {
             MessageBox.Show(

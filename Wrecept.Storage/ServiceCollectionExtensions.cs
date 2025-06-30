@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
         ArgumentException.ThrowIfNullOrEmpty(dbPath);
 
         services.AddDbContext<AppDbContext>(o => o.UseSqlite($"Data Source={dbPath}"));
+        services.AddDbContextFactory<AppDbContext>(o => o.UseSqlite($"Data Source={dbPath}"));
         services.AddScoped<IInvoiceRepository, InvoiceRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ISupplierRepository, SupplierRepository>();
@@ -24,9 +25,9 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ILogService, LogService>();
 
         using var provider = services.BuildServiceProvider();
-        using var scope = provider.CreateScope();
-        var ctx = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        var logger = scope.ServiceProvider.GetRequiredService<ILogService>();
+        var factory = provider.GetRequiredService<IDbContextFactory<AppDbContext>>();
+        var logger = provider.GetRequiredService<ILogService>();
+        using var ctx = factory.CreateDbContext();
         DbInitializer.EnsureCreatedAndMigratedAsync(ctx, logger).GetAwaiter().GetResult();
 
         return services;
