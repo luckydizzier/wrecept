@@ -22,7 +22,7 @@ public static class ServiceCollectionExtensions
 
         using var provider = services.BuildServiceProvider();
         var ctx = provider.GetRequiredService<AppDbContext>();
-        ctx.Database.Migrate();
+        DbInitializer.EnsureCreatedAndMigratedAsync(ctx).GetAwaiter().GetResult();
 
         return services;
     }
