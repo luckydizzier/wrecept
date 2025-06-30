@@ -71,6 +71,8 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
+        ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
         var orchestrator = Services.GetRequiredService<StartupOrchestrator>();
         var progressVm = Services.GetRequiredService<ProgressViewModel>();
         using var cts = new CancellationTokenSource();
@@ -106,6 +108,8 @@ public partial class App : Application
         }
 
         var window = Services.GetRequiredService<MainWindow>();
+        MainWindow = window;
+        ShutdownMode = ShutdownMode.OnMainWindowClose;
         window.Show();
     }
 }
