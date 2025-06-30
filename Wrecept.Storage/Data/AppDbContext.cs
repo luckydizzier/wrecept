@@ -23,8 +23,12 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<TaxRate>()
             .HasIndex(t => new { t.EffectiveFrom, t.EffectiveTo, t.IsArchived });
+        modelBuilder.Entity<TaxRate>()
+            .HasIndex(t => new { t.Code, t.IsArchived });
 
         modelBuilder.Entity<Unit>()
             .HasIndex(u => new { u.Name, u.IsArchived });
+        modelBuilder.Entity<Unit>()
+            .HasIndex(u => new { u.Code, u.IsArchived });
     }
 }

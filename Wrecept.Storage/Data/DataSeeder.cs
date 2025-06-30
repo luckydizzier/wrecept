@@ -59,35 +59,56 @@ public static class DataSeeder
     private static async Task InsertSampleDataAsync(AppDbContext db, CancellationToken ct)
     {
         var now = DateTime.UtcNow;
+        var paymentId = Guid.NewGuid();
         db.PaymentMethods.Add(new PaymentMethod
         {
-            Id = Guid.NewGuid(),
+            Id = paymentId,
             Name = SamplePayment,
             DueInDays = 0,
             IsArchived = false,
             CreatedAt = now,
             UpdatedAt = now
         });
+
+        var unitId = Guid.NewGuid();
         db.Units.Add(new Unit
         {
-            Id = Guid.NewGuid(),
+            Id = unitId,
+            Code = "DB",
             Name = SampleUnit,
             IsArchived = false,
             CreatedAt = now,
             UpdatedAt = now
         });
-        db.ProductGroups.Add(new ProductGroup { Id = Guid.NewGuid(), Name = SampleGroup, CreatedAt = now, UpdatedAt = now });
+
+        var groupId = Guid.NewGuid();
+        db.ProductGroups.Add(new ProductGroup { Id = groupId, Name = SampleGroup, CreatedAt = now, UpdatedAt = now });
+
+        var taxId = Guid.NewGuid();
         db.TaxRates.Add(new TaxRate
         {
-            Id = Guid.NewGuid(),
+            Id = taxId,
+            Code = "A27",
             Name = SampleTax,
             Percentage = 27m,
             EffectiveFrom = new DateTime(2020, 1, 1),
             CreatedAt = now,
             UpdatedAt = now
         });
-        db.Suppliers.Add(new Supplier { Name = SampleSupplier, TaxId = "12345678-1-42", CreatedAt = now, UpdatedAt = now });
-        db.Products.Add(new Product { Name = SampleProduct, Net = 1000m, Gross = 1270m, CreatedAt = now, UpdatedAt = now });
+
+        db.Suppliers.Add(new Supplier { Name = SampleSupplier, TaxId = "12345678-1-42", IsArchived = false, CreatedAt = now, UpdatedAt = now });
+        db.Products.Add(new Product
+        {
+            Name = SampleProduct,
+            Net = 1000m,
+            Gross = 1270m,
+            TaxRateId = taxId,
+            UnitId = unitId,
+            ProductGroupId = groupId,
+            IsArchived = false,
+            CreatedAt = now,
+            UpdatedAt = now
+        });
         await db.SaveChangesAsync(ct);
     }
 

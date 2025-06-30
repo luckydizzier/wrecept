@@ -3,6 +3,7 @@ namespace Wrecept.Core.Models;
 public class TaxRate
 {
     public Guid Id { get; set; }
+    public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public decimal Percentage { get; set; }
     public DateTime EffectiveFrom { get; set; }
