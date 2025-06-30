@@ -139,3 +139,78 @@ Ez a dokumentum definiálja a **Wrecept** rendszer üzleti logikáját. A rendsz
 * Lehetőség van több felhasználós támogatásra `CreatedBy` mezőkkel.
 
 ---
+
+11. 🧮 InvoiceCalculator – Számlaösszesítő logika
+Az InvoiceCalculator komponens felelős a számlatételek alapján az összesített értékek kiszámításáért, figyelembe véve a bruttó/nettó logikát, ÁFA kulcsokat és a visszárukat.
+
+11.1. Bemenetek
+Invoice objektum, amely tartalmazza:
+
+IsGross beállítást (bruttó/nettó megadás),
+
+InvoiceItems listáját (tételsorok),
+
+minden tételhez kapcsolt Product, benne a TaxRate hivatkozással.
+
+11.2. Kimenetek
+TotalNet: az összes nettó összeg (negatív sorokat beleszámítva),
+
+TotalTax: összesített ÁFA összeg,
+
+TotalGross: teljes bruttó érték,
+
+PerTaxRateBreakdown: kulcs-érték lista, ahol minden ÁFA-kulcshoz külön:
+
+nettó összeg,
+
+ÁFA összeg,
+
+bruttó összeg tartozik.
+
+11.3. Számítási algoritmus
+Tételsoronként:
+
+Egységár értelmezése:
+
+Ha IsGross = false: UnitPrice = nettó
+
+Ha IsGross = true: UnitPrice = bruttó, ezért:
+
+
+NetUnitPrice = UnitPrice / (1 + TaxRate.Percentage / 100)
+Tételérték számítása:
+
+
+NetAmount = Quantity * NetUnitPrice
+TaxAmount = NetAmount * (TaxRate.Percentage / 100)
+GrossAmount = NetAmount + TaxAmount
+Negatív mennyiség esetén:
+
+Minden érték (nettó, áfa, bruttó) negatívként kerül be az összesítőbe.
+
+Ez jellemzően visszáru (pl. -2 db termék).
+
+Csoportosítás:
+
+A TaxRate.Id alapján minden érték csoportosításra kerül:
+
+Összes nettó, összes áfa, összes bruttó kulcsonként.
+
+Összesítő értékek:
+
+TotalNet = Σ(NetAmount)
+
+TotalTax = Σ(TaxAmount)
+
+TotalGross = Σ(GrossAmount)
+
+11.4. Kerekítés
+Minden számítás belül decimálisan történik (decimal típus).
+
+Kimenetek megjelenítés előtt kerülnek pénznem szerint formázásra (pl. #,##0 Ft).
+
+11.5. Hibalogika
+Ha a tétel Product vagy TaxRate hiányzik → kivétel vagy validációs hiba.
+
+Ha Quantity = 0 → kihagyható a számításból, de figyelmeztetés jelenhet meg.
+
