@@ -10,13 +10,13 @@
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <DataTemplate DataType="{x:Type vm:InvoiceEditorViewModel}">
-                <view:InvoiceEditorView x:FactoryMethod="Create" />
+                <view:InvoiceEditorView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:ProductMasterViewModel}">
-                <view:ProductMasterView x:FactoryMethod="Create" />
+                <view:ProductMasterView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:SupplierMasterViewModel}">
-                <view:SupplierMasterView x:FactoryMethod="Create" />
+                <view:SupplierMasterView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:AboutViewModel}">
                 <view:AboutView />
