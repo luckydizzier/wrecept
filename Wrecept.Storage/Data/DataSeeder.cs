@@ -13,6 +13,7 @@ public static class DataSeeder
     private const string SampleGroup = "Általános";
     private const string SampleTax = "ÁFA 27%";
     private const string SamplePayment = "Készpénz";
+    private const string SampleUnit = "db";
 
     public static async Task<SeedStatus> SeedAsync(string dbPath, ILogService logService, CancellationToken ct = default)
     {
@@ -67,6 +68,14 @@ public static class DataSeeder
             CreatedAt = now,
             UpdatedAt = now
         });
+        db.Units.Add(new Unit
+        {
+            Id = Guid.NewGuid(),
+            Name = SampleUnit,
+            IsArchived = false,
+            CreatedAt = now,
+            UpdatedAt = now
+        });
         db.ProductGroups.Add(new ProductGroup { Id = Guid.NewGuid(), Name = SampleGroup, CreatedAt = now, UpdatedAt = now });
         db.TaxRates.Add(new TaxRate
         {
@@ -89,8 +98,9 @@ public static class DataSeeder
         var groupCount = await db.ProductGroups.CountAsync(ct);
         var taxCount = await db.TaxRates.CountAsync(ct);
         var paymentCount = await db.PaymentMethods.CountAsync(ct);
+        var unitCount = await db.Units.CountAsync(ct);
 
-        if (supplierCount != 1 || productCount != 1 || groupCount != 1 || taxCount != 1 || paymentCount != 1)
+        if (supplierCount != 1 || productCount != 1 || groupCount != 1 || taxCount != 1 || paymentCount != 1 || unitCount != 1)
             return false;
 
         var sampleMatch =
@@ -98,7 +108,8 @@ public static class DataSeeder
             await db.Products.AnyAsync(p => p.Name == SampleProduct, ct) &&
             await db.ProductGroups.AnyAsync(g => g.Name == SampleGroup, ct) &&
             await db.TaxRates.AnyAsync(t => t.Name == SampleTax, ct) &&
-            await db.PaymentMethods.AnyAsync(m => m.Name == SamplePayment, ct);
+            await db.PaymentMethods.AnyAsync(m => m.Name == SamplePayment, ct) &&
+            await db.Units.AnyAsync(u => u.Name == SampleUnit, ct);
 
         return sampleMatch;
     }

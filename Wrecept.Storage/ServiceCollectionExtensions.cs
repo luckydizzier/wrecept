@@ -22,6 +22,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
         services.AddScoped<IProductGroupRepository, ProductGroupRepository>();
         services.AddScoped<ITaxRateRepository, TaxRateRepository>();
+        services.AddScoped<IUnitRepository, UnitRepository>();
         services.AddSingleton<ILogService, LogService>();
 
         using var provider = services.BuildServiceProvider();

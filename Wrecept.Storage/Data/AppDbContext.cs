@@ -12,6 +12,7 @@ public class AppDbContext : DbContext
     public DbSet<ProductGroup> ProductGroups => Set<ProductGroup>();
     public DbSet<TaxRate> TaxRates => Set<TaxRate>();
     public DbSet<PaymentMethod> PaymentMethods => Set<PaymentMethod>();
+    public DbSet<Unit> Units => Set<Unit>();
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
@@ -22,5 +23,8 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<TaxRate>()
             .HasIndex(t => new { t.EffectiveFrom, t.EffectiveTo, t.IsArchived });
+
+        modelBuilder.Entity<Unit>()
+            .HasIndex(u => new { u.Name, u.IsArchived });
     }
 }

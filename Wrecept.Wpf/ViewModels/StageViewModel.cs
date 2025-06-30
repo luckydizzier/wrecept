@@ -13,6 +13,7 @@ public enum StageMenuAction
     EditSuppliers,
     EditVatKeys,
     EditPaymentMethods,
+    EditUnits,
     ListProducts,
     ListSuppliers,
     ListInvoices,
@@ -36,6 +37,7 @@ public partial class StageViewModel : ObservableObject
     private readonly SupplierMasterViewModel _supplierMaster;
     private readonly TaxRateMasterViewModel _taxRateMaster;
     private readonly PaymentMethodMasterViewModel _paymentMethodMaster;
+    private readonly UnitMasterViewModel _unitMaster;
     private readonly AboutViewModel _about;
     private readonly PlaceholderViewModel _placeholder;
     private readonly StatusBarViewModel _statusBar;
@@ -49,6 +51,7 @@ public partial class StageViewModel : ObservableObject
         SupplierMasterViewModel supplierMaster,
         TaxRateMasterViewModel taxRateMaster,
         PaymentMethodMasterViewModel paymentMethodMaster,
+        UnitMasterViewModel unitMaster,
         AboutViewModel about,
         PlaceholderViewModel placeholder,
         StatusBarViewModel statusBar)
@@ -59,6 +62,7 @@ public partial class StageViewModel : ObservableObject
         _supplierMaster = supplierMaster;
         _taxRateMaster = taxRateMaster;
         _paymentMethodMaster = paymentMethodMaster;
+        _unitMaster = unitMaster;
         _about = about;
         _placeholder = placeholder;
         _statusBar = statusBar;
@@ -93,6 +97,10 @@ public partial class StageViewModel : ObservableObject
             case StageMenuAction.EditPaymentMethods:
                 CurrentViewModel = _paymentMethodMaster;
                 _statusBar.Message = "Fizetési mód nézet megnyitva";
+                break;
+            case StageMenuAction.EditUnits:
+                CurrentViewModel = _unitMaster;
+                _statusBar.Message = "Mértékegység nézet megnyitva";
                 break;
             case StageMenuAction.InboundDeliveryNotes:
             case StageMenuAction.UpdateInboundInvoices:
