@@ -39,4 +39,7 @@ public class InvoiceService : IInvoiceService
 
     public Task<Invoice?> GetAsync(int id, CancellationToken ct = default)
         => _invoices.GetAsync(id, ct);
+
+    public Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default)
+        => _invoices.GetRecentAsync(count, ct);
 }

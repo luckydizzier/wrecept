@@ -40,6 +40,7 @@ public partial class App : Application
 
         services.AddTransient<StageViewModel>();
         services.AddTransient<InvoiceEditorViewModel>();
+        services.AddTransient<InvoiceLookupViewModel>();
         services.AddTransient<ProductMasterViewModel>();
         services.AddTransient<ProductGroupMasterViewModel>();
         services.AddTransient<SupplierMasterViewModel>();
@@ -55,6 +56,7 @@ public partial class App : Application
         services.AddTransient<StartupOrchestrator>();
         services.AddTransient<StageView>();
         services.AddTransient<InvoiceEditorView>();
+        services.AddTransient<InvoiceLookupView>();
         services.AddTransient<ProductMasterView>();
         services.AddTransient<ProductGroupMasterView>();
         services.AddTransient<SupplierMasterView>();

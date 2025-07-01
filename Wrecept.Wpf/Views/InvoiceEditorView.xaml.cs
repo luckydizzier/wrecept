@@ -30,9 +30,34 @@ public partial class InvoiceEditorView : UserControl
             });
             await viewModel.LoadAsync(progress);
             progressWindow.Close();
+            LookupView.InvoiceList.Focus();
         };
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
-        => NavigationHelper.Handle(e);
+    {
+        if (e.Key == Key.Escape)
+        {
+            LookupView.InvoiceList.Focus();
+            e.Handled = true;
+            return;
+        }
+        var dg = ItemsGrid;
+        if (e.Key == Key.Enter && dg.SelectedIndex == 0)
+        {
+            if (DataContext is InvoiceEditorViewModel vm)
+                vm.AddLineItemCommand.Execute(null);
+            e.Handled = true;
+            return;
+        }
+        if (e.Key == Key.Enter && dg.SelectedIndex > 0)
+        {
+            if (DataContext is InvoiceEditorViewModel vm && dg.SelectedItem is InvoiceItemRowViewModel row)
+                vm.EditLineFromSelection(row);
+            dg.SelectedIndex = 0;
+            e.Handled = true;
+            return;
+        }
+        NavigationHelper.Handle(e);
+    }
 }

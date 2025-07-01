@@ -40,11 +40,16 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     [ObservableProperty]
     private string productGroup = string.Empty;
+
+    [ObservableProperty]
+    private bool isEditable = true;
 }
 
 public partial class InvoiceEditorViewModel : ObservableObject
 {
     public ObservableCollection<InvoiceItemRowViewModel> Items { get; }
+
+    public InvoiceLookupViewModel Lookup { get; }
 
     public ObservableCollection<PaymentMethod> PaymentMethods { get; } = new();
     public ObservableCollection<TaxRate> TaxRates { get; } = new();
@@ -83,6 +88,7 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     private readonly ISupplierService _suppliers;
     private readonly IProductService _productsService;
     private readonly IUnitService _unitsService;
+    private readonly IInvoiceService _invoiceService;
 
     [ObservableProperty]
     private object? inlineCreator;
@@ -92,15 +98,24 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         ITaxRateService taxRates,
         ISupplierService suppliers,
         IProductService products,
-        IUnitService units)
+        IUnitService units,
+        IInvoiceService invoiceService,
+        InvoiceLookupViewModel lookup)
     {
         _paymentMethods = paymentMethods;
         _taxRates = taxRates;
         _suppliers = suppliers;
         _productsService = products;
         _unitsService = units;
+        _invoiceService = invoiceService;
+        Lookup = lookup;
+        Lookup.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(Lookup.SelectedInvoice))
+                LookupLoadSelected();
+        };
         Items = new ObservableCollection<InvoiceItemRowViewModel>(
-            Enumerable.Range(1, 3).Select(_ => new InvoiceItemRowViewModel(this)));
+            Enumerable.Range(1, 3).Select(i => new InvoiceItemRowViewModel(this) { IsEditable = i == 1 }));
     }
 
     public async Task LoadAsync(IProgress<ProgressReport>? progress = null)
@@ -202,5 +217,81 @@ private void UpdateSupplierId(string name)
     private void ShowPaymentMethodCreator()
     {
         InlineCreator = new PaymentMethodCreatorViewModel(this, _paymentMethods);
+    }
+
+    public async Task LoadInvoice(int id)
+    {
+        var invoice = await _invoiceService.GetAsync(id);
+        if (invoice == null)
+            return;
+
+        SupplierId = invoice.SupplierId;
+        Supplier = invoice.Supplier?.Name ?? string.Empty;
+        InvoiceDate = invoice.Date.ToDateTime(TimeOnly.MinValue);
+        Number = invoice.Number;
+        PaymentMethodId = invoice.PaymentMethodId;
+        IsGross = invoice.IsGross;
+        IsArchived = invoice.IsArchived;
+
+        Items.Clear();
+        Items.Add(new InvoiceItemRowViewModel(this) { IsEditable = true });
+        foreach (var item in invoice.Items)
+        {
+            var row = new InvoiceItemRowViewModel(this)
+            {
+                Product = item.Product?.Name ?? string.Empty,
+                Quantity = item.Quantity,
+                UnitPrice = item.UnitPrice,
+                TaxRateId = item.TaxRateId,
+                UnitId = item.Product?.UnitId ?? Guid.Empty,
+                ProductGroup = item.Product?.ProductGroup?.Name ?? string.Empty,
+                IsEditable = false
+            };
+            Items.Add(row);
+        }
+    }
+
+    public void EditLineFromSelection(InvoiceItemRowViewModel selected)
+    {
+        if (Items.IndexOf(selected) <= 0) return;
+        var edit = Items[0];
+        edit.Product = selected.Product;
+        edit.Quantity = selected.Quantity;
+        edit.UnitPrice = selected.UnitPrice;
+        edit.TaxRateId = selected.TaxRateId;
+        edit.UnitId = selected.UnitId;
+        edit.ProductGroup = selected.ProductGroup;
+    }
+
+    [RelayCommand]
+    private void AddLineItem()
+    {
+        var edit = Items[0];
+        if (string.IsNullOrWhiteSpace(edit.Product)) return;
+
+        var row = new InvoiceItemRowViewModel(this)
+        {
+            Product = edit.Product,
+            Quantity = edit.Quantity,
+            UnitPrice = edit.UnitPrice,
+            TaxRateId = edit.TaxRateId,
+            UnitId = edit.UnitId,
+            ProductGroup = edit.ProductGroup,
+            IsEditable = false
+        };
+
+        Items.Add(row);
+        edit.Product = string.Empty;
+        edit.Quantity = 0;
+        edit.UnitPrice = 0;
+        edit.TaxRateId = Guid.Empty;
+        edit.UnitId = Guid.Empty;
+        edit.ProductGroup = string.Empty;
+    }
+
+    private async void LookupLoadSelected()
+    {
+        if (Lookup.SelectedInvoice != null)
+            await LoadInvoice(Lookup.SelectedInvoice.Id);
     }
 }
