@@ -8,6 +8,7 @@ using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
 using Wrecept.Wpf.Resources;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -110,12 +111,23 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 
     partial void OnIsArchivedChanged(bool value) => OnPropertyChanged(nameof(IsEditable));
 
+    [ObservableProperty]
+    private decimal netTotal;
+
+    [ObservableProperty]
+    private decimal vatTotal;
+
+    [ObservableProperty]
+    private decimal grossTotal;
+
     private readonly IPaymentMethodService _paymentMethods;
     private readonly ITaxRateService _taxRates;
     private readonly ISupplierService _suppliers;
     private readonly IProductService _productsService;
     private readonly IUnitService _unitsService;
     private readonly IInvoiceService _invoiceService;
+    private readonly ILogService _log;
+    private readonly INotificationService _notifications;
 
     [ObservableProperty]
     private int invoiceId;
@@ -150,6 +162,8 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         IProductService products,
         IUnitService units,
         IInvoiceService invoiceService,
+        ILogService logService,
+        INotificationService notificationService,
         InvoiceLookupViewModel lookup)
     {
         _paymentMethods = paymentMethods;
@@ -158,6 +172,8 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         _productsService = products;
         _unitsService = units;
         _invoiceService = invoiceService;
+        _log = logService;
+        _notifications = notificationService;
         Lookup = lookup;
         Lookup.PropertyChanged += (_, e) =>
         {
@@ -325,6 +341,7 @@ private void UpdateSupplierId(string name)
             };
             Items.Add(row);
         }
+        RecalculateTotals();
     }
 
     public void EditLineFromSelection(InvoiceItemRowViewModel selected)
@@ -422,7 +439,16 @@ private void UpdateSupplierId(string name)
             UnitPrice = edit.UnitPrice
         };
 
-        await _invoiceService.AddItemAsync(item);
+        try
+        {
+            await _invoiceService.AddItemAsync(item);
+        }
+        catch (Exception ex)
+        {
+            await _log.LogError("AddLineItemAsync", ex);
+            _notifications.ShowError("A sor mentése nem sikerült: " + ex.Message);
+            return;
+        }
 
         var row = new InvoiceItemRowViewModel(this)
         {
@@ -501,6 +527,30 @@ private void UpdateSupplierId(string name)
 
     private void RecalculateTotals()
     {
-        // Future implementation will update totals
+        decimal net = 0;
+        decimal vat = 0;
+        decimal gross = 0;
+
+        foreach (var row in Items.Skip(1))
+        {
+            var tax = TaxRates.FirstOrDefault(t => t.Id == row.TaxRateId);
+            if (tax is null) continue;
+
+            decimal netUnit = IsGross
+                ? row.UnitPrice / (1 + tax.Percentage / 100m)
+                : row.UnitPrice;
+
+            decimal netAmount = row.Quantity * netUnit;
+            decimal vatAmount = netAmount * (tax.Percentage / 100m);
+            decimal grossAmount = netAmount + vatAmount;
+
+            net += netAmount;
+            vat += vatAmount;
+            gross += grossAmount;
+        }
+
+        NetTotal = net;
+        VatTotal = vat;
+        GrossTotal = gross;
     }
 }

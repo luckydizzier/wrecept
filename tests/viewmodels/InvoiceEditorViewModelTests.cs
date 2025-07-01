@@ -47,6 +47,9 @@ public class InvoiceEditorViewModelTests
         public Task<Invoice?> GetAsync(int id, System.Threading.CancellationToken ct = default) => Task.FromResult<Invoice?>(null);
         public Task<List<Invoice>> GetRecentAsync(int count, System.Threading.CancellationToken ct = default) => Task.FromResult(new List<Invoice>(Invoices));
 
+        public InvoiceCalculationResult RecalculateTotals(Invoice invoice)
+            => new InvoiceCalculator().Calculate(invoice);
+
         public int UpdatedId;
         public bool Archived;
     }
@@ -89,6 +92,22 @@ public class InvoiceEditorViewModelTests
         public Task UpdateAsync(Unit unit, System.Threading.CancellationToken ct = default) => Task.CompletedTask;
     }
 
+    private class DummyLogService : ILogService
+    {
+        public Exception? Logged;
+        public Task LogError(string message, Exception ex)
+        {
+            Logged = ex;
+            return Task.CompletedTask;
+        }
+    }
+
+    private class DummyNotificationService : INotificationService
+    {
+        public string? LastError;
+        public void ShowError(string message) => LastError = message;
+    }
+
     [Fact]
     public async Task InlinePrompt_CreatesInvoice()
     {
@@ -112,8 +131,10 @@ public class InvoiceEditorViewModelTests
         var tax = new DummyService<object>();
         var supplier = new DummyService<object>();
         var unit = new DummyService<object>();
+        var log = new DummyLogService();
+        var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, invoiceSvc, lookup);
+        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, invoiceSvc, log, notify, lookup);
 
         var row = vm.Items[0];
         row.Product = "Test";
@@ -133,8 +154,10 @@ public class InvoiceEditorViewModelTests
         var productSvc = new FakeProductService();
         productSvc.Products.Add(new Product { Id = 1, Name = "Test", TaxRateId = Guid.NewGuid() });
         var dummy = new DummyService<object>();
+        var log = new DummyLogService();
+        var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, lookup)
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, lookup)
         {
             IsArchived = true
         };
@@ -158,8 +181,10 @@ public class InvoiceEditorViewModelTests
         var invoiceSvc = new FakeInvoiceService();
         var productSvc = new FakeProductService();
         var dummy = new DummyService<object>();
+        var log = new DummyLogService();
+        var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, lookup);
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, lookup);
 
         var row = vm.Items[0];
         var creator = new ProductCreatorViewModel(vm, row, productSvc)
@@ -181,8 +206,10 @@ public class InvoiceEditorViewModelTests
         var invoiceSvc = new FakeInvoiceService();
         var productSvc = new FakeProductService();
         var dummy = new DummyService<object>();
+        var log = new DummyLogService();
+        var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, lookup)
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, lookup)
         {
             IsNew = false,
             InvoiceId = 1
@@ -202,5 +229,37 @@ public class InvoiceEditorViewModelTests
 
         Assert.Empty(invoiceSvc.Items);
     }
-}
 
+    [Fact]
+    public async Task Totals_Recalculated_After_AddLine()
+    {
+        var invoiceSvc = new FakeInvoiceService();
+        var productSvc = new FakeProductService();
+        var taxId = Guid.NewGuid();
+        productSvc.Products.Add(new Product { Id = 1, Name = "Test", TaxRateId = taxId });
+        var dummy = new DummyService<object>();
+        var log = new DummyLogService();
+        var notify = new DummyNotificationService();
+        var lookup = new InvoiceLookupViewModel(invoiceSvc);
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, lookup)
+        {
+            IsNew = false,
+            InvoiceId = 1,
+            IsGross = false
+        };
+        vm.TaxRates.Add(new TaxRate { Id = taxId, Percentage = 27 });
+
+        var row = vm.Items[0];
+        row.Product = "Test";
+        row.Quantity = 2;
+        row.UnitPrice = 100;
+        row.TaxRateId = taxId;
+
+        await vm.AddLineItemAsync();
+
+        Assert.Equal(200, vm.NetTotal);
+        Assert.Equal(54, vm.VatTotal);
+        Assert.Equal(254, vm.GrossTotal);
+    }
+
+}

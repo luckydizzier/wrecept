@@ -9,6 +9,7 @@ using Wrecept.Storage;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Views;
 using Wrecept.Wpf.Views.Controls;
+using Wrecept.Wpf.Services;
 using CommunityToolkit.Mvvm.Input;
 using Wrecept.Core.Utilities;
 using Wrecept.Storage.Data;
@@ -51,6 +52,7 @@ public partial class App : Application
         services.AddTransient<AboutViewModel>();
         services.AddTransient<PlaceholderViewModel>();
         services.AddSingleton<StatusBarViewModel>();
+        services.AddSingleton<INotificationService, NotificationService>();
         services.AddTransient<ProgressViewModel>();
         services.AddTransient<StartupWindow>();
         services.AddTransient<StartupOrchestrator>();

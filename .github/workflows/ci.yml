@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore
+        run: dotnet restore Wrecept.sln
+      - name: Build
+        run: dotnet build Wrecept.sln --no-restore
+      - name: Test
+        run: |
+          dotnet test Wrecept.Core.Tests/Wrecept.Core.Tests.csproj --no-build
+          dotnet test tests/Wrecept.Tests/Wrecept.Tests.csproj --no-build
