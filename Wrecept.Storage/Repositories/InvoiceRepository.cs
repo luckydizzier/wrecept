@@ -75,8 +75,8 @@ public class InvoiceRepository : IInvoiceRepository
     {
         return await _db.InvoiceItems
             .Include(i => i.Invoice)
-            .Where(i => i.Invoice.SupplierId == supplierId && i.ProductId == productId)
-            .OrderByDescending(i => i.Invoice.Date)
+            .Where(i => i.Invoice!.SupplierId == supplierId && i.ProductId == productId)
+            .OrderByDescending(i => i.Invoice!.Date)
             .Select(i => new LastUsageData
             {
                 Quantity = i.Quantity,
