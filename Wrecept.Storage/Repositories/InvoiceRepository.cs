@@ -21,7 +21,10 @@ public class InvoiceRepository : IInvoiceRepository
         return invoice.Id;
     }
 
-    public async Task<int> AddItemAsync(InvoiceItem item, CancellationToken ct = default)
+    async Task<int> IInvoiceRepository.AddItemAsync(InvoiceItem item, CancellationToken ct)
+        => await AddItemInternalAsync(item, ct);
+
+    private async Task<int> AddItemInternalAsync(InvoiceItem item, CancellationToken ct = default)
     {
         _db.InvoiceItems.Add(item);
         await _db.SaveChangesAsync(ct);
