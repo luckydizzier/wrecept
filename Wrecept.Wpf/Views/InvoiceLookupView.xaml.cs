@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Wpf.ViewModels;
+using Wrecept.Wpf;
 
 namespace Wrecept.Wpf.Views;
 
@@ -28,15 +29,25 @@ public partial class InvoiceLookupView : UserControl
 
     private void OnKeyDown(object sender, KeyEventArgs e)
     {
-        if (DataContext is InvoiceLookupViewModel vm && e.Key == Key.Up && InvoiceList.SelectedIndex == 0)
+        if (DataContext is InvoiceLookupViewModel vm)
         {
-            if (vm.InlinePrompt is null)
+            if (e.Key == Key.Up && InvoiceList.SelectedIndex == 0)
             {
-                var number = DateTime.Now.ToString("yyyyMMddHHmmss");
-                vm.InlinePrompt = new InvoiceCreatePromptViewModel(vm, number);
+                if (vm.InlinePrompt is null)
+                {
+                    var number = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    vm.InlinePrompt = new InvoiceCreatePromptViewModel(vm, number);
+                }
+                e.Handled = true;
+                return;
             }
-            e.Handled = true;
-            return;
+            if (e.Key == Key.Enter)
+            {
+                if (this.FindAncestor<InvoiceEditorView>()?.DataContext is InvoiceEditorViewModel parent)
+                    parent.OpenSelectedInvoiceCommand.Execute(null);
+                e.Handled = true;
+                return;
+            }
         }
         NavigationHelper.Handle(e);
     }

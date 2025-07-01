@@ -1,11 +1,11 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using Wrecept.Core.Models;
-using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
 using Wrecept.Wpf.Resources;
 using Wrecept.Core.Services;
@@ -70,6 +70,21 @@ public partial class InvoiceItemRowViewModel : ObservableObject
     private bool isAutofilled;
 }
 
+public partial class VatSummaryRowViewModel : ObservableObject
+{
+    [ObservableProperty]
+    private string rate = string.Empty;
+
+    [ObservableProperty]
+    private decimal net;
+
+    [ObservableProperty]
+    private decimal vat;
+
+    [ObservableProperty]
+    private decimal gross;
+}
+
 public partial class InvoiceEditorViewModel : ObservableObject
 {
     public ObservableCollection<InvoiceItemRowViewModel> Items { get; }
@@ -119,6 +134,11 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 
     [ObservableProperty]
     private decimal grossTotal;
+
+    public ObservableCollection<VatSummaryRowViewModel> VatSummaries { get; } = new();
+
+    [ObservableProperty]
+    private string amountInWords = string.Empty;
 
     private readonly IPaymentMethodService _paymentMethods;
     private readonly ITaxRateService _taxRates;
@@ -175,11 +195,6 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         _log = logService;
         _notifications = notificationService;
         Lookup = lookup;
-        Lookup.PropertyChanged += (_, e) =>
-        {
-            if (e.PropertyName == nameof(Lookup.SelectedInvoice))
-                LookupLoadSelected();
-        };
         Items = new ObservableCollection<InvoiceItemRowViewModel>(
             Enumerable.Range(1, 3).Select(i => new InvoiceItemRowViewModel(this)
             {
@@ -303,6 +318,13 @@ private void UpdateSupplierId(string name)
     private void ShowPaymentMethodCreator()
     {
         InlineCreator = new PaymentMethodCreatorViewModel(this, _paymentMethods);
+    }
+
+    [RelayCommand]
+    internal async Task OpenSelectedInvoiceAsync()
+    {
+        if (Lookup.SelectedInvoice != null)
+            await LoadInvoice(Lookup.SelectedInvoice.Id);
     }
 
     public async Task LoadInvoice(int id)
@@ -530,6 +552,8 @@ private void UpdateSupplierId(string name)
         decimal net = 0;
         decimal vat = 0;
         decimal gross = 0;
+        VatSummaries.Clear();
+        var byTax = new Dictionary<Guid, InvoiceTotals>();
 
         foreach (var row in Items.Skip(1))
         {
@@ -547,10 +571,31 @@ private void UpdateSupplierId(string name)
             net += netAmount;
             vat += vatAmount;
             gross += grossAmount;
+
+            if (!byTax.TryGetValue(tax.Id, out var totals))
+            {
+                totals = new InvoiceTotals();
+                byTax[tax.Id] = totals;
+            }
+            totals.Net += netAmount;
+            totals.Tax += vatAmount;
+            totals.Gross += grossAmount;
         }
 
         NetTotal = net;
         VatTotal = vat;
         GrossTotal = gross;
+        foreach (var kv in byTax)
+        {
+            var name = TaxRates.FirstOrDefault(t => t.Id == kv.Key)?.Name ?? string.Empty;
+            VatSummaries.Add(new VatSummaryRowViewModel
+            {
+                Rate = name,
+                Net = kv.Value.Net,
+                Vat = kv.Value.Tax,
+                Gross = kv.Value.Gross
+            });
+        }
+        AmountInWords = NumberToWordsConverter.Convert((long)GrossTotal) + " Ft";
     }
 }
