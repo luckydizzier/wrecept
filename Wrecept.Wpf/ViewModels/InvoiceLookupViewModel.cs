@@ -1,5 +1,4 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System;
 using System.Threading.Tasks;
@@ -19,17 +18,15 @@ public partial class InvoiceLookupItem : ObservableObject
 public partial class InvoiceLookupViewModel : ObservableObject
 {
     private readonly IInvoiceService _invoices;
-    private readonly InvoiceEditorViewModel _editor;
 
     public ObservableCollection<InvoiceLookupItem> Invoices { get; } = new();
 
     [ObservableProperty]
     private InvoiceLookupItem? selectedInvoice;
 
-    public InvoiceLookupViewModel(IInvoiceService invoices, InvoiceEditorViewModel editor)
+    public InvoiceLookupViewModel(IInvoiceService invoices)
     {
         _invoices = invoices;
-        _editor = editor;
     }
 
     public async Task LoadAsync()
@@ -48,12 +45,4 @@ public partial class InvoiceLookupViewModel : ObservableObject
         }
     }
 
-    [RelayCommand]
-    private void LoadSelected()
-    {
-        if (SelectedInvoice != null)
-        {
-            _editor.LoadInvoice(SelectedInvoice.Id);
-        }
-    }
 }
