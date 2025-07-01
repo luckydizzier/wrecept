@@ -52,7 +52,7 @@ public partial class App : Application
         services.AddTransient<AboutViewModel>();
         services.AddTransient<PlaceholderViewModel>();
         services.AddSingleton<StatusBarViewModel>();
-        services.AddSingleton<INotificationService, NotificationService>();
+        services.AddSingleton<INotificationService, MessageBoxNotificationService>();
         services.AddTransient<ProgressViewModel>();
         services.AddTransient<StartupWindow>();
         services.AddTransient<StartupOrchestrator>();
