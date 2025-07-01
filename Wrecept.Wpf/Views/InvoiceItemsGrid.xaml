@@ -86,7 +86,7 @@
                                     CellTemplate="{StaticResource ProductDisplayTemplate}"
                                     CellEditingTemplate="{StaticResource ProductEditTemplate}"
                                     CellStyle="{StaticResource EditableCellStyle}" />
-            <DataGridTemplateColumn Header="Menny." Width="80">
+            <DataGridTemplateColumn Header="Menny." Width="80"
                                     CellTemplate="{StaticResource QuantityDisplayTemplate}"
                                     CellEditingTemplate="{StaticResource QuantityEditTemplate}"
                                     CellStyle="{StaticResource EditableCellStyle}" />
