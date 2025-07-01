@@ -27,6 +27,7 @@ public partial class App : Application
         var serviceCollection = new ServiceCollection();
         ConfigureServices(serviceCollection);
         Services = serviceCollection.BuildServiceProvider();
+        ThemeManager.ApplyDarkTheme(false);
     }
 
     private static void ConfigureServices(IServiceCollection services)

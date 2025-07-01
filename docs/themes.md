@@ -9,6 +9,8 @@ date: "2025-06-27"
 
 A Retro UI hangs on warm yellows and oranges reminiscent of classic terminals. The XAML resource dictionary defines global styles for common controls and ensures consistent keyboard focus cues. The main colors are `#FFE187`, `#FFD700`, and `#FFA726` against darker text.
 
+2025 júliusától a `RetroTheme.xaml` két változatban érhető el: világos és sötét. A váltást a `ThemeManager.ApplyDarkTheme(bool)` hívással lehet vezérelni, ami a megfelelő `ResourceDictionary` betöltését végzi.
+
 - **StageBackground:** Warm yellow base for all windows and dialogs.
 - **HoverBrush:** `#F5A623` on mouse-over states.
 - **AccentBrush:** Orange used for pressed actions.

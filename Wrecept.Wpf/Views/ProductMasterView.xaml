@@ -19,19 +19,9 @@
                   AutoGenerateColumns="False"
                   RowDetailsVisibilityMode="{Binding IsEditing, Converter={StaticResource BooleanToRowDetailsConverter}}"
                   RowDetailsVisibilityChanged="Grid_RowDetailsVisibilityChanged"
+                  Style="{StaticResource RetroDataGridStyle}"
+                  RowStyle="{StaticResource RetroDataGridRowStyle}"
                   Margin="4">
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="#1A1A1A" />
-                    <Setter Property="Foreground" Value="White" />
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#FFD700" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Név" Binding="{Binding Name}" Width="*" />
                 <DataGridTextColumn Header="Nettó" Binding="{Binding Net}" Width="80" />
