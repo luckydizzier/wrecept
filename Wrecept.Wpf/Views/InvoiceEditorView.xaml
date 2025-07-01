@@ -32,6 +32,15 @@
         <DataTemplate DataType="{x:Type vm:ArchivePromptViewModel}">
             <prompt:ArchivePromptView/>
         </DataTemplate>
+        <Style x:Key="GoldFocusVisual" TargetType="Control">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Stroke="#FFD700" StrokeThickness="1" StrokeDashArray="2" Margin="2" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -42,42 +51,50 @@
         <view:InvoiceLookupView x:Name="LookupView" DataContext="{Binding Lookup}" />
 
         <StackPanel Grid.Column="1" Margin="4">
-            <StackPanel>
-                <TextBlock Text="Számla" FontWeight="Bold" Margin="0,0,0,6" />
-
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                    <TextBlock Text="Szállító" Width="70" />
-                    <c:EditLookup Width="200"
+            <GroupBox Header="Számlafejléc" Margin="0,0,0,6">
+                <Grid Margin="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Szállító" VerticalAlignment="Center" />
+                    <c:EditLookup Grid.Row="0" Grid.Column="1" Width="200"
                                   ItemsSource="{Binding Suppliers}"
                                   DisplayMemberPath="Name"
                                   SelectedValuePath="Id"
                                   SelectedValue="{Binding SupplierId}"
                                   CreateCommand="{Binding ShowSupplierCreatorCommand}"
                                   IsEnabled="{Binding IsEditable}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                    <TextBlock Text="Dátum" Width="70" />
-                    <DatePicker SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                    <TextBlock Text="Szám" Width="70" />
-                    <TextBox Width="120" Text="{Binding Number}" IsEnabled="{Binding IsNew}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                    <TextBlock Text="Fiz. mód" Width="70" />
-                    <c:EditLookup Width="200"
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Dátum" VerticalAlignment="Center" />
+                    <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Szám" VerticalAlignment="Center" />
+                    <TextBox Grid.Row="2" Grid.Column="1" Width="120" Text="{Binding Number}" IsEnabled="{Binding IsNew}" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Fiz. mód" VerticalAlignment="Center" />
+                    <c:EditLookup Grid.Row="3" Grid.Column="1" Width="200"
                                   ItemsSource="{Binding PaymentMethods}"
                                   DisplayMemberPath="Name"
                                   SelectedValuePath="Id"
                                   SelectedValue="{Binding PaymentMethodId}"
                                   CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
                                   IsEnabled="{Binding IsEditable}" />
-                </StackPanel>
-                <CheckBox Content="Bruttó ár" IsChecked="{Binding IsGross}" Margin="0,0,0,4" IsEnabled="{Binding IsEditable}" />
-            </StackPanel>
+
+                    <CheckBox Grid.Row="4" Grid.Column="1" Content="Bruttó ár" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
+                </Grid>
+            </GroupBox>
             <Separator Margin="0,6" />
 
-            <StackPanel Orientation="Horizontal" DataContext="{Binding Items[0]}" KeyDown="OnEntryKeyDown" Margin="0,0,0,4">
+            <StackPanel Orientation="Horizontal" DataContext="{Binding Items[0]}" KeyDown="OnEntryKeyDown"
+                        Background="{DynamicResource ControlBackgroundBrush}" FontStyle="Italic" Margin="0,0,0,4">
                 <c:EditLookup x:Name="EntryProduct" Width="200"
                               ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
                               DisplayMemberPath="Name"
@@ -108,10 +125,10 @@
             <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="Italic" Margin="0,4" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6">
-                <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,4,0" />
-                <Button Content="Nyomtatás" IsEnabled="{Binding IsArchived}" Margin="0,0,4,0" />
-                <Button Content="Bezárás" Command="{Binding CloseCommand}" Margin="0,0,4,0" />
-                <Button Content="📦 Véglegesítés" Command="{Binding ShowArchivePromptCommand}">
+                <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
+                <Button Content="Nyomtatás" IsEnabled="{Binding IsArchived}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
+                <Button Content="Bezárás" Command="{Binding CloseCommand}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
+                <Button Content="📦 Véglegesítés" Command="{Binding ShowArchivePromptCommand}" FocusVisualStyle="{StaticResource GoldFocusVisual}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Style.Triggers>

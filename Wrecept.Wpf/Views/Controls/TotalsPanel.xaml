@@ -5,7 +5,7 @@
         <ItemsControl ItemsSource="{Binding VatSummaries}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock>
+                    <TextBlock Margin="0,0,0,2">
                         <Run Text="{Binding Rate}" />
                         <Run Text=" - nettó " />
                         <Run Text="{Binding Net}" />
@@ -23,6 +23,6 @@
             <TextBlock Text="Bruttó:" Width="60" Margin="20,0,0,0" />
             <TextBlock Text="{Binding GrossTotal}" Width="80" TextAlignment="Right" />
         </StackPanel>
-        <TextBlock Text="{Binding AmountInWords, StringFormat=Azaz: {0}}" Margin="0,0,0,4" />
+        <TextBlock Text="{Binding AmountInWords, StringFormat=Azaz: {0}}" FontWeight="Bold" Margin="0,2,0,4" />
     </StackPanel>
 </UserControl>
