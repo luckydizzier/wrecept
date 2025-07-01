@@ -5,6 +5,7 @@
             xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
             xmlns:view="clr-namespace:Wrecept.Wpf.Views"
             xmlns:views="clr-namespace:Wrecept.Wpf.Views.InlineCreators"
+            xmlns:prompt="clr-namespace:Wrecept.Wpf.Views.InlinePrompts"
             xmlns:c="clr-namespace:Wrecept.Wpf.Views.Controls"
             KeyDown="OnKeyDown">
     <UserControl.Resources>
@@ -25,10 +26,10 @@
             <views:PaymentMethodCreatorView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:SaveLinePromptViewModel}">
-            <views:SaveLinePromptView/>
+            <prompt:SaveLinePromptView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:ArchivePromptViewModel}">
-            <views:ArchivePromptView/>
+            <prompt:ArchivePromptView/>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
