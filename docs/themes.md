@@ -17,6 +17,10 @@ A Retro UI hangs on warm yellows and oranges reminiscent of classic terminals. T
 - **HighlightBrush:** Gold for active elements and focus rings.
 - **ControlBackgroundBrush:** Pale yellow surface for controls.
 
+Betűméretek:
+- **FontSizeNormal:** 16 px, általános szövegekhez és űrlapmezőkhöz.
+- **FontSizeLarge:** 18 px, gombokhoz, menükhöz és táblázatokhoz.
+
 DataGrid sorok fekete háttérrel és arany kiemeléssel jelennek meg a DOS-hatást erősítve. A mennyiségi vagy ár mezők címkéi piros színt kapnak, hogy gyorsabban felismerhetők legyenek.
 
 Every control style sets `FocusVisualStyle` to display a dashed border so keyboard navigation is obvious.
