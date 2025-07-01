@@ -1,0 +1,28 @@
+<UserControl x:Class="Wrecept.Wpf.Views.Controls.TotalsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <ItemsControl ItemsSource="{Binding VatSummaries}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding Rate}" />
+                        <Run Text=" - nettó " />
+                        <Run Text="{Binding Net}" />
+                        <Run Text=" ÁFA " />
+                        <Run Text="{Binding Vat}" />
+                    </TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+            <TextBlock Text="Nettó:" Width="60" />
+            <TextBlock Text="{Binding NetTotal}" Width="80" TextAlignment="Right" />
+            <TextBlock Text="ÁFA:" Width="40" Margin="20,0,0,0" />
+            <TextBlock Text="{Binding VatTotal}" Width="80" TextAlignment="Right" />
+            <TextBlock Text="Bruttó:" Width="60" Margin="20,0,0,0" />
+            <TextBlock Text="{Binding GrossTotal}" Width="80" TextAlignment="Right" />
+        </StackPanel>
+        <TextBlock Text="{Binding AmountInWords, StringFormat=Azaz: {0}}" Margin="0,0,0,4" />
+    </StackPanel>
+</UserControl>

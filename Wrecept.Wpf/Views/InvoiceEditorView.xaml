@@ -42,76 +42,90 @@
         <view:InvoiceLookupView x:Name="LookupView" DataContext="{Binding Lookup}" />
 
         <StackPanel Grid.Column="1" Margin="4">
-        <TextBlock Text="Számla" FontWeight="Bold" Margin="0,0,0,6" />
+            <StackPanel>
+                <TextBlock Text="Számla" FontWeight="Bold" Margin="0,0,0,6" />
 
-        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-            <TextBlock Text="Szállító" Width="70" />
-            <c:EditLookup Width="200"
-                          ItemsSource="{Binding Suppliers}"
-                          DisplayMemberPath="Name"
-                          SelectedValuePath="Id"
-                          SelectedValue="{Binding SupplierId}"
-                          CreateCommand="{Binding ShowSupplierCreatorCommand}"
-                          IsEnabled="{Binding IsEditable}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-            <TextBlock Text="Dátum" Width="70" />
-            <DatePicker SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-            <TextBlock Text="Szám" Width="70" />
-            <TextBox Width="120" Text="{Binding Number}" IsEnabled="{Binding IsNew}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-            <TextBlock Text="Fiz. mód" Width="70" />
-            <c:EditLookup Width="200"
-                          ItemsSource="{Binding PaymentMethods}"
-                          DisplayMemberPath="Name"
-                          SelectedValuePath="Id"
-                          SelectedValue="{Binding PaymentMethodId}"
-                          CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
-                          IsEnabled="{Binding IsEditable}" />
-        </StackPanel>
-        <CheckBox Content="Bruttó ár" IsChecked="{Binding IsGross}" Margin="0,0,0,4" IsEnabled="{Binding IsEditable}" />
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="Szállító" Width="70" />
+                    <c:EditLookup Width="200"
+                                  ItemsSource="{Binding Suppliers}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValuePath="Id"
+                                  SelectedValue="{Binding SupplierId}"
+                                  CreateCommand="{Binding ShowSupplierCreatorCommand}"
+                                  IsEnabled="{Binding IsEditable}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="Dátum" Width="70" />
+                    <DatePicker SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="Szám" Width="70" />
+                    <TextBox Width="120" Text="{Binding Number}" IsEnabled="{Binding IsNew}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="Fiz. mód" Width="70" />
+                    <c:EditLookup Width="200"
+                                  ItemsSource="{Binding PaymentMethods}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValuePath="Id"
+                                  SelectedValue="{Binding PaymentMethodId}"
+                                  CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
+                                  IsEnabled="{Binding IsEditable}" />
+                </StackPanel>
+                <CheckBox Content="Bruttó ár" IsChecked="{Binding IsGross}" Margin="0,0,0,4" IsEnabled="{Binding IsEditable}" />
+            </StackPanel>
+            <Separator Margin="0,6" />
 
-        <Button Content="📦 Véglegesítés" Command="{Binding ShowArchivePromptCommand}">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsArchived}" Value="True">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+            <StackPanel Orientation="Horizontal" DataContext="{Binding Items[0]}" KeyDown="OnEntryKeyDown" Margin="0,0,0,4">
+                <c:EditLookup x:Name="EntryProduct" Width="200"
+                              ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Name"
+                              SelectedValue="{Binding Product, Mode=TwoWay}"/>
+                <TextBox x:Name="EntryQuantity" Width="60" Margin="4,0" Text="{Binding Quantity, Mode=TwoWay}"/>
+                <c:EditLookup x:Name="EntryUnit" Width="80"
+                              ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Id"
+                              SelectedValue="{Binding UnitId, Mode=TwoWay}"/>
+                <TextBox x:Name="EntryPrice" Width="80" Margin="4,0" Text="{Binding UnitPrice, Mode=TwoWay}"/>
+                <c:EditLookup x:Name="EntryTax" Width="100"
+                              ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Id"
+                              SelectedValue="{Binding TaxRateId, Mode=TwoWay}"/>
+            </StackPanel>
 
-        <view:InvoiceItemsGrid x:Name="ItemsGrid" />
-        <ItemsControl ItemsSource="{Binding VatSummaries}" Margin="0,4,0,0">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock>
-                        <Run Text="{Binding Rate}" />
-                        <Run Text=" - nettó " />
-                        <Run Text="{Binding Net}" />
-                        <Run Text=" ÁFA " />
-                        <Run Text="{Binding Vat}" />
-                    </TextBlock>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-            <TextBlock Text="Nettó:" Width="60" />
-            <TextBlock Text="{Binding NetTotal}" Width="80" />
-            <TextBlock Text="ÁFA:" Width="40" Margin="20,0,0,0" />
-            <TextBlock Text="{Binding VatTotal}" Width="80" />
-            <TextBlock Text="Bruttó:" Width="60" Margin="20,0,0,0" />
-            <TextBlock Text="{Binding GrossTotal}" Width="80" />
+            <Separator Margin="0,6" />
+
+            <view:InvoiceItemsGrid x:Name="ItemsGrid" Margin="0,4,0,0" />
+
+            <Separator Margin="0,6" />
+
+            <c:TotalsPanel />
+
+            <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="Italic" Margin="0,4" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6">
+                <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,4,0" />
+                <Button Content="Nyomtatás" IsEnabled="{Binding IsArchived}" Margin="0,0,4,0" />
+                <Button Content="Bezárás" Command="{Binding CloseCommand}" Margin="0,0,4,0" />
+                <Button Content="📦 Véglegesítés" Command="{Binding ShowArchivePromptCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsArchived}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+
+            <ContentControl Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </StackPanel>
-        <TextBlock Text="Azaz: {Binding AmountInWords}" Margin="0,0,0,4" />
-        <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="Italic" Margin="0,4,0,0"/>
-        <ContentControl Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
-        <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
-    </StackPanel>
     </Grid>
 </UserControl>

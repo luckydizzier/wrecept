@@ -7,30 +7,25 @@
         <local:QuantityToStyleConverter x:Key="QuantityToStyleConverter" />
         <local:NegativeValueForegroundConverter x:Key="NegativeForegroundConverter" />
         <local:IsReadOnlyBindingConverter x:Key="IsReadOnlyConverter" />
+        <local:InvoiceLineTotalsConverter x:Key="NetConverter" Mode="Net" />
+        <local:InvoiceLineTotalsConverter x:Key="VatConverter" Mode="Vat" />
+        <local:InvoiceLineTotalsConverter x:Key="GrossConverter" Mode="Gross" />
     </UserControl.Resources>
     <DataGrid x:Name="Grid" ItemsSource="{Binding Items}" AutoGenerateColumns="False"
-             IsReadOnly="{Binding IsArchived, Converter={StaticResource IsReadOnlyConverter}}"
+             IsReadOnly="True"
              KeyDown="OnKeyDown" RowDetailsVisibilityMode="Collapsed">
         <DataGrid.RowStyle>
             <Style TargetType="DataGridRow">
                 <Setter Property="Background" Value="{Binding Quantity, Converter={StaticResource QuantityToStyleConverter}}" />
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsEditable}" Value="True">
-                        <Setter Property="BorderBrush" Value="Blue" />
-                        <Setter Property="BorderThickness" Value="1" />
-                    </DataTrigger>
                     <DataTrigger Binding="{Binding HasError}" Value="True">
                         <Setter Property="BorderBrush" Value="Red" />
                         <Setter Property="BorderThickness" Value="2" />
                         <Setter Property="ToolTip" Value="{Binding ErrorMessage}" />
                     </DataTrigger>
-                    <MultiDataTrigger>
-                        <MultiDataTrigger.Conditions>
-                            <Condition Binding="{Binding IsFirstRow}" Value="True" />
-                            <Condition Binding="{Binding DataContext.IsInlineCreatorVisible, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True" />
-                        </MultiDataTrigger.Conditions>
-                        <Setter Property="DetailsVisibility" Value="Visible" />
-                    </MultiDataTrigger>
+                    <DataTrigger Binding="{Binding IsFirstRow}" Value="True">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
                 </Style.Triggers>
             </Style>
         </DataGrid.RowStyle>
@@ -156,6 +151,39 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn Header="Csop." Binding="{Binding ProductGroup}" Width="100" IsReadOnly="True" />
+            <DataGridTextColumn Header="Nettó" Width="90" IsReadOnly="True">
+                <DataGridTextColumn.Binding>
+                    <MultiBinding Converter="{StaticResource NetConverter}" StringFormat="F2">
+                        <Binding Path="Quantity" />
+                        <Binding Path="UnitPrice" />
+                        <Binding Path="TaxRateId" />
+                        <Binding Path="DataContext.IsGross" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                        <Binding Path="DataContext.TaxRates" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                    </MultiBinding>
+                </DataGridTextColumn.Binding>
+            </DataGridTextColumn>
+            <DataGridTextColumn Header="ÁFA érték" Width="90" IsReadOnly="True">
+                <DataGridTextColumn.Binding>
+                    <MultiBinding Converter="{StaticResource VatConverter}" StringFormat="F2">
+                        <Binding Path="Quantity" />
+                        <Binding Path="UnitPrice" />
+                        <Binding Path="TaxRateId" />
+                        <Binding Path="DataContext.IsGross" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                        <Binding Path="DataContext.TaxRates" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                    </MultiBinding>
+                </DataGridTextColumn.Binding>
+            </DataGridTextColumn>
+            <DataGridTextColumn Header="Bruttó" Width="90" IsReadOnly="True">
+                <DataGridTextColumn.Binding>
+                    <MultiBinding Converter="{StaticResource GrossConverter}" StringFormat="F2">
+                        <Binding Path="Quantity" />
+                        <Binding Path="UnitPrice" />
+                        <Binding Path="TaxRateId" />
+                        <Binding Path="DataContext.IsGross" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                        <Binding Path="DataContext.TaxRates" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                    </MultiBinding>
+                </DataGridTextColumn.Binding>
+            </DataGridTextColumn>
         </DataGrid.Columns>
         <DataGrid.RowDetailsTemplate>
             <DataTemplate>
