@@ -66,52 +66,7 @@
         </StackPanel>
         <CheckBox Content="Bruttó ár" IsChecked="{Binding IsGross}" Margin="0,0,0,4" IsEnabled="{Binding IsEditable}" />
 
-        <DataGrid x:Name="ItemsGrid" ItemsSource="{Binding Items}" AutoGenerateColumns="False" Height="120" IsEnabled="{Binding IsEditable}">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Termék" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <c:EditLookup ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                          DisplayMemberPath="Name"
-                                          SelectedValuePath="Name"
-                                          SelectedValue="{Binding Product, Mode=TwoWay}"
-                                          CreateCommand="{Binding DataContext.ShowProductCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CreateCommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Csop." Binding="{Binding ProductGroup}" Width="100" IsReadOnly="True" />
-                <DataGridTemplateColumn Header="Me.e.">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <c:EditLookup ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                          DisplayMemberPath="Name"
-                                          SelectedValuePath="Id"
-                                          SelectedValue="{Binding UnitId, Mode=TwoWay}"
-                                          CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Menny." Binding="{Binding Quantity}" Width="80">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Foreground" Value="{Binding Quantity, Converter={StaticResource NegativeForegroundConverter}}" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Ár" Binding="{Binding UnitPrice}" Width="80" />
-                <DataGridTemplateColumn Header="ÁFA">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <c:EditLookup ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                          DisplayMemberPath="Name"
-                                          SelectedValuePath="Id"
-                                          SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
-                                          CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <view:InvoiceItemsGrid x:Name="ItemsGrid" />
         <ContentControl Content="{Binding InlineCreator}" Margin="0,4,0,0" />
         <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="Italic" Margin="0,4,0,0"/>
     </StackPanel>

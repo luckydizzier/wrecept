@@ -42,22 +42,6 @@ public partial class InvoiceEditorView : UserControl
             e.Handled = true;
             return;
         }
-        var dg = ItemsGrid;
-        if (e.Key == Key.Enter && dg.SelectedIndex == 0)
-        {
-            if (DataContext is InvoiceEditorViewModel vm)
-                vm.AddLineItemCommand.Execute(null);
-            e.Handled = true;
-            return;
-        }
-        if (e.Key == Key.Enter && dg.SelectedIndex > 0)
-        {
-            if (DataContext is InvoiceEditorViewModel vm && dg.SelectedItem is InvoiceItemRowViewModel row)
-                vm.EditLineFromSelection(row);
-            dg.SelectedIndex = 0;
-            e.Handled = true;
-            return;
-        }
         NavigationHelper.Handle(e);
     }
 }
