@@ -10,6 +10,7 @@
             KeyDown="OnKeyDown">
     <UserControl.Resources>
         <local:NegativeValueForegroundConverter x:Key="NegativeForegroundConverter" />
+        <local:IsReadOnlyBindingConverter x:Key="IsReadOnlyConverter" />
         <DataTemplate DataType="{x:Type vm:ProductCreatorViewModel}">
             <views:ProductCreatorView/>
         </DataTemplate>
@@ -86,6 +87,19 @@
         </Button>
 
         <view:InvoiceItemsGrid x:Name="ItemsGrid" />
+        <ItemsControl ItemsSource="{Binding VatSummaries}" Margin="0,4,0,0">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding Rate}" />
+                        <Run Text=" - nettó " />
+                        <Run Text="{Binding Net}" />
+                        <Run Text=" ÁFA " />
+                        <Run Text="{Binding Vat}" />
+                    </TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
             <TextBlock Text="Nettó:" Width="60" />
             <TextBlock Text="{Binding NetTotal}" Width="80" />
@@ -94,6 +108,7 @@
             <TextBlock Text="Bruttó:" Width="60" Margin="20,0,0,0" />
             <TextBlock Text="{Binding GrossTotal}" Width="80" />
         </StackPanel>
+        <TextBlock Text="Azaz: {Binding AmountInWords}" Margin="0,0,0,4" />
         <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="Italic" Margin="0,4,0,0"/>
         <ContentControl Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
