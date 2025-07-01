@@ -21,6 +21,13 @@ public class InvoiceRepository : IInvoiceRepository
         return invoice.Id;
     }
 
+    public async Task<int> AddItemAsync(InvoiceItem item, CancellationToken ct = default)
+    {
+        _db.InvoiceItems.Add(item);
+        await _db.SaveChangesAsync(ct);
+        return item.Id;
+    }
+
     public Task<Invoice?> GetAsync(int id, CancellationToken ct = default)
         => _db.Invoices
             .Include(i => i.Supplier)

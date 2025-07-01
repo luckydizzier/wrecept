@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 
@@ -43,6 +44,19 @@ public partial class InvoiceLookupViewModel : ObservableObject
                 Supplier = inv.Supplier?.Name ?? string.Empty
             });
         }
+    }
+
+    public async Task<int> CreateInvoiceAsync(string number)
+    {
+        var invoice = new Invoice
+        {
+            Number = number,
+            Date = DateOnly.FromDateTime(DateTime.Today)
+        };
+        var id = await _invoices.CreateHeaderAsync(invoice);
+        await LoadAsync();
+        SelectedInvoice = Invoices.FirstOrDefault(i => i.Id == id);
+        return id;
     }
 
 }

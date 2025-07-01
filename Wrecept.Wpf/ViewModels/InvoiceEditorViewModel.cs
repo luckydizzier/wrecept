@@ -103,6 +103,9 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     private readonly IInvoiceService _invoiceService;
 
     [ObservableProperty]
+    private int invoiceId;
+
+    [ObservableProperty]
     private object? inlineCreator;
 
     public InvoiceEditorViewModel(
@@ -239,6 +242,8 @@ private void UpdateSupplierId(string name)
         if (invoice == null)
             return;
 
+        InvoiceId = invoice.Id;
+
         SupplierId = invoice.SupplierId;
         Supplier = invoice.Supplier?.Name ?? string.Empty;
         InvoiceDate = invoice.Date.ToDateTime(TimeOnly.MinValue);
@@ -282,25 +287,39 @@ private void UpdateSupplierId(string name)
     }
 
     [RelayCommand]
-    private void AddLineItem()
+    private async Task AddLineItemAsync()
     {
         var edit = Items[0];
         if (string.IsNullOrWhiteSpace(edit.Product)) return;
 
+        var product = Products.FirstOrDefault(p => p.Name.Equals(edit.Product, StringComparison.OrdinalIgnoreCase));
+        if (product == null) return;
+
+        var item = new InvoiceItem
+        {
+            InvoiceId = InvoiceId,
+            ProductId = product.Id,
+            TaxRateId = edit.TaxRateId != Guid.Empty ? edit.TaxRateId : product.TaxRateId,
+            Quantity = edit.Quantity,
+            UnitPrice = edit.UnitPrice
+        };
+
+        await _invoiceService.AddItemAsync(item);
+
         var row = new InvoiceItemRowViewModel(this)
         {
-            Product = edit.Product,
+            Product = product.Name,
             Quantity = edit.Quantity,
             UnitPrice = edit.UnitPrice,
-            TaxRateId = edit.TaxRateId,
+            TaxRateId = item.TaxRateId,
             UnitId = edit.UnitId,
             UnitName = edit.UnitName,
-            TaxRateName = edit.TaxRateName,
+            TaxRateName = TaxRates.FirstOrDefault(t => t.Id == item.TaxRateId)?.Name ?? string.Empty,
             ProductGroup = edit.ProductGroup,
             IsEditable = false
         };
 
-        Items.Add(row);
+        Items.Insert(1, row);
         edit.Product = string.Empty;
         edit.Quantity = 0;
         edit.UnitPrice = 0;

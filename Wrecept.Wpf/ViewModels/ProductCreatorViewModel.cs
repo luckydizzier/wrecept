@@ -57,6 +57,7 @@ public partial class ProductCreatorViewModel : ObservableObject
         _parent.Products.Add(product);
         _row.Product = product.Name;
         _parent.InlineCreator = null;
+        _parent.AddLineItemCommand.Execute(null);
     }
 
     [RelayCommand]
