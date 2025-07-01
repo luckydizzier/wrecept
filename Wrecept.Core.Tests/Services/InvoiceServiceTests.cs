@@ -11,6 +11,7 @@ public class InvoiceServiceTests
     private sealed class FakeInvoiceRepository : IInvoiceRepository
     {
         public Task<int> AddAsync(Invoice invoice, CancellationToken ct = default) => Task.FromResult(1);
+        public Task<int> AddItemAsync(InvoiceItem item, CancellationToken ct = default) => Task.FromResult(1);
         public Task<Invoice?> GetAsync(int id, CancellationToken ct = default) => Task.FromResult<Invoice?>(null);
         public Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default) => Task.FromResult(new List<Invoice>());
     }

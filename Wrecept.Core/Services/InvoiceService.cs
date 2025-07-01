@@ -37,6 +37,28 @@ public class InvoiceService : IInvoiceService
         return true;
     }
 
+    public async Task<int> CreateHeaderAsync(Invoice invoice, CancellationToken ct = default)
+    {
+        ArgumentNullException.ThrowIfNull(invoice);
+        if (string.IsNullOrWhiteSpace(invoice.Number))
+            throw new ArgumentException("Number required", nameof(invoice));
+
+        invoice.CreatedAt = DateTime.UtcNow;
+        invoice.UpdatedAt = DateTime.UtcNow;
+        return await _invoices.AddAsync(invoice, ct);
+    }
+
+    public async Task<int> AddItemAsync(InvoiceItem item, CancellationToken ct = default)
+    {
+        ArgumentNullException.ThrowIfNull(item);
+        if (item.InvoiceId <= 0 || item.ProductId <= 0)
+            throw new ArgumentException("Invalid item");
+
+        item.CreatedAt = DateTime.UtcNow;
+        item.UpdatedAt = DateTime.UtcNow;
+        return await _invoices.AddItemAsync(item, ct);
+    }
+
     public Task<Invoice?> GetAsync(int id, CancellationToken ct = default)
         => _invoices.GetAsync(id, ct);
 

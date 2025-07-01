@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,6 +26,19 @@ public partial class InvoiceLookupView : UserControl
             await vm.LoadAsync();
     }
 
-    private void OnKeyDown(object sender, KeyEventArgs e)
-        => NavigationHelper.Handle(e);
+    private async void OnKeyDown(object sender, KeyEventArgs e)
+    {
+        if (DataContext is InvoiceLookupViewModel vm && e.Key == Key.Up && InvoiceList.SelectedIndex == 0)
+        {
+            var number = DateTime.Now.ToString("yyyyMMddHHmmss");
+            var result = MessageBox.Show($"Új számla {number}?", "Számlalétrehozás", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                await vm.CreateInvoiceAsync(number);
+            }
+            e.Handled = true;
+            return;
+        }
+        NavigationHelper.Handle(e);
+    }
 }
