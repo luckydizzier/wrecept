@@ -25,12 +25,12 @@
 
         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
             <TextBlock Text="Szállító" Width="70" />
-            <ComboBox Width="200"
-                      ItemsSource="{Binding Suppliers}"
-                      DisplayMemberPath="Name"
-                      SelectedValuePath="Id"
-                      SelectedValue="{Binding SupplierId}" />
-        </StackPanel>
+            <c:EditLookup Width="200"
+                          ItemsSource="{Binding Suppliers}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Id"
+                          SelectedValue="{Binding SupplierId}"
+                          CreateCommand="{Binding ShowSupplierCreatorCommand}" />
         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
             <TextBlock Text="Dátum" Width="70" />
             <DatePicker SelectedDate="{Binding InvoiceDate}" Width="120" />
@@ -51,7 +51,17 @@
 
         <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" Height="120">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Termék" Binding="{Binding Product}" Width="*" />
+                <DataGridTemplateColumn Header="Termék" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <c:EditLookup ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Name"
+                                          SelectedValue="{Binding Product, Mode=TwoWay}"
+                                          CreateCommand="{Binding DataContext.ShowProductCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CreateCommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Menny." Binding="{Binding Quantity}" Width="80">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
@@ -60,12 +70,17 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Ár" Binding="{Binding UnitPrice}" Width="80" />
-                <DataGridComboBoxColumn Header="ÁFA"
-                                        SelectedValueBinding="{Binding TaxRateId}"
-                                        SelectedValuePath="Id"
-                                        DisplayMemberPath="Name"
-                                        ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}" />
-            </DataGrid.Columns>
+                <DataGridTemplateColumn Header="ÁFA">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <c:EditLookup ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Id"
+                                          SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
+                                          CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
         </DataGrid>
         <ContentControl Content="{Binding InlineCreator}" Margin="0,4,0,0" />
         <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="Italic" Margin="0,4,0,0"/>
