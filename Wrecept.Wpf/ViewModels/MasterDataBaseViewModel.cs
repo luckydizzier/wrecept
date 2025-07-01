@@ -5,14 +5,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public abstract partial class MasterDataBaseViewModel<T> : ObservableObject
+public abstract partial class MasterDataBaseViewModel<T> : ObservableObject, IMasterDataViewModel
 {
     public ObservableCollection<T> Items { get; } = new();
 
     [ObservableProperty]
     private T? selectedItem;
 
-    public async Task LoadAsync()
+    public virtual async Task LoadAsync()
     {
         var items = await GetItemsAsync();
         Items.Clear();
