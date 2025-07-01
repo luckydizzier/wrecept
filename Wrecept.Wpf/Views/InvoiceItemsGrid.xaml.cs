@@ -15,6 +15,8 @@ public partial class InvoiceItemsGrid : UserControl
     {
         if (DataContext is not InvoiceEditorViewModel vm)
             return;
+        if (!vm.IsEditable)
+            return;
         if (e.Key == Key.Enter && Grid.SelectedIndex == 0)
         {
             vm.AddLineItemCommand.Execute(null);

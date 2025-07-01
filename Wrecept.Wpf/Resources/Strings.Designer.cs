@@ -24,4 +24,8 @@ internal static class Strings
     internal static string Load_Products => _rm.GetString("Load_Products") ?? string.Empty;
     internal static string Load_Units => _rm.GetString("Load_Units") ?? string.Empty;
     internal static string Load_Complete => _rm.GetString("Load_Complete") ?? string.Empty;
+    internal static string InvoiceLine_InvalidQuantity => _rm.GetString("InvoiceLine_InvalidQuantity") ?? string.Empty;
+    internal static string InvoiceLine_InvalidPrice => _rm.GetString("InvoiceLine_InvalidPrice") ?? string.Empty;
+    internal static string InvoiceLine_TaxRequired => _rm.GetString("InvoiceLine_TaxRequired") ?? string.Empty;
+    internal static string InvoiceEditor_ReadOnly => _rm.GetString("InvoiceEditor_ReadOnly") ?? string.Empty;
 }

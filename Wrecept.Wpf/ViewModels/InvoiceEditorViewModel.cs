@@ -55,6 +55,12 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     [ObservableProperty]
     private bool isEditable = true;
+
+    [ObservableProperty]
+    private bool hasError;
+
+    [ObservableProperty]
+    private string errorMessage = string.Empty;
 }
 
 public partial class InvoiceEditorViewModel : ObservableObject
@@ -279,6 +285,12 @@ private void UpdateSupplierId(string name)
 
     public void EditLineFromSelection(InvoiceItemRowViewModel selected)
     {
+        if (!IsEditable)
+        {
+            NotifyReadOnly();
+            return;
+        }
+
         if (Items.IndexOf(selected) <= 0) return;
         var edit = Items[0];
         edit.Product = selected.Product;
@@ -291,11 +303,61 @@ private void UpdateSupplierId(string name)
         edit.ProductGroup = selected.ProductGroup;
     }
 
+    private bool ValidateLineItem(InvoiceItemRowViewModel line, out string error)
+    {
+        if (line.Quantity <= 0)
+        {
+            error = Resources.Strings.InvoiceLine_InvalidQuantity;
+            return false;
+        }
+
+        if (line.UnitPrice < 0)
+        {
+            error = Resources.Strings.InvoiceLine_InvalidPrice;
+            return false;
+        }
+
+        if (line.TaxRateId == Guid.Empty)
+        {
+            error = Resources.Strings.InvoiceLine_TaxRequired;
+            return false;
+        }
+
+        error = string.Empty;
+        return true;
+    }
+
+    private void NotifyReadOnly()
+    {
+        if (Items.Count > 0)
+        {
+            var edit = Items[0];
+            edit.HasError = true;
+            edit.ErrorMessage = Resources.Strings.InvoiceEditor_ReadOnly;
+        }
+    }
+
     [RelayCommand]
     private async Task AddLineItemAsync()
     {
+        if (!IsEditable)
+        {
+            NotifyReadOnly();
+            return;
+        }
+
         var edit = Items[0];
         if (string.IsNullOrWhiteSpace(edit.Product)) return;
+
+        if (!ValidateLineItem(edit, out var error))
+        {
+            edit.HasError = true;
+            edit.ErrorMessage = error;
+            return;
+        }
+
+        edit.HasError = false;
+        edit.ErrorMessage = string.Empty;
 
         var product = Products.FirstOrDefault(p => p.Name.Equals(edit.Product, StringComparison.OrdinalIgnoreCase));
         if (product == null) return;
