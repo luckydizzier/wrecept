@@ -17,6 +17,11 @@
                         <Setter Property="BorderBrush" Value="Blue" />
                         <Setter Property="BorderThickness" Value="1" />
                     </DataTrigger>
+                    <DataTrigger Binding="{Binding HasError}" Value="True">
+                        <Setter Property="BorderBrush" Value="Red" />
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="ToolTip" Value="{Binding ErrorMessage}" />
+                    </DataTrigger>
                 </Style.Triggers>
             </Style>
         </DataGrid.RowStyle>
