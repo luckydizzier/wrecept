@@ -9,10 +9,10 @@
         <local:IsReadOnlyBindingConverter x:Key="IsReadOnlyConverter" />
 
         <Style x:Key="EditableCellStyle" TargetType="DataGridCell">
-            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="IsHitTestVisible" Value="False" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsFirstRow}" Value="True">
-                    <Setter Property="IsReadOnly" Value="False" />
+                    <Setter Property="IsHitTestVisible" Value="True" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
