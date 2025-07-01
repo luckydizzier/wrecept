@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Threading.Tasks;
 using System.Windows;
 using Wrecept.Wpf.Resources;
 
@@ -76,8 +77,8 @@ public partial class StageViewModel : ObservableObject
         _statusBar.ActiveMenu = "Főmenü";
     }
 
-    [RelayCommand]
-    private void HandleMenu(StageMenuAction action)
+[RelayCommand]
+private async Task HandleMenu(StageMenuAction action)
     {
         _statusBar.ActiveMenu = action.ToString();
         switch (action)
@@ -119,24 +120,17 @@ public partial class StageViewModel : ObservableObject
             case StageMenuAction.AfterPowerOutage:
             case StageMenuAction.ScreenSettings:
             case StageMenuAction.PrinterSettings:
+                CurrentViewModel = _placeholder;
+                _statusBar.Message = Resources.Strings.Stage_FunctionNotReady;
+                break;
             case StageMenuAction.EditUserInfo:
+                CurrentViewModel = _userInfo;
+                _statusBar.Message = Resources.Strings.Stage_UserInfoEditOpened;
+                await _userInfo.LoadAsync();
+                break;
             case StageMenuAction.UserInfo:
-                if (action == StageMenuAction.UserInfo)
-                {
-                    CurrentViewModel = _about;
-                    _statusBar.Message = Resources.Strings.Stage_AboutOpened;
-                }
-                else if (action == StageMenuAction.EditUserInfo)
-                {
-                    CurrentViewModel = _userInfo;
-                    _statusBar.Message = Resources.Strings.Stage_UserInfoEditOpened;
-                    _ = _userInfo.LoadAsync();
-                }
-                else
-                {
-                    CurrentViewModel = _placeholder;
-                    _statusBar.Message = Resources.Strings.Stage_FunctionNotReady;
-                }
+                CurrentViewModel = _about;
+                _statusBar.Message = Resources.Strings.Stage_AboutOpened;
                 break;
             case StageMenuAction.ExitApplication:
                 Application.Current.Shutdown();
