@@ -13,4 +13,6 @@ public interface IInvoiceService
     Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default);
 
     Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default);
+
+    InvoiceCalculationResult RecalculateTotals(Invoice invoice);
 }

@@ -7,6 +7,8 @@ date: "2025-06-27"
 
 # 🎛️ Wrecept
 
+[![CI](https://github.com/luckydizzier/wrecept/actions/workflows/ci.yml/badge.svg)](https://github.com/luckydizzier/wrecept/actions/workflows/ci.yml)
+
 **A retro-modern invoice recording desktop application inspired by DOS-era logistics systems.**
 
 ---
@@ -82,6 +84,16 @@ A WPF projekt `Wrecept.Wpf` néven jött létre, és az alábbi alapelemeket tar
 * A `MainWindow` betölti a `StageView` felületet
 
 Ezek garantálják, hogy a program Windows környezetben azonnal futtatható legyen.
+
+---
+
+## ✅ Running Tests
+
+A tesztek a következő paranccsal futtathatók:
+
+```bash
+dotnet test tests/Wrecept.Tests/Wrecept.Tests.csproj
+```
 
 ---
 

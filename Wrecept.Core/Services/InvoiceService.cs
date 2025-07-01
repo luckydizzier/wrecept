@@ -95,4 +95,7 @@ public class InvoiceService : IInvoiceService
 
         return _invoices.GetLastUsageDataAsync(supplierId, productId, ct);
     }
+
+    public InvoiceCalculationResult RecalculateTotals(Invoice invoice)
+        => _calculator.Calculate(invoice);
 }
