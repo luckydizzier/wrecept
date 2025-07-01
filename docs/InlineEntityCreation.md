@@ -9,6 +9,8 @@ date: "2025-06-30"
 
 Az InvoiceEditor nézetben lehetőség nyílik a hiányzó törzsadatok azonnali felvételére. Ha a felhasználó olyan terméket, szállítót, ÁFA-kulcsot vagy mértékegységet ír be, amely nem található az adatbázisban, a program egy kibomló űrlapot jelenít meg az aktuális sor alatt.
 
+Az űrlap a DataGrid `RowDetailsTemplate` elemében jelenik meg, így a fókusz a szerkesztett soron marad.
+
 ```text
 +-----------------------+
 | Termék neve nincs még |

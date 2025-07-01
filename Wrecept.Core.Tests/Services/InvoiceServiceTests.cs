@@ -12,8 +12,21 @@ public class InvoiceServiceTests
     {
         public Task<int> AddAsync(Invoice invoice, CancellationToken ct = default) => Task.FromResult(1);
         public Task<int> AddItemAsync(InvoiceItem item, CancellationToken ct = default) => Task.FromResult(1);
+        public Task UpdateHeaderAsync(int id, DateOnly date, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
+        {
+            UpdatedId = id;
+            return Task.CompletedTask;
+        }
+        public Task SetArchivedAsync(int id, bool isArchived, CancellationToken ct = default)
+        {
+            Archived = isArchived;
+            return Task.CompletedTask;
+        }
         public Task<Invoice?> GetAsync(int id, CancellationToken ct = default) => Task.FromResult<Invoice?>(null);
         public Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default) => Task.FromResult(new List<Invoice>());
+
+        public int UpdatedId;
+        public bool Archived;
     }
 
     [Fact]
@@ -35,7 +48,13 @@ public class InvoiceServiceTests
         var repo = new FakeInvoiceRepository();
         var service = new InvoiceService(repo, new InvoiceCalculator());
         var invoice = new Invoice { Number = "INV1", SupplierId = 1 };
-        invoice.Items.Add(new InvoiceItem { ProductId = 1, Quantity = -5, UnitPrice = 10 });
+        invoice.Items.Add(new InvoiceItem
+        {
+            ProductId = 1,
+            Quantity = -5,
+            UnitPrice = 10,
+            TaxRate = new TaxRate { Id = Guid.NewGuid(), Percentage = 27 }
+        });
 
         var result = await service.CreateAsync(invoice);
 
@@ -51,5 +70,26 @@ public class InvoiceServiceTests
         var list = await service.GetRecentAsync(5);
 
         Assert.NotNull(list);
+    }
+
+    [Fact]
+    public async Task UpdateInvoiceHeaderAsync_Throws_WhenMissingFields()
+    {
+        var repo = new FakeInvoiceRepository();
+        var service = new InvoiceService(repo, new InvoiceCalculator());
+
+        await Assert.ThrowsAsync<ArgumentException>(() =>
+            service.UpdateInvoiceHeaderAsync(0, DateOnly.FromDateTime(DateTime.Today), 1, Guid.NewGuid(), true));
+    }
+
+    [Fact]
+    public async Task ArchiveAsync_SetsFlag()
+    {
+        var repo = new FakeInvoiceRepository();
+        var service = new InvoiceService(repo, new InvoiceCalculator());
+
+        await service.ArchiveAsync(5);
+
+        Assert.True(repo.Archived);
     }
 }

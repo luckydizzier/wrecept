@@ -67,7 +67,6 @@
         <CheckBox Content="Bruttó ár" IsChecked="{Binding IsGross}" Margin="0,0,0,4" IsEnabled="{Binding IsEditable}" />
 
         <view:InvoiceItemsGrid x:Name="ItemsGrid" />
-        <ContentControl Content="{Binding InlineCreator}" Margin="0,4,0,0" />
         <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="Italic" Margin="0,4,0,0"/>
     </StackPanel>
     </Grid>

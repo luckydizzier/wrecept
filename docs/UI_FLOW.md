@@ -68,6 +68,8 @@ Cannot add/remove lines
 
 Display read-only controls
 
+Archive button visible while invoice not archived. Confirmation text: "Véglegesíti a számlát, később nem módosítható."
+
 📊 EditLookup UX-behavior
 
 All master-data fields (e.g., Supplier, Product, TaxRate, Unit) use a unified EditLookup component:

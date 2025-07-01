@@ -8,7 +8,7 @@
         <local:NegativeValueForegroundConverter x:Key="NegativeForegroundConverter" />
     </UserControl.Resources>
     <DataGrid x:Name="Grid" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsEnabled="{Binding IsEditable}"
-              KeyDown="OnKeyDown">
+              KeyDown="OnKeyDown" RowDetailsVisibilityMode="Collapsed">
         <DataGrid.RowStyle>
             <Style TargetType="DataGridRow">
                 <Setter Property="Background" Value="{Binding Quantity, Converter={StaticResource QuantityToStyleConverter}}" />
@@ -22,6 +22,13 @@
                         <Setter Property="BorderThickness" Value="2" />
                         <Setter Property="ToolTip" Value="{Binding ErrorMessage}" />
                     </DataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding IsFirstRow}" Value="True" />
+                            <Condition Binding="{Binding DataContext.IsInlineCreatorVisible, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True" />
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="DetailsVisibility" Value="Visible" />
+                    </MultiDataTrigger>
                 </Style.Triggers>
             </Style>
         </DataGrid.RowStyle>
@@ -136,5 +143,10 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
         </DataGrid.Columns>
+        <DataGrid.RowDetailsTemplate>
+            <DataTemplate>
+                <ContentControl Content="{Binding DataContext.InlineCreator, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            </DataTemplate>
+        </DataGrid.RowDetailsTemplate>
     </DataGrid>
 </UserControl>

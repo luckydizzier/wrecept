@@ -59,6 +59,27 @@ public class InvoiceService : IInvoiceService
         return await _invoices.AddItemAsync(item, ct);
     }
 
+    public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
+    {
+        if (id <= 0)
+            throw new ArgumentException("Invalid id", nameof(id));
+        if (supplierId <= 0)
+            throw new ArgumentException("Supplier required", nameof(supplierId));
+        if (paymentMethodId == Guid.Empty)
+            throw new ArgumentException("Payment method required", nameof(paymentMethodId));
+        if (date == default)
+            throw new ArgumentException("Date required", nameof(date));
+
+        return _invoices.UpdateHeaderAsync(id, date, supplierId, paymentMethodId, isGross, ct);
+    }
+
+    public Task ArchiveAsync(int id, CancellationToken ct = default)
+    {
+        if (id <= 0)
+            throw new ArgumentException("Invalid id", nameof(id));
+        return _invoices.SetArchivedAsync(id, true, ct);
+    }
+
     public Task<Invoice?> GetAsync(int id, CancellationToken ct = default)
         => _invoices.GetAsync(id, ct);
 
