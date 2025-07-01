@@ -34,8 +34,21 @@ public class InvoiceEditorViewModelTests
             Items.Add(item);
             return Task.FromResult(item.Id);
         }
+        public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, int supplierId, Guid paymentMethodId, bool isGross, System.Threading.CancellationToken ct = default)
+        {
+            UpdatedId = id;
+            return Task.CompletedTask;
+        }
+        public Task ArchiveAsync(int id, System.Threading.CancellationToken ct = default)
+        {
+            Archived = true;
+            return Task.CompletedTask;
+        }
         public Task<Invoice?> GetAsync(int id, System.Threading.CancellationToken ct = default) => Task.FromResult<Invoice?>(null);
         public Task<List<Invoice>> GetRecentAsync(int count, System.Threading.CancellationToken ct = default) => Task.FromResult(new List<Invoice>(Invoices));
+
+        public int UpdatedId;
+        public bool Archived;
     }
 
     private class FakeProductService : IProductService
@@ -160,6 +173,34 @@ public class InvoiceEditorViewModelTests
 
         Assert.Single(invoiceSvc.Items);
         Assert.Null(vm.InlineCreator);
+    }
+
+    [Fact]
+    public async Task ArchiveCommand_DisablesEditing()
+    {
+        var invoiceSvc = new FakeInvoiceService();
+        var productSvc = new FakeProductService();
+        var dummy = new DummyService<object>();
+        var lookup = new InvoiceLookupViewModel(invoiceSvc);
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, lookup)
+        {
+            IsNew = false,
+            InvoiceId = 1
+        };
+
+        await vm.ArchiveAsync();
+
+        Assert.True(vm.IsArchived);
+        Assert.False(vm.IsEditable);
+
+        var row = vm.Items[0];
+        row.Product = "Test";
+        row.Quantity = 1;
+        row.TaxRateId = Guid.NewGuid();
+
+        await vm.AddLineItemAsync();
+
+        Assert.Empty(invoiceSvc.Items);
     }
 }
 

@@ -28,6 +28,29 @@ public class InvoiceRepository : IInvoiceRepository
         return item.Id;
     }
 
+    public async Task UpdateHeaderAsync(int id, DateOnly date, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
+    {
+        var invoice = await _db.Invoices.FindAsync(new object?[] { id }, ct);
+        if (invoice == null)
+            return;
+        invoice.Date = date;
+        invoice.SupplierId = supplierId;
+        invoice.PaymentMethodId = paymentMethodId;
+        invoice.IsGross = isGross;
+        invoice.UpdatedAt = DateTime.UtcNow;
+        await _db.SaveChangesAsync(ct);
+    }
+
+    public async Task SetArchivedAsync(int id, bool isArchived, CancellationToken ct = default)
+    {
+        var invoice = await _db.Invoices.FindAsync(new object?[] { id }, ct);
+        if (invoice == null)
+            return;
+        invoice.IsArchived = isArchived;
+        invoice.UpdatedAt = DateTime.UtcNow;
+        await _db.SaveChangesAsync(ct);
+    }
+
     public Task<Invoice?> GetAsync(int id, CancellationToken ct = default)
         => _db.Invoices
             .Include(i => i.Supplier)

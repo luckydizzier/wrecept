@@ -61,6 +61,9 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     [ObservableProperty]
     private string errorMessage = string.Empty;
+
+    [ObservableProperty]
+    private bool isFirstRow;
 }
 
 public partial class InvoiceEditorViewModel : ObservableObject
@@ -117,6 +120,11 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     [ObservableProperty]
     private object? inlineCreator;
 
+    public bool IsInlineCreatorVisible => InlineCreator != null;
+
+    partial void OnInlineCreatorChanged(object? value)
+        => OnPropertyChanged(nameof(IsInlineCreatorVisible));
+
     public InvoiceEditorViewModel(
         IPaymentMethodService paymentMethods,
         ITaxRateService taxRates,
@@ -139,7 +147,11 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
                 LookupLoadSelected();
         };
         Items = new ObservableCollection<InvoiceItemRowViewModel>(
-            Enumerable.Range(1, 3).Select(i => new InvoiceItemRowViewModel(this) { IsEditable = i == 1 }));
+            Enumerable.Range(1, 3).Select(i => new InvoiceItemRowViewModel(this)
+            {
+                IsEditable = i == 1,
+                IsFirstRow = i == 1
+            }));
     }
 
     public async Task LoadAsync(IProgress<ProgressReport>? progress = null)
@@ -264,7 +276,7 @@ private void UpdateSupplierId(string name)
         IsArchived = invoice.IsArchived;
 
         Items.Clear();
-        Items.Add(new InvoiceItemRowViewModel(this) { IsEditable = true });
+        Items.Add(new InvoiceItemRowViewModel(this) { IsEditable = true, IsFirstRow = true });
         foreach (var item in invoice.Items)
         {
             var row = new InvoiceItemRowViewModel(this)
@@ -396,6 +408,42 @@ private void UpdateSupplierId(string name)
         edit.UnitName = string.Empty;
         edit.TaxRateName = string.Empty;
         edit.ProductGroup = string.Empty;
+    }
+
+    [RelayCommand]
+    private async Task SaveAsync()
+    {
+        if (SupplierId <= 0 || PaymentMethodId == Guid.Empty || InvoiceDate is null)
+            return;
+
+        var date = DateOnly.FromDateTime(InvoiceDate.Value);
+        if (IsNew)
+        {
+            var invoice = new Invoice
+            {
+                Number = Number,
+                SupplierId = SupplierId,
+                PaymentMethodId = PaymentMethodId,
+                Date = date,
+                IsGross = IsGross
+            };
+            InvoiceId = await _invoiceService.CreateHeaderAsync(invoice);
+            IsNew = false;
+        }
+        else
+        {
+            await _invoiceService.UpdateInvoiceHeaderAsync(InvoiceId, date, SupplierId, PaymentMethodId, IsGross);
+        }
+    }
+
+    [RelayCommand]
+    private async Task ArchiveAsync()
+    {
+        if (IsArchived)
+            return;
+
+        await _invoiceService.ArchiveAsync(InvoiceId);
+        IsArchived = true;
     }
 
     private async void LookupLoadSelected()

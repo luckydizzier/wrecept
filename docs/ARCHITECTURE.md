@@ -43,6 +43,7 @@ Az `DbContext` példányai a Storage rétegben élnek. A migrációk és a séma
 
 Az adatlekérést repositoryk végzik, amelyek `IInvoiceRepository`, `IProductRepository` és `ISupplierRepository` interfészeket valósítanak meg. Ezek felelősek a hibák naplózásáért és az üres listákkal való visszatérésért hiba esetén.
 Ezek fölött `InvoiceService`, `ProductService` és mostantól `SupplierService` gondoskodik a validálásról és a ViewModel réteg kiszolgálásáról.
+Az `InvoiceService` kezeli a fejléc frissítését (`UpdateInvoiceHeaderAsync`) és az archiválást.
 
 Minden hibát az `ILogService` rögzít, amelyet a Storage réteg `LogService` implementációja valósít meg. A naplók a `%AppData%/Wrecept/logs` mappában napi bontású fájlokba kerülnek.
 Az alapvető cégadatokat a `UserInfoService` kezeli. Az adatok a `%AppData%/Wrecept/wrecept.json` fájlban tárolódnak, betöltésük az alkalmazás futása közben történik.
