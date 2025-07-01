@@ -1,7 +1,7 @@
 <UserControl x:Class="Wrecept.Wpf.Views.Controls.BaseMasterView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:ClassModifier="public abstract"
+             x:ClassModifier="public"
              KeyDown="OnKeyDown">
     <UserControl.InputBindings>
         <KeyBinding Key="Enter" Command="{Binding EditSelectedCommand}" />
