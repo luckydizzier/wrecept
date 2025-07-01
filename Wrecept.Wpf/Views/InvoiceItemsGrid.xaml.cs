@@ -17,21 +17,14 @@ public partial class InvoiceItemsGrid : UserControl
             return;
         if (!vm.IsEditable)
             return;
-        if (e.Key == Key.Enter && Grid.SelectedIndex == 0)
-        {
-            vm.ShowSavePromptCommand.Execute(null);
-            e.Handled = true;
-        }
-        else if (e.Key == Key.Enter && Grid.SelectedIndex > 0 && Grid.SelectedItem is InvoiceItemRowViewModel row)
+        if (e.Key == Key.Enter && Grid.SelectedItem is InvoiceItemRowViewModel row)
         {
             vm.EditLineFromSelection(row);
-            Grid.SelectedIndex = 0;
             e.Handled = true;
         }
-        else if (e.Key == Key.Down && Grid.SelectedIndex == 0 && Grid.Items.Count > 1)
+        else
         {
-            Grid.SelectedIndex = 1;
-            e.Handled = true;
+            NavigationHelper.Handle(e);
         }
     }
 }
