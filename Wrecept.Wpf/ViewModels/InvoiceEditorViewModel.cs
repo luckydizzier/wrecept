@@ -83,6 +83,9 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     private string number = string.Empty;
 
     [ObservableProperty]
+    private bool isNew = true;
+
+    [ObservableProperty]
     private Guid paymentMethodId;
 
     [ObservableProperty]
@@ -244,6 +247,8 @@ private void UpdateSupplierId(string name)
 
         InvoiceId = invoice.Id;
 
+        IsNew = false;
+
         SupplierId = invoice.SupplierId;
         Supplier = invoice.Supplier?.Name ?? string.Empty;
         InvoiceDate = invoice.Date.ToDateTime(TimeOnly.MinValue);
@@ -320,6 +325,7 @@ private void UpdateSupplierId(string name)
         };
 
         Items.Insert(1, row);
+        RecalculateTotals();
         edit.Product = string.Empty;
         edit.Quantity = 0;
         edit.UnitPrice = 0;
@@ -334,5 +340,10 @@ private void UpdateSupplierId(string name)
     {
         if (Lookup.SelectedInvoice != null)
             await LoadInvoice(Lookup.SelectedInvoice.Id);
+    }
+
+    private void RecalculateTotals()
+    {
+        // Future implementation will update totals
     }
 }

@@ -25,6 +25,9 @@ public partial class InvoiceLookupViewModel : ObservableObject
     [ObservableProperty]
     private InvoiceLookupItem? selectedInvoice;
 
+    [ObservableProperty]
+    private object? inlinePrompt;
+
     public InvoiceLookupViewModel(IInvoiceService invoices)
     {
         _invoices = invoices;
