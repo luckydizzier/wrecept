@@ -26,15 +26,14 @@ public partial class InvoiceLookupView : UserControl
             await vm.LoadAsync();
     }
 
-    private async void OnKeyDown(object sender, KeyEventArgs e)
+    private void OnKeyDown(object sender, KeyEventArgs e)
     {
         if (DataContext is InvoiceLookupViewModel vm && e.Key == Key.Up && InvoiceList.SelectedIndex == 0)
         {
-            var number = DateTime.Now.ToString("yyyyMMddHHmmss");
-            var result = MessageBox.Show($"Új számla {number}?", "Számlalétrehozás", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
+            if (vm.InlinePrompt is null)
             {
-                await vm.CreateInvoiceAsync(number);
+                var number = DateTime.Now.ToString("yyyyMMddHHmmss");
+                vm.InlinePrompt = new InvoiceCreatePromptViewModel(vm, number);
             }
             e.Handled = true;
             return;

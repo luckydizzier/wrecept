@@ -52,7 +52,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
             <TextBlock Text="Szám" Width="70" />
-            <TextBox Width="120" Text="{Binding Number}" IsEnabled="{Binding IsEditable}" />
+            <TextBox Width="120" Text="{Binding Number}" IsEnabled="{Binding IsNew}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
             <TextBlock Text="Fiz. mód" Width="70" />
