@@ -7,15 +7,15 @@ date: "2025-06-27"
 
 # 🎨 Retro Theme Overview
 
-A Retro UI hangs on warm yellows and oranges reminiscent of classic terminals. The XAML resource dictionary defines global styles for common controls and ensures consistent keyboard focus cues. The main colors are `#FFE187`, `#FFD700`, and `#FFA726` against darker text.
+A Retro UI hangs on a 16 színű DOS-palettán. A XAML erőforrás szótár egységesíti a vezérlők megjelenését. A fő színek: háttér `#9b8b20`, mezők `#c7bb4f`, gombok `#0000aa` fehér felirattal és kiemelés `#000055`.
 
 2025 júliusától a `RetroTheme.xaml` két változatban érhető el: világos és sötét. A váltást a `ThemeManager.ApplyDarkTheme(bool)` hívással lehet vezérelni, ami a megfelelő `ResourceDictionary` betöltését végzi.
 
-- **StageBackground:** Warm yellow base for all windows and dialogs.
-- **HoverBrush:** `#F5A623` on mouse-over states.
-- **AccentBrush:** Orange used for pressed actions.
-- **HighlightBrush:** Gold for active elements and focus rings.
-- **ControlBackgroundBrush:** Pale yellow surface for controls.
+- **StageBackground:** Mustár sárga (`#9b8b20`) alap minden ablakhoz.
+- **HighlightBrush:** `#0000aa` a gombokhoz és aktív elemekhez.
+- **SelectionBrush:** `#000055` kijelölt sorokhoz.
+- **ControlBackgroundBrush:** Olívzöld (`#c7bb4f`) mezők alapja.
+- **HeaderFooterBrush:** Sötétebb sárga (`#806000`) fejléc és lábléc szín.
 
 Betűméretek:
 - **FontSizeNormal:** 16 px, általános szövegekhez és űrlapmezőkhöz.

@@ -2,12 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <!-- Light retro palette -->
-    <Color x:Key="BackgroundColor">#9D941D</Color>
+    <Color x:Key="BackgroundColor">#9b8b20</Color>
     <Color x:Key="ForegroundColor">#000000</Color>
-    <Color x:Key="HighlightColor">#0D00B0</Color>
-    <Color x:Key="SelectionColor">#C00000</Color>
+    <Color x:Key="HighlightColor">#0000aa</Color>
+    <Color x:Key="SelectionColor">#000055</Color>
+    <Color x:Key="HeaderFooterColor">#806000</Color>
 
-    <Color x:Key="StageBackgroundColor">#9D941D</Color>
+    <Color x:Key="StageBackgroundColor">#9b8b20</Color>
 
     <SolidColorBrush x:Key="StageBackground" Color="{StaticResource StageBackgroundColor}" />
 
@@ -15,7 +16,8 @@
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush x:Key="HighlightBrush" Color="{StaticResource HighlightColor}" />
     <SolidColorBrush x:Key="SelectionBrush" Color="{StaticResource SelectionColor}" />
-    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#FFE187" />
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#c7bb4f" />
+    <SolidColorBrush x:Key="HeaderFooterBrush" Color="{StaticResource HeaderFooterColor}" />
 
     <sys:Double x:Key="FontSizeNormal">16</sys:Double>
     <sys:Double x:Key="FontSizeLarge">18</sys:Double>
@@ -36,21 +38,21 @@
 
     <Style TargetType="Button">
         <Setter Property="Background" Value="{StaticResource HighlightBrush}" />
-        <Setter Property="Foreground" Value="{StaticResource ControlBackgroundBrush}" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderBrush" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="FontFamily" Value="Consolas" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
     <Style TargetType="Menu">
-        <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource HeaderFooterBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="FontFamily" Value="Consolas" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
     <Style TargetType="MenuItem">
-        <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource HeaderFooterBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="FontFamily" Value="Consolas" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
@@ -73,8 +75,8 @@
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource HighlightBrush}" />
-                <Setter Property="Foreground" Value="{StaticResource ControlBackgroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource SelectionBrush}" />
+                <Setter Property="Foreground" Value="White" />
             </Trigger>
         </Style.Triggers>
     </Style>
