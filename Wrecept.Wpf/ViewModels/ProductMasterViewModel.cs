@@ -5,6 +5,7 @@ using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using System.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 
 namespace Wrecept.Wpf.ViewModels;
 
