@@ -11,4 +11,6 @@ public interface IInvoiceService
     Task ArchiveAsync(int id, CancellationToken ct = default);
     Task<Invoice?> GetAsync(int id, CancellationToken ct = default);
     Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default);
+
+    Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default);
 }

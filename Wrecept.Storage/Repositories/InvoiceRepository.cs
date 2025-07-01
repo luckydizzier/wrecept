@@ -70,4 +70,19 @@ public class InvoiceRepository : IInvoiceRepository
             .OrderByDescending(i => i.Date)
             .Take(count)
             .ToListAsync(ct);
+
+    public async Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default)
+    {
+        return await _db.InvoiceItems
+            .Include(i => i.Invoice)
+            .Where(i => i.Invoice.SupplierId == supplierId && i.ProductId == productId)
+            .OrderByDescending(i => i.Invoice.Date)
+            .Select(i => new LastUsageData
+            {
+                Quantity = i.Quantity,
+                UnitPrice = i.UnitPrice,
+                TaxRateId = i.TaxRateId
+            })
+            .FirstOrDefaultAsync(ct);
+    }
 }

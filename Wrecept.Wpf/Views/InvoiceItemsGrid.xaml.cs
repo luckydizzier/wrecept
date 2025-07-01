@@ -19,7 +19,7 @@ public partial class InvoiceItemsGrid : UserControl
             return;
         if (e.Key == Key.Enter && Grid.SelectedIndex == 0)
         {
-            vm.AddLineItemCommand.Execute(null);
+            vm.ShowSavePromptCommand.Execute(null);
             e.Handled = true;
         }
         else if (e.Key == Key.Enter && Grid.SelectedIndex > 0 && Grid.SelectedItem is InvoiceItemRowViewModel row)

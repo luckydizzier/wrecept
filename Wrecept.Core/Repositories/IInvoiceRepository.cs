@@ -10,4 +10,6 @@ public interface IInvoiceRepository
     Task SetArchivedAsync(int id, bool isArchived, CancellationToken ct = default);
     Task<Invoice?> GetAsync(int id, CancellationToken ct = default);
     Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default);
+
+    Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default);
 }
