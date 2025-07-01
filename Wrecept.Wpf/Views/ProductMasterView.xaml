@@ -3,7 +3,8 @@
                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                               xmlns:views="clr-namespace:Wrecept.Wpf.Views"
                               xmlns:viewsControls="clr-namespace:Wrecept.Wpf.Views.Controls"
-                              xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels">
+                              xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
+                              x:TypeArguments="vm:ProductMasterViewModel">
     <viewsControls:BaseMasterView.Columns>
         <DataGridTextColumn Header="Név" Binding="{Binding Name}" Width="*" />
         <DataGridTextColumn Header="Nettó" Binding="{Binding Net}" Width="80" />
