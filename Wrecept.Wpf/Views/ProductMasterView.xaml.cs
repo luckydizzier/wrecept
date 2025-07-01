@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,4 +25,16 @@ public partial class ProductMasterView : UserControl
 
     private void OnKeyDown(object sender, KeyEventArgs e)
         => NavigationHelper.Handle(e);
+
+    private void Grid_RowDetailsVisibilityChanged(object sender, DataGridRowDetailsEventArgs e)
+    {
+        if (e.DetailsElement.FindName("NameBox") is TextBox box && e.Row.DetailsVisibility == Visibility.Visible)
+        {
+            box.Focus();
+        }
+        else if (e.Row.DetailsVisibility != Visibility.Visible)
+        {
+            Grid.Focus();
+        }
+    }
 }
