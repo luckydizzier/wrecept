@@ -8,16 +8,13 @@ using System;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public partial class ProductMasterViewModel : ObservableObject
+public partial class ProductMasterViewModel : MasterDataBaseViewModel<Product>
 {
-    public ObservableCollection<Product> Products { get; } = new();
+    public ObservableCollection<Product> Products => Items;
     public ObservableCollection<TaxRate> TaxRates { get; } = new();
 
     private readonly IProductService _service;
     private readonly ITaxRateService _taxRates;
-
-    [ObservableProperty]
-    private Product? selectedProduct;
 
     [ObservableProperty]
     private bool isEditing;
@@ -30,26 +27,26 @@ public partial class ProductMasterViewModel : ObservableObject
     {
         _service = service;
         _taxRates = taxRates;
-        EditSelectedCommand = new RelayCommand(() => IsEditing = !IsEditing, () => SelectedProduct != null);
+        EditSelectedCommand = new RelayCommand(() => IsEditing = !IsEditing, () => SelectedItem != null);
         DeleteSelectedCommand = new RelayCommand(async () =>
         {
-            if (SelectedProduct != null)
+            if (SelectedItem != null)
             {
-                SelectedProduct.IsArchived = true;
-                await _service.UpdateAsync(SelectedProduct);
+                SelectedItem.IsArchived = true;
+                await _service.UpdateAsync(SelectedItem);
                 await LoadAsync();
             }
-        }, () => SelectedProduct != null);
+        }, () => SelectedItem != null);
         CloseDetailsCommand = new RelayCommand(() => IsEditing = false);
     }
 
-    public async Task LoadAsync()
+    protected override Task<List<Product>> GetItemsAsync()
+        => _service.GetActiveAsync();
+
+    public override async Task LoadAsync()
     {
-        var items = await _service.GetActiveAsync();
+        await base.LoadAsync();
         var rates = await _taxRates.GetActiveAsync(DateTime.UtcNow);
-        Products.Clear();
-        foreach (var item in items)
-            Products.Add(item);
         TaxRates.Clear();
         foreach (var r in rates)
             TaxRates.Add(r);
