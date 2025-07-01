@@ -64,6 +64,9 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     [ObservableProperty]
     private bool isFirstRow;
+
+    [ObservableProperty]
+    private bool isAutofilled;
 }
 
 public partial class InvoiceEditorViewModel : ObservableObject
@@ -124,6 +127,21 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 
     partial void OnInlineCreatorChanged(object? value)
         => OnPropertyChanged(nameof(IsInlineCreatorVisible));
+
+    public bool IsSavePromptVisible => SavePrompt != null;
+    public bool IsArchivePromptVisible => ArchivePrompt != null;
+
+    [ObservableProperty]
+    private object? savePrompt;
+
+    [ObservableProperty]
+    private object? archivePrompt;
+
+    partial void OnSavePromptChanged(object? value)
+        => OnPropertyChanged(nameof(IsSavePromptVisible));
+
+    partial void OnArchivePromptChanged(object? value)
+        => OnPropertyChanged(nameof(IsArchivePromptVisible));
 
     public InvoiceEditorViewModel(
         IPaymentMethodService paymentMethods,
@@ -188,10 +206,10 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         progress?.Report(new ProgressReport { SubtaskPercent = 100, Message = Resources.Strings.Load_Complete });
     }
 
-    public Task CheckProductAsync(InvoiceItemRowViewModel row, string name)
+    public async Task CheckProductAsync(InvoiceItemRowViewModel row, string name)
     {
         if (string.IsNullOrWhiteSpace(name))
-            return Task.CompletedTask;
+            return;
 
         var exists = Products.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         if (exists is null)
@@ -209,9 +227,23 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
             row.ProductGroup = exists.ProductGroup?.Name ?? string.Empty;
             row.TaxRateId = exists.TaxRateId;
             row.TaxRateName = TaxRates.FirstOrDefault(t => t.Id == exists.TaxRateId)?.Name ?? string.Empty;
-        }
 
-        return Task.CompletedTask;
+            if (SupplierId > 0)
+            {
+                var usage = await _invoiceService.GetLastUsageDataAsync(SupplierId, exists.Id);
+                if (usage != null)
+                {
+                    row.Quantity = usage.Quantity;
+                    row.UnitPrice = usage.UnitPrice;
+                    row.TaxRateId = usage.TaxRateId;
+                    row.IsAutofilled = true;
+                }
+                else
+                {
+                    row.IsAutofilled = false;
+                }
+            }
+        }
     }
 private void UpdateSupplierId(string name)
 {
@@ -350,6 +382,13 @@ private void UpdateSupplierId(string name)
     }
 
     [RelayCommand]
+    private void ShowSavePrompt()
+    {
+        if (SavePrompt is null)
+            SavePrompt = new SaveLinePromptViewModel(this);
+    }
+
+    [RelayCommand]
     private async Task AddLineItemAsync()
     {
         if (!IsEditable)
@@ -408,6 +447,7 @@ private void UpdateSupplierId(string name)
         edit.UnitName = string.Empty;
         edit.TaxRateName = string.Empty;
         edit.ProductGroup = string.Empty;
+        edit.IsAutofilled = false;
     }
 
     [RelayCommand]
@@ -434,6 +474,13 @@ private void UpdateSupplierId(string name)
         {
             await _invoiceService.UpdateInvoiceHeaderAsync(InvoiceId, date, SupplierId, PaymentMethodId, IsGross);
         }
+    }
+
+    [RelayCommand]
+    private void ShowArchivePrompt()
+    {
+        if (ArchivePrompt is null)
+            ArchivePrompt = new ArchivePromptViewModel(this);
     }
 
     [RelayCommand]

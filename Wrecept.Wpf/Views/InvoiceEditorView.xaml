@@ -24,6 +24,12 @@
         <DataTemplate DataType="{x:Type vm:PaymentMethodCreatorViewModel}">
             <views:PaymentMethodCreatorView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SaveLinePromptViewModel}">
+            <views:SaveLinePromptView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ArchivePromptViewModel}">
+            <views:ArchivePromptView/>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -66,8 +72,22 @@
         </StackPanel>
         <CheckBox Content="Bruttó ár" IsChecked="{Binding IsGross}" Margin="0,0,0,4" IsEnabled="{Binding IsEditable}" />
 
+        <Button Content="📦 Véglegesítés" Command="{Binding ShowArchivePromptCommand}">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsArchived}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
         <view:InvoiceItemsGrid x:Name="ItemsGrid" />
         <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="Italic" Margin="0,4,0,0"/>
+        <ContentControl Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </StackPanel>
     </Grid>
 </UserControl>

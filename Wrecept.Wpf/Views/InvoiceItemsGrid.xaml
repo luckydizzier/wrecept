@@ -86,9 +86,9 @@
                     <DataTemplate>
                         <Grid>
                             <TextBox x:Name="Editor" Text="{Binding Quantity, Mode=TwoWay}"
-                                     Foreground="{Binding Quantity, Converter={StaticResource NegativeForegroundConverter}}"/>
+                                     Foreground="{Binding Quantity, Converter={StaticResource NegativeForegroundConverter}}" />
                             <TextBlock x:Name="Text" Text="{Binding Quantity}" VerticalAlignment="Center"
-                                       Foreground="{Binding Quantity, Converter={StaticResource NegativeForegroundConverter}}"/>
+                                       Foreground="{Binding Quantity, Converter={StaticResource NegativeForegroundConverter}}" />
                         </Grid>
                         <DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding IsEditable}" Value="False">
@@ -96,6 +96,10 @@
                             </DataTrigger>
                             <DataTrigger Binding="{Binding IsEditable}" Value="True">
                                 <Setter TargetName="Text" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsAutofilled}" Value="True">
+                                <Setter TargetName="Editor" Property="FontStyle" Value="Italic" />
+                                <Setter TargetName="Text" Property="FontStyle" Value="Italic" />
                             </DataTrigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>
@@ -114,6 +118,10 @@
                             </DataTrigger>
                             <DataTrigger Binding="{Binding IsEditable}" Value="True">
                                 <Setter TargetName="Text" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsAutofilled}" Value="True">
+                                <Setter TargetName="Editor" Property="FontStyle" Value="Italic" />
+                                <Setter TargetName="Text" Property="FontStyle" Value="Italic" />
                             </DataTrigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>
@@ -137,6 +145,10 @@
                             </DataTrigger>
                             <DataTrigger Binding="{Binding IsEditable}" Value="True">
                                 <Setter TargetName="Text" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsAutofilled}" Value="True">
+                                <Setter TargetName="Editor" Property="FontStyle" Value="Italic" />
+                                <Setter TargetName="Text" Property="FontStyle" Value="Italic" />
                             </DataTrigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>

@@ -85,4 +85,14 @@ public class InvoiceService : IInvoiceService
 
     public Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default)
         => _invoices.GetRecentAsync(count, ct);
+
+    public Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default)
+    {
+        if (supplierId <= 0)
+            throw new ArgumentException("supplierId", nameof(supplierId));
+        if (productId <= 0)
+            throw new ArgumentException("productId", nameof(productId));
+
+        return _invoices.GetLastUsageDataAsync(supplierId, productId, ct);
+    }
 }
