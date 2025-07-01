@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="..\docs\about_hu.md" Link="Resources\about_hu.md" />
+    <EmbeddedResource Include="Resources\Strings.resx" />
   </ItemGroup>
 
   <ItemGroup>

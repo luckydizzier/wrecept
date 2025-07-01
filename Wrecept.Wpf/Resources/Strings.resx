@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Stage_ProductViewOpened" xml:space="preserve">
+    <value>Termék nézet megnyitva</value>
+  </data>
+  <data name="Stage_SupplierViewOpened" xml:space="preserve">
+    <value>Szállító nézet megnyitva</value>
+  </data>
+  <data name="Stage_ProductGroupViewOpened" xml:space="preserve">
+    <value>Termékcsoport nézet megnyitva</value>
+  </data>
+  <data name="Stage_TaxRateViewOpened" xml:space="preserve">
+    <value>Adókulcs nézet megnyitva</value>
+  </data>
+  <data name="Stage_PaymentMethodViewOpened" xml:space="preserve">
+    <value>Fizetési mód nézet megnyitva</value>
+  </data>
+  <data name="Stage_UnitViewOpened" xml:space="preserve">
+    <value>Mértékegység nézet megnyitva</value>
+  </data>
+  <data name="Stage_InvoiceEditorOpened" xml:space="preserve">
+    <value>Számla szerkesztő</value>
+  </data>
+  <data name="Stage_AboutOpened" xml:space="preserve">
+    <value>Névjegy megjelenítve</value>
+  </data>
+  <data name="Stage_FunctionNotReady" xml:space="preserve">
+    <value>Funkció még nincs kész</value>
+  </data>
+  <data name="StatusBar_DefaultMessage" xml:space="preserve">
+    <value>&#x2191;/&#x2193; navigál, Enter aktivál, Esc vissza</value>
+  </data>
+  <data name="Load_PaymentMethods" xml:space="preserve">
+    <value>Fizetési módok betöltése...</value>
+  </data>
+  <data name="Load_Suppliers" xml:space="preserve">
+    <value>Szállítók betöltése...</value>
+  </data>
+  <data name="Load_TaxRates" xml:space="preserve">
+    <value>ÁFA kulcsok betöltése...</value>
+  </data>
+  <data name="Load_Products" xml:space="preserve">
+    <value>Termékek betöltése...</value>
+  </data>
+  <data name="Load_Units" xml:space="preserve">
+    <value>Mértékegységek betöltése...</value>
+  </data>
+  <data name="Load_Complete" xml:space="preserve">
+    <value>Betöltés kész.</value>
+  </data>
+</root>

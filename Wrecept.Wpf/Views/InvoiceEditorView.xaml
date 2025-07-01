@@ -20,6 +20,9 @@
         <DataTemplate DataType="{x:Type vm:UnitCreatorViewModel}">
             <views:UnitCreatorView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PaymentMethodCreatorViewModel}">
+            <views:PaymentMethodCreatorView/>
+        </DataTemplate>
     </UserControl.Resources>
     <StackPanel Margin="4">
         <TextBlock Text="Számla" FontWeight="Bold" Margin="0,0,0,6" />
@@ -31,27 +34,30 @@
                           DisplayMemberPath="Name"
                           SelectedValuePath="Id"
                           SelectedValue="{Binding SupplierId}"
-                          CreateCommand="{Binding ShowSupplierCreatorCommand}" />
+                          CreateCommand="{Binding ShowSupplierCreatorCommand}"
+                          IsEnabled="{Binding IsEditable}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
             <TextBlock Text="Dátum" Width="70" />
-            <DatePicker SelectedDate="{Binding InvoiceDate}" Width="120" />
+            <DatePicker SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
             <TextBlock Text="Szám" Width="70" />
-            <TextBox Width="120" Text="{Binding Number}" />
+            <TextBox Width="120" Text="{Binding Number}" IsEnabled="{Binding IsEditable}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
             <TextBlock Text="Fiz. mód" Width="70" />
-            <ComboBox Width="200"
-                      ItemsSource="{Binding PaymentMethods}"
-                      DisplayMemberPath="Name"
-                      SelectedValuePath="Id"
-                      SelectedValue="{Binding PaymentMethodId}" />
+            <c:EditLookup Width="200"
+                          ItemsSource="{Binding PaymentMethods}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Id"
+                          SelectedValue="{Binding PaymentMethodId}"
+                          CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
+                          IsEnabled="{Binding IsEditable}" />
         </StackPanel>
-        <CheckBox Content="Bruttó ár" IsChecked="{Binding IsGross}" Margin="0,0,0,4" />
+        <CheckBox Content="Bruttó ár" IsChecked="{Binding IsGross}" Margin="0,0,0,4" IsEnabled="{Binding IsEditable}" />
 
-        <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" Height="120">
+        <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" Height="120" IsEnabled="{Binding IsEditable}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Termék" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -61,6 +67,18 @@
                                           SelectedValuePath="Name"
                                           SelectedValue="{Binding Product, Mode=TwoWay}"
                                           CreateCommand="{Binding DataContext.ShowProductCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CreateCommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Csop." Binding="{Binding ProductGroup}" Width="100" IsReadOnly="True" />
+                <DataGridTemplateColumn Header="Me.e.">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <c:EditLookup ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Id"
+                                          SelectedValue="{Binding UnitId, Mode=TwoWay}"
+                                          CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

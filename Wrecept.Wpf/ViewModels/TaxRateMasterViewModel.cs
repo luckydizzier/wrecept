@@ -1,15 +1,14 @@
 using System;
-using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public partial class TaxRateMasterViewModel : ObservableObject
+public partial class TaxRateMasterViewModel : MasterDataBaseViewModel<TaxRate>
 {
-    public ObservableCollection<TaxRate> TaxRates { get; } = new();
+    public ObservableCollection<TaxRate> TaxRates => Items;
 
     private readonly ITaxRateService _service;
 
@@ -18,11 +17,6 @@ public partial class TaxRateMasterViewModel : ObservableObject
         _service = service;
     }
 
-    public async Task LoadAsync()
-    {
-        var items = await _service.GetActiveAsync(DateTime.UtcNow);
-        TaxRates.Clear();
-        foreach (var item in items)
-            TaxRates.Add(item);
-    }
+    protected override Task<List<TaxRate>> GetItemsAsync()
+        => _service.GetActiveAsync(DateTime.UtcNow);
 }

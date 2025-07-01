@@ -1,15 +1,13 @@
-using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public partial class PaymentMethodMasterViewModel : ObservableObject
+public partial class PaymentMethodMasterViewModel : MasterDataBaseViewModel<PaymentMethod>
 {
-    public ObservableCollection<PaymentMethod> PaymentMethods { get; } = new();
-
+    public ObservableCollection<PaymentMethod> PaymentMethods => Items;
     private readonly IPaymentMethodService _service;
 
     public PaymentMethodMasterViewModel(IPaymentMethodService service)
@@ -17,11 +15,6 @@ public partial class PaymentMethodMasterViewModel : ObservableObject
         _service = service;
     }
 
-    public async Task LoadAsync()
-    {
-        var items = await _service.GetAllAsync();
-        PaymentMethods.Clear();
-        foreach (var item in items)
-            PaymentMethods.Add(item);
-    }
+    protected override Task<List<PaymentMethod>> GetItemsAsync()
+        => _service.GetActiveAsync();
 }

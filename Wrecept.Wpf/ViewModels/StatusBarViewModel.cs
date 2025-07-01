@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Wrecept.Wpf.Resources;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -19,7 +20,7 @@ public partial class StatusBarViewModel : ObservableObject
     private string focusedElement = string.Empty;
 
     [ObservableProperty]
-    private string message = "\u2191/\u2193 navig\xE1l, Enter aktiv\xE1l, Esc vissza";
+    private string message = Resources.Strings.StatusBar_DefaultMessage;
 
     [ObservableProperty]
     private bool isNumLock;
