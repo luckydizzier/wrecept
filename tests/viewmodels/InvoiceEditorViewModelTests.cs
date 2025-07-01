@@ -106,6 +106,8 @@ public class InvoiceEditorViewModelTests
     {
         public string? LastError;
         public void ShowError(string message) => LastError = message;
+        public void ShowInfo(string message) { }
+        public bool Confirm(string message) => true;
     }
 
     [Fact]

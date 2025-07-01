@@ -8,7 +8,7 @@ using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
 using Wrecept.Wpf.Resources;
-using Wrecept.Wpf.Services;
+using Wrecept.Core.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
