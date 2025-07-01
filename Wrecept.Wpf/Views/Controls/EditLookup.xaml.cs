@@ -12,7 +12,8 @@ public partial class EditLookup : UserControl
         nameof(ItemsSource), typeof(object), typeof(EditLookup));
 
     public static readonly DependencyProperty SelectedValueProperty = DependencyProperty.Register(
-        nameof(SelectedValue), typeof(object), typeof(EditLookup), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        nameof(SelectedValue), typeof(object), typeof(EditLookup),
+        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
     public static readonly DependencyProperty SelectedValuePathProperty = DependencyProperty.Register(
         nameof(SelectedValuePath), typeof(string), typeof(EditLookup));
@@ -23,9 +24,10 @@ public partial class EditLookup : UserControl
     public static readonly DependencyProperty CreateCommandProperty = DependencyProperty.Register(
         nameof(CreateCommand), typeof(ICommand), typeof(EditLookup));
 
-    public object? ItemsSource
     public static readonly DependencyProperty CreateCommandParameterProperty = DependencyProperty.Register(
         nameof(CreateCommandParameter), typeof(object), typeof(EditLookup));
+
+    public object? ItemsSource
     {
         get => GetValue(ItemsSourceProperty);
         set => SetValue(ItemsSourceProperty, value);
@@ -47,11 +49,12 @@ public partial class EditLookup : UserControl
     {
         get => (string?)GetValue(DisplayMemberPathProperty);
         set => SetValue(DisplayMemberPathProperty, value);
+    }
+
     public object? CreateCommandParameter
     {
         get => GetValue(CreateCommandParameterProperty);
         set => SetValue(CreateCommandParameterProperty, value);
-    }
     }
 
     public ICommand? CreateCommand
