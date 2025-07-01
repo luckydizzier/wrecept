@@ -8,6 +8,7 @@ namespace Wrecept.Wpf.Views;
 public partial class StageView : UserControl
 {
     private readonly StageViewModel _viewModel;
+    private MenuItem? _lastMenuItem;
 
     public StageView(StageViewModel viewModel)
     {
@@ -18,7 +19,21 @@ public partial class StageView : UserControl
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
-        => NavigationHelper.Handle(e);
+    {
+        if (e.Key == Key.Escape)
+        {
+            _lastMenuItem?.Focus();
+            e.Handled = true;
+            return;
+        }
+
+        NavigationHelper.Handle(e);
+    }
+
+    private void MenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        _lastMenuItem = sender as MenuItem;
+    }
 
     private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {

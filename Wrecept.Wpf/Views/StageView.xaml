@@ -14,6 +14,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <Menu.Resources>
+            <Style TargetType="MenuItem">
+                <EventSetter Event="Click" Handler="MenuItem_Click"/>
+            </Style>
+        </Menu.Resources>
         <Menu>
             <MenuItem Header="Számlák">
                 <MenuItem Header="Bejövő szállítólevelek"

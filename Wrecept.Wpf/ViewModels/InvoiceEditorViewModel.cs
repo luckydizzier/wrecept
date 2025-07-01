@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
@@ -46,6 +47,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
     [ObservableProperty]
     private string supplier = string.Empty;
+partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 
     [ObservableProperty]
     private int supplierId;
@@ -140,5 +142,36 @@ public partial class InvoiceEditorViewModel : ObservableObject
         }
 
         return Task.CompletedTask;
+    }
+private void UpdateSupplierId(string name)
+{
+    var match = Suppliers.FirstOrDefault(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+    if (match != null)
+        SupplierId = match.Id;
+}
+    [RelayCommand]
+    private void ShowSupplierCreator(string? name)
+    {
+        InlineCreator = new SupplierCreatorViewModel(this, _suppliers)
+        {
+            Name = name ?? string.Empty
+        };
+    }
+    [RelayCommand]
+    private void ShowProductCreator(InvoiceItemRowViewModel row)
+    {
+        InlineCreator = new ProductCreatorViewModel(this, row, _productsService)
+        {
+            Name = row.Product
+        };
+    }
+
+    [RelayCommand]
+    private void ShowTaxRateCreator(string name)
+    {
+        InlineCreator = new TaxRateCreatorViewModel(this, _taxRates)
+        {
+            Name = name
+        };
     }
 }
