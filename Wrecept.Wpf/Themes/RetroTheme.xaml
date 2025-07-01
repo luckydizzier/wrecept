@@ -1,5 +1,6 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <!-- Light retro palette -->
     <Color x:Key="BackgroundColor">#9D941D</Color>
     <Color x:Key="ForegroundColor">#000000</Color>
@@ -16,9 +17,13 @@
     <SolidColorBrush x:Key="SelectionBrush" Color="{StaticResource SelectionColor}" />
     <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#FFE187" />
 
+    <sys:Double x:Key="FontSizeNormal">16</sys:Double>
+    <sys:Double x:Key="FontSizeLarge">18</sys:Double>
+
     <Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
     </Style>
 
     <Style TargetType="TextBox">
@@ -26,6 +31,7 @@
         <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource HighlightBrush}" />
         <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
     </Style>
 
     <Style TargetType="Button">
@@ -33,18 +39,21 @@
         <Setter Property="Foreground" Value="{StaticResource ControlBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
     <Style TargetType="Menu">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
     <Style TargetType="MenuItem">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
     <Style TargetType="DataGrid" x:Key="RetroDataGridStyle">
@@ -55,11 +64,13 @@
         <Setter Property="RowBackground" Value="{StaticResource ControlBackgroundBrush}" />
         <Setter Property="AlternatingRowBackground" Value="{StaticResource ControlBackgroundBrush}" />
         <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
     <Style TargetType="DataGridRow" x:Key="RetroDataGridRowStyle">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{StaticResource HighlightBrush}" />
