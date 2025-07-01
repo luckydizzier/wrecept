@@ -181,10 +181,10 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         {
             row.Product = exists.Name;
             row.UnitId = exists.UnitId;
-            row.UnitName = _parent.Units.FirstOrDefault(u => u.Id == exists.UnitId)?.Name ?? string.Empty;
+            row.UnitName = Units.FirstOrDefault(u => u.Id == exists.UnitId)?.Name ?? string.Empty;
             row.ProductGroup = exists.ProductGroup?.Name ?? string.Empty;
             row.TaxRateId = exists.TaxRateId;
-            row.TaxRateName = _parent.TaxRates.FirstOrDefault(t => t.Id == exists.TaxRateId)?.Name ?? string.Empty;
+            row.TaxRateName = TaxRates.FirstOrDefault(t => t.Id == exists.TaxRateId)?.Name ?? string.Empty;
         }
 
         return Task.CompletedTask;
