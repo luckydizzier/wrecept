@@ -15,7 +15,11 @@ public partial class ProductMasterView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
-        Loaded += async (_, _) => await viewModel.LoadAsync();
+        Loaded += async (_, _) =>
+        {
+            await viewModel.LoadAsync();
+            Grid.Focus();
+        };
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
