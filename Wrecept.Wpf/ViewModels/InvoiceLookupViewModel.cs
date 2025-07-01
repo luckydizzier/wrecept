@@ -1,0 +1,57 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
+using Wrecept.Core.Models;
+using Wrecept.Core.Services;
+
+namespace Wrecept.Wpf.ViewModels;
+
+public partial class InvoiceLookupItem : ObservableObject
+{
+    public int Id { get; set; }
+    public string Number { get; set; } = string.Empty;
+    public DateOnly Date { get; set; }
+    public string Supplier { get; set; } = string.Empty;
+}
+
+public partial class InvoiceLookupViewModel : ObservableObject
+{
+    private readonly IInvoiceService _invoices;
+    private readonly InvoiceEditorViewModel _editor;
+
+    public ObservableCollection<InvoiceLookupItem> Invoices { get; } = new();
+
+    [ObservableProperty]
+    private InvoiceLookupItem? selectedInvoice;
+
+    public InvoiceLookupViewModel(IInvoiceService invoices, InvoiceEditorViewModel editor)
+    {
+        _invoices = invoices;
+        _editor = editor;
+    }
+
+    public async Task LoadAsync()
+    {
+        var items = await _invoices.GetRecentAsync(50);
+        Invoices.Clear();
+        foreach (var inv in items)
+        {
+            Invoices.Add(new InvoiceLookupItem
+            {
+                Id = inv.Id,
+                Number = inv.Number,
+                Date = inv.Date,
+                Supplier = inv.Supplier?.Name ?? string.Empty
+            });
+        }
+    }
+
+    [RelayCommand]
+    private void LoadSelected()
+    {
+        if (SelectedInvoice != null)
+        {
+            _editor.LoadInvoice(SelectedInvoice.Id);
+        }
+    }
+}

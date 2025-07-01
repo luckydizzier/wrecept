@@ -24,7 +24,15 @@
             <views:PaymentMethodCreatorView/>
         </DataTemplate>
     </UserControl.Resources>
-    <StackPanel Margin="4">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <views:InvoiceLookupView x:Name="LookupView" DataContext="{Binding Lookup}" />
+
+        <StackPanel Grid.Column="1" Margin="4">
         <TextBlock Text="Számla" FontWeight="Bold" Margin="0,0,0,6" />
 
         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
@@ -57,7 +65,7 @@
         </StackPanel>
         <CheckBox Content="Bruttó ár" IsChecked="{Binding IsGross}" Margin="0,0,0,4" IsEnabled="{Binding IsEditable}" />
 
-        <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" Height="120" IsEnabled="{Binding IsEditable}">
+        <DataGrid x:Name="ItemsGrid" ItemsSource="{Binding Items}" AutoGenerateColumns="False" Height="120" IsEnabled="{Binding IsEditable}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Termék" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -106,4 +114,5 @@
         <ContentControl Content="{Binding InlineCreator}" Margin="0,4,0,0" />
         <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="Italic" Margin="0,4,0,0"/>
     </StackPanel>
+    </Grid>
 </UserControl>
