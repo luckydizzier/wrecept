@@ -13,6 +13,5 @@
               StaysOpenOnEdit="True"
               IsTextSearchEnabled="False"
               PreviewKeyDown="Box_PreviewKeyDown"
-              CreateCommandParameter="{Binding CreateCommandParameter, RelativeSource={RelativeSource AncestorType=UserControl}}"
               IsSynchronizedWithCurrentItem="True"/>
 </UserControl>
