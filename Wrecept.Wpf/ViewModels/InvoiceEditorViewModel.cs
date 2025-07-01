@@ -389,7 +389,7 @@ private void UpdateSupplierId(string name)
     }
 
     [RelayCommand]
-    private async Task AddLineItemAsync()
+    internal async Task AddLineItemAsync()
     {
         if (!IsEditable)
         {
@@ -484,7 +484,7 @@ private void UpdateSupplierId(string name)
     }
 
     [RelayCommand]
-    private async Task ArchiveAsync()
+    internal async Task ArchiveAsync()
     {
         if (IsArchived)
             return;

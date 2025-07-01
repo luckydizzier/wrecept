@@ -25,6 +25,9 @@ public class InvoiceServiceTests
         public Task<Invoice?> GetAsync(int id, CancellationToken ct = default) => Task.FromResult<Invoice?>(null);
         public Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default) => Task.FromResult(new List<Invoice>());
 
+        public Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default)
+            => Task.FromResult<LastUsageData?>(null);
+
         public int UpdatedId;
         public bool Archived;
     }
