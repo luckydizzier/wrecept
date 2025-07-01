@@ -11,8 +11,8 @@ public partial class SupplierMasterView : BaseMasterView<SupplierMasterViewModel
     }
 
     public SupplierMasterView(SupplierMasterViewModel viewModel)
+        : base(viewModel)
     {
         InitializeComponent();
-        InitializeViewModel(viewModel);
     }
 }

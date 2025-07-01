@@ -11,8 +11,8 @@ public partial class TaxRateMasterView : BaseMasterView<TaxRateMasterViewModel>
     }
 
     public TaxRateMasterView(TaxRateMasterViewModel viewModel)
+        : base(viewModel)
     {
         InitializeComponent();
-        InitializeViewModel(viewModel);
     }
 }

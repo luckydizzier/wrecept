@@ -59,7 +59,7 @@ public abstract class BaseMasterView : UserControl
             Margin = new Thickness(4),
             HorizontalAlignment = HorizontalAlignment.Center
         };
-        Grid.SetRow(hint, 1);
+        System.Windows.Controls.Grid.SetRow(hint, 1);
         grid.Children.Add(hint);
 
         Content = grid;

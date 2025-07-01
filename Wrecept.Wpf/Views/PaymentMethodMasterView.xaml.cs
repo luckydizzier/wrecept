@@ -11,8 +11,8 @@ public partial class PaymentMethodMasterView : BaseMasterView<PaymentMethodMaste
     }
 
     public PaymentMethodMasterView(PaymentMethodMasterViewModel viewModel)
+        : base(viewModel)
     {
         InitializeComponent();
-        InitializeViewModel(viewModel);
     }
 }
