@@ -11,8 +11,8 @@ public partial class ProductMasterView : BaseMasterView<ProductMasterViewModel>
     }
 
     public ProductMasterView(ProductMasterViewModel viewModel)
+        : base(viewModel)
     {
         InitializeComponent();
-        InitializeViewModel(viewModel);
     }
 }

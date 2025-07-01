@@ -11,8 +11,8 @@ public partial class UnitMasterView : BaseMasterView<UnitMasterViewModel>
     }
 
     public UnitMasterView(UnitMasterViewModel viewModel)
+        : base(viewModel)
     {
         InitializeComponent();
-        InitializeViewModel(viewModel);
     }
 }
