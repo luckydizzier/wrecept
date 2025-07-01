@@ -1,14 +1,13 @@
-using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public partial class ProductGroupMasterViewModel : ObservableObject
+public partial class ProductGroupMasterViewModel : MasterDataBaseViewModel<ProductGroup>
 {
-    public ObservableCollection<ProductGroup> ProductGroups { get; } = new();
+    public ObservableCollection<ProductGroup> ProductGroups => Items;
 
     private readonly IProductGroupService _service;
 
@@ -17,11 +16,6 @@ public partial class ProductGroupMasterViewModel : ObservableObject
         _service = service;
     }
 
-    public async Task LoadAsync()
-    {
-        var items = await _service.GetAllAsync();
-        ProductGroups.Clear();
-        foreach (var item in items)
-            ProductGroups.Add(item);
-    }
+    protected override Task<List<ProductGroup>> GetItemsAsync()
+        => _service.GetActiveAsync();
 }

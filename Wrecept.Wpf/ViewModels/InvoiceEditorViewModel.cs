@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Input;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
+using Wrecept.Wpf.Resources;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -33,6 +34,12 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     [ObservableProperty]
     private Guid taxRateId;
+
+    [ObservableProperty]
+    private Guid unitId;
+
+    [ObservableProperty]
+    private string productGroup = string.Empty;
 }
 
 public partial class InvoiceEditorViewModel : ObservableObject
@@ -64,6 +71,13 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     [ObservableProperty]
     private bool isGross;
 
+    [ObservableProperty]
+    private bool isArchived;
+
+    public bool IsEditable => !IsArchived;
+
+    partial void OnIsArchivedChanged(bool value) => OnPropertyChanged(nameof(IsEditable));
+
     private readonly IPaymentMethodService _paymentMethods;
     private readonly ITaxRateService _taxRates;
     private readonly ISupplierService _suppliers;
@@ -91,36 +105,36 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 
     public async Task LoadAsync(IProgress<ProgressReport>? progress = null)
     {
-        progress?.Report(new ProgressReport { SubtaskPercent = 0, Message = "Fizetési módok betöltése..." });
+        progress?.Report(new ProgressReport { SubtaskPercent = 0, Message = Resources.Strings.Load_PaymentMethods });
         var methods = await _paymentMethods.GetActiveAsync();
         PaymentMethods.Clear();
         foreach (var m in methods)
             PaymentMethods.Add(m);
 
-        progress?.Report(new ProgressReport { SubtaskPercent = 20, Message = "Szállítók betöltése..." });
+        progress?.Report(new ProgressReport { SubtaskPercent = 20, Message = Resources.Strings.Load_Suppliers });
         var supplierItems = await _suppliers.GetActiveAsync();
         Suppliers.Clear();
         foreach (var s in supplierItems)
             Suppliers.Add(s);
 
-        progress?.Report(new ProgressReport { SubtaskPercent = 40, Message = "ÁFA kulcsok betöltése..." });
+        progress?.Report(new ProgressReport { SubtaskPercent = 40, Message = Resources.Strings.Load_TaxRates });
         var taxRates = await _taxRates.GetActiveAsync(DateTime.UtcNow);
         TaxRates.Clear();
         foreach (var t in taxRates)
             TaxRates.Add(t);
 
-        progress?.Report(new ProgressReport { SubtaskPercent = 60, Message = "Termékek betöltése..." });
+        progress?.Report(new ProgressReport { SubtaskPercent = 60, Message = Resources.Strings.Load_Products });
         var productItems = await _productsService.GetActiveAsync();
         Products.Clear();
         foreach (var p in productItems)
             Products.Add(p);
 
-        progress?.Report(new ProgressReport { SubtaskPercent = 80, Message = "Mértékegységek betöltése..." });
+        progress?.Report(new ProgressReport { SubtaskPercent = 80, Message = Resources.Strings.Load_Units });
         var unitItems = await _unitsService.GetActiveAsync();
         Units.Clear();
         foreach (var u in unitItems)
             Units.Add(u);
-        progress?.Report(new ProgressReport { SubtaskPercent = 100, Message = "Betöltés kész." });
+        progress?.Report(new ProgressReport { SubtaskPercent = 100, Message = Resources.Strings.Load_Complete });
     }
 
     public Task CheckProductAsync(InvoiceItemRowViewModel row, string name)
@@ -139,6 +153,9 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         else
         {
             row.Product = exists.Name;
+            row.UnitId = exists.UnitId;
+            row.ProductGroup = exists.ProductGroup?.Name ?? string.Empty;
+            row.TaxRateId = exists.TaxRateId;
         }
 
         return Task.CompletedTask;
@@ -173,5 +190,17 @@ private void UpdateSupplierId(string name)
         {
             Name = name
         };
+    }
+
+    [RelayCommand]
+    private void ShowUnitCreator()
+    {
+        InlineCreator = new UnitCreatorViewModel(this, _unitsService);
+    }
+
+    [RelayCommand]
+    private void ShowPaymentMethodCreator()
+    {
+        InlineCreator = new PaymentMethodCreatorViewModel(this, _paymentMethods);
     }
 }

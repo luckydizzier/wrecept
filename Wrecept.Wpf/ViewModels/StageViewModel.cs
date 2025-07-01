@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows;
+using Wrecept.Wpf.Resources;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -79,33 +80,33 @@ public partial class StageViewModel : ObservableObject
             case StageMenuAction.EditProducts:
             case StageMenuAction.ListProducts:
                 CurrentViewModel = _productMaster;
-                _statusBar.Message = "Termék nézet megnyitva";
+                _statusBar.Message = Resources.Strings.Stage_ProductViewOpened;
                 break;
             case StageMenuAction.EditSuppliers:
             case StageMenuAction.ListSuppliers:
                 CurrentViewModel = _supplierMaster;
-                _statusBar.Message = "Szállító nézet megnyitva";
+                _statusBar.Message = Resources.Strings.Stage_SupplierViewOpened;
                 break;
             case StageMenuAction.EditProductGroups:
                 CurrentViewModel = _productGroupMaster;
-                _statusBar.Message = "Termékcsoport nézet megnyitva";
+                _statusBar.Message = Resources.Strings.Stage_ProductGroupViewOpened;
                 break;
             case StageMenuAction.EditVatKeys:
                 CurrentViewModel = _taxRateMaster;
-                _statusBar.Message = "Adókulcs nézet megnyitva";
+                _statusBar.Message = Resources.Strings.Stage_TaxRateViewOpened;
                 break;
             case StageMenuAction.EditPaymentMethods:
                 CurrentViewModel = _paymentMethodMaster;
-                _statusBar.Message = "Fizetési mód nézet megnyitva";
+                _statusBar.Message = Resources.Strings.Stage_PaymentMethodViewOpened;
                 break;
             case StageMenuAction.EditUnits:
                 CurrentViewModel = _unitMaster;
-                _statusBar.Message = "Mértékegység nézet megnyitva";
+                _statusBar.Message = Resources.Strings.Stage_UnitViewOpened;
                 break;
             case StageMenuAction.InboundDeliveryNotes:
             case StageMenuAction.UpdateInboundInvoices:
                 CurrentViewModel = _invoiceEditor;
-                _statusBar.Message = "Számla szerkesztő";
+                _statusBar.Message = Resources.Strings.Stage_InvoiceEditorOpened;
                 break;
             case StageMenuAction.ListInvoices:
             case StageMenuAction.InventoryCard:
@@ -117,12 +118,12 @@ public partial class StageViewModel : ObservableObject
                 if (action == StageMenuAction.UserInfo)
                 {
                     CurrentViewModel = _about;
-                    _statusBar.Message = "Névjegy megjelenítve";
+                    _statusBar.Message = Resources.Strings.Stage_AboutOpened;
                 }
                 else
                 {
                     CurrentViewModel = _placeholder;
-                    _statusBar.Message = "Funkció még nincs kész";
+                    _statusBar.Message = Resources.Strings.Stage_FunctionNotReady;
                 }
                 break;
             case StageMenuAction.ExitApplication:

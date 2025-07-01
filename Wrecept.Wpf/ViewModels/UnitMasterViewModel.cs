@@ -1,14 +1,13 @@
-using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public partial class UnitMasterViewModel : ObservableObject
+public partial class UnitMasterViewModel : MasterDataBaseViewModel<Unit>
 {
-    public ObservableCollection<Unit> Units { get; } = new();
+    public ObservableCollection<Unit> Units => Items;
 
     private readonly IUnitService _service;
 
@@ -17,11 +16,6 @@ public partial class UnitMasterViewModel : ObservableObject
         _service = service;
     }
 
-    public async Task LoadAsync()
-    {
-        var items = await _service.GetActiveAsync();
-        Units.Clear();
-        foreach (var item in items)
-            Units.Add(item);
-    }
+    protected override Task<List<Unit>> GetItemsAsync()
+        => _service.GetActiveAsync();
 }
