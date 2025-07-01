@@ -4,14 +4,17 @@ using CommunityToolkit.Mvvm.Input;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using System.Threading.Tasks;
+using System;
 
 namespace Wrecept.Wpf.ViewModels;
 
 public partial class ProductMasterViewModel : ObservableObject
 {
     public ObservableCollection<Product> Products { get; } = new();
+    public ObservableCollection<TaxRate> TaxRates { get; } = new();
 
     private readonly IProductService _service;
+    private readonly ITaxRateService _taxRates;
 
     [ObservableProperty]
     private Product? selectedProduct;
@@ -23,9 +26,10 @@ public partial class ProductMasterViewModel : ObservableObject
     public IRelayCommand DeleteSelectedCommand { get; }
     public IRelayCommand CloseDetailsCommand { get; }
 
-    public ProductMasterViewModel(IProductService service)
+    public ProductMasterViewModel(IProductService service, ITaxRateService taxRates)
     {
         _service = service;
+        _taxRates = taxRates;
         EditSelectedCommand = new RelayCommand(() => IsEditing = !IsEditing, () => SelectedProduct != null);
         DeleteSelectedCommand = new RelayCommand(async () =>
         {
@@ -42,8 +46,12 @@ public partial class ProductMasterViewModel : ObservableObject
     public async Task LoadAsync()
     {
         var items = await _service.GetActiveAsync();
+        var rates = await _taxRates.GetActiveAsync(DateTime.UtcNow);
         Products.Clear();
         foreach (var item in items)
             Products.Add(item);
+        TaxRates.Clear();
+        foreach (var r in rates)
+            TaxRates.Add(r);
     }
 }

@@ -18,27 +18,48 @@
                   SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
                   AutoGenerateColumns="False"
                   RowDetailsVisibilityMode="{Binding IsEditing, Converter={StaticResource BooleanToRowDetailsConverter}}"
+                  RowDetailsVisibilityChanged="Grid_RowDetailsVisibilityChanged"
                   Margin="4">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="#1A1A1A" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#FFD700" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Név" Binding="{Binding Name}" Width="*" />
                 <DataGridTextColumn Header="Nettó" Binding="{Binding Net}" Width="80" />
                 <DataGridTextColumn Header="Bruttó" Binding="{Binding Gross}" Width="80" />
-                <DataGridTextColumn Header="ÁFA" Binding="{Binding TaxRateId}" Width="90" />
+                <DataGridTextColumn Header="ÁFA" Binding="{Binding TaxRate.Name}" Width="90" />
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <StackPanel Margin="4">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Width="80" Text="Név"/>
-                            <TextBox Text="{Binding Name, Mode=TwoWay}" Width="200"/>
+                            <TextBox x:Name="NameBox" Text="{Binding Name, Mode=TwoWay}" Width="200"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                            <TextBlock Width="80" Text="Nettó"/>
+                            <TextBlock Width="80" Text="Nettó" Foreground="Red"/>
                             <TextBox Text="{Binding Net, Mode=TwoWay}" Width="80"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                            <TextBlock Width="80" Text="Bruttó"/>
+                            <TextBlock Width="80" Text="Bruttó" Foreground="Red"/>
                             <TextBox Text="{Binding Gross, Mode=TwoWay}" Width="80"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                            <TextBlock Width="80" Text="ÁFA"/>
+                            <ComboBox Width="120"
+                                      ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      SelectedValuePath="Id"
+                                      DisplayMemberPath="Name"
+                                      SelectedValue="{Binding TaxRateId, Mode=TwoWay}" />
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
