@@ -6,6 +6,7 @@
     <UserControl.Resources>
         <local:QuantityToStyleConverter x:Key="QuantityToStyleConverter" />
         <local:NegativeValueForegroundConverter x:Key="NegativeForegroundConverter" />
+        <local:IsReadOnlyBindingConverter x:Key="IsReadOnlyConverter" />
     </UserControl.Resources>
     <DataGrid x:Name="Grid" ItemsSource="{Binding Items}" AutoGenerateColumns="False"
              IsReadOnly="{Binding IsArchived, Converter={StaticResource IsReadOnlyConverter}}"
