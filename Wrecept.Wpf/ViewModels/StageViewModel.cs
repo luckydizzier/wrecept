@@ -23,6 +23,7 @@ public enum StageMenuAction
     AfterPowerOutage,
     ScreenSettings,
     PrinterSettings,
+    EditUserInfo,
     UserInfo,
     ExitApplication
 }
@@ -39,11 +40,13 @@ public partial class StageViewModel : ObservableObject
     private readonly TaxRateMasterViewModel _taxRateMaster;
     private readonly PaymentMethodMasterViewModel _paymentMethodMaster;
     private readonly UnitMasterViewModel _unitMaster;
+    private readonly UserInfoViewModel _userInfo;
     private readonly AboutViewModel _about;
     private readonly PlaceholderViewModel _placeholder;
     private readonly StatusBarViewModel _statusBar;
 
     public StatusBarViewModel StatusBar => _statusBar;
+    public UserInfoViewModel UserInfo => _userInfo;
 
     public StageViewModel(
         InvoiceEditorViewModel invoiceEditor,
@@ -53,6 +56,7 @@ public partial class StageViewModel : ObservableObject
         TaxRateMasterViewModel taxRateMaster,
         PaymentMethodMasterViewModel paymentMethodMaster,
         UnitMasterViewModel unitMaster,
+        UserInfoViewModel userInfo,
         AboutViewModel about,
         PlaceholderViewModel placeholder,
         StatusBarViewModel statusBar)
@@ -64,6 +68,7 @@ public partial class StageViewModel : ObservableObject
         _taxRateMaster = taxRateMaster;
         _paymentMethodMaster = paymentMethodMaster;
         _unitMaster = unitMaster;
+        _userInfo = userInfo;
         _about = about;
         _placeholder = placeholder;
         _statusBar = statusBar;
@@ -114,11 +119,18 @@ public partial class StageViewModel : ObservableObject
             case StageMenuAction.AfterPowerOutage:
             case StageMenuAction.ScreenSettings:
             case StageMenuAction.PrinterSettings:
+            case StageMenuAction.EditUserInfo:
             case StageMenuAction.UserInfo:
                 if (action == StageMenuAction.UserInfo)
                 {
                     CurrentViewModel = _about;
                     _statusBar.Message = Resources.Strings.Stage_AboutOpened;
+                }
+                else if (action == StageMenuAction.EditUserInfo)
+                {
+                    CurrentViewModel = _userInfo;
+                    _statusBar.Message = Resources.Strings.Stage_UserInfoEditOpened;
+                    _ = _userInfo.LoadAsync();
                 }
                 else
                 {

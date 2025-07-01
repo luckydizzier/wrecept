@@ -24,6 +24,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITaxRateRepository, TaxRateRepository>();
         services.AddScoped<IUnitRepository, UnitRepository>();
         services.AddSingleton<ILogService, LogService>();
+        services.AddSingleton<IUserInfoService, UserInfoService>();
 
         using var provider = services.BuildServiceProvider();
         var factory = provider.GetRequiredService<IDbContextFactory<AppDbContext>>();

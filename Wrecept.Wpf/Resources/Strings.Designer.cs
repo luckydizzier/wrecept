@@ -15,6 +15,7 @@ internal static class Strings
     internal static string Stage_UnitViewOpened => _rm.GetString("Stage_UnitViewOpened") ?? string.Empty;
     internal static string Stage_InvoiceEditorOpened => _rm.GetString("Stage_InvoiceEditorOpened") ?? string.Empty;
     internal static string Stage_AboutOpened => _rm.GetString("Stage_AboutOpened") ?? string.Empty;
+    internal static string Stage_UserInfoEditOpened => _rm.GetString("Stage_UserInfoEditOpened") ?? string.Empty;
     internal static string Stage_FunctionNotReady => _rm.GetString("Stage_FunctionNotReady") ?? string.Empty;
     internal static string StatusBar_DefaultMessage => _rm.GetString("StatusBar_DefaultMessage") ?? string.Empty;
     internal static string Load_PaymentMethods => _rm.GetString("Load_PaymentMethods") ?? string.Empty;
