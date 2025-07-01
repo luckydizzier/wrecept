@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:local="clr-namespace:Wrecept.Wpf.Converters"
             xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
+            xmlns:view="clr-namespace:Wrecept.Wpf.Views"
             xmlns:views="clr-namespace:Wrecept.Wpf.Views.InlineCreators"
             xmlns:c="clr-namespace:Wrecept.Wpf.Views.Controls"
             KeyDown="OnKeyDown">
@@ -30,7 +31,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <views:InvoiceLookupView x:Name="LookupView" DataContext="{Binding Lookup}" />
+        <view:InvoiceLookupView x:Name="LookupView" DataContext="{Binding Lookup}" />
 
         <StackPanel Grid.Column="1" Margin="4">
         <TextBlock Text="Számla" FontWeight="Bold" Margin="0,0,0,6" />
