@@ -36,6 +36,9 @@
   <data name="Stage_AboutOpened" xml:space="preserve">
     <value>Névjegy megjelenítve</value>
   </data>
+  <data name="Stage_UserInfoEditOpened" xml:space="preserve">
+    <value>Tulajdonos adatok szerkesztése</value>
+  </data>
   <data name="Stage_FunctionNotReady" xml:space="preserve">
     <value>Funkció még nincs kész</value>
   </data>

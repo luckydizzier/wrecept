@@ -75,6 +75,9 @@
                 <MenuItem Header="Nyomtató beállítás"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.PrinterSettings}" />
+                <MenuItem Header="Tulajdonos szerkesztése..."
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.EditUserInfo}" />
             </MenuItem>
             <MenuItem Header="Névjegy">
                 <MenuItem Header="A program felhasználójának adatai"

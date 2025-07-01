@@ -30,6 +30,9 @@
             <DataTemplate DataType="{x:Type vm:UnitMasterViewModel}">
                 <view:UnitMasterView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:UserInfoViewModel}">
+                <view:UserInfoView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:AboutViewModel}">
                 <view:AboutView />
             </DataTemplate>

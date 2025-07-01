@@ -46,6 +46,7 @@ public partial class App : Application
         services.AddTransient<TaxRateMasterViewModel>();
         services.AddTransient<PaymentMethodMasterViewModel>();
         services.AddTransient<UnitMasterViewModel>();
+        services.AddTransient<UserInfoViewModel>();
         services.AddTransient<AboutViewModel>();
         services.AddTransient<PlaceholderViewModel>();
         services.AddSingleton<StatusBarViewModel>();
@@ -60,6 +61,7 @@ public partial class App : Application
         services.AddTransient<TaxRateMasterView>();
         services.AddTransient<PaymentMethodMasterView>();
         services.AddTransient<UnitMasterView>();
+        services.AddTransient<UserInfoView>();
         services.AddTransient<AboutView>();
         services.AddTransient<PlaceholderView>();
         services.AddTransient<Views.Controls.StatusBar>();
