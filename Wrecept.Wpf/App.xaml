@@ -2,13 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
-             xmlns:view="clr-namespace:Wrecept.Wpf.Views">
+            xmlns:view="clr-namespace:Wrecept.Wpf.Views"
+            xmlns:converters="clr-namespace:Wrecept.Wpf.Converters">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/RetroTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:BooleanToRowDetailsConverter x:Key="BooleanToRowDetailsConverter" />
             <DataTemplate DataType="{x:Type vm:InvoiceEditorViewModel}">
                 <view:InvoiceEditorView />
             </DataTemplate>
