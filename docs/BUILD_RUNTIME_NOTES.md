@@ -16,6 +16,7 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
 - **Nem támogatott `{x:Int32}` jelölés** – a Tag attribútumnál az egyszerű numerikus érték használata biztosítja a kompatibilitást.
 - **Hiányzó using direktíva** – a `StageView.xaml.cs` állományban a `System.Windows` névtér hiánya CS0246 hibát okozott.
 - **Elgépelés vagy hiányzó záró tag** – az `InvoiceEditorView.xaml` fájlban egy fölösleges `</StackPanel>` tag miatt a build meghiúsult.
+- **Önzáró `DataGridTemplateColumn` hiánya** – ha a nyitó tag `>` jellel zárul és az attribútumok külön sorban szerepelnek, a parser MC3061 hibát dob.
 - **Teszt futtatásához szükséges csomag** – a `Xunit.StaFact` hiánya tesztfutási hibát eredményezhet Windows környezetben.
 
 ## Javaslatok
