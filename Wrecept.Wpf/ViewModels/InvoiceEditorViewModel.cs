@@ -36,7 +36,19 @@ public partial class InvoiceItemRowViewModel : ObservableObject
     private Guid taxRateId;
 
     [ObservableProperty]
+    private string taxRateName = string.Empty;
+
+    partial void OnTaxRateIdChanged(Guid value)
+        => TaxRateName = _parent.TaxRates.FirstOrDefault(t => t.Id == value)?.Name ?? string.Empty;
+
+    [ObservableProperty]
     private Guid unitId;
+
+    [ObservableProperty]
+    private string unitName = string.Empty;
+
+    partial void OnUnitIdChanged(Guid value)
+        => UnitName = _parent.Units.FirstOrDefault(u => u.Id == value)?.Name ?? string.Empty;
 
     [ObservableProperty]
     private string productGroup = string.Empty;
@@ -169,8 +181,10 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         {
             row.Product = exists.Name;
             row.UnitId = exists.UnitId;
+            row.UnitName = _parent.Units.FirstOrDefault(u => u.Id == exists.UnitId)?.Name ?? string.Empty;
             row.ProductGroup = exists.ProductGroup?.Name ?? string.Empty;
             row.TaxRateId = exists.TaxRateId;
+            row.TaxRateName = _parent.TaxRates.FirstOrDefault(t => t.Id == exists.TaxRateId)?.Name ?? string.Empty;
         }
 
         return Task.CompletedTask;
@@ -244,6 +258,8 @@ private void UpdateSupplierId(string name)
                 UnitPrice = item.UnitPrice,
                 TaxRateId = item.TaxRateId,
                 UnitId = item.Product?.UnitId ?? Guid.Empty,
+                UnitName = item.Product?.Unit?.Name ?? string.Empty,
+                TaxRateName = item.TaxRate?.Name ?? string.Empty,
                 ProductGroup = item.Product?.ProductGroup?.Name ?? string.Empty,
                 IsEditable = false
             };
@@ -260,6 +276,8 @@ private void UpdateSupplierId(string name)
         edit.UnitPrice = selected.UnitPrice;
         edit.TaxRateId = selected.TaxRateId;
         edit.UnitId = selected.UnitId;
+        edit.UnitName = selected.UnitName;
+        edit.TaxRateName = selected.TaxRateName;
         edit.ProductGroup = selected.ProductGroup;
     }
 
@@ -276,6 +294,8 @@ private void UpdateSupplierId(string name)
             UnitPrice = edit.UnitPrice,
             TaxRateId = edit.TaxRateId,
             UnitId = edit.UnitId,
+            UnitName = edit.UnitName,
+            TaxRateName = edit.TaxRateName,
             ProductGroup = edit.ProductGroup,
             IsEditable = false
         };
@@ -286,6 +306,8 @@ private void UpdateSupplierId(string name)
         edit.UnitPrice = 0;
         edit.TaxRateId = Guid.Empty;
         edit.UnitId = Guid.Empty;
+        edit.UnitName = string.Empty;
+        edit.TaxRateName = string.Empty;
         edit.ProductGroup = string.Empty;
     }
 

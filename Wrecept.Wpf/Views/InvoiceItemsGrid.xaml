@@ -1,0 +1,135 @@
+<UserControl x:Class="Wrecept.Wpf.Views.InvoiceItemsGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Wrecept.Wpf.Views.Controls"
+             xmlns:local="clr-namespace:Wrecept.Wpf.Converters">
+    <UserControl.Resources>
+        <local:QuantityToStyleConverter x:Key="QuantityToStyleConverter" />
+        <local:NegativeValueForegroundConverter x:Key="NegativeForegroundConverter" />
+    </UserControl.Resources>
+    <DataGrid x:Name="Grid" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsEnabled="{Binding IsEditable}"
+              KeyDown="OnKeyDown">
+        <DataGrid.RowStyle>
+            <Style TargetType="DataGridRow">
+                <Setter Property="Background" Value="{Binding Quantity, Converter={StaticResource QuantityToStyleConverter}}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsEditable}" Value="True">
+                        <Setter Property="BorderBrush" Value="Blue" />
+                        <Setter Property="BorderThickness" Value="1" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </DataGrid.RowStyle>
+        <DataGrid.Columns>
+            <DataGridTemplateColumn Header="Termék" Width="*">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <c:EditLookup x:Name="Editor"
+                                         ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                         DisplayMemberPath="Name"
+                                         SelectedValuePath="Name"
+                                         SelectedValue="{Binding Product, Mode=TwoWay}"
+                                         CreateCommand="{Binding DataContext.ShowProductCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                         CreateCommandParameter="{Binding}" />
+                            <TextBlock x:Name="Text" Text="{Binding Product}" VerticalAlignment="Center" />
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="False">
+                                <Setter TargetName="Editor" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="True">
+                                <Setter TargetName="Text" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="Csop." Binding="{Binding ProductGroup}" Width="100" IsReadOnly="True" />
+            <DataGridTemplateColumn Header="Me.e.">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <c:EditLookup x:Name="Editor"
+                                         ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                         DisplayMemberPath="Name"
+                                         SelectedValuePath="Id"
+                                         SelectedValue="{Binding UnitId, Mode=TwoWay}"
+                                         CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                            <TextBlock x:Name="Text" Text="{Binding UnitName}" />
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="False">
+                                <Setter TargetName="Editor" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="True">
+                                <Setter TargetName="Text" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Menny." Width="80">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBox x:Name="Editor" Text="{Binding Quantity, Mode=TwoWay}"
+                                     Foreground="{Binding Quantity, Converter={StaticResource NegativeForegroundConverter}}"/>
+                            <TextBlock x:Name="Text" Text="{Binding Quantity}" VerticalAlignment="Center"
+                                       Foreground="{Binding Quantity, Converter={StaticResource NegativeForegroundConverter}}"/>
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="False">
+                                <Setter TargetName="Editor" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="True">
+                                <Setter TargetName="Text" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Ár" Width="80">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBox x:Name="Editor" Text="{Binding UnitPrice, Mode=TwoWay}" />
+                            <TextBlock x:Name="Text" Text="{Binding UnitPrice}" VerticalAlignment="Center" />
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="False">
+                                <Setter TargetName="Editor" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="True">
+                                <Setter TargetName="Text" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="ÁFA">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <c:EditLookup x:Name="Editor"
+                                         ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                         DisplayMemberPath="Name"
+                                         SelectedValuePath="Id"
+                                         SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
+                                         CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                            <TextBlock x:Name="Text" Text="{Binding TaxRateName}" />
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="False">
+                                <Setter TargetName="Editor" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsEditable}" Value="True">
+                                <Setter TargetName="Text" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>
