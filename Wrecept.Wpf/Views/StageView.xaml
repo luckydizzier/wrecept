@@ -19,7 +19,7 @@
                 <EventSetter Event="Click" Handler="MenuItem_Click"/>
             </Style>
         </Grid.Resources>
-        <Menu>
+        <Menu Background="{DynamicResource HeaderFooterBrush}">
             <MenuItem Header="Számlák">
                 <MenuItem Header="Bejövő szállítólevelek"
                           Command="{Binding HandleMenuCommand}"

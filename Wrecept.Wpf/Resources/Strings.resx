@@ -43,7 +43,7 @@
     <value>Funkció még nincs kész</value>
   </data>
   <data name="StatusBar_DefaultMessage" xml:space="preserve">
-    <value>&#x2191;/&#x2193; navigál, Enter aktivál, Esc vissza</value>
+    <value>[Esc] Kilépés  [Enter] Jóváhagy</value>
   </data>
   <data name="Load_PaymentMethods" xml:space="preserve">
     <value>Fizetési módok betöltése...</value>
