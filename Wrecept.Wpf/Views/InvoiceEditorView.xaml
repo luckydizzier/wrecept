@@ -83,13 +83,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Szállító" Style="{StaticResource HeaderText}" />
-                            <c:EditLookup Grid.Row="0" Grid.Column="1" Width="220"
-                                          ItemsSource="{Binding Suppliers}"
-                                          DisplayMemberPath="Name"
-                                          SelectedValuePath="Id"
-                                          SelectedValue="{Binding SupplierId}"
-                                          CreateCommand="{Binding ShowSupplierCreatorCommand}"
-                                          IsEnabled="{Binding IsEditable}" />
+                            <c:SmartLookup Grid.Row="0" Grid.Column="1" Width="220"
+                                           ItemsSource="{Binding Suppliers}"
+                                           DisplayMemberPath="Name"
+                                           SelectedValuePath="Id"
+                                           SelectedValue="{Binding SupplierId}"
+                                           CreateCommand="{Binding ShowSupplierCreatorCommand}"
+                                           Watermark="Kezdjen el gépelni..."
+                                           IsEnabled="{Binding IsEditable}" />
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Fizetési mód" Margin="0,4,0,0" Style="{StaticResource HeaderText}" />
                             <c:EditLookup Grid.Row="1" Grid.Column="1" Width="220" Margin="0,4,0,0"
@@ -135,17 +136,19 @@
             <StackPanel Orientation="Horizontal" DataContext="{Binding Items[0]}" KeyDown="OnEntryKeyDown"
                         Background="{DynamicResource ControlBackgroundBrush}" Margin="0,0,0,4" Grid.Row="1"
                         IsEnabled="{Binding DataContext.IsEditable, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                <c:EditLookup x:Name="EntryProduct" Width="200"
-                              ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                              DisplayMemberPath="Name"
-                              SelectedValuePath="Name"
-                              SelectedValue="{Binding Product, Mode=TwoWay}"/>
+                <c:SmartLookup x:Name="EntryProduct" Width="200"
+                               ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                               DisplayMemberPath="Name"
+                               SelectedValuePath="Name"
+                               SelectedValue="{Binding Product, Mode=TwoWay}"
+                               Watermark="Termék neve" />
                 <TextBox x:Name="EntryQuantity" Width="60" Margin="4,0" Text="{Binding Quantity, Mode=TwoWay}"/>
-                <c:EditLookup x:Name="EntryUnit" Width="80"
-                              ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                              DisplayMemberPath="Name"
-                              SelectedValuePath="Id"
-                              SelectedValue="{Binding UnitId, Mode=TwoWay}"/>
+                <c:SmartLookup x:Name="EntryUnit" Width="80"
+                               ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                               DisplayMemberPath="Name"
+                               SelectedValuePath="Id"
+                               SelectedValue="{Binding UnitId, Mode=TwoWay}"
+                               Watermark="Me.e." />
                 <TextBox x:Name="EntryPrice" Width="80" Margin="4,0" Text="{Binding UnitPrice, Mode=TwoWay}"/>
                 <c:EditLookup x:Name="EntryTax" Width="100"
                               ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"

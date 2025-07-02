@@ -32,11 +32,11 @@ Confirmation prompt: Create invoice XXXXX1231? (Enter=Yes, Esc=No)
 
 After invoice number confirmed:
 
-Supplier selection (EditLookup)
+Supplier selection (SmartLookup)
 
 Date selection (default = today, arrow or numpad)
 
-Payment method (EditLookup)
+Payment method (SmartLookup)
 
 Bruttó checkbox (affects unit price interpretation)
 
@@ -44,7 +44,7 @@ Bruttó checkbox (affects unit price interpretation)
 
 Focus shifts to the first line’s Product Name
 
-EditLookup behavior with real-time filtering and keyboard navigation
+SmartLookup behavior with real-time filtering and keyboard navigation
 
 If product not found → inline product creator in-row (no modal popup)
 
@@ -70,9 +70,9 @@ Display read-only controls
 
 Archive button visible while invoice not archived. Confirmation text: "Véglegesíti a számlát, később nem módosítható."
 
-📊 EditLookup UX-behavior
+📊 SmartLookup UX-behavior
 
-All master-data fields (e.g., Supplier, Product, TaxRate, Unit) use a unified EditLookup component:
+All master-data fields (e.g., Supplier, Product, TaxRate, Unit) use a unified SmartLookup component:
 
 Typing filters the list in real time.
 
@@ -91,7 +91,7 @@ Example:
 → ↓ selects "Trappista"
 → Enter → field set to ProductId = 23, focus → Quantity
 
-The EditLookup behavior ensures consistent UX and keyboard flow across invoice fields.
+The SmartLookup behavior ensures consistent UX and keyboard flow across invoice fields.
 
 📀 Screen Mockups
 
@@ -109,10 +109,10 @@ The EditLookup behavior ensures consistent UX and keyboard flow across invoice f
 🧾 Invoice Editor View
 
 ┌───── Lista ────┬──────── Számla szerkesztő ────────────────┐
-│ [Számlaszám]   │ Szállító: [EditLookup   ]                │
+│ [Számlaszám]   │ Szállító: [SmartLookup   ]               │
 │ [Dátum]        │ Dátum:    [2025-06-30  ]                │
 │ [Szállító]     │ Szám:     [XXXXX1231   ]                │
-│                │ Fiz. mód: [EditLookup   ]   [ ] Bruttó  │
+│                │ Fiz. mód: [SmartLookup   ]   [ ] Bruttó │
 │                ├──────────────────────────────────────────┤
 │                │ Termék  Menny. Csop. Me.e. Ár  ÁFA       │
 │                │ [Edit] [  1] ...                         │
