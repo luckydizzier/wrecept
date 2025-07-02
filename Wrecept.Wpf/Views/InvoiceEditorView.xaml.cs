@@ -58,12 +58,15 @@ public partial class InvoiceEditorView : UserControl
 
         if (e.Key == Key.Enter && fe?.Name == "EntryTax")
         {
-            await vm.AddLineItemCommand.ExecuteAsync(null);
+            if (vm.EditableItem.IsEditingExisting)
+                vm.SaveEditedItemCommand.Execute(null);
+            else
+                await vm.AddLineItemCommand.ExecuteAsync(null);
             e.Handled = true;
             return;
         }
 
-        if (e.Key == Key.Escape && vm.Items.Count > 1 && !vm.IsInLineFinalizationPrompt)
+        if (e.Key == Key.Escape && string.IsNullOrWhiteSpace(vm.EditableItem.Product) && !vm.IsInLineFinalizationPrompt)
         {
             vm.SavePrompt = new SaveLinePromptViewModel(vm,
                 "Befejezted a tételsorok rögzítését? (Enter=Igen, Esc=Nem)",

@@ -33,6 +33,9 @@
         <DataTemplate DataType="{x:Type vm:ArchivePromptViewModel}">
             <prompt:ArchivePromptView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DeleteItemPromptViewModel}">
+            <prompt:DeleteItemPromptView/>
+        </DataTemplate>
         <Style x:Key="GoldFocusVisual" TargetType="Control">
             <Setter Property="Template">
                 <Setter.Value>
@@ -133,9 +136,18 @@
                 </GroupBox>
             </Grid>
 
-            <StackPanel Orientation="Horizontal" DataContext="{Binding Items[0]}" KeyDown="OnEntryKeyDown"
-                        Background="{DynamicResource ControlBackgroundBrush}" Margin="0,0,0,4" Grid.Row="1"
+            <StackPanel Orientation="Horizontal" DataContext="{Binding EditableItem}" KeyDown="OnEntryKeyDown" Margin="0,0,0,4" Grid.Row="1"
                         IsEnabled="{Binding DataContext.IsEditable, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsEditingExisting}" Value="True">
+                                <Setter Property="Background" Value="LightYellow" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
                 <c:SmartLookup x:Name="EntryProduct" Width="200"
                                ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                DisplayMemberPath="Name"
@@ -183,6 +195,7 @@
 
             <ContentControl Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="5" />
             <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="5" Margin="0,4,0,0" />
+            <ContentControl Content="{Binding DeletePrompt}" Visibility="{Binding IsDeletePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="5" Margin="0,8,0,0" />
         </Grid>
     </Grid>
 </UserControl>
