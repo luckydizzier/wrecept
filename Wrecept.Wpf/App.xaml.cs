@@ -31,19 +31,19 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
     {
     }
 
-    private static void EnsureServicesInitialized()
+    private static async Task EnsureServicesInitializedAsync()
     {
         if (Services != null)
             return;
 
-        var settings = LoadSettings();
+        var settings = await LoadSettingsAsync();
         var serviceCollection = new ServiceCollection();
-        ConfigureServices(serviceCollection, settings);
+        await ConfigureServicesAsync(serviceCollection, settings);
         Services = serviceCollection.BuildServiceProvider();
         ThemeManager.ApplyDarkTheme(false);
     }
 
-    private static AppSettings LoadSettings()
+    private static async Task<AppSettings> LoadSettingsAsync()
     {
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         var dataDir = Path.Combine(appData, "Wrecept");
@@ -59,7 +59,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
             catch (Exception ex) when (ex is IOException || ex is JsonException)
             {
                 var logger = new Wrecept.Storage.Services.LogService();
-                logger.LogError("LoadSettings", ex).GetAwaiter().GetResult();
+                await logger.LogError("LoadSettings", ex);
             }
         }
 
@@ -82,18 +82,18 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         catch (Exception ex) when (ex is IOException || ex is JsonException)
         {
             var logger = new Wrecept.Storage.Services.LogService();
-            logger.LogError("SaveSettings", ex).GetAwaiter().GetResult();
+            await logger.LogError("SaveSettings", ex);
         }
         return settings;
     }
 
-    private static void ConfigureServices(IServiceCollection services, AppSettings settings)
+    private static async Task ConfigureServicesAsync(IServiceCollection services, AppSettings settings)
     {
         DbPath = settings.DatabasePath;
         UserInfoPath = settings.UserInfoPath;
 
         services.AddCore();
-        services.AddStorage(DbPath, UserInfoPath, SettingsPath);
+        await services.AddStorageAsync(DbPath, UserInfoPath, SettingsPath);
 
         services.AddTransient<StageViewModel>();
         services.AddTransient<InvoiceEditorViewModel>();
@@ -138,7 +138,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
     {
         base.OnStartup(e);
 
-        EnsureServicesInitialized();
+        await EnsureServicesInitializedAsync();
 
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
