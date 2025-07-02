@@ -28,7 +28,6 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
 
     public App()
     {
-        EnsureServicesInitialized();
     }
 
     private static void EnsureServicesInitialized()

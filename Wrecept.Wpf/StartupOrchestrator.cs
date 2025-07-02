@@ -22,7 +22,9 @@ public class StartupOrchestrator
     public async Task<SeedStatus> SeedAsync(IProgress<ProgressReport> progress, CancellationToken ct)
     {
         progress.Report(new ProgressReport { GlobalPercent = 10, Message = "Mintaszámlák létrehozása..." });
-        var status = await DataSeeder.SeedSampleDataAsync(App.DbPath, _log, progress, ct);
+        var status = await Task.Run(
+            () => DataSeeder.SeedSampleDataAsync(App.DbPath, _log, progress, ct),
+            ct);
         progress.Report(new ProgressReport { GlobalPercent = 100, SubtaskPercent = 100, Message = status.ToString() });
         return status;
     }
