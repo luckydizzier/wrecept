@@ -242,8 +242,9 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
             if (Lookup.InlinePrompt is null)
                 await LoadInvoice(item.Id, item.Number);
         };
+        Items = new ObservableCollection<InvoiceItemRowViewModel>();
         EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
-        Items = new ObservableCollection<InvoiceItemRowViewModel>(new[] { EditableItem });
+        Items.Add(EditableItem);
     }
 
     public async Task LoadAsync(IProgress<ProgressReport>? progress = null)
