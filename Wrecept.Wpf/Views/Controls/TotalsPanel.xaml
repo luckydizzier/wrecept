@@ -6,6 +6,14 @@
             <Setter Property="TextAlignment" Value="Right" />
             <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
+        <Style x:Key="TotalsStackStyle" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsCompactMode, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
+                    <Setter Property="Orientation" Value="Vertical" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <StackPanel x:Name="RootPanel">
         <ItemsControl ItemsSource="{Binding VatSummaries}" Margin="0,0,0,2">
@@ -21,7 +29,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <StackPanel x:Name="TotalsStack" Orientation="Horizontal" Margin="0,4,0,0">
+        <StackPanel x:Name="TotalsStack" Margin="0,4,0,0" Style="{StaticResource TotalsStackStyle}">
             <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
                 <TextBlock Text="Nettó:" />
                 <TextBlock Text="{Binding NetTotal}" Width="80" Style="{StaticResource RightTextBlock}" />
@@ -44,10 +52,5 @@
             <Run Text="Azaz&#x2010;:" />
             <Run Text="{Binding AmountInWords}" />
         </TextBlock>
-        <StackPanel.Triggers>
-            <DataTrigger Binding="{Binding IsCompactMode, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
-                <Setter TargetName="TotalsStack" Property="Orientation" Value="Vertical" />
-            </DataTrigger>
-        </StackPanel.Triggers>
     </StackPanel>
 </UserControl>
