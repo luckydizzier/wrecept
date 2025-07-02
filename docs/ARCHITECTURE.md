@@ -56,9 +56,11 @@ Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a se
  hívást kezdeményez. Hibánál `EnsureCreated()` után másodszor is migrál.
  Az `AddStorage` kiterjesztés ehhez `IDbContextFactory`-t használ,
  így a migráció egy külön kontextuson történik és azonnal eldobásra kerül.
-Ezt követően a `DataSeeder` – ha az adatbázis üres vagy hiányzik – saját
-kontextust hoz létre és egy minimális mintaadatkészletet tölt be.
-Amennyiben csak ez a mintaadatkészlet érhető el, a UI figyelmezteti a felhasználót.
+Az indítás során a `DataSeeder` ellenőrzi, hogy az adatbázis teljesen üres‑e.
+Ha igen, a felhasználó megerősítése után Bogus könyvtár segítségével
+magyar lokalizációjú mintaszámlákat generál (100 számla, 20 szállító,
+500 termék, számlánként 5‑60 tétel). A folyamat közben a `StartupWindow`
+mutatja a haladást két progress baron keresztül.
 Ha a második adatlekérdezés is hibát jelez, a részleteket az `ILogService` naplózza a `logs` mappába, és a program hibát jelez.
 
 ## Indítási folyamat
