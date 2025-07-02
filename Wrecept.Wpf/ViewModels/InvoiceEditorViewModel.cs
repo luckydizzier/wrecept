@@ -97,6 +97,25 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public ObservableCollection<Product> Products { get; } = new();
     public ObservableCollection<Unit> Units { get; } = new();
 
+    private static int StepPercent(int step, int total) => step * 100 / total;
+
+    private static async Task LoadCollectionAsync<T>(ObservableCollection<T> target, Task<List<T>> loadTask, string message, int step, int totalSteps, IProgress<ProgressReport>? progress)
+    {
+        progress?.Report(new ProgressReport { GlobalPercent = StepPercent(step, totalSteps), SubtaskPercent = 0, Message = message });
+        var items = await loadTask;
+        target.Clear();
+        for (int i = 0; i < items.Count; i++)
+        {
+            target.Add(items[i]);
+            progress?.Report(new ProgressReport
+            {
+                GlobalPercent = StepPercent(step, totalSteps),
+                SubtaskPercent = (i + 1) * 100 / items.Count,
+                Message = $"{message} {i + 1}/{items.Count}"
+            });
+        }
+    }
+
     [ObservableProperty]
     private string supplier = string.Empty;
 partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
@@ -205,36 +224,16 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 
     public async Task LoadAsync(IProgress<ProgressReport>? progress = null)
     {
-        progress?.Report(new ProgressReport { SubtaskPercent = 0, Message = Resources.Strings.Load_PaymentMethods });
-        var methods = await _paymentMethods.GetActiveAsync();
-        PaymentMethods.Clear();
-        foreach (var m in methods)
-            PaymentMethods.Add(m);
+        const int total = 5;
+        var step = 0;
 
-        progress?.Report(new ProgressReport { SubtaskPercent = 20, Message = Resources.Strings.Load_Suppliers });
-        var supplierItems = await _suppliers.GetActiveAsync();
-        Suppliers.Clear();
-        foreach (var s in supplierItems)
-            Suppliers.Add(s);
+        await LoadCollectionAsync(PaymentMethods, _paymentMethods.GetActiveAsync(), Resources.Strings.Load_PaymentMethods, step++, total, progress);
+        await LoadCollectionAsync(Suppliers, _suppliers.GetActiveAsync(), Resources.Strings.Load_Suppliers, step++, total, progress);
+        await LoadCollectionAsync(TaxRates, _taxRates.GetActiveAsync(DateTime.UtcNow), Resources.Strings.Load_TaxRates, step++, total, progress);
+        await LoadCollectionAsync(Products, _productsService.GetActiveAsync(), Resources.Strings.Load_Products, step++, total, progress);
+        await LoadCollectionAsync(Units, _unitsService.GetActiveAsync(), Resources.Strings.Load_Units, step++, total, progress);
 
-        progress?.Report(new ProgressReport { SubtaskPercent = 40, Message = Resources.Strings.Load_TaxRates });
-        var taxRates = await _taxRates.GetActiveAsync(DateTime.UtcNow);
-        TaxRates.Clear();
-        foreach (var t in taxRates)
-            TaxRates.Add(t);
-
-        progress?.Report(new ProgressReport { SubtaskPercent = 60, Message = Resources.Strings.Load_Products });
-        var productItems = await _productsService.GetActiveAsync();
-        Products.Clear();
-        foreach (var p in productItems)
-            Products.Add(p);
-
-        progress?.Report(new ProgressReport { SubtaskPercent = 80, Message = Resources.Strings.Load_Units });
-        var unitItems = await _unitsService.GetActiveAsync();
-        Units.Clear();
-        foreach (var u in unitItems)
-            Units.Add(u);
-        progress?.Report(new ProgressReport { SubtaskPercent = 100, Message = Resources.Strings.Load_Complete });
+        progress?.Report(new ProgressReport { GlobalPercent = 100, SubtaskPercent = 100, Message = Resources.Strings.Load_Complete });
     }
 
     public async Task CheckProductAsync(InvoiceItemRowViewModel row, string name)
