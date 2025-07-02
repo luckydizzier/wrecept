@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public partial class PaymentMethodMasterViewModel : MasterDataBaseViewModel<PaymentMethod>
+public partial class PaymentMethodMasterViewModel : EditableMasterDataViewModel<PaymentMethod>
 {
     public ObservableCollection<PaymentMethod> PaymentMethods => Items;
     private readonly IPaymentMethodService _service;
@@ -18,4 +18,13 @@ public partial class PaymentMethodMasterViewModel : MasterDataBaseViewModel<Paym
 
     protected override Task<List<PaymentMethod>> GetItemsAsync()
         => _service.GetActiveAsync();
+
+    protected override async Task DeleteAsync()
+    {
+        if (SelectedItem != null)
+        {
+            SelectedItem.IsArchived = true;
+            await _service.UpdateAsync(SelectedItem);
+        }
+    }
 }

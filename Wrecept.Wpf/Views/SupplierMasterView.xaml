@@ -8,4 +8,14 @@
     <viewsControls:BaseMasterView.Columns>
         <DataGridTextColumn Header="Név" Binding="{Binding Name}" Width="*" />
     </viewsControls:BaseMasterView.Columns>
+    <viewsControls:BaseMasterView.RowDetailsTemplate>
+        <DataTemplate>
+            <StackPanel Margin="4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="80" Text="Név"/>
+                    <TextBox x:Name="InitialFocus" Text="{Binding Name, Mode=TwoWay}" Width="200"/>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </viewsControls:BaseMasterView.RowDetailsTemplate>
 </viewsControls:BaseMasterView>

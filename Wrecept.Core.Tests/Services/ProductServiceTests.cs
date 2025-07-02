@@ -65,6 +65,18 @@ public class ProductServiceTests
     }
 
     [Fact]
+    public async Task UpdateAsync_AllowsArchiving()
+    {
+        var repo = new FakeRepo();
+        var svc = new ProductService(repo);
+        var prod = new Product { Id = 2, Name = "Prod", Net = 1, Gross = 1, IsArchived = true };
+
+        await svc.UpdateAsync(prod);
+
+        Assert.True(repo.Updated?.IsArchived);
+    }
+
+    [Fact]
     public async Task UpdateAsync_Throws_WhenIdInvalid()
     {
         var repo = new FakeRepo();

@@ -63,6 +63,18 @@ public class PaymentMethodServiceTests
     }
 
     [Fact]
+    public async Task UpdateAsync_AllowsArchiving()
+    {
+        var repo = new FakeRepo();
+        var svc = new PaymentMethodService(repo);
+        var method = new PaymentMethod { Id = Guid.NewGuid(), Name = "Cash", IsArchived = true };
+
+        await svc.UpdateAsync(method);
+
+        Assert.True(repo.Updated?.IsArchived);
+    }
+
+    [Fact]
     public async Task UpdateAsync_Throws_WhenIdInvalid()
     {
         var repo = new FakeRepo();

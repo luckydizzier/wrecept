@@ -36,6 +36,7 @@ A Wrecept minden felületén a billentyűzet az elsődleges vezérlő eszköz. A
 - `Enter`: kijelölt sor szerkesztése.
 - `Delete`: kijelölt sor törlése.
 - `Escape`: részletes nézetből vissza a listához.
+Az összes mesteradat ViewModel az `EditableMasterDataViewModel` leszármazottja, így ezek a billentyűk minden listában azonos módon viselkednek.
 
 ## 📦 Modal Prompt Behavior
 

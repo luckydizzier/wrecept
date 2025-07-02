@@ -63,6 +63,18 @@ public class SupplierServiceTests
     }
 
     [Fact]
+    public async Task UpdateAsync_AllowsArchiving()
+    {
+        var repo = new FakeRepo();
+        var svc = new SupplierService(repo);
+        var supplier = new Supplier { Id = 2, Name = "Supp", IsArchived = true };
+
+        await svc.UpdateAsync(supplier);
+
+        Assert.True(repo.Updated?.IsArchived);
+    }
+
+    [Fact]
     public async Task UpdateAsync_Throws_WhenIdInvalid()
     {
         var repo = new FakeRepo();

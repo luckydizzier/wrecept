@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public partial class TaxRateMasterViewModel : MasterDataBaseViewModel<TaxRate>
+public partial class TaxRateMasterViewModel : EditableMasterDataViewModel<TaxRate>
 {
     public ObservableCollection<TaxRate> TaxRates => Items;
 
@@ -20,4 +20,13 @@ public partial class TaxRateMasterViewModel : MasterDataBaseViewModel<TaxRate>
 
     protected override Task<List<TaxRate>> GetItemsAsync()
         => _service.GetActiveAsync(DateTime.UtcNow);
+
+    protected override async Task DeleteAsync()
+    {
+        if (SelectedItem != null)
+        {
+            SelectedItem.IsArchived = true;
+            await _service.UpdateAsync(SelectedItem);
+        }
+    }
 }

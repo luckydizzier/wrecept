@@ -17,4 +17,18 @@
         </DataGridCheckBoxColumn>
         <DataGridTextColumn Binding="{Binding UpdatedAt}" Header="Módosítva" />
     </viewsControls:BaseMasterView.Columns>
+    <viewsControls:BaseMasterView.RowDetailsTemplate>
+        <DataTemplate>
+            <StackPanel Margin="4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="80" Text="Kód"/>
+                    <TextBox x:Name="InitialFocus" Text="{Binding Code, Mode=TwoWay}" Width="80"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                    <TextBlock Width="80" Text="Név"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}" Width="200"/>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </viewsControls:BaseMasterView.RowDetailsTemplate>
 </viewsControls:BaseMasterView>
