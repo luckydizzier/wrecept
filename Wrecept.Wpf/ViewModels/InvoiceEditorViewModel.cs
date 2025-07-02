@@ -658,7 +658,10 @@ private void UpdateSupplierId(string name)
             return;
         Items.RemoveAt(index);
         if (IsNew && index - 1 >= 0 && index - 1 < _draft.Items.Count)
-            _draft.Items.RemoveAt(index - 1);
+        {
+            var domainItem = _draft.Items.ElementAt(index - 1);
+            _draft.Items.Remove(domainItem);
+        }
         RecalculateTotals();
     }
 
