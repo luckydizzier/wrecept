@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using Wrecept.Core.Services;
 
 namespace Wrecept.Wpf.ViewModels;
