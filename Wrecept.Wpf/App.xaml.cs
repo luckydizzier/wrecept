@@ -51,12 +51,15 @@ public partial class App : Application
         services.AddTransient<PaymentMethodMasterViewModel>();
         services.AddTransient<UnitMasterViewModel>();
         services.AddTransient<UserInfoViewModel>();
+        services.AddTransient<ScreenModeViewModel>();
         services.AddTransient<AboutViewModel>();
         services.AddTransient<PlaceholderViewModel>();
         services.AddSingleton<StatusBarViewModel>();
         services.AddSingleton<INotificationService, MessageBoxNotificationService>();
+        services.AddSingleton<ScreenModeManager>();
         services.AddTransient<ProgressViewModel>();
         services.AddTransient<StartupWindow>();
+        services.AddTransient<ScreenModeWindow>();
         services.AddTransient<StartupOrchestrator>();
         services.AddTransient<StageView>();
         services.AddTransient<InvoiceEditorView>();

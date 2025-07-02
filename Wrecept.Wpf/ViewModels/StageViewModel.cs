@@ -118,10 +118,15 @@ private async Task HandleMenu(StageMenuAction action)
             case StageMenuAction.InventoryCard:
             case StageMenuAction.CheckFiles:
             case StageMenuAction.AfterPowerOutage:
-            case StageMenuAction.ScreenSettings:
             case StageMenuAction.PrinterSettings:
                 CurrentViewModel = _placeholder;
                 _statusBar.Message = Resources.Strings.Stage_FunctionNotReady;
+                break;
+            case StageMenuAction.ScreenSettings:
+                var win = App.Provider.GetRequiredService<ScreenModeWindow>();
+                win.Owner = App.Current.MainWindow;
+                win.ShowDialog();
+                _statusBar.Message = "Képernyő mód frissítve";
                 break;
             case StageMenuAction.EditUserInfo:
                 CurrentViewModel = _userInfo;
