@@ -78,7 +78,7 @@ Allow keyboard-only product/supplier lookup and inline creation.
 
 | Step | Agent            | Task Description                              | Blocking Dependency |
 | ---- | ---------------- | --------------------------------------------- | ------------------- |
-| 1    | `ui_agent`       | Implement `EditLookup` UI pattern             | -                   |
+| 1    | `ui_agent`       | Implement `SmartLookup` UI pattern            | -                   |
 | 2    | `logic_agent`    | Handle navigation, trigger Add dialog         | ui\_agent           |
 | 3    | `core_agent`     | Ensure services support async create & reload | logic\_agent        |
 | 4    | `code_agent`     | ViewModel binding and error handling          | core\_agent         |
