@@ -125,8 +125,8 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
         var orchestrator = Provider.GetRequiredService<StartupOrchestrator>();
-        var progressVm = Provider.GetRequiredService<ProgressViewModel>();
         using var cts = new CancellationTokenSource();
+        var progressVm = Provider.GetRequiredService<ProgressViewModel>();
         progressVm.CancelCommand = new RelayCommand(() => cts.Cancel());
         var progress = new Progress<ProgressReport>(r =>
         {
@@ -135,27 +135,32 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
             progressVm.StatusMessage = r.Message;
         });
 
-        var startupWindow = Provider.GetRequiredService<StartupWindow>();
-        startupWindow.DataContext = progressVm;
-        startupWindow.Show();
-        var status = await orchestrator.RunAsync(progress, cts.Token);
-        startupWindow.Close();
+        if (await orchestrator.DatabaseEmptyAsync(cts.Token))
+        {
+            var result = MessageBox.Show(
+                "Kérsz 100 példaszámlát 20 szállítótól, 500 termékkel, számlánként 5-60 tétellel?",
+                "Mintadatok",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question,
+                MessageBoxResult.Yes);
 
-        if (status == SeedStatus.Failed)
-        {
-            MessageBox.Show(
-                "Az adatbázis nem inicializálható. Részletek a logs/startup.log fájlban.",
-                "Indítási hiba",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
-        }
-        else if (status != SeedStatus.None)
-        {
-            MessageBox.Show(
-                "A(z) app.db hiányzott vagy csak mintaadatokat tartalmazott. Mintaadatok betöltve.",
-                "Első indítás",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
+            if (result == MessageBoxResult.Yes)
+            {
+                var startupWindow = Provider.GetRequiredService<StartupWindow>();
+                startupWindow.DataContext = progressVm;
+                startupWindow.Show();
+                var status = await orchestrator.SeedAsync(progress, cts.Token);
+                startupWindow.Close();
+
+                if (status == SeedStatus.Failed)
+                {
+                    MessageBox.Show(
+                        "Az adatbázis nem inicializálható. Részletek a logs/startup.log fájlban.",
+                        "Indítási hiba",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
         }
 
         var window = Provider.GetRequiredService<MainWindow>();
