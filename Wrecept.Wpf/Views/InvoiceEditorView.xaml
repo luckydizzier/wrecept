@@ -134,7 +134,7 @@
 
             <c:TotalsPanel Grid.Row="6" />
 
-            <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="Italic" Margin="0,4" Grid.Row="7" />
+            <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="{x:Static FontStyles.Italic}" Margin="0,4" Grid.Row="7" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6" Grid.Row="8">
                 <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
