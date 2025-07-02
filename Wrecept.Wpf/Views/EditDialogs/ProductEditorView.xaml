@@ -1,0 +1,21 @@
+<UserControl x:Class="Wrecept.Wpf.Views.EditDialogs.ProductEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             KeyDown="OnKeyDown">
+    <StackPanel Margin="10">
+        <TextBlock Text="Név" />
+        <TextBox x:Name="InitialFocus" Text="{Binding Name}" Width="200" />
+        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+            <TextBlock Width="80" Text="Nettó"/>
+            <TextBox Text="{Binding Net}" Width="80"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+            <TextBlock Width="80" Text="Bruttó"/>
+            <TextBox Text="{Binding Gross}" Width="80"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="OK" Width="80" Margin="0,0,8,0" Command="{Binding OkCommand}" />
+            <Button Content="Mégse" Width="80" Command="{Binding CancelCommand}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>
