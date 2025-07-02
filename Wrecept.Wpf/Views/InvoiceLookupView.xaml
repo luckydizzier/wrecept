@@ -18,7 +18,6 @@
                   ItemsSource="{Binding Invoices}"
                   SelectedItem="{Binding SelectedInvoice}"
                   IsEditable="True" IsTextSearchEnabled="True"
-                  DisplayMemberPath="Number"
                   Margin="4">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
