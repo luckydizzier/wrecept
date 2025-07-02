@@ -89,6 +89,9 @@ public partial class InvoiceEditorViewModel : ObservableObject
 {
     public ObservableCollection<InvoiceItemRowViewModel> Items { get; }
 
+    [ObservableProperty]
+    private EditableItemViewModel editableItem = null!;
+
     public InvoiceLookupViewModel Lookup { get; }
 
     public ObservableCollection<PaymentMethod> PaymentMethods { get; } = new();
@@ -182,6 +185,7 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 
     public bool IsSavePromptVisible => SavePrompt != null;
     public bool IsArchivePromptVisible => ArchivePrompt != null;
+    public bool IsDeletePromptVisible => DeletePrompt != null;
 
     [ObservableProperty]
     private object? savePrompt;
@@ -190,16 +194,28 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     private object? archivePrompt;
 
     [ObservableProperty]
+    private object? deletePrompt;
+
+    [ObservableProperty]
     private bool isInLineFinalizationPrompt;
 
     [ObservableProperty]
     private string lastFocusedField = string.Empty;
+
+    partial void OnEditableItemChanged(EditableItemViewModel value)
+    {
+        if (Items.Count > 0)
+            Items[0] = value;
+    }
 
     partial void OnSavePromptChanged(object? value)
         => OnPropertyChanged(nameof(IsSavePromptVisible));
 
     partial void OnArchivePromptChanged(object? value)
         => OnPropertyChanged(nameof(IsArchivePromptVisible));
+
+    partial void OnDeletePromptChanged(object? value)
+        => OnPropertyChanged(nameof(IsDeletePromptVisible));
 
     public InvoiceEditorViewModel(
         IPaymentMethodService paymentMethods,
@@ -226,12 +242,8 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
             if (Lookup.InlinePrompt is null)
                 await LoadInvoice(item.Id, item.Number);
         };
-        Items = new ObservableCollection<InvoiceItemRowViewModel>(
-            Enumerable.Range(1, 3).Select(i => new InvoiceItemRowViewModel(this)
-            {
-                IsEditable = i == 1,
-                IsFirstRow = i == 1
-            }));
+        EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
+        Items = new ObservableCollection<InvoiceItemRowViewModel>(new[] { EditableItem });
     }
 
     public async Task LoadAsync(IProgress<ProgressReport>? progress = null)
@@ -353,7 +365,8 @@ private void UpdateSupplierId(string name)
             IsGross = false;
             IsArchived = false;
             Items.Clear();
-            Items.Add(new InvoiceItemRowViewModel(this) { IsEditable = true, IsFirstRow = true });
+            EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
+            Items.Add(EditableItem);
             RecalculateTotals();
             FormNavigator.RequestFocus("EntryProduct");
             return;
@@ -376,7 +389,8 @@ private void UpdateSupplierId(string name)
         IsArchived = invoice.IsArchived;
 
         Items.Clear();
-        Items.Add(new InvoiceItemRowViewModel(this) { IsEditable = true, IsFirstRow = true });
+        EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
+        Items.Add(EditableItem);
         foreach (var item in invoice.Items)
         {
             var row = new InvoiceItemRowViewModel(this)
@@ -406,7 +420,7 @@ private void UpdateSupplierId(string name)
         }
 
         if (Items.IndexOf(selected) <= 0) return;
-        var edit = Items[0];
+        var edit = EditableItem;
         edit.Product = selected.Product;
         edit.Quantity = selected.Quantity;
         edit.UnitPrice = selected.UnitPrice;
@@ -445,7 +459,7 @@ private void UpdateSupplierId(string name)
     {
         if (Items.Count > 0)
         {
-            var edit = Items[0];
+            var edit = EditableItem;
             edit.HasError = true;
             edit.ErrorMessage = Resources.Strings.InvoiceEditor_ReadOnly;
         }
@@ -467,7 +481,7 @@ private void UpdateSupplierId(string name)
             return;
         }
 
-        var edit = Items[0];
+        var edit = EditableItem;
         if (string.IsNullOrWhiteSpace(edit.Product)) return;
 
         if (!ValidateLineItem(edit, out var error))
@@ -534,6 +548,55 @@ private void UpdateSupplierId(string name)
         edit.TaxRateName = string.Empty;
         edit.ProductGroup = string.Empty;
         edit.IsAutofilled = false;
+        edit.IsEditingExisting = false;
+        edit.TargetRow = null;
+    }
+
+    [RelayCommand]
+    internal void SaveEditedItem()
+    {
+        if (EditableItem is not ExistingLineItemEditViewModel edit || edit.TargetRow is null)
+            return;
+
+        if (!IsEditable)
+        {
+            NotifyReadOnly();
+            return;
+        }
+
+        if (!ValidateLineItem(edit, out var error))
+        {
+            edit.HasError = true;
+            edit.ErrorMessage = error;
+            return;
+        }
+
+        var target = edit.TargetRow;
+        target.Product = edit.Product;
+        target.Quantity = edit.Quantity;
+        target.UnitPrice = edit.UnitPrice;
+        target.TaxRateId = edit.TaxRateId;
+        target.UnitId = edit.UnitId;
+        target.UnitName = edit.UnitName;
+        target.TaxRateName = edit.TaxRateName;
+        target.ProductGroup = edit.ProductGroup;
+
+        edit.HasError = false;
+        edit.ErrorMessage = string.Empty;
+
+        RecalculateTotals();
+
+        edit.Product = string.Empty;
+        edit.Quantity = 0;
+        edit.UnitPrice = 0;
+        edit.TaxRateId = Guid.Empty;
+        edit.UnitId = Guid.Empty;
+        edit.UnitName = string.Empty;
+        edit.TaxRateName = string.Empty;
+        edit.ProductGroup = string.Empty;
+        edit.IsEditingExisting = false;
+        edit.TargetRow = null;
+        FormNavigator.RequestFocus("EntryProduct");
     }
 
     [RelayCommand]
@@ -578,6 +641,25 @@ private void UpdateSupplierId(string name)
     {
         if (ArchivePrompt is null)
             ArchivePrompt = new ArchivePromptViewModel(this);
+    }
+
+    internal void RequestDeleteItem(InvoiceItemRowViewModel row)
+    {
+        if (!IsEditable || Items.IndexOf(row) <= 0)
+            return;
+        if (DeletePrompt is null)
+            DeletePrompt = new DeleteItemPromptViewModel(this, row);
+    }
+
+    internal void DeleteItemConfirmed(InvoiceItemRowViewModel row)
+    {
+        var index = Items.IndexOf(row);
+        if (index <= 0)
+            return;
+        Items.RemoveAt(index);
+        if (IsNew && index - 1 >= 0 && index - 1 < _draft.Items.Count)
+            _draft.Items.RemoveAt(index - 1);
+        RecalculateTotals();
     }
 
     [RelayCommand]

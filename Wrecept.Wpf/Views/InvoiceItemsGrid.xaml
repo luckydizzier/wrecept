@@ -10,11 +10,6 @@
 
         <Style x:Key="EditableCellStyle" TargetType="DataGridCell">
             <Setter Property="IsHitTestVisible" Value="False" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsFirstRow}" Value="True">
-                    <Setter Property="IsHitTestVisible" Value="True" />
-                </DataTrigger>
-            </Style.Triggers>
         </Style>
 
         <DataTemplate x:Key="ProductDisplayTemplate">
@@ -67,7 +62,7 @@
         <local:InvoiceLineTotalsConverter x:Key="GrossConverter" Mode="Gross" />
     </UserControl.Resources>
     <DataGrid x:Name="Grid" ItemsSource="{Binding Items}" AutoGenerateColumns="False"
-             IsReadOnly="{Binding IsArchived}"
+             IsReadOnly="True"
              IsEnabled="{Binding IsEditable}"
              KeyDown="OnKeyDown" RowDetailsVisibilityMode="Collapsed"
              VerticalAlignment="Stretch">

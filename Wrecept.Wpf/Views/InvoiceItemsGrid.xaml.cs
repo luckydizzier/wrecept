@@ -17,10 +17,22 @@ public partial class InvoiceItemsGrid : UserControl
             return;
         if (!vm.IsEditable)
             return;
-        if (e.Key == Key.Enter && Grid.SelectedItem is InvoiceItemRowViewModel row)
+        if (Grid.SelectedItem is InvoiceItemRowViewModel row)
         {
-            vm.EditLineFromSelection(row);
-            e.Handled = true;
+            if (e.Key == Key.Enter)
+            {
+                vm.EditLineFromSelection(row);
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Delete)
+            {
+                vm.RequestDeleteItem(row);
+                e.Handled = true;
+            }
+            else
+            {
+                NavigationHelper.Handle(e);
+            }
         }
         else
         {
