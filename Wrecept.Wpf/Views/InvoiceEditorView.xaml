@@ -106,7 +106,7 @@
             <Separator Margin="0,6" Grid.Row="1" />
 
             <StackPanel Orientation="Horizontal" DataContext="{Binding Items[0]}" KeyDown="OnEntryKeyDown"
-                        Background="{DynamicResource ControlBackgroundBrush}" FontStyle="Italic" Margin="0,0,0,4" Grid.Row="2">
+                        Background="{DynamicResource ControlBackgroundBrush}" Margin="0,0,0,4" Grid.Row="2">
                 <c:EditLookup x:Name="EntryProduct" Width="200"
                               ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
                               DisplayMemberPath="Name"
