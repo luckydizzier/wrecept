@@ -31,12 +31,13 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 1. **Adatbázis fájl hiánya vagy hiányzó elérési út** – Ha az adatbázis helye nincs megadva vagy az `app.db` nem található, a Storage réteg a `%AppData%/Wrecept/app.db` fájlt hozza létre, majd figyelmeztető üzenetet jelenítünk meg.
 2. **Üres adatbázis** – Ha egyetlen táblában sincs adat, minta rekordokat szúrunk be és figyelmeztetjük a felhasználót.
 3. **Sémahibák indításkor** – A `DbInitializer` megkísérli a `Database.Migrate()` hívást. Ha a migráció hibát dob, `EnsureCreated()` után újra futtatja. A `DataSeeder` külön kontextust használ, így a DI-ből kapott példány nem marad használatban.
-4. **Sérült import fájl** – Hibás formátumú vagy hiányzó adatfájl betöltésekor megszakítjuk a folyamatot, naplózzuk a fájl nevét és a kiváltó hibát, és lehetőséget adunk új fájl kiválasztására.
-5. **Hálózati kimaradás** – Külső frissítések letöltése közben kapcsolatvesztés esetén újrapróbálkozunk, majd offline módra váltunk, miközben a felhasználót tájékoztatjuk.
-6. **Sikertelen adatbázis írás** – Ha a fájl zárolt vagy elfogy a tárhely, hibaüzenetet jelenítünk meg, a műveletet naplózzuk, majd biztonsági mentés után újrapróbáljuk.
-7. **Indítási hiba** – Ha a `DataSeeder` másodszori próbálkozásra is `SqliteException`-t kap, a részleteket az `ILogService` naplózza a `logs` mappába, majd hibaüzenetet jelenítünk meg.
-8. **Egyéb inicializációs hiba** – A `DbInitializer` általános kivételt is naplóz. Ha a második migrációs kísérlet sikertelen, a program leáll.
-9. **Hiányzó tábla új modell után** – A `DataSeeder` felismeri a `no such table` hibát, ismét migrációt futtat és naplózza az eseményt.
+4. **Sérült konfigurációs fájl** – A `settings.json` olvasásakor `JsonException` vagy `IOException` esetén hibaüzenetet írunk a naplóba és alapértelmezett beállításokkal folytatjuk.
+5. **Sérült import fájl** – Hibás formátumú vagy hiányzó adatfájl betöltésekor megszakítjuk a folyamatot, naplózzuk a fájl nevét és a kiváltó hibát, és lehetőséget adunk új fájl kiválasztására.
+6. **Hálózati kimaradás** – Külső frissítések letöltése közben kapcsolatvesztés esetén újrapróbálkozunk, majd offline módra váltunk, miközben a felhasználót tájékoztatjuk.
+7. **Sikertelen adatbázis írás** – Ha a fájl zárolt vagy elfogy a tárhely, hibaüzenetet jelenítünk meg, a műveletet naplózzuk, majd biztonsági mentés után újrapróbáljuk.
+8. **Indítási hiba** – Ha a `DataSeeder` másodszori próbálkozásra is `SqliteException`-t kap, a részleteket az `ILogService` naplózza a `logs` mappába, majd hibaüzenetet jelenítünk meg.
+9. **Egyéb inicializációs hiba** – A `DbInitializer` általános kivételt is naplóz. Ha a második migrációs kísérlet sikertelen, a program leáll.
+10. **Hiányzó tábla új modell után** – A `DataSeeder` felismeri a `no such table` hibát, ismét migrációt futtat és naplózza az eseményt.
 
 *Megjegyzés: a `wrecept.db` fájlt kizárólag fejlesztés közbeni migrációkhoz használjuk.*
 

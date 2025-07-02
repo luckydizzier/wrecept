@@ -8,6 +8,7 @@ using Wrecept.Core;
 using Wrecept.Core.Services;
 using Wrecept.Core.Entities;
 using Wrecept.Storage;
+using Wrecept.Storage.Services;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Views;
 using Wrecept.Wpf.Views.Controls;
@@ -50,8 +51,16 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         SettingsPath = Path.Combine(dataDir, "settings.json");
         if (File.Exists(SettingsPath))
         {
-            using var stream = File.OpenRead(SettingsPath);
-            return JsonSerializer.Deserialize<AppSettings>(stream) ?? new AppSettings();
+            try
+            {
+                using var stream = File.OpenRead(SettingsPath);
+                return JsonSerializer.Deserialize<AppSettings>(stream) ?? new AppSettings();
+            }
+            catch (Exception ex) when (ex is IOException || ex is JsonException)
+            {
+                var logger = new Wrecept.Storage.Services.LogService();
+                logger.LogError("LoadSettings", ex).GetAwaiter().GetResult();
+            }
         }
 
         var defaultDb = Path.Combine(Environment.CurrentDirectory, "app.db");
@@ -65,8 +74,16 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
             DatabasePath = vm.DatabasePath,
             UserInfoPath = vm.ConfigPath
         };
-        using var save = File.Create(SettingsPath);
-        JsonSerializer.Serialize(save, settings, new JsonSerializerOptions { WriteIndented = true });
+        try
+        {
+            using var save = File.Create(SettingsPath);
+            JsonSerializer.Serialize(save, settings, new JsonSerializerOptions { WriteIndented = true });
+        }
+        catch (Exception ex) when (ex is IOException || ex is JsonException)
+        {
+            var logger = new Wrecept.Storage.Services.LogService();
+            logger.LogError("SaveSettings", ex).GetAwaiter().GetResult();
+        }
         return settings;
     }
 

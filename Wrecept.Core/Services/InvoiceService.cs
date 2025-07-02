@@ -22,6 +22,8 @@ public class InvoiceService : IInvoiceService
         if (invoice.Items.Count == 0) return false;
         if (invoice.Items.Any(i => i.Quantity == 0 || i.UnitPrice < 0)) return false;
         if (invoice.Items.Any(i => i.ProductId <= 0)) return false;
+        if (invoice.Items.Any(i => i.TaxRate is null && (i.Product?.TaxRate is null)))
+            return false;
 
         invoice.CreatedAt = DateTime.UtcNow;
         invoice.UpdatedAt = DateTime.UtcNow;
