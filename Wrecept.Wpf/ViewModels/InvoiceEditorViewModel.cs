@@ -590,18 +590,18 @@ private void UpdateSupplierId(string name)
             totals.Gross += grossAmount;
         }
 
-        NetTotal = net;
-        VatTotal = vat;
-        GrossTotal = gross;
+        NetTotal = Math.Round(net, 2, MidpointRounding.AwayFromZero);
+        VatTotal = Math.Round(vat, 2, MidpointRounding.AwayFromZero);
+        GrossTotal = Math.Round(gross, 2, MidpointRounding.AwayFromZero);
         foreach (var kv in byTax)
         {
             var name = TaxRates.FirstOrDefault(t => t.Id == kv.Key)?.Name ?? string.Empty;
             VatSummaries.Add(new VatSummaryRowViewModel
             {
                 Rate = name,
-                Net = kv.Value.Net,
-                Vat = kv.Value.Tax,
-                Gross = kv.Value.Gross
+                Net = Math.Round(kv.Value.Net, 2, MidpointRounding.AwayFromZero),
+                Vat = Math.Round(kv.Value.Tax, 2, MidpointRounding.AwayFromZero),
+                Gross = Math.Round(kv.Value.Gross, 2, MidpointRounding.AwayFromZero)
             });
         }
         AmountInWords = NumberToWordsConverter.Convert((long)GrossTotal) + " Ft";
