@@ -1,8 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System.Windows;
 using Wrecept.Wpf.Resources;
+using Wrecept.Wpf.Views;
 
 namespace Wrecept.Wpf.ViewModels;
 
