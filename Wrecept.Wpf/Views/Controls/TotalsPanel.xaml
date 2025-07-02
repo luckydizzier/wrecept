@@ -14,7 +14,8 @@
             <Setter Property="HorizontalAlignment" Value="Stretch" />
         </Style>
     </UserControl.Resources>
-    <StackPanel FontFamily="{StaticResource MonospacedFont}" FontSize="14">
+    <StackPanel TextElement.FontFamily="{StaticResource MonospacedFont}"
+                TextElement.FontSize="14">
         <ItemsControl ItemsSource="{Binding VatSummaries}" Margin="0,0,0,2">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
