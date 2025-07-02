@@ -9,6 +9,7 @@ namespace Wrecept.Wpf.ViewModels;
 public partial class AboutViewModel : ObservableObject
 {
     private readonly IUserInfoService _service;
+    private readonly string _baseText;
 
     [ObservableProperty]
     private string aboutText = string.Empty;
@@ -21,15 +22,20 @@ public partial class AboutViewModel : ObservableObject
         var resourceName = "Wrecept.Wpf.Resources.about_hu.md";
         using var stream = assembly.GetManifestResourceStream(resourceName);
 
-        string text = "A Névjegy információ nem található.";
+        var text = "A Névjegy információ nem található.";
         if (stream is not null)
         {
             using var reader = new StreamReader(stream);
             text = StripFrontMatter(reader.ReadToEnd());
         }
 
-        var info = _service.LoadAsync().GetAwaiter().GetResult();
-        var sb = new StringBuilder(text);
+        _baseText = text;
+    }
+
+    public async Task LoadAsync()
+    {
+        var info = await _service.LoadAsync();
+        var sb = new StringBuilder(_baseText);
 
         if (!string.IsNullOrWhiteSpace(info.CompanyName))
         {

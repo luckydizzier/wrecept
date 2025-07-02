@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.Storage.Data;
@@ -13,6 +14,12 @@ namespace Wrecept.Storage;
 public static class ServiceCollectionExtensions
 {
 public static IServiceCollection AddStorage(this IServiceCollection services, string dbPath, string userInfoPath, string settingsPath)
+    {
+        AddStorageAsync(services, dbPath, userInfoPath, settingsPath).GetAwaiter().GetResult();
+        return services;
+    }
+
+public static async Task AddStorageAsync(this IServiceCollection services, string dbPath, string userInfoPath, string settingsPath)
     {
         if (string.IsNullOrWhiteSpace(dbPath))
         {
@@ -38,9 +45,7 @@ public static IServiceCollection AddStorage(this IServiceCollection services, st
         using var provider = services.BuildServiceProvider();
         var factory = provider.GetRequiredService<IDbContextFactory<AppDbContext>>();
         var logger = provider.GetRequiredService<ILogService>();
-        using var ctx = factory.CreateDbContext();
-        DbInitializer.EnsureCreatedAndMigratedAsync(ctx, logger).GetAwaiter().GetResult();
-
-        return services;
+        await using var ctx = factory.CreateDbContext();
+        await DbInitializer.EnsureCreatedAndMigratedAsync(ctx, logger);
     }
 }

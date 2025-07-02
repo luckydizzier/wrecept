@@ -138,6 +138,7 @@ private async Task HandleMenu(StageMenuAction action)
             case StageMenuAction.UserInfo:
                 CurrentViewModel = _about;
                 _statusBar.Message = Resources.Strings.Stage_AboutOpened;
+                await _about.LoadAsync();
                 break;
             case StageMenuAction.ExitApplication:
                 Application.Current.Shutdown();
