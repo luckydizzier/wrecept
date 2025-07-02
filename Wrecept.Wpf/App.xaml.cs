@@ -138,9 +138,9 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
     {
         base.OnStartup(e);
 
-        await EnsureServicesInitializedAsync();
-
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+        await EnsureServicesInitializedAsync();
 
         var orchestrator = Provider.GetRequiredService<StartupOrchestrator>();
         using var cts = new CancellationTokenSource();
