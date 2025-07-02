@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core;
 using Wrecept.Core.Services;
+using Wrecept.Core.Entities;
 using Wrecept.Storage;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Views;
