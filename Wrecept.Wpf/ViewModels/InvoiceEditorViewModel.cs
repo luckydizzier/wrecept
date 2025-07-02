@@ -167,6 +167,7 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     private readonly IInvoiceService _invoiceService;
     private readonly ILogService _log;
     private readonly INotificationService _notifications;
+    private Invoice _draft = new();
 
     [ObservableProperty]
     private int invoiceId;
@@ -323,11 +324,29 @@ private void UpdateSupplierId(string name)
     internal async Task OpenSelectedInvoiceAsync()
     {
         if (Lookup.SelectedInvoice != null)
-            await LoadInvoice(Lookup.SelectedInvoice.Id);
+            await LoadInvoice(Lookup.SelectedInvoice.Id, Lookup.SelectedInvoice.Number);
     }
 
-    public async Task LoadInvoice(int id)
+    public async Task LoadInvoice(int id, string? number = null)
     {
+        if (id == 0)
+        {
+            _draft = new Invoice();
+            InvoiceId = 0;
+            IsNew = true;
+            SupplierId = 0;
+            Supplier = string.Empty;
+            InvoiceDate = DateTime.Today;
+            Number = number ?? string.Empty;
+            PaymentMethodId = Guid.Empty;
+            IsGross = false;
+            IsArchived = false;
+            Items.Clear();
+            Items.Add(new InvoiceItemRowViewModel(this) { IsEditable = true, IsFirstRow = true });
+            RecalculateTotals();
+            return;
+        }
+
         var invoice = await _invoiceService.GetAsync(id);
         if (invoice == null)
             return;
@@ -453,22 +472,29 @@ private void UpdateSupplierId(string name)
 
         var item = new InvoiceItem
         {
-            InvoiceId = InvoiceId,
             ProductId = product.Id,
             TaxRateId = edit.TaxRateId != Guid.Empty ? edit.TaxRateId : product.TaxRateId,
             Quantity = edit.Quantity,
             UnitPrice = edit.UnitPrice
         };
 
-        try
+        if (IsNew)
         {
-            await _invoiceService.AddItemAsync(item);
+            _draft.Items.Add(item);
         }
-        catch (Exception ex)
+        else
         {
-            await _log.LogError("AddLineItemAsync", ex);
-            _notifications.ShowError("A sor mentése nem sikerült: " + ex.Message);
-            return;
+            try
+            {
+                item.InvoiceId = InvoiceId;
+                await _invoiceService.AddItemAsync(item);
+            }
+            catch (Exception ex)
+            {
+                await _log.LogError("AddLineItemAsync", ex);
+                _notifications.ShowError("A sor mentése nem sikerült: " + ex.Message);
+                return;
+            }
         }
 
         var row = new InvoiceItemRowViewModel(this)
@@ -509,16 +535,18 @@ private void UpdateSupplierId(string name)
         {
             if (IsNew)
             {
-                var invoice = new Invoice
+                _draft.Number = Number;
+                _draft.SupplierId = SupplierId;
+                _draft.PaymentMethodId = PaymentMethodId;
+                _draft.Date = date;
+                _draft.IsGross = IsGross;
+                var ok = await _invoiceService.CreateAsync(_draft);
+                if (ok)
                 {
-                    Number = Number,
-                    SupplierId = SupplierId,
-                    PaymentMethodId = PaymentMethodId,
-                    Date = date,
-                    IsGross = IsGross
-                };
-                InvoiceId = await _invoiceService.CreateHeaderAsync(invoice);
-                IsNew = false;
+                    InvoiceId = _draft.Id;
+                    IsNew = false;
+                    _draft = new Invoice();
+                }
             }
             else
             {

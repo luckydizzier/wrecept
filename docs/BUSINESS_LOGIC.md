@@ -25,6 +25,9 @@ Ez a dokumentum definiálja a **Wrecept** rendszer üzleti logikáját. A rendsz
    * fizetési módot (`PaymentMethod`), amelyhez `DueInDays` is tartozik,
    * beérkezés dátuma alapján **automatikusan számítható a fizetési határidő**.
 
+   A fejlécadatok először csak memóriában kerülnek tárolásra. Az adatbázisba írás
+   a teljes számla mentésekor történik, így elkerülhetők a félbehagyott rekordok.
+
 2. A felhasználó tetszőleges számú tételt rögzít:
 
    * termék kiválasztása,
