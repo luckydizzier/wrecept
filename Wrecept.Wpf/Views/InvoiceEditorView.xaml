@@ -61,51 +61,53 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Margin="0,0,0,6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <GroupBox Header="Számlafejléc" Grid.Column="0" Margin="0,0,8,0">
-                <Grid Margin="4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="70" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Szállító" VerticalAlignment="Center" />
-                    <c:EditLookup Grid.Row="0" Grid.Column="1" Width="200"
-                                  ItemsSource="{Binding Suppliers}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValuePath="Id"
-                                  SelectedValue="{Binding SupplierId}"
-                                  CreateCommand="{Binding ShowSupplierCreatorCommand}"
-                                  IsEnabled="{Binding IsEditable}" />
+                <GroupBox Header="Számlafejléc">
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Szállító" VerticalAlignment="Center" />
+                            <c:EditLookup Grid.Row="0" Grid.Column="1" Width="200"
+                                          ItemsSource="{Binding Suppliers}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Id"
+                                          SelectedValue="{Binding SupplierId}"
+                                          CreateCommand="{Binding ShowSupplierCreatorCommand}"
+                                          IsEnabled="{Binding IsEditable}" />
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Dátum" VerticalAlignment="Center" />
-                    <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Dátum" VerticalAlignment="Center" />
+                            <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
 
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Szám" VerticalAlignment="Center" />
-                    <TextBox Grid.Row="2" Grid.Column="1" Width="120" Text="{Binding Number}" IsEnabled="{Binding IsNew}" />
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Szám" VerticalAlignment="Center" />
+                            <TextBox Grid.Row="2" Grid.Column="1" Width="120" Text="{Binding Number}" IsEnabled="{Binding IsNew}" />
 
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Fiz. mód" VerticalAlignment="Center" />
-                    <c:EditLookup Grid.Row="3" Grid.Column="1" Width="200"
-                                  ItemsSource="{Binding PaymentMethods}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValuePath="Id"
-                                  SelectedValue="{Binding PaymentMethodId}"
-                                  CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
-                                  IsEnabled="{Binding IsEditable}" />
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Fiz. mód" VerticalAlignment="Center" />
+                            <c:EditLookup Grid.Row="3" Grid.Column="1" Width="200"
+                                          ItemsSource="{Binding PaymentMethods}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Id"
+                                          SelectedValue="{Binding PaymentMethodId}"
+                                          CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
+                                          IsEnabled="{Binding IsEditable}" />
 
-                    <CheckBox Grid.Row="4" Grid.Column="1" Content="Bruttó ár" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
-                </Grid>
+                            <CheckBox Grid.Row="4" Grid.Column="1" Content="Bruttó ár" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
+                        </Grid>
+                        <c:TotalsPanel Grid.Column="1" Margin="12,0,0,0" />
+                    </Grid>
                 </GroupBox>
-                <c:TotalsPanel Grid.Column="1" />
             </Grid>
 
             <StackPanel Orientation="Horizontal" DataContext="{Binding Items[0]}" KeyDown="OnEntryKeyDown"
