@@ -52,8 +52,9 @@ Az aktuális képernyőmódot a `SettingsService` tartja nyilván `settings.json
 
 Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a service réteg inicializálja, így naplózható az adat módosításának ideje.
 
- Az alkalmazás indításakor a `DbInitializer` közvetlenül `Database.Migrate()`
- hívást kezdeményez. Hibánál `EnsureCreated()` után másodszor is migrál.
+ Az alkalmazás indításakor a `DbInitializer` előbb `EnsureCreated()` majd
+ `Database.Migrate()` hívást kezdeményez. Így elkerülhető a hiányzó
+ `__EFMigrationsHistory` tábla miatti hiba.
  Az `AddStorage` kiterjesztés ehhez `IDbContextFactory`-t használ,
  így a migráció egy külön kontextuson történik és azonnal eldobásra kerül.
 Az indítás során a `DataSeeder` ellenőrzi, hogy az adatbázis teljesen üres‑e.
