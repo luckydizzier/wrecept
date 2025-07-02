@@ -4,13 +4,14 @@
     <UserControl.Resources>
         <Style x:Key="RightTextBlock" TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
     </UserControl.Resources>
-    <StackPanel>
-        <ItemsControl ItemsSource="{Binding VatSummaries}">
+    <StackPanel x:Name="RootPanel">
+        <ItemsControl ItemsSource="{Binding VatSummaries}" Margin="0,0,0,2">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Margin="0,0,0,2" Style="{StaticResource RightTextBlock}">
+                    <TextBlock Margin="0,0,0,1" Style="{StaticResource RightTextBlock}">
                         <Run Text="{Binding Rate}" />
                         <Run Text=" - nettó " />
                         <Run Text="{Binding Net}" />
@@ -20,28 +21,33 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Grid Margin="0,4,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="80" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Nettó:" Grid.Column="0" />
-            <TextBlock Text="{Binding NetTotal}" Grid.Column="1" Style="{StaticResource RightTextBlock}" />
-            <TextBlock Text="ÁFA:" Grid.Column="2" Margin="20,0,0,0" />
-            <TextBlock Text="{Binding VatTotal}" Grid.Column="3" Style="{StaticResource RightTextBlock}" />
-            <TextBlock Text="Bruttó:" Grid.Column="4" Margin="20,0,0,0" />
-            <TextBlock Text="{Binding GrossTotal}" Grid.Column="5" Style="{StaticResource RightTextBlock}" />
-        </Grid>
-        <TextBlock Text="{Binding AmountInWords, StringFormat=Azaz: {0}}"
-                   FontWeight="Bold"
+        <StackPanel x:Name="TotalsStack" Orientation="Horizontal" Margin="0,4,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                <TextBlock Text="Nettó:" />
+                <TextBlock Text="{Binding NetTotal}" Width="80" Style="{StaticResource RightTextBlock}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                <TextBlock Text="ÁFA:" />
+                <TextBlock Text="{Binding VatTotal}" Width="80" Style="{StaticResource RightTextBlock}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Bruttó:" />
+                <TextBlock Text="{Binding GrossTotal}" Width="80" Style="{StaticResource RightTextBlock}" />
+            </StackPanel>
+        </StackPanel>
+        <TextBlock FontWeight="Bold"
                    Margin="0,2,0,4"
                    Style="{StaticResource RightTextBlock}"
                    TextWrapping="Wrap"
                    Language="hu-HU"
-                   IsHyphenationEnabled="True" />
+                   IsHyphenationEnabled="True">
+            <Run Text="Azaz&#x2010;:" />
+            <Run Text="{Binding AmountInWords}" />
+        </TextBlock>
+        <StackPanel.Triggers>
+            <DataTrigger Binding="{Binding IsCompactMode, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
+                <Setter TargetName="TotalsStack" Property="Orientation" Value="Vertical" />
+            </DataTrigger>
+        </StackPanel.Triggers>
     </StackPanel>
 </UserControl>
