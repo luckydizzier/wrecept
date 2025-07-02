@@ -64,4 +64,10 @@ Ha a második adatlekérdezés is hibát jelez, a részleteket az `ILogService` 
 
 Az alkalmazás betöltésekor a `StartupOrchestrator` fut le, amely két szintű előrehaladási értéket jelent az UI felé. A `ProgressViewModel` által kötött nézet két `ProgressBar`-on keresztül mutatja a globális és részfeladatok százalékos állását, így a felhasználó valós időben látja a migráció és a mintaadatok betöltésének állapotát.
 
+## Dialóguskezelés
+
+A modális ablakok megjelenítését a `NavigationService.ShowCenteredDialog` koordinálja. A metódus a `MainWindow` példányát állítja be tulajdonosnak, majd a `DialogHelper.CenterToOwner` hívással középre igazítja a párbeszédablakot, mielőtt meghívja a `ShowDialog` függvényt. Így minden dialógus egységesen, ismétlődő pozicionálási kód nélkül jelenik meg.
+
+A progress logok szerint a `DialogService` jelenleg csak az `EditEntity` dialógust indítja el, de később ez a szolgáltatás fogja összefogni a különféle modális ablakok megnyitását és esetleges útvonalkezelését. A cél, hogy a ViewModel rétegek ne közvetlenül hozzák létre a dialógusokat, hanem a `DialogService` döntse el, miként és mely nézetekkel jelenjenek meg.
+
 ---
