@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.Storage.Data;
@@ -12,7 +14,13 @@ public static class ServiceCollectionExtensions
 {
 public static IServiceCollection AddStorage(this IServiceCollection services, string dbPath, string userInfoPath, string settingsPath)
     {
-        ArgumentException.ThrowIfNullOrEmpty(dbPath);
+        if (string.IsNullOrWhiteSpace(dbPath))
+        {
+            var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var dataDir = Path.Combine(appData, "Wrecept");
+            Directory.CreateDirectory(dataDir);
+            dbPath = Path.Combine(dataDir, "app.db");
+        }
 
         services.AddDbContext<AppDbContext>(o => o.UseSqlite($"Data Source={dbPath}"));
         services.AddDbContextFactory<AppDbContext>(o => o.UseSqlite($"Data Source={dbPath}"));
