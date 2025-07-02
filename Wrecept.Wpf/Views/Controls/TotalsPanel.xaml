@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <Style x:Key="ValueCell" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
+            <Setter Property="TextElement.FontFamily" Value="{StaticResource MonospacedFont}" />
             <Setter Property="TextElement.FontSize" Value="14" />
             <Setter Property="TextAlignment" Value="Right" />
             <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
         <Style x:Key="LabelCell" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
+            <Setter Property="TextElement.FontFamily" Value="{StaticResource MonospacedFont}" />
             <Setter Property="TextElement.FontSize" Value="14" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
         </Style>
