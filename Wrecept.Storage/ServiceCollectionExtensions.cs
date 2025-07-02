@@ -25,6 +25,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUnitRepository, UnitRepository>();
         services.AddSingleton<ILogService, LogService>();
         services.AddSingleton<IUserInfoService, UserInfoService>();
+        services.AddSingleton<ISettingsService, SettingsService>();
 
         using var provider = services.BuildServiceProvider();
         var factory = provider.GetRequiredService<IDbContextFactory<AppDbContext>>();

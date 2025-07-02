@@ -1,0 +1,13 @@
+<Window x:Class="Wrecept.Wpf.Views.ScreenModeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Képernyőbeállítás" Height="250" Width="300"
+        WindowStartupLocation="CenterOwner" KeyDown="OnKeyDown">
+    <StackPanel Margin="10">
+        <ListBox ItemsSource="{Binding Modes}" SelectedItem="{Binding SelectedMode}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="OK" Width="80" Margin="0,0,8,0" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+            <Button Content="Mégse" Width="80" IsCancel="True"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

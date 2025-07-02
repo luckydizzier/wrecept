@@ -25,3 +25,10 @@ DataGrid sorok fekete háttérrel és arany kiemeléssel jelennek meg a DOS-hat�
 
 Every control style sets `FocusVisualStyle` to display a dashed border so keyboard navigation is obvious.
 - The StatusBar uses `ControlBackgroundBrush` with subtle text to avoid distraction while conveying state.
+
+## Screen Modes
+
+A `ScreenModeManager` négy előre definiált profil közül választ:
+Small (800x600), Medium (1024x768), Large (1280x1024) és ExtraLarge (1920x1080).
+Az ablakméret és a betűméret a kiválasztott mód szerint frissül, az értékek a
+`%AppData%/Wrecept/settings.json` fájlban tárolódnak.
