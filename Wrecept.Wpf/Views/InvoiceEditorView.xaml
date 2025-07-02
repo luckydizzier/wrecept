@@ -62,11 +62,10 @@
 
             <Grid Grid.Row="0" Margin="0,0,0,6">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <c:TotalsPanel Grid.Column="0" Margin="0,0,8,0" />
-                <GroupBox Header="Számlafejléc" Grid.Column="1">
+                <GroupBox Header="Számlafejléc" Grid.Column="0" Margin="0,0,8,0">
                 <Grid Margin="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="70" />
@@ -106,6 +105,7 @@
                     <CheckBox Grid.Row="4" Grid.Column="1" Content="Bruttó ár" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
                 </Grid>
                 </GroupBox>
+                <c:TotalsPanel Grid.Column="1" />
             </Grid>
 
             <StackPanel Orientation="Horizontal" DataContext="{Binding Items[0]}" KeyDown="OnEntryKeyDown"
