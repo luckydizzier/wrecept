@@ -44,7 +44,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="Auto" MinWidth="220" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -54,16 +54,19 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <GroupBox Header="Számlafejléc" Margin="0,0,0,6" Grid.Row="0">
+
+            <Grid Grid.Row="0" Margin="0,0,0,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <c:TotalsPanel Grid.Column="0" Margin="0,0,8,0" />
+                <GroupBox Header="Számlafejléc" Grid.Column="1">
                 <Grid Margin="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="70" />
@@ -102,11 +105,11 @@
 
                     <CheckBox Grid.Row="4" Grid.Column="1" Content="Bruttó ár" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
                 </Grid>
-            </GroupBox>
-            <Separator Margin="0,6" Grid.Row="1" />
+                </GroupBox>
+            </Grid>
 
             <StackPanel Orientation="Horizontal" DataContext="{Binding Items[0]}" KeyDown="OnEntryKeyDown"
-                        Background="{DynamicResource ControlBackgroundBrush}" Margin="0,0,0,4" Grid.Row="2">
+                        Background="{DynamicResource ControlBackgroundBrush}" Margin="0,0,0,4" Grid.Row="1">
                 <c:EditLookup x:Name="EntryProduct" Width="200"
                               ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
                               DisplayMemberPath="Name"
@@ -126,17 +129,13 @@
                               SelectedValue="{Binding TaxRateId, Mode=TwoWay}"/>
             </StackPanel>
 
-            <Separator Margin="0,6" Grid.Row="3" />
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <view:InvoiceItemsGrid x:Name="ItemsGrid" Margin="0,0,0,4" />
+            </ScrollViewer>
 
-            <view:InvoiceItemsGrid x:Name="ItemsGrid" Margin="0,4,0,0" Grid.Row="4" />
+            <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="{x:Static FontStyles.Italic}" Margin="0,4" Grid.Row="3" />
 
-            <Separator Margin="0,6" Grid.Row="5" />
-
-            <c:TotalsPanel Grid.Row="6" />
-
-            <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="{x:Static FontStyles.Italic}" Margin="0,4" Grid.Row="7" />
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6" Grid.Row="8">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6" Grid.Row="4">
                 <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
                 <Button Content="Nyomtatás" IsEnabled="{Binding IsArchived}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
                 <Button Content="Bezárás" Command="{Binding CloseCommand}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
@@ -153,8 +152,8 @@
                 </Button>
             </StackPanel>
 
-            <ContentControl Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="9" />
-            <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="9" Margin="0,4,0,0" />
+            <ContentControl Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="5" />
+            <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="5" Margin="0,4,0,0" />
         </Grid>
     </Grid>
 </UserControl>
