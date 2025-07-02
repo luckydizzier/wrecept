@@ -17,6 +17,10 @@ A Retro UI hangs on a 16 színű DOS-palettán. A XAML erőforrás szótár egys
 - **ControlBackgroundBrush:** Olívzöld (`#c7bb4f`) mezők alapja.
 - **HeaderFooterBrush:** Sötétebb sárga (`#806000`) fejléc és lábléc szín.
 
+Stílusok:
+- **HeaderText**, **HeaderTextBold**: IBM Plex Mono betűcsalád feliratokhoz.
+- **HeaderTextBoxBold**: ugyanez a megjelenés szövegmezőknél.
+
 Betűméretek:
 - **FontSizeNormal:** 16 px, általános szövegekhez és űrlapmezőkhöz.
 - **FontSizeLarge:** 18 px, gombokhoz, menükhöz és táblázatokhoz.
