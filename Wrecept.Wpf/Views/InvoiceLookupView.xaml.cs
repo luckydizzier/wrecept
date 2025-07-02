@@ -27,7 +27,7 @@ public partial class InvoiceLookupView : UserControl
             await vm.LoadAsync();
     }
 
-    private void OnKeyDown(object sender, KeyEventArgs e)
+    private async void OnKeyDown(object sender, KeyEventArgs e)
     {
         if (DataContext is InvoiceLookupViewModel vm)
         {
@@ -35,7 +35,7 @@ public partial class InvoiceLookupView : UserControl
             {
                 if (e.Key == Key.Enter)
                 {
-                    prompt.ConfirmCommand.Execute(null);
+                    await prompt.ConfirmCommand.ExecuteAsync(null);
                     e.Handled = true;
                     return;
                 }
@@ -60,7 +60,7 @@ public partial class InvoiceLookupView : UserControl
             if (e.Key == Key.Enter)
             {
                 if (this.FindAncestor<InvoiceEditorView>()?.DataContext is InvoiceEditorViewModel parent)
-                    parent.OpenSelectedInvoiceCommand.Execute(null);
+                    await parent.OpenSelectedInvoiceCommand.ExecuteAsync(null);
                 e.Handled = true;
                 return;
             }
