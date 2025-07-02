@@ -68,7 +68,8 @@
     </UserControl.Resources>
     <DataGrid x:Name="Grid" ItemsSource="{Binding Items}" AutoGenerateColumns="False"
              IsReadOnly="False"
-             KeyDown="OnKeyDown" RowDetailsVisibilityMode="Collapsed">
+             KeyDown="OnKeyDown" RowDetailsVisibilityMode="Collapsed"
+             VerticalAlignment="Stretch">
         <DataGrid.RowStyle>
             <Style TargetType="DataGridRow">
                 <Setter Property="Background" Value="{Binding Quantity, Converter={StaticResource QuantityToStyleConverter}}" />

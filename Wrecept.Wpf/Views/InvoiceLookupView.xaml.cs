@@ -31,6 +31,22 @@ public partial class InvoiceLookupView : UserControl
     {
         if (DataContext is InvoiceLookupViewModel vm)
         {
+            if (vm.InlinePrompt is InvoiceCreatePromptViewModel prompt)
+            {
+                if (e.Key == Key.Enter)
+                {
+                    prompt.ConfirmCommand.Execute(null);
+                    e.Handled = true;
+                    return;
+                }
+                if (e.Key == Key.Escape)
+                {
+                    prompt.CancelCommand.Execute(null);
+                    e.Handled = true;
+                    return;
+                }
+            }
+
             if (e.Key == Key.Up && InvoiceList.SelectedIndex == 0)
             {
                 if (vm.InlinePrompt is null)
