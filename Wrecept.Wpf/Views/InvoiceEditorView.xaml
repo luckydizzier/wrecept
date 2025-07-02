@@ -70,9 +70,19 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Bal oszlop -->
-                        <StackPanel Grid.Column="0">
-                            <TextBlock Text="Szállító" Style="{StaticResource HeaderText}" />
-                            <c:EditLookup Width="200"
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="220" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Szállító" Style="{StaticResource HeaderText}" />
+                            <c:EditLookup Grid.Row="0" Grid.Column="1" Width="220"
                                           ItemsSource="{Binding Suppliers}"
                                           DisplayMemberPath="Name"
                                           SelectedValuePath="Id"
@@ -80,8 +90,8 @@
                                           CreateCommand="{Binding ShowSupplierCreatorCommand}"
                                           IsEnabled="{Binding IsEditable}" />
 
-                            <TextBlock Text="Fizetési mód" Margin="0,4,0,0" Style="{StaticResource HeaderText}" />
-                            <c:EditLookup Width="200"
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Fizetési mód" Margin="0,4,0,0" Style="{StaticResource HeaderText}" />
+                            <c:EditLookup Grid.Row="1" Grid.Column="1" Width="220" Margin="0,4,0,0"
                                           ItemsSource="{Binding PaymentMethods}"
                                           DisplayMemberPath="Name"
                                           SelectedValuePath="Id"
@@ -89,19 +99,29 @@
                                           CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
                                           IsEnabled="{Binding IsEditable}" />
 
-                            <CheckBox Content="Bruttó ár" Margin="0,4,0,0" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
-                        </StackPanel>
+                            <CheckBox Grid.Row="2" Grid.ColumnSpan="2" Content="Bruttó ár" Margin="0,4,0,0" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
+                        </Grid>
 
                         <!-- Középső oszlop -->
-                        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                            <TextBlock Text="Dátum" Style="{StaticResource HeaderText}" />
-                            <DatePicker SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
-                            <TextBlock Text="Számlaszám" Margin="0,4,0,0" Style="{StaticResource HeaderText}" />
-                            <TextBox Width="120"
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="220" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Dátum" Style="{StaticResource HeaderText}" />
+                            <DatePicker Grid.Row="0" Grid.Column="1" Width="220" SelectedDate="{Binding InvoiceDate}" IsEnabled="{Binding IsEditable}" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,4,0,0" Text="Számlaszám" Style="{StaticResource HeaderText}" />
+                            <TextBox Grid.Row="1" Grid.Column="1" Width="220" Margin="0,4,0,0"
                                      Text="{Binding Number}"
                                      IsEnabled="{Binding IsNew}"
                                      Style="{StaticResource HeaderTextBoxBold}" />
-                        </StackPanel>
+                        </Grid>
 
                         <!-- Jobb oszlop: TotalsPanel -->
                         <Border Grid.Column="2" Padding="4" Margin="0,0,0,0" Background="{DynamicResource ControlBackgroundBrush}">

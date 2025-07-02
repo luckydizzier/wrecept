@@ -3,6 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              KeyDown="OnKeyDown">
     <ScrollViewer Background="{DynamicResource StageBackground}" Margin="4">
-        <TextBlock Text="{Binding AboutText}" TextWrapping="Wrap" FontFamily="Consolas"/>
+        <TextBlock Text="{Binding AboutText}" TextWrapping="Wrap" FontFamily="{DynamicResource MonospacedFont}"/>
     </ScrollViewer>
 </UserControl>
