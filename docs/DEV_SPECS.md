@@ -111,6 +111,7 @@ kóddal keresni az ős elemeket, a logika tisztán a ViewModelben marad.
 └── version.txt          # Last known app version
 ```
 Fejlesztéskor a `wrecept.db` nevű adatbázis kizárólag a migrációk generálásához használatos.
+Ha az adatbázis elérési útja hiányzik, a program automatikusan a fenti `%AppData%/Wrecept/app.db` fájlt hozza létre.
 
 ---
 

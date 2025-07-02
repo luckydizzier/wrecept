@@ -28,7 +28,7 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 
 ## Konkrét példák
 
-1. **Adatbázis fájl hiánya** – Ha az `app.db` nem található indításkor, a Storage réteg új üres adatbázist hoz létre, majd figyelmeztető üzenetet jelenítünk meg.
+1. **Adatbázis fájl hiánya vagy hiányzó elérési út** – Ha az adatbázis helye nincs megadva vagy az `app.db` nem található, a Storage réteg a `%AppData%/Wrecept/app.db` fájlt hozza létre, majd figyelmeztető üzenetet jelenítünk meg.
 2. **Üres adatbázis** – Ha egyetlen táblában sincs adat, minta rekordokat szúrunk be és figyelmeztetjük a felhasználót.
 3. **Sémahibák indításkor** – A `DbInitializer` gondoskodik a migrációk lefuttatásáról. Sikertelenség esetén `EnsureCreated()` hívással létrehozza az alap sémát, majd ismét migrál. A `DataSeeder` külön kontextust használ, így a DI-ből kapott példány nem marad használatban.
 4. **Sérült import fájl** – Hibás formátumú vagy hiányzó adatfájl betöltésekor megszakítjuk a folyamatot, naplózzuk a fájl nevét és a kiváltó hibát, és lehetőséget adunk új fájl kiválasztására.
