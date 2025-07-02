@@ -58,7 +58,7 @@ Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a se
  így a migráció egy külön kontextuson történik és azonnal eldobásra kerül.
 Az indítás során a `DataSeeder` ellenőrzi, hogy az adatbázis teljesen üres‑e.
 Ha igen, a felhasználó megerősítése után Bogus könyvtár segítségével
-magyar lokalizációjú mintaszámlákat generál (100 számla, 20 szállító,
+brit angol lokalizációjú (en_GB) mintaszámlákat generál (100 számla, 20 szállító,
 500 termék, számlánként 5‑60 tétel). A folyamat közben a `StartupWindow`
 mutatja a haladást két progress baron keresztül.
 Ha a második adatlekérdezés is hibát jelez, a részleteket az `ILogService` naplózza a `logs` mappába, és a program hibát jelez.

@@ -42,7 +42,7 @@ public static class DataSeeder
         await using var db = new AppDbContext(opts);
         await DbInitializer.EnsureCreatedAndMigratedAsync(db, logService, ct);
 
-        var faker = new Faker("hu");
+        var faker = new Faker("en_GB");
         var now = DateTime.UtcNow;
 
         progress?.Report(new ProgressReport { GlobalPercent = 10, Message = "Alap adatok..." });
@@ -71,7 +71,7 @@ public static class DataSeeder
 
         progress?.Report(new ProgressReport { GlobalPercent = 30, Message = "Szállítók..." });
 
-        var supplierFaker = new Faker<Supplier>("hu")
+        var supplierFaker = new Faker<Supplier>("en_GB")
             .RuleFor(s => s.Name, f => f.Company.CompanyName())
             .RuleFor(s => s.TaxId, f => f.Random.Replace("########-#-##"))
             .RuleFor(s => s.CreatedAt, _ => now)
@@ -82,7 +82,7 @@ public static class DataSeeder
 
         progress?.Report(new ProgressReport { GlobalPercent = 50, Message = "Termékek..." });
 
-        var productFaker = new Faker<Product>("hu")
+        var productFaker = new Faker<Product>("en_GB")
             .RuleFor(p => p.Name, f => f.Commerce.ProductName())
             .RuleFor(p => p.Net, f => Math.Round(f.Random.Decimal(100, 10000), 2))
             .RuleFor(p => p.TaxRateId, f => f.PickRandom(taxes).Id)
@@ -101,7 +101,7 @@ public static class DataSeeder
 
         progress?.Report(new ProgressReport { GlobalPercent = 70, Message = "Számlák..." });
 
-        var invoiceFaker = new Faker<Invoice>("hu")
+        var invoiceFaker = new Faker<Invoice>("en_GB")
             .RuleFor(i => i.Number, f => f.Random.Replace("INV-#####"))
             .RuleFor(i => i.Date, f => DateOnly.FromDateTime(f.Date.Recent(365)))
             .RuleFor(i => i.SupplierId, f => f.PickRandom(suppliers).Id)
@@ -117,7 +117,7 @@ public static class DataSeeder
 
         foreach (var invoice in invoices)
         {
-            var itemFaker = new Faker<InvoiceItem>("hu")
+            var itemFaker = new Faker<InvoiceItem>("en_GB")
                 .RuleFor(it => it.InvoiceId, _ => invoice.Id)
                 .RuleFor(it => it.ProductId, f => f.PickRandom(products).Id)
                 .RuleFor(it => it.Description, (f, it) => products.First(p => p.Id == it.ProductId).Name)
