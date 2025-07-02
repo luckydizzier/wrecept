@@ -20,7 +20,7 @@ public abstract partial class EditableMasterDataViewModel<T> : MasterDataBaseVie
         CloseDetailsCommand = new RelayCommand(() => IsEditing = false);
     }
 
-    protected override void SelectedItemChanged(T? value)
+    partial void OnSelectedItemChanged(T? value)
     {
         (EditSelectedCommand as RelayCommand)?.NotifyCanExecuteChanged();
         (DeleteSelectedCommand as RelayCommand)?.NotifyCanExecuteChanged();
