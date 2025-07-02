@@ -35,7 +35,7 @@
 
     <Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
-        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
     </Style>
 
@@ -43,7 +43,7 @@
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource HighlightBrush}" />
-        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
     </Style>
 
@@ -53,25 +53,40 @@
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
+    <Style TargetType="ComboBox">
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+    </Style>
+
+    <Style TargetType="CheckBox">
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}" />
+    </Style>
+
     <Style TargetType="Button">
         <Setter Property="Background" Value="{StaticResource HighlightBrush}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderBrush" Value="{StaticResource ForegroundBrush}" />
-        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
     <Style TargetType="Menu">
         <Setter Property="Background" Value="{StaticResource HeaderFooterBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
-        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
     <Style TargetType="MenuItem">
         <Setter Property="Background" Value="{StaticResource HeaderFooterBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
-        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
@@ -82,13 +97,14 @@
         <Setter Property="GridLinesVisibility" Value="All" />
         <Setter Property="RowBackground" Value="{StaticResource ControlBackgroundBrush}" />
         <Setter Property="AlternatingRowBackground" Value="{StaticResource ControlBackgroundBrush}" />
-        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
     <Style TargetType="DataGridRow" x:Key="RetroDataGridRowStyle">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
