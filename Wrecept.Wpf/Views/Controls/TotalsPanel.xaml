@@ -46,7 +46,7 @@
         </TextBlock>
         <StackPanel.Triggers>
             <DataTrigger Binding="{Binding IsCompactMode, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
-                <Setter TargetName="TotalsStack" Property="Orientation" Value="Vertical" />
+                <Setter TargetName="TotalsStack" Property="StackPanel.Orientation" Value="Vertical" />
             </DataTrigger>
         </StackPanel.Triggers>
     </StackPanel>
