@@ -20,14 +20,22 @@ namespace Wrecept.Wpf;
 
 public partial class App : Application
 {
-public static IServiceProvider Services { get; private set; } = null!;
-public static IServiceProvider Provider => Services;
+public static IServiceProvider? Services { get; private set; }
+public static IServiceProvider Provider => Services ?? throw new InvalidOperationException("App services not initialized");
     public static string DbPath { get; private set; } = string.Empty;
     public static string UserInfoPath { get; private set; } = string.Empty;
     public static string SettingsPath { get; private set; } = string.Empty;
 
     public App()
     {
+        EnsureServicesInitialized();
+    }
+
+    private static void EnsureServicesInitialized()
+    {
+        if (Services != null)
+            return;
+
         var settings = LoadSettings();
         var serviceCollection = new ServiceCollection();
         ConfigureServices(serviceCollection, settings);
@@ -111,6 +119,8 @@ public static IServiceProvider Provider => Services;
     protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+
+        EnsureServicesInitialized();
 
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
