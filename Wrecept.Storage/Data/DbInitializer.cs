@@ -10,6 +10,7 @@ public static class DbInitializer
     {
         try
         {
+            await db.Database.EnsureCreatedAsync(ct);
             await db.Database.MigrateAsync(ct);
         }
         catch (SqliteException ex)
