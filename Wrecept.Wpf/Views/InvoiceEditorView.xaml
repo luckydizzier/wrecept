@@ -132,7 +132,8 @@
             </Grid>
 
             <StackPanel Orientation="Horizontal" DataContext="{Binding Items[0]}" KeyDown="OnEntryKeyDown"
-                        Background="{DynamicResource ControlBackgroundBrush}" Margin="0,0,0,4" Grid.Row="1">
+                        Background="{DynamicResource ControlBackgroundBrush}" Margin="0,0,0,4" Grid.Row="1"
+                        IsEnabled="{Binding DataContext.IsEditable, RelativeSource={RelativeSource AncestorType=UserControl}}">
                 <c:EditLookup x:Name="EntryProduct" Width="200"
                               ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
                               DisplayMemberPath="Name"
@@ -159,7 +160,8 @@
             <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="{x:Static FontStyles.Italic}" Margin="0,4" Grid.Row="3" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6" Grid.Row="4">
-                <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
+                <Button Content="Mentés" Command="{Binding SaveCommand}" IsEnabled="{Binding IsEditable}"
+                        Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
                 <Button Content="Nyomtatás" IsEnabled="{Binding IsArchived}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
                 <Button Content="Bezárás" Command="{Binding CloseCommand}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
                 <Button Content="📦 Véglegesítés" Command="{Binding ShowArchivePromptCommand}" FocusVisualStyle="{StaticResource GoldFocusVisual}">

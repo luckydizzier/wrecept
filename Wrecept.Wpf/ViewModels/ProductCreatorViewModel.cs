@@ -14,6 +14,9 @@ public partial class ProductCreatorViewModel : ObservableObject
     private readonly InvoiceItemRowViewModel _row;
     private readonly IProductService _products;
 
+    [ObservableProperty]
+    private bool isInlineOpen = true;
+
     public ObservableCollection<Unit> Units => _parent.Units;
     public ObservableCollection<TaxRate> TaxRates => _parent.TaxRates;
 
@@ -63,5 +66,12 @@ public partial class ProductCreatorViewModel : ObservableObject
 
     [RelayCommand]
     private void Cancel()
-        => _parent.InlineCreator = null;
+        => CloseEditor();
+
+    [RelayCommand]
+    private void CloseEditor()
+    {
+        IsInlineOpen = false;
+        _parent.InlineCreator = null;
+    }
 }
