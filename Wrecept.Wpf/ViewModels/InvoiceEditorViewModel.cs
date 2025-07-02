@@ -189,6 +189,12 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     [ObservableProperty]
     private object? archivePrompt;
 
+    [ObservableProperty]
+    private bool isInLineFinalizationPrompt;
+
+    [ObservableProperty]
+    private string lastFocusedField = string.Empty;
+
     partial void OnSavePromptChanged(object? value)
         => OnPropertyChanged(nameof(IsSavePromptVisible));
 
@@ -344,6 +350,7 @@ private void UpdateSupplierId(string name)
             Items.Clear();
             Items.Add(new InvoiceItemRowViewModel(this) { IsEditable = true, IsFirstRow = true });
             RecalculateTotals();
+            FormNavigator.RequestFocus("EntryProduct");
             return;
         }
 
@@ -382,6 +389,7 @@ private void UpdateSupplierId(string name)
             Items.Add(row);
         }
         RecalculateTotals();
+        FormNavigator.RequestFocus("InvoiceList");
     }
 
     public void EditLineFromSelection(InvoiceItemRowViewModel selected)
@@ -565,6 +573,13 @@ private void UpdateSupplierId(string name)
     {
         if (ArchivePrompt is null)
             ArchivePrompt = new ArchivePromptViewModel(this);
+    }
+
+    [RelayCommand]
+    internal async Task FinalizeInvoiceAsync()
+    {
+        await ArchiveAsync();
+        IsInLineFinalizationPrompt = false;
     }
 
     [RelayCommand]

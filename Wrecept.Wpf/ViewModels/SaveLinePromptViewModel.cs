@@ -7,25 +7,37 @@ namespace Wrecept.Wpf.ViewModels;
 public partial class SaveLinePromptViewModel : ObservableObject
 {
     private readonly InvoiceEditorViewModel _parent;
+    private readonly bool _finalize;
 
-    public SaveLinePromptViewModel(InvoiceEditorViewModel parent)
+    public SaveLinePromptViewModel(InvoiceEditorViewModel parent,
+        string message = "Mentsem ezt a sort? (Enter=Igen, Esc=Nem)",
+        bool finalize = false)
     {
         _parent = parent;
+        Message = message;
+        _finalize = finalize;
     }
 
-    public string Message => "Mentsem ezt a sort? (Enter=Igen, Esc=Nem)";
+    public string Message { get; }
 
     [RelayCommand]
     private async Task ConfirmAsync()
     {
-        await _parent.AddLineItemAsync();
+        if (_finalize)
+            await _parent.FinalizeInvoiceCommand.ExecuteAsync(null);
+        else
+            await _parent.AddLineItemAsync();
         _parent.SavePrompt = null;
+        _parent.IsInLineFinalizationPrompt = false;
     }
 
     [RelayCommand]
     private void Cancel()
     {
         _parent.SavePrompt = null;
+        if (_finalize)
+            FormNavigator.RequestFocus(_parent.LastFocusedField);
+        _parent.IsInLineFinalizationPrompt = false;
     }
 }
 

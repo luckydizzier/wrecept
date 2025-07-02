@@ -67,7 +67,8 @@
         <local:InvoiceLineTotalsConverter x:Key="GrossConverter" Mode="Gross" />
     </UserControl.Resources>
     <DataGrid x:Name="Grid" ItemsSource="{Binding Items}" AutoGenerateColumns="False"
-             IsReadOnly="False"
+             IsReadOnly="{Binding IsArchived}"
+             IsEnabled="{Binding IsEditable}"
              KeyDown="OnKeyDown" RowDetailsVisibilityMode="Collapsed"
              VerticalAlignment="Stretch">
         <DataGrid.RowStyle>

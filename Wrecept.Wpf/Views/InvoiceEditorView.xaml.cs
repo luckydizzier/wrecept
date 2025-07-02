@@ -50,14 +50,27 @@ public partial class InvoiceEditorView : UserControl
     {
         if (DataContext is not InvoiceEditorViewModel vm)
             return;
-        if (e.Key == Key.Enter && e.OriginalSource is FrameworkElement { Name: "EntryTax" })
+
+        if (e.OriginalSource is FrameworkElement fe)
+            vm.LastFocusedField = fe.Name;
+
+        if (e.Key == Key.Enter && fe.Name == "EntryTax")
         {
             await vm.AddLineItemCommand.ExecuteAsync(null);
             e.Handled = true;
+            return;
         }
-        else
+
+        if (e.Key == Key.Escape && vm.Items.Count > 1 && !vm.IsInLineFinalizationPrompt)
         {
-            NavigationHelper.Handle(e);
+            vm.SavePrompt = new SaveLinePromptViewModel(vm,
+                "Befejezted a tételsorok rögzítését? (Enter=Igen, Esc=Nem)",
+                finalize: true);
+            vm.IsInLineFinalizationPrompt = true;
+            e.Handled = true;
+            return;
         }
+
+        NavigationHelper.Handle(e);
     }
 }
