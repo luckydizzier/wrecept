@@ -60,7 +60,8 @@ Az indítás során a `DataSeeder` ellenőrzi, hogy az adatbázis teljesen üres
 Ha igen, a felhasználó megerősítése után Bogus könyvtár segítségével
 brit angol lokalizációjú (en_GB) mintaszámlákat generál (100 számla, 20 szállító,
 500 termék, számlánként 5‑60 tétel). A folyamat közben a `StartupWindow`
-mutatja a haladást két progress baron keresztül.
+mutatja a haladást két progress baron keresztül. A mintaadatok feltöltése
+háttérszálon fut, így az UI végig reszponzív marad.
 Ha a második adatlekérdezés is hibát jelez, a részleteket az `ILogService` naplózza a `logs` mappába, és a program hibát jelez.
 
 ## Indítási folyamat
