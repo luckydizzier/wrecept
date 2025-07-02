@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
+using System.Collections.Generic;
 
 namespace Wrecept.Storage.Data;
 
@@ -34,7 +35,13 @@ public static class DataSeeder
         string dbPath,
         ILogService logService,
         IProgress<ProgressReport>? progress = null,
-        CancellationToken ct = default)
+        CancellationToken ct = default,
+        int supplierCount = 20,
+        int productCount = 500,
+        int invoiceCount = 100,
+        int minItemsPerInvoice = 5,
+        int maxItemsPerInvoice = 60,
+        bool slow = false)
     {
         var opts = new DbContextOptionsBuilder<AppDbContext>()
             .UseSqlite($"Data Source={dbPath}")
@@ -76,7 +83,22 @@ public static class DataSeeder
             .RuleFor(s => s.TaxId, f => f.Random.Replace("########-#-##"))
             .RuleFor(s => s.CreatedAt, _ => now)
             .RuleFor(s => s.UpdatedAt, _ => now);
-        var suppliers = supplierFaker.Generate(20);
+
+        var suppliers = new List<Supplier>();
+        for (int i = 1; i <= supplierCount; i++)
+        {
+            suppliers.Add(supplierFaker.Generate());
+            if (i % 10 == 0 || i == supplierCount)
+            {
+                progress?.Report(new ProgressReport
+                {
+                    GlobalPercent = 30,
+                    SubtaskPercent = i * 100 / supplierCount,
+                    Message = $"Szállítók {i}/{supplierCount}"
+                });
+                if (slow) await Task.Delay(100, ct);
+            }
+        }
         db.Suppliers.AddRange(suppliers);
         await db.SaveChangesAsync(ct);
 
@@ -95,7 +117,22 @@ public static class DataSeeder
                 var tax = taxes.First(t => t.Id == p.TaxRateId).Percentage;
                 p.Gross = Math.Round(p.Net * (1 + tax / 100m), 2);
             });
-        var products = productFaker.Generate(500);
+
+        var products = new List<Product>();
+        for (int i = 1; i <= productCount; i++)
+        {
+            products.Add(productFaker.Generate());
+            if (i % 25 == 0 || i == productCount)
+            {
+                progress?.Report(new ProgressReport
+                {
+                    GlobalPercent = 50,
+                    SubtaskPercent = i * 100 / productCount,
+                    Message = $"Termékek {i}/{productCount}"
+                });
+                if (slow) await Task.Delay(100, ct);
+            }
+        }
         db.Products.AddRange(products);
         await db.SaveChangesAsync(ct);
 
@@ -109,12 +146,28 @@ public static class DataSeeder
             .RuleFor(i => i.IsGross, _ => false)
             .RuleFor(i => i.CreatedAt, _ => now)
             .RuleFor(i => i.UpdatedAt, _ => now);
-        var invoices = invoiceFaker.Generate(100);
+
+        var invoices = new List<Invoice>();
+        for (int i = 1; i <= invoiceCount; i++)
+        {
+            invoices.Add(invoiceFaker.Generate());
+            if (i % 5 == 0 || i == invoiceCount)
+            {
+                progress?.Report(new ProgressReport
+                {
+                    GlobalPercent = 70,
+                    SubtaskPercent = i * 100 / invoiceCount,
+                    Message = $"Számlák {i}/{invoiceCount}"
+                });
+                if (slow) await Task.Delay(100, ct);
+            }
+        }
         db.Invoices.AddRange(invoices);
         await db.SaveChangesAsync(ct);
 
         progress?.Report(new ProgressReport { GlobalPercent = 90, Message = "Tételek..." });
 
+        int invoiceIndex = 0;
         foreach (var invoice in invoices)
         {
             var itemFaker = new Faker<InvoiceItem>("en_GB")
@@ -126,8 +179,17 @@ public static class DataSeeder
                 .RuleFor(it => it.UnitPrice, (f, it) => products.First(p => p.Id == it.ProductId).Net)
                 .RuleFor(it => it.CreatedAt, _ => now)
                 .RuleFor(it => it.UpdatedAt, _ => now);
-            var count = faker.Random.Int(5, 60);
+            var count = faker.Random.Int(minItemsPerInvoice, maxItemsPerInvoice);
             db.InvoiceItems.AddRange(itemFaker.Generate(count));
+
+            invoiceIndex++;
+            progress?.Report(new ProgressReport
+            {
+                GlobalPercent = 90,
+                SubtaskPercent = invoiceIndex * 100 / invoiceCount,
+                Message = $"Tételek {invoiceIndex}/{invoiceCount}"
+            });
+            if (slow) await Task.Delay(100, ct);
         }
         await db.SaveChangesAsync(ct);
 

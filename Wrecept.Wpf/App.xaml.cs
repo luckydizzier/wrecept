@@ -95,6 +95,8 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddSingleton<INotificationService, MessageBoxNotificationService>();
         services.AddSingleton<ScreenModeManager>();
         services.AddTransient<ProgressViewModel>();
+        services.AddTransient<SeedOptionsViewModel>();
+        services.AddTransient<SeedOptionsWindow>();
         services.AddTransient<StartupWindow>();
         services.AddTransient<ScreenModeWindow>();
         services.AddTransient<StartupOrchestrator>();
@@ -136,19 +138,23 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
 
         if (await orchestrator.DatabaseEmptyAsync(cts.Token))
         {
-            var result = MessageBox.Show(
-                "Kérsz 100 példaszámlát 20 szállítótól, 500 termékkel, számlánként 5-60 tétellel?",
-                "Mintadatok",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question,
-                MessageBoxResult.Yes);
-
-            if (result == MessageBoxResult.Yes)
+            var optionsVm = Provider.GetRequiredService<SeedOptionsViewModel>();
+            var optionsWin = Provider.GetRequiredService<SeedOptionsWindow>();
+            optionsWin.DataContext = optionsVm;
+            if (optionsWin.ShowDialog() == true)
             {
                 var startupWindow = Provider.GetRequiredService<StartupWindow>();
                 startupWindow.DataContext = progressVm;
                 startupWindow.Show();
-                var status = await orchestrator.SeedAsync(progress, cts.Token);
+                var status = await orchestrator.SeedAsync(
+                    progress,
+                    cts.Token,
+                    optionsVm.SupplierCount,
+                    optionsVm.ProductCount,
+                    optionsVm.InvoiceCount,
+                    optionsVm.MinItemsPerInvoice,
+                    optionsVm.MaxItemsPerInvoice,
+                    true);
                 startupWindow.Close();
 
                 if (status == SeedStatus.Failed)
