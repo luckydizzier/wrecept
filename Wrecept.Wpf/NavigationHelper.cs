@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace Wrecept.Wpf;
 
@@ -8,6 +9,16 @@ public static class NavigationHelper
     public static void Handle(KeyEventArgs e)
     {
         var element = e.OriginalSource as UIElement;
+
+        // Allow list controls to handle arrow navigation themselves
+        if (e.OriginalSource is DependencyObject d)
+        {
+            if ((e.Key is Key.Up or Key.Down) &&
+                (d.FindAncestor<ListBox>() is not null || d.FindAncestor<DataGrid>() is not null))
+            {
+                return;
+            }
+        }
 
         switch (e.Key)
         {

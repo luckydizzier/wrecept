@@ -29,14 +29,15 @@ public partial class InvoiceItemsGrid : UserControl
                 vm.RequestDeleteItem(row);
                 e.Handled = true;
             }
-            else
+            else if (e.Key is not (Key.Up or Key.Down))
             {
                 NavigationHelper.Handle(e);
             }
         }
         else
         {
-            NavigationHelper.Handle(e);
+            if (e.Key is not (Key.Up or Key.Down))
+                NavigationHelper.Handle(e);
         }
     }
 }

@@ -65,6 +65,10 @@ public partial class InvoiceLookupView : UserControl
                 return;
             }
         }
+
+        if (e.Key is Key.Up or Key.Down)
+            return;
+
         NavigationHelper.Handle(e);
     }
 }
