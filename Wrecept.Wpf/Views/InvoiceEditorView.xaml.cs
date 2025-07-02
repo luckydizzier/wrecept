@@ -51,10 +51,11 @@ public partial class InvoiceEditorView : UserControl
         if (DataContext is not InvoiceEditorViewModel vm)
             return;
 
-        if (e.OriginalSource is FrameworkElement fe)
+        var fe = e.OriginalSource as FrameworkElement;
+        if (fe is not null)
             vm.LastFocusedField = fe.Name;
 
-        if (e.Key == Key.Enter && fe.Name == "EntryTax")
+        if (e.Key == Key.Enter && fe?.Name == "EntryTax")
         {
             await vm.AddLineItemCommand.ExecuteAsync(null);
             e.Handled = true;
