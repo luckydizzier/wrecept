@@ -32,3 +32,14 @@ A `ScreenModeManager` négy előre definiált profil közül választ:
 Small (800x600), Medium (1024x768), Large (1280x1024) és ExtraLarge (1920x1080).
 Az ablakméret és a betűméret a kiválasztott mód szerint frissül, az értékek a
 `%AppData%/Wrecept/settings.json` fájlban tárolódnak.
+
+Az aktuális betűméreteket a `ThemeSizing` osztály állítja be a képernyőmérethez
+rendelve:
+
+- **Small:** `FontSizeNormal` 12 px, `FontSizeLarge` 14 px
+- **Medium:** `FontSizeNormal` 14 px, `FontSizeLarge` 16 px
+- **Large:** `FontSizeNormal` 16 px, `FontSizeLarge` 18 px
+- **ExtraLarge:** `FontSizeNormal` 18 px, `FontSizeLarge` 20 px
+
+Ez a beállítás a `ScreenModeManager` hívásakor frissül, így minden nézet kód
+módosítás nélkül tud alkalmazkodni a választott módhoz.

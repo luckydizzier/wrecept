@@ -68,6 +68,11 @@ The design must be:
 | `HelpWindow`  | Shows the app usage from the documentations          |
 | `ExitDialog`  | Possible a question (Wanna quit? Enter/Esc)          |
 
+## 🔍 View Utilities
+
+`VisualTreeExtensions.FindAncestor<T>` segít a vizuális fa bejárásában, ha a
+szükséges szülő vezérlőt XAML-ben szeretnénk elérni. Így a nézetekben nem kell
+kóddal keresni az ős elemeket, a logika tisztán a ViewModelben marad.
 
 
 ---
