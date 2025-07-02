@@ -5,6 +5,7 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Core.Utilities;
+using Wrecept.Wpf;
 
 namespace Wrecept.Wpf.Views;
 
@@ -31,7 +32,7 @@ public partial class InvoiceEditorView : UserControl
             });
             await viewModel.LoadAsync(progress);
             progressWindow.Close();
-            LookupView.InvoiceList.Focus();
+            FormNavigator.RequestFocus("InvoiceList");
         };
     }
 

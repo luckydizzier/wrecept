@@ -221,6 +221,11 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         _log = logService;
         _notifications = notificationService;
         Lookup = lookup;
+        Lookup.InvoiceSelected += async item =>
+        {
+            if (Lookup.InlinePrompt is null)
+                await LoadInvoice(item.Id, item.Number);
+        };
         Items = new ObservableCollection<InvoiceItemRowViewModel>(
             Enumerable.Range(1, 3).Select(i => new InvoiceItemRowViewModel(this)
             {
