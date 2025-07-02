@@ -15,6 +15,7 @@ A Wrecept stabilitását több szinten biztosítjuk.
 2. **Integration tesztek** – Adatbázis műveletek és szolgáltatások együttműködését vizsgáljuk SQLite in-memory módban.
    * Egy külön teszt a fizikai `app.db` fájlon fut, hogy ellenőrizzük a tényleges mentést és betöltést.
 3. **UI tesztek** – WinAppDriverrel automatizáltan teszteljük a billentyűzettel vezérelt nézeteket. Részletek: [developer_guide_hu.md](manuals/developer_guide_hu.md#ui-tesztek-winappdriverrel).
+   * Példa projekt: `tests/Wrecept.UiTests`.
 
 ## Hülyebiztos validáció
 
