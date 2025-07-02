@@ -147,3 +147,13 @@ Bruttó flag controls pricing behavior throughout lifecycle
 UX must reflect availability of actions based on current invoice state
 
 ℹ️ This file is part of the coordinated documentation set along with BUSINESS_LOGIC.md and RefactorPlan.md. Use this UI Flow spec to align visual layout, keyboard handling, and interaction design with core logic and model behavior.
+
+📺 Képernyőmód beállító ablak
+
+A "Karbantartás / Képernyő" menüpont egy kis modális ablakot nyit meg. A `ScreenModeWindow` egy egyszerű `ListBox`-ot tartalmaz, amely az elérhető módokat sorolja fel. Az "OK" gomb az aktuális kiválasztást menti és lezárja az ablakot, a "Mégse" visszalépésre szolgál.
+
+A `ScreenModeViewModel` tölti be az értékeket az `Enum.GetValues<ScreenMode>()` hívással. A `SelectedMode` tulajdonság az `ObservableProperty` attribútumot használja, a `RelayCommand` pedig meghívja a `ScreenModeManager.ChangeModeAsync` metódust. A ViewModel az ablak `DataContext`-jeként működik.
+
+📐 `ScreenModeManager` szerepe
+
+Induláskor a `ScreenModeManager.ApplySavedAsync` kiolvassa a `%AppData%/Wrecept/settings.json` fájlt a `SettingsService` segítségével. A beállított ablakméret és betűméret így visszaáll az előző állapotra. Az új mód kiválasztásakor a szolgáltatás frissíti a főablak méreteit, majd elmenti az értéket a `settings.json`-ba az `ISettingsService.SaveAsync` hívással.
