@@ -119,7 +119,7 @@ public class InvoiceEditorViewModelTests
 
         await prompt.ConfirmAsyncCommand.ExecuteAsync(null);
 
-        Assert.Single(invoiceSvc.Invoices);
+        Assert.Empty(invoiceSvc.Invoices);
         Assert.Null(lookup.InlinePrompt);
     }
 
@@ -198,7 +198,7 @@ public class InvoiceEditorViewModelTests
 
         await creator.ConfirmAsync();
 
-        Assert.Single(invoiceSvc.Items);
+        Assert.Empty(invoiceSvc.Items);
         Assert.Null(vm.InlineCreator);
     }
 

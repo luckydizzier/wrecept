@@ -49,26 +49,19 @@ public partial class InvoiceLookupViewModel : ObservableObject
         }
     }
 
-    public async Task<int> CreateInvoiceAsync(string number)
+    public Task<int> CreateInvoiceAsync(string number)
     {
-        var invoice = new Invoice
+        var item = new InvoiceLookupItem
         {
+            Id = 0,
             Number = number,
-            Date = DateOnly.FromDateTime(DateTime.Today)
+            Date = DateOnly.FromDateTime(DateTime.Today),
+            Supplier = string.Empty
         };
 
-        var id = await _invoices.CreateHeaderAsync(invoice);
-
-        Invoices.Insert(0, new InvoiceLookupItem
-        {
-            Id = id,
-            Number = number,
-            Date = invoice.Date,
-            Supplier = string.Empty
-        });
-
-        SelectedInvoice = Invoices.FirstOrDefault(i => i.Id == id);
-        return id;
+        Invoices.Insert(0, item);
+        SelectedInvoice = item;
+        return Task.FromResult(0);
     }
 
 }
