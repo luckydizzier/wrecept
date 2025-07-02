@@ -505,22 +505,31 @@ private void UpdateSupplierId(string name)
             return;
 
         var date = DateOnly.FromDateTime(InvoiceDate.Value);
-        if (IsNew)
+
+        try
         {
-            var invoice = new Invoice
+            if (IsNew)
             {
-                Number = Number,
-                SupplierId = SupplierId,
-                PaymentMethodId = PaymentMethodId,
-                Date = date,
-                IsGross = IsGross
-            };
-            InvoiceId = await _invoiceService.CreateHeaderAsync(invoice);
-            IsNew = false;
+                var invoice = new Invoice
+                {
+                    Number = Number,
+                    SupplierId = SupplierId,
+                    PaymentMethodId = PaymentMethodId,
+                    Date = date,
+                    IsGross = IsGross
+                };
+                InvoiceId = await _invoiceService.CreateHeaderAsync(invoice);
+                IsNew = false;
+            }
+            else
+            {
+                await _invoiceService.UpdateInvoiceHeaderAsync(InvoiceId, date, SupplierId, PaymentMethodId, IsGross);
+            }
         }
-        else
+        catch (Exception ex)
         {
-            await _invoiceService.UpdateInvoiceHeaderAsync(InvoiceId, date, SupplierId, PaymentMethodId, IsGross);
+            await _log.LogError("SaveAsync", ex);
+            _notifications.ShowError("A számla mentése nem sikerült: " + ex.Message);
         }
     }
 
