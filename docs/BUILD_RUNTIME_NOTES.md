@@ -31,5 +31,8 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
 7. Az `AddStorage` kiterjesztés migrációhoz `IDbContextFactory`-t használ, így a munkakontextus az inicializálás végén eldobásra kerül.
 8. Ha a második adatlekérdezés is `SqliteException`-t dob, a `DataSeeder` a `logs/startup.log` fájlba ír és `Failed` állapotot jelez.
 9. Új modell bevezetésekor, ha valamely tábla hiányzik, a `DataSeeder` ismét migrációt futtat és naplózza a hibát.
+10. A `SetupWindow` bezárása után az alkalmazás alapértelmezett `OnLastWindowClose` módja miatt azonnal leállt,
+    ezért a `ShutdownMode` beállítása a `OnStartup` végén `InvalidOperationException`-t dobott.
+    A megoldás: `OnStartup` elején állítsuk `ShutdownMode = OnExplicitShutdown` értékre.
 
 ---
