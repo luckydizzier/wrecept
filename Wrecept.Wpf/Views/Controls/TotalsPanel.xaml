@@ -31,22 +31,24 @@
         </ItemsControl>
         <StackPanel x:Name="TotalsStack" Margin="0,4,0,0" Style="{StaticResource TotalsStackStyle}">
             <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
-                <TextBlock Text="Nettó:" />
-                <TextBlock Text="{Binding NetTotal}" Width="80" Style="{StaticResource RightTextBlock}" />
+                <TextBlock Text="Nettó:" Style="{StaticResource HeaderText}" />
+                <TextBlock Text="{Binding NetTotal}" Width="80" Style="{StaticResource HeaderTextBold}" TextAlignment="Right" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
-                <TextBlock Text="ÁFA:" />
-                <TextBlock Text="{Binding VatTotal}" Width="80" Style="{StaticResource RightTextBlock}" />
+                <TextBlock Text="ÁFA:" Style="{StaticResource HeaderText}" />
+                <TextBlock Text="{Binding VatTotal}" Width="80" Style="{StaticResource HeaderTextBold}" TextAlignment="Right" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Bruttó:" />
-                <TextBlock Text="{Binding GrossTotal}" Width="80" Style="{StaticResource RightTextBlock}" />
+                <TextBlock Text="Bruttó:" Style="{StaticResource HeaderText}" />
+                <TextBlock Text="{Binding GrossTotal}" Width="80" Style="{StaticResource HeaderTextBold}" TextAlignment="Right" />
             </StackPanel>
         </StackPanel>
         <TextBlock FontWeight="Bold"
                    Margin="0,2,0,4"
-                   Style="{StaticResource RightTextBlock}"
+                   Style="{StaticResource HeaderTextBold}"
                    TextWrapping="Wrap"
+                   TextAlignment="Right"
+                   MaxWidth="300"
                    Language="hu-HU"
                    IsHyphenationEnabled="True">
             <Run Text="Azaz&#x2010;:" />

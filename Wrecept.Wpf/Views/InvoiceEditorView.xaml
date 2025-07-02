@@ -64,23 +64,15 @@
                 <GroupBox Header="Számlafejléc">
                     <Grid Margin="4">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="7*" />
                             <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Szállító" VerticalAlignment="Center" />
-                            <c:EditLookup Grid.Row="0" Grid.Column="1" Width="200"
+
+                        <!-- Bal oszlop -->
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Szállító" Style="{StaticResource HeaderText}" />
+                            <c:EditLookup Width="200"
                                           ItemsSource="{Binding Suppliers}"
                                           DisplayMemberPath="Name"
                                           SelectedValuePath="Id"
@@ -88,14 +80,8 @@
                                           CreateCommand="{Binding ShowSupplierCreatorCommand}"
                                           IsEnabled="{Binding IsEditable}" />
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Dátum" VerticalAlignment="Center" />
-                            <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
-
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Szám" VerticalAlignment="Center" />
-                            <TextBox Grid.Row="2" Grid.Column="1" Width="120" Text="{Binding Number}" IsEnabled="{Binding IsNew}" />
-
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Fiz. mód" VerticalAlignment="Center" />
-                            <c:EditLookup Grid.Row="3" Grid.Column="1" Width="200"
+                            <TextBlock Text="Fizetési mód" Margin="0,4,0,0" Style="{StaticResource HeaderText}" />
+                            <c:EditLookup Width="200"
                                           ItemsSource="{Binding PaymentMethods}"
                                           DisplayMemberPath="Name"
                                           SelectedValuePath="Id"
@@ -103,9 +89,21 @@
                                           CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
                                           IsEnabled="{Binding IsEditable}" />
 
-                            <CheckBox Grid.Row="4" Grid.Column="1" Content="Bruttó ár" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
-                        </Grid>
-                        <c:TotalsPanel Grid.Column="1" Margin="12,0,0,0" />
+                            <CheckBox Content="Bruttó ár" Margin="0,4,0,0" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
+                        </StackPanel>
+
+                        <!-- Középső oszlop -->
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                            <TextBlock Text="Dátum" Style="{StaticResource HeaderText}" />
+                            <DatePicker SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
+                            <TextBlock Text="Számlaszám" Margin="0,4,0,0" Style="{StaticResource HeaderText}" />
+                            <TextBox Width="120" Text="{Binding Number}" IsEnabled="{Binding IsNew}" Style="{StaticResource HeaderTextBold}" />
+                        </StackPanel>
+
+                        <!-- Jobb oszlop: TotalsPanel -->
+                        <Border Grid.Column="2" Padding="4" Margin="0,0,0,0" Background="{DynamicResource ControlBackgroundBrush}">
+                            <c:TotalsPanel HorizontalAlignment="Right" />
+                        </Border>
                     </Grid>
                 </GroupBox>
             </Grid>
