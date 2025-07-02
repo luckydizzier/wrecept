@@ -6,6 +6,7 @@ using Wrecept.Wpf.ViewModels;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Wrecept.Tests.ViewModels;
 
@@ -44,7 +45,8 @@ public class InvoiceEditorViewModelTests
             Archived = true;
             return Task.CompletedTask;
         }
-        public Task<Invoice?> GetAsync(int id, System.Threading.CancellationToken ct = default) => Task.FromResult<Invoice?>(null);
+        public Task<Invoice?> GetAsync(int id, System.Threading.CancellationToken ct = default)
+            => Task.FromResult(Invoices.FirstOrDefault(i => i.Id == id));
         public Task<List<Invoice>> GetRecentAsync(int count, System.Threading.CancellationToken ct = default) => Task.FromResult(new List<Invoice>(Invoices));
 
         public InvoiceCalculationResult RecalculateTotals(Invoice invoice)
@@ -262,6 +264,25 @@ public class InvoiceEditorViewModelTests
         Assert.Equal(200, vm.NetTotal);
         Assert.Equal(54, vm.VatTotal);
         Assert.Equal(254, vm.GrossTotal);
+    }
+
+    [Fact]
+    public void Selecting_Invoice_Loads_Header()
+    {
+        var invoiceSvc = new FakeInvoiceService();
+        invoiceSvc.Invoices.Add(new Invoice { Id = 1, Number = "A1", Date = DateOnly.FromDateTime(DateTime.Today) });
+        var dummy = new DummyService<object>();
+        var productSvc = new FakeProductService();
+        var log = new DummyLogService();
+        var notify = new DummyNotificationService();
+        var lookup = new InvoiceLookupViewModel(invoiceSvc);
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, lookup);
+
+        lookup.Invoices.Add(new InvoiceLookupItem { Id = 1, Number = "A1", Date = DateOnly.FromDateTime(DateTime.Today) });
+        lookup.SelectedInvoice = lookup.Invoices[0];
+
+        Assert.Equal(1, vm.InvoiceId);
+        Assert.False(vm.IsNew);
     }
 
 }

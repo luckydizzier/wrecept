@@ -20,10 +20,18 @@ public partial class InvoiceLookupViewModel : ObservableObject
 {
     private readonly IInvoiceService _invoices;
 
+    public event Action<InvoiceLookupItem>? InvoiceSelected;
+
     public ObservableCollection<InvoiceLookupItem> Invoices { get; } = new();
 
     [ObservableProperty]
     private InvoiceLookupItem? selectedInvoice;
+
+    partial void OnSelectedInvoiceChanged(InvoiceLookupItem? value)
+    {
+        if (value != null)
+            InvoiceSelected?.Invoke(value);
+    }
 
     [ObservableProperty]
     private object? inlinePrompt;
