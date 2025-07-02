@@ -14,12 +14,11 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ComboBox x:Name="InvoiceList"
-                  ItemsSource="{Binding Invoices}"
-                  SelectedItem="{Binding SelectedInvoice}"
-                  IsEditable="True" IsTextSearchEnabled="True"
-                  Margin="4">
-            <ComboBox.ItemTemplate>
+        <ListBox x:Name="InvoiceList"
+                 ItemsSource="{Binding Invoices}"
+                 SelectedItem="{Binding SelectedInvoice}"
+                 Margin="4">
+            <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Number}" Width="80"/>
@@ -27,8 +26,8 @@
                         <TextBlock Text="{Binding Supplier}" />
                     </StackPanel>
                 </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <ContentControl Content="{Binding InlinePrompt}" Margin="4" Grid.Row="1" />
     </Grid>
 </UserControl>
