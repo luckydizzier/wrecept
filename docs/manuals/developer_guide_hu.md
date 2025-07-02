@@ -33,5 +33,10 @@ A billentyűzettel vezérelt WPF felület automatikus ellenőrzéséhez a [WinAp
        driver.Close();
    }
    ```
+4. A repóban már szerepel egy minta projekt `tests/Wrecept.UiTests` néven.
+   Fordítsd le a `Wrecept.Wpf` alkalmazást `Debug` módban, majd indítsd a WinAppDriver-t és futtasd a teszteket:
+   ```bash
+   dotnet test tests/Wrecept.UiTests/Wrecept.UiTests.csproj
+   ```
 A WinAppDriver headed módban fut, így a tesztekhez lokális Windows GUI szükséges.
 
