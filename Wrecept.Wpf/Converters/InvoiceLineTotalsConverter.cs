@@ -37,7 +37,11 @@ public class InvoiceLineTotalsConverter : IMultiValueConverter
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        => throw new NotImplementedException();
+    {
+        // A visszairányú konverzióra jelenleg nincs szükség, ezért "DoNothing" jelzés
+        // mellett üres tömbbel térünk vissza, hogy a binding ne okozzon hibát.
+        return Array.Empty<object>();
+    }
 }
 
 public enum InvoiceLineTotalsConverterMode
