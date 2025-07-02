@@ -57,11 +57,12 @@ Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a se
  Az `AddStorage` kiterjesztés ehhez `IDbContextFactory`-t használ,
  így a migráció egy külön kontextuson történik és azonnal eldobásra kerül.
 Az indítás során a `DataSeeder` ellenőrzi, hogy az adatbázis teljesen üres‑e.
-Ha igen, a felhasználó megerősítése után Bogus könyvtár segítségével
-brit angol lokalizációjú (en_GB) mintaszámlákat generál (100 számla, 20 szállító,
-500 termék, számlánként 5‑60 tétel). A folyamat közben a `StartupWindow`
-mutatja a haladást két progress baron keresztül. A mintaadatok feltöltése
-háttérszálon fut, így az UI végig reszponzív marad.
+Ha igen, a felhasználó egy párbeszédablakban megadhatja,
+hány szállító, termék, számla és tétel generálódjon.
+A Bogus könyvtár en_GB lokalizációval hozza létre a mintaszámlákat.
+A `StartupWindow` a két ProgressBar segítségével jelzi,
+hogy például *Szállítók 3/20* állásnál tart a folyamat.
+A mintaadatok betöltése háttérszálon fut, így az UI végig reszponzív marad.
 Ha a második adatlekérdezés is hibát jelez, a részleteket az `ILogService` naplózza a `logs` mappába, és a program hibát jelez.
 
 ## Indítási folyamat
