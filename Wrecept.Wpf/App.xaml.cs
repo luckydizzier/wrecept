@@ -11,6 +11,7 @@ using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Views;
 using Wrecept.Wpf.Views.Controls;
 using Wrecept.Wpf.Services;
+using System.Text.Json;
 using CommunityToolkit.Mvvm.Input;
 using Wrecept.Core.Utilities;
 using Wrecept.Storage.Data;
@@ -21,25 +22,53 @@ public partial class App : Application
     public IServiceProvider Services { get; }
     public static IServiceProvider Provider => ((App)Current).Services;
     public static string DbPath { get; private set; } = string.Empty;
+    public static string UserInfoPath { get; private set; } = string.Empty;
+    public static string SettingsPath { get; private set; } = string.Empty;
 
     public App()
     {
+        var settings = LoadSettings();
         var serviceCollection = new ServiceCollection();
-        ConfigureServices(serviceCollection);
+        ConfigureServices(serviceCollection, settings);
         Services = serviceCollection.BuildServiceProvider();
         ThemeManager.ApplyDarkTheme(false);
     }
 
-    private static void ConfigureServices(IServiceCollection services)
+    private static AppSettings LoadSettings()
     {
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         var dataDir = Path.Combine(appData, "Wrecept");
         Directory.CreateDirectory(dataDir);
-        var dbPath = Path.Combine(dataDir, "app.db");
-        DbPath = dbPath;
+        SettingsPath = Path.Combine(dataDir, "settings.json");
+        if (File.Exists(SettingsPath))
+        {
+            using var stream = File.OpenRead(SettingsPath);
+            return JsonSerializer.Deserialize<AppSettings>(stream) ?? new AppSettings();
+        }
+
+        var defaultDb = Path.Combine(Environment.CurrentDirectory, "app.db");
+        var defaultCfg = Path.Combine(Environment.CurrentDirectory, "wrecept.json");
+        var vm = new SetupViewModel(defaultDb, defaultCfg);
+        var win = new SetupWindow { DataContext = vm };
+        win.ShowDialog();
+
+        var settings = new AppSettings
+        {
+            DatabasePath = vm.DatabasePath,
+            UserInfoPath = vm.ConfigPath
+        };
+        using var save = File.Create(SettingsPath);
+        JsonSerializer.Serialize(save, settings, new JsonSerializerOptions { WriteIndented = true });
+        return settings;
+    }
+
+    private static void ConfigureServices(IServiceCollection services, AppSettings settings)
+    {
+        DbPath = settings.DatabasePath;
+        UserInfoPath = settings.UserInfoPath;
 
         services.AddCore();
-        services.AddStorage(dbPath);
+        services.AddStorage(DbPath, UserInfoPath, SettingsPath);
 
         services.AddTransient<StageViewModel>();
         services.AddTransient<InvoiceEditorViewModel>();

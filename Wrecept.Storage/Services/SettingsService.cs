@@ -6,9 +6,12 @@ namespace Wrecept.Storage.Services;
 
 public class SettingsService : ISettingsService
 {
-    private readonly string _path = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-        "Wrecept", "settings.json");
+    private readonly string _path;
+
+    public SettingsService(string path)
+    {
+        _path = path;
+    }
 
     public async Task<AppSettings> LoadAsync()
     {

@@ -23,7 +23,8 @@ public class UserInfoServiceTests : IDisposable
     [Fact]
     public async Task LoadAsync_ReturnsDefaults_IfFileMissing()
     {
-        var svc = new UserInfoService();
+        var path = Path.Combine(_tempDir, "Wrecept", "wrecept.json");
+        var svc = new UserInfoService(path);
         var info = await svc.LoadAsync();
 
         Assert.Equal(string.Empty, info.CompanyName);
@@ -35,18 +36,19 @@ public class UserInfoServiceTests : IDisposable
     [Fact]
     public async Task SaveAsync_WritesFile()
     {
-        var svc = new UserInfoService();
+        var path = Path.Combine(_tempDir, "Wrecept", "wrecept.json");
+        var svc = new UserInfoService(path);
         var info = new UserInfo { CompanyName = "ACME" };
         await svc.SaveAsync(info);
 
-        var path = Path.Combine(_tempDir, "Wrecept", "wrecept.json");
         Assert.True(File.Exists(path));
     }
 
     [Fact]
     public async Task LoadAsync_ReturnsSavedObject()
     {
-        var svc = new UserInfoService();
+        var path = Path.Combine(_tempDir, "Wrecept", "wrecept.json");
+        var svc = new UserInfoService(path);
         var info = new UserInfo { CompanyName = "ACME", Address = "Addr", Phone = "123", Email = "a@b.c" };
         await svc.SaveAsync(info);
 
