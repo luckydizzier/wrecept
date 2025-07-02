@@ -12,6 +12,11 @@ public abstract partial class MasterDataBaseViewModel<T> : ObservableObject, IMa
     [ObservableProperty]
     private T? selectedItem;
 
+    partial void OnSelectedItemChanged(T? value)
+        => SelectedItemChanged(value);
+
+    protected virtual void SelectedItemChanged(T? value) { }
+
     public virtual async Task LoadAsync()
     {
         var items = await GetItemsAsync();
