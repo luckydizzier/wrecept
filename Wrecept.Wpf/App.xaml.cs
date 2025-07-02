@@ -20,8 +20,8 @@ namespace Wrecept.Wpf;
 
 public partial class App : Application
 {
-    public IServiceProvider Services { get; }
-    public static IServiceProvider Provider => ((App)Current).Services;
+public static IServiceProvider Services { get; private set; } = null!;
+public static IServiceProvider Provider => Services;
     public static string DbPath { get; private set; } = string.Empty;
     public static string UserInfoPath { get; private set; } = string.Empty;
     public static string SettingsPath { get; private set; } = string.Empty;
@@ -114,8 +114,8 @@ public partial class App : Application
 
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
-        var orchestrator = Services.GetRequiredService<StartupOrchestrator>();
-        var progressVm = Services.GetRequiredService<ProgressViewModel>();
+        var orchestrator = Provider.GetRequiredService<StartupOrchestrator>();
+        var progressVm = Provider.GetRequiredService<ProgressViewModel>();
         using var cts = new CancellationTokenSource();
         progressVm.CancelCommand = new RelayCommand(() => cts.Cancel());
         var progress = new Progress<ProgressReport>(r =>
@@ -125,7 +125,7 @@ public partial class App : Application
             progressVm.StatusMessage = r.Message;
         });
 
-        var startupWindow = Services.GetRequiredService<StartupWindow>();
+        var startupWindow = Provider.GetRequiredService<StartupWindow>();
         startupWindow.DataContext = progressVm;
         startupWindow.Show();
         var status = await orchestrator.RunAsync(progress, cts.Token);
@@ -148,7 +148,7 @@ public partial class App : Application
                 MessageBoxImage.Information);
         }
 
-        var window = Services.GetRequiredService<MainWindow>();
+        var window = Provider.GetRequiredService<MainWindow>();
         MainWindow = window;
         ShutdownMode = ShutdownMode.OnMainWindowClose;
         window.Show();
