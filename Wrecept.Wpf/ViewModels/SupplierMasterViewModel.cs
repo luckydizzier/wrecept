@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public partial class SupplierMasterViewModel : MasterDataBaseViewModel<Supplier>
+public partial class SupplierMasterViewModel : EditableMasterDataViewModel<Supplier>
 {
     private readonly ISupplierService _service;
 
@@ -19,4 +19,13 @@ public partial class SupplierMasterViewModel : MasterDataBaseViewModel<Supplier>
 
     protected override Task<List<Supplier>> GetItemsAsync()
         => _service.GetActiveAsync();
+
+    protected override async Task DeleteAsync()
+    {
+        if (SelectedItem != null)
+        {
+            SelectedItem.IsArchived = true;
+            await _service.UpdateAsync(SelectedItem);
+        }
+    }
 }

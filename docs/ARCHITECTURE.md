@@ -50,6 +50,10 @@ Felhasználói üzenetekhez az `INotificationService` ad egységes felületet. W
 Az alapvető cégadatokat a `UserInfoService` kezeli. Az adatok a `%AppData%/Wrecept/wrecept.json` fájlban tárolódnak, betöltésük az alkalmazás futása közben történik.
 Az aktuális képernyőmódot a `SettingsService` tartja nyilván `settings.json` fájlban, amit a `ScreenModeManager` olvas be induláskor.
 
+### Törzsadatok szerkesztése
+
+A különböző mesteradat nézeteket kiszolgáló ViewModel-ek mind az `EditableMasterDataViewModel<T>` osztályból öröklődnek. Ez az alaposztály valósítja meg az egységes `EditSelectedCommand`, `DeleteSelectedCommand` és `CloseDetailsCommand` parancsokat, továbbá az `IsEditing` flag-et. A törlés valójában archiválás: a leszármazott ViewModel a `DeleteAsync` metódusban hívja meg a hozzá tartozó Service `UpdateAsync` műveletét, miután az entitást archiváltnak jelölte.
+
 Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a service réteg inicializálja, így naplózható az adat módosításának ideje.
 
  Az alkalmazás indításakor a `DbInitializer` megkísérli a `Database.Migrate()`

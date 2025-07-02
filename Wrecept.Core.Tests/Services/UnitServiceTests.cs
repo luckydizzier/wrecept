@@ -63,6 +63,18 @@ public class UnitServiceTests
     }
 
     [Fact]
+    public async Task UpdateAsync_AllowsArchiving()
+    {
+        var repo = new FakeRepo();
+        var svc = new UnitService(repo);
+        var unit = new Unit { Id = Guid.NewGuid(), Name = "kg", IsArchived = true };
+
+        await svc.UpdateAsync(unit);
+
+        Assert.True(repo.Updated?.IsArchived);
+    }
+
+    [Fact]
     public async Task UpdateAsync_Throws_WhenIdInvalid()
     {
         var repo = new FakeRepo();

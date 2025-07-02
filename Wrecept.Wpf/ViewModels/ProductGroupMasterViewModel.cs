@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public partial class ProductGroupMasterViewModel : MasterDataBaseViewModel<ProductGroup>
+public partial class ProductGroupMasterViewModel : EditableMasterDataViewModel<ProductGroup>
 {
     public ObservableCollection<ProductGroup> ProductGroups => Items;
 
@@ -19,4 +19,13 @@ public partial class ProductGroupMasterViewModel : MasterDataBaseViewModel<Produ
 
     protected override Task<List<ProductGroup>> GetItemsAsync()
         => _service.GetActiveAsync();
+
+    protected override async Task DeleteAsync()
+    {
+        if (SelectedItem != null)
+        {
+            SelectedItem.IsArchived = true;
+            await _service.UpdateAsync(SelectedItem);
+        }
+    }
 }
