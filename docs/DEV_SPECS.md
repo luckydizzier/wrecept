@@ -110,6 +110,7 @@ kóddal keresni az ős elemeket, a logika tisztán a ViewModelben marad.
 ├── Themes\              # Application Themes
 └── version.txt          # Last known app version
 ```
+Fejlesztéskor a `wrecept.db` nevű adatbázis kizárólag a migrációk generálásához használatos.
 
 ---
 

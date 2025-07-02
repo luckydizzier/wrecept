@@ -6,9 +6,12 @@ namespace Wrecept.Storage.Services;
 
 public class UserInfoService : IUserInfoService
 {
-    private readonly string _path = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-        "Wrecept", "wrecept.json");
+    private readonly string _path;
+
+    public UserInfoService(string path)
+    {
+        _path = path;
+    }
 
     public async Task<UserInfo> LoadAsync()
     {

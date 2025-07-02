@@ -13,7 +13,7 @@ A Wrecept stabilitását több szinten biztosítjuk.
 
 1. **Unit tesztek** – A Core és ViewModel rétegek logikáját izoláltan ellenőrizzük.
 2. **Integration tesztek** – Adatbázis műveletek és szolgáltatások együttműködését vizsgáljuk SQLite in-memory módban.
-   * Egy külön teszt a fizikai `wrecept.db` fájlon fut, hogy ellenőrizzük a tényleges mentést és betöltést.
+   * Egy külön teszt a fizikai `app.db` fájlon fut, hogy ellenőrizzük a tényleges mentést és betöltést.
 3. **UI tesztek** – A WPF nézetek billentyű-kezelését automatizáltan teszteljük, például WinAppDriverrel.
 
 ## Hülyebiztos validáció
@@ -26,5 +26,7 @@ A Wrecept stabilitását több szinten biztosítjuk.
 
 * Minimum 80% kódfedettségre törekszünk. A Core és ViewModel rétegek kritikus útvonalait teljesen lefedjük.
 * A tesztek minden commit után futnak GitHub Actions alatt (`dotnet test`). Ha bármely teszt megbukik, a build elutasításra kerül.
+
+*Megjegyzés: a `wrecept.db` néven szereplő adatbázis csak a migrációk tervezési szakaszában használatos.*
 
 ---

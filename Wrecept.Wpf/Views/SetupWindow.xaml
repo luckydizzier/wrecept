@@ -1,0 +1,21 @@
+<Window x:Class="Wrecept.Wpf.Views.SetupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Első indítás" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight">
+    <StackPanel Margin="10">
+        <TextBlock Text="Adatbázis fájl:"/>
+        <DockPanel>
+            <TextBox Width="280" Text="{Binding DatabasePath, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="..." Width="30" Margin="5,0,0,0" Command="{Binding BrowseDbCommand}"/>
+        </DockPanel>
+        <TextBlock Text="Konfigurációs fájl:" Margin="0,10,0,0"/>
+        <DockPanel>
+            <TextBox Width="280" Text="{Binding ConfigPath, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="..." Width="30" Margin="5,0,0,0" Command="{Binding BrowseConfigCommand}"/>
+        </DockPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="OK" Width="80" Margin="0,0,5,0" Command="{Binding OkCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+            <Button Content="Mégse" Width="80" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

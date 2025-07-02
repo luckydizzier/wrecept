@@ -10,7 +10,7 @@ namespace Wrecept.Storage;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddStorage(this IServiceCollection services, string dbPath)
+public static IServiceCollection AddStorage(this IServiceCollection services, string dbPath, string userInfoPath, string settingsPath)
     {
         ArgumentException.ThrowIfNullOrEmpty(dbPath);
 
@@ -24,8 +24,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITaxRateRepository, TaxRateRepository>();
         services.AddScoped<IUnitRepository, UnitRepository>();
         services.AddSingleton<ILogService, LogService>();
-        services.AddSingleton<IUserInfoService, UserInfoService>();
-        services.AddSingleton<ISettingsService, SettingsService>();
+        services.AddSingleton<IUserInfoService>(_ => new UserInfoService(userInfoPath));
+        services.AddSingleton<ISettingsService>(_ => new SettingsService(settingsPath));
 
         using var provider = services.BuildServiceProvider();
         var factory = provider.GetRequiredService<IDbContextFactory<AppDbContext>>();
