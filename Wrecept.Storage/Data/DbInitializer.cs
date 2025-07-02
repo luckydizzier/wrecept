@@ -10,11 +10,7 @@ public static class DbInitializer
     {
         try
         {
-            var pending = await db.Database.GetPendingMigrationsAsync(ct);
-            if (pending.Any())
-                await db.Database.MigrateAsync(ct);
-            else
-                await db.Database.EnsureCreatedAsync(ct);
+            await db.Database.MigrateAsync(ct);
         }
         catch (SqliteException ex)
         {
