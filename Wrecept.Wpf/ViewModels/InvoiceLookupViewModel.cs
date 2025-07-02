@@ -56,8 +56,17 @@ public partial class InvoiceLookupViewModel : ObservableObject
             Number = number,
             Date = DateOnly.FromDateTime(DateTime.Today)
         };
+
         var id = await _invoices.CreateHeaderAsync(invoice);
-        await LoadAsync();
+
+        Invoices.Insert(0, new InvoiceLookupItem
+        {
+            Id = id,
+            Number = number,
+            Date = invoice.Date,
+            Supplier = string.Empty
+        });
+
         SelectedInvoice = Invoices.FirstOrDefault(i => i.Id == id);
         return id;
     }

@@ -10,13 +10,13 @@ public partial class InvoiceCreatePromptView : UserControl
         InitializeComponent();
     }
 
-    private void OnKeyDown(object sender, KeyEventArgs e)
+    private async void OnKeyDown(object sender, KeyEventArgs e)
     {
         if (DataContext is not Wrecept.Wpf.ViewModels.InvoiceCreatePromptViewModel vm)
             return;
         if (e.Key == Key.Enter)
         {
-            vm.ConfirmCommand.Execute(null);
+            await vm.ConfirmCommand.ExecuteAsync(null);
             e.Handled = true;
         }
         else if (e.Key == Key.Escape)

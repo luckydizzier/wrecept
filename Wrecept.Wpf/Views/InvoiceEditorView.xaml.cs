@@ -46,13 +46,13 @@ public partial class InvoiceEditorView : UserControl
         NavigationHelper.Handle(e);
     }
 
-    private void OnEntryKeyDown(object sender, KeyEventArgs e)
+    private async void OnEntryKeyDown(object sender, KeyEventArgs e)
     {
         if (DataContext is not InvoiceEditorViewModel vm)
             return;
         if (e.Key == Key.Enter && e.OriginalSource is FrameworkElement { Name: "EntryTax" })
         {
-            vm.AddLineItemCommand.Execute(null);
+            await vm.AddLineItemCommand.ExecuteAsync(null);
             e.Handled = true;
         }
         else
