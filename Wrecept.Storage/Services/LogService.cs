@@ -16,9 +16,16 @@ public class LogService : ILogService
 
     public async Task LogError(string message, Exception ex)
     {
-        Directory.CreateDirectory(_logDir);
-        var path = Path.Combine(_logDir, $"{DateTime.UtcNow:yyyyMMdd}.log");
-        var entry = $"{DateTime.UtcNow:u} {message} {ex}\n";
-        await File.AppendAllTextAsync(path, entry);
+        try
+        {
+            Directory.CreateDirectory(_logDir);
+            var path = Path.Combine(_logDir, $"{DateTime.UtcNow:yyyyMMdd}.log");
+            var entry = $"{DateTime.UtcNow:u} {message} {ex}\n";
+            await File.AppendAllTextAsync(path, entry);
+        }
+        catch (Exception ioEx)
+        {
+            Console.Error.WriteLine($"{DateTime.UtcNow:u} {message} {ioEx}");
+        }
     }
 }
