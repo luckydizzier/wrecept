@@ -97,7 +97,10 @@
                             <TextBlock Text="Dátum" Style="{StaticResource HeaderText}" />
                             <DatePicker SelectedDate="{Binding InvoiceDate}" Width="120" IsEnabled="{Binding IsEditable}" />
                             <TextBlock Text="Számlaszám" Margin="0,4,0,0" Style="{StaticResource HeaderText}" />
-                            <TextBox Width="120" Text="{Binding Number}" IsEnabled="{Binding IsNew}" Style="{StaticResource HeaderTextBold}" />
+                            <TextBox Width="120"
+                                     Text="{Binding Number}"
+                                     IsEnabled="{Binding IsNew}"
+                                     Style="{StaticResource HeaderTextBoxBold}" />
                         </StackPanel>
 
                         <!-- Jobb oszlop: TotalsPanel -->
