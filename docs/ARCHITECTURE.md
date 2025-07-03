@@ -56,12 +56,12 @@ A különböző mesteradat nézeteket kiszolgáló ViewModel-ek mind az `Editabl
 
 Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a service réteg inicializálja, így naplózható az adat módosításának ideje.
 
- Az alkalmazás indításakor a `DbInitializer` ellenőrzi, létezik‑e az adatbázis
- és a migrációs napló. Új adatbázis esetén lefuttatja a `Database.Migrate()`
- hívást, meglévő, de napló nélküli fájlnál `EnsureCreated()` után azonnal
- `Database.Migrate()` következik.
- Az `AddStorage` kiterjesztés ehhez `IDbContextFactory`-t használ,
- így a migráció egy külön kontextuson történik és azonnal eldobásra kerül.
+ Az alkalmazás indításakor a `DbInitializer` a `Database.Migrate()` hívással
+ hozza létre vagy frissíti az adatbázist. A migráció futása automatikusan
+ létrehozza az `__EFMigrationsHistory` táblát is, így külön
+ `EnsureCreated()` hívásra nincs szükség.
+  Az `AddStorage` kiterjesztés ehhez `IDbContextFactory`-t használ,
+  így a migráció egy külön kontextuson történik és azonnal eldobásra kerül.
 Az indítás során a `DataSeeder` ellenőrzi, hogy az adatbázis teljesen üres‑e.
 Ha igen, a felhasználó egy párbeszédablakban megadhatja,
 hány szállító, termék, számla és tétel generálódjon.
