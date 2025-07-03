@@ -7,6 +7,11 @@ namespace Wrecept.Wpf;
 
 public static class FormNavigator
 {
+    public static void RequestFocus(IInputElement? element)
+    {
+        Application.Current.Dispatcher.BeginInvoke(() => element?.Focus(), DispatcherPriority.Background);
+    }
+
     public static void RequestFocus(string elementName, Type? viewType = null)
     {
         Application.Current.Dispatcher.BeginInvoke(() =>
