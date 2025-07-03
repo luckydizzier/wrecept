@@ -62,6 +62,10 @@ Application.Current.MainWindow?.Focus();
 Más ablakokban a billentyűt a saját logikájuk kezeli.
 Az `Enter` alapértelmezésben a következő vezérlőre ugrik, ha az aktuális kezelő nem nyeli el.
 
+### Fókuszkövető szolgáltatás
+
+Az `IFocusTrackerService` a nézetekhez rendelt kulcs alapján megjegyzi az utoljára fókuszba került vezérlőt. A promptok vagy nézetek bezárásakor a `FormNavigator` ennek segítségével állítja vissza a fókuszt az eredeti elemre. A szolgáltatás singletonként regisztrált, így minden View és ViewModel DI-n keresztül éri el.
+
 ## 💡 Design Philosophy
 
 A billentyűzetes navigációt a sebesség és az időtálló megszokhatóság jegyében terveztük. Minden akció egzaktul megismételhető, vizuális visszajelzéssel kombinálva.
