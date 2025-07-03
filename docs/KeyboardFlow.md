@@ -40,6 +40,10 @@ Az összes mesteradat ViewModel az `EditableMasterDataViewModel` leszármazottja
 Az InputBindingek helyett a rács `PreviewKeyDown` eseménye futtatja a parancsokat,
 így szövegmezők szerkesztésekor az `Enter` nem zárja le véletlenül a részleteteket.
 
+### StageView
+- `Escape`: visszateszi a fókuszt az utoljára aktivált menüpontra, ha az elérhető.
+- Ha nincs korábbi menüpont, a `NavigationHelper` globális fókusz-visszaállítása lép életbe.
+
 ## 📦 Modal Prompt Behavior
 
 Az `ArchivePromptView`, `SaveLinePromptView` és `InvoiceCreatePromptView` egyaránt követi:

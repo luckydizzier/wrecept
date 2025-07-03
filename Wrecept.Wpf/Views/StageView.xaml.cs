@@ -22,8 +22,16 @@ public partial class StageView : UserControl
     {
         if (e.Key == Key.Escape)
         {
-            _lastMenuItem?.Focus();
-            e.Handled = true;
+            if (_lastMenuItem is not null)
+            {
+                _lastMenuItem.Focus();
+                e.Handled = true;
+            }
+            else
+            {
+                NavigationHelper.Handle(e);
+            }
+
             return;
         }
 
