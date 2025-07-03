@@ -31,6 +31,7 @@ public static class DbInitializer
             else
             {
                 await db.Database.EnsureCreatedAsync(ct);
+                await db.Database.MigrateAsync(ct);
             }
         }
         catch (Exception ex)

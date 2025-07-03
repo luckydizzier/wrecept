@@ -58,7 +58,8 @@ Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a se
 
  Az alkalmazás indításakor a `DbInitializer` ellenőrzi, létezik‑e az adatbázis
  és a migrációs napló. Új adatbázis esetén lefuttatja a `Database.Migrate()`
- hívást, meglévő, de napló nélküli fájlnál pedig csak `EnsureCreated()` fut.
+ hívást, meglévő, de napló nélküli fájlnál `EnsureCreated()` után azonnal
+ `Database.Migrate()` következik.
  Az `AddStorage` kiterjesztés ehhez `IDbContextFactory`-t használ,
  így a migráció egy külön kontextuson történik és azonnal eldobásra kerül.
 Az indítás során a `DataSeeder` ellenőrzi, hogy az adatbázis teljesen üres‑e.
