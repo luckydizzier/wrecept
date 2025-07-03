@@ -11,6 +11,8 @@ using Wrecept.Wpf.Resources;
 using Wrecept.Core.Services;
 using System.Windows;
 using Wrecept.Wpf.Views.Controls;
+using Wrecept.Wpf.Views;
+using Controls = Wrecept.Wpf.Views.Controls;
 
 namespace Wrecept.Wpf.ViewModels;
 
