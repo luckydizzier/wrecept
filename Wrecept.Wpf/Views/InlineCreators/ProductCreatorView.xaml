@@ -2,13 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
-             KeyDown="OnKeyDown">
+             KeyDown="OnKeyDown"
+             FocusManager.FocusedElement="{Binding ElementName=NameBox}">
     <Border Background="#F5F5DC" Padding="4" Margin="0,4,0,0">
         <StackPanel>
             <TextBlock Text="Új termék" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                 <TextBlock Text="Név" Width="60" />
-                <TextBox Width="160" Text="{Binding Name}" />
+                <TextBox x:Name="NameBox" Width="160" Text="{Binding Name}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                 <TextBlock Text="Nettó" Width="60" />

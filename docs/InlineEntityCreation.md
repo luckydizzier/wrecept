@@ -2,7 +2,7 @@
 title: "Inline Entity Creation"
 purpose: "Rövid technikai leírás az inline entitás létrehozásáról"
 author: "docs_agent"
-date: "2025-06-30"
+date: "2025-07-03"
 ---
 
 # Inline Entity Creation
@@ -18,6 +18,9 @@ Korábban a űrlap a DataGrid `RowDetailsTemplate` elemében jelent meg, ám ez 
 | [OK] [Mégse]          |
 +-----------------------+
 ```
+
+Az űrlap megnyitásakor a kurzor automatikusan az első mezőre kerül, így a
+felhasználó további billentyűk nélkül kezdheti el a gépelést.
 
 A kitöltött űrlap mentése azonnal létrehozza az entitást és a szerkesztett sorban is frissíti a hivatkozást. Minden más vezérlő ideiglenesen letiltásra kerül, hogy a fókusz az új bejegyzésen maradjon.
 
