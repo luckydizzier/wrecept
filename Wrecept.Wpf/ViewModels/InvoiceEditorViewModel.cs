@@ -9,6 +9,8 @@ using Wrecept.Core.Models;
 using Wrecept.Core.Utilities;
 using Wrecept.Wpf.Resources;
 using Wrecept.Core.Services;
+using System.Windows;
+using Wrecept.Wpf.Views.Controls;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -178,10 +180,17 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     [ObservableProperty]
     private object? inlineCreator;
 
+    [ObservableProperty]
+    private UIElement? inlineCreatorTarget;
+
     public bool IsInlineCreatorVisible => InlineCreator != null;
 
     partial void OnInlineCreatorChanged(object? value)
-        => OnPropertyChanged(nameof(IsInlineCreatorVisible));
+    {
+        OnPropertyChanged(nameof(IsInlineCreatorVisible));
+        if (value is null)
+            InlineCreatorTarget = null;
+    }
 
     public bool IsSavePromptVisible => SavePrompt != null;
     public bool IsArchivePromptVisible => ArchivePrompt != null;
@@ -307,41 +316,63 @@ private void UpdateSupplierId(string name)
         SupplierId = match.Id;
 }
     [RelayCommand]
-    private void ShowSupplierCreator(string? name)
+    private void ShowSupplierCreator(object? parameter)
     {
-        InlineCreator = new SupplierCreatorViewModel(this, _suppliers)
+        if (parameter is UIElement target)
         {
-            Name = name ?? string.Empty
-        };
+            InlineCreatorTarget = target;
+            var text = (target as Views.Controls.SmartLookup)?.Text ?? string.Empty;
+            InlineCreator = new SupplierCreatorViewModel(this, _suppliers)
+            {
+                Name = text
+            };
+        }
     }
     [RelayCommand]
-    private void ShowProductCreator(InvoiceItemRowViewModel row)
+    private void ShowProductCreator(object? parameter)
     {
-        InlineCreator = new ProductCreatorViewModel(this, row, _productsService)
+        if (parameter is UIElement target && target is FrameworkElement fe && fe.DataContext is InvoiceItemRowViewModel row)
         {
-            Name = row.Product
-        };
+            InlineCreatorTarget = target;
+            InlineCreator = new ProductCreatorViewModel(this, row, _productsService)
+            {
+                Name = row.Product
+            };
+        }
     }
 
     [RelayCommand]
-    private void ShowTaxRateCreator(string name)
+    private void ShowTaxRateCreator(object? parameter)
     {
-        InlineCreator = new TaxRateCreatorViewModel(this, _taxRates)
+        if (parameter is UIElement target)
         {
-            Name = name
-        };
+            InlineCreatorTarget = target;
+            var name = (target as Controls.EditLookup)?.Box.Text ?? (target as Controls.SmartLookup)?.Text ?? string.Empty;
+            InlineCreator = new TaxRateCreatorViewModel(this, _taxRates)
+            {
+                Name = name
+            };
+        }
     }
 
     [RelayCommand]
-    private void ShowUnitCreator()
+    private void ShowUnitCreator(object? parameter)
     {
-        InlineCreator = new UnitCreatorViewModel(this, _unitsService);
+        if (parameter is UIElement target)
+        {
+            InlineCreatorTarget = target;
+            InlineCreator = new UnitCreatorViewModel(this, _unitsService);
+        }
     }
 
     [RelayCommand]
-    private void ShowPaymentMethodCreator()
+    private void ShowPaymentMethodCreator(object? parameter)
     {
-        InlineCreator = new PaymentMethodCreatorViewModel(this, _paymentMethods);
+        if (parameter is UIElement target)
+        {
+            InlineCreatorTarget = target;
+            InlineCreator = new PaymentMethodCreatorViewModel(this, _paymentMethods);
+        }
     }
 
     [RelayCommand]
