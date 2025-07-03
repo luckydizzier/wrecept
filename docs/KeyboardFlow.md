@@ -44,7 +44,7 @@ Az InputBindingek mostantól a rács vezérlőn vannak, így szövegmezők szerk
 Az `ArchivePromptView`, `SaveLinePromptView` és `InvoiceCreatePromptView` egyaránt követi:
 - `Enter` a megerősítő parancsot futtatja.
 - `Escape` a mégse parancsot hívja.
-- Többsoros `TextBox` esetén az `Enter` nem kerül lekezelésre, hogy az új sor bevitele működjön.
+- Többsoros `TextBox` (`AcceptsReturn=true`) esetén a `NavigationHelper` sem az `Enter`, sem az `Escape` billentyűt nem kezeli, így az új sor bevitele és a vezérlő saját művelete zavartalan.
 A fókusz a prompt bezárása után visszatér a megnyitó nézethez.
 
 ## 📋 Focus Reset Rules

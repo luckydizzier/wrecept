@@ -23,6 +23,13 @@ public static class NavigationHelper
             }
         }
 
+        if ((e.Key is Key.Enter or Key.Escape) &&
+            e.OriginalSource is TextBox box &&
+            box.AcceptsReturn)
+        {
+            return;
+        }
+
         switch (e.Key)
         {
             case Key.Down:
