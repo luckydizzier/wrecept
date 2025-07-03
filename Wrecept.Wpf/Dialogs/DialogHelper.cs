@@ -20,6 +20,9 @@ public static class DialogHelper
         {
             if (e.Key == Key.Enter)
             {
+                if (e.OriginalSource is TextBox box && box.AcceptsReturn)
+                    return;
+
                 ok.Execute(null);
                 e.Handled = true;
             }
