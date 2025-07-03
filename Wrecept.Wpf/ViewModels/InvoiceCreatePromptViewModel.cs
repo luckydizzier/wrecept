@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -23,11 +25,15 @@ public partial class InvoiceCreatePromptViewModel : ObservableObject
     {
         await _parent.CreateInvoiceAsync(Number);
         _parent.InlinePrompt = null;
+        var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        FormNavigator.RequestFocus(tracker.GetLast("InvoiceEditorView"));
     }
 
     [RelayCommand]
     private void Cancel()
     {
         _parent.InlinePrompt = null;
+        var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        FormNavigator.RequestFocus(tracker.GetLast("InvoiceEditorView"));
     }
 }

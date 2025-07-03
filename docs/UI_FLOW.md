@@ -134,6 +134,7 @@ Menu state persists across Escape presses to return user to most recent focus
 The FormNavigator.RequestFocus helper now accepts an optional view-type
 parameter to narrow the search scope; dynamic elements therefore need not use
 globally unique identifiers.
+FocusTrackerService jegyzi meg, melyik vezérlő volt aktív a nézetekben, így a promptok bezárásakor visszaállítható a fókusz.
 
 📚 Future List Views
 

@@ -7,11 +7,13 @@ using Wrecept.Wpf.ViewModels;
 using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
 using Wrecept.Wpf;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.Views;
 
 public partial class InvoiceEditorView : UserControl
 {
+    private readonly IFocusTrackerService _tracker;
     public InvoiceEditorView() : this(App.Provider.GetRequiredService<InvoiceEditorViewModel>())
     {
     }
@@ -20,6 +22,8 @@ public partial class InvoiceEditorView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
+        _tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
         Loaded += async (_, _) =>
         {
             var progressVm = new ProgressViewModel();
@@ -87,4 +91,7 @@ public partial class InvoiceEditorView : UserControl
             await log.LogError("InvoiceEditorView.OnEntryKeyDown", ex);
         }
     }
+
+    private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        => _tracker.Update("InvoiceEditorView", e.NewFocus);
 }

@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -20,12 +22,16 @@ public partial class ArchivePromptViewModel : ObservableObject
     {
         await _parent.ArchiveAsync();
         _parent.ArchivePrompt = null;
+        var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        FormNavigator.RequestFocus(tracker.GetLast("InvoiceEditorView"));
     }
 
     [RelayCommand]
     private void Cancel()
     {
         _parent.ArchivePrompt = null;
+        var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        FormNavigator.RequestFocus(tracker.GetLast("InvoiceEditorView"));
     }
 }
 
