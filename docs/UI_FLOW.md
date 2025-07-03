@@ -131,6 +131,9 @@ Inline creators must not shift focus away from the current context
 Views are loaded in-place inside StageView, avoiding modal disruptions
 
 Menu state persists across Escape presses to return user to most recent focus
+The FormNavigator.RequestFocus helper now accepts an optional view-type
+parameter to narrow the search scope; dynamic elements therefore need not use
+globally unique identifiers.
 
 📚 Future List Views
 
