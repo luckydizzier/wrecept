@@ -208,7 +208,7 @@
         </Grid>
         <Popup Placement="Bottom"
                PlacementTarget="{Binding InlineCreatorTarget}"
-               IsOpen="{Binding IsInlineCreatorVisible}"
+               IsOpen="{Binding IsInlineCreatorVisible, Mode=OneWay}"
                StaysOpen="True"
                AllowsTransparency="True">
             <Border Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
