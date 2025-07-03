@@ -46,7 +46,7 @@ private async void OnKeyDown(object sender, KeyEventArgs e)
 
 1. **Adatbázis fájl hiánya vagy hiányzó elérési út** – Ha az adatbázis helye nincs megadva vagy az `app.db` nem található, a Storage réteg a `%AppData%/Wrecept/app.db` fájlt hozza létre, majd figyelmeztető üzenetet jelenítünk meg.
 2. **Üres adatbázis** – Ha egyetlen táblában sincs adat, minta rekordokat szúrunk be és figyelmeztetjük a felhasználót.
-3. **Sémahibák indításkor** – A `DbInitializer` megkísérli a `Database.Migrate()` hívást. Ha a migráció hibát dob, `EnsureCreated()` után újra futtatja. A `DataSeeder` külön kontextust használ, így a DI-ből kapott példány nem marad használatban.
+3. **Sémahibák indításkor** – A `DbInitializer` először ellenőrzi, létezik‑e az adatbázis és a migrációs napló. Ha a napló hiányzik, `EnsureCreated()` fut, ellenkező esetben `Database.Migrate()`. A `DataSeeder` külön kontextust használ, így a DI-ből kapott példány nem marad használatban.
 4. **Sérült konfigurációs fájl** – A `settings.json` olvasásakor `JsonException` vagy `IOException` esetén hibaüzenetet írunk a naplóba és alapértelmezett beállításokkal folytatjuk.
 5. **Sérült import fájl** – Hibás formátumú vagy hiányzó adatfájl betöltésekor megszakítjuk a folyamatot, naplózzuk a fájl nevét és a kiváltó hibát, és lehetőséget adunk új fájl kiválasztására.
 6. **Hálózati kimaradás** – Külső frissítések letöltése közben kapcsolatvesztés esetén újrapróbálkozunk, majd offline módra váltunk, miközben a felhasználót tájékoztatjuk.
