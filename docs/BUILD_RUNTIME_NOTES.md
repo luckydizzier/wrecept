@@ -37,5 +37,9 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
 10. A `SetupWindow` bezárása után az alkalmazás alapértelmezett `OnLastWindowClose` módja miatt azonnal leállt,
     ezért a `ShutdownMode` beállítása a `OnStartup` végén `InvalidOperationException`-t dobott.
     A megoldás: `OnStartup` elején állítsuk `ShutdownMode = OnExplicitShutdown` értékre.
+11. Amennyiben sem adatbázis, sem konfigurációs fájl nem létezik, indításkor rákérdezünk:
+    "Biztos, hogy elölről kezded?". Elfogadás után a `SetupWindow` és a
+    tulajdonosi adatok szerkesztője jelenik meg, ezek mentik a beállított
+    elérési utakat és cégadatokat.
 
 ---

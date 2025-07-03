@@ -65,9 +65,40 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
 
         var defaultDb = Path.Combine(Environment.CurrentDirectory, "app.db");
         var defaultCfg = Path.Combine(Environment.CurrentDirectory, "wrecept.json");
+
+        if (MessageBox.Show(
+                "Biztos, hogy elölrõl kezded?",
+                "Első indítás",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question) != MessageBoxResult.Yes)
+        {
+            Current.Shutdown();
+            Environment.Exit(0);
+        }
+
         var vm = new SetupViewModel(defaultDb, defaultCfg);
         var win = new SetupWindow { DataContext = vm };
-        win.ShowDialog();
+        if (win.ShowDialog() != true)
+        {
+            Current.Shutdown();
+            Environment.Exit(0);
+        }
+
+        var infoVm = new UserInfoEditorViewModel();
+        var infoWin = new UserInfoWindow { DataContext = infoVm };
+        if (infoWin.ShowDialog() != true)
+        {
+            Current.Shutdown();
+            Environment.Exit(0);
+        }
+        var userInfoService = new Wrecept.Storage.Services.UserInfoService(vm.ConfigPath);
+        await userInfoService.SaveAsync(new UserInfo
+        {
+            CompanyName = infoVm.CompanyName,
+            Address = infoVm.Address,
+            Phone = infoVm.Phone,
+            Email = infoVm.Email
+        });
 
         var settings = new AppSettings
         {
