@@ -4,6 +4,7 @@ using System.Windows.Input;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Wpf.ViewModels;
+using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
 using Wrecept.Wpf;
 
@@ -49,33 +50,41 @@ public partial class InvoiceEditorView : UserControl
 
     private async void OnEntryKeyDown(object sender, KeyEventArgs e)
     {
-        if (DataContext is not InvoiceEditorViewModel vm)
-            return;
-
-        var fe = e.OriginalSource as FrameworkElement;
-        if (fe is not null)
-            vm.LastFocusedField = fe.Name;
-
-        if (e.Key == Key.Enter && fe?.Tag?.ToString() == "LastEntry")
+        try
         {
-            if (vm.EditableItem.IsEditingExisting)
-                vm.SaveEditedItemCommand.Execute(null);
-            else
-                await vm.AddLineItemCommand.ExecuteAsync(null);
-            e.Handled = true;
-            return;
-        }
+            if (DataContext is not InvoiceEditorViewModel vm)
+                return;
 
-        if (e.Key == Key.Escape && string.IsNullOrWhiteSpace(vm.EditableItem.Product) && !vm.IsInLineFinalizationPrompt)
+            var fe = e.OriginalSource as FrameworkElement;
+            if (fe is not null)
+                vm.LastFocusedField = fe.Name;
+
+            if (e.Key == Key.Enter && fe?.Tag?.ToString() == "LastEntry")
+            {
+                if (vm.EditableItem.IsEditingExisting)
+                    vm.SaveEditedItemCommand.Execute(null);
+                else
+                    await vm.AddLineItemCommand.ExecuteAsync(null);
+                e.Handled = true;
+                return;
+            }
+
+            if (e.Key == Key.Escape && string.IsNullOrWhiteSpace(vm.EditableItem.Product) && !vm.IsInLineFinalizationPrompt)
+            {
+                vm.SavePrompt = new SaveLinePromptViewModel(vm,
+                    "Befejezted a tételsorok rögzítését? (Enter=Igen, Esc=Nem)",
+                    finalize: true);
+                vm.IsInLineFinalizationPrompt = true;
+                e.Handled = true;
+                return;
+            }
+
+            NavigationHelper.Handle(e);
+        }
+        catch (Exception ex)
         {
-            vm.SavePrompt = new SaveLinePromptViewModel(vm,
-                "Befejezted a tételsorok rögzítését? (Enter=Igen, Esc=Nem)",
-                finalize: true);
-            vm.IsInLineFinalizationPrompt = true;
-            e.Handled = true;
-            return;
+            var log = App.Provider.GetRequiredService<ILogService>();
+            await log.LogError("InvoiceEditorView.OnEntryKeyDown", ex);
         }
-
-        NavigationHelper.Handle(e);
     }
 }

@@ -1,5 +1,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
+using Wrecept.Core.Services;
 
 namespace Wrecept.Wpf.Views.InlinePrompts;
 
@@ -12,17 +14,25 @@ public partial class SaveLinePromptView : UserControl
 
     private async void OnKeyDown(object sender, KeyEventArgs e)
     {
-        if (DataContext is not Wrecept.Wpf.ViewModels.SaveLinePromptViewModel vm)
-            return;
-        if (e.Key == Key.Enter)
+        try
         {
-            await vm.ConfirmCommand.ExecuteAsync(null);
-            e.Handled = true;
+            if (DataContext is not Wrecept.Wpf.ViewModels.SaveLinePromptViewModel vm)
+                return;
+            if (e.Key == Key.Enter)
+            {
+                await vm.ConfirmCommand.ExecuteAsync(null);
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Escape)
+            {
+                vm.CancelCommand.Execute(null);
+                e.Handled = true;
+            }
         }
-        else if (e.Key == Key.Escape)
+        catch (Exception ex)
         {
-            vm.CancelCommand.Execute(null);
-            e.Handled = true;
+            var log = App.Provider.GetRequiredService<ILogService>();
+            await log.LogError("SaveLinePromptView.OnKeyDown", ex);
         }
     }
 }

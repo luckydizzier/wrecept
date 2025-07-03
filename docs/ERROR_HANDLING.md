@@ -14,6 +14,22 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 * A magas szintű beavatkozási pontokon (ViewModel, Service) használunk `try`-`catch` blokkot.
 * Csak a szükséges adatot logoljuk, hogy érzékeny információ ne kerüljön ki.
 * Kivétel elnyelése helyett visszajelzést adunk a felhasználónak a `feedback_agent` segítségével.
+* Minden `async void` kulcskezelőben `try`-`catch` blokkot használunk, és a hibát az `ILogService`-en keresztül rögzítjük.
+
+```csharp
+private async void OnKeyDown(object sender, KeyEventArgs e)
+{
+    try
+    {
+        // kulcslogika
+    }
+    catch (Exception ex)
+    {
+        var log = App.Provider.GetRequiredService<ILogService>();
+        await log.LogError("OnKeyDown", ex);
+    }
+}
+```
 
 ## Aktív védelem
 
