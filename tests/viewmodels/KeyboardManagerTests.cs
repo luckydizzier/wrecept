@@ -1,11 +1,11 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Xunit;
-using Wrecept.Wpf;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Tests.ViewModels;
 
-public class NavigationHelperTests
+public class KeyboardManagerTests
 {
     private class FakeSource : System.Windows.PresentationSource
     {
@@ -28,7 +28,25 @@ public class NavigationHelperTests
             OriginalSource = item
         };
 
-        NavigationHelper.Handle(args);
+        var manager = new KeyboardManager();
+        manager.Handle(args);
+
+        Assert.False(args.Handled);
+    }
+
+    [Fact]
+    public void DisabledProfile_DoesNotHandleKeys()
+    {
+        var box = new TextBox();
+        var args = new KeyEventArgs(Keyboard.PrimaryDevice, new FakeSource(), 0, Key.Down)
+        {
+            RoutedEvent = Keyboard.KeyDownEvent,
+            Source = box,
+            OriginalSource = box
+        };
+
+        var manager = new KeyboardManager { Profile = NavigationProfile.Disabled };
+        manager.Handle(args);
 
         Assert.False(args.Handled);
     }

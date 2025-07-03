@@ -12,6 +12,8 @@ public partial class StageView : UserControl
     private readonly StageViewModel _viewModel;
     private MenuItem? _lastMenuItem;
     private readonly IFocusTrackerService _tracker;
+    private readonly KeyboardManager _keyboard;
+    private readonly FocusManager _focus;
 
     public StageView(StageViewModel viewModel)
     {
@@ -19,6 +21,8 @@ public partial class StageView : UserControl
         _viewModel = viewModel;
         DataContext = viewModel;
         _tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
+        _focus = App.Provider.GetRequiredService<FocusManager>();
         Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
     }
 
@@ -33,7 +37,7 @@ public partial class StageView : UserControl
             }
             else
             {
-                NavigationHelper.Handle(e);
+                _keyboard.Handle(e);
             }
 
             return;
@@ -44,13 +48,13 @@ public partial class StageView : UserControl
             var last = _tracker.GetLast("StageView") as IInputElement;
             if (last is not null && !ReferenceEquals(last, this))
             {
-                FormNavigator.RequestFocus(last);
+                _focus.RequestFocus(last);
                 e.Handled = true;
                 return;
             }
         }
 
-        NavigationHelper.Handle(e);
+        _keyboard.Handle(e);
     }
 
     private void MenuItem_Click(object sender, RoutedEventArgs e)

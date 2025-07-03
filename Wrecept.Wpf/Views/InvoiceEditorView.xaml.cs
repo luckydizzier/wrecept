@@ -15,6 +15,8 @@ namespace Wrecept.Wpf.Views;
 public partial class InvoiceEditorView : UserControl
 {
     private readonly IFocusTrackerService _tracker;
+    private readonly KeyboardManager _keyboard;
+    private readonly FocusManager _focus;
     public InvoiceEditorView() : this(App.Provider.GetRequiredService<InvoiceEditorViewModel>())
     {
     }
@@ -24,6 +26,8 @@ public partial class InvoiceEditorView : UserControl
         InitializeComponent();
         DataContext = viewModel;
         _tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
+        _focus = App.Provider.GetRequiredService<FocusManager>();
         Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
         Loaded += async (_, _) =>
         {
@@ -38,7 +42,7 @@ public partial class InvoiceEditorView : UserControl
             });
             await viewModel.LoadAsync(progress);
             progressWindow.Close();
-            FormNavigator.RequestFocus("InvoiceList", typeof(InvoiceEditorView));
+            _focus.RequestFocus("InvoiceList", typeof(InvoiceEditorView));
         };
     }
 
@@ -50,7 +54,7 @@ public partial class InvoiceEditorView : UserControl
             e.Handled = true;
             return;
         }
-        NavigationHelper.Handle(e);
+        _keyboard.Handle(e);
     }
 
     private async void OnEntryKeyDown(object sender, KeyEventArgs e)
@@ -84,7 +88,7 @@ public partial class InvoiceEditorView : UserControl
                 return;
             }
 
-            NavigationHelper.Handle(e);
+            _keyboard.Handle(e);
         }
         catch (Exception ex)
         {

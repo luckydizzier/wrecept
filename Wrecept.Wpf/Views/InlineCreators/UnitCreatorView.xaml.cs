@@ -5,11 +5,12 @@ namespace Wrecept.Wpf.Views.InlineCreators;
 
 public partial class UnitCreatorView : UserControl
 {
+    private readonly KeyboardManager _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
     public UnitCreatorView()
     {
         InitializeComponent();
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
-        => NavigationHelper.Handle(e);
+        => _keyboard.Handle(e);
 }

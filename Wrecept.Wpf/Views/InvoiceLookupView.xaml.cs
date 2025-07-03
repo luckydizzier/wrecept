@@ -80,7 +80,8 @@ public partial class InvoiceLookupView : UserControl
             if (e.Key is Key.Up or Key.Down)
                 return;
 
-            NavigationHelper.Handle(e);
+            var keyboard = App.Provider.GetRequiredService<KeyboardManager>();
+            keyboard.Handle(e);
         }
         catch (Exception ex)
         {

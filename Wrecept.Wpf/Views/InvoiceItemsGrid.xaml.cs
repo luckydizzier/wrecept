@@ -31,13 +31,17 @@ public partial class InvoiceItemsGrid : UserControl
             }
             else if (e.Key is not (Key.Up or Key.Down))
             {
-                NavigationHelper.Handle(e);
+                var keyboard = App.Provider.GetRequiredService<KeyboardManager>();
+                keyboard.Handle(e);
             }
         }
         else
         {
             if (e.Key is not (Key.Up or Key.Down))
-                NavigationHelper.Handle(e);
+            {
+                var keyboard = App.Provider.GetRequiredService<KeyboardManager>();
+                keyboard.Handle(e);
+            }
         }
     }
 }

@@ -112,6 +112,8 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddSingleton<INotificationService, MessageBoxNotificationService>();
         services.AddSingleton<ScreenModeManager>();
         services.AddSingleton<IFocusTrackerService, FocusTrackerService>();
+        services.AddSingleton<KeyboardManager>();
+        services.AddSingleton<FocusManager>();
         services.AddTransient<ProgressViewModel>();
         services.AddTransient<SeedOptionsViewModel>();
         services.AddTransient<SeedOptionsWindow>();
