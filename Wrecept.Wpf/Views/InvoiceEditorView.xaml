@@ -166,7 +166,7 @@
                                Watermark="Me.e."
                                CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
                 <TextBox x:Name="EntryPrice" Width="80" Margin="4,0" Text="{Binding UnitPrice, Mode=TwoWay}"/>
-                <c:EditLookup x:Name="EntryTax" Width="100"
+                <c:EditLookup x:Name="EntryTax" Width="100" Tag="LastEntry"
                               ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Id"

@@ -42,8 +42,11 @@ public static class NavigationHelper
                 element?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));
                 break;
             case Key.Escape:
-                e.Handled = true;
-                Application.Current.MainWindow?.Focus();
+                if (Window.GetWindow(element) == Application.Current.MainWindow)
+                {
+                    e.Handled = true;
+                    Application.Current.MainWindow?.Focus();
+                }
                 break;
         }
     }

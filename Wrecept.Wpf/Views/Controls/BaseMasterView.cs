@@ -40,18 +40,7 @@ public abstract class BaseMasterView : UserControl
         dataGrid.RowDetailsVisibilityChanged += Grid_RowDetailsVisibilityChanged;
         grid.Children.Add(dataGrid);
 
-        var commands = new[]
-        {
-            new KeyBinding { Key = Key.Enter },
-            new KeyBinding { Key = Key.Delete },
-            new KeyBinding { Key = Key.Escape }
-        };
-        dataGrid.InputBindings.Add(commands[0]);
-        dataGrid.InputBindings.Add(commands[1]);
-        dataGrid.InputBindings.Add(commands[2]);
-        BindingOperations.SetBinding(commands[0], InputBinding.CommandProperty, new Binding("EditSelectedCommand"));
-        BindingOperations.SetBinding(commands[1], InputBinding.CommandProperty, new Binding("DeleteSelectedCommand"));
-        BindingOperations.SetBinding(commands[2], InputBinding.CommandProperty, new Binding("CloseDetailsCommand"));
+        dataGrid.PreviewKeyDown += Grid_PreviewKeyDown;
 
         var hint = new TextBlock
         {
@@ -92,6 +81,31 @@ public abstract class BaseMasterView : UserControl
 
     private void OnKeyDown(object? sender, KeyEventArgs e)
         => NavigationHelper.Handle(e);
+
+    private void Grid_PreviewKeyDown(object? sender, KeyEventArgs e)
+    {
+        if (e.OriginalSource is TextBox)
+            return;
+
+        if (DataContext is not IEditableMasterDataViewModel vm)
+            return;
+
+        if (e.Key == Key.Enter && vm.EditSelectedCommand.CanExecute(null))
+        {
+            vm.EditSelectedCommand.Execute(null);
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Delete && vm.DeleteSelectedCommand.CanExecute(null))
+        {
+            vm.DeleteSelectedCommand.Execute(null);
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape && vm.CloseDetailsCommand.CanExecute(null))
+        {
+            vm.CloseDetailsCommand.Execute(null);
+            e.Handled = true;
+        }
+    }
 
     private void Grid_RowDetailsVisibilityChanged(object? sender, DataGridRowDetailsEventArgs e)
     {

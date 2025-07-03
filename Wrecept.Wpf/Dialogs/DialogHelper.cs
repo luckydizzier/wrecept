@@ -23,13 +23,19 @@ public static class DialogHelper
                 if (e.OriginalSource is TextBox box && box.AcceptsReturn)
                     return;
 
-                ok.Execute(null);
-                e.Handled = true;
+                if (ok.CanExecute(null))
+                {
+                    ok.Execute(null);
+                    e.Handled = true;
+                }
             }
             else if (e.Key == Key.Escape)
             {
-                cancel.Execute(null);
-                e.Handled = true;
+                if (cancel.CanExecute(null))
+                {
+                    cancel.Execute(null);
+                    e.Handled = true;
+                }
             }
         };
     }

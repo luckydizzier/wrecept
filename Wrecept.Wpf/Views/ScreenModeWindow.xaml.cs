@@ -13,5 +13,10 @@ public partial class ScreenModeWindow : Window
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
-        => NavigationHelper.Handle(e);
+    {
+        if (e.Key == Key.Escape)
+            return;
+
+        NavigationHelper.Handle(e);
+    }
 }

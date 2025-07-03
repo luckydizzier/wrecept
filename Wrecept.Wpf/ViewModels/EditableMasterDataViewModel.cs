@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Wrecept.Wpf.ViewModels;
 
-public abstract partial class EditableMasterDataViewModel<T> : MasterDataBaseViewModel<T>
+public abstract partial class EditableMasterDataViewModel<T> : MasterDataBaseViewModel<T>, IEditableMasterDataViewModel
 {
     [ObservableProperty]
     private bool isEditing;
