@@ -49,6 +49,10 @@ public partial class StageView : UserControl
     private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         var fe = e.NewFocus as FrameworkElement;
+        if (fe is MenuItem menuItem)
+        {
+            _lastMenuItem = menuItem;
+        }
         _tracker.Update("StageView", e.NewFocus);
         _viewModel.StatusBar.FocusedElement = fe?.Name ?? fe?.GetType().Name ?? string.Empty;
     }
