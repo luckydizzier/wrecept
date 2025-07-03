@@ -85,8 +85,10 @@ public abstract class BaseMasterView : UserControl
             Grid.RowDetailsTemplate = RowDetailsTemplate;
     }
 
+    private readonly KeyboardManager _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
+
     private void OnKeyDown(object? sender, KeyEventArgs e)
-        => NavigationHelper.Handle(e);
+        => _keyboard.Handle(e);
 
     private void Grid_PreviewKeyDown(object? sender, KeyEventArgs e)
     {

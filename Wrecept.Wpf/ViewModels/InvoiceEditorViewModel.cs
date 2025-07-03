@@ -403,7 +403,8 @@ private void UpdateSupplierId(string name)
             EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
             Items.Add(EditableItem);
             RecalculateTotals();
-            FormNavigator.RequestFocus("EntryProduct", typeof(InvoiceEditorView));
+            var focus = App.Provider.GetRequiredService<FocusManager>();
+            focus.RequestFocus("EntryProduct", typeof(InvoiceEditorView));
             return;
         }
 
@@ -443,7 +444,8 @@ private void UpdateSupplierId(string name)
             Items.Add(row);
         }
         RecalculateTotals();
-        FormNavigator.RequestFocus("InvoiceList", typeof(InvoiceEditorView));
+        var focusAfterLoad = App.Provider.GetRequiredService<FocusManager>();
+        focusAfterLoad.RequestFocus("InvoiceList", typeof(InvoiceEditorView));
     }
 
     public void EditLineFromSelection(InvoiceItemRowViewModel selected)
@@ -631,7 +633,8 @@ private void UpdateSupplierId(string name)
         edit.ProductGroup = string.Empty;
         edit.IsEditingExisting = false;
         edit.TargetRow = null;
-        FormNavigator.RequestFocus("EntryProduct", typeof(InvoiceEditorView));
+        var focus = App.Provider.GetRequiredService<FocusManager>();
+        focus.RequestFocus("EntryProduct", typeof(InvoiceEditorView));
     }
 
     [RelayCommand]

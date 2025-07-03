@@ -33,8 +33,9 @@ public partial class SaveLinePromptViewModel : ObservableObject
         _parent.SavePrompt = null;
         _parent.IsInLineFinalizationPrompt = false;
         var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        var focus = App.Provider.GetRequiredService<FocusManager>();
         var last = tracker.GetLast("InvoiceEditorView");
-        FormNavigator.RequestFocus(last);
+        focus.RequestFocus(last);
     }
 
     [RelayCommand]
@@ -43,8 +44,9 @@ public partial class SaveLinePromptViewModel : ObservableObject
         _parent.SavePrompt = null;
         _parent.IsInLineFinalizationPrompt = false;
         var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        var focus = App.Provider.GetRequiredService<FocusManager>();
         var last = tracker.GetLast("InvoiceEditorView");
-        FormNavigator.RequestFocus(last);
+        focus.RequestFocus(last);
     }
 }
 

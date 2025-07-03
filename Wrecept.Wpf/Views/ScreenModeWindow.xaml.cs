@@ -6,10 +6,13 @@ namespace Wrecept.Wpf.Views;
 
 public partial class ScreenModeWindow : Window
 {
+    private readonly KeyboardManager _keyboard;
+
     public ScreenModeWindow(ScreenModeViewModel viewModel)
     {
         InitializeComponent();
         DataContext = viewModel;
+        _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
@@ -17,6 +20,6 @@ public partial class ScreenModeWindow : Window
         if (e.Key == Key.Escape)
             return;
 
-        NavigationHelper.Handle(e);
+        _keyboard.Handle(e);
     }
 }

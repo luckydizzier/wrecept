@@ -27,6 +27,8 @@ public class StageViewFocusTests
         var view = (StageView)FormatterServices.GetUninitializedObject(typeof(StageView));
         typeof(StageView).GetField("_viewModel", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(view, vm);
         typeof(StageView).GetField("_tracker", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(view, new FocusTrackerService());
+        typeof(StageView).GetField("_keyboard", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(view, new KeyboardManager());
+        typeof(StageView).GetField("_focus", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(view, new FocusManager());
 
         first = new MenuItem { Header = "A" };
         second = new MenuItem { Header = "B" };
