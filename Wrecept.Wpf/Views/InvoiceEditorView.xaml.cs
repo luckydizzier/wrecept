@@ -14,7 +14,6 @@ namespace Wrecept.Wpf.Views;
 
 public partial class InvoiceEditorView : UserControl
 {
-    private readonly IFocusTrackerService _tracker;
     private readonly KeyboardManager _keyboard;
     private readonly FocusManager _focus;
     public InvoiceEditorView() : this(App.Provider.GetRequiredService<InvoiceEditorViewModel>())
@@ -25,7 +24,6 @@ public partial class InvoiceEditorView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
-        _tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
         _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
         _focus = App.Provider.GetRequiredService<FocusManager>();
         Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
@@ -98,7 +96,7 @@ public partial class InvoiceEditorView : UserControl
     }
 
     private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        => _tracker.Update("InvoiceEditorView", e.NewFocus);
+        => _focus.Update("InvoiceEditorView", e.NewFocus);
 
     private void OnInlineCreatorOpened(object sender, EventArgs e)
     {

@@ -22,9 +22,8 @@ public partial class ArchivePromptViewModel : ObservableObject
     {
         await _parent.ArchiveAsync();
         _parent.ArchivePrompt = null;
-        var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
         var focus = App.Provider.GetRequiredService<FocusManager>();
-        var last = tracker.GetLast("InvoiceEditorView");
+        var last = focus.GetLast("InvoiceEditorView");
         focus.RequestFocus(last);
     }
 
@@ -32,9 +31,8 @@ public partial class ArchivePromptViewModel : ObservableObject
     private void Cancel()
     {
         _parent.ArchivePrompt = null;
-        var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
         var focus = App.Provider.GetRequiredService<FocusManager>();
-        var last = tracker.GetLast("InvoiceEditorView");
+        var last = focus.GetLast("InvoiceEditorView");
         focus.RequestFocus(last);
     }
 }
