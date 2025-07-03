@@ -36,6 +36,9 @@ public partial class SmartLookup : UserControl
     public static readonly DependencyProperty CreateCommandProperty = DependencyProperty.Register(
         nameof(CreateCommand), typeof(ICommand), typeof(SmartLookup));
 
+    public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
+        nameof(CommandParameter), typeof(object), typeof(SmartLookup));
+
     public static readonly DependencyProperty MaxSuggestionsProperty = DependencyProperty.Register(
         nameof(MaxSuggestions), typeof(int), typeof(SmartLookup), new PropertyMetadata(10));
 
@@ -79,6 +82,12 @@ public partial class SmartLookup : UserControl
     {
         get => (ICommand?)GetValue(CreateCommandProperty);
         set => SetValue(CreateCommandProperty, value);
+    }
+
+    public object? CommandParameter
+    {
+        get => GetValue(CommandParameterProperty);
+        set => SetValue(CommandParameterProperty, value);
     }
 
     public int MaxSuggestions
@@ -211,8 +220,9 @@ public partial class SmartLookup : UserControl
             }
             else if (FilteredItems.Count == 0 && !string.IsNullOrWhiteSpace(Text))
             {
-                if (CreateCommand?.CanExecute(Text) == true)
-                    CreateCommand.Execute(Text);
+                var param = CommandParameter ?? Text;
+                if (CreateCommand?.CanExecute(param) == true)
+                    CreateCommand.Execute(param);
                 PART_Popup.IsOpen = false;
             }
             e.Handled = true;
