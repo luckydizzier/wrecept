@@ -17,7 +17,9 @@ public static class NavigationHelper
                 (d.FindAncestor<ListBox>() is not null ||
                  d.FindAncestor<DataGrid>() is not null ||
                  d.FindAncestor<ComboBox>() is not null ||
-                 d.FindAncestor<TreeView>() is not null))
+                 d.FindAncestor<TreeView>() is not null ||
+                 d.FindAncestor<Menu>() is not null ||
+                 d.FindAncestor<MenuItem>() is not null))
             {
                 return;
             }

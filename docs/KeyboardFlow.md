@@ -65,6 +65,7 @@ Az `Enter` alapértelmezésben a következő vezérlőre ugrik, ha az aktuális 
 
 A billentyűzetes navigációt a sebesség és az időtálló megszokhatóság jegyében terveztük. Minden akció egzaktul megismételhető, vizuális visszajelzéssel kombinálva.
 Általánosan `KeyDown` eseményeket használunk; csak a `SmartLookup` és az `EditLookup` kezel `PreviewKeyDown`-t, hogy még a `TextBox` szintjén elcsípje a navigációs billentyűket.
+- A `ListBox`, `DataGrid`, `ComboBox`, `TreeView`, valamint a `Menu` és `MenuItem` saját nyílkezelése elsőbbséget élvez; a `NavigationHelper` ilyen őst találva nem mozdít fókuszt.
 
 ## 🔧 Future Enhancements
 
