@@ -1,7 +1,9 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
+using Wrecept.Wpf.Services;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
@@ -16,10 +18,13 @@ public partial class ProductMasterViewModel : EditableMasterDataViewModel<Produc
     private readonly IProductService _service;
     private readonly ITaxRateService _taxRates;
 
+    public new IRelayCommand EditSelectedCommand { get; }
+
     public ProductMasterViewModel(IProductService service, ITaxRateService taxRates)
     {
         _service = service;
         _taxRates = taxRates;
+        EditSelectedCommand = new RelayCommand(EditSelected, () => SelectedItem != null);
     }
 
     protected override Task<List<Product>> GetItemsAsync()
@@ -41,5 +46,32 @@ public partial class ProductMasterViewModel : EditableMasterDataViewModel<Produc
         TaxRates.Clear();
         foreach (var r in rates)
             TaxRates.Add(r);
+    }
+
+    private async void EditSelected()
+    {
+        if (SelectedItem is null)
+            return;
+
+        var vm = new ProductEditorViewModel
+        {
+            Name = SelectedItem.Name,
+            Net = SelectedItem.Net,
+            Gross = SelectedItem.Gross,
+            TaxRateId = SelectedItem.TaxRateId
+        };
+
+        vm.OnOk = async m =>
+        {
+            SelectedItem.Name = m.Name;
+            SelectedItem.Net = m.Net;
+            SelectedItem.Gross = m.Gross;
+            SelectedItem.TaxRateId = m.TaxRateId;
+            await _service.UpdateAsync(SelectedItem);
+            await LoadAsync();
+        };
+
+        DialogService.EditEntity<Views.EditDialogs.ProductEditorView, ProductEditorViewModel>(
+            vm, vm.OkCommand, vm.CancelCommand);
     }
 }

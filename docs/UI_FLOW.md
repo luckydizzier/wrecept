@@ -157,3 +157,10 @@ A `ScreenModeViewModel` tölti be az értékeket az `Enum.GetValues<ScreenMode>(
 📐 `ScreenModeManager` szerepe
 
 Induláskor a `ScreenModeManager.ApplySavedAsync` kiolvassa a `%AppData%/Wrecept/settings.json` fájlt a `SettingsService` segítségével. A beállított ablakméret és betűméret így visszaáll az előző állapotra. Az új mód kiválasztásakor a szolgáltatás frissíti a főablak méreteit, majd elmenti az értéket a `settings.json`-ba az `ISettingsService.SaveAsync` hívással.
+
+📋 Dialóguskezelés lépései
+
+1. A ViewModel létrehozza a megfelelő szerkesztő ViewModelt (pl. `ProductEditorViewModel`).
+2. Az `OnOk` delegáltban frissíti a kiválasztott entitást, majd meghívja a szolgáltatást a mentésre.
+3. A `DialogService.EditEntity<TView, TViewModel>` hívás elkészíti az `EditEntityDialog` példányt, és átadja az `Ok`/`Mégse` parancsokat.
+4. A `NavigationService.ShowCenteredDialog` megjeleníti a dialógust a főablak közepén. A `DialogHelper` gondoskodik a billentyűk leképezéséről.
