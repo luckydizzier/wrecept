@@ -24,7 +24,8 @@ public partial class DeleteItemPromptViewModel : ObservableObject
         _parent.DeleteItemConfirmed(_row);
         _parent.DeletePrompt = null;
         var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
-        FormNavigator.RequestFocus(tracker.GetLast("InvoiceEditorView"));
+        var last = tracker.GetLast("InvoiceEditorView");
+        FormNavigator.RequestFocus(last);
     }
 
     [RelayCommand]
@@ -32,6 +33,7 @@ public partial class DeleteItemPromptViewModel : ObservableObject
     {
         _parent.DeletePrompt = null;
         var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
-        FormNavigator.RequestFocus(tracker.GetLast("InvoiceEditorView"));
+        var last = tracker.GetLast("InvoiceEditorView");
+        FormNavigator.RequestFocus(last);
     }
 }

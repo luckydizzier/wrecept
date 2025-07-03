@@ -26,7 +26,8 @@ public partial class InvoiceCreatePromptViewModel : ObservableObject
         await _parent.CreateInvoiceAsync(Number);
         _parent.InlinePrompt = null;
         var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
-        FormNavigator.RequestFocus(tracker.GetLast("InvoiceEditorView"));
+        var last = tracker.GetLast("InvoiceEditorView");
+        FormNavigator.RequestFocus(last);
     }
 
     [RelayCommand]
@@ -34,6 +35,7 @@ public partial class InvoiceCreatePromptViewModel : ObservableObject
     {
         _parent.InlinePrompt = null;
         var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
-        FormNavigator.RequestFocus(tracker.GetLast("InvoiceEditorView"));
+        var last = tracker.GetLast("InvoiceEditorView");
+        FormNavigator.RequestFocus(last);
     }
 }
