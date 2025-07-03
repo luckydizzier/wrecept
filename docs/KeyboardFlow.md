@@ -37,12 +37,14 @@ A Wrecept minden felületén a billentyűzet az elsődleges vezérlő eszköz. A
 - `Delete`: kijelölt sor törlése.
 - `Escape`: részletes nézetből vissza a listához.
 Az összes mesteradat ViewModel az `EditableMasterDataViewModel` leszármazottja, így ezek a billentyűk minden listában azonos módon viselkednek.
+Az InputBindingek mostantól a rács vezérlőn vannak, így szövegmezők szerkesztésekor az `Enter` nem zárja le véletlenül a részleteket.
 
 ## 📦 Modal Prompt Behavior
 
 Az `ArchivePromptView`, `SaveLinePromptView` és `InvoiceCreatePromptView` egyaránt követi:
 - `Enter` a megerősítő parancsot futtatja.
 - `Escape` a mégse parancsot hívja.
+- Többsoros `TextBox` esetén az `Enter` nem kerül lekezelésre, hogy az új sor bevitele működjön.
 A fókusz a prompt bezárása után visszatér a megnyitó nézethez.
 
 ## 📋 Focus Reset Rules
@@ -56,6 +58,7 @@ Az `Enter` alapértelmezésben a következő vezérlőre ugrik, ha az aktuális 
 ## 💡 Design Philosophy
 
 A billentyűzetes navigációt a sebesség és az időtálló megszokhatóság jegyében terveztük. Minden akció egzaktul megismételhető, vizuális visszajelzéssel kombinálva.
+Általánosan `KeyDown` eseményeket használunk; csak a `SmartLookup` és az `EditLookup` kezel `PreviewKeyDown`-t, hogy még a `TextBox` szintjén elcsípje a navigációs billentyűket.
 
 ## 🔧 Future Enhancements
 

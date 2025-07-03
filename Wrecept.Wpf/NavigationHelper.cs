@@ -14,7 +14,10 @@ public static class NavigationHelper
         if (e.OriginalSource is DependencyObject d)
         {
             if ((e.Key is Key.Up or Key.Down) &&
-                (d.FindAncestor<ListBox>() is not null || d.FindAncestor<DataGrid>() is not null))
+                (d.FindAncestor<ListBox>() is not null ||
+                 d.FindAncestor<DataGrid>() is not null ||
+                 d.FindAncestor<ComboBox>() is not null ||
+                 d.FindAncestor<TreeView>() is not null))
             {
                 return;
             }

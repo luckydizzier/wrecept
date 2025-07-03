@@ -46,9 +46,9 @@ public abstract class BaseMasterView : UserControl
             new KeyBinding { Key = Key.Delete },
             new KeyBinding { Key = Key.Escape }
         };
-        InputBindings.Add(commands[0]);
-        InputBindings.Add(commands[1]);
-        InputBindings.Add(commands[2]);
+        dataGrid.InputBindings.Add(commands[0]);
+        dataGrid.InputBindings.Add(commands[1]);
+        dataGrid.InputBindings.Add(commands[2]);
         BindingOperations.SetBinding(commands[0], InputBinding.CommandProperty, new Binding("EditSelectedCommand"));
         BindingOperations.SetBinding(commands[1], InputBinding.CommandProperty, new Binding("DeleteSelectedCommand"));
         BindingOperations.SetBinding(commands[2], InputBinding.CommandProperty, new Binding("CloseDetailsCommand"));
