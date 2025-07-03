@@ -2,6 +2,7 @@ using System.Windows;
 using System.Windows.Input;
 using Wrecept.Wpf.Services;
 using Wrecept.Wpf.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Wrecept.Wpf.Views;
 
