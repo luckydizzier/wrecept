@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,13 @@ public partial class UserInfoEditorView : UserControl
 
     private void OnKeyDown(object sender, KeyEventArgs e)
     {
+        if (e.Key == Key.Escape)
+        {
+            e.Handled = true;
+            (e.OriginalSource as UIElement)?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));
+            return;
+        }
+
         _keyboard?.Handle(e);
     }
 }

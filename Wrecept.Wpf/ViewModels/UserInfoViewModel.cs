@@ -14,6 +14,8 @@ public partial class UserInfoViewModel : ObservableObject
     [ObservableProperty] private string address = string.Empty;
     [ObservableProperty] private string phone = string.Empty;
     [ObservableProperty] private string email = string.Empty;
+    [ObservableProperty] private string taxNumber = string.Empty;
+    [ObservableProperty] private string bankAccount = string.Empty;
 
     public UserInfoViewModel(IUserInfoService service)
     {
@@ -27,6 +29,8 @@ public partial class UserInfoViewModel : ObservableObject
         Address = info.Address;
         Phone = info.Phone;
         Email = info.Email;
+        TaxNumber = info.TaxNumber;
+        BankAccount = info.BankAccount;
     }
 
     [RelayCommand]
@@ -37,7 +41,9 @@ public partial class UserInfoViewModel : ObservableObject
             CompanyName = CompanyName,
             Address = Address,
             Phone = Phone,
-            Email = Email
+            Email = Email,
+            TaxNumber = TaxNumber,
+            BankAccount = BankAccount
         });
     }
 }

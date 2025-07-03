@@ -97,7 +97,9 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
             CompanyName = infoVm.CompanyName,
             Address = infoVm.Address,
             Phone = infoVm.Phone,
-            Email = infoVm.Email
+            Email = infoVm.Email,
+            TaxNumber = infoVm.TaxNumber,
+            BankAccount = infoVm.BankAccount
         });
 
         var settings = new AppSettings

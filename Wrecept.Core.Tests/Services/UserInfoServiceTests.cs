@@ -31,6 +31,8 @@ public class UserInfoServiceTests : IDisposable
         Assert.Equal(string.Empty, info.Address);
         Assert.Equal(string.Empty, info.Phone);
         Assert.Equal(string.Empty, info.Email);
+        Assert.Equal(string.Empty, info.TaxNumber);
+        Assert.Equal(string.Empty, info.BankAccount);
     }
 
     [Fact]
@@ -38,7 +40,15 @@ public class UserInfoServiceTests : IDisposable
     {
         var path = Path.Combine(_tempDir, "Wrecept", "wrecept.json");
         var svc = new UserInfoService(path);
-        var info = new UserInfo { CompanyName = "ACME" };
+        var info = new UserInfo
+        {
+            CompanyName = "ACME",
+            Address = "Addr",
+            Phone = "123",
+            Email = "a@b.c",
+            TaxNumber = "12345678-1-42",
+            BankAccount = "11100000-11111111-11111111"
+        };
         await svc.SaveAsync(info);
 
         Assert.True(File.Exists(path));
@@ -49,7 +59,15 @@ public class UserInfoServiceTests : IDisposable
     {
         var path = Path.Combine(_tempDir, "Wrecept", "wrecept.json");
         var svc = new UserInfoService(path);
-        var info = new UserInfo { CompanyName = "ACME", Address = "Addr", Phone = "123", Email = "a@b.c" };
+        var info = new UserInfo
+        {
+            CompanyName = "ACME",
+            Address = "Addr",
+            Phone = "123",
+            Email = "a@b.c",
+            TaxNumber = "12345678-1-42",
+            BankAccount = "11100000-11111111-11111111"
+        };
         await svc.SaveAsync(info);
 
         var loaded = await svc.LoadAsync();
@@ -57,6 +75,8 @@ public class UserInfoServiceTests : IDisposable
         Assert.Equal(info.Address, loaded.Address);
         Assert.Equal(info.Phone, loaded.Phone);
         Assert.Equal(info.Email, loaded.Email);
+        Assert.Equal(info.TaxNumber, loaded.TaxNumber);
+        Assert.Equal(info.BankAccount, loaded.BankAccount);
     }
 
     public void Dispose()
