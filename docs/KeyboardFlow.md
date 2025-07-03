@@ -28,7 +28,7 @@ A Wrecept minden felületén a billentyűzet az elsődleges vezérlő eszköz. A
 - A fejmezőkben `Enter` vagy `Down` továbbítja a fókuszt.
 - `Escape` visszaviszi a főablak listájához.
 - Az „Inline Item Entry” sor a `OnEntryKeyDown` eseményt használja:
-  - `Enter` az utolsó mezőben (`EntryTax`) meghívja az `AddLineItemCommand`-et.
+  - `Enter` az utolsó mezőben (jelölés: `Tag="LastEntry"`) meghívja az `AddLineItemCommand`-et.
   - Egyébként a `NavigationHelper` lép közbe.
 - Az `InvoiceItemsGrid`-en `Enter` az aktuális tétel szerkesztését indítja.
 
@@ -37,7 +37,8 @@ A Wrecept minden felületén a billentyűzet az elsődleges vezérlő eszköz. A
 - `Delete`: kijelölt sor törlése.
 - `Escape`: részletes nézetből vissza a listához.
 Az összes mesteradat ViewModel az `EditableMasterDataViewModel` leszármazottja, így ezek a billentyűk minden listában azonos módon viselkednek.
-Az InputBindingek mostantól a rács vezérlőn vannak, így szövegmezők szerkesztésekor az `Enter` nem zárja le véletlenül a részleteket.
+Az InputBindingek helyett a rács `PreviewKeyDown` eseménye futtatja a parancsokat,
+így szövegmezők szerkesztésekor az `Enter` nem zárja le véletlenül a részleteteket.
 
 ## 📦 Modal Prompt Behavior
 
@@ -49,10 +50,11 @@ A fókusz a prompt bezárása után visszatér a megnyitó nézethez.
 
 ## 📋 Focus Reset Rules
 
-Globálisan az `Escape` mindig a főablakra helyezi a fókuszt:
+Globálisan az `Escape` csak a főablakból indítva helyezi a fókuszt vissza a főablakra:
 ```csharp
 Application.Current.MainWindow?.Focus();
 ```
+Más ablakokban a billentyűt a saját logikájuk kezeli.
 Az `Enter` alapértelmezésben a következő vezérlőre ugrik, ha az aktuális kezelő nem nyeli el.
 
 ## 💡 Design Philosophy

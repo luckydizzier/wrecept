@@ -56,7 +56,7 @@ public partial class InvoiceEditorView : UserControl
         if (fe is not null)
             vm.LastFocusedField = fe.Name;
 
-        if (e.Key == Key.Enter && fe?.Name == "EntryTax")
+        if (e.Key == Key.Enter && fe?.Tag?.ToString() == "LastEntry")
         {
             if (vm.EditableItem.IsEditingExisting)
                 vm.SaveEditedItemCommand.Execute(null);
