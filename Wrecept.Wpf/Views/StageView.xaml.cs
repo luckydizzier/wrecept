@@ -39,6 +39,17 @@ public partial class StageView : UserControl
             return;
         }
 
+        if (e.Key is Key.Up or Key.Down && e.OriginalSource == this)
+        {
+            var last = _tracker.GetLast("StageView") as IInputElement;
+            if (last is not null && !ReferenceEquals(last, this))
+            {
+                FormNavigator.RequestFocus(last);
+                e.Handled = true;
+                return;
+            }
+        }
+
         NavigationHelper.Handle(e);
     }
 
