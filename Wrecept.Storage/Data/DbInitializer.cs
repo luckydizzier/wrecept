@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Wrecept.Core.Services;
 
@@ -16,7 +15,6 @@ public static class DbInitializer
         try
         {
             var creator = db.GetService<IRelationalDatabaseCreator>();
-            var history = db.GetService<IHistoryRepository>();
 
             if (!await creator.ExistsAsync(ct))
             {
@@ -24,15 +22,7 @@ public static class DbInitializer
                 return;
             }
 
-            if (await history.ExistsAsync(ct))
-            {
-                await db.Database.MigrateAsync(ct);
-            }
-            else
-            {
-                await db.Database.EnsureCreatedAsync(ct);
-                await db.Database.MigrateAsync(ct);
-            }
+            await db.Database.MigrateAsync(ct);
         }
         catch (Exception ex)
         {
