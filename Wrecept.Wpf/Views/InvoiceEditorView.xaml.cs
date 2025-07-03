@@ -101,7 +101,12 @@ public partial class InvoiceEditorView : UserControl
         Dispatcher.BeginInvoke(() =>
         {
             if (InlineCreatorHost.Content is FrameworkElement fe)
-                fe.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+            {
+                if (fe.FindName("NameBox") is IInputElement box)
+                    Keyboard.Focus(box);
+                else
+                    fe.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+            }
         }, DispatcherPriority.Background);
     }
 }
