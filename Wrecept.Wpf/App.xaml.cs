@@ -95,6 +95,9 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddCore();
         await services.AddStorageAsync(DbPath, UserInfoPath, SettingsPath);
 
+        var keyboardProfile = KeyboardProfile.Load(UserInfoPath);
+        services.AddSingleton(keyboardProfile);
+
         services.AddTransient<StageViewModel>();
         services.AddTransient<InvoiceEditorViewModel>();
         services.AddTransient<InvoiceLookupViewModel>();
