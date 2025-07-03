@@ -42,7 +42,7 @@ Allow invoices to store a reference to a selectable payment method (e.g., cash, 
 
 ## 🧮 Feature: Implement Auto-Totals in InvoiceEditor
 
-**Status:** IN PROGRESS
+**Status:** DONE
 
 ### 🎯 Goal
 
@@ -97,7 +97,7 @@ Allow keyboard-only product/supplier lookup and inline creation.
 | Feature Name                  | Status      | Last Agent Triggered |
 | ----------------------------- | ----------- | -------------------- |
 | Add Payment Method Entity     | PLANNED     | -                    |
-| Implement Auto-Totals         | IN PROGRESS | code\_agent          |
+| Implement Auto-Totals         | DONE        | docs_agent           |
 | Keyboard-Only Lookup Workflow | PLANNED     | -                    |
 
 ---
