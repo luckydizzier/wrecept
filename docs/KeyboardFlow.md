@@ -51,7 +51,7 @@ Az `ArchivePromptView`, `SaveLinePromptView` és `InvoiceCreatePromptView` egyar
 - `Escape` a mégse parancsot hívja.
 - Többsoros `TextBox` (`AcceptsReturn=true`) esetén a `KeyboardManager` sem az `Enter`, sem az `Escape` billentyűt nem kezeli, így az új sor bevitele és a vezérlő saját művelete zavartalan.
 A fókusz a prompt bezárása után visszatér a megnyitó nézethez.
-Ezt a `FocusTrackerService` végzi, amely nézetenként rögzíti az utoljára fókuszba került vezérlőt.
+Ezt a `FocusManager` végzi, amely nézetenként rögzíti az utoljára fókuszba került vezérlőt.
 
 ## 📋 Focus Reset Rules
 
@@ -64,7 +64,7 @@ Az `Enter` alapértelmezésben a következő vezérlőre ugrik, ha az aktuális 
 
 ### Fókuszkövető szolgáltatás
 
-Az `IFocusTrackerService` a nézetekhez rendelt kulcs alapján megjegyzi az utoljára fókuszba került vezérlőt. A promptok vagy nézetek bezárásakor a `FocusManager` ennek segítségével állítja vissza a fókuszt az eredeti elemre. A szolgáltatás singletonként regisztrált, így minden View és ViewModel DI-n keresztül éri el.
+A `FocusManager` a nézetekhez rendelt kulcs alapján megjegyzi az utoljára fókuszba került vezérlőt. A promptok vagy nézetek bezárásakor ezen keresztül állítjuk vissza a fókuszt az eredeti elemre. A szolgáltatás singletonként regisztrált, így minden View és ViewModel DI-n keresztül éri el.
 
 ## 💡 Design Philosophy
 

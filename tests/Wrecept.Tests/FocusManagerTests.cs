@@ -4,19 +4,19 @@ using Wrecept.Wpf.Services;
 
 namespace Wrecept.Tests;
 
-public class FocusTrackerServiceTests
+public class FocusManagerTests
 {
     [Fact]
     public void GetLast_ReturnsNull_WhenNotTracked()
     {
-        var tracker = new FocusTrackerService();
+        var tracker = new FocusManager();
         Assert.Null(tracker.GetLast("Any"));
     }
 
     [Fact]
     public void Update_StoresLastElement_PerView()
     {
-        var tracker = new FocusTrackerService();
+        var tracker = new FocusManager();
         var first = new TextBox();
         var second = new TextBox();
 

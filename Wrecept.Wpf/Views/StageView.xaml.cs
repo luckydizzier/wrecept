@@ -11,7 +11,6 @@ public partial class StageView : UserControl
 {
     private readonly StageViewModel _viewModel;
     private MenuItem? _lastMenuItem;
-    private readonly IFocusTrackerService _tracker;
     private readonly KeyboardManager _keyboard;
     private readonly FocusManager _focus;
 
@@ -20,7 +19,6 @@ public partial class StageView : UserControl
         InitializeComponent();
         _viewModel = viewModel;
         DataContext = viewModel;
-        _tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
         _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
         _focus = App.Provider.GetRequiredService<FocusManager>();
         Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
@@ -45,7 +43,7 @@ public partial class StageView : UserControl
 
         if (e.Key is Key.Up or Key.Down && e.OriginalSource == this)
         {
-            var last = _tracker.GetLast("StageView") as IInputElement;
+            var last = _focus.GetLast("StageView");
             if (last is not null && !ReferenceEquals(last, this))
             {
                 _focus.RequestFocus(last);
@@ -69,7 +67,7 @@ public partial class StageView : UserControl
         {
             _lastMenuItem = menuItem;
         }
-        _tracker.Update("StageView", e.NewFocus);
+        _focus.Update("StageView", e.NewFocus);
         _viewModel.StatusBar.FocusedElement = fe?.Name ?? fe?.GetType().Name ?? string.Empty;
     }
 }

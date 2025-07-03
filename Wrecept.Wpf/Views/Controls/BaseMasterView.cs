@@ -17,14 +17,14 @@ public abstract class BaseMasterView : UserControl
 
     protected DataGrid Grid { get; }
 
-    private readonly IFocusTrackerService _tracker;
+    private readonly FocusManager _focus;
 
     protected BaseMasterView()
     {
         Grid = BuildLayout();
         Loaded += OnLoaded;
         KeyDown += OnKeyDown;
-        _tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        _focus = App.Provider.GetRequiredService<FocusManager>();
         Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
     }
 
@@ -116,7 +116,7 @@ public abstract class BaseMasterView : UserControl
     }
 
     private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        => _tracker.Update(GetType().Name, e.NewFocus);
+        => _focus.Update(GetType().Name, e.NewFocus);
 
     private void Grid_RowDetailsVisibilityChanged(object? sender, DataGridRowDetailsEventArgs e)
     {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Media;
@@ -7,6 +8,20 @@ namespace Wrecept.Wpf.Services;
 
 public class FocusManager
 {
+    private readonly Dictionary<string, WeakReference<IInputElement>> _map = new();
+
+    public void Update(string viewKey, IInputElement element)
+    {
+        _map[viewKey] = new WeakReference<IInputElement>(element);
+    }
+
+    public IInputElement? GetLast(string viewKey)
+    {
+        if (_map.TryGetValue(viewKey, out var weak) && weak.TryGetTarget(out var element))
+            return element;
+        return null;
+    }
+
     public void RequestFocus(IInputElement? element)
     {
         Application.Current.Dispatcher.BeginInvoke(() => element?.Focus(), DispatcherPriority.Background);
