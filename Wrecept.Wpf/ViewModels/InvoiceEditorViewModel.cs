@@ -336,9 +336,10 @@ private void UpdateSupplierId(string name)
         if (parameter is UIElement target && target is FrameworkElement fe && fe.DataContext is InvoiceItemRowViewModel row)
         {
             InlineCreatorTarget = target;
+            var name = (target as Views.Controls.SmartLookup)?.Text ?? row.Product;
             InlineCreator = new ProductCreatorViewModel(this, row, _productsService)
             {
-                Name = row.Product
+                Name = name
             };
         }
     }
