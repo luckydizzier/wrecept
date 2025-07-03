@@ -63,4 +63,29 @@ public class StageViewFocusTests
         Assert.True(escape.Handled);
         Assert.Same(second, last);
     }
+
+    [Fact]
+    public void ArrowKeyRestoresLastFocusedElement()
+    {
+        var view = CreateView(out _, out _);
+        var type = view.GetType();
+
+        var focusMethod = type.GetMethod("OnGotKeyboardFocus", BindingFlags.Instance | BindingFlags.NonPublic)!;
+        var keyMethod = type.GetMethod("OnKeyDown", BindingFlags.Instance | BindingFlags.NonPublic)!;
+
+        var box = new TextBox();
+        var focusArgs = new KeyboardFocusChangedEventArgs(Keyboard.PrimaryDevice, 0, null, box) { RoutedEvent = Keyboard.GotKeyboardFocusEvent };
+        focusMethod.Invoke(view, new object[] { view, focusArgs });
+
+        var down = new KeyEventArgs(Keyboard.PrimaryDevice, new FakeSource(), 0, Key.Down)
+        {
+            RoutedEvent = Keyboard.KeyDownEvent,
+            Source = view,
+            OriginalSource = view
+        };
+
+        keyMethod.Invoke(view, new object[] { view, down });
+
+        Assert.True(down.Handled);
+    }
 }
