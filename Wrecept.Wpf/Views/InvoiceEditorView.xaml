@@ -58,6 +58,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -153,29 +154,35 @@
                                DisplayMemberPath="Name"
                                SelectedValuePath="Name"
                                SelectedValue="{Binding Product, Mode=TwoWay}"
-                               Watermark="Termék neve" />
+                               Watermark="Termék neve"
+                               CreateCommand="{Binding DataContext.ShowProductCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                               CommandParameter="{Binding}" />
                 <TextBox x:Name="EntryQuantity" Width="60" Margin="4,0" Text="{Binding Quantity, Mode=TwoWay}"/>
                 <c:SmartLookup x:Name="EntryUnit" Width="80"
                                ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                DisplayMemberPath="Name"
                                SelectedValuePath="Id"
                                SelectedValue="{Binding UnitId, Mode=TwoWay}"
-                               Watermark="Me.e." />
+                               Watermark="Me.e."
+                               CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
                 <TextBox x:Name="EntryPrice" Width="80" Margin="4,0" Text="{Binding UnitPrice, Mode=TwoWay}"/>
                 <c:EditLookup x:Name="EntryTax" Width="100"
                               ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Id"
-                              SelectedValue="{Binding TaxRateId, Mode=TwoWay}"/>
+                              SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
+                              CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
             </StackPanel>
 
-            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ContentControl Grid.Row="2" Content="{Binding InlineCreator}" Visibility="{Binding IsInlineCreatorVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <view:InvoiceItemsGrid x:Name="ItemsGrid" Margin="0,0,0,4" />
             </ScrollViewer>
 
-            <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="{x:Static FontStyles.Italic}" Margin="0,4" Grid.Row="3" />
+            <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="{x:Static FontStyles.Italic}" Margin="0,4" Grid.Row="4" />
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6" Grid.Row="4">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6" Grid.Row="5">
                 <Button Content="Mentés" Command="{Binding SaveCommand}" IsEnabled="{Binding IsEditable}"
                         Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
                 <Button Content="Nyomtatás" IsEnabled="{Binding IsArchived}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
@@ -193,9 +200,9 @@
                 </Button>
             </StackPanel>
 
-            <ContentControl Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="5" />
-            <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="5" Margin="0,4,0,0" />
-            <ContentControl Content="{Binding DeletePrompt}" Visibility="{Binding IsDeletePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="5" Margin="0,8,0,0" />
+            <ContentControl Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="6" />
+            <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="6" Margin="0,4,0,0" />
+            <ContentControl Content="{Binding DeletePrompt}" Visibility="{Binding IsDeletePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="6" Margin="0,8,0,0" />
         </Grid>
     </Grid>
 </UserControl>
