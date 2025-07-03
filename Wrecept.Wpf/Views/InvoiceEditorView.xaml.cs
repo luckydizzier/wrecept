@@ -9,6 +9,7 @@ using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
 using Wrecept.Wpf;
 using Wrecept.Wpf.Services;
+using FocusManager = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views;
 

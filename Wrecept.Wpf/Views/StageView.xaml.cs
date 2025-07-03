@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Services;
+using FocusManager = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views;
 
