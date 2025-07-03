@@ -9,7 +9,7 @@ date: "2025-06-30"
 
 Az InvoiceEditor nézetben lehetőség nyílik a hiányzó törzsadatok azonnali felvételére. Ha a felhasználó olyan terméket, szállítót, ÁFA-kulcsot vagy mértékegységet ír be, amely nem található az adatbázisban, a program egy kibomló űrlapot jelenít meg az aktuális sor alatt.
 
-Korábban a űrlap a DataGrid `RowDetailsTemplate` elemében jelent meg, ám ez rejtve maradt a sorok összecsukása miatt.  Most egy külön `ContentControl` tartja az űrlapot az adatbeviteli sáv alatt, így mindig látható marad.
+Korábban a űrlap a DataGrid `RowDetailsTemplate` elemében jelent meg, ám ez rejtve maradt a sorok összecsukása miatt.  A legutóbbi frissítés óta a nézet egy lebegő `Popup` segítségével közvetlenül a keresőmező alatt jeleníti meg az űrlapot, így a felhasználó fókusza nem vész el.
 
 ```text
 +-----------------------+
@@ -25,6 +25,7 @@ A kitöltött űrlap mentése azonnal létrehozza az entitást és a szerkesztet
 
 * Minden entitáshoz külön `*CreatorViewModel` és XAML nézet tartozik.
 * Az `InvoiceEditorViewModel.InlineCreator` property tartalmazza az aktuális űrlapot.
+* Az `InlineCreatorTarget` property az adott vezérlőre mutat, amelyhez a `Popup` igazodik.
 * A háttérszín `#F5F5DC`, ezzel emeljük ki az inline űrlapot.
 * Az entitások validálását a megfelelő szolgáltatások (`IProductService`, stb.) végzik.
 

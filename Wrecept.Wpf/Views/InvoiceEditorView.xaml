@@ -93,6 +93,7 @@
                                            SelectedValuePath="Id"
                                            SelectedValue="{Binding SupplierId}"
                                            CreateCommand="{Binding ShowSupplierCreatorCommand}"
+                                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                            Watermark="Kezdjen el gépelni..."
                                            IsEnabled="{Binding IsEditable}" />
 
@@ -103,6 +104,7 @@
                                           SelectedValuePath="Id"
                                           SelectedValue="{Binding PaymentMethodId}"
                                           CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
+                                          CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                           IsEnabled="{Binding IsEditable}" />
 
                             <CheckBox Grid.Row="2" Grid.ColumnSpan="2" Content="Bruttó ár" Margin="0,4,0,0" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
@@ -156,7 +158,7 @@
                                SelectedValue="{Binding Product, Mode=TwoWay}"
                                Watermark="Termék neve"
                                CreateCommand="{Binding DataContext.ShowProductCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                               CommandParameter="{Binding}" />
+                               CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
                 <TextBox x:Name="EntryQuantity" Width="60" Margin="4,0" Text="{Binding Quantity, Mode=TwoWay}"/>
                 <c:SmartLookup x:Name="EntryUnit" Width="80"
                                ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -164,17 +166,17 @@
                                SelectedValuePath="Id"
                                SelectedValue="{Binding UnitId, Mode=TwoWay}"
                                Watermark="Me.e."
-                               CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                               CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                               CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
                 <TextBox x:Name="EntryPrice" Width="80" Margin="4,0" Text="{Binding UnitPrice, Mode=TwoWay}"/>
                 <c:EditLookup x:Name="EntryTax" Width="100" Tag="LastEntry"
                               ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Id"
                               SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
-                              CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                              CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
             </StackPanel>
-
-            <ContentControl Grid.Row="2" Content="{Binding InlineCreator}" Visibility="{Binding IsInlineCreatorVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <view:InvoiceItemsGrid x:Name="ItemsGrid" Margin="0,0,0,4" />
@@ -204,5 +206,14 @@
             <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="6" Margin="0,4,0,0" />
             <ContentControl Content="{Binding DeletePrompt}" Visibility="{Binding IsDeletePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="6" Margin="0,8,0,0" />
         </Grid>
+        <Popup Placement="Bottom"
+               PlacementTarget="{Binding InlineCreatorTarget}"
+               IsOpen="{Binding IsInlineCreatorVisible}"
+               StaysOpen="True"
+               AllowsTransparency="True">
+            <Border Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
+                <ContentControl Content="{Binding InlineCreator}" />
+            </Border>
+        </Popup>
     </Grid>
 </UserControl>
