@@ -33,7 +33,7 @@ public partial class InvoiceEditorView : UserControl
             });
             await viewModel.LoadAsync(progress);
             progressWindow.Close();
-            FormNavigator.RequestFocus("InvoiceList");
+            FormNavigator.RequestFocus("InvoiceList", typeof(InvoiceEditorView));
         };
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Media;
@@ -6,14 +7,22 @@ namespace Wrecept.Wpf;
 
 public static class FormNavigator
 {
-    public static void RequestFocus(string elementName)
+    public static void RequestFocus(string elementName, Type? viewType = null)
     {
         Application.Current.Dispatcher.BeginInvoke(() =>
         {
             if (Application.Current.MainWindow is null)
                 return;
 
-            var target = FindElement(Application.Current.MainWindow, elementName);
+            DependencyObject root = Application.Current.MainWindow;
+            if (viewType != null)
+            {
+                var view = FindElement(root, viewType);
+                if (view != null)
+                    root = view;
+            }
+
+            var target = FindElement(root, elementName);
             (target as IInputElement)?.Focus();
         }, DispatcherPriority.Background);
     }
@@ -26,6 +35,21 @@ public static class FormNavigator
             if (child is FrameworkElement fe && fe.Name == name)
                 return fe;
             var result = FindElement(child, name);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+
+    private static DependencyObject? FindElement(DependencyObject parent, Type targetType)
+    {
+        if (parent.GetType() == targetType)
+            return parent;
+
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+        {
+            var child = VisualTreeHelper.GetChild(parent, i);
+            var result = FindElement(child, targetType);
             if (result != null)
                 return result;
         }
