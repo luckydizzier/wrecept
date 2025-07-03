@@ -104,7 +104,7 @@
                                           SelectedValuePath="Id"
                                           SelectedValue="{Binding PaymentMethodId}"
                                           CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
-                                          CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                          CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                           IsEnabled="{Binding IsEditable}" />
 
                             <CheckBox Grid.Row="2" Grid.ColumnSpan="2" Content="Bruttó ár" Margin="0,4,0,0" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
@@ -175,7 +175,7 @@
                               SelectedValuePath="Id"
                               SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
                               CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                              CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                              CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
             </StackPanel>
 
             <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
