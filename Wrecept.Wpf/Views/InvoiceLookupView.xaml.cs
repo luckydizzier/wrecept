@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core.Services;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.Views;
 

@@ -13,6 +13,8 @@ using System.Windows;
 using Wrecept.Wpf.Views.Controls;
 using Wrecept.Wpf.Views;
 using Controls = Wrecept.Wpf.Views.Controls;
+using Wrecept.Wpf.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Wrecept.Wpf.ViewModels;
 
