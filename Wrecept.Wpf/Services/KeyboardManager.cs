@@ -12,7 +12,16 @@ public enum NavigationProfile
 
 public class KeyboardManager
 {
+    private readonly KeyboardProfile _keys;
+
     public NavigationProfile Profile { get; set; } = NavigationProfile.Default;
+
+    public KeyboardManager() : this(new KeyboardProfile()) { }
+
+    public KeyboardManager(KeyboardProfile keys)
+    {
+        _keys = keys;
+    }
 
     public void Handle(KeyEventArgs e)
     {
@@ -23,7 +32,7 @@ public class KeyboardManager
 
         if (e.OriginalSource is DependencyObject d)
         {
-            if ((e.Key is Key.Up or Key.Down) &&
+            if ((e.Key == _keys.Previous || e.Key == _keys.Next) &&
                 (d.FindAncestor<ListBox>() is not null ||
                  d.FindAncestor<DataGrid>() is not null ||
                  d.FindAncestor<ComboBox>() is not null ||
@@ -35,31 +44,35 @@ public class KeyboardManager
             }
         }
 
-        if ((e.Key is Key.Enter or Key.Escape) &&
+        if ((e.Key == _keys.Confirm || e.Key == _keys.Cancel) &&
             e.OriginalSource is TextBox box &&
             box.AcceptsReturn)
         {
             return;
         }
 
-        switch (e.Key)
+        if (e.Key == _keys.Next)
         {
-            case Key.Down:
-            case Key.Enter:
+            e.Handled = true;
+            element?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+        }
+        else if (e.Key == _keys.Previous)
+        {
+            e.Handled = true;
+            element?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));
+        }
+        else if (e.Key == _keys.Cancel)
+        {
+            if (Window.GetWindow(element) == Application.Current.MainWindow)
+            {
                 e.Handled = true;
-                element?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-                break;
-            case Key.Up:
-                e.Handled = true;
-                element?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));
-                break;
-            case Key.Escape:
-                if (Window.GetWindow(element) == Application.Current.MainWindow)
-                {
-                    e.Handled = true;
-                    Application.Current.MainWindow?.Focus();
-                }
-                break;
+                Application.Current.MainWindow?.Focus();
+            }
+        }
+        else if (e.Key == _keys.Confirm)
+        {
+            e.Handled = true;
+            element?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
         }
     }
 }
