@@ -33,6 +33,22 @@
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="LabelTextStyle">
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="ValueTextStyle">
+        <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextAlignment" Value="Right" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="BoldTotalStyle" BasedOn="{StaticResource ValueTextStyle}">
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
     <Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="FontFamily" Value="{StaticResource MonospacedFont}" />
