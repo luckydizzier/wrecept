@@ -138,56 +138,69 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
     {
         base.OnStartup(e);
 
-        ShutdownMode = ShutdownMode.OnExplicitShutdown;
-
-        await EnsureServicesInitializedAsync();
-
-        var orchestrator = Provider.GetRequiredService<StartupOrchestrator>();
-        using var cts = new CancellationTokenSource();
-        var progressVm = Provider.GetRequiredService<ProgressViewModel>();
-        progressVm.CancelCommand = new RelayCommand(() => cts.Cancel());
-        var progress = new Progress<ProgressReport>(r =>
+        try
         {
-            progressVm.GlobalProgress = r.GlobalPercent;
-            progressVm.SubProgress = r.SubtaskPercent;
-            progressVm.StatusMessage = r.Message;
-        });
+            ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
-        if (await orchestrator.DatabaseEmptyAsync(cts.Token))
-        {
-            var optionsVm = Provider.GetRequiredService<SeedOptionsViewModel>();
-            var optionsWin = Provider.GetRequiredService<SeedOptionsWindow>();
-            optionsWin.DataContext = optionsVm;
-            if (optionsWin.ShowDialog() == true)
+            await EnsureServicesInitializedAsync();
+
+            var orchestrator = Provider.GetRequiredService<StartupOrchestrator>();
+            using var cts = new CancellationTokenSource();
+            var progressVm = Provider.GetRequiredService<ProgressViewModel>();
+            progressVm.CancelCommand = new RelayCommand(() => cts.Cancel());
+            var progress = new Progress<ProgressReport>(r =>
             {
-                var startupWindow = Provider.GetRequiredService<StartupWindow>();
-                startupWindow.DataContext = progressVm;
-                startupWindow.Show();
-                var status = await orchestrator.SeedAsync(
-                    progress,
-                    cts.Token,
-                    optionsVm.SupplierCount,
-                    optionsVm.ProductCount,
-                    optionsVm.InvoiceCount,
-                    optionsVm.MinItemsPerInvoice,
-                    optionsVm.MaxItemsPerInvoice,
-                    true);
-                startupWindow.Close();
+                progressVm.GlobalProgress = r.GlobalPercent;
+                progressVm.SubProgress = r.SubtaskPercent;
+                progressVm.StatusMessage = r.Message;
+            });
 
-                if (status == SeedStatus.Failed)
+            if (await orchestrator.DatabaseEmptyAsync(cts.Token))
+            {
+                var optionsVm = Provider.GetRequiredService<SeedOptionsViewModel>();
+                var optionsWin = Provider.GetRequiredService<SeedOptionsWindow>();
+                optionsWin.DataContext = optionsVm;
+                if (optionsWin.ShowDialog() == true)
                 {
-                    MessageBox.Show(
-                        "Az adatbázis nem inicializálható. Részletek a logs/startup.log fájlban.",
-                        "Indítási hiba",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
+                    var startupWindow = Provider.GetRequiredService<StartupWindow>();
+                    startupWindow.DataContext = progressVm;
+                    startupWindow.Show();
+                    var status = await orchestrator.SeedAsync(
+                        progress,
+                        cts.Token,
+                        optionsVm.SupplierCount,
+                        optionsVm.ProductCount,
+                        optionsVm.InvoiceCount,
+                        optionsVm.MinItemsPerInvoice,
+                        optionsVm.MaxItemsPerInvoice,
+                        true);
+                    startupWindow.Close();
+
+                    if (status == SeedStatus.Failed)
+                    {
+                        MessageBox.Show(
+                            "Az adatbázis nem inicializálható. Részletek a logs/startup.log fájlban.",
+                            "Indítási hiba",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    }
                 }
             }
-        }
 
-        var window = Provider.GetRequiredService<MainWindow>();
-        MainWindow = window;
-        ShutdownMode = ShutdownMode.OnMainWindowClose;
-        window.Show();
+            var window = Provider.GetRequiredService<MainWindow>();
+            MainWindow = window;
+            ShutdownMode = ShutdownMode.OnMainWindowClose;
+            window.Show();
+        }
+        catch (Exception ex)
+        {
+            var log = Provider.GetRequiredService<ILogService>();
+            await log.LogError("App.OnStartup", ex);
+            MessageBox.Show(
+                "Váratlan hiba indításkor. Részletek a logs/startup.log fájlban.",
+                "Indítási hiba",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
     }
 }

@@ -7,6 +7,8 @@ using Wrecept.Wpf.Services;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
+using Wrecept.Wpf;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -50,28 +52,36 @@ public partial class ProductMasterViewModel : EditableMasterDataViewModel<Produc
 
     private async void EditSelected()
     {
-        if (SelectedItem is null)
-            return;
-
-        var vm = new ProductEditorViewModel
+        try
         {
-            Name = SelectedItem.Name,
-            Net = SelectedItem.Net,
-            Gross = SelectedItem.Gross,
-            TaxRateId = SelectedItem.TaxRateId
-        };
+            if (SelectedItem is null)
+                return;
 
-        vm.OnOk = async m =>
+            var vm = new ProductEditorViewModel
+            {
+                Name = SelectedItem.Name,
+                Net = SelectedItem.Net,
+                Gross = SelectedItem.Gross,
+                TaxRateId = SelectedItem.TaxRateId
+            };
+
+            vm.OnOk = async m =>
+            {
+                SelectedItem.Name = m.Name;
+                SelectedItem.Net = m.Net;
+                SelectedItem.Gross = m.Gross;
+                SelectedItem.TaxRateId = m.TaxRateId;
+                await _service.UpdateAsync(SelectedItem);
+                await LoadAsync();
+            };
+
+            DialogService.EditEntity<Views.EditDialogs.ProductEditorView, ProductEditorViewModel>(
+                vm, vm.OkCommand, vm.CancelCommand);
+        }
+        catch (Exception ex)
         {
-            SelectedItem.Name = m.Name;
-            SelectedItem.Net = m.Net;
-            SelectedItem.Gross = m.Gross;
-            SelectedItem.TaxRateId = m.TaxRateId;
-            await _service.UpdateAsync(SelectedItem);
-            await LoadAsync();
-        };
-
-        DialogService.EditEntity<Views.EditDialogs.ProductEditorView, ProductEditorViewModel>(
-            vm, vm.OkCommand, vm.CancelCommand);
+            var log = App.Provider.GetRequiredService<ILogService>();
+            await log.LogError("ProductMasterViewModel.EditSelected", ex);
+        }
     }
 }

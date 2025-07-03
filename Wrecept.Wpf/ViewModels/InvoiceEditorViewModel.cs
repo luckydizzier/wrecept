@@ -685,8 +685,15 @@ private void UpdateSupplierId(string name)
 
     private async void LookupLoadSelected()
     {
-        if (Lookup.SelectedInvoice != null)
-            await LoadInvoice(Lookup.SelectedInvoice.Id);
+        try
+        {
+            if (Lookup.SelectedInvoice != null)
+                await LoadInvoice(Lookup.SelectedInvoice.Id);
+        }
+        catch (Exception ex)
+        {
+            await _log.LogError("LookupLoadSelected", ex);
+        }
     }
 
     private void RecalculateTotals()
