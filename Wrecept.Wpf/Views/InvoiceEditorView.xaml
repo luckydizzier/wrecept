@@ -210,9 +210,10 @@
                PlacementTarget="{Binding InlineCreatorTarget}"
                IsOpen="{Binding IsInlineCreatorVisible, Mode=OneWay}"
                StaysOpen="True"
-               AllowsTransparency="True">
+               AllowsTransparency="True"
+               Opened="OnInlineCreatorOpened">
             <Border Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
-                <ContentControl Content="{Binding InlineCreator}" />
+                <ContentControl x:Name="InlineCreatorHost" Content="{Binding InlineCreator}" />
             </Border>
         </Popup>
     </Grid>
