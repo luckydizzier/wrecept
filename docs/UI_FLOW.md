@@ -176,3 +176,11 @@ Induláskor a `ScreenModeManager.ApplySavedAsync` kiolvassa a `%AppData%/Wrecept
 2. Az `OnOk` delegáltban frissíti a kiválasztott entitást, majd meghívja a szolgáltatást a mentésre.
 3. A `DialogService.EditEntity<TView, TViewModel>` hívás elkészíti az `EditEntityDialog` példányt, és átadja az `Ok`/`Mégse` parancsokat.
 4. A `NavigationService.ShowCenteredDialog` megjeleníti a dialógust a főablak közepén. A `DialogHelper` gondoskodik a billentyűk leképezéséről.
+
+### Tulajdonosi adatok felvétele
+
+Első indításkor a `UserInfoWindow` kéri be a cég adatait. A mezők kötelezőek, a
+`KeyboardManager` biztosítja, hogy `Enter` a következő mezőre lépjen. Az utolsó
+mező után az `OK` gombra kerül a fókusz, majd megerősítő üzenet jelenik meg:
+"Helyesek az adatok?". `Enter` elfogadja, `Escape` az előző mezőre visz
+vissza. Minden üres mező piros keretet kap, amíg ki nem töltik.

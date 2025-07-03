@@ -11,6 +11,8 @@ A program a felhasználó cégadatait JSON formátumban tárolja a `%AppData%/Wr
 - `Address` – székhely vagy telephely címe
 - `Phone` – kapcsolattartó telefonszáma
 - `Email` – általános elérhetőség
+- `TaxNumber` – hivatalos adószám
+- `BankAccount` – bankszámlaszám a kiállított számlákhoz
 
 ## Billentyűzetprofil
 
