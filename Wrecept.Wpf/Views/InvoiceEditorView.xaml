@@ -69,9 +69,9 @@
                 <GroupBox Header="Számlafejléc">
                     <Grid Margin="4">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <!-- Bal oszlop -->
@@ -86,7 +86,7 @@
                                 <ColumnDefinition Width="220" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Szállító" Style="{StaticResource HeaderText}" />
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Szállító" Style="{StaticResource LabelTextStyle}" />
                             <c:SmartLookup Grid.Row="0" Grid.Column="1" Width="220"
                                            ItemsSource="{Binding Suppliers}"
                                            DisplayMemberPath="Name"
@@ -96,7 +96,7 @@
                                            Watermark="Kezdjen el gépelni..."
                                            IsEnabled="{Binding IsEditable}" />
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Fizetési mód" Margin="0,4,0,0" Style="{StaticResource HeaderText}" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Fizetési mód" Margin="0,4,0,0" Style="{StaticResource LabelTextStyle}" />
                             <c:EditLookup Grid.Row="1" Grid.Column="1" Width="220" Margin="0,4,0,0"
                                           ItemsSource="{Binding PaymentMethods}"
                                           DisplayMemberPath="Name"
@@ -109,7 +109,7 @@
                         </Grid>
 
                         <!-- Középső oszlop -->
-                        <Grid Grid.Column="1">
+                        <Grid Grid.Column="1" Margin="8,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -119,10 +119,10 @@
                                 <ColumnDefinition Width="220" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Dátum" Style="{StaticResource HeaderText}" />
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Dátum" Style="{StaticResource LabelTextStyle}" />
                             <DatePicker Grid.Row="0" Grid.Column="1" Width="220" SelectedDate="{Binding InvoiceDate}" IsEnabled="{Binding IsEditable}" />
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,4,0,0" Text="Számlaszám" Style="{StaticResource HeaderText}" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,4,0,0" Text="Számlaszám" Style="{StaticResource LabelTextStyle}" />
                             <TextBox Grid.Row="1" Grid.Column="1" Width="220" Margin="0,4,0,0"
                                      Text="{Binding Number}"
                                      IsEnabled="{Binding IsNew}"
@@ -130,8 +130,8 @@
                         </Grid>
 
                         <!-- Jobb oszlop: TotalsPanel -->
-                        <Border Grid.Column="2" Padding="4" Margin="0,0,0,0" Background="{DynamicResource ControlBackgroundBrush}">
-                            <c:TotalsPanel HorizontalAlignment="Right" />
+                        <Border Grid.Column="2" Padding="4" Margin="8,0,0,0" Background="{DynamicResource ControlBackgroundBrush}">
+                            <c:TotalsPanel />
                         </Border>
                     </Grid>
                 </GroupBox>
