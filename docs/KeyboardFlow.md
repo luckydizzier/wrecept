@@ -10,6 +10,7 @@
 ## 🧭 Navigation Principles
 
 A Wrecept minden felületén a billentyűzet az elsődleges vezérlő eszköz. A `KeyboardManager.Handle` segít az általános, fokozatmentes fókuszmozgatásban. A viselkedés profil alapján szabható, az egyes nézetek saját `KeyDown` kezelőkkel finomítják a működést.
+Az alkalmazás indításakor a `KeyboardManager` betölti a `KeyboardProfile` beállításait a `wrecept.json` fájl `Keyboard` szekciójából, így a felhasználó tetszés szerint módosíthatja a `Next`, `Previous`, `Confirm` és `Cancel` billentyűket.
 
 ## 🔑 Key Bindings Overview
 
@@ -78,7 +79,7 @@ A billentyűzetes navigációt a sebesség és az időtálló megszokhatóság j
 ## 🔧 Future Enhancements
 
 - [ ] AccessKey-k hozzárendelése a címkékhez
-- [ ] Testreszabható billentyűzetprofil `wrecept.json`-on keresztül
+- [x] Testreszabható billentyűzetprofil `wrecept.json`-on keresztül
 - [ ] `Ctrl+Z` visszavonás a sor szerkesztésben
 - [ ] Tesztesetek bővítése a `TEST_MATRIX.md`-ben
 

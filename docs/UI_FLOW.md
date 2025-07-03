@@ -132,6 +132,7 @@ The SmartLookup behavior ensures consistent UX and keyboard flow across invoice 
 🔁 Special Behavior
 
 All views must support full keyboard navigation
+Key mappings are loaded from `wrecept.json` via `KeyboardProfile`, allowing users to redefine the Next, Previous, Confirm and Cancel keys.
 
 Inline creators must not shift focus away from the current context
 
