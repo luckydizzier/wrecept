@@ -51,6 +51,7 @@ Az `ArchivePromptView`, `SaveLinePromptView` és `InvoiceCreatePromptView` egyar
 - `Escape` a mégse parancsot hívja.
 - Többsoros `TextBox` (`AcceptsReturn=true`) esetén a `NavigationHelper` sem az `Enter`, sem az `Escape` billentyűt nem kezeli, így az új sor bevitele és a vezérlő saját művelete zavartalan.
 A fókusz a prompt bezárása után visszatér a megnyitó nézethez.
+Ezt a `FocusTrackerService` végzi, amely nézetenként rögzíti az utoljára fókuszba került vezérlőt.
 
 ## 📋 Focus Reset Rules
 

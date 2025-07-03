@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Wrecept.Wpf.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -30,15 +32,17 @@ public partial class SaveLinePromptViewModel : ObservableObject
             await _parent.AddLineItemAsync();
         _parent.SavePrompt = null;
         _parent.IsInLineFinalizationPrompt = false;
+        var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        FormNavigator.RequestFocus(tracker.GetLast("InvoiceEditorView"));
     }
 
     [RelayCommand]
     private void Cancel()
     {
         _parent.SavePrompt = null;
-        if (_finalize)
-            FormNavigator.RequestFocus(_parent.LastFocusedField, typeof(InvoiceEditorView));
         _parent.IsInLineFinalizationPrompt = false;
+        var tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        FormNavigator.RequestFocus(tracker.GetLast("InvoiceEditorView"));
     }
 }
 

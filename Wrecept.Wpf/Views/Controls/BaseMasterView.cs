@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Wrecept.Wpf.ViewModels;
 using System.Windows.Data;
+using Microsoft.Extensions.DependencyInjection;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.Views.Controls;
 
@@ -15,11 +17,15 @@ public abstract class BaseMasterView : UserControl
 
     protected DataGrid Grid { get; }
 
+    private readonly IFocusTrackerService _tracker;
+
     protected BaseMasterView()
     {
         Grid = BuildLayout();
         Loaded += OnLoaded;
         KeyDown += OnKeyDown;
+        _tracker = App.Provider.GetRequiredService<IFocusTrackerService>();
+        Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
     }
 
     private DataGrid BuildLayout()
@@ -106,6 +112,9 @@ public abstract class BaseMasterView : UserControl
             e.Handled = true;
         }
     }
+
+    private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        => _tracker.Update(GetType().Name, e.NewFocus);
 
     private void Grid_RowDetailsVisibilityChanged(object? sender, DataGridRowDetailsEventArgs e)
     {
