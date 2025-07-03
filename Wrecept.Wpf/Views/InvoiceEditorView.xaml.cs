@@ -2,6 +2,7 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Core.Services;
@@ -94,4 +95,13 @@ public partial class InvoiceEditorView : UserControl
 
     private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         => _tracker.Update("InvoiceEditorView", e.NewFocus);
+
+    private void OnInlineCreatorOpened(object sender, EventArgs e)
+    {
+        Dispatcher.BeginInvoke(() =>
+        {
+            if (InlineCreatorHost.Content is FrameworkElement fe)
+                fe.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+        }, DispatcherPriority.Background);
+    }
 }
