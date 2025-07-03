@@ -18,6 +18,13 @@ Enter: Activates the selected submenu view and focuses the first control
 
 Escape: Returns to menu with last selected item focused
 
+- Fókuszkezdő pontok nézetenként:
+  - **StageView** – a főmenüsor első eleme
+  - **InvoiceLookupView** – `InvoiceList` `ListBox`
+  - **InvoiceEditorView** – bal oldali `InvoiceList`
+  - **ProductMasterView** – a táblázat (Grid)
+  - **SupplierMasterView** – a táblázat (Grid)
+
 🧾 Invoice Editor Flow (Bejövő szállítólevelek)
 
 1. Invoice Number Field (Lookup & Creation)
