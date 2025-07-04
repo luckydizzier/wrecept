@@ -20,7 +20,7 @@ A Retro UI hangs on a 16 színű DOS-palettán. A XAML erőforrás szótár egys
 Stílusok:
 - **HeaderText**, **HeaderTextBold**: IBM Plex Mono betűcsalád feliratokhoz.
 - **HeaderTextBoxBold**: ugyanez a megjelenés szövegmezőknél.
-- **LabelTextStyle**, **ValueTextStyle**, **BoldTotalStyle**: számlamezők és összesítések tipográfiája mindkét témában.
+- **FormLabelStyle**, **LabelTextStyle**, **ValueTextStyle**, **BoldTotalStyle**: számlamezők és összesítések tipográfiája mindkét témában.
 
 Betűméretek:
 - **FontSizeNormal:** 16 px, általános szövegekhez és űrlapmezőkhöz.

@@ -86,7 +86,7 @@
                                 <ColumnDefinition Width="220" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="_Szállító" Style="{StaticResource LabelTextStyle}" Target="{Binding ElementName=SupplierLookup}" />
+                            <Label Grid.Row="0" Grid.Column="0" Content="_Szállító" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=SupplierLookup}" />
                             <c:SmartLookup x:Name="SupplierLookup" Grid.Row="0" Grid.Column="1" Width="220"
                                            ItemsSource="{Binding Suppliers}"
                                            DisplayMemberPath="Name"
@@ -97,7 +97,7 @@
                                            Watermark="Kezdjen el gépelni..."
                                            IsEnabled="{Binding IsEditable}" />
 
-                            <Label Grid.Row="1" Grid.Column="0" Content="_Fizetési mód" Margin="0,4,0,0" Style="{StaticResource LabelTextStyle}" Target="{Binding ElementName=PaymentLookup}" />
+                            <Label Grid.Row="1" Grid.Column="0" Content="_Fizetési mód" Margin="0,4,0,0" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=PaymentLookup}" />
                             <c:EditLookup x:Name="PaymentLookup" Grid.Row="1" Grid.Column="1" Width="220" Margin="0,4,0,0"
                                           ItemsSource="{Binding PaymentMethods}"
                                           DisplayMemberPath="Name"
@@ -121,10 +121,10 @@
                                 <ColumnDefinition Width="220" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="_Dátum" Style="{StaticResource LabelTextStyle}" Target="{Binding ElementName=DatePicker}" />
+                            <Label Grid.Row="0" Grid.Column="0" Content="_Dátum" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=DatePicker}" />
                             <DatePicker x:Name="DatePicker" Grid.Row="0" Grid.Column="1" Width="220" SelectedDate="{Binding InvoiceDate}" IsEnabled="{Binding IsEditable}" />
 
-                            <Label Grid.Row="1" Grid.Column="0" Margin="0,4,0,0" Content="_Számlaszám" Style="{StaticResource LabelTextStyle}" Target="{Binding ElementName=NumberBox}" />
+                            <Label Grid.Row="1" Grid.Column="0" Margin="0,4,0,0" Content="_Számlaszám" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=NumberBox}" />
                             <TextBox x:Name="NumberBox" Grid.Row="1" Grid.Column="1" Width="220" Margin="0,4,0,0"
                                      Text="{Binding Number}"
                                      IsEnabled="{Binding IsNew}"
