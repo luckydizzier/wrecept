@@ -31,7 +31,7 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
    amely létrehozza és frissíti az adatbázist. A migrációk futtatása közben
    automatikusan létrejön az `__EFMigrationsHistory` tábla is.
    Ha az adatbázis üres, a felhasználó megerősítheti, hogy Bogus segítségével generált mintaadatok kerüljenek be.
-7. Az `AddStorage` kiterjesztés migrációhoz `IDbContextFactory`-t használ, így a munkakontextus az inicializálás végén eldobásra kerül.
+7. Az `AddStorageAsync` kiterjesztés migrációhoz `IDbContextFactory`‑t használ, így a munkakontextus az inicializálás végén eldobásra kerül.
 8. Ha a második adatlekérdezés is `SqliteException`-t dob, a `DataSeeder` a `logs/startup.log` fájlba ír és `Failed` állapotot jelez.
 9. Új modell bevezetésekor, ha valamely tábla hiányzik, a `DataSeeder` ismét migrációt futtat és naplózza a hibát.
 10. A `SetupWindow` bezárása után az alkalmazás alapértelmezett `OnLastWindowClose` módja miatt azonnal leállt,

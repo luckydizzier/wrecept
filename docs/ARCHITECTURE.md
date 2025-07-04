@@ -62,7 +62,7 @@ Minden domain modell tartalmaz `CreatedAt` és `UpdatedAt` mezőket. Ezeket a se
  hozza létre vagy frissíti az adatbázist. A migráció futása automatikusan
  létrehozza az `__EFMigrationsHistory` táblát is, így külön
  `EnsureCreated()` hívásra nincs szükség.
-  Az `AddStorage` kiterjesztés ehhez `IDbContextFactory`-t használ,
+  Az `AddStorageAsync` kiterjesztés ehhez `IDbContextFactory`-t használ,
   így a migráció egy külön kontextuson történik és azonnal eldobásra kerül.
 Az indítás során a `DataSeeder` ellenőrzi, hogy az adatbázis teljesen üres‑e.
 Ha igen, a felhasználó egy párbeszédablakban megadhatja,
