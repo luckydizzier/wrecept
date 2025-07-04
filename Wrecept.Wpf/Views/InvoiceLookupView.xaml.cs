@@ -31,8 +31,11 @@ public partial class InvoiceLookupView : UserControl
         try
         {
             if (DataContext is InvoiceLookupViewModel vm)
+            {
                 await vm.LoadAsync();
-            _focus.RequestFocus("InvoiceList", typeof(InvoiceLookupView));
+                if (vm.Invoices.Count > 0)
+                    _focus.RequestFocus("InvoiceList", typeof(InvoiceLookupView));
+            }
         }
         catch (Exception ex)
         {
