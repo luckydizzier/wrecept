@@ -14,65 +14,16 @@ namespace Wrecept.UiTests;
 [TestClass]
 public class StartupWindowTests
 {
-    private const string ExePath = @"C:\Users\tankoferenc\source\repos\luckydizzier\wrecept\Wrecept.Wpf\bin\Debug\net8.0-windows\Wrecept.Wpf.exe";
-    private const string WinAppDriverUrl = "http://127.0.0.1:4723";
+    private static void PrepareSettings(bool firstRun) => TestHelper.PrepareSettings(firstRun);
 
-    private static void PrepareSettings(bool firstRun)
-    {
-        var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        var dataDir = Path.Combine(appData, "Wrecept");
-        Directory.CreateDirectory(dataDir);
-        var settingsPath = Path.Combine(dataDir, "settings.json");
-        if (firstRun)
-        {
-            if (File.Exists(settingsPath))
-                File.Delete(settingsPath);
-        }
-        else
-        {
-            var settings = new AppSettings
-            {
-                DatabasePath = Path.Combine(dataDir, "test.db"),
-                UserInfoPath = Path.Combine(dataDir, "user.json")
-            };
-            File.WriteAllText(settingsPath, JsonSerializer.Serialize(settings));
-        }
-    }
-
-    private static WindowsDriver<WindowsElement> LaunchApp()
-    {
-        var options = new AppiumOptions();
-        options.AddAdditionalCapability("app", ExePath);
-
-        var driver = new WindowsDriver<WindowsElement>(new Uri(WinAppDriverUrl), options);
-        DismissFirstLaunchDialogs(driver);
-        return driver;
-    }
-
-    private static void DismissFirstLaunchDialogs(WindowsDriver<WindowsElement> driver)
-    {
-        foreach (var title in new[] { "Első indítás", "Megerősítés" })
-        {
-            var dialogs = driver.FindElementsByName(title);
-            if (dialogs.Count > 0)
-            {
-                try
-                {
-                    dialogs[0].FindElementByName("Igen").Click();
-                }
-                catch (OpenQA.Selenium.WebDriverException)
-                {
-                    // No 'Igen' button, likely a setup window
-                }
-            }
-        }
-    }
+    private static WindowsDriver<WindowsElement> LaunchApp(bool waitMainWindow = false) =>
+        TestHelper.LaunchApp(waitMainWindow);
 
     [TestMethod]
     public void Application_Launches_And_Closes()
     {
         PrepareSettings(firstRun: false);
-        using var driver = LaunchApp();
+        using var driver = LaunchApp(true);
         Assert.AreEqual("Wrecept", driver.Title);
         driver.Close();
     }
