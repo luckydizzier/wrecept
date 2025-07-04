@@ -89,4 +89,36 @@ public class StartupWindowTests
             .FindElementByName("Wrecept"));
         driver.Close();
     }
+
+    [TestMethod]
+    public void SetupWindow_Cancel_ClosesApplication()
+    {
+        PrepareSettings(firstRun: true);
+        using var driver = TestHelper.LaunchAppRaw();
+
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        var setupWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
+            .FindElementByName("Első indítás"));
+        setupWindow.FindElementByName("Mégse").Click();
+
+        Assert.ThrowsException<WebDriverException>(() => _ = driver.Title);
+    }
+
+    [TestMethod]
+    public void UserInfoEditor_Cancel_ClosesApplication()
+    {
+        PrepareSettings(firstRun: true);
+        using var driver = TestHelper.LaunchAppRaw();
+
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        var setupWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
+            .FindElementByName("Első indítás"));
+        setupWindow.FindElementByName("OK").Click();
+
+        var editorWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
+            .FindElementByName("Tulajdonosi adatok"));
+        editorWindow.FindElementByName("Mégse").Click();
+
+        Assert.ThrowsException<WebDriverException>(() => _ = driver.Title);
+    }
 }
