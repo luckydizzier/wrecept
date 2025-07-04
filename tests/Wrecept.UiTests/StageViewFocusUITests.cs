@@ -26,7 +26,7 @@ public class StageViewFocusUITests
 
         new Actions(driver).SendKeys(Keys.Escape).Perform();
         var active = driver.SwitchTo().ActiveElement();
-        Assert.AreEqual("Termékek", active.Text);
+        Assert.AreEqual("Termékek", active.GetAttribute("Name"));
 
         driver.Close();
     }
