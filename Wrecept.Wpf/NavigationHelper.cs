@@ -47,7 +47,6 @@ public static class NavigationHelper
                 if (Window.GetWindow(element) == Application.Current.MainWindow)
                 {
                     e.Handled = true;
-                    Application.Current.MainWindow?.Focus();
                 }
                 break;
         }

@@ -56,11 +56,9 @@ Ezt a `FocusManager` végzi, amely nézetenként rögzíti az utoljára fókuszb
 
 ## 📋 Focus Reset Rules
 
-Globálisan az `Escape` csak a főablakból indítva helyezi a fókuszt vissza a főablakra:
-```csharp
-Application.Current.MainWindow?.Focus();
-```
-Más ablakokban a billentyűt a saját logikájuk kezeli.
+Az `Escape` billentyűt a `StageView` kezeli, és a legutóbb aktivált menüelemre
+állítja a fókuszt. Más nézeteknél a billentyű az adott nézet logikájára van
+bízva.
 Az `Enter` alapértelmezésben a következő vezérlőre ugrik, ha az aktuális kezelő nem nyeli el.
 
 ### Fókuszkövető szolgáltatás
