@@ -13,3 +13,7 @@ date: "2025-06-27"
 | Network loss     | A lokális műveletek zavartalanul folytatódnak, figyelmeztető üzenet jelenik meg. |
 | Corrupted invoice| A betöltés megszakad, a hibát naplózzuk és a felhasználót tájékoztatjuk.          |
 | WPF build Windowson | Ha a .NET Desktop Runtime nincs telepítve, a build nem fut le; ezt naplózzuk. |
+| StageView menü | Escape visszaadja a fókuszt az utolsó menüpontra. |
+| InvoiceEditor sor mentése | Új tétel rögzítését követően frissül a lista. |
+| Masteradat ablakok | A rács fókuszálható és Enter szerkesztést indít. |
+| ScreenMode váltás | A kiválasztott mód elmentésre kerül és az ablak bezár. |
