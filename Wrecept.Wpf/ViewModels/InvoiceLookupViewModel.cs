@@ -55,6 +55,9 @@ public partial class InvoiceLookupViewModel : ObservableObject
                 Supplier = inv.Supplier?.Name ?? string.Empty
             });
         }
+
+        if (Invoices.Count > 0)
+            SelectedInvoice = Invoices[0];
     }
 
     public Task<int> CreateInvoiceAsync(string number)
