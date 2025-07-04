@@ -25,7 +25,7 @@ Escape: Returns to menu with last selected item focused
   - **ProductMasterView** – a táblázat (Grid)
   - **SupplierMasterView** – a táblázat (Grid)
   
-Az adott nézetek betöltésekor a `FormNavigator.RequestFocus` hívása állítja be
+Az adott nézetek betöltésekor a `FocusManager.RequestFocus` hívása állítja be
 a kezdő fókuszt a felsorolt vezérlőkre.
 
 🧾 Invoice Editor Flow (Bejövő szállítólevelek)

@@ -13,12 +13,6 @@ namespace Wrecept.Storage;
 
 public static class ServiceCollectionExtensions
 {
-public static IServiceCollection AddStorage(this IServiceCollection services, string dbPath, string userInfoPath, string settingsPath)
-    {
-        AddStorageAsync(services, dbPath, userInfoPath, settingsPath).GetAwaiter().GetResult();
-        return services;
-    }
-
 public static async Task AddStorageAsync(this IServiceCollection services, string dbPath, string userInfoPath, string settingsPath)
     {
         if (string.IsNullOrWhiteSpace(dbPath))
