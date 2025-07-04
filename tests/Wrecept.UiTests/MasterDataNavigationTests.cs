@@ -13,6 +13,9 @@ public class MasterDataNavigationTests
 {
     private static WindowsDriver<WindowsElement> LaunchApp() => TestHelper.LaunchApp();
 
+    [TestInitialize]
+    public void Setup() => TestHelper.PrepareSettings(false);
+
     [DataTestMethod]
     [DataRow("Termékek")]
     [DataRow("Szállítók")]

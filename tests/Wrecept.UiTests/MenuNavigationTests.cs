@@ -13,6 +13,9 @@ public class MenuNavigationTests
 {
     private static WindowsDriver<WindowsElement> LaunchApp() => TestHelper.LaunchApp();
 
+    [TestInitialize]
+    public void Setup() => TestHelper.PrepareSettings(false);
+
     [TestMethod]
     public void AboutMenu_DisplaysAboutView()
     {
