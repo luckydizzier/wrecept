@@ -29,7 +29,8 @@ A billentyűzettel vezérelt WPF felület automatikus ellenőrzéséhez a [WinAp
        var options = new AppiumOptions();
        options.AddAdditionalCapability("app", "<path-to>\\Wrecept.Wpf.exe");
        using var driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);
-       // TODO: UI lépések és ellenőrzések
+       var list = driver.FindElementByAccessibilityId("InvoiceList");
+       Assert.IsNotNull(list);
        driver.Close();
    }
    ```
