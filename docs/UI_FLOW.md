@@ -27,6 +27,7 @@ Escape: Returns to menu with last selected item focused
   
 Az adott nézetek betöltésekor a `FocusManager.RequestFocus` hívása állítja be
 a kezdő fókuszt a felsorolt vezérlőkre.
+A `FocusManager` nyilvántartja az utoljára fókuszált elemeket is, így a nézetek közti váltáskor vagy a dialógusok bezárásakor ugyanide tér vissza a fókusz.
 
 🧾 Invoice Editor Flow (Bejövő szállítólevelek)
 
