@@ -11,34 +11,7 @@ namespace Wrecept.UiTests;
 [TestClass]
 public class MenuNavigationTests
 {
-    private static WindowsDriver<WindowsElement> LaunchApp()
-    {
-        const string exePath = @"C:\Users\tankoferenc\source\repos\luckydizzier\wrecept\Wrecept.Wpf\bin\Debug\net8.0-windows\Wrecept.Wpf.exe";
-        var options = new AppiumOptions();
-        options.AddAdditionalCapability("app", exePath);
-        var driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);
-        DismissFirstLaunchDialogs(driver);
-        return driver;
-    }
-
-    private static void DismissFirstLaunchDialogs(WindowsDriver<WindowsElement> driver)
-    {
-        foreach (var title in new[] { "Első indítás", "Megerősítés" })
-        {
-            var dialogs = driver.FindElementsByName(title);
-            if (dialogs.Count > 0)
-            {
-                try
-                {
-                    dialogs[0].FindElementByName("Igen").Click();
-                }
-                catch (OpenQA.Selenium.WebDriverException)
-                {
-                    // no confirmation button present
-                }
-            }
-        }
-    }
+    private static WindowsDriver<WindowsElement> LaunchApp() => TestHelper.LaunchApp();
 
     [TestMethod]
     public void AboutMenu_DisplaysAboutView()
