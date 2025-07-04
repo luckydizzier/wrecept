@@ -18,6 +18,9 @@ Enter: Activates the selected submenu view and focuses the first control
 
 Escape: Returns to menu with last selected item focused
 
+AccessKey jelek (aláhúzás) segítik az Alt+betű kombinációkat a főmenüben és a
+számlafejléc mezőknél.
+
 - Fókuszkezdő pontok nézetenként:
   - **StageView** – a főmenüsor első eleme
   - **InvoiceLookupView** – `InvoiceList` `ListBox`

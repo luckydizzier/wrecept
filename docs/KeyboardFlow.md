@@ -76,7 +76,7 @@ A billentyűzetes navigációt a sebesség és az időtálló megszokhatóság j
 
 ## 🔧 Future Enhancements
 
-- [ ] AccessKey-k hozzárendelése a címkékhez
+- [x] AccessKey-k hozzárendelése a címkékhez
 - [x] Testreszabható billentyűzetprofil `wrecept.json`-on keresztül
 - [ ] `Ctrl+Z` visszavonás a sor szerkesztésben
 - [ ] Tesztesetek bővítése a `TEST_MATRIX.md`-ben
