@@ -75,6 +75,26 @@ internal static class TestHelper
         }
     }
 
+    internal static WindowsDriver<WindowsElement> LaunchAppRaw()
+    {
+        var options = new AppiumOptions();
+        options.AddAdditionalCapability("app", ExePath);
+
+        var driver = new WindowsDriver<WindowsElement>(new Uri(WinAppDriverUrl), options);
+
+        try
+        {
+            WaitForUiReady(driver);
+            return driver;
+        }
+        catch
+        {
+            SaveScreenshot(driver);
+            driver.Close();
+            throw;
+        }
+    }
+
     internal static void DismissFirstLaunchDialogs(WindowsDriver<WindowsElement> driver)
     {
         foreach (var title in new[] { "Első indítás", "Megerősítés" })
