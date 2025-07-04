@@ -20,72 +20,72 @@
             </Style>
         </Grid.Resources>
         <Menu x:Name="Menu" Background="{DynamicResource HeaderFooterBrush}">
-            <MenuItem Header="Számlák">
-                <MenuItem Header="Bejövő szállítólevelek"
+            <MenuItem Header="_Számlák">
+                <MenuItem Header="_Bejövő szállítólevelek"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.InboundDeliveryNotes}" />
-                <MenuItem Header="Bejövő számlák aktualizálása"
+                <MenuItem Header="Bejövő számlák _aktualizálása"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.UpdateInboundInvoices}" />
             </MenuItem>
-            <MenuItem Header="Törzsek">
-                <MenuItem Header="Termékek"
+            <MenuItem Header="_Törzsek">
+                <MenuItem Header="_Termékek"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.EditProducts}" />
-                <MenuItem Header="Termékcsoportok"
+                <MenuItem Header="T_ermékcsoportok"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.EditProductGroups}" />
-                <MenuItem Header="Szállítók"
+                <MenuItem Header="Szá_llítók"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.EditSuppliers}" />
-                <MenuItem Header="ÁFA-kulcsok"
+                <MenuItem Header="Á_FA-kulcsok"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.EditVatKeys}" />
-                <MenuItem Header="Fizetési módok"
+                <MenuItem Header="F_izetési módok"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.EditPaymentMethods}" />
-                <MenuItem Header="Mértékegységek"
+                <MenuItem Header="M_értékegységek"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.EditUnits}" />
             </MenuItem>
-            <MenuItem Header="Listák">
-                <MenuItem Header="Terméklista"
+            <MenuItem Header="_Listák">
+                <MenuItem Header="T_erméklista"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.ListProducts}" />
-                <MenuItem Header="Szállítók listája"
+                <MenuItem Header="Szállí_tók listája"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.ListSuppliers}" />
-                <MenuItem Header="Számlák listája"
+                <MenuItem Header="Számlák l_istája"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.ListInvoices}" />
-                <MenuItem Header="Készletkarton"
+                <MenuItem Header="K_észletkarton"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.InventoryCard}" />
             </MenuItem>
-            <MenuItem Header="Szerviz">
-                <MenuItem Header="Állományok ellenőrzése"
+            <MenuItem Header="Sz_erviz">
+                <MenuItem Header="Á_llományok ellenőrzése"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.CheckFiles}" />
-                <MenuItem Header="Áramszünet után"
+                <MenuItem Header="Áramszünet _után"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.AfterPowerOutage}" />
-                <MenuItem Header="Képernyő beállítása"
+                <MenuItem Header="K_épernyő beállítása"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.ScreenSettings}" />
-                <MenuItem Header="Nyomtató beállítás"
+                <MenuItem Header="N_yomtató beállítás"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.PrinterSettings}" />
-                <MenuItem Header="Tulajdonos szerkesztése..."
+                <MenuItem Header="Tu_lajdonos szerkesztése..."
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.EditUserInfo}" />
             </MenuItem>
-            <MenuItem Header="Névjegy">
-                <MenuItem Header="A program felhasználójának adatai"
+            <MenuItem Header="N_évjegy">
+                <MenuItem Header="A program f_elhasználójának adatai"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.UserInfo}" />
             </MenuItem>
-            <MenuItem Header="Vége">
-                <MenuItem Header="Kilépés"
+            <MenuItem Header="V_ége">
+                <MenuItem Header="_Kilépés"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.ExitApplication}" />
             </MenuItem>
