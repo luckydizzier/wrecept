@@ -86,6 +86,8 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
 
         var infoVm = new UserInfoEditorViewModel();
         var infoWin = new UserInfoWindow { DataContext = infoVm };
+        infoVm.OnOk = _ => { infoWin.DialogResult = true; infoWin.Close(); };
+        infoVm.OnCancel = () => { infoWin.DialogResult = false; infoWin.Close(); };
         if (infoWin.ShowDialog() != true)
         {
             Current.Shutdown();
