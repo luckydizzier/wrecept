@@ -1,5 +1,8 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
+using System.Text.Json;
+using Wrecept.Core.Entities;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
@@ -10,8 +13,31 @@ namespace Wrecept.UiTests;
 [TestClass]
 public class StartupWindowTests
 {
-    private const string ExePath = @"C:\Users\tankoferenc\source\repos\luckydizzier\wrecept\Wrecept.Wpf\bin\Debug\net8.0-windows\Wrecept.Wpf.exe";
+    private static string ExePath =>
+        Path.GetFullPath(Path.Combine("..", "..", "..", "..", "Wrecept.Wpf", "bin", "Debug", "net8.0-windows", "Wrecept.Wpf.exe"));
     private const string WinAppDriverUrl = "http://127.0.0.1:4723";
+
+    private static void PrepareSettings(bool firstRun)
+    {
+        var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        var dataDir = Path.Combine(appData, "Wrecept");
+        Directory.CreateDirectory(dataDir);
+        var settingsPath = Path.Combine(dataDir, "settings.json");
+        if (firstRun)
+        {
+            if (File.Exists(settingsPath))
+                File.Delete(settingsPath);
+        }
+        else
+        {
+            var settings = new AppSettings
+            {
+                DatabasePath = Path.Combine(dataDir, "test.db"),
+                UserInfoPath = Path.Combine(dataDir, "user.json")
+            };
+            File.WriteAllText(settingsPath, JsonSerializer.Serialize(settings));
+        }
+    }
 
     private static WindowsDriver<WindowsElement> LaunchApp()
     {
@@ -45,6 +71,7 @@ public class StartupWindowTests
     [TestMethod]
     public void Application_Launches_And_Closes()
     {
+        PrepareSettings(firstRun: false);
         using var driver = LaunchApp();
         Assert.AreEqual("Wrecept", driver.Title);
         driver.Close();
@@ -53,6 +80,7 @@ public class StartupWindowTests
     [TestMethod]
     public void SeedOptions_Cancel_OpensMainWindow()
     {
+        PrepareSettings(firstRun: false);
         using var driver = LaunchApp();
 
         var wait = new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(5));
@@ -67,6 +95,7 @@ public class StartupWindowTests
     [TestMethod]
     public void SeedOptions_Ok_ShowsStartupWindow()
     {
+        PrepareSettings(firstRun: false);
         using var driver = LaunchApp();
 
         var wait = new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(5));
@@ -82,6 +111,7 @@ public class StartupWindowTests
     [TestMethod]
     public void UserInfoEditor_FillFields_Confirms()
     {
+        PrepareSettings(firstRun: true);
         using var driver = LaunchApp();
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));

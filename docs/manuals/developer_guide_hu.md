@@ -43,12 +43,9 @@ A WinAppDriver headed módban fut, így a tesztekhez lokális Windows GUI szüks
 ## Indítási UI tesztek
 
 A `StartupWindowTests` a teljes indulási folyamatot automatizálja. A tesztek a
-`tests/Wrecept.UiTests` projektben találhatók, az alkalmazás elérési útja
-fixen szerepel:
-
-```csharp
-private const string ExePath = @"C:\Users\tankoferenc\source\repos\luckydizzier\wrecept\Wrecept.Wpf\bin\Debug\net8.0-windows\Wrecept.Wpf.exe";
-```
+`tests/Wrecept.UiTests` projektben találhatók. Az alkalmazás elérési útját
+a teszt futáskor relatívan számítjuk ki,
+így nem függ a fejlesztői könyvtárstruktúrától.
 
 ### Tesztek sorrendje
 
@@ -56,6 +53,8 @@ private const string ExePath = @"C:\Users\tankoferenc\source\repos\luckydizzier\
 2. **SeedOptions_Cancel_OpensMainWindow** – a „Mintaszámok” ablakban a *Mégse* gombra kattint, majd ellenőrzi, hogy a *Wrecept* főablak jelenik meg.
 3. **SeedOptions_Ok_ShowsStartupWindow** – az *OK* gombbal elindítja a mintadatok feltöltését, és ellenőrzi, hogy megjelenik az *Indulás* ablak.
 4. **UserInfoEditor_FillFields_Confirms** – első indításkor kitölti a tulajdonosi adatokat, majd az *Enter* billentyűvel megerősít.
+
+A tesztek a `settings.json` állomány törlésével vagy létrehozásával különböztetik meg az első indítást a szokásos futástól.
 
 A fenti esetek egyenként futtathatók például:
 
