@@ -40,3 +40,26 @@ A billentyűzettel vezérelt WPF felület automatikus ellenőrzéséhez a [WinAp
    ```
 A WinAppDriver headed módban fut, így a tesztekhez lokális Windows GUI szükséges.
 
+## Indítási UI tesztek
+
+A `StartupWindowTests` a teljes indulási folyamatot automatizálja. A tesztek a
+`tests/Wrecept.UiTests` projektben találhatók, az alkalmazás elérési útja
+fixen szerepel:
+
+```csharp
+private const string ExePath = @"C:\Users\tankoferenc\source\repos\luckydizzier\wrecept\Wrecept.Wpf\bin\Debug\net8.0-windows\Wrecept.Wpf.exe";
+```
+
+### Tesztek sorrendje
+
+1. **Application_Launches_And_Closes** – egyszerűen megnyitja majd bezárja a főablakot.
+2. **SeedOptions_Cancel_OpensMainWindow** – a „Mintaszámok” ablakban a *Mégse* gombra kattint, majd ellenőrzi, hogy a *Wrecept* főablak jelenik meg.
+3. **SeedOptions_Ok_ShowsStartupWindow** – az *OK* gombbal elindítja a mintadatok feltöltését, és ellenőrzi, hogy megjelenik az *Indulás* ablak.
+
+A fenti esetek egyenként futtathatók például:
+
+```bash
+dotnet test tests/Wrecept.UiTests/Wrecept.UiTests.csproj --filter "Name=SeedOptions_Ok_ShowsStartupWindow"
+```
+
+
