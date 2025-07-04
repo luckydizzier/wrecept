@@ -109,7 +109,7 @@ internal static class TestHelper
     internal static WindowsElement WaitForElementById(WindowsDriver<WindowsElement> driver, string id)
     {
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        return wait.Until(d => d.FindElementByAccessibilityId(id));
+        return wait.Until(_ => driver.FindElementByAccessibilityId(id));
     }
 
     internal static void HandleConfirmationDialog(WindowsDriver<WindowsElement> driver)
@@ -124,7 +124,7 @@ internal static class TestHelper
     internal static void RunFirstLaunchSetup(WindowsDriver<WindowsElement> driver)
     {
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-        var setupWindow = wait.Until(d => d.FindElementByName("Első indítás"));
+        var setupWindow = wait.Until(_ => driver.FindElementByName("Első indítás"));
         setupWindow.FindElementByName("OK").Click();
 
         var companyBox = WaitForElementById(driver, "CompanyNameBox");
