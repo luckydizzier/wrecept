@@ -63,4 +63,6 @@ A fenti esetek egyenként futtathatók például:
 dotnet test tests/Wrecept.UiTests/Wrecept.UiTests.csproj --filter "Name=SeedOptions_Ok_ShowsStartupWindow"
 ```
 
+Az új tesztsegéd automatikusan kezeli az első indítási ablakokat, és hiba esetén képernyőképet ment az aktuális könyvtárba `error_YYYYMMDD_HHMMSS.png` néven.
+
 

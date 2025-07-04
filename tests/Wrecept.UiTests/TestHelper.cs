@@ -42,11 +42,37 @@ internal static class TestHelper
     {
         var options = new AppiumOptions();
         options.AddAdditionalCapability("app", ExePath);
+
         var driver = new WindowsDriver<WindowsElement>(new Uri(WinAppDriverUrl), options);
-        DismissFirstLaunchDialogs(driver);
-        if (waitMainWindow)
-            WaitForMainWindow(driver);
-        return driver;
+
+        try
+        {
+            WaitForUiReady(driver);
+
+            switch (driver.Title)
+            {
+                case "Első indítás":
+                    RunFirstLaunchSetup(driver);
+                    break;
+                case "Wrecept":
+                    ValidateMainWindowLoaded(driver);
+                    break;
+                default:
+                    Assert.Fail($"Váratlan ablakcím: {driver.Title}");
+                    break;
+            }
+
+            if (waitMainWindow)
+                WaitForMainWindow(driver);
+
+            return driver;
+        }
+        catch
+        {
+            SaveScreenshot(driver);
+            driver.Close();
+            throw;
+        }
     }
 
     internal static void DismissFirstLaunchDialogs(WindowsDriver<WindowsElement> driver)
@@ -72,5 +98,63 @@ internal static class TestHelper
     {
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
         wait.Until(d => d.Title == "Wrecept");
+    }
+
+    internal static void WaitForUiReady(WindowsDriver<WindowsElement> driver)
+    {
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait.Until(d => d.PageSource.Length > 0);
+    }
+
+    internal static WindowsElement WaitForElementById(WindowsDriver<WindowsElement> driver, string id)
+    {
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        return wait.Until(d => d.FindElementByAccessibilityId(id));
+    }
+
+    internal static void HandleConfirmationDialog(WindowsDriver<WindowsElement> driver)
+    {
+        if (driver.PageSource.Contains("Megerősítés"))
+        {
+            var dialog = driver.FindElementByName("Megerősítés");
+            dialog.FindElementByName("Igen").Click();
+        }
+    }
+
+    internal static void RunFirstLaunchSetup(WindowsDriver<WindowsElement> driver)
+    {
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        var setupWindow = wait.Until(d => d.FindElementByName("Első indítás"));
+        setupWindow.FindElementByName("OK").Click();
+
+        var companyBox = WaitForElementById(driver, "CompanyNameBox");
+        companyBox.SendKeys("Teszt Kft.");
+        driver.FindElementByAccessibilityId("AddressBox").SendKeys("Teszt cím");
+        driver.FindElementByAccessibilityId("PhoneBox").SendKeys("123");
+        driver.FindElementByAccessibilityId("EmailBox").SendKeys("test@example.hu");
+        driver.FindElementByAccessibilityId("TaxNumberBox").SendKeys("1111");
+        driver.FindElementByAccessibilityId("BankAccountBox").SendKeys("0000");
+
+        driver.FindElementByName("OK").Click();
+        HandleConfirmationDialog(driver);
+    }
+
+    internal static void ValidateMainWindowLoaded(WindowsDriver<WindowsElement> driver)
+    {
+        var menu = WaitForElementById(driver, "MainMenuBar");
+        Assert.IsNotNull(menu);
+    }
+
+    internal static void SaveScreenshot(WindowsDriver<WindowsElement> driver)
+    {
+        try
+        {
+            var file = $"error_{DateTime.Now:yyyyMMdd_HHmmss}.png";
+            driver.GetScreenshot().SaveAsFile(file);
+        }
+        catch
+        {
+            // ignore screenshot failures
+        }
     }
 }
