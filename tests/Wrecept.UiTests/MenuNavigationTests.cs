@@ -13,7 +13,7 @@ public class MenuNavigationTests
 {
     private static WindowsDriver<WindowsElement> LaunchApp()
     {
-        var exePath = Path.GetFullPath(Path.Combine("..", "..", "..", "..", "Wrecept.Wpf", "bin", "Debug", "net8.0-windows", "Wrecept.Wpf.exe"));
+        const string exePath = @"C:\Users\tankoferenc\source\repos\luckydizzier\wrecept\Wrecept.Wpf\bin\Debug\net8.0-windows\Wrecept.Wpf.exe";
         var options = new AppiumOptions();
         options.AddAdditionalCapability("app", exePath);
         var driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);

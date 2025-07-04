@@ -9,8 +9,7 @@ namespace Wrecept.UiTests;
 [TestClass]
 public class ScreenModeTests
 {
-    private static string ExePath =>
-        Path.GetFullPath(Path.Combine("..", "..", "..", "..", "Wrecept.Wpf", "bin", "Debug", "net8.0-windows", "Wrecept.Wpf.exe"));
+    private const string ExePath = @"C:\Users\tankoferenc\source\repos\luckydizzier\wrecept\Wrecept.Wpf\bin\Debug\net8.0-windows\Wrecept.Wpf.exe";
     private const string WinAppDriverUrl = "http://127.0.0.1:4723";
 
     private static WindowsDriver<WindowsElement> LaunchApp()
