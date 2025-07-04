@@ -14,8 +14,7 @@ internal static class TestHelper
     private const string WinAppDriverUrl = "http://127.0.0.1:4723";
 
     internal static string ExePath =>
-        Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,
-            "../../../../Wrecept.Wpf/bin/Debug/net8.0-windows/Wrecept.Wpf.exe"));
+        @"C:\\Users\\tankoferenc\\source\\repos\\luckydizzier\\wrecept\\Wrecept.Wpf\\bin\\Debug\\net8.0-windows\\Wrecept.Wpf.exe";
 
     internal static void PrepareSettings(bool firstRun)
     {

@@ -11,6 +11,9 @@ public class InvoiceEditorTests
 {
     private static WindowsDriver<WindowsElement> LaunchApp() => TestHelper.LaunchApp();
 
+    [TestInitialize]
+    public void Setup() => TestHelper.PrepareSettings(false);
+
     [TestMethod]
     public void InvoiceEditor_Loads_DefaultView()
     {
