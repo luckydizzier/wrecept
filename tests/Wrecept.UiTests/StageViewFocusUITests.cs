@@ -4,6 +4,7 @@ using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace Wrecept.UiTests;
 
@@ -50,7 +51,7 @@ public class StageViewFocusUITests
         driver.FindElementByName("Törzsek").Click();
         driver.FindElementByName("Termékek").Click();
 
-        driver.Keyboard.PressKey(Keys.Escape);
+        new Actions(driver).SendKeys(Keys.Escape).Perform();
         var active = driver.SwitchTo().ActiveElement();
         Assert.AreEqual("Termékek", active.Text);
 

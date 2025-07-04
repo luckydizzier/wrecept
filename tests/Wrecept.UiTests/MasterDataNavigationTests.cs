@@ -4,6 +4,7 @@ using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace Wrecept.UiTests;
 
@@ -54,10 +55,11 @@ public class MasterDataNavigationTests
         driver.FindElementByName(item).Click();
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-        var grid = wait.Until(d => d.FindElementByAccessibilityId("Grid"));
+        var grid = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
+            .FindElementByAccessibilityId("Grid"));
         Assert.IsNotNull(grid);
 
-        driver.Keyboard.PressKey(Keys.Escape);
+        new Actions(driver).SendKeys(Keys.Escape).Perform();
         driver.Close();
     }
 }
