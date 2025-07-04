@@ -2,6 +2,8 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium;
 
 namespace Wrecept.UiTests;
 
@@ -15,7 +17,29 @@ public class StartupWindowTests
     {
         var options = new AppiumOptions();
         options.AddAdditionalCapability("app", ExePath);
-        return new WindowsDriver<WindowsElement>(new Uri(WinAppDriverUrl), options);
+
+        var driver = new WindowsDriver<WindowsElement>(new Uri(WinAppDriverUrl), options);
+        DismissFirstLaunchDialogs(driver);
+        return driver;
+    }
+
+    private static void DismissFirstLaunchDialogs(WindowsDriver<WindowsElement> driver)
+    {
+        foreach (var title in new[] { "Első indítás", "Megerősítés" })
+        {
+            var dialogs = driver.FindElementsByName(title);
+            if (dialogs.Count > 0)
+            {
+                try
+                {
+                    dialogs[0].FindElementByName("Igen").Click();
+                }
+                catch (OpenQA.Selenium.WebDriverException)
+                {
+                    // No 'Igen' button, likely a setup window
+                }
+            }
+        }
     }
 
     [TestMethod]
@@ -31,10 +55,11 @@ public class StartupWindowTests
     {
         using var driver = LaunchApp();
 
-        var optionsWindow = driver.FindElementByName("Mintaszámok");
+        var wait = new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        var optionsWindow = wait.Until(d => d.FindElementByName("Mintaszámok"));
         optionsWindow.FindElementByName("Mégse").Click();
 
-        var mainWindow = driver.FindElementByName("Wrecept");
+        var mainWindow = wait.Until(d => d.FindElementByName("Wrecept"));
         Assert.IsNotNull(mainWindow);
         driver.Close();
     }
@@ -44,12 +69,35 @@ public class StartupWindowTests
     {
         using var driver = LaunchApp();
 
-        var optionsWindow = driver.FindElementByName("Mintaszámok");
+        var wait = new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        var optionsWindow = wait.Until(d => d.FindElementByName("Mintaszámok"));
         optionsWindow.FindElementByName("OK").Click();
 
-        var startupWindow = driver.FindElementByName("Indulás");
+        var startupWindow = wait.Until(d => d.FindElementByName("Indulás"));
         Assert.IsNotNull(startupWindow);
 
+        driver.Close();
+    }
+
+    [TestMethod]
+    public void UserInfoEditor_FillFields_Confirms()
+    {
+        using var driver = LaunchApp();
+
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        var setupWindow = wait.Until(d => d.FindElementByName("Első indítás"));
+        setupWindow.FindElementByName("OK").Click();
+
+        var editorWindow = wait.Until(d => d.FindElementByName("Tulajdonosi adatok"));
+        wait.Until(d => d.FindElementByAccessibilityId("CompanyNameBox")).SendKeys("Teszt Kft.");
+        driver.FindElementByAccessibilityId("AddressBox").SendKeys("Siklós, Fő utca 1.");
+        driver.FindElementByAccessibilityId("PhoneBox").SendKeys("1111");
+        driver.FindElementByAccessibilityId("EmailBox").SendKeys("teszt@example.hu");
+        driver.FindElementByAccessibilityId("TaxNumberBox").SendKeys("123");
+        driver.FindElementByAccessibilityId("BankAccountBox").SendKeys("111");
+        driver.Keyboard.PressKey(OpenQA.Selenium.Keys.Enter);
+
+        wait.Until(d => d.FindElementByName("Wrecept"));
         driver.Close();
     }
 }

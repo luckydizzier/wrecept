@@ -55,6 +55,7 @@ private const string ExePath = @"C:\Users\tankoferenc\source\repos\luckydizzier\
 1. **Application_Launches_And_Closes** – egyszerűen megnyitja majd bezárja a főablakot.
 2. **SeedOptions_Cancel_OpensMainWindow** – a „Mintaszámok” ablakban a *Mégse* gombra kattint, majd ellenőrzi, hogy a *Wrecept* főablak jelenik meg.
 3. **SeedOptions_Ok_ShowsStartupWindow** – az *OK* gombbal elindítja a mintadatok feltöltését, és ellenőrzi, hogy megjelenik az *Indulás* ablak.
+4. **UserInfoEditor_FillFields_Confirms** – első indításkor kitölti a tulajdonosi adatokat, majd az *Enter* billentyűvel megerősít.
 
 A fenti esetek egyenként futtathatók például:
 

@@ -4,7 +4,9 @@
              KeyDown="OnKeyDown">
     <StackPanel Margin="10">
         <TextBlock Text="Cégnév" />
-        <TextBox x:Name="InitialFocus" Text="{Binding CompanyName}" Width="280">
+        <TextBox x:Name="InitialFocus"
+                 AutomationProperties.AutomationId="CompanyNameBox"
+                 Text="{Binding CompanyName}" Width="280">
             <TextBox.Style>
                 <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                     <Style.Triggers>
@@ -16,7 +18,9 @@
             </TextBox.Style>
         </TextBox>
         <TextBlock Text="Cím" Margin="0,5,0,0" />
-        <TextBox Text="{Binding Address}" Width="280">
+        <TextBox x:Name="AddressBox"
+                 AutomationProperties.AutomationId="AddressBox"
+                 Text="{Binding Address}" Width="280">
             <TextBox.Style>
                 <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                     <Style.Triggers>
@@ -28,7 +32,9 @@
             </TextBox.Style>
         </TextBox>
         <TextBlock Text="Telefonszám" Margin="0,5,0,0" />
-        <TextBox Text="{Binding Phone}" Width="280">
+        <TextBox x:Name="PhoneBox"
+                 AutomationProperties.AutomationId="PhoneBox"
+                 Text="{Binding Phone}" Width="280">
             <TextBox.Style>
                 <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                     <Style.Triggers>
@@ -40,7 +46,9 @@
             </TextBox.Style>
         </TextBox>
         <TextBlock Text="E-mail" Margin="0,5,0,0" />
-        <TextBox Text="{Binding Email}" Width="280">
+        <TextBox x:Name="EmailBox"
+                 AutomationProperties.AutomationId="EmailBox"
+                 Text="{Binding Email}" Width="280">
             <TextBox.Style>
                 <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                     <Style.Triggers>
@@ -52,7 +60,9 @@
             </TextBox.Style>
         </TextBox>
         <TextBlock Text="Adószám" Margin="0,5,0,0" />
-        <TextBox Text="{Binding TaxNumber}" Width="280">
+        <TextBox x:Name="TaxNumberBox"
+                 AutomationProperties.AutomationId="TaxNumberBox"
+                 Text="{Binding TaxNumber}" Width="280">
             <TextBox.Style>
                 <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                     <Style.Triggers>
@@ -64,7 +74,9 @@
             </TextBox.Style>
         </TextBox>
         <TextBlock Text="Bankszámla" Margin="0,5,0,0" />
-        <TextBox x:Name="LastField" Text="{Binding BankAccount}" Width="280">
+        <TextBox x:Name="LastField"
+                 AutomationProperties.AutomationId="BankAccountBox"
+                 Text="{Binding BankAccount}" Width="280">
             <TextBox.Style>
                 <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                     <Style.Triggers>
