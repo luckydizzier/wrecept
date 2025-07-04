@@ -47,7 +47,8 @@ public class InvoiceEditorTests
         using var driver = LaunchApp();
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-        var list = wait.Until(d => d.FindElementByAccessibilityId("InvoiceList"));
+        var list = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
+            .FindElementByAccessibilityId("InvoiceList"));
         Assert.IsNotNull(list);
         var entry = driver.FindElementByAccessibilityId("EntryProduct");
         Assert.IsNotNull(entry);

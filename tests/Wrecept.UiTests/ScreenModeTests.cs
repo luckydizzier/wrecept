@@ -50,7 +50,8 @@ public class ScreenModeTests
         driver.FindElementByName("Képernyő beállítása").Click();
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-        var window = wait.Until(d => d.FindElementByName("Képernyőbeállítás"));
+        var window = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
+            .FindElementByName("Képernyőbeállítás"));
         window.FindElementByName("Mégse").Click();
 
         Assert.ThrowsException<OpenQA.Selenium.WebDriverException>(() => driver.FindElementByName("Képernyőbeállítás"));
