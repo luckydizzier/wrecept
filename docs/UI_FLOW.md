@@ -24,6 +24,9 @@ Escape: Returns to menu with last selected item focused
   - **InvoiceEditorView** – bal oldali `InvoiceList`
   - **ProductMasterView** – a táblázat (Grid)
   - **SupplierMasterView** – a táblázat (Grid)
+  
+Az adott nézetek betöltésekor a `FormNavigator.RequestFocus` hívása állítja be
+a kezdő fókuszt a felsorolt vezérlőkre.
 
 🧾 Invoice Editor Flow (Bejövő szállítólevelek)
 
