@@ -5,13 +5,14 @@ using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core.Services;
 using Wrecept.Wpf.ViewModels;
-using Wrecept.Wpf;
 using Wrecept.Wpf.Services;
+using FocusManager = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views;
 
 public partial class InvoiceLookupView : UserControl
 {
+    private readonly FocusManager _focus;
     public InvoiceLookupView() : this(App.Provider.GetRequiredService<InvoiceLookupViewModel>())
     {
     }
@@ -20,6 +21,8 @@ public partial class InvoiceLookupView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
+        _focus = App.Provider.GetRequiredService<FocusManager>();
+        Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
         Loaded += OnLoaded;
     }
 
@@ -29,7 +32,7 @@ public partial class InvoiceLookupView : UserControl
         {
             if (DataContext is InvoiceLookupViewModel vm)
                 await vm.LoadAsync();
-            FormNavigator.RequestFocus("InvoiceList", typeof(InvoiceLookupView));
+            _focus.RequestFocus("InvoiceList", typeof(InvoiceLookupView));
         }
         catch (Exception ex)
         {
@@ -91,4 +94,7 @@ public partial class InvoiceLookupView : UserControl
             await log.LogError("InvoiceLookupView.OnKeyDown", ex);
         }
     }
+
+    private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        => _focus.Update("InvoiceLookupView", e.NewFocus);
 }
