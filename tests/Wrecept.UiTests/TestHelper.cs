@@ -22,17 +22,25 @@ internal static class TestHelper
         var dataDir = Path.Combine(appData, "Wrecept");
         Directory.CreateDirectory(dataDir);
         var settingsPath = Path.Combine(dataDir, "settings.json");
+        var dbPath = Path.Combine(dataDir, "test.db");
+        var userPath = Path.Combine(dataDir, "user.json");
+
+        if (File.Exists(dbPath))
+            File.Delete(dbPath);
+
         if (firstRun)
         {
             if (File.Exists(settingsPath))
                 File.Delete(settingsPath);
+            if (File.Exists(userPath))
+                File.Delete(userPath);
         }
         else
         {
             var settings = new AppSettings
             {
-                DatabasePath = Path.Combine(dataDir, "test.db"),
-                UserInfoPath = Path.Combine(dataDir, "user.json")
+                DatabasePath = dbPath,
+                UserInfoPath = userPath
             };
             File.WriteAllText(settingsPath, JsonSerializer.Serialize(settings));
         }
