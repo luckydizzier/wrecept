@@ -18,7 +18,8 @@
                  ItemsSource="{Binding Invoices}"
                  SelectedItem="{Binding SelectedInvoice}"
                  Margin="4"
-                 TabIndex="0">
+                 TabIndex="0"
+                 KeyboardNavigation.DirectionalNavigation="None">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

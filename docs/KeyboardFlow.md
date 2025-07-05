@@ -74,6 +74,7 @@ A billentyűzetes navigációt a sebesség és az időtálló megszokhatóság j
 2. A dialógusok (`DialogHelper`) `Enter`/`Escape` kezeléséhez.
 3. Az `EditLookup` és `SmartLookup` szövegmezőinél a legördülő lista navigációjához.
 - A `ListBox`, `DataGrid`, `ComboBox`, `TreeView`, valamint a `Menu` és `MenuItem` saját nyílkezelése elsőbbséget élvez; a `KeyboardManager` ilyen őst találva nem mozdít fókuszt.
+- Lista vezérlőknél `KeyboardNavigation.DirectionalNavigation` értéke `None`, így a nyilak nem ugranak ki a listából.
 
 ## 🔧 Future Enhancements
 
