@@ -118,3 +118,5 @@ Reconstruction by: \[ChatGPT-Dev Agent – 2025 Edition]
 - [TEST_STRATEGY.md](TEST_STRATEGY.md) – Tesztstratégia
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) – Fájlszintű áttekintés
 - [../.git-branch-policy.md](../.git-branch-policy.md) – Git ágkezelési szabályzat
+- [manuals/developer_guide_hu.md](manuals/developer_guide_hu.md) – Fejlesztői útmutató
+- [manuals/user_manual_hu.md](manuals/user_manual_hu.md) – Felhasználói kézikönyv

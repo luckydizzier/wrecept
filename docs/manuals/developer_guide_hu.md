@@ -7,7 +7,48 @@ date: "2025-06-27"
 
 # 📙 Fejlesztői útmutató
 
-Helyőrző a magyar fejlesztői útmutatóhoz.
+Ez a dokumentum a projekt fejlesztéséhez szükséges alapvető lépéseket tartalmazza. A részletes architektúrai és kódolási irányelvek a [README.md](../README.md) és [CODE_STANDARDS.md](../CODE_STANDARDS.md) fájlokban találhatók.
+
+## Alapvető környezet beállítása
+
+1. **.NET 8 SDK** és a *Windows Desktop Runtime* telepítése.
+   ```bash
+   dotnet --list-sdks
+   ```
+   A kimenetben szerepeljen a `8.0.x` verzió.
+2. **Repository klónozása** majd megnyitása Visual Studio vagy VS Code alatt.
+   ```bash
+   git clone <repository-url>
+   cd wrecept
+   ```
+3. **Megoldás fordítása** a gyökérben:
+   ```bash
+   dotnet build Wrecept.sln
+   ```
+4. **Futtatás** fejlesztői módban:
+   ```bash
+   dotnet run --project Wrecept.Wpf
+   ```
+
+## Navigáció a projektben
+
+- A megoldás három fő projektet tartalmaz: `Wrecept.Core`, `Wrecept.Storage` és `Wrecept.Wpf`.
+- A nézetmodellek és szolgáltatások elrendezését a [PROJECT_STRUCTURE.md](../PROJECT_STRUCTURE.md) ismerteti.
+- A felhasználói felület billentyűs működését a [UI_FLOW.md](../UI_FLOW.md) dokumentum részletezi.
+
+## Karbantartási teendők
+
+1. **Tesztelés**: minden módosítás előtt futtasd a teszteket.
+   ```bash
+   dotnet test
+   ```
+2. **Adatbázis-migrációk** módosításakor használd az `ef` eszközt.
+   ```bash
+   dotnet ef migrations add <Név>
+   dotnet ef database update
+   ```
+3. **Haladás naplózása**: minden változtatás után készíts bejegyzést a `docs/progress` mappában a dátum és az agent nevének feltüntetésével.
+
 
 
 ## UI tesztek WinAppDriverrel
