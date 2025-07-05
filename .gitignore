@@ -1,0 +1,41 @@
+# Build Outputs
+bin/
+obj/
+out/
+
+# Visual Studio Files
+.vs/
+*.user
+*.suo
+*.cache
+.vsconfig
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# MSBuild
+*.binlog
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Database files
+*.db
+*.db-*
+
+# JetBrains
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
