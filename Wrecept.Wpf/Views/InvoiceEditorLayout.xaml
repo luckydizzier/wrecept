@@ -35,6 +35,7 @@
     </UserControl.Resources>
 
     <Grid Margin="{StaticResource DefaultMargin}">
+
         <Grid.ColumnDefinitions>
             <!-- Left invoice list -->
             <ColumnDefinition Width="Auto" MinWidth="220" />
