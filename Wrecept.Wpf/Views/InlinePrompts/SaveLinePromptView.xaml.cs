@@ -13,28 +13,5 @@ public partial class SaveLinePromptView : UserControl
         InitializeComponent();
     }
 
-    private async void OnKeyDown(object sender, KeyEventArgs e)
-    {
-        try
-        {
-            if (DataContext is not Wrecept.Wpf.ViewModels.SaveLinePromptViewModel vm)
-                return;
-            if (e.Key == Key.Enter)
-            {
-                await vm.ConfirmCommand.ExecuteAsync(null);
-                e.Handled = true;
-            }
-            else if (e.Key == Key.Escape)
-            {
-                vm.CancelCommand.Execute(null);
-                e.Handled = true;
-            }
-        }
-        catch (Exception ex)
-        {
-            var log = App.Provider.GetRequiredService<ILogService>();
-            await log.LogError("SaveLinePromptView.OnKeyDown", ex);
-        }
-    }
 }
 
