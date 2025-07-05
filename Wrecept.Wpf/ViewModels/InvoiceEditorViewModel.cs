@@ -116,6 +116,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
     public InvoiceLookupViewModel Lookup { get; }
 
+    public event Action? InvoiceLoaded;
+
     public ObservableCollection<PaymentMethod> PaymentMethods { get; } = new();
     public ObservableCollection<TaxRate> TaxRates { get; } = new();
     public ObservableCollection<Supplier> Suppliers { get; } = new();
@@ -448,6 +450,7 @@ private void UpdateSupplierId(string name)
             RecalculateTotals();
             await Task.Yield();
             IsLoading = false;
+            InvoiceLoaded?.Invoke();
             return;
         }
 
@@ -479,6 +482,7 @@ private void UpdateSupplierId(string name)
         RecalculateTotals();
         await Task.Yield();
         IsLoading = false;
+        InvoiceLoaded?.Invoke();
     }
 
     public void EditLineFromSelection(InvoiceItemRowViewModel selected)

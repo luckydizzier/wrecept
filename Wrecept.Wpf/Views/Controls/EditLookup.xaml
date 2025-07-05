@@ -10,7 +10,7 @@
               DisplayMemberPath="{Binding DisplayMemberPath, RelativeSource={RelativeSource AncestorType=UserControl}}"
               SelectedValue="{Binding SelectedValue, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}"
               IsEditable="True"
-              StaysOpenOnEdit="True"
               IsTextSearchEnabled="False"
+              StaysOpenOnEdit="False"
               IsSynchronizedWithCurrentItem="True"/>
 </UserControl>

@@ -167,4 +167,9 @@ public partial class SmartLookup : UserControl
         return prop?.GetValue(item);
     }
 
+    public void ClosePopup()
+    {
+        PART_Popup.IsOpen = false;
+    }
+
 }
