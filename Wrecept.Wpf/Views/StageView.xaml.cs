@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Services;
+using Wrecept.Core.Enums;
 using FocusManager = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views;
@@ -14,6 +15,7 @@ public partial class StageView : UserControl
     private MenuItem? _lastMenuItem;
     private readonly KeyboardManager _keyboard;
     private readonly FocusManager _focus;
+    private readonly AppStateService _state;
 
     public StageView(StageViewModel viewModel)
     {
@@ -22,11 +24,17 @@ public partial class StageView : UserControl
         DataContext = viewModel;
         _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
         _focus = App.Provider.GetRequiredService<FocusManager>();
+        _state = App.Provider.GetRequiredService<AppStateService>();
         Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
     {
+        if (_state.Current is AppState.PromptActive or AppState.Saving or AppState.Error)
+        {
+            e.Handled = true;
+            return;
+        }
         if (e.Key == Key.Escape)
         {
             if (_lastMenuItem is not null)
@@ -54,7 +62,10 @@ public partial class StageView : UserControl
             }
         }
 
-        _keyboard.Handle(e);
+        if (_state.Current is AppState.Browsing or AppState.Editing)
+        {
+            _keyboard.Handle(e);
+        }
     }
 
     private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -71,5 +82,6 @@ public partial class StageView : UserControl
         }
         _focus.Update("StageView", e.NewFocus);
         _viewModel.StatusBar.FocusedElement = fe?.Name ?? fe?.GetType().Name ?? string.Empty;
+        _viewModel.StatusBar.Message = $"State: {_state.Current}";
     }
 }

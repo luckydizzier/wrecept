@@ -24,10 +24,12 @@ public class StageViewFocusTests
         var vm = (StageViewModel)FormatterServices.GetUninitializedObject(typeof(StageViewModel));
         typeof(StageViewModel).GetField("_statusBar", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(vm, status);
 
+        var state = new AppStateService();
         var view = (StageView)FormatterServices.GetUninitializedObject(typeof(StageView));
         typeof(StageView).GetField("_viewModel", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(view, vm);
-        typeof(StageView).GetField("_keyboard", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(view, new KeyboardManager());
+        typeof(StageView).GetField("_keyboard", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(view, new KeyboardManager(state));
         typeof(StageView).GetField("_focus", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(view, new FocusManager());
+        typeof(StageView).GetField("_state", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(view, state);
 
         first = new MenuItem { Header = "A" };
         second = new MenuItem { Header = "B" };

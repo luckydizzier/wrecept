@@ -44,6 +44,7 @@ Az InputBindingek helyett a rács `PreviewKeyDown` eseménye futtatja a parancso
 ### StageView
 - `Escape`: visszateszi a fókuszt az utoljára aktivált menüpontra, ha az elérhető.
 - Ha nincs korábbi menüpont, a `KeyboardManager` globális fókusz-visszaállítása lép életbe.
+- A billentyűk csak akkor élnek, ha az `AppStateService` böngészés vagy szerkesztés állapotot jelez; mentés vagy hiba közben a bemenetet a StageView elnyeli.
 
 ## 📦 Modal Prompt Behavior
 

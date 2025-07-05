@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
+using Wrecept.Core.Enums;
 
 namespace Wrecept.Wpf.Services;
 
@@ -13,18 +14,22 @@ public enum NavigationProfile
 public class KeyboardManager
 {
     private readonly KeyboardProfile _keys;
+    private readonly AppStateService _state;
 
     public NavigationProfile Profile { get; set; } = NavigationProfile.Default;
 
-    public KeyboardManager() : this(new KeyboardProfile()) { }
+    public KeyboardManager(AppStateService state) : this(new KeyboardProfile(), state) { }
 
-    public KeyboardManager(KeyboardProfile keys)
+    public KeyboardManager(KeyboardProfile keys, AppStateService state)
     {
         _keys = keys;
+        _state = state;
     }
 
     public void Handle(KeyEventArgs e)
     {
+        if (_state.Current is AppState.Saving or AppState.DialogOpen)
+            return;
         if (Profile == NavigationProfile.Disabled)
             return;
 

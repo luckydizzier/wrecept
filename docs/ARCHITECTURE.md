@@ -51,6 +51,7 @@ Az alapvető cégadatokat a `UserInfoService` kezeli. Az adatok a `%AppData%/Wre
 Az aktuális képernyőmódot a `SettingsService` tartja nyilván `settings.json` fájlban, amit a `ScreenModeManager` olvas be induláskor.
 A `KeyboardManager` a `KeyboardProfile` alapján kezeli a globális billentyűkiosztást. A profil a `wrecept.json` fájl `Keyboard` szekciójából töltődik be.
 A `FocusManager` rögzíti és visszaállítja a nézetenként utoljára fókuszba került vezérlőt, így a promptok bezárása után a fókusz konzisztensen tér vissza.
+Az `AppStateService` központi enum értéket tart fenn az alkalmazás állapotáról, amit a nézetek és a billentyűkezelés ellenőriz a kiszámítható átmenetek érdekében.
 
 ### Törzsadatok szerkesztése
 
