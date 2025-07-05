@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.IO;
 using Xunit;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
+using Wrecept.Wpf.Services;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -138,7 +140,8 @@ public class InvoiceEditorViewModelTests
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, invoiceSvc, log, notify, lookup);
+        var state = new AppStateService(Path.GetTempFileName());
+        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, invoiceSvc, log, notify, state, lookup);
 
         var row = vm.Items[0];
         row.Product = "Test";
@@ -165,7 +168,8 @@ public class InvoiceEditorViewModelTests
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, invoiceSvc, log, notify, lookup);
+        var state = new AppStateService(Path.GetTempFileName());
+        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, invoiceSvc, log, notify, state, lookup);
 
         var row = vm.Items[0];
         row.Product = "Test";
@@ -191,7 +195,8 @@ public class InvoiceEditorViewModelTests
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, lookup)
+        var state = new AppStateService(Path.GetTempFileName());
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, state, lookup)
         {
             IsArchived = true
         };
@@ -218,7 +223,8 @@ public class InvoiceEditorViewModelTests
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, lookup);
+        var state = new AppStateService(Path.GetTempFileName());
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, state, lookup);
 
         var row = vm.Items[0];
         var creator = new ProductCreatorViewModel(vm, row, productSvc)
@@ -243,7 +249,8 @@ public class InvoiceEditorViewModelTests
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, lookup)
+        var state = new AppStateService(Path.GetTempFileName());
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, state, lookup)
         {
             IsNew = false,
             InvoiceId = 1
@@ -275,7 +282,8 @@ public class InvoiceEditorViewModelTests
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, lookup)
+        var state = new AppStateService(Path.GetTempFileName());
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, state, lookup)
         {
             IsNew = false,
             InvoiceId = 1,
@@ -306,7 +314,8 @@ public class InvoiceEditorViewModelTests
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, lookup);
+        var state = new AppStateService(Path.GetTempFileName());
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, state, lookup);
 
         lookup.Invoices.Add(new InvoiceLookupItem { Id = 1, Number = "A1", Date = DateOnly.FromDateTime(DateTime.Today) });
         lookup.SelectedInvoice = lookup.Invoices[0];

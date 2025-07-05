@@ -201,6 +201,7 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 private readonly ILogService _log;
     private readonly INotificationService _notifications;
     private readonly ISessionService _session;
+    private readonly AppStateService _state;
 private Invoice _draft = new();
 private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
 
@@ -266,6 +267,7 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
         ILogService logService,
         INotificationService notificationService,
         ISessionService sessionService,
+        AppStateService state,
         InvoiceLookupViewModel lookup)
     {
         _paymentMethods = paymentMethods;
@@ -277,6 +279,7 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
         _log = logService;
         _notifications = notificationService;
         _session = sessionService;
+        _state = state;
         Lookup = lookup;
         Lookup.InvoiceSelected += async item =>
         {
@@ -460,6 +463,8 @@ private void UpdateSupplierId(string name)
             await Task.Yield();
             IsLoading = false;
             await _session.SaveLastInvoiceIdAsync(null);
+            _state.CurrentInvoiceId = null;
+            await _state.SaveAsync();
             return;
         }
 
@@ -493,6 +498,8 @@ private void UpdateSupplierId(string name)
         await Task.Yield();
         IsLoading = false;
         await _session.SaveLastInvoiceIdAsync(InvoiceId);
+        _state.CurrentInvoiceId = InvoiceId;
+        await _state.SaveAsync();
     }
 
     public void EditLineFromSelection(InvoiceItemRowViewModel selected)
@@ -769,6 +776,8 @@ private void UpdateSupplierId(string name)
         await _invoiceService.ArchiveAsync(InvoiceId);
         IsArchived = true;
         await _session.SaveLastInvoiceIdAsync(null);
+        _state.CurrentInvoiceId = null;
+        await _state.SaveAsync();
     }
 
     private async void LookupLoadSelected()
