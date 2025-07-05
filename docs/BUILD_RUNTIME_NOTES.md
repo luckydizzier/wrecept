@@ -18,6 +18,7 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
 - **Elgépelés vagy hiányzó záró tag** – az `InvoiceEditorView.xaml` fájlban egy fölösleges `</StackPanel>` tag miatt a build meghiúsult.
 - **Önzáró `DataGridTemplateColumn` hiánya** – ha a nyitó tag `>` jellel zárul és az attribútumok külön sorban szerepelnek, a parser MC3061 hibát dob.
 - **Teszt futtatásához szükséges csomag** – a `Xunit.StaFact` hiánya tesztfutási hibát eredményezhet Windows környezetben.
+- **Téves karakter a `DataTemplate`-ben** – ha egy véletlen karakter (pl. `z`) marad a sablon nyitó vagy záró tagja előtt, MC3061 hibával leáll a fordítás.
 
 ## Javaslatok
 

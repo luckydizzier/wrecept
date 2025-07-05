@@ -21,7 +21,7 @@
             <views:TaxRateCreatorView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:UnitCreatorViewModel}">
-            z<views:UnitCreatorView/>
+            <views:UnitCreatorView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:PaymentMethodCreatorViewModel}">
             <views:PaymentMethodCreatorView/>
