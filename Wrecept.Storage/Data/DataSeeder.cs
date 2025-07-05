@@ -36,11 +36,11 @@ public static class DataSeeder
         ILogService logService,
         IProgress<ProgressReport>? progress = null,
         CancellationToken ct = default,
-        int supplierCount = 20,
-        int productCount = 500,
-        int invoiceCount = 100,
+        int supplierCount = 5,
+        int productCount = 50,
+        int invoiceCount = 15,
         int minItemsPerInvoice = 5,
-        int maxItemsPerInvoice = 60,
+        int maxItemsPerInvoice = 20,
         bool slow = false)
     {
         var opts = new DbContextOptionsBuilder<AppDbContext>()
