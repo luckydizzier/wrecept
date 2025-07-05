@@ -131,6 +131,7 @@
                         <ColumnDefinition Width="80" />
                         <ColumnDefinition Width="80" />
                         <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="150" />
                     </Grid.ColumnDefinitions>
 
                     <c:SmartLookup x:Name="EntryProduct" Grid.Column="0"
@@ -158,6 +159,7 @@
                                   SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
                                   CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                   CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                    <TextBox x:Name="EntryDesc" Grid.Column="5" Text="{Binding Description, Mode=TwoWay}" Margin="4,0" />
                 </Grid>
             </Border>
 

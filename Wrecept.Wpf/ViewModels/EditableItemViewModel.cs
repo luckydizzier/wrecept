@@ -33,5 +33,6 @@ public class ExistingLineItemEditViewModel : EditableItemViewModel
         UnitName = target.UnitName;
         TaxRateName = target.TaxRateName;
         ProductGroup = target.ProductGroup;
+        Description = target.Description;
     }
 }
