@@ -512,7 +512,7 @@ private void UpdateSupplierId(string name)
 
     private bool ValidateLineItem(InvoiceItemRowViewModel line, out string error)
     {
-        if (line.Quantity <= 0)
+        if (line.Quantity == 0)
         {
             error = Resources.Strings.InvoiceLine_InvalidQuantity;
             return false;

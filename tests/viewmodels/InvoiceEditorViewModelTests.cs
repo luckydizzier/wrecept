@@ -152,6 +152,36 @@ public class InvoiceEditorViewModelTests
     }
 
     [Fact]
+    public async Task AddLineItem_NegativeQuantity_Accepted()
+    {
+        var invoiceSvc = new FakeInvoiceService();
+        var productSvc = new FakeProductService();
+        var taxId = Guid.NewGuid();
+        productSvc.Products.Add(new Product { Id = 1, Name = "Test", TaxRateId = taxId });
+        var payment = new DummyService<object>();
+        var tax = new DummyService<object>();
+        var supplier = new DummyService<object>();
+        var unit = new DummyService<object>();
+        var log = new DummyLogService();
+        var notify = new DummyNotificationService();
+        var lookup = new InvoiceLookupViewModel(invoiceSvc);
+        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, invoiceSvc, log, notify, lookup);
+
+        var row = vm.Items[0];
+        row.Product = "Test";
+        row.Quantity = -2;
+        row.UnitPrice = 100;
+        row.TaxRateId = taxId;
+
+        await vm.AddLineItemAsync();
+
+        Assert.Equal(0, invoiceSvc.Items.Count);
+        Assert.False(row.HasError);
+        Assert.Equal(2, vm.Items.Count);
+        Assert.Equal(-2, vm.Items[1].Quantity);
+    }
+
+    [Fact]
     public async Task Commands_Ignored_When_ReadOnly()
     {
         var invoiceSvc = new FakeInvoiceService();

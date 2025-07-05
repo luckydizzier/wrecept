@@ -64,6 +64,7 @@ Confirm entry prompt: Save line? (Enter=Yes, Esc=No)
 Insert new line, repeat
 
 Quantity < 0 indicates return (visszáru), highlighted red via converter
+Quantity = 0 is rejected with inline error message
 
 📄 Invoice Finalization
 
