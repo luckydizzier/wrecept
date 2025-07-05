@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Media;
+using Wrecept.Core.Enums;
 
 namespace Wrecept.Wpf.Services;
 
 public class FocusManager
 {
     private readonly Dictionary<string, WeakReference<IInputElement>> _map = new();
+    private readonly AppStateService _state;
+
+    public FocusManager() : this(new AppStateService()) { }
+
+    public FocusManager(AppStateService state)
+    {
+        _state = state;
+    }
 
     public void Update(string viewKey, IInputElement element)
     {
@@ -24,11 +33,17 @@ public class FocusManager
 
     public void RequestFocus(IInputElement? element)
     {
+        if (_state.Current is AppState.Saving or AppState.DialogOpen or AppState.Error or AppState.PromptActive)
+            return;
+
         Application.Current.Dispatcher.BeginInvoke(() => element?.Focus(), DispatcherPriority.Background);
     }
 
     public void RequestFocus(string elementName, Type? viewType = null)
     {
+        if (_state.Current is AppState.Saving or AppState.DialogOpen or AppState.Error or AppState.PromptActive)
+            return;
+
         Application.Current.Dispatcher.BeginInvoke(() =>
         {
             if (Application.Current.MainWindow is null)

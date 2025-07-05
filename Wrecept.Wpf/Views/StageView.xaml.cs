@@ -39,12 +39,12 @@ public partial class StageView : UserControl
         {
             if (_lastMenuItem is not null)
             {
-                _lastMenuItem.Focus();
+                _focus.RequestFocus(_lastMenuItem);
             }
             else if (Menu.Items.Count > 0)
             {
                 if (Menu.Items[0] is MenuItem first)
-                    first.Focus();
+                    _focus.RequestFocus(first);
             }
 
             e.Handled = true;

@@ -68,7 +68,7 @@ public abstract class BaseMasterView : UserControl
         Loaded += async (_, _) =>
         {
             await viewModel.LoadAsync();
-            Grid.Focus();
+            _focus.RequestFocus(Grid);
         };
 
         BindingOperations.SetBinding(Grid, ItemsControl.ItemsSourceProperty, new Binding("Items"));
@@ -123,8 +123,8 @@ public abstract class BaseMasterView : UserControl
     {
         if (e.DetailsElement.FindName("InitialFocus") is Control box &&
             e.Row.DetailsVisibility == Visibility.Visible)
-            box.Focus();
+            _focus.RequestFocus(box);
         else if (e.Row.DetailsVisibility != Visibility.Visible)
-            Grid.Focus();
+            _focus.RequestFocus(Grid);
     }
 }
