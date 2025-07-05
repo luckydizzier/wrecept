@@ -49,7 +49,7 @@ public partial class InvoiceEditorView : UserControl
     {
         if (e.Key == Key.Escape)
         {
-            LookupView.InvoiceList.Focus();
+            _focus.RequestFocus(LookupView.InvoiceList);
             e.Handled = true;
             return;
         }
@@ -106,9 +106,9 @@ public partial class InvoiceEditorView : UserControl
             if (InlineCreatorHost.Content is FrameworkElement fe)
             {
                 if (fe.FindName("NameBox") is IInputElement box)
-                    Keyboard.Focus(box);
+                    _focus.RequestFocus(box);
                 else
-                    fe.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+                    _focus.RequestFocus(fe);
             }
         }, DispatcherPriority.Background);
     }

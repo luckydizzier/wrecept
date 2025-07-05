@@ -7,8 +7,7 @@
             xmlns:views="clr-namespace:Wrecept.Wpf.Views.InlineCreators"
             xmlns:prompt="clr-namespace:Wrecept.Wpf.Views.InlinePrompts"
             xmlns:c="clr-namespace:Wrecept.Wpf.Views.Controls"
-            KeyDown="OnKeyDown"
-             FocusManager.FocusedElement="{Binding ElementName=InvoiceList}">
+            KeyDown="OnKeyDown">
     <UserControl.Resources>
         <local:NegativeValueForegroundConverter x:Key="NegativeForegroundConverter" />
         <local:IsReadOnlyBindingConverter x:Key="IsReadOnlyConverter" />
