@@ -15,8 +15,8 @@ namespace Wrecept.Wpf.Views;
 
 public partial class InvoiceEditorView : UserControl
 {
-    private readonly KeyboardManager? _keyboard;
-    private readonly FocusManager? _focus;
+    private KeyboardManager? _keyboard;
+    private FocusManager? _focus;
 
     public InvoiceEditorView()
     {
