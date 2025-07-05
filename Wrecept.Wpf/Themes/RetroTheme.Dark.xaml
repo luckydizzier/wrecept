@@ -18,6 +18,9 @@
     <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#4f4f20" />
     <SolidColorBrush x:Key="HeaderFooterBrush" Color="{StaticResource HeaderFooterColor}" />
 
+    <!-- Spacing helpers -->
+    <Thickness x:Key="DefaultMargin">6</Thickness>
+
     <sys:Double x:Key="FontSizeNormal">16</sys:Double>
     <sys:Double x:Key="FontSizeLarge">18</sys:Double>
 
