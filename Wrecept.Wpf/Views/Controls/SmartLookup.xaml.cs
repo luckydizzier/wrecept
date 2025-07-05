@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Wrecept.Wpf.Views.Controls;
@@ -103,25 +102,8 @@ public partial class SmartLookup : UserControl
     public SmartLookup()
     {
         InitializeComponent();
-        Loaded += OnLoaded;
-        Unloaded += OnUnloaded;
     }
 
-    private void OnLoaded(object sender, RoutedEventArgs e)
-    {
-        if (PART_TextBox != null)
-        {
-            PART_TextBox.GotFocus += TextBox_GotFocus;
-        }
-    }
-
-    private void OnUnloaded(object sender, RoutedEventArgs e)
-    {
-        if (PART_TextBox != null)
-        {
-            PART_TextBox.GotFocus -= TextBox_GotFocus;
-        }
-    }
 
     private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -129,8 +111,6 @@ public partial class SmartLookup : UserControl
             _ = lookup.FilterAsync();
     }
 
-    private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        => _ = FilterAsync();
 
     private async Task FilterAsync()
     {

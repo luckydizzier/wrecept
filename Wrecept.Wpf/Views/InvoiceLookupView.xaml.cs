@@ -1,7 +1,6 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core.Services;
@@ -30,9 +29,6 @@ public partial class InvoiceLookupView : UserControl
             if (DataContext is InvoiceLookupViewModel vm)
             {
                 await vm.LoadAsync();
-                if (vm.Invoices.Count > 0)
-                    _ = Dispatcher.BeginInvoke(() =>
-                        InvoiceList.Focus(), DispatcherPriority.Background);
             }
         }
         catch (Exception ex)

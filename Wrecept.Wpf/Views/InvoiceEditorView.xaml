@@ -34,15 +34,6 @@
         <DataTemplate DataType="{x:Type vm:DeleteItemPromptViewModel}">
             <prompt:DeleteItemPromptView/>
         </DataTemplate>
-        <Style x:Key="GoldFocusVisual" TargetType="Control">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Stroke="#FFD700" StrokeThickness="1" StrokeDashArray="2" Margin="2" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -184,10 +175,10 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6" Grid.Row="5">
                 <Button Content="Mentés" Command="{Binding SaveCommand}" IsEnabled="{Binding IsEditable}"
-                        Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
-                <Button Content="Nyomtatás" IsEnabled="{Binding IsArchived}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
-                <Button Content="Bezárás" Command="{Binding CloseCommand}" Margin="0,0,4,0" FocusVisualStyle="{StaticResource GoldFocusVisual}" />
-                <Button Content="📦 Véglegesítés" Command="{Binding ShowArchivePromptCommand}" FocusVisualStyle="{StaticResource GoldFocusVisual}">
+                        Margin="0,0,4,0" />
+                <Button Content="Nyomtatás" IsEnabled="{Binding IsArchived}" Margin="0,0,4,0" />
+                <Button Content="Bezárás" Command="{Binding CloseCommand}" Margin="0,0,4,0" />
+                <Button Content="📦 Véglegesítés" Command="{Binding ShowArchivePromptCommand}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Style.Triggers>
@@ -208,8 +199,7 @@
                PlacementTarget="{Binding InlineCreatorTarget}"
                IsOpen="{Binding IsInlineCreatorVisible, Mode=OneWay}"
                StaysOpen="True"
-               AllowsTransparency="True"
-               Opened="OnInlineCreatorOpened">
+               AllowsTransparency="True">
             <Border Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
                 <ContentControl x:Name="InlineCreatorHost" Content="{Binding InlineCreator}" />
             </Border>
