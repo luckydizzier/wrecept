@@ -9,6 +9,7 @@ public class Invoice
     public Supplier? Supplier { get; set; }
     public Guid PaymentMethodId { get; set; }
     public PaymentMethod? PaymentMethod { get; set; }
+    public DateOnly DueDate { get; set; }
     public bool IsGross { get; set; } = false;
     public ICollection<InvoiceItem> Items { get; set; } = new List<InvoiceItem>();
     public bool IsArchived { get; set; } = false;

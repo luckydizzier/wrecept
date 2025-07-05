@@ -120,6 +120,10 @@
                                           CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                           IsEnabled="{Binding IsEditable}" />
                         </StackPanel>
+                        <StackPanel Margin="0,6,6,0">
+                            <Label Content="Fizetési _határidő" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=DueDateBox}" />
+                            <DatePicker x:Name="DueDateBox" Width="220" SelectedDate="{Binding DueDate}" IsEnabled="False" />
+                        </StackPanel>
                         <StackPanel Margin="0,6,0,0">
                             <Label Content="_Számlaszám" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=NumberBox}" />
                             <TextBox x:Name="NumberBox" Width="220" Text="{Binding Number}" IsEnabled="{Binding IsNew}" Style="{StaticResource FocusHeaderTextBoxBold}" />

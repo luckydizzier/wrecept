@@ -33,12 +33,13 @@ public class InvoiceRepository : IInvoiceRepository
         return item.Id;
     }
 
-    public async Task UpdateHeaderAsync(int id, DateOnly date, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
+    public async Task UpdateHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
     {
         var invoice = await _db.Invoices.FindAsync(new object?[] { id }, ct);
         if (invoice == null)
             return;
         invoice.Date = date;
+        invoice.DueDate = dueDate;
         invoice.SupplierId = supplierId;
         invoice.PaymentMethodId = paymentMethodId;
         invoice.IsGross = isGross;

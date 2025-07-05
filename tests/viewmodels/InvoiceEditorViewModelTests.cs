@@ -35,7 +35,7 @@ public class InvoiceEditorViewModelTests
             Items.Add(item);
             return Task.FromResult(item.Id);
         }
-        public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, int supplierId, Guid paymentMethodId, bool isGross, System.Threading.CancellationToken ct = default)
+        public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, System.Threading.CancellationToken ct = default)
         {
             UpdatedId = id;
             return Task.CompletedTask;
