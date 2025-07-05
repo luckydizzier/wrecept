@@ -68,7 +68,7 @@ Quantity = 0 is rejected with inline error message
 
 📄 Invoice Finalization
 
-PDF Export / Print button is only active when IsArchived == true
+„PDF mentés” és „Nyomtatás” gomb csak archivált számlánál aktív
 
 Archived invoices:
 

@@ -173,6 +173,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: Tömeges használati adatokhoz `GetLastUsageDataBatchAsync` metódust kínál
+- **Wrecept.Core/Services/IInvoiceExportService.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: Core
+  - Type: C#
+  - Responsibility: Számlák PDF exportja és nyomtatása
+  - Interaction: ViewModels
+  - Special Notes: -
 - **Wrecept.Core/Services/ILogService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
@@ -747,6 +754,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
+- **Wrecept.Wpf/Services/PdfInvoiceExporter.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: UI
+  - Type: C#
+  - Responsibility: Számlák PDF exportja és nyomtatása
+  - Interaction: ViewModels
+  - Special Notes: QuestPDF alapú
 - **Wrecept.Wpf/Services/ScreenModeManager.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
