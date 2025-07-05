@@ -179,6 +179,9 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
     {
         base.OnStartup(e);
 
+        CancellationTokenSource? cts = null;
+        ProgressViewModel? progressVm = null;
+
         try
         {
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
@@ -187,9 +190,19 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
             await Provider.GetRequiredService<AppStateService>().LoadAsync();
 
             var orchestrator = Provider.GetRequiredService<StartupOrchestrator>();
-            using var cts = new CancellationTokenSource();
-            var progressVm = Provider.GetRequiredService<ProgressViewModel>();
-            progressVm.CancelCommand = new RelayCommand(() => cts.Cancel());
+            cts = new CancellationTokenSource();
+            progressVm = Provider.GetRequiredService<ProgressViewModel>();
+            progressVm.CancelCommand = new RelayCommand(() =>
+            {
+                try
+                {
+                    cts.Cancel();
+                }
+                catch (ObjectDisposedException)
+                {
+                    // ignore; startup already completed
+                }
+            });
             var progress = new Progress<ProgressReport>(r =>
             {
                 progressVm.GlobalProgress = r.GlobalPercent;
@@ -245,6 +258,12 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
                 "Indítási hiba",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
+        }
+        finally
+        {
+            if (progressVm != null)
+                progressVm.CancelCommand = null;
+            cts?.Dispose();
         }
     }
 }
