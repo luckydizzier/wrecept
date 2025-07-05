@@ -15,7 +15,7 @@ date: "2025-06-27"
 
 ## 📦 Project Purpose
 
-Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform MAUI kitérő után ismét WPF-re építjük a felületet, megőrizve a Clipper + dBase IV rendszerek sebességét és tiszta billentyűs vezérlését (Enter / Esc / ↑ / ↓). A cél továbbra is a kiszámítható működés, akár áramszünet után is.
+Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform MAUI kitérő után ismét WPF-re építjük a felületet, megőrizve a Clipper + dBase IV rendszerek sebességét. A cél továbbra is a kiszámítható működés, akár áramszünet után is.
 
 ---
 
@@ -24,7 +24,6 @@ Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform 
 | Feature                          | Status                  |
 | -------------------------------- | ----------------------- |
 | Retro-style UI                   | ✅ Stage design complete |
-| Keyboard-only control            | ⏳ Logic in progress     |
 | Structured top menu              | ✅ StageView in place    |
 | Invoice recording (header/items) | ⏳ UI skeleton ready     |
 | Product master data              | ⏳ List view available   |
@@ -38,8 +37,7 @@ Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform 
 ## 🎹 Interface Philosophy
 
 * **No mouse. No clutter.**
-* Only `Enter`, `Esc`, `↑`, `↓` keys are used.
-* All screens mimic DOS layouts — with color-coded panels, keyboard footer hints, and full-screen efficiency.
+* All screens mimic DOS layouts — with color-coded panels and full-screen efficiency.
 * Menük nagy része még helykitöltő, de a termékek kezelése már működik.
 
 ---
@@ -69,10 +67,9 @@ Wrecept.sln
 ## 🎯 Next Steps
 
 1. Build out invoice editor UI (inspired by screenshot #3)
-2. Add keyboard navigation logic layer (Enter / Esc focus cycle)
-3. Integrate fake data into product and supplier modules
-4. Discuss minimal database model based on real .dbf structure
-5. Kötelező induló tennivalók a [DEV_SPECS.md](DEV_SPECS.md) "Kick OFF" szakaszában
+2. Integrate fake data into product and supplier modules
+3. Discuss minimal database model based on real .dbf structure
+4. Kötelező induló tennivalók a [DEV_SPECS.md](DEV_SPECS.md) "Kick OFF" szakaszában
 
 ## ✅ Kick OFF
 

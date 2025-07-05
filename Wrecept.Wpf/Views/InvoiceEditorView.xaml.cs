@@ -9,13 +9,11 @@ using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
 using Wrecept.Wpf;
 using Wrecept.Wpf.Services;
-using FocusManager = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views;
 
 public partial class InvoiceEditorView : UserControl
 {
-    private FocusManager? _focus;
 
     public InvoiceEditorView()
     {
@@ -36,7 +34,6 @@ public partial class InvoiceEditorView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
-        _focus = App.Provider?.GetRequiredService<FocusManager>();
         Loaded += async (_, _) =>
         {
             var progressVm = new ProgressViewModel();
@@ -50,9 +47,6 @@ public partial class InvoiceEditorView : UserControl
             });
             await viewModel.LoadAsync(progress);
             progressWindow.Close();
-            _ = Dispatcher.InvokeAsync(() =>
-                _focus?.RequestFocus("InvoiceList", typeof(InvoiceEditorView)),
-                DispatcherPriority.ContextIdle);
         };
     }
 
@@ -67,9 +61,9 @@ public partial class InvoiceEditorView : UserControl
             if (InlineCreatorHost.Content is FrameworkElement fe)
             {
                 if (fe.FindName("NameBox") is IInputElement box)
-                    _focus?.RequestFocus(box);
+                    box.Focus();
                 else
-                    _focus?.RequestFocus(fe);
+                    fe.Focus();
             }
         }, DispatcherPriority.Background);
     }

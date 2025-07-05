@@ -26,11 +26,7 @@
                     <TextBlock Grid.Column="2" Text="{Binding CurrentTime}" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
-            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="Num" Margin="2,0" Visibility="{Binding IsNumLock, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                <TextBlock Text="Caps" Margin="2,0" Visibility="{Binding IsCapsLock, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                <TextBlock Text="Scr" Margin="2,0" Visibility="{Binding IsScrollLock, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            </StackPanel>
+            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" />
         </Grid>
     </Border>
 </UserControl>

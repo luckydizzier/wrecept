@@ -1,6 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Windows.Input;
 using System.Windows.Threading;
 using Wrecept.Wpf.Resources;
 
@@ -22,14 +21,6 @@ public partial class StatusBarViewModel : ObservableObject
     [ObservableProperty]
     private string message = Resources.Strings.StatusBar_DefaultMessage;
 
-    [ObservableProperty]
-    private bool isNumLock;
-
-    [ObservableProperty]
-    private bool isCapsLock;
-
-    [ObservableProperty]
-    private bool isScrollLock;
 
     public StatusBarViewModel()
     {
@@ -45,8 +36,5 @@ public partial class StatusBarViewModel : ObservableObject
     private void Update()
     {
         DateTime = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        IsNumLock = Keyboard.IsKeyToggled(Key.NumLock);
-        IsCapsLock = Keyboard.IsKeyToggled(Key.CapsLock);
-        IsScrollLock = Keyboard.IsKeyToggled(Key.Scroll);
     }
 }
