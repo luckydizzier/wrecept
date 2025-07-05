@@ -143,6 +143,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddTransient<PaymentMethodMasterViewModel>();
         services.AddTransient<UnitMasterViewModel>();
         services.AddTransient<UserInfoViewModel>();
+        services.AddTransient<UserInfoEditorViewModel>();
         services.AddTransient<ScreenModeViewModel>();
         services.AddTransient<AboutViewModel>();
         services.AddTransient<PlaceholderViewModel>();
@@ -168,6 +169,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddTransient<PaymentMethodMasterView>();
         services.AddTransient<UnitMasterView>();
         services.AddTransient<UserInfoView>();
+        services.AddTransient<UserInfoWindow>();
         services.AddTransient<AboutView>();
         services.AddTransient<PlaceholderView>();
         services.AddTransient<Views.Controls.StatusBar>();

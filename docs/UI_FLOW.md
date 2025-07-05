@@ -192,3 +192,8 @@ Első indításkor a `UserInfoWindow` kéri be a cég adatait. A mezők kötelez
 mező után az `OK` gombra kerül a fókusz, majd megerősítő üzenet jelenik meg:
 "Helyesek az adatok?". `Enter` elfogadja, `Escape` az előző mezőre visz
 vissza. Minden üres mező piros keretet kap, amíg ki nem töltik.
+
+Későbbi módosításhoz a *Szerviz / Tulajdonos szerkesztése...* menüpont ugyanazt
+a `UserInfoWindow` párbeszédet nyitja meg. A mentés után a háttérben
+`UserInfoService.SaveAsync` frissíti a `wrecept.json` fájlt, majd a
+`UserInfoViewModel` értékei is aktualizálódnak.
