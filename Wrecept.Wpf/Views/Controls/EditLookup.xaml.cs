@@ -66,8 +66,6 @@ public partial class EditLookup : UserControl
 
     private TextBox? _textBox;
 
-    public ComboBox ComboBoxControl => Box;
-
     public EditLookup()
     {
         InitializeComponent();

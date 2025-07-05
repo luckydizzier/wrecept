@@ -1,7 +1,5 @@
 using System;
-using System.Linq;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core.Services;
 using Wrecept.Core.Utilities;
@@ -31,7 +29,6 @@ public partial class InvoiceEditorLayout : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
-        KeyboardOnlyUXHelper.SuppressUnintendedDropDown(PaymentLookup.ComboBoxControl);
         Loaded += async (_, _) =>
         {
             var progressVm = new ProgressViewModel();
@@ -45,15 +42,6 @@ public partial class InvoiceEditorLayout : UserControl
             });
             await viewModel.LoadAsync(progress);
             progressWindow.Close();
-        };
-        viewModel.InvoiceLoaded += () =>
-        {
-            SupplierLookup.Text = viewModel.Supplier;
-            SupplierLookup.ClosePopup();
-            PaymentLookup.ComboBoxControl.SelectedItem = viewModel.PaymentMethods.FirstOrDefault(p => p.Id == viewModel.PaymentMethodId);
-            PaymentLookup.ComboBoxControl.IsDropDownOpen = false;
-            LookupView.InvoiceList.Focus();
-            Keyboard.Focus(LookupView.InvoiceList);
         };
     }
 }
