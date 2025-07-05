@@ -42,5 +42,8 @@ Ez a jegyzet a fejlesztés során tapasztalt fordítási és futásidejű probl�
     "Biztos, hogy elölről kezded?". Elfogadás után a `SetupWindow` és a
     tulajdonosi adatok szerkesztője jelenik meg, ezek mentik a beállított
     elérési utakat és cégadatokat.
+12. A `StartupWindow` `Mégse` gombjára kattintva `ObjectDisposedException` lépett
+    fel, ha a `CancellationTokenSource` már felszabadult. A parancs most
+    biztonságosan kezeli ezt és az indítás végén eltávolítjuk a hivatkozást.
 
 ---
