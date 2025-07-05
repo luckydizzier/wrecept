@@ -18,14 +18,15 @@ public abstract class BaseMasterView : UserControl
 
     protected DataGrid Grid { get; }
 
-    private readonly FocusManager _focus;
+    private readonly FocusManager? _focus;
 
     protected BaseMasterView()
     {
         Grid = BuildLayout();
         Loaded += OnLoaded;
         KeyDown += OnKeyDown;
-        _focus = App.Provider.GetRequiredService<FocusManager>();
+        if (App.Provider is not null)
+            _focus = App.Provider.GetRequiredService<FocusManager>();
         Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
     }
 
@@ -68,7 +69,7 @@ public abstract class BaseMasterView : UserControl
         Loaded += async (_, _) =>
         {
             await viewModel.LoadAsync();
-            _focus.RequestFocus(Grid);
+            _focus?.RequestFocus(Grid);
         };
 
         BindingOperations.SetBinding(Grid, ItemsControl.ItemsSourceProperty, new Binding("Items"));
@@ -86,10 +87,11 @@ public abstract class BaseMasterView : UserControl
             Grid.RowDetailsTemplate = RowDetailsTemplate;
     }
 
-    private readonly KeyboardManager _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
+    private readonly KeyboardManager? _keyboard =
+        App.Provider is not null ? App.Provider.GetRequiredService<KeyboardManager>() : null;
 
     private void OnKeyDown(object? sender, KeyEventArgs e)
-        => _keyboard.Handle(e);
+        => _keyboard?.Handle(e);
 
     private void Grid_PreviewKeyDown(object? sender, KeyEventArgs e)
     {
@@ -117,14 +119,14 @@ public abstract class BaseMasterView : UserControl
     }
 
     private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        => _focus.Update(GetType().Name, e.NewFocus);
+        => _focus?.Update(GetType().Name, e.NewFocus);
 
     private void Grid_RowDetailsVisibilityChanged(object? sender, DataGridRowDetailsEventArgs e)
     {
         if (e.DetailsElement.FindName("InitialFocus") is Control box &&
             e.Row.DetailsVisibility == Visibility.Visible)
-            _focus.RequestFocus(box);
+            _focus?.RequestFocus(box);
         else if (e.Row.DetailsVisibility != Visibility.Visible)
-            _focus.RequestFocus(Grid);
+            _focus?.RequestFocus(Grid);
     }
 }
