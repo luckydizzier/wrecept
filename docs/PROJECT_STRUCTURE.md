@@ -1279,6 +1279,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
+- **Wrecept.Wpf/Views/InvoiceEditorLayout.xaml**
+  - Purpose: WPF nézet
+  - Layer: UI
+  - Type: XAML
+  - Responsibility: Modern billentyűzet-fókuszú elrendezés
+  - Interaction: ViewModels
+  - Special Notes: StageView alapértelmezett nézete
 - **Wrecept.Wpf/Views/InvoiceItemsGrid.xaml**
   - Purpose: WPF nézet
   - Layer: UI
