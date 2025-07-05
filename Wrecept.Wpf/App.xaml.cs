@@ -130,8 +130,6 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddCore();
         await services.AddStorageAsync(DbPath, UserInfoPath, SettingsPath);
 
-        var keyboardProfile = KeyboardProfile.Load(UserInfoPath);
-        services.AddSingleton(keyboardProfile);
 
         services.AddTransient<StageViewModel>();
         services.AddTransient<InvoiceEditorViewModel>();
@@ -151,8 +149,6 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddSingleton<AppStateService>();
         services.AddSingleton<INotificationService, MessageBoxNotificationService>();
         services.AddSingleton<ScreenModeManager>();
-        services.AddSingleton<KeyboardManager>();
-        services.AddSingleton<FocusManager>();
         services.AddTransient<ProgressViewModel>();
         services.AddTransient<SeedOptionsViewModel>();
         services.AddTransient<SeedOptionsWindow>();

@@ -1,7 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -23,17 +22,11 @@ public partial class DeleteItemPromptViewModel : ObservableObject
     {
         _parent.DeleteItemConfirmed(_row);
         _parent.DeletePrompt = null;
-        var focus = App.Provider.GetRequiredService<FocusManager>();
-        var last = focus.GetLast("InvoiceEditorView");
-        focus.RequestFocus(last);
     }
 
     [RelayCommand]
     private void Cancel()
     {
         _parent.DeletePrompt = null;
-        var focus = App.Provider.GetRequiredService<FocusManager>();
-        var last = focus.GetLast("InvoiceEditorView");
-        focus.RequestFocus(last);
     }
 }

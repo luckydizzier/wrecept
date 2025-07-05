@@ -12,7 +12,7 @@ Helyőrző a magyar fejlesztői útmutatóhoz.
 
 ## UI tesztek WinAppDriverrel
 
-A billentyűzettel vezérelt WPF felület automatikus ellenőrzéséhez a [WinAppDriver](https://github.com/microsoft/WinAppDriver) és az Appium kliens használható.
+A WPF felület automatikus ellenőrzéséhez a [WinAppDriver](https://github.com/microsoft/WinAppDriver) és az Appium kliens használható.
 
 1. Telepítsd a WinAppDriver MSI csomagot, majd indítsd el a `WinAppDriver.exe` alkalmazást.
 2. A `tests` könyvtárban hozz létre egy MSTest projektet, majd add hozzá a következő csomagokat:

@@ -2,7 +2,7 @@ UI_FLOW.md
 
 🧱 Overview
 
-This document describes the user interface flow of the Wrecept application. It outlines the navigation model, expected behaviors, data entry sequences, and the logic of interaction across screens and embedded components. It adheres to the current implementation goals defined in BUSINESS_LOGIC.md and supports both keyboard-based workflows and inline editing models.
+This document describes the user interface flow of the Wrecept application. It outlines the navigation model, expected behaviors, data entry sequences, and the logic of interaction across screens and embedded components. It adheres to the current implementation goals defined in BUSINESS_LOGIC.md and supports inline editing models.
 
 📌 Navigation Model
 
@@ -28,9 +28,6 @@ számlafejléc mezőknél.
   - **ProductMasterView** – a táblázat (Grid)
   - **SupplierMasterView** – a táblázat (Grid)
   
-Az adott nézetek betöltésekor a `FocusManager.RequestFocus` hívása állítja be
-a kezdő fókuszt a felsorolt vezérlőkre.
-A `FocusManager` nyilvántartja az utoljára fókuszált elemeket is, így a nézetek közti váltáskor vagy a dialógusok bezárásakor ugyanide tér vissza a fókusz.
 
 🧾 Invoice Editor Flow (Bejövő szállítólevelek)
 
@@ -56,9 +53,7 @@ Bruttó checkbox (affects unit price interpretation)
 
 3. Invoice Line Items Entry
 
-Focus shifts to the first line’s Product Name
-
-SmartLookup behavior with real-time filtering and keyboard navigation
+SmartLookup behavior with real-time filtering
 
 If product not found → inline product creator in-row (no modal popup)
 
@@ -103,9 +98,7 @@ Example:
 → User starts typing "tri..."
 → Matches: "Trappista", "Trikolor paprika", etc.
 → ↓ selects "Trappista"
-→ Enter → field set to ProductId = 23, focus → Quantity
-
-The SmartLookup behavior ensures consistent UX and keyboard flow across invoice fields.
+→ Enter → field set to ProductId = 23
 
 📀 Screen Mockups
 
@@ -138,19 +131,13 @@ The SmartLookup behavior ensures consistent UX and keyboard flow across invoice 
 
 🔁 Special Behavior
 
-All views must support full keyboard navigation
-Key mappings are loaded from `wrecept.json` via `KeyboardProfile`, allowing users to redefine the Next, Previous, Confirm and Cancel keys.
+All views load in-place inside StageView, avoiding modal disruptions
 
 Inline creators must not shift focus away from the current context
 
 Views are loaded in-place inside StageView, avoiding modal disruptions
 
 Menu state persists across Escape presses to return user to most recent focus
-The FocusManager.RequestFocus helper accepts an optional view-type
-parameter to narrow the search scope; dynamic elements therefore need not use
-globally unique identifiers.
-FocusManager jegyzi meg, melyik vezérlő volt aktív a nézetekben, így a promptok bezárásakor visszaállítható a fókusz.
-Every programmatic focus change **must** invoke `FocusManager.RequestFocus`; direct `MoveFocus` calls are disallowed.
 
 📚 Future List Views
 
@@ -166,7 +153,7 @@ Bruttó flag controls pricing behavior throughout lifecycle
 
 UX must reflect availability of actions based on current invoice state
 
-ℹ️ This file is part of the coordinated documentation set along with BUSINESS_LOGIC.md and RefactorPlan.md. Use this UI Flow spec to align visual layout, keyboard handling, and interaction design with core logic and model behavior.
+ℹ️ This file is part of the coordinated documentation set along with BUSINESS_LOGIC.md and RefactorPlan.md. Use this UI Flow spec to align visual layout and interaction design with core logic and model behavior.
 
 📺 Képernyőmód beállító ablak
 

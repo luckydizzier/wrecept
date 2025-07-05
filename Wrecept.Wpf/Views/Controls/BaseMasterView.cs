@@ -5,8 +5,6 @@ using System.Windows.Input;
 using Wrecept.Wpf.ViewModels;
 using System.Windows.Data;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.Wpf.Services;
-using FocusManager = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views.Controls;
 
@@ -18,14 +16,12 @@ public abstract class BaseMasterView : UserControl
 
     protected DataGrid Grid { get; }
 
-    private readonly FocusManager? _focus;
+
 
     protected BaseMasterView()
     {
         Grid = BuildLayout();
         Loaded += OnLoaded;
-        if (App.Provider is not null)
-            _focus = App.Provider.GetRequiredService<FocusManager>();
     }
 
     private DataGrid BuildLayout()
@@ -65,7 +61,7 @@ public abstract class BaseMasterView : UserControl
         Loaded += async (_, _) =>
         {
             await viewModel.LoadAsync();
-            _focus?.RequestFocus(Grid);
+            Grid.Focus();
         };
 
         BindingOperations.SetBinding(Grid, ItemsControl.ItemsSourceProperty, new Binding("Items"));
@@ -89,8 +85,8 @@ public abstract class BaseMasterView : UserControl
     {
         if (e.DetailsElement.FindName("InitialFocus") is Control box &&
             e.Row.DetailsVisibility == Visibility.Visible)
-            _focus?.RequestFocus(box);
+            box.Focus();
         else if (e.Row.DetailsVisibility != Visibility.Visible)
-            _focus?.RequestFocus(Grid);
+            Grid.Focus();
     }
 }

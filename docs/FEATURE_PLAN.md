@@ -66,31 +66,6 @@ Automatically recalculate invoice totals when line items are added/removed.
 
 ---
 
-## 🔍 Feature: Keyboard-Only Lookup Workflow
-
-**Status:** PLANNED
-
-### 🎯 Goal
-
-Allow keyboard-only product/supplier lookup and inline creation.
-
-### 🧩 Agent Breakdown
-
-| Step | Agent            | Task Description                              | Blocking Dependency |
-| ---- | ---------------- | --------------------------------------------- | ------------------- |
-| 1    | `ui_agent`       | Implement `SmartLookup` UI pattern            | -                   |
-| 2    | `logic_agent`    | Handle navigation, trigger Add dialog         | ui\_agent           |
-| 3    | `core_agent`     | Ensure services support async create & reload | logic\_agent        |
-| 4    | `code_agent`     | ViewModel binding and error handling          | core\_agent         |
-| 5    | `feedback_agent` | Show success/failure banners and sounds       | code\_agent         |
-| 6    | `root_agent`     | Approve user journey and error cases          | all                 |
-
-### ✅ Success Criteria
-
-* Supplier/Product can be selected/created without mouse
-* Errors shown gracefully, field focus retained
-
----
 
 ## 🗃️ Feature Status Tracker
 
@@ -98,7 +73,6 @@ Allow keyboard-only product/supplier lookup and inline creation.
 | ----------------------------- | ----------- | -------------------- |
 | Add Payment Method Entity     | PLANNED     | -                    |
 | Implement Auto-Totals         | DONE        | docs_agent           |
-| Keyboard-Only Lookup Workflow | PLANNED     | -                    |
 
 ---
 

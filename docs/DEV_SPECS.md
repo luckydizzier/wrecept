@@ -22,8 +22,8 @@ The design must be:
 
 ## 👤 Target User Profile
 
-* Non-technical, keyboard-driven operator
-* Familiar with legacy DOS UI and key navigation
+* Non-technical operator
+* Familiar with legacy DOS UI
 * Seeks high speed, reliability, and visual confirmation
 * Works with a fixed set of suppliers and products
 
@@ -59,7 +59,7 @@ The design must be:
 | Module            | Description                                      |
 | ----------------- | ------------------------------------------------ |
 | `MainWindow`      | Shell container with top menu and dynamic status bar |
-| `InvoiceEditor`   | Header + item rows UI with keyboard-only control |
+| `InvoiceEditor`   | Header + item rows UI with streamlined control |
 | `ProductMaster`   | Searchable product registry and editor           |
 | `SupplierMaster`  | Simple list-and-edit view of vendors             |
 | `LookupDialog<T>` | Generic search/select component for lookups      |
@@ -91,7 +91,7 @@ kóddal keresni az ős elemeket, a logika tisztán a ViewModelben marad.
 
 | Scope      | Defense Mechanism                                                  |
 | ---------- | ------------------------------------------------------------------ |
-| Data entry | Live validation, keyboard-blocked invalid characters               |
+| Data entry | Live validation, invalid characters filtered                      |
 | Storage    | Pre-check file locks, auto-rollback if insert fails                |
 | UI         | Graceful degradation of controls if bindings fail                  |
 | Startup    | Verify db existence and schema match, show error window if invalid |
@@ -136,7 +136,6 @@ Ha az adatbázis elérési útja hiányzik, a program automatikusan a fenti `%Ap
 * `InvoiceEditor` view with mocked-up item rows
 * Basic product and supplier search views
 * No database functionality, just layout and input handling
-* Full keyboard routing and error suppression for UI prototype
 
 ---
 
