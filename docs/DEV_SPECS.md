@@ -39,6 +39,8 @@ The design must be:
 | Backups     | Manual + optional autosave-based copy            |
 | Permissions | No admin required. Writes to `%AppData%\Wrecept` |
 
+Az alkalmazás minden adatbázis-kapcsolat nyitásakor lefuttatja a `PRAGMA journal_mode=WAL` parancsot, így a naplózási mód mindig visszaáll WAL értékre.
+
 ---
 
 ## 🧱 Architectural Principles

@@ -10,6 +10,7 @@ public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
         var dbPath = args.Length > 0 ? args[0] : "app.db";
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseSqlite($"Data Source={dbPath}")
+            .AddInterceptors(new WalPragmaInterceptor())
             .Options;
         return new AppDbContext(options);
     }
