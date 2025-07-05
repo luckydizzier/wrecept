@@ -92,39 +92,46 @@
                 <!-- Header card -->
                 <Border Padding="6" Margin="0,0,6,0" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
                     <!-- Header fields -->
-                    <UniformGrid Columns="2" Margin="4">
-                        <StackPanel Margin="0,0,6,0">
-                            <Label Content="_Szállító" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=SupplierLookup}" />
-                            <c:SmartLookup x:Name="SupplierLookup" Width="220"
-                                           ItemsSource="{Binding Suppliers}"
-                                           DisplayMemberPath="Name"
-                                           SelectedValuePath="Id"
-                                           SelectedValue="{Binding SupplierId}"
-                                           CreateCommand="{Binding ShowSupplierCreatorCommand}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                                           Watermark="Kezdjen el gépelni..."
-                                           IsEnabled="{Binding IsEditable}" />
-                        </StackPanel>
-                        <StackPanel Margin="0,0,6,0">
-                            <Label Content="_Dátum" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=DatePicker}" />
-                            <DatePicker x:Name="DatePicker" Width="220" SelectedDate="{Binding InvoiceDate}" IsEnabled="{Binding IsEditable}" />
-                        </StackPanel>
-                        <StackPanel Margin="0,6,6,0">
-                            <Label Content="_Fizetési mód" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=PaymentLookup}" />
-                            <c:EditLookup x:Name="PaymentLookup" Width="220"
-                                          ItemsSource="{Binding PaymentMethods}"
-                                          DisplayMemberPath="Name"
-                                          SelectedValuePath="Id"
-                                          SelectedValue="{Binding PaymentMethodId}"
-                                          CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
-                                          CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                                          IsEnabled="{Binding IsEditable}" />
-                        </StackPanel>
-                        <StackPanel Margin="0,6,0,0">
-                            <Label Content="_Számlaszám" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=NumberBox}" />
-                            <TextBox x:Name="NumberBox" Width="220" Text="{Binding Number}" IsEnabled="{Binding IsNew}" Style="{StaticResource FocusHeaderTextBoxBold}" />
-                        </StackPanel>
-                    </UniformGrid>
+                    <Grid Margin="4" Grid.IsSharedSizeScope="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Labels" />
+                            <ColumnDefinition Width="*" SharedSizeGroup="Inputs" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Labels" />
+                            <ColumnDefinition Width="*" SharedSizeGroup="Inputs" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="_Szállító" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=SupplierLookup}" />
+                        <c:SmartLookup x:Name="SupplierLookup" Grid.Row="0" Grid.Column="1" MinWidth="150"
+                                       ItemsSource="{Binding Suppliers}"
+                                       DisplayMemberPath="Name"
+                                       SelectedValuePath="Id"
+                                       SelectedValue="{Binding SupplierId}"
+                                       Text="{Binding Supplier, Mode=TwoWay}"
+                                       CreateCommand="{Binding ShowSupplierCreatorCommand}"
+                                       CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                       Watermark="Kezdjen el gépelni..."
+                                       IsEnabled="{Binding IsEditable}" />
+
+                        <Label Grid.Row="0" Grid.Column="2" Content="_Dátum" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=DatePicker}" />
+                        <DatePicker x:Name="DatePicker" Grid.Row="0" Grid.Column="3" MinWidth="150" SelectedDate="{Binding InvoiceDate}" IsEnabled="{Binding IsEditable}" />
+
+                        <Label Grid.Row="1" Grid.Column="0" Margin="0,6,0,0" Content="_Fizetési mód" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=PaymentLookup}" />
+                        <c:EditLookup x:Name="PaymentLookup" Grid.Row="1" Grid.Column="1" MinWidth="150"
+                                      ItemsSource="{Binding PaymentMethods}"
+                                      DisplayMemberPath="Name"
+                                      SelectedValuePath="Id"
+                                      SelectedValue="{Binding PaymentMethodId}"
+                                      CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
+                                      CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                      IsEnabled="{Binding IsEditable}" />
+
+                        <Label Grid.Row="1" Grid.Column="2" Margin="0,6,0,0" Content="_Számlaszám" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=NumberBox}" />
+                        <TextBox x:Name="NumberBox" Grid.Row="1" Grid.Column="3" MinWidth="150" Text="{Binding Number}" IsEnabled="{Binding IsNew}" Style="{StaticResource FocusHeaderTextBoxBold}" />
+                    </Grid>
                 </Border>
 
                 <!-- Summary card -->

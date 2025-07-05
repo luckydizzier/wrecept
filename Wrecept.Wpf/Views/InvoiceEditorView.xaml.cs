@@ -2,6 +2,8 @@ using System;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Threading;
+using System.Windows.Input;
+using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Core.Services;
@@ -33,6 +35,11 @@ public partial class InvoiceEditorView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
+        KeyboardOnlyUXHelper.SuppressUnintendedDropDown(PaymentLookup.BoxControl);
+        PaymentLookup.BoxControl.DropDownOpened += PaymentLookup_DropDownOpened;
+        if (DataContext is InvoiceEditorViewModel vm)
+            vm.PropertyChanged += Vm_PropertyChanged;
+
         Loaded += async (_, _) =>
         {
             var progressVm = new ProgressViewModel();
@@ -49,5 +56,32 @@ public partial class InvoiceEditorView : UserControl
         };
     }
 
+    private void PaymentLookup_DropDownOpened(object? sender, EventArgs e)
+    {
+        if (!PaymentLookup.BoxControl.IsKeyboardFocusWithin)
+            PaymentLookup.BoxControl.IsDropDownOpen = false;
+    }
 
+    private void Vm_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (sender is not InvoiceEditorViewModel vm)
+            return;
+
+        if (e.PropertyName == nameof(vm.Supplier))
+        {
+            SupplierLookup.Text = vm.Supplier;
+        }
+        else if (e.PropertyName == nameof(vm.PaymentMethodId))
+        {
+            var match = vm.PaymentMethods.FirstOrDefault(p => p.Id == vm.PaymentMethodId);
+            if (match != null)
+                PaymentLookup.BoxControl.SelectedItem = match;
+            PaymentLookup.BoxControl.IsDropDownOpen = false;
+        }
+        else if (e.PropertyName == nameof(vm.InvoiceId))
+        {
+            LookupView.InvoiceList.Focus();
+            Keyboard.Focus(LookupView.InvoiceList);
+        }
+    }
 }
