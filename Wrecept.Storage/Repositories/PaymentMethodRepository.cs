@@ -15,10 +15,10 @@ public class PaymentMethodRepository : IPaymentMethodRepository
     }
 
     public Task<List<PaymentMethod>> GetAllAsync(CancellationToken ct = default)
-        => _db.Set<PaymentMethod>().ToListAsync(ct);
+        => _db.Set<PaymentMethod>().AsNoTracking().ToListAsync(ct);
 
     public Task<List<PaymentMethod>> GetActiveAsync(CancellationToken ct = default)
-        => _db.Set<PaymentMethod>().Where(m => !m.IsArchived).ToListAsync(ct);
+        => _db.Set<PaymentMethod>().AsNoTracking().Where(m => !m.IsArchived).ToListAsync(ct);
 
     public async Task<Guid> AddAsync(PaymentMethod method, CancellationToken ct = default)
     {
