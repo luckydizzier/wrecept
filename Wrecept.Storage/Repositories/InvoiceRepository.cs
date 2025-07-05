@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using Wrecept.Core.Models;
 using Wrecept.Core.Repositories;
 using Wrecept.Storage.Data;
@@ -84,5 +86,26 @@ public class InvoiceRepository : IInvoiceRepository
                 TaxRateId = i.TaxRateId
             })
             .FirstOrDefaultAsync(ct);
+    }
+
+    public async Task<Dictionary<int, LastUsageData>> GetLastUsageDataBatchAsync(int supplierId, IEnumerable<int> productIds, CancellationToken ct = default)
+    {
+        var list = await _db.InvoiceItems.AsNoTracking()
+            .Include(i => i.Invoice)
+            .Where(i => i.Invoice!.SupplierId == supplierId && productIds.Contains(i.ProductId))
+            .GroupBy(i => i.ProductId)
+            .Select(g => new
+            {
+                ProductId = g.Key,
+                Data = g.OrderByDescending(x => x.Invoice!.Date).Select(x => new LastUsageData
+                {
+                    Quantity = x.Quantity,
+                    UnitPrice = x.UnitPrice,
+                    TaxRateId = x.TaxRateId
+                }).First()
+            })
+            .ToListAsync(ct);
+
+        return list.ToDictionary(x => x.ProductId, x => x.Data);
     }
 }

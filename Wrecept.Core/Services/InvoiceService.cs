@@ -98,6 +98,16 @@ public class InvoiceService : IInvoiceService
         return _invoices.GetLastUsageDataAsync(supplierId, productId, ct);
     }
 
+    public Task<Dictionary<int, LastUsageData>> GetLastUsageDataBatchAsync(int supplierId, IEnumerable<int> productIds, CancellationToken ct = default)
+    {
+        if (supplierId <= 0)
+            throw new ArgumentException("supplierId", nameof(supplierId));
+        if (productIds == null)
+            throw new ArgumentNullException(nameof(productIds));
+
+        return _invoices.GetLastUsageDataBatchAsync(supplierId, productIds, ct);
+    }
+
     public InvoiceCalculationResult RecalculateTotals(Invoice invoice)
         => _calculator.Calculate(invoice);
 }

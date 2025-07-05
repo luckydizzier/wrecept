@@ -31,7 +31,10 @@ public partial class InvoiceItemRowViewModel : ObservableObject
     private string product = string.Empty;
 
     partial void OnProductChanged(string value)
-        => _ = _parent.CheckProductAsync(this, value);
+    {
+        if (!_parent.IsLoading)
+            _ = _parent.CheckProductAsync(this, value);
+    }
 
     [ObservableProperty]
     private decimal quantity;
@@ -74,6 +77,19 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     [ObservableProperty]
     private bool isAutofilled;
+
+    internal void SetInitialValues(InvoiceItem item)
+    {
+        product = item.Product?.Name ?? string.Empty;
+        quantity = item.Quantity;
+        unitPrice = item.UnitPrice;
+        taxRateId = item.TaxRateId;
+        unitId = item.Product?.UnitId ?? Guid.Empty;
+        unitName = item.Product?.Unit?.Name ?? string.Empty;
+        taxRateName = item.TaxRate?.Name ?? string.Empty;
+        productGroup = item.Product?.ProductGroup?.Name ?? string.Empty;
+        isEditable = false;
+    }
 }
 
 public partial class VatSummaryRowViewModel : ObservableObject
@@ -105,6 +121,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public ObservableCollection<Supplier> Suppliers { get; } = new();
     public ObservableCollection<Product> Products { get; } = new();
     public ObservableCollection<Unit> Units { get; } = new();
+
+    internal bool IsLoading { get; private set; }
 
     private static int StepPercent(int step, int total) => step * 100 / total;
 
@@ -173,9 +191,10 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     private readonly IProductService _productsService;
     private readonly IUnitService _unitsService;
     private readonly IInvoiceService _invoiceService;
-    private readonly ILogService _log;
-    private readonly INotificationService _notifications;
-    private Invoice _draft = new();
+private readonly ILogService _log;
+private readonly INotificationService _notifications;
+private Invoice _draft = new();
+private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
 
     [ObservableProperty]
     private int invoiceId;
@@ -264,6 +283,8 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         const int total = 5;
         var step = 0;
 
+        IsLoading = true;
+
         var paymentTask = _paymentMethods.GetActiveAsync();
         var supplierTask = _suppliers.GetActiveAsync();
         var taxTask = _taxRates.GetActiveAsync(DateTime.UtcNow);
@@ -279,6 +300,7 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         FillCollection(Units, unitTask.Result, Resources.Strings.Load_Units, step++, total, progress);
 
         progress?.Report(new ProgressReport { GlobalPercent = 100, SubtaskPercent = 100, Message = Resources.Strings.Load_Complete });
+        IsLoading = false;
     }
 
     public async Task CheckProductAsync(InvoiceItemRowViewModel row, string name)
@@ -305,7 +327,7 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 
             if (SupplierId > 0)
             {
-                var usage = await _invoiceService.GetLastUsageDataAsync(SupplierId, exists.Id);
+                var usage = await GetUsageDataAsync(SupplierId, exists.Id);
                 if (usage != null)
                 {
                     row.Quantity = usage.Quantity;
@@ -326,6 +348,17 @@ private void UpdateSupplierId(string name)
     if (match != null)
         SupplierId = match.Id;
 }
+
+    private async Task<LastUsageData?> GetUsageDataAsync(int supplierId, int productId)
+    {
+        if (_usageCache.TryGetValue((supplierId, productId), out var cached))
+            return cached;
+
+        var data = await _invoiceService.GetLastUsageDataAsync(supplierId, productId);
+        if (data != null)
+            _usageCache[(supplierId, productId)] = data;
+        return data;
+    }
     [RelayCommand]
     private void ShowSupplierCreator(object? parameter)
     {
@@ -396,6 +429,7 @@ private void UpdateSupplierId(string name)
 
     public async Task LoadInvoice(int id, string? number = null)
     {
+        IsLoading = true;
         if (id == 0)
         {
             _draft = new Invoice();
@@ -413,6 +447,7 @@ private void UpdateSupplierId(string name)
             Items.Add(EditableItem);
             RecalculateTotals();
             await Task.Yield();
+            IsLoading = false;
             return;
         }
 
@@ -437,22 +472,13 @@ private void UpdateSupplierId(string name)
         Items.Add(EditableItem);
         foreach (var item in invoice.Items)
         {
-            var row = new InvoiceItemRowViewModel(this)
-            {
-                Product = item.Product?.Name ?? string.Empty,
-                Quantity = item.Quantity,
-                UnitPrice = item.UnitPrice,
-                TaxRateId = item.TaxRateId,
-                UnitId = item.Product?.UnitId ?? Guid.Empty,
-                UnitName = item.Product?.Unit?.Name ?? string.Empty,
-                TaxRateName = item.TaxRate?.Name ?? string.Empty,
-                ProductGroup = item.Product?.ProductGroup?.Name ?? string.Empty,
-                IsEditable = false
-            };
+            var row = new InvoiceItemRowViewModel(this);
+            row.SetInitialValues(item);
             Items.Add(row);
         }
         RecalculateTotals();
         await Task.Yield();
+        IsLoading = false;
     }
 
     public void EditLineFromSelection(InvoiceItemRowViewModel selected)

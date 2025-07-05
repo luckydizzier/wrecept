@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Wrecept.Core.Models;
 
 namespace Wrecept.Core.Services;
@@ -13,6 +14,8 @@ public interface IInvoiceService
     Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default);
 
     Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default);
+
+    Task<Dictionary<int, LastUsageData>> GetLastUsageDataBatchAsync(int supplierId, IEnumerable<int> productIds, CancellationToken ct = default);
 
     InvoiceCalculationResult RecalculateTotals(Invoice invoice);
 }
