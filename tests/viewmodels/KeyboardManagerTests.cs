@@ -28,7 +28,7 @@ public class KeyboardManagerTests
             OriginalSource = item
         };
 
-        var manager = new KeyboardManager();
+        var manager = new KeyboardManager(new AppStateService());
         manager.Handle(args);
 
         Assert.False(args.Handled);
@@ -45,7 +45,7 @@ public class KeyboardManagerTests
             OriginalSource = box
         };
 
-        var manager = new KeyboardManager { Profile = NavigationProfile.Disabled };
+        var manager = new KeyboardManager(new AppStateService()) { Profile = NavigationProfile.Disabled };
         manager.Handle(args);
 
         Assert.False(args.Handled);

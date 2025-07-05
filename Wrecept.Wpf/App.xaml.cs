@@ -147,6 +147,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddTransient<AboutViewModel>();
         services.AddTransient<PlaceholderViewModel>();
         services.AddSingleton<StatusBarViewModel>();
+        services.AddSingleton<AppStateService>();
         services.AddSingleton<INotificationService, MessageBoxNotificationService>();
         services.AddSingleton<ScreenModeManager>();
         services.AddSingleton<KeyboardManager>();
