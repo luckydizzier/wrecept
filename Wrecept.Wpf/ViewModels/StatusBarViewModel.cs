@@ -15,8 +15,6 @@ public partial class StatusBarViewModel : ObservableObject
     [ObservableProperty]
     private string activeMenu = string.Empty;
 
-    [ObservableProperty]
-    private string focusedElement = string.Empty;
 
     [ObservableProperty]
     private string message = Resources.Strings.StatusBar_DefaultMessage;

@@ -174,8 +174,8 @@ Induláskor a `ScreenModeManager.ApplySavedAsync` kiolvassa a `%AppData%/Wrecept
 
 ### Tulajdonosi adatok felvétele
 
-Első indításkor a `UserInfoWindow` kéri be a cég adatait. A mezők kötelezőek, a
-`KeyboardManager` biztosítja, hogy `Enter` a következő mezőre lépjen. Az utolsó
+Első indításkor a `UserInfoWindow` kéri be a cég adatait. A mezők kötelezőek, az
+utolsó
 mező után az `OK` gombra kerül a fókusz, majd megerősítő üzenet jelenik meg:
 "Helyesek az adatok?". `Enter` elfogadja, `Escape` az előző mezőre visz
 vissza. Minden üres mező piros keretet kap, amíg ki nem töltik.

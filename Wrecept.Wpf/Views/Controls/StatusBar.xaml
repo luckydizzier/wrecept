@@ -7,13 +7,11 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="120" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding DateTime}"/>
             <TextBlock Grid.Column="1" Text="{Binding ActiveMenu}" Margin="8,0"/>
-            <TextBlock Grid.Column="2" Text="{Binding FocusedElement}" Margin="8,0"/>
-            <TextBlock Grid.Column="3" Text="{Binding Message}" Margin="8,0" />
+            <TextBlock Grid.Column="2" Text="{Binding Message}" Margin="8,0" />
             <Border Background="{DynamicResource HeaderFooterBrush}" Padding="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -26,7 +24,7 @@
                     <TextBlock Grid.Column="2" Text="{Binding CurrentTime}" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
-            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" />
+            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" />
         </Grid>
     </Border>
 </UserControl>

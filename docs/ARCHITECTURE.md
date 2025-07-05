@@ -49,8 +49,6 @@ Minden hibát az `ILogService` rögzít, amelyet a Storage réteg `LogService` i
 Felhasználói üzenetekhez az `INotificationService` ad egységes felületet. WPF alatt a `MessageBoxNotificationService` jeleníti meg a dialógusokat, míg a tesztekben egy csonk "MockNotificationService" működik.
 Az alapvető cégadatokat a `UserInfoService` kezeli. Az adatok a `%AppData%/Wrecept/wrecept.json` fájlban tárolódnak, betöltésük az alkalmazás futása közben történik.
 Az aktuális képernyőmódot a `SettingsService` tartja nyilván `settings.json` fájlban, amit a `ScreenModeManager` olvas be induláskor.
-A `KeyboardManager` a `KeyboardProfile` alapján kezeli a globális billentyűkiosztást. A profil a `wrecept.json` fájl `Keyboard` szekciójából töltődik be.
-A `FocusManager` rögzíti és visszaállítja a nézetenként utoljára fókuszba került vezérlőt, így a promptok bezárása után a fókusz konzisztensen tér vissza.
 Az `AppStateService` központi enum értéket tart fenn az alkalmazás állapotáról, amit a nézetek és a billentyűkezelés ellenőriz a kiszámítható átmenetek érdekében.
 
 ### Törzsadatok szerkesztése

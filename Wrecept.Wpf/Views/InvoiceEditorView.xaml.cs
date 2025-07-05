@@ -1,6 +1,5 @@
 using System;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,20 +50,4 @@ public partial class InvoiceEditorView : UserControl
     }
 
 
-    private void OnInlineCreatorOpened(object sender, EventArgs e)
-    {
-        if (!InlineCreatorHost.IsVisible)
-            return;
-
-        Dispatcher.BeginInvoke(() =>
-        {
-            if (InlineCreatorHost.Content is FrameworkElement fe)
-            {
-                if (fe.FindName("NameBox") is IInputElement box)
-                    box.Focus();
-                else
-                    fe.Focus();
-            }
-        }, DispatcherPriority.Background);
-    }
 }

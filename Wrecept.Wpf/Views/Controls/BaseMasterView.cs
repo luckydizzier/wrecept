@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Wrecept.Wpf.ViewModels;
 using System.Windows.Data;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,17 +38,7 @@ public abstract class BaseMasterView : UserControl
             Style = (Style)Application.Current.Resources["RetroDataGridStyle"],
             RowStyle = (Style)Application.Current.Resources["RetroDataGridRowStyle"],
         };
-        dataGrid.RowDetailsVisibilityChanged += Grid_RowDetailsVisibilityChanged;
         grid.Children.Add(dataGrid);
-
-        var hint = new TextBlock
-        {
-            Text = "[Enter] Szerkesztés  [Del] Törlés  [Esc] Vissza",
-            Margin = new Thickness(4),
-            HorizontalAlignment = HorizontalAlignment.Center
-        };
-        System.Windows.Controls.Grid.SetRow(hint, 1);
-        grid.Children.Add(hint);
 
         Content = grid;
         return dataGrid;
@@ -61,7 +50,6 @@ public abstract class BaseMasterView : UserControl
         Loaded += async (_, _) =>
         {
             await viewModel.LoadAsync();
-            Grid.Focus();
         };
 
         BindingOperations.SetBinding(Grid, ItemsControl.ItemsSourceProperty, new Binding("Items"));
@@ -80,13 +68,4 @@ public abstract class BaseMasterView : UserControl
     }
 
 
-
-    private void Grid_RowDetailsVisibilityChanged(object? sender, DataGridRowDetailsEventArgs e)
-    {
-        if (e.DetailsElement.FindName("InitialFocus") is Control box &&
-            e.Row.DetailsVisibility == Visibility.Visible)
-            box.Focus();
-        else if (e.Row.DetailsVisibility != Visibility.Visible)
-            Grid.Focus();
-    }
 }
