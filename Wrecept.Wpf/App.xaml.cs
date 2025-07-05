@@ -233,7 +233,9 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         }
         catch (Exception ex)
         {
-            var log = Provider.GetRequiredService<ILogService>();
+            ILogService log = Services != null
+                ? Provider.GetRequiredService<ILogService>()
+                : new Wrecept.Storage.Services.LogService();
             await log.LogError("App.OnStartup", ex);
             MessageBox.Show(
                 "Váratlan hiba indításkor. Részletek a logs/startup.log fájlban.",
