@@ -14,6 +14,8 @@ Ez a dokumentum meghatározza, hogyan vizsgáljuk az alkalmazás hibával szembe
 1. **Adatbázis kapcsolat megszakadása** – Szimuláljuk az elérhetetlenséget és figyeljük, hogy a Storage réteg hogyan kezeli a tranzakciók visszagörgetését.
 2. **Hiányzó vagy sérült konfigurációs fájl** – Indításkor ellenőrizzük, hogy a beállítások olvashatók-e; hiba esetén alapértelmezett értékeket töltünk.
 3. **Nem várt kivétel a ViewModelben** – Ellenőrizzük, hogy az Error Handling terv szerint logol-e és jelzi-e a hibát a felhasználónak.
+4. **Sérült adatbázis szerkezet** – Az `IDbHealthService` `PRAGMA integrity_check` futtatásával vizsgálja a táblák épségét. Hibát a LogService naplóz.
+5. **Áramszünet utáni helyreállítás** – A SessionService eltárolja az utoljára szerkesztett számla azonosítóját. A *Szerviz > Áramszünet után* menüpont visszatölti ezt az állapotot.
 
 ## Cél
 
