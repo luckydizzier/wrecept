@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Media;
+using System.Windows.Controls;
 using InputFocusManager = System.Windows.Input.FocusManager;
 using Wrecept.Core.Enums;
 
@@ -10,14 +11,30 @@ namespace Wrecept.Wpf.Services;
 
 public class FocusManager
 {
+    private static FocusManager? _instance;
+
     private readonly Dictionary<string, WeakReference<IInputElement>> _map = new();
     private readonly AppStateService _state;
 
     public FocusManager() : this(new AppStateService()) { }
 
     public FocusManager(AppStateService state)
+        : this(state, Application.Current != null)
+    {
+    }
+
+    public FocusManager(AppStateService state, bool autoTrack)
     {
         _state = state;
+        if (autoTrack && Application.Current != null && _instance is null)
+        {
+            _instance = this;
+            EventManager.RegisterClassHandler(
+                typeof(UIElement),
+                UIElement.GotKeyboardFocusEvent,
+                new KeyboardFocusChangedEventHandler(OnGotKeyboardFocus),
+                true);
+        }
     }
 
     public void Update(string viewKey, IInputElement element)
@@ -30,6 +47,16 @@ public class FocusManager
         if (_map.TryGetValue(viewKey, out var weak) && weak.TryGetTarget(out var element))
             return element;
         return null;
+    }
+
+    private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        if (e.NewFocus is not DependencyObject d)
+            return;
+
+        var view = FindParentView(d);
+        if (view != null)
+            Update(view.GetType().Name, e.NewFocus);
     }
 
     public void RequestFocus(IInputElement? element)
@@ -110,6 +137,17 @@ public class FocusManager
             var result = FindElement(child, targetType);
             if (result != null)
                 return result;
+        }
+        return null;
+    }
+
+    private static UserControl? FindParentView(DependencyObject? element)
+    {
+        while (element != null)
+        {
+            if (element is UserControl uc)
+                return uc;
+            element = VisualTreeHelper.GetParent(element);
         }
         return null;
     }

@@ -22,7 +22,6 @@ public partial class InvoiceLookupView : UserControl
         InitializeComponent();
         DataContext = viewModel;
         _focus = App.Provider.GetRequiredService<FocusManager>();
-        Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
         Loaded += OnLoaded;
     }
 
@@ -44,6 +43,4 @@ public partial class InvoiceLookupView : UserControl
         }
     }
 
-    private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        => _focus.Update("InvoiceLookupView", e.NewFocus);
 }

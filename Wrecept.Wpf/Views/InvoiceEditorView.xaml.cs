@@ -37,7 +37,6 @@ public partial class InvoiceEditorView : UserControl
         InitializeComponent();
         DataContext = viewModel;
         _focus = App.Provider?.GetRequiredService<FocusManager>();
-        Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
         Loaded += async (_, _) =>
         {
             var progressVm = new ProgressViewModel();
@@ -57,9 +56,6 @@ public partial class InvoiceEditorView : UserControl
         };
     }
 
-
-    private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        => _focus?.Update("InvoiceEditorView", e.NewFocus);
 
     private void OnInlineCreatorOpened(object sender, EventArgs e)
     {

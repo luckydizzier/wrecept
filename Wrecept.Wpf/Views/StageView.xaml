@@ -13,11 +13,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid.Resources>
-            <Style TargetType="MenuItem">
-                <EventSetter Event="Click" Handler="MenuItem_Click"/>
-            </Style>
-        </Grid.Resources>
+        <Grid.Resources/>
         <Menu x:Name="Menu" Background="{DynamicResource HeaderFooterBrush}"
               AutomationProperties.AutomationId="MainMenuBar">
             <MenuItem Header="_Számlák">
