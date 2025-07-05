@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:view="clr-namespace:Wrecept.Wpf.Views"
 
-             IsEnabled="{Binding DataContext.IsEditable, RelativeSource={RelativeSource AncestorType=view:InvoiceEditorView}}">
+            IsEnabled="{Binding DataContext.IsEditable, RelativeSource={RelativeSource AncestorType=view:InvoiceEditorLayout}}">
     <Border Background="#F5F5DC" Padding="4" Margin="0,4,0,0">
         <TextBlock Text="{Binding Message}" />
     </Border>

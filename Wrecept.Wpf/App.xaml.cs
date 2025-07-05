@@ -159,7 +159,6 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddTransient<ScreenModeWindow>();
         services.AddTransient<StartupOrchestrator>();
         services.AddTransient<StageView>();
-        services.AddTransient<InvoiceEditorView>();
         services.AddTransient<InvoiceLookupView>();
         services.AddTransient<ProductMasterView>();
         services.AddTransient<ProductGroupMasterView>();
