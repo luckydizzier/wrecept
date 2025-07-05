@@ -116,3 +116,4 @@ Reconstruction by: \[ChatGPT-Dev Agent – 2025 Edition]
 - [ERROR_HANDLING.md](ERROR_HANDLING.md) – Hibatűrés
 - [FAULT_PLAN.md](FAULT_PLAN.md) – Hibabefecskendezési terv
 - [TEST_STRATEGY.md](TEST_STRATEGY.md) – Tesztstratégia
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) – Fájlszintű áttekintés
