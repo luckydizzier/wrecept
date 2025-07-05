@@ -40,7 +40,7 @@ public class StageViewFocusUITests
         driver.FindElementByName("A program felhasználójának adatai").Click();
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-        var address = wait.Until(d => d.FindElementByAccessibilityId("AddressBox"));
+        var address = wait.Until(d => ((WindowsDriver<WindowsElement>)d).FindElementByAccessibilityId("AddressBox"));
         address.Click();
 
         new Actions(driver).SendKeys(Keys.Escape).Perform();

@@ -21,7 +21,7 @@ public class LookupFocusTests
         using var driver = LaunchApp();
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-        var product = wait.Until(d => d.FindElementByAccessibilityId("EntryProduct"));
+        var product = wait.Until(d => ((WindowsDriver<WindowsElement>)d).FindElementByAccessibilityId("EntryProduct"));
         product.Click();
 
         new Actions(driver).SendKeys(Keys.Enter).Perform();

@@ -7,9 +7,12 @@ namespace Wrecept.Wpf.Views.InlineCreators;
 
 public partial class ProductCreatorView : UserControl
 {
-    private readonly KeyboardManager _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
+    private readonly KeyboardManager? _keyboard;
+
     public ProductCreatorView()
     {
+        if (App.Provider is not null)
+            _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
         InitializeComponent();
     }
 
@@ -21,6 +24,6 @@ public partial class ProductCreatorView : UserControl
             e.Handled = true;
             return;
         }
-        _keyboard.Handle(e);
+        _keyboard?.Handle(e);
     }
 }

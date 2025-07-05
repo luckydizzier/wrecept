@@ -7,12 +7,15 @@ namespace Wrecept.Wpf.Views.EditDialogs;
 
 public partial class ProductEditorView : UserControl
 {
-    private readonly KeyboardManager _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
+    private readonly KeyboardManager? _keyboard;
+
     public ProductEditorView()
     {
+        if (App.Provider is not null)
+            _keyboard = App.Provider.GetRequiredService<KeyboardManager>();
         InitializeComponent();
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
-        => _keyboard.Handle(e);
+        => _keyboard?.Handle(e);
 }
