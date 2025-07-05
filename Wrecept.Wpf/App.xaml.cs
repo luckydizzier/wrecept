@@ -26,6 +26,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
     public static string DbPath { get; private set; } = string.Empty;
     public static string UserInfoPath { get; private set; } = string.Empty;
     public static string SettingsPath { get; private set; } = string.Empty;
+    public static string StatePath { get; private set; } = string.Empty;
 
     public App()
     {
@@ -49,6 +50,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         var dataDir = Path.Combine(appData, "Wrecept");
         Directory.CreateDirectory(dataDir);
         SettingsPath = Path.Combine(dataDir, "settings.json");
+        StatePath = Path.Combine(dataDir, "state.json");
         if (File.Exists(SettingsPath))
         {
             try
@@ -146,7 +148,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddTransient<AboutViewModel>();
         services.AddTransient<PlaceholderViewModel>();
         services.AddSingleton<StatusBarViewModel>();
-        services.AddSingleton<AppStateService>();
+        services.AddSingleton<AppStateService>(_ => new AppStateService(StatePath));
         services.AddSingleton<INotificationService, MessageBoxNotificationService>();
         services.AddSingleton<ScreenModeManager>();
         services.AddTransient<ProgressViewModel>();
@@ -182,6 +184,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
             await EnsureServicesInitializedAsync();
+            await Provider.GetRequiredService<AppStateService>().LoadAsync();
 
             var orchestrator = Provider.GetRequiredService<StartupOrchestrator>();
             using var cts = new CancellationTokenSource();

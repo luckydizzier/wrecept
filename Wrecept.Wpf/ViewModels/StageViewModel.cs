@@ -52,6 +52,7 @@ public partial class StageViewModel : ObservableObject
     private readonly StatusBarViewModel _statusBar;
     private readonly IDbHealthService _dbHealth;
     private readonly ISessionService _session;
+    private readonly AppStateService _state;
 
     public StatusBarViewModel StatusBar => _statusBar;
     public UserInfoViewModel UserInfo => _userInfo;
@@ -69,7 +70,8 @@ public partial class StageViewModel : ObservableObject
         PlaceholderViewModel placeholder,
         StatusBarViewModel statusBar,
         IDbHealthService dbHealth,
-        ISessionService session)
+        ISessionService session,
+        AppStateService state)
     {
         _invoiceEditor = invoiceEditor;
         _productMaster = productMaster;
@@ -84,14 +86,49 @@ public partial class StageViewModel : ObservableObject
         _statusBar = statusBar;
         _dbHealth = dbHealth;
         _session = session;
-        CurrentViewModel = _invoiceEditor;
+        _state = state;
+        ApplySavedState();
+    }
+
+    private void ApplySavedState()
+    {
         _statusBar.ActiveMenu = "Főmenü";
+        StageMenuAction view = _state.LastView;
+        switch (view)
+        {
+            case StageMenuAction.EditProducts:
+            case StageMenuAction.ListProducts:
+                CurrentViewModel = _productMaster;
+                break;
+            case StageMenuAction.EditSuppliers:
+            case StageMenuAction.ListSuppliers:
+                CurrentViewModel = _supplierMaster;
+                break;
+            case StageMenuAction.EditProductGroups:
+                CurrentViewModel = _productGroupMaster;
+                break;
+            case StageMenuAction.EditVatKeys:
+                CurrentViewModel = _taxRateMaster;
+                break;
+            case StageMenuAction.EditPaymentMethods:
+                CurrentViewModel = _paymentMethodMaster;
+                break;
+            case StageMenuAction.EditUnits:
+                CurrentViewModel = _unitMaster;
+                break;
+            default:
+                CurrentViewModel = _invoiceEditor;
+                if (_state.CurrentInvoiceId.HasValue)
+                    _ = _invoiceEditor.LoadInvoice(_state.CurrentInvoiceId.Value);
+                break;
+        }
     }
 
 [RelayCommand]
 private async Task HandleMenu(StageMenuAction action)
     {
         _statusBar.ActiveMenu = action.ToString();
+        _state.LastView = action;
         switch (action)
         {
             case StageMenuAction.EditProducts:
@@ -144,6 +181,7 @@ private async Task HandleMenu(StageMenuAction action)
                     CurrentViewModel = _invoiceEditor;
                     await _invoiceEditor.LoadInvoice(last.Value);
                     _statusBar.Message = Resources.Strings.Stage_LastInvoiceRestored;
+                    _state.CurrentInvoiceId = last.Value;
                 }
                 else
                 {
@@ -209,5 +247,6 @@ private async Task HandleMenu(StageMenuAction action)
                 _statusBar.Message = string.Empty;
                 break;
         }
+        await _state.SaveAsync();
     }
 }

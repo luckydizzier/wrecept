@@ -52,6 +52,7 @@ Az aktuális képernyőmódot a `SettingsService` tartja nyilván `settings.json
 Az adatbázis integritását az `IDbHealthService` ellenőrzi `PRAGMA integrity_check` parancs futtatásával.
 Az utolsó megnyitott számla azonosítóját a `SessionService` jegyzi meg a `session.json` fájlban.
 Az `AppStateService` központi enum értéket tart fenn az alkalmazás állapotáról, amit a nézetek és a billentyűkezelés ellenőriz a kiszámítható átmenetek érdekében.
+Az állapot szolgáltatás a `state.json` fájlba menti az utolsó aktív menüpontot és a szerkesztett számla azonosítóját, amit indításkor visszatöltünk.
 
 ### Törzsadatok szerkesztése
 
