@@ -125,7 +125,7 @@ Ez a dokumentum definiálja a **Wrecept** rendszer üzleti logikáját. A rendsz
 ## 9. ⚠️ Validációs szabályok
 
 * Számlán legalább egy tételnek szerepelnie kell.
-* Tétel: `Quantity != 0`, `UnitPrice ≥ 0`
+* Tétel: `Quantity != 0` (negatív érték visszárut jelent), `UnitPrice ≥ 0`
 * Termék, beszállító, fizetési mód kiválasztása kötelező.
 * Törzsadatból csak **nem archivált** elemek választhatók.
 
