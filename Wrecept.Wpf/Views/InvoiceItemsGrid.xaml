@@ -64,7 +64,7 @@
     <DataGrid x:Name="Grid" ItemsSource="{Binding Items}" AutoGenerateColumns="False"
              IsReadOnly="True"
              IsEnabled="{Binding IsEditable}"
-             KeyDown="OnKeyDown" RowDetailsVisibilityMode="Collapsed"
+             RowDetailsVisibilityMode="Collapsed"
              VerticalAlignment="Stretch">
         <DataGrid.RowStyle>
             <Style TargetType="DataGridRow">

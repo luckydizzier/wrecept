@@ -24,7 +24,6 @@ public abstract class BaseMasterView : UserControl
     {
         Grid = BuildLayout();
         Loaded += OnLoaded;
-        KeyDown += OnKeyDown;
         if (App.Provider is not null)
             _focus = App.Provider.GetRequiredService<FocusManager>();
         Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
@@ -47,8 +46,6 @@ public abstract class BaseMasterView : UserControl
         };
         dataGrid.RowDetailsVisibilityChanged += Grid_RowDetailsVisibilityChanged;
         grid.Children.Add(dataGrid);
-
-        dataGrid.PreviewKeyDown += Grid_PreviewKeyDown;
 
         var hint = new TextBlock
         {
@@ -87,36 +84,7 @@ public abstract class BaseMasterView : UserControl
             Grid.RowDetailsTemplate = RowDetailsTemplate;
     }
 
-    private readonly KeyboardManager? _keyboard =
-        App.Provider is not null ? App.Provider.GetRequiredService<KeyboardManager>() : null;
 
-    private void OnKeyDown(object? sender, KeyEventArgs e)
-        => _keyboard?.Handle(e);
-
-    private void Grid_PreviewKeyDown(object? sender, KeyEventArgs e)
-    {
-        if (e.OriginalSource is TextBox)
-            return;
-
-        if (DataContext is not IEditableMasterDataViewModel vm)
-            return;
-
-        if (e.Key == Key.Enter && vm.EditSelectedCommand.CanExecute(null))
-        {
-            vm.EditSelectedCommand.Execute(null);
-            e.Handled = true;
-        }
-        else if (e.Key == Key.Delete && vm.DeleteSelectedCommand.CanExecute(null))
-        {
-            vm.DeleteSelectedCommand.Execute(null);
-            e.Handled = true;
-        }
-        else if (e.Key == Key.Escape && vm.CloseDetailsCommand.CanExecute(null))
-        {
-            vm.CloseDetailsCommand.Execute(null);
-            e.Handled = true;
-        }
-    }
 
     private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         => _focus?.Update(GetType().Name, e.NewFocus);

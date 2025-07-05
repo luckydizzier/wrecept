@@ -21,6 +21,5 @@ public class EditEntityDialog<TView, TViewModel> : Window
     public void Initialize(IRelayCommand ok, IRelayCommand cancel)
     {
         DialogHelper.CenterToOwner(this, Application.Current.MainWindow!);
-        DialogHelper.MapKeys(this, ok, cancel);
     }
 }

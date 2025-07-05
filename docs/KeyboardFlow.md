@@ -9,7 +9,7 @@
 
 ## 🧭 Navigation Principles
 
-A Wrecept minden felületén a billentyűzet az elsődleges vezérlő eszköz. A `KeyboardManager.Handle` segít az általános, fokozatmentes fókuszmozgatásban. A viselkedés profil alapján szabható, az egyes nézetek saját `KeyDown` kezelőkkel finomítják a működést.
+A Wrecept minden felületén a billentyűzet az elsődleges vezérlő eszköz. A `KeyboardManager.Handle` globálisan figyeli a `KeyDown` eseményeket és mozgatja a fókuszt. A viselkedés profil alapján szabható, nézetenként külön kezelők már nincsenek.
 Az alkalmazás indításakor a `KeyboardManager` betölti a `KeyboardProfile` beállításait a `wrecept.json` fájl `Keyboard` szekciójából, így a felhasználó tetszés szerint módosíthatja a `Next`, `Previous`, `Confirm` és `Cancel` billentyűket.
 
 ## 🔑 Key Bindings Overview
@@ -26,11 +26,8 @@ Az alkalmazás indításakor a `KeyboardManager` betölti a `KeyboardProfile` be
 ## 🧾 View-Specific Flow
 
 ### InvoiceEditorView
-- A fejmezőkben `Enter` vagy `Down` továbbítja a fókuszt.
+- A fejmezőkben a `KeyboardManager` lépteti a fókuszt.
 - `Escape` visszaviszi a főablak listájához.
-- Az „Inline Item Entry” sor a `OnEntryKeyDown` eseményt használja:
-  - `Enter` az utolsó mezőben (jelölés: `Tag="LastEntry"`) meghívja az `AddLineItemCommand`-et.
-  - Egyébként a `KeyboardManager` lép közbe.
 - Az `InvoiceItemsGrid`-en `Enter` az aktuális tétel szerkesztését indítja.
 
 ### BaseMasterView
@@ -38,8 +35,6 @@ Az alkalmazás indításakor a `KeyboardManager` betölti a `KeyboardProfile` be
 - `Delete`: kijelölt sor törlése.
 - `Escape`: részletes nézetből vissza a listához.
 Az összes mesteradat ViewModel az `EditableMasterDataViewModel` leszármazottja, így ezek a billentyűk minden listában azonos módon viselkednek.
-Az InputBindingek helyett a rács `PreviewKeyDown` eseménye futtatja a parancsokat,
-így szövegmezők szerkesztésekor az `Enter` nem zárja le véletlenül a részleteteket.
 
 ### StageView
 - `Escape`: visszateszi a fókuszt az utoljára aktivált menüpontra, ha az elérhető.

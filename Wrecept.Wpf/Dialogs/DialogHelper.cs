@@ -1,7 +1,5 @@
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Controls;
-using CommunityToolkit.Mvvm.Input;
+
 
 namespace Wrecept.Wpf.Dialogs;
 
@@ -15,29 +13,4 @@ public static class DialogHelper
         dialog.Top = owner.Top + (owner.Height - dialog.Height) / 2;
     }
 
-    public static void MapKeys(Window dialog, IRelayCommand ok, IRelayCommand cancel)
-    {
-        dialog.PreviewKeyDown += (_, e) =>
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (e.OriginalSource is TextBox box && box.AcceptsReturn)
-                    return;
-
-                if (ok.CanExecute(null))
-                {
-                    ok.Execute(null);
-                    e.Handled = true;
-                }
-            }
-            else if (e.Key == Key.Escape)
-            {
-                if (cancel.CanExecute(null))
-                {
-                    cancel.Execute(null);
-                    e.Handled = true;
-                }
-            }
-        };
-    }
 }
