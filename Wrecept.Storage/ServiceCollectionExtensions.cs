@@ -13,7 +13,7 @@ namespace Wrecept.Storage;
 
 public static class ServiceCollectionExtensions
 {
-public static async Task AddStorageAsync(this IServiceCollection services, string dbPath, string userInfoPath, string settingsPath)
+    public static async Task AddStorageAsync(this IServiceCollection services, string dbPath, string userInfoPath, string settingsPath)
     {
         if (string.IsNullOrWhiteSpace(dbPath))
         {
@@ -42,6 +42,9 @@ public static async Task AddStorageAsync(this IServiceCollection services, strin
         services.AddSingleton<ILogService, LogService>();
         services.AddSingleton<IUserInfoService>(_ => new UserInfoService(userInfoPath));
         services.AddSingleton<ISettingsService>(_ => new SettingsService(settingsPath));
+        var sessionPath = Path.Combine(Path.GetDirectoryName(settingsPath)!, "session.json");
+        services.AddSingleton<ISessionService>(_ => new SessionService(sessionPath));
+        services.AddScoped<IDbHealthService, DbHealthService>();
 
         using var provider = services.BuildServiceProvider();
         var factory = provider.GetRequiredService<IDbContextFactory<AppDbContext>>();

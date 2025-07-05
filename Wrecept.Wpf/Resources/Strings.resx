@@ -42,6 +42,18 @@
   <data name="Stage_FunctionNotReady" xml:space="preserve">
     <value>Funkció még nincs kész</value>
   </data>
+  <data name="Stage_DbCheckOk" xml:space="preserve">
+    <value>Adatbázis rendben</value>
+  </data>
+  <data name="Stage_DbCheckFailed" xml:space="preserve">
+    <value>Adatbázis hibás, részletek a naplóban</value>
+  </data>
+  <data name="Stage_LastInvoiceRestored" xml:space="preserve">
+    <value>Utolsó számla visszaállítva</value>
+  </data>
+  <data name="Stage_NoInvoiceToRestore" xml:space="preserve">
+    <value>Nincs visszaállítható számla</value>
+  </data>
   <data name="StatusBar_DefaultMessage" xml:space="preserve">
     <value>[Esc] Kilépés  [Enter] Jóváhagy</value>
   </data>

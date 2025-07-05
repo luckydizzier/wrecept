@@ -49,6 +49,8 @@ Minden hibát az `ILogService` rögzít, amelyet a Storage réteg `LogService` i
 Felhasználói üzenetekhez az `INotificationService` ad egységes felületet. WPF alatt a `MessageBoxNotificationService` jeleníti meg a dialógusokat, míg a tesztekben egy csonk "MockNotificationService" működik.
 Az alapvető cégadatokat a `UserInfoService` kezeli. Az adatok a `%AppData%/Wrecept/wrecept.json` fájlban tárolódnak, betöltésük az alkalmazás futása közben történik.
 Az aktuális képernyőmódot a `SettingsService` tartja nyilván `settings.json` fájlban, amit a `ScreenModeManager` olvas be induláskor.
+Az adatbázis integritását az `IDbHealthService` ellenőrzi `PRAGMA integrity_check` parancs futtatásával.
+Az utolsó megnyitott számla azonosítóját a `SessionService` jegyzi meg a `session.json` fájlban.
 Az `AppStateService` központi enum értéket tart fenn az alkalmazás állapotáról, amit a nézetek és a billentyűkezelés ellenőriz a kiszámítható átmenetek érdekében.
 
 ### Törzsadatok szerkesztése

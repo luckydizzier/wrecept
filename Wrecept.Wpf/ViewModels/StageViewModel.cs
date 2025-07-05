@@ -50,6 +50,8 @@ public partial class StageViewModel : ObservableObject
     private readonly AboutViewModel _about;
     private readonly PlaceholderViewModel _placeholder;
     private readonly StatusBarViewModel _statusBar;
+    private readonly IDbHealthService _dbHealth;
+    private readonly ISessionService _session;
 
     public StatusBarViewModel StatusBar => _statusBar;
     public UserInfoViewModel UserInfo => _userInfo;
@@ -65,7 +67,9 @@ public partial class StageViewModel : ObservableObject
         UserInfoViewModel userInfo,
         AboutViewModel about,
         PlaceholderViewModel placeholder,
-        StatusBarViewModel statusBar)
+        StatusBarViewModel statusBar,
+        IDbHealthService dbHealth,
+        ISessionService session)
     {
         _invoiceEditor = invoiceEditor;
         _productMaster = productMaster;
@@ -78,6 +82,8 @@ public partial class StageViewModel : ObservableObject
         _about = about;
         _placeholder = placeholder;
         _statusBar = statusBar;
+        _dbHealth = dbHealth;
+        _session = session;
         CurrentViewModel = _invoiceEditor;
         _statusBar.ActiveMenu = "Főmenü";
     }
@@ -121,11 +127,29 @@ private async Task HandleMenu(StageMenuAction action)
                 break;
             case StageMenuAction.ListInvoices:
             case StageMenuAction.InventoryCard:
-            case StageMenuAction.CheckFiles:
-            case StageMenuAction.AfterPowerOutage:
             case StageMenuAction.PrinterSettings:
                 CurrentViewModel = _placeholder;
                 _statusBar.Message = Resources.Strings.Stage_FunctionNotReady;
+                break;
+            case StageMenuAction.CheckFiles:
+                CurrentViewModel = _placeholder;
+                _statusBar.Message = Resources.Strings.Stage_FunctionNotReady;
+                var ok = await _dbHealth.CheckAsync();
+                _statusBar.Message = ok ? Resources.Strings.Stage_DbCheckOk : Resources.Strings.Stage_DbCheckFailed;
+                break;
+            case StageMenuAction.AfterPowerOutage:
+                var last = await _session.LoadLastInvoiceIdAsync();
+                if (last.HasValue)
+                {
+                    CurrentViewModel = _invoiceEditor;
+                    await _invoiceEditor.LoadInvoice(last.Value);
+                    _statusBar.Message = Resources.Strings.Stage_LastInvoiceRestored;
+                }
+                else
+                {
+                    CurrentViewModel = _placeholder;
+                    _statusBar.Message = Resources.Strings.Stage_NoInvoiceToRestore;
+                }
                 break;
             case StageMenuAction.ScreenSettings:
                 var win = App.Provider.GetRequiredService<ScreenModeWindow>();
