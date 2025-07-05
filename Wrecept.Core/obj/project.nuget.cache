@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Zc6J2C08lBXGwCvJaEbnZFhLMtO8gKT0wQxswhxFrz7I5Ms7Ua2/y6cbpQ0AAnTCogWjWF1g30dQuYEWKR8moA==",
+  "success": true,
+  "projectFilePath": "/home/runner/work/wrecept/wrecept/Wrecept.Core/Wrecept.Core.csproj",
+  "expectedPackageFiles": [
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
