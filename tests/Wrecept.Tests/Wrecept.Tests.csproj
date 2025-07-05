@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Wrecept.Wpf\Wrecept.Wpf.csproj" />
     <ProjectReference Include="..\..\Wrecept.Core\Wrecept.Core.csproj" />
+    <ProjectReference Include="..\..\Wrecept.Storage\Wrecept.Storage.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\viewmodels\*.cs" />

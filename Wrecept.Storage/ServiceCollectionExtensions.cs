@@ -23,8 +23,15 @@ public static async Task AddStorageAsync(this IServiceCollection services, strin
             dbPath = Path.Combine(dataDir, "app.db");
         }
 
-        services.AddDbContext<AppDbContext>(o => o.UseSqlite($"Data Source={dbPath}"));
-        services.AddDbContextFactory<AppDbContext>(o => o.UseSqlite($"Data Source={dbPath}"));
+        services.AddSingleton<WalPragmaInterceptor>();
+
+        services.AddDbContext<AppDbContext>((sp, o) =>
+            o.UseSqlite($"Data Source={dbPath}")
+             .AddInterceptors(sp.GetRequiredService<WalPragmaInterceptor>()));
+
+        services.AddDbContextFactory<AppDbContext>((sp, o) =>
+            o.UseSqlite($"Data Source={dbPath}")
+             .AddInterceptors(sp.GetRequiredService<WalPragmaInterceptor>()));
         services.AddScoped<IInvoiceRepository, InvoiceRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ISupplierRepository, SupplierRepository>();
@@ -41,5 +48,6 @@ public static async Task AddStorageAsync(this IServiceCollection services, strin
         var logger = provider.GetRequiredService<ILogService>();
         await using var ctx = factory.CreateDbContext();
         await DbInitializer.EnsureCreatedAndMigratedAsync(ctx, logger);
+        await ctx.Database.ExecuteSqlRawAsync("PRAGMA journal_mode=WAL");
     }
 }
