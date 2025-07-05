@@ -62,6 +62,9 @@ public partial class InvoiceItemRowViewModel : ObservableObject
         => UnitName = _parent.Units.FirstOrDefault(u => u.Id == value)?.Name ?? string.Empty;
 
     [ObservableProperty]
+    private string description = string.Empty;
+
+    [ObservableProperty]
     private string productGroup = string.Empty;
 
     [ObservableProperty]
@@ -89,6 +92,7 @@ public partial class InvoiceItemRowViewModel : ObservableObject
         unitName = item.Product?.Unit?.Name ?? string.Empty;
         taxRateName = item.TaxRate?.Name ?? string.Empty;
         productGroup = item.Product?.ProductGroup?.Name ?? string.Empty;
+        description = item.Description;
         isEditable = false;
     }
 }
@@ -625,7 +629,8 @@ private void UpdateSupplierId(string name)
             ProductId = product.Id,
             TaxRateId = edit.TaxRateId != Guid.Empty ? edit.TaxRateId : product.TaxRateId,
             Quantity = edit.Quantity,
-            UnitPrice = edit.UnitPrice
+            UnitPrice = edit.UnitPrice,
+            Description = edit.Description
         };
 
         if (IsNew)
@@ -657,6 +662,7 @@ private void UpdateSupplierId(string name)
             UnitName = edit.UnitName,
             TaxRateName = TaxRates.FirstOrDefault(t => t.Id == item.TaxRateId)?.Name ?? string.Empty,
             ProductGroup = edit.ProductGroup,
+            Description = edit.Description,
             IsEditable = false
         };
 
@@ -670,6 +676,7 @@ private void UpdateSupplierId(string name)
         edit.UnitName = string.Empty;
         edit.TaxRateName = string.Empty;
         edit.ProductGroup = string.Empty;
+        edit.Description = string.Empty;
         edit.IsAutofilled = false;
         edit.IsEditingExisting = false;
         edit.TargetRow = null;
@@ -703,6 +710,7 @@ private void UpdateSupplierId(string name)
         target.UnitName = edit.UnitName;
         target.TaxRateName = edit.TaxRateName;
         target.ProductGroup = edit.ProductGroup;
+        target.Description = edit.Description;
 
         edit.HasError = false;
         edit.ErrorMessage = string.Empty;
@@ -717,6 +725,7 @@ private void UpdateSupplierId(string name)
         edit.UnitName = string.Empty;
         edit.TaxRateName = string.Empty;
         edit.ProductGroup = string.Empty;
+        edit.Description = string.Empty;
         edit.IsEditingExisting = false;
         edit.TargetRow = null;
         // focus removed

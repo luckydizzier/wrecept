@@ -99,6 +99,7 @@
                                     CellEditingTemplate="{StaticResource VatEditTemplate}"
                                     CellStyle="{StaticResource EditableCellStyle}" />
             <DataGridTextColumn Header="Csop." Binding="{Binding ProductGroup}" Width="100" IsReadOnly="True" />
+            <DataGridTextColumn Header="Megj." Binding="{Binding Description}" Width="120" IsReadOnly="True" />
             <DataGridTextColumn Header="Nettó" Width="90" IsReadOnly="True">
                 <DataGridTextColumn.Binding>
                     <MultiBinding Converter="{StaticResource NetConverter}" StringFormat="F2">

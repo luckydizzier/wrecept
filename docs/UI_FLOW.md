@@ -59,6 +59,8 @@ If product not found → inline product creator in-row (no modal popup)
 
 Pre-fill Quantity, Price, TaxRate based on latest usage
 
+Free-text note (Megjegyzés) entry per line
+
 Confirm entry prompt: Save line? (Enter=Yes, Esc=No)
 
 Insert new line, repeat
