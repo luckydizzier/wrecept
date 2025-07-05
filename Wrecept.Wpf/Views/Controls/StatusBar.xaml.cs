@@ -1,11 +1,12 @@
 using System.Windows.Controls;
 
-namespace Wrecept.Wpf.Views.Controls;
-
-public partial class StatusBar : UserControl
+namespace Wrecept.Wpf.Views.Controls
 {
-    public StatusBar()
+    public partial class StatusBar : UserControl
     {
-        InitializeComponent();
+        public StatusBar()
+        {
+            InitializeComponent();
+        }
     }
 }

@@ -4,16 +4,28 @@
     <Border Background="{DynamicResource HeaderFooterBrush}" Padding="2">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding DateTime}"/>
             <TextBlock Grid.Column="1" Text="{Binding ActiveMenu}" Margin="8,0"/>
             <TextBlock Grid.Column="2" Text="{Binding FocusedElement}" Margin="8,0"/>
             <TextBlock Grid.Column="3" Text="{Binding Message}" Margin="8,0" />
+            <Border Background="{DynamicResource HeaderFooterBrush}" Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding StatusText}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{Binding CurrentUser}" Margin="10,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Text="{Binding CurrentTime}" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
             <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="Num" Margin="2,0" Visibility="{Binding IsNumLock, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 <TextBlock Text="Caps" Margin="2,0" Visibility="{Binding IsCapsLock, Converter={StaticResource BooleanToVisibilityConverter}}"/>
