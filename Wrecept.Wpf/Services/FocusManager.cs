@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Media;
 using System.Windows.Controls;
+using System.Windows.Input;
 using InputFocusManager = System.Windows.Input.FocusManager;
 using Wrecept.Core.Enums;
 
