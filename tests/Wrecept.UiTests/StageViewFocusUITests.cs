@@ -30,4 +30,23 @@ public class StageViewFocusUITests
 
         driver.Close();
     }
+
+    [TestMethod]
+    public void EscapeInUserInfoEditorMovesFocusBack()
+    {
+        using var driver = LaunchApp();
+
+        driver.FindElementByName("Névjegy").Click();
+        driver.FindElementByName("A program felhasználójának adatai").Click();
+
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        var address = wait.Until(d => d.FindElementByAccessibilityId("AddressBox"));
+        address.Click();
+
+        new Actions(driver).SendKeys(Keys.Escape).Perform();
+        var active = driver.SwitchTo().ActiveElement();
+        Assert.AreEqual("CompanyNameBox", active.GetAttribute("AutomationId"));
+
+        driver.Close();
+    }
 }
