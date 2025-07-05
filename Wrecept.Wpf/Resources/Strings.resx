@@ -54,6 +54,12 @@
   <data name="Stage_NoInvoiceToRestore" xml:space="preserve">
     <value>Nincs visszaállítható számla</value>
   </data>
+  <data name="Stage_BackupSuccess" xml:space="preserve">
+    <value>Mentés elkészült</value>
+  </data>
+  <data name="Stage_RestoreSuccess" xml:space="preserve">
+    <value>Visszaállítás kész</value>
+  </data>
   <data name="StatusBar_DefaultMessage" xml:space="preserve">
     <value>[Esc] Kilépés  [Enter] Jóváhagy</value>
   </data>
