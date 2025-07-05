@@ -15,6 +15,7 @@ using Wrecept.Wpf.Views;
 using Controls = Wrecept.Wpf.Views.Controls;
 using Wrecept.Wpf.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -198,6 +199,7 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     private readonly IProductService _productsService;
     private readonly IUnitService _unitsService;
     private readonly IInvoiceService _invoiceService;
+    private readonly IInvoiceExportService _exporter;
 private readonly ILogService _log;
     private readonly INotificationService _notifications;
     private readonly ISessionService _session;
@@ -264,6 +266,7 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
         IProductService products,
         IUnitService units,
         IInvoiceService invoiceService,
+        IInvoiceExportService exporter,
         ILogService logService,
         INotificationService notificationService,
         ISessionService sessionService,
@@ -276,6 +279,7 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
         _productsService = products;
         _unitsService = units;
         _invoiceService = invoiceService;
+        _exporter = exporter;
         _log = logService;
         _notifications = notificationService;
         _session = sessionService;
@@ -500,6 +504,34 @@ private void UpdateSupplierId(string name)
         await _session.SaveLastInvoiceIdAsync(InvoiceId);
         _state.CurrentInvoiceId = InvoiceId;
         await _state.SaveAsync();
+    }
+
+    [RelayCommand]
+    private async Task SavePdfAsync()
+    {
+        if (!IsArchived)
+            return;
+        var dlg = new SaveFileDialog
+        {
+            Filter = "PDF (*.pdf)|*.pdf",
+            FileName = $"{Number}.pdf"
+        };
+        if (NavigationService.ShowFileDialog(dlg))
+        {
+            var invoice = await _invoiceService.GetAsync(InvoiceId);
+            if (invoice != null)
+                await _exporter.SavePdfAsync(invoice, dlg.FileName);
+        }
+    }
+
+    [RelayCommand]
+    private async Task PrintAsync()
+    {
+        if (!IsArchived)
+            return;
+        var invoice = await _invoiceService.GetAsync(InvoiceId);
+        if (invoice != null)
+            await _exporter.PrintAsync(invoice);
     }
 
     public void EditLineFromSelection(InvoiceItemRowViewModel selected)
