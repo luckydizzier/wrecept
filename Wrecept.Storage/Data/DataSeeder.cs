@@ -143,6 +143,11 @@ public static class DataSeeder
             .RuleFor(i => i.Date, f => DateOnly.FromDateTime(f.Date.Recent(365)))
             .RuleFor(i => i.SupplierId, f => f.PickRandom(suppliers).Id)
             .RuleFor(i => i.PaymentMethodId, f => f.PickRandom(payments).Id)
+            .RuleFor(i => i.DueDate, (f, i) =>
+            {
+                var method = payments.First(p => p.Id == i.PaymentMethodId);
+                return i.Date.AddDays(method.DueInDays);
+            })
             .RuleFor(i => i.IsGross, _ => false)
             .RuleFor(i => i.CreatedAt, _ => now)
             .RuleFor(i => i.UpdatedAt, _ => now);

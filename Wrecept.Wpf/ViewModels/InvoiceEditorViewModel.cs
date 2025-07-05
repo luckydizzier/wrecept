@@ -152,6 +152,11 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     [ObservableProperty]
     private DateTime? invoiceDate;
 
+    partial void OnInvoiceDateChanged(DateTime? value) => RecalculateDueDate();
+
+    [ObservableProperty]
+    private DateTime? dueDate;
+
     [ObservableProperty]
     private string number = string.Empty;
 
@@ -160,6 +165,8 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 
     [ObservableProperty]
     private Guid paymentMethodId;
+
+    partial void OnPaymentMethodIdChanged(Guid value) => RecalculateDueDate();
 
     [ObservableProperty]
     private bool isGross;
@@ -438,6 +445,7 @@ private void UpdateSupplierId(string name)
             SupplierId = 0;
             Supplier = string.Empty;
             InvoiceDate = DateTime.Today;
+            DueDate = null;
             Number = number ?? string.Empty;
             PaymentMethodId = Guid.Empty;
             IsGross = false;
@@ -464,6 +472,7 @@ private void UpdateSupplierId(string name)
         InvoiceDate = invoice.Date.ToDateTime(TimeOnly.MinValue);
         Number = invoice.Number;
         PaymentMethodId = invoice.PaymentMethodId;
+        DueDate = invoice.DueDate.ToDateTime(TimeOnly.MinValue);
         IsGross = invoice.IsGross;
         IsArchived = invoice.IsArchived;
 
@@ -676,6 +685,9 @@ private void UpdateSupplierId(string name)
             return;
 
         var date = DateOnly.FromDateTime(InvoiceDate.Value);
+        var dueDate = DueDate != null
+            ? DateOnly.FromDateTime(DueDate.Value)
+            : date.AddDays(PaymentMethods.FirstOrDefault(m => m.Id == PaymentMethodId)?.DueInDays ?? 0);
 
         try
         {
@@ -686,6 +698,7 @@ private void UpdateSupplierId(string name)
                 _draft.PaymentMethodId = PaymentMethodId;
                 _draft.Date = date;
                 _draft.IsGross = IsGross;
+                _draft.DueDate = dueDate;
                 var ok = await _invoiceService.CreateAsync(_draft);
                 if (ok)
                 {
@@ -696,7 +709,7 @@ private void UpdateSupplierId(string name)
             }
             else
             {
-                await _invoiceService.UpdateInvoiceHeaderAsync(InvoiceId, date, SupplierId, PaymentMethodId, IsGross);
+                await _invoiceService.UpdateInvoiceHeaderAsync(InvoiceId, date, dueDate, SupplierId, PaymentMethodId, IsGross);
             }
         }
         catch (Exception ex)
@@ -815,5 +828,19 @@ private void UpdateSupplierId(string name)
             });
         }
         AmountInWords = NumberToWordsConverter.Convert((long)GrossTotal) + " Ft";
+    }
+
+    private void RecalculateDueDate()
+    {
+        if (InvoiceDate != null && PaymentMethodId != Guid.Empty)
+        {
+            var method = PaymentMethods.FirstOrDefault(m => m.Id == PaymentMethodId);
+            if (method != null)
+                DueDate = InvoiceDate.Value.AddDays(method.DueInDays);
+        }
+        else
+        {
+            DueDate = null;
+        }
     }
 }

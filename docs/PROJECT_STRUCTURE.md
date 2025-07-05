@@ -46,7 +46,7 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
-  - Special Notes: -
+  - Special Notes: Tartalmazza a `DueDate` mezőt a fizetési határidőhöz
 - **Wrecept.Core/Models/InvoiceItem.cs**
   - Purpose: Domain model
   - Layer: Core

@@ -22,7 +22,7 @@ public class InvoiceLookupViewModelTests
             => throw new NotImplementedException();
         public Task<int> AddItemAsync(InvoiceItem item, System.Threading.CancellationToken ct = default)
             => throw new NotImplementedException();
-        public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, int supplierId, Guid paymentMethodId, bool isGross, System.Threading.CancellationToken ct = default)
+        public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, System.Threading.CancellationToken ct = default)
             => throw new NotImplementedException();
         public Task ArchiveAsync(int id, System.Threading.CancellationToken ct = default)
             => throw new NotImplementedException();

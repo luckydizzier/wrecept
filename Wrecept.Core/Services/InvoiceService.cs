@@ -27,6 +27,8 @@ public class InvoiceService : IInvoiceService
 
         invoice.CreatedAt = DateTime.UtcNow;
         invoice.UpdatedAt = DateTime.UtcNow;
+        if (invoice.DueDate == default && invoice.PaymentMethod != null)
+            invoice.DueDate = invoice.Date.AddDays(invoice.PaymentMethod.DueInDays);
         foreach (var item in invoice.Items)
         {
             item.CreatedAt = DateTime.UtcNow;
@@ -47,6 +49,8 @@ public class InvoiceService : IInvoiceService
 
         invoice.CreatedAt = DateTime.UtcNow;
         invoice.UpdatedAt = DateTime.UtcNow;
+        if (invoice.DueDate == default && invoice.PaymentMethod != null)
+            invoice.DueDate = invoice.Date.AddDays(invoice.PaymentMethod.DueInDays);
         return await _invoices.AddAsync(invoice, ct);
     }
 
@@ -61,7 +65,7 @@ public class InvoiceService : IInvoiceService
         return await _invoices.AddItemAsync(item, ct);
     }
 
-    public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
+    public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
     {
         if (id <= 0)
             throw new ArgumentException("Invalid id", nameof(id));
@@ -72,7 +76,7 @@ public class InvoiceService : IInvoiceService
         if (date == default)
             throw new ArgumentException("Date required", nameof(date));
 
-        return _invoices.UpdateHeaderAsync(id, date, supplierId, paymentMethodId, isGross, ct);
+        return _invoices.UpdateHeaderAsync(id, date, dueDate, supplierId, paymentMethodId, isGross, ct);
     }
 
     public Task ArchiveAsync(int id, CancellationToken ct = default)
