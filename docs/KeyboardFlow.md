@@ -65,6 +65,7 @@ Az `Enter` alapértelmezésben a következő vezérlőre ugrik, ha az aktuális 
 ### Fókuszkövető szolgáltatás
 
 A `FocusManager` a nézetekhez rendelt kulcs alapján megjegyzi az utoljára fókuszba került vezérlőt. A promptok vagy nézetek bezárásakor ezen keresztül állítjuk vissza a fókuszt az eredeti elemre. A szolgáltatás singletonként regisztrált, így minden View és ViewModel DI-n keresztül éri el.
+Minden programozott fókuszváltáshoz **kötelező** a `FocusManager.RequestFocus` metódust használni; közvetlen `MoveFocus` vagy `Keyboard.Focus` hívás nem megengedett.
 
 ## 💡 Design Philosophy
 
