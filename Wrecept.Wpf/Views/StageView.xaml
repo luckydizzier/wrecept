@@ -65,6 +65,12 @@
                 <MenuItem Header="Áramszünet _után"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.AfterPowerOutage}" />
+                <MenuItem Header="_Mentés"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.BackupData}" />
+                <MenuItem Header="_Visszaállítás"
+                          Command="{Binding HandleMenuCommand}"
+                          CommandParameter="{x:Static vm:StageMenuAction.RestoreData}" />
                 <MenuItem Header="K_épernyő beállítása"
                           Command="{Binding HandleMenuCommand}"
                           CommandParameter="{x:Static vm:StageMenuAction.ScreenSettings}" />

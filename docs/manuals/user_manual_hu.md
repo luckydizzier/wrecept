@@ -38,6 +38,8 @@ A *Szerviz* menü segít az adatállományok karbantartásában:
 
 - **Állományok ellenőrzése** – adatbázis-hiba esetén futtasd.
 - **Áramszünet után** – nem várt leállás után indítsd.
+- **Mentés** – a teljes adatbázist és beállításokat ZIP fájlba menti.
+- **Visszaállítás** – korábbi mentésből tölti vissza az adatokat.
 - **Tulajdonos szerkesztése...** – itt módosíthatod a céges adatokat, amelyek a számlák fejlécében megjelennek.
 
 

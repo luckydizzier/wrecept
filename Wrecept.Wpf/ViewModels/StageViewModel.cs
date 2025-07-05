@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.Win32;
+using System.IO;
 using Wrecept.Core.Entities;
 using Wrecept.Core.Services;
 using Wrecept.Wpf.Resources;
@@ -27,6 +29,8 @@ public enum StageMenuAction
     InventoryCard,
     CheckFiles,
     AfterPowerOutage,
+    BackupData,
+    RestoreData,
     ScreenSettings,
     PrinterSettings,
     EditUserInfo,
@@ -187,6 +191,33 @@ private async Task HandleMenu(StageMenuAction action)
                 {
                     CurrentViewModel = _placeholder;
                     _statusBar.Message = Resources.Strings.Stage_NoInvoiceToRestore;
+                }
+                break;
+            case StageMenuAction.BackupData:
+                var saveDlg = new SaveFileDialog
+                {
+                    Filter = "ZIP (*.zip)|*.zip|All files|*.*",
+                    FileName = "wrecept-backup.zip",
+                    InitialDirectory = Path.GetDirectoryName(App.DbPath)
+                };
+                if (NavigationService.ShowFileDialog(saveDlg))
+                {
+                    var svc = App.Provider.GetRequiredService<IBackupService>();
+                    await svc.BackupAsync(saveDlg.FileName);
+                    _statusBar.Message = Resources.Strings.Stage_BackupSuccess;
+                }
+                break;
+            case StageMenuAction.RestoreData:
+                var openDlg = new OpenFileDialog
+                {
+                    Filter = "ZIP (*.zip)|*.zip|All files|*.*",
+                    InitialDirectory = Path.GetDirectoryName(App.DbPath)
+                };
+                if (NavigationService.ShowFileDialog(openDlg))
+                {
+                    var svc = App.Provider.GetRequiredService<IBackupService>();
+                    await svc.RestoreAsync(openDlg.FileName);
+                    _statusBar.Message = Resources.Strings.Stage_RestoreSuccess;
                 }
                 break;
             case StageMenuAction.ScreenSettings:

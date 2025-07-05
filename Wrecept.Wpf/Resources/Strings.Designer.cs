@@ -21,6 +21,8 @@ internal static class Strings
     internal static string Stage_DbCheckFailed => _rm.GetString("Stage_DbCheckFailed") ?? string.Empty;
     internal static string Stage_LastInvoiceRestored => _rm.GetString("Stage_LastInvoiceRestored") ?? string.Empty;
     internal static string Stage_NoInvoiceToRestore => _rm.GetString("Stage_NoInvoiceToRestore") ?? string.Empty;
+    internal static string Stage_BackupSuccess => _rm.GetString("Stage_BackupSuccess") ?? string.Empty;
+    internal static string Stage_RestoreSuccess => _rm.GetString("Stage_RestoreSuccess") ?? string.Empty;
     internal static string StatusBar_DefaultMessage => _rm.GetString("StatusBar_DefaultMessage") ?? string.Empty;
     internal static string Load_PaymentMethods => _rm.GetString("Load_PaymentMethods") ?? string.Empty;
     internal static string Load_Suppliers => _rm.GetString("Load_Suppliers") ?? string.Empty;

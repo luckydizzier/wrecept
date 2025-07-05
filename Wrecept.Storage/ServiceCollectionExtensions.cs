@@ -44,6 +44,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ISettingsService>(_ => new SettingsService(settingsPath));
         var sessionPath = Path.Combine(Path.GetDirectoryName(settingsPath)!, "session.json");
         services.AddSingleton<ISessionService>(_ => new SessionService(sessionPath));
+        services.AddScoped<IBackupService>(_ => new FileBackupService(dbPath, userInfoPath, settingsPath));
         services.AddScoped<IDbHealthService, DbHealthService>();
 
         using var provider = services.BuildServiceProvider();
