@@ -28,6 +28,9 @@ public class InvoiceServiceTests
         public Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default)
             => Task.FromResult<LastUsageData?>(null);
 
+        public Task<Dictionary<int, LastUsageData>> GetLastUsageDataBatchAsync(int supplierId, IEnumerable<int> productIds, CancellationToken ct = default)
+            => Task.FromResult(new Dictionary<int, LastUsageData>());
+
         public int UpdatedId;
         public bool Archived;
     }

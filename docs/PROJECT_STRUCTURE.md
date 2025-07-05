@@ -109,7 +109,7 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
-  - Special Notes: -
+  - Special Notes: Tartalmaz `GetLastUsageDataBatchAsync` metódust a tömeges lekérdezéshez
 - **Wrecept.Core/Repositories/IPaymentMethodRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Core
@@ -172,7 +172,7 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
-  - Special Notes: -
+  - Special Notes: Tömeges használati adatokhoz `GetLastUsageDataBatchAsync` metódust kínál
 - **Wrecept.Core/Services/ILogService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
