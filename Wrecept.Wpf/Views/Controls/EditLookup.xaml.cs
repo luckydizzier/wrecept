@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
+using FocusService = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views.Controls;
 
@@ -112,7 +114,9 @@ public partial class EditLookup : UserControl
             }
             else
             {
-                MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                var focus = App.Provider.GetRequiredService<FocusService>();
+                var next = (e.OriginalSource as UIElement)?.PredictFocus(FocusNavigationDirection.Next);
+                focus.RequestFocus(next as IInputElement);
             }
             e.Handled = true;
         }

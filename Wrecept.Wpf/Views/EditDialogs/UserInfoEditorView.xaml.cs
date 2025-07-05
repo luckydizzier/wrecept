@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Wpf.Services;
+using FocusService = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views.EditDialogs;
 
@@ -21,8 +22,10 @@ public partial class UserInfoEditorView : UserControl
     {
         if (e.Key == Key.Escape)
         {
+            var focus = App.Provider.GetRequiredService<FocusService>();
+            var next = (e.OriginalSource as UIElement)?.PredictFocus(FocusNavigationDirection.Previous);
+            focus.RequestFocus(next as IInputElement);
             e.Handled = true;
-            (e.OriginalSource as UIElement)?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));
             return;
         }
 

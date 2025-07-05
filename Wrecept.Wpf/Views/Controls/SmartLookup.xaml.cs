@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
+using FocusService = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views.Controls;
 
@@ -216,7 +218,9 @@ public partial class SmartLookup : UserControl
                 SelectedValue = GetProperty(PART_ListBox.SelectedItem, SelectedValuePath);
                 Text = GetProperty(PART_ListBox.SelectedItem, DisplayMemberPath)?.ToString() ?? string.Empty;
                 PART_Popup.IsOpen = false;
-                MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                var focus = App.Provider.GetRequiredService<FocusService>();
+                var next = (e.OriginalSource as UIElement)?.PredictFocus(FocusNavigationDirection.Next);
+                focus.RequestFocus(next as IInputElement);
             }
             else if (FilteredItems.Count == 0 && !string.IsNullOrWhiteSpace(Text))
             {
