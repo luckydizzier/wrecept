@@ -1,82 +1,101 @@
 <UserControl x:Class="Wrecept.Wpf.Views.InvoiceEditorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            xmlns:local="clr-namespace:Wrecept.Wpf.Converters"
-            xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
-            xmlns:view="clr-namespace:Wrecept.Wpf.Views"
-            xmlns:views="clr-namespace:Wrecept.Wpf.Views.InlineCreators"
-            xmlns:prompt="clr-namespace:Wrecept.Wpf.Views.InlinePrompts"
-            xmlns:c="clr-namespace:Wrecept.Wpf.Views.Controls">
+             xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
+             xmlns:view="clr-namespace:Wrecept.Wpf.Views"
+             xmlns:views="clr-namespace:Wrecept.Wpf.Views.InlineCreators"
+             xmlns:prompt="clr-namespace:Wrecept.Wpf.Views.InlinePrompts"
+             xmlns:c="clr-namespace:Wrecept.Wpf.Views.Controls"
+             xmlns:local="clr-namespace:Wrecept.Wpf.Converters">
+    <!-- Inline creators and prompt templates -->
     <UserControl.Resources>
         <local:NegativeValueForegroundConverter x:Key="NegativeForegroundConverter" />
         <local:IsReadOnlyBindingConverter x:Key="IsReadOnlyConverter" />
+        <!-- Highlight focused TextBox -->
+        <Style x:Key="FocusTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Style.Triggers>
+                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                    <Setter Property="BorderBrush" Value="{DynamicResource HighlightBrush}" />
+                    <Setter Property="BorderThickness" Value="2" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="FocusHeaderTextBoxBold" TargetType="TextBox" BasedOn="{StaticResource HeaderTextBoxBold}">
+            <Style.Triggers>
+                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                    <Setter Property="BorderBrush" Value="{DynamicResource HighlightBrush}" />
+                    <Setter Property="BorderThickness" Value="2" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <DataTemplate DataType="{x:Type vm:ProductCreatorViewModel}">
-            <views:ProductCreatorView/>
+            <views:ProductCreatorView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:SupplierCreatorViewModel}">
-            <views:SupplierCreatorView/>
+            <views:SupplierCreatorView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:TaxRateCreatorViewModel}">
-            <views:TaxRateCreatorView/>
+            <views:TaxRateCreatorView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:UnitCreatorViewModel}">
             <views:UnitCreatorView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:PaymentMethodCreatorViewModel}">
-            <views:PaymentMethodCreatorView/>
+            <views:PaymentMethodCreatorView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:SaveLinePromptViewModel}">
-            <prompt:SaveLinePromptView/>
+            <prompt:SaveLinePromptView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:ArchivePromptViewModel}">
-            <prompt:ArchivePromptView/>
+            <prompt:ArchivePromptView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:DeleteItemPromptViewModel}">
-            <prompt:DeleteItemPromptView/>
+            <prompt:DeleteItemPromptView />
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
+
+    <Grid Margin="{StaticResource DefaultMargin}">
         <Grid.ColumnDefinitions>
+            <!-- Left panel: invoice list -->
             <ColumnDefinition Width="Auto" MinWidth="220" />
+            <!-- Right panel: editor -->
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <!-- 📄 Invoice list -->
         <view:InvoiceLookupView x:Name="LookupView" DataContext="{Binding Lookup}" />
 
-        <Grid Grid.Column="1" Margin="4">
+        <!-- ➡️ Editor area -->
+        <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <!-- Header and summary -->
+                <RowDefinition Height="Auto" />
+                <!-- Line input row -->
+                <RowDefinition Height="Auto" />
+                <!-- Items grid -->
+                <RowDefinition Height="*" />
+                <!-- Hint text -->
+                <RowDefinition Height="Auto" />
+                <!-- Action buttons -->
+                <RowDefinition Height="Auto" />
+                <!-- Prompts -->
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
+            <!-- 🧾 Header section and totals -->
             <Grid Grid.Row="0" Margin="0,0,0,6">
-                <GroupBox Header="Számlafejléc">
-                    <Grid Margin="4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                        <!-- Bal oszlop -->
-                        <Grid Grid.Column="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="220" />
-                            </Grid.ColumnDefinitions>
-
-                            <Label Grid.Row="0" Grid.Column="0" Content="_Szállító" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=SupplierLookup}" />
-                            <c:SmartLookup x:Name="SupplierLookup" Grid.Row="0" Grid.Column="1" Width="220"
+                <!-- Header card -->
+                <Border Padding="6" Margin="0,0,6,0" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
+                    <!-- Header fields -->
+                    <UniformGrid Columns="2" Margin="4">
+                        <StackPanel Margin="0,0,6,0">
+                            <Label Content="_Szállító" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=SupplierLookup}" />
+                            <c:SmartLookup x:Name="SupplierLookup" Width="220"
                                            ItemsSource="{Binding Suppliers}"
                                            DisplayMemberPath="Name"
                                            SelectedValuePath="Id"
@@ -85,9 +104,14 @@
                                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                            Watermark="Kezdjen el gépelni..."
                                            IsEnabled="{Binding IsEditable}" />
-
-                            <Label Grid.Row="1" Grid.Column="0" Content="_Fizetési mód" Margin="0,4,0,0" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=PaymentLookup}" />
-                            <c:EditLookup x:Name="PaymentLookup" Grid.Row="1" Grid.Column="1" Width="220" Margin="0,4,0,0"
+                        </StackPanel>
+                        <StackPanel Margin="0,0,6,0">
+                            <Label Content="_Dátum" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=DatePicker}" />
+                            <DatePicker x:Name="DatePicker" Width="220" SelectedDate="{Binding InvoiceDate}" IsEnabled="{Binding IsEditable}" />
+                        </StackPanel>
+                        <StackPanel Margin="0,6,6,0">
+                            <Label Content="_Fizetési mód" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=PaymentLookup}" />
+                            <c:EditLookup x:Name="PaymentLookup" Width="220"
                                           ItemsSource="{Binding PaymentMethods}"
                                           DisplayMemberPath="Name"
                                           SelectedValuePath="Id"
@@ -95,87 +119,69 @@
                                           CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
                                           CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                           IsEnabled="{Binding IsEditable}" />
+                        </StackPanel>
+                        <StackPanel Margin="0,6,0,0">
+                            <Label Content="_Számlaszám" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=NumberBox}" />
+                            <TextBox x:Name="NumberBox" Width="220" Text="{Binding Number}" IsEnabled="{Binding IsNew}" Style="{StaticResource FocusHeaderTextBoxBold}" />
+                        </StackPanel>
+                    </UniformGrid>
+                </Border>
 
-                            <CheckBox Grid.Row="2" Grid.ColumnSpan="2" Content="Bruttó ár" Margin="0,4,0,0" IsChecked="{Binding IsGross}" IsEnabled="{Binding IsEditable}" />
-                        </Grid>
-
-                        <!-- Középső oszlop -->
-                        <Grid Grid.Column="1" Margin="8,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="220" />
-                            </Grid.ColumnDefinitions>
-
-                            <Label Grid.Row="0" Grid.Column="0" Content="_Dátum" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=DatePicker}" />
-                            <DatePicker x:Name="DatePicker" Grid.Row="0" Grid.Column="1" Width="220" SelectedDate="{Binding InvoiceDate}" IsEnabled="{Binding IsEditable}" />
-
-                            <Label Grid.Row="1" Grid.Column="0" Margin="0,4,0,0" Content="_Számlaszám" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=NumberBox}" />
-                            <TextBox x:Name="NumberBox" Grid.Row="1" Grid.Column="1" Width="220" Margin="0,4,0,0"
-                                     Text="{Binding Number}"
-                                     IsEnabled="{Binding IsNew}"
-                                     Style="{StaticResource HeaderTextBoxBold}" />
-                        </Grid>
-
-                        <!-- Jobb oszlop: TotalsPanel -->
-                        <Border Grid.Column="2" Padding="4" Margin="8,0,0,0" Background="{DynamicResource ControlBackgroundBrush}">
-                            <c:TotalsPanel />
-                        </Border>
-                    </Grid>
-                </GroupBox>
+                <!-- Summary card -->
+                <Border Grid.Column="1" Padding="6" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
+                    <c:TotalsPanel />
+                </Border>
             </Grid>
 
-            <StackPanel Orientation="Horizontal" DataContext="{Binding EditableItem}" Margin="0,0,0,4" Grid.Row="1"
-                        IsEnabled="{Binding DataContext.IsEditable, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsEditingExisting}" Value="True">
-                                <Setter Property="Background" Value="LightYellow" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
-                <c:SmartLookup x:Name="EntryProduct" Width="200"
-                               ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                               DisplayMemberPath="Name"
-                               SelectedValuePath="Name"
-                               SelectedValue="{Binding Product, Mode=TwoWay}"
-                               Watermark="Termék neve"
-                               CreateCommand="{Binding DataContext.ShowProductCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                               CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-                <TextBox x:Name="EntryQuantity" Width="60" Margin="4,0" Text="{Binding Quantity, Mode=TwoWay}"/>
-                <c:SmartLookup x:Name="EntryUnit" Width="80"
-                               ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                               DisplayMemberPath="Name"
-                               SelectedValuePath="Id"
-                               SelectedValue="{Binding UnitId, Mode=TwoWay}"
-                               Watermark="Me.e."
-                               CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                               CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-                <TextBox x:Name="EntryPrice" Width="80" Margin="4,0" Text="{Binding UnitPrice, Mode=TwoWay}"/>
-                <c:EditLookup x:Name="EntryTax" Width="100" Tag="LastEntry"
-                              ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                              DisplayMemberPath="Name"
-                              SelectedValuePath="Id"
-                              SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
-                              CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                              CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-            </StackPanel>
+            <!-- ➕ Line item entry -->
+            <Border Grid.Row="1" Padding="6" Margin="0,0,0,6" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
+                <Grid DataContext="{Binding EditableItem}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+                    <c:SmartLookup x:Name="EntryProduct" Grid.Column="0"
+                                   ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                   DisplayMemberPath="Name"
+                                   SelectedValuePath="Name"
+                                   SelectedValue="{Binding Product, Mode=TwoWay}"
+                                   Watermark="Termék neve"
+                                   CreateCommand="{Binding DataContext.ShowProductCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                   CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                    <TextBox x:Name="EntryQuantity" Grid.Column="1" Margin="4,0" Text="{Binding Quantity, Mode=TwoWay}" Style="{StaticResource FocusTextBoxStyle}" />
+                    <c:SmartLookup x:Name="EntryUnit" Grid.Column="2"
+                                   ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                   DisplayMemberPath="Name"
+                                   SelectedValuePath="Id"
+                                   SelectedValue="{Binding UnitId, Mode=TwoWay}"
+                                   Watermark="Me.e."
+                                   CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                   CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                    <TextBox x:Name="EntryPrice" Grid.Column="3" Margin="4,0" Text="{Binding UnitPrice, Mode=TwoWay}" Style="{StaticResource FocusTextBoxStyle}" />
+                    <c:EditLookup x:Name="EntryTax" Grid.Column="4" Tag="LastEntry"
+                                  ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValuePath="Id"
+                                  SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
+                                  CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                  CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                </Grid>
+            </Border>
 
-            <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <view:InvoiceItemsGrid x:Name="ItemsGrid" Margin="0,0,0,4" />
-            </ScrollViewer>
+            <!-- 📋 Line items grid -->
+            <Border Grid.Row="2" Padding="0" Margin="0,0,0,6" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
+                <view:InvoiceItemsGrid x:Name="ItemsGrid" />
+            </Border>
 
-            <TextBlock Text="Negatív mennyiség visszárut jelez." FontStyle="{x:Static FontStyles.Italic}" Margin="0,4" Grid.Row="4" />
+            <!-- ℹ️ Hint text -->
+            <TextBlock Grid.Row="3" Text="Negatív mennyiség visszárut jelez." FontStyle="{x:Static FontStyles.Italic}" Margin="0,4" />
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6" Grid.Row="5">
-                <Button Content="Mentés" Command="{Binding SaveCommand}" IsEnabled="{Binding IsEditable}"
-                        Margin="0,0,4,0" />
+            <!-- ✅ Action buttons -->
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0">
+                <Button Content="Mentés" Command="{Binding SaveCommand}" IsEnabled="{Binding IsEditable}" Margin="0,0,4,0" />
                 <Button Content="Nyomtatás" IsEnabled="{Binding IsArchived}" Margin="0,0,4,0" />
                 <Button Content="Bezárás" Command="{Binding CloseCommand}" Margin="0,0,4,0" />
                 <Button Content="📦 Véglegesítés" Command="{Binding ShowArchivePromptCommand}">
@@ -191,15 +197,14 @@
                 </Button>
             </StackPanel>
 
-            <ContentControl Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="6" />
-            <ContentControl Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="6" Margin="0,4,0,0" />
-            <ContentControl Content="{Binding DeletePrompt}" Visibility="{Binding IsDeletePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="6" Margin="0,8,0,0" />
+            <!-- 🔔 Prompts -->
+            <ContentControl Grid.Row="5" Content="{Binding SavePrompt}" Visibility="{Binding IsSavePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ContentControl Grid.Row="5" Content="{Binding ArchivePrompt}" Visibility="{Binding IsArchivePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,4,0,0" />
+            <ContentControl Grid.Row="5" Content="{Binding DeletePrompt}" Visibility="{Binding IsDeletePromptVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,8,0,0" />
         </Grid>
-        <Popup Placement="Bottom"
-               PlacementTarget="{Binding InlineCreatorTarget}"
-               IsOpen="{Binding IsInlineCreatorVisible, Mode=OneWay}"
-               StaysOpen="True"
-               AllowsTransparency="True">
+
+        <!-- ✏️ Inline creator popup -->
+        <Popup Placement="Bottom" PlacementTarget="{Binding InlineCreatorTarget}" IsOpen="{Binding IsInlineCreatorVisible, Mode=OneWay}" StaysOpen="True" AllowsTransparency="True">
             <Border Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
                 <ContentControl x:Name="InlineCreatorHost" Content="{Binding InlineCreator}" />
             </Border>
