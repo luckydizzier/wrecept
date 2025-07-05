@@ -113,7 +113,6 @@ public partial class SmartLookup : UserControl
         if (PART_TextBox != null)
         {
             PART_TextBox.GotFocus += TextBox_GotFocus;
-            PART_TextBox.PreviewKeyDown += TextBox_PreviewKeyDown;
         }
     }
 
@@ -122,7 +121,6 @@ public partial class SmartLookup : UserControl
         if (PART_TextBox != null)
         {
             PART_TextBox.GotFocus -= TextBox_GotFocus;
-            PART_TextBox.PreviewKeyDown -= TextBox_PreviewKeyDown;
         }
     }
 
@@ -189,52 +187,4 @@ public partial class SmartLookup : UserControl
         return prop?.GetValue(item);
     }
 
-    private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Down)
-        {
-            if (FilteredItems.Count > 0)
-            {
-                var index = PART_ListBox.SelectedIndex + 1;
-                if (index >= FilteredItems.Count) index = 0;
-                PART_ListBox.SelectedIndex = index;
-            }
-            e.Handled = true;
-        }
-        else if (e.Key == Key.Up)
-        {
-            if (FilteredItems.Count > 0)
-            {
-                var index = PART_ListBox.SelectedIndex - 1;
-                if (index < 0) index = FilteredItems.Count - 1;
-                PART_ListBox.SelectedIndex = index;
-            }
-            e.Handled = true;
-        }
-        else if (e.Key == Key.Enter)
-        {
-            if (PART_ListBox.SelectedItem != null)
-            {
-                SelectedValue = GetProperty(PART_ListBox.SelectedItem, SelectedValuePath);
-                Text = GetProperty(PART_ListBox.SelectedItem, DisplayMemberPath)?.ToString() ?? string.Empty;
-                PART_Popup.IsOpen = false;
-                var focus = App.Provider.GetRequiredService<FocusService>();
-                var next = (e.OriginalSource as UIElement)?.PredictFocus(FocusNavigationDirection.Next);
-                focus.RequestFocus(next as IInputElement);
-            }
-            else if (FilteredItems.Count == 0 && !string.IsNullOrWhiteSpace(Text))
-            {
-                var param = CommandParameter ?? Text;
-                if (CreateCommand?.CanExecute(param) == true)
-                    CreateCommand.Execute(param);
-                PART_Popup.IsOpen = false;
-            }
-            e.Handled = true;
-        }
-        else if (e.Key == Key.Escape)
-        {
-            PART_Popup.IsOpen = false;
-            e.Handled = true;
-        }
-    }
 }

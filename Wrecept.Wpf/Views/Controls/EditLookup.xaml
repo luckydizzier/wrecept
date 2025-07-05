@@ -12,6 +12,5 @@
               IsEditable="True"
               StaysOpenOnEdit="True"
               IsTextSearchEnabled="False"
-              PreviewKeyDown="Box_PreviewKeyDown"
               IsSynchronizedWithCurrentItem="True"/>
 </UserControl>
