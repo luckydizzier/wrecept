@@ -117,3 +117,4 @@ Reconstruction by: \[ChatGPT-Dev Agent – 2025 Edition]
 - [FAULT_PLAN.md](FAULT_PLAN.md) – Hibabefecskendezési terv
 - [TEST_STRATEGY.md](TEST_STRATEGY.md) – Tesztstratégia
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) – Fájlszintű áttekintés
+- [../.git-branch-policy.md](../.git-branch-policy.md) – Git ágkezelési szabályzat
