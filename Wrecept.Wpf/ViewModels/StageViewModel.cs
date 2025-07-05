@@ -3,8 +3,11 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System.Windows;
+using Wrecept.Core.Entities;
+using Wrecept.Core.Services;
 using Wrecept.Wpf.Resources;
 using Wrecept.Wpf.Views;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -131,9 +134,43 @@ private async Task HandleMenu(StageMenuAction action)
                 _statusBar.Message = "Képernyő mód frissítve";
                 break;
             case StageMenuAction.EditUserInfo:
-                CurrentViewModel = _userInfo;
                 _statusBar.Message = Resources.Strings.Stage_UserInfoEditOpened;
                 await _userInfo.LoadAsync();
+
+                var editorVm = App.Provider.GetRequiredService<UserInfoEditorViewModel>();
+                editorVm.CompanyName = _userInfo.CompanyName;
+                editorVm.Address = _userInfo.Address;
+                editorVm.Phone = _userInfo.Phone;
+                editorVm.Email = _userInfo.Email;
+                editorVm.TaxNumber = _userInfo.TaxNumber;
+                editorVm.BankAccount = _userInfo.BankAccount;
+
+                var editorWin = App.Provider.GetRequiredService<UserInfoWindow>();
+                editorWin.DataContext = editorVm;
+                editorVm.OnOk = _ => { editorWin.DialogResult = true; editorWin.Close(); };
+                editorVm.OnCancel = () => { editorWin.DialogResult = false; editorWin.Close(); };
+
+                if (NavigationService.ShowCenteredDialog(editorWin))
+                {
+                    var svc = App.Provider.GetRequiredService<IUserInfoService>();
+                    await svc.SaveAsync(new UserInfo
+                    {
+                        CompanyName = editorVm.CompanyName,
+                        Address = editorVm.Address,
+                        Phone = editorVm.Phone,
+                        Email = editorVm.Email,
+                        TaxNumber = editorVm.TaxNumber,
+                        BankAccount = editorVm.BankAccount
+                    });
+
+                    _userInfo.CompanyName = editorVm.CompanyName;
+                    _userInfo.Address = editorVm.Address;
+                    _userInfo.Phone = editorVm.Phone;
+                    _userInfo.Email = editorVm.Email;
+                    _userInfo.TaxNumber = editorVm.TaxNumber;
+                    _userInfo.BankAccount = editorVm.BankAccount;
+                }
+
                 break;
             case StageMenuAction.UserInfo:
                 CurrentViewModel = _about;
