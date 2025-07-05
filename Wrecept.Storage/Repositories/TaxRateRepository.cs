@@ -15,10 +15,10 @@ public class TaxRateRepository : ITaxRateRepository
     }
 
     public Task<List<TaxRate>> GetAllAsync(CancellationToken ct = default)
-        => _db.Set<TaxRate>().ToListAsync(ct);
+        => _db.Set<TaxRate>().AsNoTracking().ToListAsync(ct);
 
     public Task<List<TaxRate>> GetActiveAsync(DateTime asOf, CancellationToken ct = default)
-        => _db.Set<TaxRate>()
+        => _db.Set<TaxRate>().AsNoTracking()
             .Where(t => t.EffectiveFrom <= asOf && (!t.EffectiveTo.HasValue || t.EffectiveTo >= asOf) && !t.IsArchived)
             .OrderByDescending(t => t.EffectiveFrom)
             .ToListAsync(ct);

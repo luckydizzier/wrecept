@@ -15,10 +15,10 @@ public class ProductGroupRepository : IProductGroupRepository
     }
 
     public Task<List<ProductGroup>> GetAllAsync(CancellationToken ct = default)
-        => _db.Set<ProductGroup>().ToListAsync(ct);
+        => _db.Set<ProductGroup>().AsNoTracking().ToListAsync(ct);
 
     public Task<List<ProductGroup>> GetActiveAsync(CancellationToken ct = default)
-        => _db.Set<ProductGroup>().Where(g => !g.IsArchived).ToListAsync(ct);
+        => _db.Set<ProductGroup>().AsNoTracking().Where(g => !g.IsArchived).ToListAsync(ct);
 
     public async Task<Guid> AddAsync(ProductGroup group, CancellationToken ct = default)
     {

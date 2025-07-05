@@ -15,10 +15,10 @@ public class SupplierRepository : ISupplierRepository
     }
 
     public Task<List<Supplier>> GetAllAsync(CancellationToken ct = default)
-        => _db.Suppliers.ToListAsync(ct);
+        => _db.Suppliers.AsNoTracking().ToListAsync(ct);
 
     public Task<List<Supplier>> GetActiveAsync(CancellationToken ct = default)
-        => _db.Suppliers.Where(s => !s.IsArchived).ToListAsync(ct);
+        => _db.Suppliers.AsNoTracking().Where(s => !s.IsArchived).ToListAsync(ct);
 
     public async Task<int> AddAsync(Supplier supplier, CancellationToken ct = default)
     {

@@ -108,10 +108,9 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
     private static int StepPercent(int step, int total) => step * 100 / total;
 
-    private static async Task LoadCollectionAsync<T>(ObservableCollection<T> target, Task<List<T>> loadTask, string message, int step, int totalSteps, IProgress<ProgressReport>? progress)
+    private static void FillCollection<T>(ObservableCollection<T> target, List<T> items, string message, int step, int totalSteps, IProgress<ProgressReport>? progress)
     {
         progress?.Report(new ProgressReport { GlobalPercent = StepPercent(step, totalSteps), SubtaskPercent = 0, Message = message });
-        var items = await loadTask;
         target.Clear();
         for (int i = 0; i < items.Count; i++)
         {
@@ -265,11 +264,19 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
         const int total = 5;
         var step = 0;
 
-        await LoadCollectionAsync(PaymentMethods, _paymentMethods.GetActiveAsync(), Resources.Strings.Load_PaymentMethods, step++, total, progress);
-        await LoadCollectionAsync(Suppliers, _suppliers.GetActiveAsync(), Resources.Strings.Load_Suppliers, step++, total, progress);
-        await LoadCollectionAsync(TaxRates, _taxRates.GetActiveAsync(DateTime.UtcNow), Resources.Strings.Load_TaxRates, step++, total, progress);
-        await LoadCollectionAsync(Products, _productsService.GetActiveAsync(), Resources.Strings.Load_Products, step++, total, progress);
-        await LoadCollectionAsync(Units, _unitsService.GetActiveAsync(), Resources.Strings.Load_Units, step++, total, progress);
+        var paymentTask = _paymentMethods.GetActiveAsync();
+        var supplierTask = _suppliers.GetActiveAsync();
+        var taxTask = _taxRates.GetActiveAsync(DateTime.UtcNow);
+        var productTask = _productsService.GetActiveAsync();
+        var unitTask = _unitsService.GetActiveAsync();
+
+        await Task.WhenAll(paymentTask, supplierTask, taxTask, productTask, unitTask);
+
+        FillCollection(PaymentMethods, paymentTask.Result, Resources.Strings.Load_PaymentMethods, step++, total, progress);
+        FillCollection(Suppliers, supplierTask.Result, Resources.Strings.Load_Suppliers, step++, total, progress);
+        FillCollection(TaxRates, taxTask.Result, Resources.Strings.Load_TaxRates, step++, total, progress);
+        FillCollection(Products, productTask.Result, Resources.Strings.Load_Products, step++, total, progress);
+        FillCollection(Units, unitTask.Result, Resources.Strings.Load_Units, step++, total, progress);
 
         progress?.Report(new ProgressReport { GlobalPercent = 100, SubtaskPercent = 100, Message = Resources.Strings.Load_Complete });
     }

@@ -15,10 +15,10 @@ public class UnitRepository : IUnitRepository
     }
 
     public Task<List<Unit>> GetAllAsync(CancellationToken ct = default)
-        => _db.Set<Unit>().ToListAsync(ct);
+        => _db.Set<Unit>().AsNoTracking().ToListAsync(ct);
 
     public Task<List<Unit>> GetActiveAsync(CancellationToken ct = default)
-        => _db.Set<Unit>().Where(u => !u.IsArchived).ToListAsync(ct);
+        => _db.Set<Unit>().AsNoTracking().Where(u => !u.IsArchived).ToListAsync(ct);
 
     public async Task<Guid> AddAsync(Unit unit, CancellationToken ct = default)
     {

@@ -55,7 +55,7 @@ public class InvoiceRepository : IInvoiceRepository
     }
 
     public Task<Invoice?> GetAsync(int id, CancellationToken ct = default)
-        => _db.Invoices
+        => _db.Invoices.AsNoTracking()
             .Include(i => i.Supplier)
             .Include(i => i.PaymentMethod)
             .Include(i => i.Items)
@@ -65,7 +65,7 @@ public class InvoiceRepository : IInvoiceRepository
             .FirstOrDefaultAsync(i => i.Id == id, ct);
 
     public Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default)
-        => _db.Invoices
+        => _db.Invoices.AsNoTracking()
             .Include(i => i.Supplier)
             .OrderByDescending(i => i.Date)
             .Take(count)
@@ -73,7 +73,7 @@ public class InvoiceRepository : IInvoiceRepository
 
     public async Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default)
     {
-        return await _db.InvoiceItems
+        return await _db.InvoiceItems.AsNoTracking()
             .Include(i => i.Invoice)
             .Where(i => i.Invoice!.SupplierId == supplierId && i.ProductId == productId)
             .OrderByDescending(i => i.Invoice!.Date)
