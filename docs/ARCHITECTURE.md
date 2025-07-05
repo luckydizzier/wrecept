@@ -76,7 +76,7 @@ Ha a második adatlekérdezés is hibát jelez, a részleteket az `ILogService` 
 
 Az alkalmazás betöltésekor a `StartupOrchestrator` fut le, amely két szintű előrehaladási értéket jelent az UI felé. A `ProgressViewModel` által kötött nézet két `ProgressBar`-on keresztül mutatja a globális és részfeladatok százalékos állását, így a felhasználó valós időben látja a migráció és a mintaadatok betöltésének állapotát.
 
-Az `InvoiceEditorView` megnyitásakor hasonló ablak jelenik meg. A törzsadatok (fizetési módok, szállítók, ÁFA‑kulcsok, termékek, mértékegységek) betöltése lépésenként történik, a második sáv pedig az adott lista elemeinek betöltési arányát írja ki.
+Az `InvoiceEditorLayout` megnyitásakor hasonló ablak jelenik meg. A törzsadatok (fizetési módok, szállítók, ÁFA‑kulcsok, termékek, mértékegységek) betöltése lépésenként történik, a második sáv pedig az adott lista elemeinek betöltési arányát írja ki.
 
 ## Dialóguskezelés
 

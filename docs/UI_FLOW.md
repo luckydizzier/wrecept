@@ -24,7 +24,7 @@ számlafejléc mezőknél.
 - Fókuszkezdő pontok nézetenként:
   - **StageView** – a főmenüsor első eleme
   - **InvoiceLookupView** – `InvoiceList` `ListBox`
-  - **InvoiceEditorView** – bal oldali `InvoiceList`
+  - **InvoiceEditorLayout** – bal oldali `InvoiceList`
   - **ProductMasterView** – a táblázat (Grid)
   - **SupplierMasterView** – a táblázat (Grid)
   

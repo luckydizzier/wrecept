@@ -12,7 +12,7 @@
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <converters:BooleanToRowDetailsConverter x:Key="BooleanToRowDetailsConverter" />
             <DataTemplate DataType="{x:Type vm:InvoiceEditorViewModel}">
-                <view:InvoiceEditorView />
+                <view:InvoiceEditorLayout />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:ProductMasterViewModel}">
                 <view:ProductMasterView />
