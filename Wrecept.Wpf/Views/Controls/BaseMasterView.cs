@@ -26,7 +26,6 @@ public abstract class BaseMasterView : UserControl
         Loaded += OnLoaded;
         if (App.Provider is not null)
             _focus = App.Provider.GetRequiredService<FocusManager>();
-        Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
     }
 
     private DataGrid BuildLayout()
@@ -85,9 +84,6 @@ public abstract class BaseMasterView : UserControl
     }
 
 
-
-    private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        => _focus?.Update(GetType().Name, e.NewFocus);
 
     private void Grid_RowDetailsVisibilityChanged(object? sender, DataGridRowDetailsEventArgs e)
     {
