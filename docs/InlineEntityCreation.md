@@ -7,7 +7,7 @@ date: "2025-07-03"
 
 # Inline Entity Creation
 
-Az InvoiceEditor nézetben lehetőség nyílik a hiányzó törzsadatok azonnali felvételére. Ha a felhasználó olyan terméket, szállítót, ÁFA-kulcsot vagy mértékegységet ír be, amely nem található az adatbázisban, a program egy kibomló űrlapot jelenít meg az aktuális sor alatt.
+Az InvoiceEditor nézetben lehetőség nyílik a hiányzó törzsadatok azonnali felvételére. Ha a felhasználó olyan terméket, szállítót, ÁFA-kulcsot vagy mértékegységet ír be, amely nem található az adatbázisban, a program a beviteli mezőben felugró űrlapot jelenít meg.
 
 Korábban a űrlap a DataGrid `RowDetailsTemplate` elemében jelent meg, ám ez rejtve maradt a sorok összecsukása miatt.  A legutóbbi frissítés óta a nézet egy lebegő `Popup` segítségével közvetlenül a keresőmező alatt jeleníti meg az űrlapot, így a felhasználó fókusza nem vész el.
 

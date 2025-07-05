@@ -55,7 +55,9 @@ Bruttó checkbox (affects unit price interpretation)
 
 SmartLookup behavior with real-time filtering
 
-If product not found → inline product creator in-row (no modal popup)
+A számlafejadatoknál és a tételsorok felett is SmartLookup segíti a választást.
+Ha nincs találat, a beviteli mezőben egy felugró űrlap jelenik meg, így azonnal
+létrehozható az új entitás.
 
 Pre-fill Quantity, Price, TaxRate based on latest usage
 
@@ -70,7 +72,7 @@ Quantity = 0 is rejected with inline error message
 
 📄 Invoice Finalization
 
-„PDF mentés” és „Nyomtatás” gomb csak archivált számlánál aktív
+„PDF mentés” és „Nyomtatás” gomb minden számlánál elérhető
 
 Archived invoices:
 

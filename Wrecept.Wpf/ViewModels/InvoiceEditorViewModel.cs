@@ -513,8 +513,6 @@ private void UpdateSupplierId(string name)
     [RelayCommand]
     private async Task SavePdfAsync()
     {
-        if (!IsArchived)
-            return;
         var dlg = new SaveFileDialog
         {
             Filter = "PDF (*.pdf)|*.pdf",
@@ -531,8 +529,6 @@ private void UpdateSupplierId(string name)
     [RelayCommand]
     private async Task PrintAsync()
     {
-        if (!IsArchived)
-            return;
         var invoice = await _invoiceService.GetAsync(InvoiceId);
         if (invoice != null)
             await _exporter.PrintAsync(invoice);
