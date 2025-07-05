@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Media;
+using InputFocusManager = System.Windows.Input.FocusManager;
 using Wrecept.Core.Enums;
 
 namespace Wrecept.Wpf.Services;
@@ -36,7 +37,18 @@ public class FocusManager
         if (_state.Current is AppState.Saving or AppState.DialogOpen or AppState.Error or AppState.PromptActive)
             return;
 
-        Application.Current.Dispatcher.BeginInvoke(() => element?.Focus(), DispatcherPriority.Background);
+        Application.Current.Dispatcher.BeginInvoke(() =>
+        {
+            if (element is DependencyObject d && !element.Focus())
+            {
+                var scope = InputFocusManager.GetFocusScope(d);
+                InputFocusManager.SetFocusedElement(scope, element);
+            }
+            else
+            {
+                element?.Focus();
+            }
+        }, DispatcherPriority.Background);
     }
 
     public void RequestFocus(string elementName, Type? viewType = null)
@@ -58,7 +70,18 @@ public class FocusManager
             }
 
             var target = FindElement(root, elementName);
-            (target as IInputElement)?.Focus();
+            if (target is IInputElement input)
+            {
+                if (target is DependencyObject d && !input.Focus())
+                {
+                    var scope = InputFocusManager.GetFocusScope(d);
+                    InputFocusManager.SetFocusedElement(scope, input);
+                }
+                else
+                {
+                    input.Focus();
+                }
+            }
         }, DispatcherPriority.Background);
     }
 

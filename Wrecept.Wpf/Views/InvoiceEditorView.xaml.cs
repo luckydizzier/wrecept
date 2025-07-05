@@ -41,7 +41,9 @@ public partial class InvoiceEditorView : UserControl
             });
             await viewModel.LoadAsync(progress);
             progressWindow.Close();
-            _focus.RequestFocus("InvoiceList", typeof(InvoiceEditorView));
+            Dispatcher.InvokeAsync(() =>
+                _focus.RequestFocus("InvoiceList", typeof(InvoiceEditorView)),
+                DispatcherPriority.ContextIdle);
         };
     }
 
@@ -101,6 +103,9 @@ public partial class InvoiceEditorView : UserControl
 
     private void OnInlineCreatorOpened(object sender, EventArgs e)
     {
+        if (!InlineCreatorHost.IsVisible)
+            return;
+
         Dispatcher.BeginInvoke(() =>
         {
             if (InlineCreatorHost.Content is FrameworkElement fe)
