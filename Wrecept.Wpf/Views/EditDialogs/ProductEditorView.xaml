@@ -1,7 +1,7 @@
 <UserControl x:Class="Wrecept.Wpf.Views.EditDialogs.ProductEditorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             KeyDown="OnKeyDown">
+            >
     <StackPanel Margin="10">
         <TextBlock Text="Név" />
         <TextBox x:Name="InitialFocus" Text="{Binding Name}" Width="200" />

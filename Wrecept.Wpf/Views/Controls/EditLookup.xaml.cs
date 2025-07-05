@@ -102,28 +102,4 @@ public partial class EditLookup : UserControl
         return value != null && value.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
-    private void Box_PreviewKeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Enter)
-        {
-            if (Box.SelectedItem == null)
-            {
-                var param = CreateCommandParameter ?? _textBox?.Text;
-                if (CreateCommand?.CanExecute(param) == true)
-                    CreateCommand.Execute(param);
-            }
-            else
-            {
-                var focus = App.Provider.GetRequiredService<FocusService>();
-                var next = (e.OriginalSource as UIElement)?.PredictFocus(FocusNavigationDirection.Next);
-                focus.RequestFocus(next as IInputElement);
-            }
-            e.Handled = true;
-        }
-        else if (e.Key == Key.Escape)
-        {
-            Box.IsDropDownOpen = false;
-            e.Handled = true;
-        }
-    }
 }

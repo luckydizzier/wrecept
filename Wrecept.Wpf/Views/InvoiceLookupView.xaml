@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prompt="clr-namespace:Wrecept.Wpf.Views.InlinePrompts"
              xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
-             KeyDown="OnKeyDown">
+            >
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type vm:InvoiceCreatePromptViewModel}">
             <prompt:InvoiceCreatePromptView />
