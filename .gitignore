@@ -1,0 +1,34 @@
+# Build artifacts
+bin/
+obj/
+*/bin/
+*/obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet packages
+packages/
+*.nupkg
+*.snupkg
+
+# Temporary files
+*.tmp
+*.cache
+*.log
+
+# Application data
+*.db
+*.sqlite
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Development tools
+*.DotSettings
