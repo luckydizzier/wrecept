@@ -15,7 +15,6 @@ namespace Wrecept.Wpf.Views;
 
 public partial class InvoiceEditorView : UserControl
 {
-    private KeyboardManager? _keyboard;
     private FocusManager? _focus;
 
     public InvoiceEditorView()
@@ -37,7 +36,6 @@ public partial class InvoiceEditorView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
-        _keyboard = App.Provider?.GetRequiredService<KeyboardManager>();
         _focus = App.Provider?.GetRequiredService<FocusManager>();
         Keyboard.AddGotKeyboardFocusHandler(this, OnGotKeyboardFocus);
         Loaded += async (_, _) =>
@@ -59,56 +57,6 @@ public partial class InvoiceEditorView : UserControl
         };
     }
 
-    private void OnKeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Escape)
-        {
-            _focus?.RequestFocus(LookupView.InvoiceList);
-            e.Handled = true;
-            return;
-        }
-        _keyboard?.Handle(e);
-    }
-
-    private async void OnEntryKeyDown(object sender, KeyEventArgs e)
-    {
-        try
-        {
-            if (DataContext is not InvoiceEditorViewModel vm)
-                return;
-
-            var fe = e.OriginalSource as FrameworkElement;
-            if (fe is not null)
-                vm.LastFocusedField = fe.Name;
-
-            if (e.Key == Key.Enter && fe?.Tag?.ToString() == "LastEntry")
-            {
-                if (vm.EditableItem.IsEditingExisting)
-                    vm.SaveEditedItemCommand.Execute(null);
-                else
-                    await vm.AddLineItemCommand.ExecuteAsync(null);
-                e.Handled = true;
-                return;
-            }
-
-            if (e.Key == Key.Escape && string.IsNullOrWhiteSpace(vm.EditableItem.Product) && !vm.IsInLineFinalizationPrompt)
-            {
-                vm.SavePrompt = new SaveLinePromptViewModel(vm,
-                    "Befejezted a tételsorok rögzítését? (Enter=Igen, Esc=Nem)",
-                    finalize: true);
-                vm.IsInLineFinalizationPrompt = true;
-                e.Handled = true;
-                return;
-            }
-
-            _keyboard?.Handle(e);
-        }
-        catch (Exception ex)
-        {
-            var log = App.Provider.GetRequiredService<ILogService>();
-            await log.LogError("InvoiceEditorView.OnEntryKeyDown", ex);
-        }
-    }
 
     private void OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         => _focus?.Update("InvoiceEditorView", e.NewFocus);
