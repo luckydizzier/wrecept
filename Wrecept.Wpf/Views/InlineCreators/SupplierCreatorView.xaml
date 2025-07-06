@@ -10,6 +10,10 @@
                 <TextBox x:Name="NameBox" Width="160" Text="{Binding Name}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                <TextBlock Text="Adószám" Width="60" />
+                <TextBox Width="160" Text="{Binding TaxId}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                 <Button Content="OK" Command="{Binding ConfirmCommand}" Width="60" Margin="0,0,4,0" />
                 <Button Content="Mégse" Command="{Binding CancelCommand}" Width="60" />
             </StackPanel>

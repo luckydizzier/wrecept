@@ -72,7 +72,7 @@ public class InvoiceEditorViewModelTests
         public Task UpdateAsync(Product product, System.Threading.CancellationToken ct = default) => Task.CompletedTask;
     }
 
-    private class DummyService<T> : IPaymentMethodService, ITaxRateService, ISupplierService, IUnitService
+    private class DummyService<T> : IPaymentMethodService, ITaxRateService, ISupplierService, IUnitService, IProductGroupService
         where T : class
     {
         public Task<List<PaymentMethod>> GetActiveAsync(System.Threading.CancellationToken ct = default) => Task.FromResult(new List<PaymentMethod>());
@@ -94,6 +94,11 @@ public class InvoiceEditorViewModelTests
         public Task<List<Unit>> GetActiveAsync(System.Threading.CancellationToken ct = default) => Task.FromResult(new List<Unit>());
         public Task<Guid> AddAsync(Unit unit, System.Threading.CancellationToken ct = default) => Task.FromResult(Guid.NewGuid());
         public Task UpdateAsync(Unit unit, System.Threading.CancellationToken ct = default) => Task.CompletedTask;
+
+        public Task<List<ProductGroup>> GetAllAsync(System.Threading.CancellationToken ct = default) => Task.FromResult(new List<ProductGroup>());
+        public Task<List<ProductGroup>> GetActiveAsync(System.Threading.CancellationToken ct = default) => Task.FromResult(new List<ProductGroup>());
+        public Task<Guid> AddAsync(ProductGroup group, System.Threading.CancellationToken ct = default) => Task.FromResult(Guid.NewGuid());
+        public Task UpdateAsync(ProductGroup group, System.Threading.CancellationToken ct = default) => Task.CompletedTask;
     }
 
     private class DummyLogService : ILogService
@@ -137,11 +142,13 @@ public class InvoiceEditorViewModelTests
         var tax = new DummyService<object>();
         var supplier = new DummyService<object>();
         var unit = new DummyService<object>();
+        var group = new DummyService<object>();
+        var group = new DummyService<object>();
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
         var state = new AppStateService(Path.GetTempFileName());
-        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, invoiceSvc, log, notify, state, lookup);
+        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, group, invoiceSvc, log, notify, state, lookup);
 
         var row = vm.Items[0];
         row.Product = "Test";
@@ -169,7 +176,7 @@ public class InvoiceEditorViewModelTests
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
         var state = new AppStateService(Path.GetTempFileName());
-        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, invoiceSvc, log, notify, state, lookup);
+        var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, group, invoiceSvc, log, notify, state, lookup);
 
         var row = vm.Items[0];
         row.Product = "Test";
@@ -196,7 +203,7 @@ public class InvoiceEditorViewModelTests
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
         var state = new AppStateService(Path.GetTempFileName());
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, state, lookup)
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, dummy, invoiceSvc, log, notify, state, lookup)
         {
             IsArchived = true
         };
@@ -224,7 +231,7 @@ public class InvoiceEditorViewModelTests
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
         var state = new AppStateService(Path.GetTempFileName());
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, state, lookup);
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, dummy, invoiceSvc, log, notify, state, lookup);
 
         var row = vm.Items[0];
         var creator = new ProductCreatorViewModel(vm, row, productSvc)
@@ -250,7 +257,7 @@ public class InvoiceEditorViewModelTests
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
         var state = new AppStateService(Path.GetTempFileName());
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, state, lookup)
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, dummy, invoiceSvc, log, notify, state, lookup)
         {
             IsNew = false,
             InvoiceId = 1
@@ -283,7 +290,7 @@ public class InvoiceEditorViewModelTests
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
         var state = new AppStateService(Path.GetTempFileName());
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, state, lookup)
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, dummy, invoiceSvc, log, notify, state, lookup)
         {
             IsNew = false,
             InvoiceId = 1,
@@ -315,7 +322,7 @@ public class InvoiceEditorViewModelTests
         var notify = new DummyNotificationService();
         var lookup = new InvoiceLookupViewModel(invoiceSvc);
         var state = new AppStateService(Path.GetTempFileName());
-        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, invoiceSvc, log, notify, state, lookup);
+        var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, dummy, invoiceSvc, log, notify, state, lookup);
 
         lookup.Invoices.Add(new InvoiceLookupItem { Id = 1, Number = "A1", Date = DateOnly.FromDateTime(DateTime.Today) });
         lookup.SelectedInvoice = lookup.Invoices[0];
