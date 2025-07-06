@@ -9,6 +9,11 @@ namespace Wrecept.Wpf.Services;
 
 public class PdfInvoiceExporter : IInvoiceExportService
 {
+    static PdfInvoiceExporter()
+    {
+        QuestPDF.Settings.License = LicenseType.Community;
+    }
+
     public Task SavePdfAsync(Invoice invoice, string filePath, CancellationToken ct = default)
     {
         ArgumentNullException.ThrowIfNull(invoice);
