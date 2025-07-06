@@ -214,7 +214,6 @@ private async Task HandleMenu(StageMenuAction action)
                 }
                 break;
             case StageMenuAction.BackupData:
-                await _state.WithDialogOpen(async () =>
                 {
                     var saveDlg = new SaveFileDialog
                     {
@@ -228,10 +227,9 @@ private async Task HandleMenu(StageMenuAction action)
                         await svc.BackupAsync(saveDlg.FileName);
                         _statusBar.Message = Resources.Strings.Stage_BackupSuccess;
                     }
-                });
+                }
                 break;
             case StageMenuAction.RestoreData:
-                await _state.WithDialogOpen(async () =>
                 {
                     var openDlg = new OpenFileDialog
                     {
@@ -244,20 +242,18 @@ private async Task HandleMenu(StageMenuAction action)
                         await svc.RestoreAsync(openDlg.FileName);
                         _statusBar.Message = Resources.Strings.Stage_RestoreSuccess;
                     }
-                });
+                }
                 break;
             case StageMenuAction.ScreenSettings:
-                await _state.WithDialogOpen(async () =>
                 {
                     var win = App.Provider.GetRequiredService<ScreenModeWindow>();
                     win.Owner = App.Current.MainWindow;
                     win.ShowDialog();
                     _statusBar.Message = "Képernyő mód frissítve";
                     await Task.CompletedTask;
-                });
+                }
                 break;
             case StageMenuAction.EditUserInfo:
-                await _state.WithDialogOpen(async () =>
                 {
                     _statusBar.Message = Resources.Strings.Stage_UserInfoEditOpened;
                     await _userInfo.LoadAsync();
@@ -295,15 +291,14 @@ private async Task HandleMenu(StageMenuAction action)
                         _userInfo.TaxNumber = editorVm.TaxNumber;
                         _userInfo.BankAccount = editorVm.BankAccount;
                     }
-                });
+                }
                 break;
             case StageMenuAction.UserInfo:
-                await _state.WithDialogOpen(async () =>
                 {
                     CurrentViewModel = _about;
                     _statusBar.Message = Resources.Strings.Stage_AboutOpened;
                     await _about.LoadAsync();
-                });
+                }
                 break;
             case StageMenuAction.ExitApplication:
                 Application.Current.Shutdown();

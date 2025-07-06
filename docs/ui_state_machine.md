@@ -27,3 +27,4 @@ Ez a központi állapotkezelés garantálja, hogy minden ViewModel csak a saját
 ## Modális párbeszédek kezelése
 
 A `WithDialogOpen(Func<Task>)` segédfüggvény biztosítja, hogy minden párbeszédablak megnyitásakor az `InteractionState` értéke átmenetileg `DialogOpen` legyen. A hívó által megadott művelet lefutása után automatikusan visszaáll az előző állapot.
+Ezt a logikát a `NavigationService` is kihasználja, így minden `ShowCenteredDialog` vagy `ShowFileDialog` hívás automatikusan kezeli az állapotváltást.

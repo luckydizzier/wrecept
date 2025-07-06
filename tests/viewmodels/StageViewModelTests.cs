@@ -134,6 +134,7 @@ public class StageViewModelTests
     public async Task HandleMenuCommand_SwitchesViewAndState()
     {
         var state = new AppStateService(Path.GetTempFileName());
+        NavigationService.State = state;
         var invoice = new InvoiceEditorViewModel();
         var vm = new StageViewModel(
             invoice,
@@ -160,6 +161,7 @@ public class StageViewModelTests
     public async Task HandleMenu_UserInfo_TemporarilyOpensDialog()
     {
         var state = new AppStateService(Path.GetTempFileName());
+        NavigationService.State = state;
         var invoice = new InvoiceEditorViewModel();
         var changes = new List<AppInteractionState>();
         state.InteractionStateChanged += s => changes.Add(s);

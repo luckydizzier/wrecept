@@ -41,6 +41,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         var serviceCollection = new ServiceCollection();
         await ConfigureServicesAsync(serviceCollection, settings);
         Services = serviceCollection.BuildServiceProvider();
+        NavigationService.State = Services.GetRequiredService<AppStateService>();
         ThemeManager.ApplyDarkTheme(false);
     }
 
