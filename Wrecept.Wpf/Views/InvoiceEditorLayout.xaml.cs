@@ -63,8 +63,8 @@ public partial class InvoiceEditorLayout : UserControl
     {
         if (e.Key == System.Windows.Input.Key.Enter && DataContext is InvoiceEditorViewModel vm)
         {
+            // csak megjelenítjük a mentési megerősítő dialógust
             vm.ShowSavePromptCommand.Execute(null);
-            await vm.AddLineItemCommand.ExecuteAsync(null);
             EntryProduct.Focus();
             e.Handled = true;
         }
