@@ -51,7 +51,7 @@ public class StageViewModelTests
             LastView = last,
             CurrentInvoiceId = null
         };
-        var invoice = CreateUninitialized<InvoiceEditorViewModel>();
+        var invoice = new InvoiceEditorViewModel(); // Replace with proper instantiation logic.
         var product = new ProductMasterViewModel(new FakeProductService(), new FakeTaxRateService());
         var group = new ProductGroupMasterViewModel(new FakeProductGroupService());
         var supplier = new SupplierMasterViewModel(new FakeSupplierService());
