@@ -84,16 +84,16 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     internal void SetInitialValues(InvoiceItem item)
     {
-        product = item.Product?.Name ?? string.Empty;
-        quantity = item.Quantity;
-        unitPrice = item.UnitPrice;
-        taxRateId = item.TaxRateId;
-        unitId = item.Product?.UnitId ?? Guid.Empty;
-        unitName = item.Product?.Unit?.Name ?? string.Empty;
-        taxRateName = item.TaxRate?.Name ?? string.Empty;
-        productGroup = item.Product?.ProductGroup?.Name ?? string.Empty;
-        description = item.Description;
-        isEditable = false;
+        Product = item.Product?.Name ?? string.Empty;
+        Quantity = item.Quantity;
+        UnitPrice = item.UnitPrice;
+        TaxRateId = item.TaxRateId;
+        UnitId = item.Product?.UnitId ?? Guid.Empty;
+        UnitName = item.Product?.Unit?.Name ?? string.Empty;
+        TaxRateName = item.TaxRate?.Name ?? string.Empty;
+        ProductGroup = item.Product?.ProductGroup?.Name ?? string.Empty;
+        Description = item.Description;
+        IsEditable = false;
     }
 }
 

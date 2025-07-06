@@ -6,6 +6,7 @@ using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Wrecept.Wpf.Services;
 

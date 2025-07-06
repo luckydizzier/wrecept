@@ -6,6 +6,7 @@ namespace Wrecept.Wpf.Services;
 using System.Text.Json;
 using Wrecept.Wpf.ViewModels;
 using System.Threading.Tasks;
+using System.IO;
 
 public partial class AppStateService : ObservableObject
 {
