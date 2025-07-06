@@ -3,6 +3,7 @@ using Wrecept.Core.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -11,7 +12,8 @@ public partial class PaymentMethodMasterViewModel : EditableMasterDataViewModel<
     public ObservableCollection<PaymentMethod> PaymentMethods => Items;
     private readonly IPaymentMethodService _service;
 
-    public PaymentMethodMasterViewModel(IPaymentMethodService service)
+    public PaymentMethodMasterViewModel(IPaymentMethodService service, AppStateService state)
+        : base(state)
     {
         _service = service;
     }

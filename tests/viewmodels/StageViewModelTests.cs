@@ -9,6 +9,7 @@ using Wrecept.Wpf.Services;
 using Wrecept.Core.Services;
 using Wrecept.Core.Models;
 using Wrecept.Core.Entities;
+using Wrecept.Core.Enums;
 
 namespace Wrecept.Tests.ViewModels;
 
@@ -132,8 +133,26 @@ public class StageViewModelTests
     [StaFact]
     public async Task HandleMenuCommand_SwitchesViewAndState()
     {
-        var vm = Create(StageMenuAction.EditProducts);
+        var state = new AppStateService(Path.GetTempFileName());
+        var invoice = new InvoiceEditorViewModel();
+        var vm = new StageViewModel(
+            invoice,
+            new ProductMasterViewModel(new FakeProductService(), new FakeTaxRateService(), state),
+            new ProductGroupMasterViewModel(new FakeProductGroupService(), state),
+            new SupplierMasterViewModel(new FakeSupplierService(), state),
+            new TaxRateMasterViewModel(new FakeTaxRateService(), state),
+            new PaymentMethodMasterViewModel(new FakePaymentMethodService(), state),
+            new UnitMasterViewModel(new FakeUnitService(), state),
+            new UserInfoViewModel(new FakeUserInfoService()),
+            new AboutViewModel(new FakeUserInfoService()),
+            new PlaceholderViewModel(),
+            new StatusBarViewModel(),
+            new FakeDbHealth(),
+            new FakeSession(),
+            state);
+
         await vm.HandleMenuCommand.ExecuteAsync(StageMenuAction.EditUnits);
         Assert.IsType<UnitMasterViewModel>(vm.CurrentViewModel);
+        Assert.Equal(AppInteractionState.EditingMasterData, state.InteractionState);
     }
 }

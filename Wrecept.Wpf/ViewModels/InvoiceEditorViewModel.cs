@@ -9,6 +9,7 @@ using Wrecept.Core.Models;
 using Wrecept.Core.Utilities;
 using Wrecept.Wpf.Resources;
 using Wrecept.Core.Services;
+using Wrecept.Core.Enums;
 using System.Windows;
 using Wrecept.Wpf.Views.Controls;
 using Wrecept.Wpf.Views;
@@ -228,7 +229,14 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
     {
         OnPropertyChanged(nameof(IsInlineCreatorVisible));
         if (value is null)
+        {
             InlineCreatorTarget = null;
+            _state.InteractionState = AppInteractionState.EditingInvoice;
+        }
+        else
+        {
+            _state.InteractionState = AppInteractionState.InlineCreatorActive;
+        }
     }
 
     public bool IsSavePromptVisible => SavePrompt != null;
@@ -257,13 +265,28 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
     }
 
     partial void OnSavePromptChanged(object? value)
-        => OnPropertyChanged(nameof(IsSavePromptVisible));
+    {
+        OnPropertyChanged(nameof(IsSavePromptVisible));
+        _state.InteractionState = value == null
+            ? AppInteractionState.EditingInvoice
+            : AppInteractionState.InlinePromptActive;
+    }
 
     partial void OnArchivePromptChanged(object? value)
-        => OnPropertyChanged(nameof(IsArchivePromptVisible));
+    {
+        OnPropertyChanged(nameof(IsArchivePromptVisible));
+        _state.InteractionState = value == null
+            ? AppInteractionState.EditingInvoice
+            : AppInteractionState.InlinePromptActive;
+    }
 
     partial void OnDeletePromptChanged(object? value)
-        => OnPropertyChanged(nameof(IsDeletePromptVisible));
+    {
+        OnPropertyChanged(nameof(IsDeletePromptVisible));
+        _state.InteractionState = value == null
+            ? AppInteractionState.EditingInvoice
+            : AppInteractionState.InlinePromptActive;
+    }
 
     public InvoiceEditorViewModel(
         IPaymentMethodService paymentMethods,
@@ -483,6 +506,7 @@ private void UpdateSupplierId(string name)
             await _session.SaveLastInvoiceIdAsync(null);
             _state.CurrentInvoiceId = null;
             await _state.SaveAsync();
+            _state.InteractionState = AppInteractionState.EditingInvoice;
             return;
         }
 
@@ -518,6 +542,7 @@ private void UpdateSupplierId(string name)
         await _session.SaveLastInvoiceIdAsync(InvoiceId);
         _state.CurrentInvoiceId = InvoiceId;
         await _state.SaveAsync();
+        _state.InteractionState = AppInteractionState.EditingInvoice;
     }
 
     [RelayCommand]

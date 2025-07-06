@@ -3,6 +3,7 @@ using Wrecept.Core.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -10,7 +11,8 @@ public partial class SupplierMasterViewModel : EditableMasterDataViewModel<Suppl
 {
     private readonly ISupplierService _service;
 
-    public SupplierMasterViewModel(ISupplierService service)
+    public SupplierMasterViewModel(ISupplierService service, AppStateService state)
+        : base(state)
     {
         _service = service;
     }

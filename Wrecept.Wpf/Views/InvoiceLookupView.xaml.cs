@@ -27,10 +27,7 @@ public partial class InvoiceLookupView : UserControl
         try
         {
             if (DataContext is InvoiceLookupViewModel vm)
-            {
                 await vm.LoadAsync();
-                InvoiceList.Focus();
-            }
         }
         catch (Exception ex)
         {
@@ -39,21 +36,6 @@ public partial class InvoiceLookupView : UserControl
         }
     }
 
-    private async void InvoiceList_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-    {
-        if (DataContext is not InvoiceLookupViewModel vm)
-            return;
-
-        if (e.Key == System.Windows.Input.Key.Insert)
-        {
-            await vm.PromptNewInvoiceAsync();
-            e.Handled = true;
-        }
-        else if (e.Key == System.Windows.Input.Key.Up && InvoiceList.SelectedIndex == 0)
-        {
-            await vm.PromptNewInvoiceAsync();
-            e.Handled = true;
-        }
-    }
+    // billentyűkezelés a KeyboardManageren keresztül történik
 
 }

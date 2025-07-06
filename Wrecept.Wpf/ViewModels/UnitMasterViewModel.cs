@@ -3,6 +3,7 @@ using Wrecept.Core.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -12,7 +13,8 @@ public partial class UnitMasterViewModel : EditableMasterDataViewModel<Unit>
 
     private readonly IUnitService _service;
 
-    public UnitMasterViewModel(IUnitService service)
+    public UnitMasterViewModel(IUnitService service, AppStateService state)
+        : base(state)
     {
         _service = service;
     }

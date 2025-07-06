@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
+using Wrecept.Core.Enums;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -9,12 +11,15 @@ public abstract partial class EditableMasterDataViewModel<T> : MasterDataBaseVie
     [ObservableProperty]
     private bool isEditing;
 
+    private readonly AppStateService _state;
+
     public IRelayCommand EditSelectedCommand { get; }
     public IRelayCommand DeleteSelectedCommand { get; }
     public IRelayCommand CloseDetailsCommand { get; }
 
-    protected EditableMasterDataViewModel()
+    protected EditableMasterDataViewModel(AppStateService state)
     {
+        _state = state;
         EditSelectedCommand = new RelayCommand(OnEditSelected, CanModify);
         DeleteSelectedCommand = new RelayCommand(async () => await OnDeleteSelected(), CanModify);
         CloseDetailsCommand = new RelayCommand(() => IsEditing = false);
@@ -41,4 +46,9 @@ public abstract partial class EditableMasterDataViewModel<T> : MasterDataBaseVie
     protected virtual Task DeleteAsync() => Task.CompletedTask;
 
     private bool CanModify() => SelectedItem != null;
+
+    partial void OnIsEditingChanged(bool value)
+        => _state.InteractionState = value
+            ? AppInteractionState.EditingMasterData
+            : AppInteractionState.BrowsingInvoices;
 }

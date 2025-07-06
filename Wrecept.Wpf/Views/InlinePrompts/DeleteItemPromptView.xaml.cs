@@ -13,7 +13,7 @@ public partial class DeleteItemPromptView : UserControl
 
     private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
     {
-        Focus();
+        // fókuszkezelést a FocusManager végzi
     }
 
 }

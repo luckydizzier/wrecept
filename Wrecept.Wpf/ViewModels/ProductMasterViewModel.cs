@@ -22,12 +22,13 @@ public partial class ProductMasterViewModel : EditableMasterDataViewModel<Produc
 
     public new IRelayCommand EditSelectedCommand { get; }
 
-    public ProductMasterViewModel(IProductService service, ITaxRateService taxRates)
-    {
-        _service = service;
-        _taxRates = taxRates;
-        EditSelectedCommand = new RelayCommand(EditSelected, () => SelectedItem != null);
-    }
+public ProductMasterViewModel(IProductService service, ITaxRateService taxRates, AppStateService state)
+    : base(state)
+{
+    _service = service;
+    _taxRates = taxRates;
+    EditSelectedCommand = new RelayCommand(EditSelected, () => SelectedItem != null);
+}
 
     protected override Task<List<Product>> GetItemsAsync()
         => _service.GetActiveAsync();

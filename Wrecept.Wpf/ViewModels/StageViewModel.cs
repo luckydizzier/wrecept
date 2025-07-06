@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
+using Wrecept.Core.Enums;
 using System.IO;
 using Wrecept.Core.Entities;
 using Wrecept.Core.Services;
@@ -92,6 +93,7 @@ public partial class StageViewModel : ObservableObject
         _session = session;
         _state = state;
         ApplySavedState();
+        _state.InteractionState = AppInteractionState.MainMenu;
     }
 
     private void ApplySavedState()
@@ -103,27 +105,34 @@ public partial class StageViewModel : ObservableObject
             case StageMenuAction.EditProducts:
             case StageMenuAction.ListProducts:
                 CurrentViewModel = _productMaster;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.EditSuppliers:
             case StageMenuAction.ListSuppliers:
                 CurrentViewModel = _supplierMaster;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.EditProductGroups:
                 CurrentViewModel = _productGroupMaster;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.EditVatKeys:
                 CurrentViewModel = _taxRateMaster;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.EditPaymentMethods:
                 CurrentViewModel = _paymentMethodMaster;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.EditUnits:
                 CurrentViewModel = _unitMaster;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             default:
                 CurrentViewModel = _invoiceEditor;
                 if (_state.CurrentInvoiceId.HasValue)
                     _ = _invoiceEditor.LoadInvoice(_state.CurrentInvoiceId.Value);
+                _state.InteractionState = AppInteractionState.EditingInvoice;
                 break;
         }
     }
@@ -139,44 +148,53 @@ private async Task HandleMenu(StageMenuAction action)
             case StageMenuAction.ListProducts:
                 CurrentViewModel = _productMaster;
                 _statusBar.Message = Resources.Strings.Stage_ProductViewOpened;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.EditSuppliers:
             case StageMenuAction.ListSuppliers:
                 CurrentViewModel = _supplierMaster;
                 _statusBar.Message = Resources.Strings.Stage_SupplierViewOpened;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.EditProductGroups:
                 CurrentViewModel = _productGroupMaster;
                 _statusBar.Message = Resources.Strings.Stage_ProductGroupViewOpened;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.EditVatKeys:
                 CurrentViewModel = _taxRateMaster;
                 _statusBar.Message = Resources.Strings.Stage_TaxRateViewOpened;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.EditPaymentMethods:
                 CurrentViewModel = _paymentMethodMaster;
                 _statusBar.Message = Resources.Strings.Stage_PaymentMethodViewOpened;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.EditUnits:
                 CurrentViewModel = _unitMaster;
                 _statusBar.Message = Resources.Strings.Stage_UnitViewOpened;
+                _state.InteractionState = AppInteractionState.EditingMasterData;
                 break;
             case StageMenuAction.InboundDeliveryNotes:
             case StageMenuAction.UpdateInboundInvoices:
                 CurrentViewModel = _invoiceEditor;
                 _statusBar.Message = Resources.Strings.Stage_InvoiceEditorOpened;
+                _state.InteractionState = AppInteractionState.EditingInvoice;
                 break;
             case StageMenuAction.ListInvoices:
             case StageMenuAction.InventoryCard:
             case StageMenuAction.PrinterSettings:
                 CurrentViewModel = _placeholder;
                 _statusBar.Message = Resources.Strings.Stage_FunctionNotReady;
+                _state.InteractionState = AppInteractionState.BrowsingInvoices;
                 break;
             case StageMenuAction.CheckFiles:
                 CurrentViewModel = _placeholder;
                 _statusBar.Message = Resources.Strings.Stage_FunctionNotReady;
                 var ok = await _dbHealth.CheckAsync();
                 _statusBar.Message = ok ? Resources.Strings.Stage_DbCheckOk : Resources.Strings.Stage_DbCheckFailed;
+                _state.InteractionState = AppInteractionState.MainMenu;
                 break;
             case StageMenuAction.AfterPowerOutage:
                 var last = await _session.LoadLastInvoiceIdAsync();
@@ -186,11 +204,13 @@ private async Task HandleMenu(StageMenuAction action)
                     await _invoiceEditor.LoadInvoice(last.Value);
                     _statusBar.Message = Resources.Strings.Stage_LastInvoiceRestored;
                     _state.CurrentInvoiceId = last.Value;
+                    _state.InteractionState = AppInteractionState.EditingInvoice;
                 }
                 else
                 {
                     CurrentViewModel = _placeholder;
                     _statusBar.Message = Resources.Strings.Stage_NoInvoiceToRestore;
+                    _state.InteractionState = AppInteractionState.MainMenu;
                 }
                 break;
             case StageMenuAction.BackupData:
@@ -206,6 +226,7 @@ private async Task HandleMenu(StageMenuAction action)
                     await svc.BackupAsync(saveDlg.FileName);
                     _statusBar.Message = Resources.Strings.Stage_BackupSuccess;
                 }
+                _state.InteractionState = AppInteractionState.DialogOpen;
                 break;
             case StageMenuAction.RestoreData:
                 var openDlg = new OpenFileDialog
@@ -219,12 +240,14 @@ private async Task HandleMenu(StageMenuAction action)
                     await svc.RestoreAsync(openDlg.FileName);
                     _statusBar.Message = Resources.Strings.Stage_RestoreSuccess;
                 }
+                _state.InteractionState = AppInteractionState.DialogOpen;
                 break;
             case StageMenuAction.ScreenSettings:
                 var win = App.Provider.GetRequiredService<ScreenModeWindow>();
                 win.Owner = App.Current.MainWindow;
                 win.ShowDialog();
                 _statusBar.Message = "Képernyő mód frissítve";
+                _state.InteractionState = AppInteractionState.DialogOpen;
                 break;
             case StageMenuAction.EditUserInfo:
                 _statusBar.Message = Resources.Strings.Stage_UserInfoEditOpened;
@@ -264,18 +287,22 @@ private async Task HandleMenu(StageMenuAction action)
                     _userInfo.BankAccount = editorVm.BankAccount;
                 }
 
+                _state.InteractionState = AppInteractionState.DialogOpen;
                 break;
             case StageMenuAction.UserInfo:
                 CurrentViewModel = _about;
                 _statusBar.Message = Resources.Strings.Stage_AboutOpened;
                 await _about.LoadAsync();
+                _state.InteractionState = AppInteractionState.DialogOpen;
                 break;
             case StageMenuAction.ExitApplication:
                 Application.Current.Shutdown();
+                _state.InteractionState = AppInteractionState.Exiting;
                 break;
             default:
                 CurrentViewModel = _invoiceEditor;
                 _statusBar.Message = string.Empty;
+                _state.InteractionState = AppInteractionState.MainMenu;
                 break;
         }
         await _state.SaveAsync();

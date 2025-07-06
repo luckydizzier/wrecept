@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
+using Wrecept.Core.Enums;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -20,6 +22,7 @@ public partial class InvoiceLookupViewModel : ObservableObject
 {
     private readonly IInvoiceService _invoices;
     private readonly INumberingService _numbering;
+    private readonly AppStateService _state;
 
     public event Action<InvoiceLookupItem>? InvoiceSelected;
     public event Action<string>? InvoiceCreated;
@@ -38,10 +41,16 @@ public partial class InvoiceLookupViewModel : ObservableObject
     [ObservableProperty]
     private object? inlinePrompt;
 
-    public InvoiceLookupViewModel(IInvoiceService invoices, INumberingService numbering)
+    partial void OnInlinePromptChanged(object? value)
+        => _state.InteractionState = value == null
+            ? AppInteractionState.BrowsingInvoices
+            : AppInteractionState.InlinePromptActive;
+
+    public InvoiceLookupViewModel(IInvoiceService invoices, INumberingService numbering, AppStateService state)
     {
         _invoices = invoices;
         _numbering = numbering;
+        _state = state;
     }
 
     public async Task LoadAsync()
