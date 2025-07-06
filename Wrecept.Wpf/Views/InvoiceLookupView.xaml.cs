@@ -38,4 +38,13 @@ public partial class InvoiceLookupView : UserControl
         }
     }
 
+    private async void InvoiceList_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Insert && DataContext is InvoiceLookupViewModel vm)
+        {
+            await vm.PromptNewInvoiceAsync();
+            e.Handled = true;
+        }
+    }
+
 }

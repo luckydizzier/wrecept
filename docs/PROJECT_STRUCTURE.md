@@ -194,6 +194,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
+- **Wrecept.Core/Services/INumberingService.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: Core
+  - Type: C#
+  - Responsibility: Sorszám generálás
+  - Interaction: Storage
+  - Special Notes: -
 - **Wrecept.Core/Services/IPaymentMethodService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
@@ -487,6 +494,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
+  - Special Notes: -
+- **Wrecept.Storage/Services/NumberingService.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: Storage
+  - Type: C#
+  - Responsibility: Sorszám generálás
+  - Interaction: File
   - Special Notes: -
 - **Wrecept.Storage/Services/SettingsService.cs**
   - Purpose: Üzleti szolgáltatás
