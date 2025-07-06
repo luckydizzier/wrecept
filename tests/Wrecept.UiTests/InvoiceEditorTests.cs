@@ -44,21 +44,16 @@ public class InvoiceEditorTests
             .FindElementByAccessibilityId("InvoiceList"));
         list.Click();
 
-        new OpenQA.Selenium.Interactions.Actions(driver)
-            .SendKeys(OpenQA.Selenium.Keys.Insert)
-            .Perform();
+        var actions = new OpenQA.Selenium.Interactions.Actions(driver);
+        actions.SendKeys(OpenQA.Selenium.Keys.Insert).Perform();
 
         var box = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
             .FindElementByAccessibilityId("NumberBox"));
-        new OpenQA.Selenium.Interactions.Actions(driver)
-            .SendKeys(OpenQA.Selenium.Keys.Enter)
-            .Perform();
+        actions.SendKeys(OpenQA.Selenium.Keys.Enter).Perform();
         wait.Until(d => d.FindElementsByAccessibilityId("NumberBox").Count == 0);
 
         list.Click();
-        new OpenQA.Selenium.Interactions.Actions(driver)
-            .SendKeys(OpenQA.Selenium.Keys.ArrowUp)
-            .Perform();
+        actions.SendKeys(OpenQA.Selenium.Keys.ArrowUp).Perform();
 
         box = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
             .FindElementByAccessibilityId("NumberBox"));
