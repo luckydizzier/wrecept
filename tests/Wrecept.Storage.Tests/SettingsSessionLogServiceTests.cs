@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Wrecept.Core.Entities;
+using Wrecept.Core;
 using Wrecept.Storage.Services;
 using Xunit;
 
@@ -100,7 +101,7 @@ public class SettingsSessionLogServiceTests
         }
         finally
         {
-            Environment.SetEnvironmentVariable("HOME", oldHome);
+            Environment.SetEnvironmentVariable("APPDATA", oldAppData);
             if (Directory.Exists(tempHome))
             {
                 Directory.Delete(tempHome, recursive: true);
