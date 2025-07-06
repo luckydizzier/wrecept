@@ -11,6 +11,12 @@ public partial class SaveLinePromptView : UserControl
     public SaveLinePromptView()
     {
         InitializeComponent();
+        Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        Focus();
     }
 
 }
