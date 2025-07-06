@@ -761,9 +761,12 @@ private void UpdateSupplierId(string name)
                 var ok = await _invoiceService.CreateAsync(_draft);
                 if (ok)
                 {
-                    InvoiceId = _draft.Id;
+                    var newId = _draft.Id;
+                    InvoiceId = newId;
                     IsNew = false;
                     _draft = new Invoice();
+                    await Lookup.LoadAsync();
+                    Lookup.SelectedInvoice = Lookup.Invoices.FirstOrDefault(i => i.Id == newId);
                 }
             }
             else
@@ -825,6 +828,7 @@ private void UpdateSupplierId(string name)
         await _session.SaveLastInvoiceIdAsync(null);
         _state.CurrentInvoiceId = null;
         await _state.SaveAsync();
+        await Lookup.LoadAsync();
     }
 
     private async void LookupLoadSelected()
