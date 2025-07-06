@@ -8,7 +8,7 @@
     </UserControl.InputBindings>
     <Border Background="#F5F5DC" Padding="4" Margin="0,4,0,0" HorizontalAlignment="Center">
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBox x:Name="NumberBox" Width="120" Text="{Binding EditableNumber}" Margin="0,0,4,0" />
+            <TextBox x:Name="NumberBox" Width="120" Text="{Binding EditableNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,4,0" />
             <TextBlock Text="{Binding Message}" VerticalAlignment="Center" />
         </StackPanel>
     </Border>
