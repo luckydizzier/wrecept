@@ -1,5 +1,4 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using Wrecept.Core.Enums;
 
 namespace Wrecept.Wpf.Services;
 
@@ -16,9 +15,6 @@ public partial class AppStateService : ObservableObject
     {
         _path = path;
     }
-
-    [ObservableProperty]
-    private AppState current = AppState.None;
 
     [ObservableProperty]
     private StageMenuAction lastView = StageMenuAction.InboundDeliveryNotes;

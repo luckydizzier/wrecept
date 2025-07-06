@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core.Services;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Services;
+using FocusService = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views;
 
@@ -29,7 +30,8 @@ public partial class InvoiceLookupView : UserControl
             if (DataContext is InvoiceLookupViewModel vm)
             {
                 await vm.LoadAsync();
-                InvoiceList.Focus();
+                var focus = App.Provider.GetRequiredService<FocusService>();
+                focus.RequestFocus(InvoiceList);
             }
         }
         catch (Exception ex)

@@ -1,5 +1,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
+using FocusService = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views.InlinePrompts;
 
@@ -13,7 +15,8 @@ public partial class DeleteItemPromptView : UserControl
 
     private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
     {
-        Focus();
+        var focus = App.Provider.GetRequiredService<FocusService>();
+        focus.RequestFocus(this);
     }
 
 }

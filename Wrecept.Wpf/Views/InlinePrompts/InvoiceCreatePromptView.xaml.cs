@@ -2,7 +2,7 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.Core.Services;
+using FocusService = Wrecept.Wpf.Services.FocusManager;
 
 namespace Wrecept.Wpf.Views.InlinePrompts;
 
@@ -16,7 +16,8 @@ public partial class InvoiceCreatePromptView : UserControl
 
     private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
     {
-        NumberBox.Focus();
+        var focus = App.Provider.GetRequiredService<FocusService>();
+        focus.RequestFocus(NumberBox);
     }
 
 }
