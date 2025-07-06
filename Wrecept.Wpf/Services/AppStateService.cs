@@ -19,9 +19,6 @@ public partial class AppStateService : ObservableObject
     }
 
     [ObservableProperty]
-    private AppState current = AppState.None;
-
-    [ObservableProperty]
     private AppInteractionState interactionState = AppInteractionState.None;
 
     public event Action<AppInteractionState>? InteractionStateChanged;

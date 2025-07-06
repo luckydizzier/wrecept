@@ -2,21 +2,28 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.Core.Services;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.Views.InlinePrompts;
 
 public partial class InvoiceCreatePromptView : UserControl
 {
-    public InvoiceCreatePromptView()
+    private readonly FocusManager _focus;
+
+    public InvoiceCreatePromptView() : this(App.Provider.GetRequiredService<FocusManager>())
     {
+    }
+
+    public InvoiceCreatePromptView(FocusManager focus)
+    {
+        _focus = focus;
         InitializeComponent();
         Loaded += OnLoaded;
     }
 
     private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
     {
-        // fókuszkezelést a FocusManager végzi
+        _focus.RequestFocus(NumberBox);
     }
 
 }
