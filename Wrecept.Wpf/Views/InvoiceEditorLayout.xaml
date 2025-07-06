@@ -157,7 +157,7 @@
                                    CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
                     <TextBox x:Name="EntryPrice" Grid.Column="3" Margin="4,0" Text="{Binding UnitPrice, Mode=TwoWay}" />
-                    <c:EditLookup x:Name="EntryTax" Grid.Column="4" Tag="LastEntry"
+                    <c:EditLookup x:Name="EntryTax" Grid.Column="4" Tag="LastEntry" PreviewKeyDown="LastEntry_PreviewKeyDown"
                                   ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                   DisplayMemberPath="Name"
                                   SelectedValuePath="Id"
