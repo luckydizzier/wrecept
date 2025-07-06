@@ -44,5 +44,19 @@ public partial class InvoiceEditorLayout : UserControl
             progressWindow.Close();
         };
     }
+
+    private void LastEntry_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Escape && DataContext is InvoiceEditorViewModel vm)
+        {
+            if (vm.IsInLineFinalizationPrompt)
+                return;
+
+            vm.IsInLineFinalizationPrompt = true;
+            vm.SavePrompt = new SaveLinePromptViewModel(vm,
+                "Végeztél a szerkesztéssel? (Enter=Igen, Esc=Nem)", finalize: true);
+            e.Handled = true;
+        }
+    }
 }
 
