@@ -59,7 +59,7 @@ public partial class InvoiceEditorLayout : UserControl
         }
     }
 
-    private async void EntryDesc_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    private void EntryDesc_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == System.Windows.Input.Key.Enter && DataContext is InvoiceEditorViewModel vm)
         {
