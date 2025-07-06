@@ -49,7 +49,7 @@ Date selection (default = today, arrow or numpad)
 
 Payment method (SmartLookup)
 
-Bruttó checkbox (affects unit price interpretation)
+Bruttó jelölőnégyzet a számlaszám mező mellett. Csak szerkeszthető számlánál aktív, az egységár értelmezését szabályozza.
 
 3. Invoice Line Items Entry
 

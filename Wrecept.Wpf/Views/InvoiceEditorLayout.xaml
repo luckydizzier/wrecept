@@ -108,10 +108,15 @@
                                           IsEnabled="{Binding IsEditable}" />
                         </StackPanel>
 
-                        <!-- Invoice number -->
+                        <!-- Invoice number and gross mode -->
                         <StackPanel Margin="0,6,0,0">
                             <Label Content="_Számlaszám" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=NumberBox}" />
-                            <TextBox x:Name="NumberBox" Width="220" Text="{Binding Number}" IsEnabled="{Binding IsNew}" Style="{StaticResource HeaderTextBoxBold}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="NumberBox" Width="220" Text="{Binding Number}" IsEnabled="{Binding IsNew}" Style="{StaticResource HeaderTextBoxBold}" />
+                                <CheckBox Content="Bruttó" Margin="8,0,0,0"
+                                          IsChecked="{Binding IsGross}"
+                                          IsEnabled="{Binding IsEditable}" />
+                            </StackPanel>
                         </StackPanel>
                     </UniformGrid>
                 </Border>
