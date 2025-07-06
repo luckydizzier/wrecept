@@ -16,6 +16,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPaymentMethodService, PaymentMethodService>();
         services.AddScoped<IUnitService, UnitService>();
         services.AddSingleton<ILogService, NullLogService>();
+        services.AddSingleton<INumberingService, NullNumberingService>();
         return services;
     }
 }
