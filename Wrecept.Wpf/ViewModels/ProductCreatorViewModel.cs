@@ -5,7 +5,6 @@ using CommunityToolkit.Mvvm.Input;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -14,8 +13,6 @@ public partial class ProductCreatorViewModel : ObservableObject
     private readonly InvoiceEditorViewModel _parent;
     private readonly InvoiceItemRowViewModel _row;
     private readonly IProductService _products;
-
-    public ObservableCollection<ProductGroup> ProductGroups => _parent.ProductGroups;
 
     [ObservableProperty]
     private bool isInlineOpen = true;
@@ -38,9 +35,6 @@ public partial class ProductCreatorViewModel : ObservableObject
     [ObservableProperty]
     private Guid taxRateId;
 
-    [ObservableProperty]
-    private Guid productGroupId;
-
     public ProductCreatorViewModel(InvoiceEditorViewModel parent, InvoiceItemRowViewModel row, IProductService products)
     {
         _parent = parent;
@@ -58,19 +52,13 @@ public partial class ProductCreatorViewModel : ObservableObject
             Net = Net,
             Gross = Gross,
             UnitId = UnitId,
-            TaxRateId = TaxRateId,
-            ProductGroupId = ProductGroupId
+            TaxRateId = TaxRateId
         };
 
         var id = await _products.AddAsync(product);
         product.Id = id;
         _parent.Products.Add(product);
         _row.Product = product.Name;
-        _row.UnitId = UnitId;
-        _row.UnitName = _parent.Units.FirstOrDefault(u => u.Id == UnitId)?.Name ?? string.Empty;
-        _row.TaxRateId = TaxRateId;
-        _row.TaxRateName = _parent.TaxRates.FirstOrDefault(t => t.Id == TaxRateId)?.Name ?? string.Empty;
-        _row.ProductGroup = _parent.ProductGroups.FirstOrDefault(g => g.Id == ProductGroupId)?.Name ?? string.Empty;
         _parent.InlineCreator = null;
         if (_parent.IsEditable)
             await _parent.AddLineItemCommand.ExecuteAsync(null);
