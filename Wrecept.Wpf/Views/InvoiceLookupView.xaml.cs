@@ -41,7 +41,15 @@ public partial class InvoiceLookupView : UserControl
 
     private async void InvoiceList_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
-        if (e.Key == System.Windows.Input.Key.Insert && DataContext is InvoiceLookupViewModel vm)
+        if (DataContext is not InvoiceLookupViewModel vm)
+            return;
+
+        if (e.Key == System.Windows.Input.Key.Insert)
+        {
+            await vm.PromptNewInvoiceAsync();
+            e.Handled = true;
+        }
+        else if (e.Key == System.Windows.Input.Key.Up && InvoiceList.SelectedIndex == 0)
         {
             await vm.PromptNewInvoiceAsync();
             e.Handled = true;
