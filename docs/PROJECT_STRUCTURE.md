@@ -1713,6 +1713,335 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: 
   - Interaction: Services, Storage
   - Special Notes: -
+- **tests/Wrecept.Storage.Tests/DataSeederTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/DbInitializerTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/InvoiceRepositoryTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/PaymentMethodRepositoryTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/ProductGroupRepositoryTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/ProductRepositoryTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/SettingsSessionLogServiceTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/SupplierRepositoryTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/TaxRateRepositoryTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/UnitRepositoryTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/WalPragmaInterceptorTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Storage.Tests/Wrecept.Storage.Tests.csproj**
+  - Purpose: Projektfájl
+  - Layer: Tests
+  - Type: Project
+  - Responsibility: Build konfiguráció
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/AppStateServiceTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/BooleanToRowDetailsConverterTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/DialogHelperTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/DialogServiceTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/EditEntityDialogTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/FileBackupServiceTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/FocusManagerTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/InvoiceLineTotalsConverterTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/IsReadOnlyBindingConverterTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/KeyboardManagerTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/MessageBoxNotificationServiceTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/NavigationServiceTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/NegativeValueForegroundConverterTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/PdfInvoiceExporterTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/QuantityToStyleConverterTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/ScreenModeManagerTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/StartupOrchestratorTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/StringNullOrEmptyToVisibilityConverterTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/ThemeManagerTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/Wrecept.Tests/WalPragmaTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/PaymentMethodCreatorViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/PaymentMethodMasterViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/ProductCreatorViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/ProductGroupMasterViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/ProductMasterViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/ProgressViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/ScreenModeViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/SetupViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/StageViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/SupplierCreatorViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/SupplierMasterViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/TaxRateCreatorViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/TaxRateMasterViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/UnitCreatorViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
+- **tests/viewmodels/UnitMasterViewModelTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
 - **tools/generate_changelog.py**
   - Purpose: Fájl
   - Layer: Tooling
