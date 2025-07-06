@@ -24,6 +24,7 @@ számlafejléc mezőknél.
 - Fókuszkezdő pontok nézetenként:
   - **StageView** – a főmenüsor első eleme
   - **InvoiceLookupView** – `InvoiceList` `ListBox`
+    - A lista betöltése után az `OnLoaded` esemény hívja meg az `InvoiceList.Focus()` metódust, így a kurzor rögtön a listára kerül.
   - **InvoiceEditorLayout** – bal oldali `InvoiceList`
   - **ProductMasterView** – a táblázat (Grid)
   - **SupplierMasterView** – a táblázat (Grid)
