@@ -23,3 +23,7 @@ Az alkalmazás felhasználói felülete egy egyszerű állapotgépen keresztül 
 - **ExitApplication → Exiting** – a program leállítása előtt.
 
 Ez a központi állapotkezelés garantálja, hogy minden ViewModel csak a saját felelősségébe tartozó állapotot változtassa, a fókusz- és billentyűkezelés pedig egyetlen helyre koncentrálódik.
+
+## Modális párbeszédek kezelése
+
+A `WithDialogOpen(Func<Task>)` segédfüggvény biztosítja, hogy minden párbeszédablak megnyitásakor az `InteractionState` értéke átmenetileg `DialogOpen` legyen. A hívó által megadott művelet lefutása után automatikusan visszaáll az előző állapot.

@@ -548,17 +548,20 @@ private void UpdateSupplierId(string name)
     [RelayCommand]
     private async Task SavePdfAsync()
     {
-        var dlg = new SaveFileDialog
+        await _state.WithDialogOpen(async () =>
         {
-            Filter = "PDF (*.pdf)|*.pdf",
-            FileName = $"{Number}.pdf"
-        };
-        if (NavigationService.ShowFileDialog(dlg))
-        {
-            var invoice = await _invoiceService.GetAsync(InvoiceId);
-            if (invoice != null)
-                await _exporter.SavePdfAsync(invoice, dlg.FileName);
-        }
+            var dlg = new SaveFileDialog
+            {
+                Filter = "PDF (*.pdf)|*.pdf",
+                FileName = $"{Number}.pdf"
+            };
+            if (NavigationService.ShowFileDialog(dlg))
+            {
+                var invoice = await _invoiceService.GetAsync(InvoiceId);
+                if (invoice != null)
+                    await _exporter.SavePdfAsync(invoice, dlg.FileName);
+            }
+        });
     }
 
     [RelayCommand]

@@ -155,4 +155,33 @@ public class StageViewModelTests
         Assert.IsType<UnitMasterViewModel>(vm.CurrentViewModel);
         Assert.Equal(AppInteractionState.EditingMasterData, state.InteractionState);
     }
+
+    [StaFact]
+    public async Task HandleMenu_UserInfo_TemporarilyOpensDialog()
+    {
+        var state = new AppStateService(Path.GetTempFileName());
+        var invoice = new InvoiceEditorViewModel();
+        var changes = new List<AppInteractionState>();
+        state.InteractionStateChanged += s => changes.Add(s);
+        var vm = new StageViewModel(
+            invoice,
+            new ProductMasterViewModel(new FakeProductService(), new FakeTaxRateService(), state),
+            new ProductGroupMasterViewModel(new FakeProductGroupService(), state),
+            new SupplierMasterViewModel(new FakeSupplierService(), state),
+            new TaxRateMasterViewModel(new FakeTaxRateService(), state),
+            new PaymentMethodMasterViewModel(new FakePaymentMethodService(), state),
+            new UnitMasterViewModel(new FakeUnitService(), state),
+            new UserInfoViewModel(new FakeUserInfoService()),
+            new AboutViewModel(new FakeUserInfoService()),
+            new PlaceholderViewModel(),
+            new StatusBarViewModel(),
+            new FakeDbHealth(),
+            new FakeSession(),
+            state);
+
+        await vm.HandleMenuCommand.ExecuteAsync(StageMenuAction.UserInfo);
+
+        Assert.Contains(AppInteractionState.DialogOpen, changes);
+        Assert.Equal(AppInteractionState.MainMenu, state.InteractionState);
+    }
 }

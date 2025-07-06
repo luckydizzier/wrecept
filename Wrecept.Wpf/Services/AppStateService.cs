@@ -62,4 +62,24 @@ public partial class AppStateService : ObservableObject
         var json = JsonSerializer.Serialize(data);
         await File.WriteAllTextAsync(_path, json);
     }
+
+    /// <summary>
+    /// Segédfüggvény modális dialógusokhoz. Ideiglenesen
+    /// <see cref="InteractionState"/> értékét <see cref="AppInteractionState.DialogOpen"/>
+    /// állítja, majd a művelet befejezése után visszaállítja a korábbi állapotot.
+    /// </summary>
+    /// <param name="action">A végrehajtandó aszinkron művelet.</param>
+    public async Task WithDialogOpen(Func<Task> action)
+    {
+        var previous = InteractionState;
+        InteractionState = AppInteractionState.DialogOpen;
+        try
+        {
+            await action();
+        }
+        finally
+        {
+            InteractionState = previous;
+        }
+    }
 }
