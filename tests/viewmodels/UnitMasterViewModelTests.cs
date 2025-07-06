@@ -54,7 +54,7 @@ public class UnitMasterViewModelTests
 
         vm.SelectedItem = vm.Units[0];
         vm.DeleteSelectedCommand.Execute(null);
-        await Task.Delay(10);
+        await service.WaitForUpdateAsync();
 
         Assert.True(unit.IsArchived);
         Assert.Equal(unit, service.Updated);
