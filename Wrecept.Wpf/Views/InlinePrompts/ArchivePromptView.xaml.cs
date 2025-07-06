@@ -11,6 +11,12 @@ public partial class ArchivePromptView : UserControl
     public ArchivePromptView()
     {
         InitializeComponent();
+        Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        Focus();
     }
 
 }

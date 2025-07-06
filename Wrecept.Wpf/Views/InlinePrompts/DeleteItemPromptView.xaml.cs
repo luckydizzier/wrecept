@@ -8,6 +8,12 @@ public partial class DeleteItemPromptView : UserControl
     public DeleteItemPromptView()
     {
         InitializeComponent();
+        Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        Focus();
     }
 
 }

@@ -11,6 +11,12 @@ public partial class InvoiceCreatePromptView : UserControl
     public InvoiceCreatePromptView()
     {
         InitializeComponent();
+        Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        Focus();
     }
 
 }
