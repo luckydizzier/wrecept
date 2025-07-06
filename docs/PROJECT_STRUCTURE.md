@@ -747,13 +747,27 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Services/AppStateService.cs**
-  - Purpose: Üzleti szolgáltatás
-  - Layer: UI
-  - Type: C#
-  - Responsibility: Funkcionális logika
-  - Interaction: Repositories, ViewModels
-  - Special Notes: -
+  - **Wrecept.Wpf/Services/AppStateService.cs**
+    - Purpose: Üzleti szolgáltatás
+    - Layer: UI
+    - Type: C#
+    - Responsibility: Interakciós állapot tárolása
+    - Interaction: ViewModels, FocusManager, KeyboardManager
+    - Special Notes: Állapotváltozás eseményt küld
+  - **Wrecept.Wpf/Services/FocusManager.cs**
+    - Purpose: Szolgáltatás
+    - Layer: UI
+    - Type: C#
+    - Responsibility: Fókusz kezelése az állapotgép alapján
+    - Interaction: Views, AppStateService
+    - Special Notes: -
+  - **Wrecept.Wpf/Services/KeyboardManager.cs**
+    - Purpose: Szolgáltatás
+    - Layer: UI
+    - Type: C#
+    - Responsibility: Billentyűesemények delegálása
+    - Interaction: AppStateService, IKeyboardHandler implementációk
+    - Special Notes: -
 - **Wrecept.Wpf/Services/DialogService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
@@ -1312,7 +1326,7 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Layer: UI
   - Type: XAML
   - Responsibility: Modern billentyűzet-fókuszú elrendezés
-  - Interaction: ViewModels
+  - Interaction: ViewModels, FocusManager
   - Special Notes: StageView alapértelmezett nézete
 - **Wrecept.Wpf/Views/InvoiceItemsGrid.xaml**
   - Purpose: WPF nézet
