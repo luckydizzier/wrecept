@@ -58,5 +58,16 @@ public partial class InvoiceEditorLayout : UserControl
             e.Handled = true;
         }
     }
+
+    private async void EntryDesc_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Enter && DataContext is InvoiceEditorViewModel vm)
+        {
+            vm.ShowSavePromptCommand.Execute(null);
+            await vm.AddLineItemCommand.ExecuteAsync(null);
+            EntryProduct.Focus();
+            e.Handled = true;
+        }
+    }
 }
 

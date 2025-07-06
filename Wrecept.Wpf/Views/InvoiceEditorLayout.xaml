@@ -164,7 +164,8 @@
                                   SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
                                   CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                   CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-                    <TextBox x:Name="EntryDesc" Grid.Column="5" Text="{Binding Description, Mode=TwoWay}" Margin="4,0" />
+                    <TextBox x:Name="EntryDesc" Grid.Column="5" Text="{Binding Description, Mode=TwoWay}" Margin="4,0"
+                             PreviewKeyDown="EntryDesc_PreviewKeyDown" />
                 </Grid>
             </Border>
 
