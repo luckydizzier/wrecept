@@ -9,20 +9,24 @@ public partial class InvoiceCreatePromptViewModel : ObservableObject
 {
     private readonly InvoiceLookupViewModel _parent;
 
+    [ObservableProperty]
+    private string editableNumber = string.Empty;
+
     public string Number { get; }
 
     public InvoiceCreatePromptViewModel(InvoiceLookupViewModel parent, string number)
     {
         _parent = parent;
         Number = number;
+        EditableNumber = number;
     }
 
-    public string Message => $"\u00daj sz\u00e1mla '{Number}'? (Enter=Igen / Esc=Nem)";
+    public string Message => $"\u00daj sz\u00e1mla '{EditableNumber}'? (Enter=Igen / Esc=Nem)";
 
     [RelayCommand]
     private async Task ConfirmAsync()
     {
-        await _parent.CreateInvoiceAsync(Number);
+        await _parent.CreateInvoiceAsync(EditableNumber);
         _parent.InlinePrompt = null;
     }
 
