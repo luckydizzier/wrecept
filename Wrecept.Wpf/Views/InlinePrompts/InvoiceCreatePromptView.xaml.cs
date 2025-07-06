@@ -16,7 +16,7 @@ public partial class InvoiceCreatePromptView : UserControl
 
     private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
     {
-        NumberBox.Focus();
+        // fókuszkezelést a FocusManager végzi
     }
 
 }

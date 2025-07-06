@@ -152,6 +152,8 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddSingleton<INotificationService, MessageBoxNotificationService>();
         services.AddTransient<IInvoiceExportService, PdfInvoiceExporter>();
         services.AddSingleton<ScreenModeManager>();
+        services.AddSingleton<FocusManager>();
+        services.AddSingleton<KeyboardManager>();
         services.AddTransient<ProgressViewModel>();
         services.AddTransient<SeedOptionsViewModel>();
         services.AddTransient<SeedOptionsWindow>();

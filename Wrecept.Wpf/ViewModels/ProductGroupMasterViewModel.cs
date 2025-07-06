@@ -3,6 +3,7 @@ using Wrecept.Core.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -12,10 +13,11 @@ public partial class ProductGroupMasterViewModel : EditableMasterDataViewModel<P
 
     private readonly IProductGroupService _service;
 
-    public ProductGroupMasterViewModel(IProductGroupService service)
-    {
-        _service = service;
-    }
+public ProductGroupMasterViewModel(IProductGroupService service, AppStateService state)
+    : base(state)
+{
+    _service = service;
+}
 
     protected override Task<List<ProductGroup>> GetItemsAsync()
         => _service.GetActiveAsync();

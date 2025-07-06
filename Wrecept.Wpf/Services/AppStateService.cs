@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Core.Enums;
+using System;
 
 namespace Wrecept.Wpf.Services;
 
@@ -19,6 +20,14 @@ public partial class AppStateService : ObservableObject
 
     [ObservableProperty]
     private AppState current = AppState.None;
+
+    [ObservableProperty]
+    private AppInteractionState interactionState = AppInteractionState.None;
+
+    public event Action<AppInteractionState>? InteractionStateChanged;
+
+    partial void OnInteractionStateChanged(AppInteractionState value)
+        => InteractionStateChanged?.Invoke(value);
 
     [ObservableProperty]
     private StageMenuAction lastView = StageMenuAction.InboundDeliveryNotes;

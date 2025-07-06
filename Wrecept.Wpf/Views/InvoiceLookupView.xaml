@@ -18,8 +18,7 @@
                  ItemsSource="{Binding Invoices}"
                  SelectedItem="{Binding SelectedInvoice}"
                  Margin="4"
-                 TabIndex="0"
-                 PreviewKeyDown="InvoiceList_PreviewKeyDown">
+                 TabIndex="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
