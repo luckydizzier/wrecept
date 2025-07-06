@@ -358,4 +358,24 @@ public class InvoiceEditorViewModelTests
         Assert.Equal(AppInteractionState.EditingInvoice, state.InteractionState);
     }
 
+    [Fact]
+    public async Task WithDialogOpen_RestoresState()
+    {
+        var state = new AppStateService(Path.GetTempFileName())
+        {
+            InteractionState = AppInteractionState.EditingInvoice
+        };
+
+        var during = AppInteractionState.None;
+
+        await state.WithDialogOpen(async () =>
+        {
+            during = state.InteractionState;
+            await Task.CompletedTask;
+        });
+
+        Assert.Equal(AppInteractionState.DialogOpen, during);
+        Assert.Equal(AppInteractionState.EditingInvoice, state.InteractionState);
+    }
+
 }

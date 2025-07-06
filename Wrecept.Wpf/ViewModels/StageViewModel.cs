@@ -214,86 +214,96 @@ private async Task HandleMenu(StageMenuAction action)
                 }
                 break;
             case StageMenuAction.BackupData:
-                var saveDlg = new SaveFileDialog
+                await _state.WithDialogOpen(async () =>
                 {
-                    Filter = "ZIP (*.zip)|*.zip|All files|*.*",
-                    FileName = "wrecept-backup.zip",
-                    InitialDirectory = Path.GetDirectoryName(App.DbPath)
-                };
-                if (NavigationService.ShowFileDialog(saveDlg))
-                {
-                    var svc = App.Provider.GetRequiredService<IBackupService>();
-                    await svc.BackupAsync(saveDlg.FileName);
-                    _statusBar.Message = Resources.Strings.Stage_BackupSuccess;
-                }
-                _state.InteractionState = AppInteractionState.DialogOpen;
+                    var saveDlg = new SaveFileDialog
+                    {
+                        Filter = "ZIP (*.zip)|*.zip|All files|*.*",
+                        FileName = "wrecept-backup.zip",
+                        InitialDirectory = Path.GetDirectoryName(App.DbPath)
+                    };
+                    if (NavigationService.ShowFileDialog(saveDlg))
+                    {
+                        var svc = App.Provider.GetRequiredService<IBackupService>();
+                        await svc.BackupAsync(saveDlg.FileName);
+                        _statusBar.Message = Resources.Strings.Stage_BackupSuccess;
+                    }
+                });
                 break;
             case StageMenuAction.RestoreData:
-                var openDlg = new OpenFileDialog
+                await _state.WithDialogOpen(async () =>
                 {
-                    Filter = "ZIP (*.zip)|*.zip|All files|*.*",
-                    InitialDirectory = Path.GetDirectoryName(App.DbPath)
-                };
-                if (NavigationService.ShowFileDialog(openDlg))
-                {
-                    var svc = App.Provider.GetRequiredService<IBackupService>();
-                    await svc.RestoreAsync(openDlg.FileName);
-                    _statusBar.Message = Resources.Strings.Stage_RestoreSuccess;
-                }
-                _state.InteractionState = AppInteractionState.DialogOpen;
+                    var openDlg = new OpenFileDialog
+                    {
+                        Filter = "ZIP (*.zip)|*.zip|All files|*.*",
+                        InitialDirectory = Path.GetDirectoryName(App.DbPath)
+                    };
+                    if (NavigationService.ShowFileDialog(openDlg))
+                    {
+                        var svc = App.Provider.GetRequiredService<IBackupService>();
+                        await svc.RestoreAsync(openDlg.FileName);
+                        _statusBar.Message = Resources.Strings.Stage_RestoreSuccess;
+                    }
+                });
                 break;
             case StageMenuAction.ScreenSettings:
-                var win = App.Provider.GetRequiredService<ScreenModeWindow>();
-                win.Owner = App.Current.MainWindow;
-                win.ShowDialog();
-                _statusBar.Message = "Képernyő mód frissítve";
-                _state.InteractionState = AppInteractionState.DialogOpen;
+                await _state.WithDialogOpen(async () =>
+                {
+                    var win = App.Provider.GetRequiredService<ScreenModeWindow>();
+                    win.Owner = App.Current.MainWindow;
+                    win.ShowDialog();
+                    _statusBar.Message = "Képernyő mód frissítve";
+                    await Task.CompletedTask;
+                });
                 break;
             case StageMenuAction.EditUserInfo:
-                _statusBar.Message = Resources.Strings.Stage_UserInfoEditOpened;
-                await _userInfo.LoadAsync();
-
-                var editorVm = App.Provider.GetRequiredService<UserInfoEditorViewModel>();
-                editorVm.CompanyName = _userInfo.CompanyName;
-                editorVm.Address = _userInfo.Address;
-                editorVm.Phone = _userInfo.Phone;
-                editorVm.Email = _userInfo.Email;
-                editorVm.TaxNumber = _userInfo.TaxNumber;
-                editorVm.BankAccount = _userInfo.BankAccount;
-
-                var editorWin = App.Provider.GetRequiredService<UserInfoWindow>();
-                editorWin.DataContext = editorVm;
-                editorVm.OnOk = _ => { editorWin.DialogResult = true; editorWin.Close(); };
-                editorVm.OnCancel = () => { editorWin.DialogResult = false; editorWin.Close(); };
-
-                if (NavigationService.ShowCenteredDialog(editorWin))
+                await _state.WithDialogOpen(async () =>
                 {
-                    var svc = App.Provider.GetRequiredService<IUserInfoService>();
-                    await svc.SaveAsync(new UserInfo
+                    _statusBar.Message = Resources.Strings.Stage_UserInfoEditOpened;
+                    await _userInfo.LoadAsync();
+
+                    var editorVm = App.Provider.GetRequiredService<UserInfoEditorViewModel>();
+                    editorVm.CompanyName = _userInfo.CompanyName;
+                    editorVm.Address = _userInfo.Address;
+                    editorVm.Phone = _userInfo.Phone;
+                    editorVm.Email = _userInfo.Email;
+                    editorVm.TaxNumber = _userInfo.TaxNumber;
+                    editorVm.BankAccount = _userInfo.BankAccount;
+
+                    var editorWin = App.Provider.GetRequiredService<UserInfoWindow>();
+                    editorWin.DataContext = editorVm;
+                    editorVm.OnOk = _ => { editorWin.DialogResult = true; editorWin.Close(); };
+                    editorVm.OnCancel = () => { editorWin.DialogResult = false; editorWin.Close(); };
+
+                    if (NavigationService.ShowCenteredDialog(editorWin))
                     {
-                        CompanyName = editorVm.CompanyName,
-                        Address = editorVm.Address,
-                        Phone = editorVm.Phone,
-                        Email = editorVm.Email,
-                        TaxNumber = editorVm.TaxNumber,
-                        BankAccount = editorVm.BankAccount
-                    });
+                        var svc = App.Provider.GetRequiredService<IUserInfoService>();
+                        await svc.SaveAsync(new UserInfo
+                        {
+                            CompanyName = editorVm.CompanyName,
+                            Address = editorVm.Address,
+                            Phone = editorVm.Phone,
+                            Email = editorVm.Email,
+                            TaxNumber = editorVm.TaxNumber,
+                            BankAccount = editorVm.BankAccount
+                        });
 
-                    _userInfo.CompanyName = editorVm.CompanyName;
-                    _userInfo.Address = editorVm.Address;
-                    _userInfo.Phone = editorVm.Phone;
-                    _userInfo.Email = editorVm.Email;
-                    _userInfo.TaxNumber = editorVm.TaxNumber;
-                    _userInfo.BankAccount = editorVm.BankAccount;
-                }
-
-                _state.InteractionState = AppInteractionState.DialogOpen;
+                        _userInfo.CompanyName = editorVm.CompanyName;
+                        _userInfo.Address = editorVm.Address;
+                        _userInfo.Phone = editorVm.Phone;
+                        _userInfo.Email = editorVm.Email;
+                        _userInfo.TaxNumber = editorVm.TaxNumber;
+                        _userInfo.BankAccount = editorVm.BankAccount;
+                    }
+                });
                 break;
             case StageMenuAction.UserInfo:
-                CurrentViewModel = _about;
-                _statusBar.Message = Resources.Strings.Stage_AboutOpened;
-                await _about.LoadAsync();
-                _state.InteractionState = AppInteractionState.DialogOpen;
+                await _state.WithDialogOpen(async () =>
+                {
+                    CurrentViewModel = _about;
+                    _statusBar.Message = Resources.Strings.Stage_AboutOpened;
+                    await _about.LoadAsync();
+                });
                 break;
             case StageMenuAction.ExitApplication:
                 Application.Current.Shutdown();
