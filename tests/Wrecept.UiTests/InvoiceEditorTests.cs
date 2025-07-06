@@ -50,7 +50,8 @@ public class InvoiceEditorTests
         var box = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
             .FindElementByAccessibilityId("NumberBox"));
         actions.SendKeys(OpenQA.Selenium.Keys.Enter).Perform();
-        wait.Until(d => d.FindElementsByAccessibilityId("NumberBox").Count == 0);
+        wait.Until(d => ((WindowsDriver<WindowsElement>)d)
+            .FindElementsByAccessibilityId("NumberBox").Count == 0);
 
         list.Click();
         actions.SendKeys(OpenQA.Selenium.Keys.ArrowUp).Perform();
