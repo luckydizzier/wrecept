@@ -82,8 +82,8 @@ public class SettingsSessionLogServiceTests
     {
         var tempHome = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
         Directory.CreateDirectory(tempHome);
-        var oldHome = Environment.GetEnvironmentVariable("HOME");
-        Environment.SetEnvironmentVariable("HOME", tempHome);
+        var oldAppData = Environment.GetEnvironmentVariable("APPDATA");
+        Environment.SetEnvironmentVariable("APPDATA", tempHome);
 
         try
         {
