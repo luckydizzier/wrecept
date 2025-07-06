@@ -813,7 +813,7 @@ private void UpdateSupplierId(string name)
     [RelayCommand]
     internal async Task FinalizeInvoiceAsync()
     {
-        await ArchiveAsync();
+        await SaveAsync();
         IsInLineFinalizationPrompt = false;
     }
 
