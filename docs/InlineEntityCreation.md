@@ -32,6 +32,8 @@ A kitöltött űrlap mentése azonnal létrehozza az entitást és a szerkesztet
 * A háttérszín `#F5F5DC`, ezzel emeljük ki az inline űrlapot.
 * Az entitások validálását a megfelelő szolgáltatások (`IProductService`, stb.) végzik.
 
+Az újabb verzióban a termék űrlap minden alapadatot kér: egység, ÁFA és termékcsoport is kiválasztható. A szállító űrlapon adószám mező jelent meg, a mértékegység pedig kódot is rögzít.
+
 ## Jövőbeli bővítések
 
 * Hibakezelési üzenetek megjelenítése az űrlap alatt.
