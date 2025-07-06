@@ -1587,6 +1587,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
+- **Wrecept.Core.Tests/Services/ProductGroupServiceTests.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: Tests
+  - Type: C#
+  - Responsibility: Funkcionális logika
+  - Interaction: Repositories, ViewModels
+  - Special Notes: -
 - **Wrecept.Core.Tests/Services/SupplierServiceTests.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Tests
