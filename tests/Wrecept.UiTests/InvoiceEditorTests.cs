@@ -62,4 +62,32 @@ public class InvoiceEditorTests
 
         driver.Close();
     }
+
+    [TestMethod]
+    public void InvoiceCreatePrompt_EnterOnNumberBox_Confirms()
+    {
+        using var driver = LaunchApp();
+
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+
+        var options = driver.FindElementsByName("Mintaszámok");
+        if (options.Count > 0)
+            options[0].FindElementByName("Mégse").Click();
+
+        var list = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
+            .FindElementByAccessibilityId("InvoiceList"));
+        list.Click();
+
+        var actions = new OpenQA.Selenium.Interactions.Actions(driver);
+        actions.SendKeys(OpenQA.Selenium.Keys.Insert).Perform();
+
+        var box = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
+            .FindElementByAccessibilityId("NumberBox"));
+        box.SendKeys(OpenQA.Selenium.Keys.Enter);
+
+        wait.Until(d => ((WindowsDriver<WindowsElement>)d)
+            .FindElementsByAccessibilityId("NumberBox").Count == 0);
+
+        driver.Close();
+    }
 }
