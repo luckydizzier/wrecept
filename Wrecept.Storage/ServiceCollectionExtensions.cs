@@ -44,6 +44,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ISettingsService>(_ => new SettingsService(settingsPath));
         var sessionPath = Path.Combine(Path.GetDirectoryName(settingsPath)!, "session.json");
         services.AddSingleton<ISessionService>(_ => new SessionService(sessionPath));
+        var numberPath = Path.Combine(Path.GetDirectoryName(settingsPath)!, "invoice_sequence.txt");
+        services.AddSingleton<INumberingService>(_ => new NumberingService(numberPath));
         services.AddScoped<IBackupService>(_ => new FileBackupService(dbPath, userInfoPath, settingsPath));
         services.AddScoped<IDbHealthService, DbHealthService>();
 

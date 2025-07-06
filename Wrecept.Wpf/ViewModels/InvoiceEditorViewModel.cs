@@ -298,6 +298,10 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
             if (Lookup.InlinePrompt is null)
                 await LoadInvoice(item.Id, item.Number);
         };
+        Lookup.InvoiceCreated += async number =>
+        {
+            await LoadInvoice(0, number);
+        };
         Items = new ObservableCollection<InvoiceItemRowViewModel>();
         EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
         Items.Add(EditableItem);

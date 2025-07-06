@@ -34,6 +34,16 @@ public class InvoiceLookupViewModelTests
             => throw new NotImplementedException();
     }
 
+    private class FakeNumberingService : INumberingService
+    {
+        private int _counter;
+        public Task<string> GetNextInvoiceNumberAsync(System.Threading.CancellationToken ct = default)
+        {
+            _counter++;
+            return Task.FromResult($"INV{_counter}");
+        }
+    }
+
     [Fact]
     public async Task LoadAsync_SelectsFirstInvoice()
     {
@@ -41,7 +51,7 @@ public class InvoiceLookupViewModelTests
         service.Invoices.Add(new Invoice { Id = 1, Number = "A1", Date = DateOnly.FromDateTime(DateTime.Today) });
         service.Invoices.Add(new Invoice { Id = 2, Number = "A2", Date = DateOnly.FromDateTime(DateTime.Today.AddDays(-1)) });
 
-        var vm = new InvoiceLookupViewModel(service);
+        var vm = new InvoiceLookupViewModel(service, new FakeNumberingService());
         await vm.LoadAsync();
 
         Assert.Equal(1, vm.SelectedInvoice?.Id);

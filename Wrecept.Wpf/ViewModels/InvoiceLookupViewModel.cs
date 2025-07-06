@@ -19,8 +19,10 @@ public partial class InvoiceLookupItem : ObservableObject
 public partial class InvoiceLookupViewModel : ObservableObject
 {
     private readonly IInvoiceService _invoices;
+    private readonly INumberingService _numbering;
 
     public event Action<InvoiceLookupItem>? InvoiceSelected;
+    public event Action<string>? InvoiceCreated;
 
     public ObservableCollection<InvoiceLookupItem> Invoices { get; } = new();
 
@@ -36,9 +38,10 @@ public partial class InvoiceLookupViewModel : ObservableObject
     [ObservableProperty]
     private object? inlinePrompt;
 
-    public InvoiceLookupViewModel(IInvoiceService invoices)
+    public InvoiceLookupViewModel(IInvoiceService invoices, INumberingService numbering)
     {
         _invoices = invoices;
+        _numbering = numbering;
     }
 
     public async Task LoadAsync()
@@ -72,7 +75,14 @@ public partial class InvoiceLookupViewModel : ObservableObject
 
         Invoices.Insert(0, item);
         SelectedInvoice = item;
+        InvoiceCreated?.Invoke(number);
         return Task.FromResult(0);
+    }
+
+    public async Task PromptNewInvoiceAsync()
+    {
+        var number = await _numbering.GetNextInvoiceNumberAsync();
+        InlinePrompt = new InvoiceCreatePromptViewModel(this, number);
     }
 
 }
