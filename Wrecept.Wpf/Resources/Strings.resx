@@ -78,9 +78,6 @@
   <data name="Load_Units" xml:space="preserve">
     <value>Mértékegységek betöltése...</value>
   </data>
-  <data name="Load_ProductGroups" xml:space="preserve">
-    <value>Termékcsoportok betöltése...</value>
-  </data>
   <data name="Load_Complete" xml:space="preserve">
     <value>Betöltés kész.</value>
   </data>

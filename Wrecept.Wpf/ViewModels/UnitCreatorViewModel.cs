@@ -15,9 +15,6 @@ public partial class UnitCreatorViewModel : ObservableObject
     [ObservableProperty]
     private string name = string.Empty;
 
-    [ObservableProperty]
-    private string? code;
-
     public UnitCreatorViewModel(InvoiceEditorViewModel parent, IUnitService units)
     {
         _parent = parent;
@@ -27,7 +24,7 @@ public partial class UnitCreatorViewModel : ObservableObject
     [RelayCommand]
     private async Task ConfirmAsync()
     {
-        var unit = new Unit { Name = Name, Code = Code };
+        var unit = new Unit { Name = Name };
         var id = await _units.AddAsync(unit);
         unit.Id = id;
         _parent.Units.Add(unit);

@@ -15,9 +15,6 @@ public partial class SupplierCreatorViewModel : ObservableObject
     [ObservableProperty]
     private string name = string.Empty;
 
-    [ObservableProperty]
-    private string? taxId;
-
     public SupplierCreatorViewModel(InvoiceEditorViewModel parent, ISupplierService suppliers)
     {
         _parent = parent;
@@ -27,7 +24,7 @@ public partial class SupplierCreatorViewModel : ObservableObject
     [RelayCommand]
     private async Task ConfirmAsync()
     {
-        var supplier = new Supplier { Name = Name, TaxId = TaxId };
+        var supplier = new Supplier { Name = Name };
         var id = await _suppliers.AddAsync(supplier);
         supplier.Id = id;
         _parent.Suppliers.Add(supplier);
