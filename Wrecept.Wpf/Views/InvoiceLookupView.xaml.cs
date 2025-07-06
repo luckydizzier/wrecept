@@ -1,7 +1,6 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core.Services;
 using Wrecept.Wpf.ViewModels;
@@ -11,14 +10,19 @@ namespace Wrecept.Wpf.Views;
 
 public partial class InvoiceLookupView : UserControl
 {
-    public InvoiceLookupView() : this(App.Provider.GetRequiredService<InvoiceLookupViewModel>())
+    private readonly FocusManager _focus;
+
+    public InvoiceLookupView() : this(
+        App.Provider.GetRequiredService<InvoiceLookupViewModel>(),
+        App.Provider.GetRequiredService<FocusManager>())
     {
     }
 
-    public InvoiceLookupView(InvoiceLookupViewModel viewModel)
+    public InvoiceLookupView(InvoiceLookupViewModel viewModel, FocusManager focus)
     {
         InitializeComponent();
         DataContext = viewModel;
+        _focus = focus;
         Loaded += OnLoaded;
     }
 
@@ -28,6 +32,7 @@ public partial class InvoiceLookupView : UserControl
         {
             if (DataContext is InvoiceLookupViewModel vm)
                 await vm.LoadAsync();
+            _focus.RequestFocus(InvoiceList);
         }
         catch (Exception ex)
         {

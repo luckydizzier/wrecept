@@ -33,12 +33,12 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Alkalmazásadat
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Enums/AppState.cs**
-  - Purpose: Fájl
+- **Wrecept.Core/Enums/AppInteractionState.cs**
+  - Purpose: Enum típus a felhasználói interakciókhoz
   - Layer: Core
   - Type: C#
-  - Responsibility: 
-  - Interaction: Storage
+  - Responsibility: Állapotjelzés
+  - Interaction: UI
   - Special Notes: -
 - **Wrecept.Core/Models/Invoice.cs**
   - Purpose: Domain model

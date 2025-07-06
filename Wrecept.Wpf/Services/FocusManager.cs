@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Threading;
+using System.Windows.Input;
 using Wrecept.Core.Enums;
 
 namespace Wrecept.Wpf.Services;
@@ -24,7 +26,19 @@ public class FocusManager
         if (_registry.TryGetValue(state, out var p))
         {
             var element = p();
-            element?.Focus();
+            RequestFocus(element);
         }
+    }
+
+    public void RequestFocus(UIElement? element)
+    {
+        if (element is null)
+            return;
+
+        element.Dispatcher.InvokeAsync(() =>
+        {
+            if (!element.Focus())
+                Keyboard.Focus(element);
+        }, DispatcherPriority.ContextIdle);
     }
 }
