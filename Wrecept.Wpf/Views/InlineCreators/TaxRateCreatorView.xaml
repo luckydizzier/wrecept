@@ -10,6 +10,10 @@
                 <TextBox x:Name="NameBox" Width="120" Text="{Binding Name}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                <TextBlock Text="Kód" Width="60" />
+                <TextBox Width="80" Text="{Binding Code}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                 <TextBlock Text="%" Width="60" />
                 <TextBox Width="80" Text="{Binding Percentage}" />
             </StackPanel>

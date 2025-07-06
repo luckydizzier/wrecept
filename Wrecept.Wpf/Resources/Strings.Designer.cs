@@ -29,6 +29,7 @@ internal static class Strings
     internal static string Load_TaxRates => _rm.GetString("Load_TaxRates") ?? string.Empty;
     internal static string Load_Products => _rm.GetString("Load_Products") ?? string.Empty;
     internal static string Load_Units => _rm.GetString("Load_Units") ?? string.Empty;
+    internal static string Load_ProductGroups => _rm.GetString("Load_ProductGroups") ?? string.Empty;
     internal static string Load_Complete => _rm.GetString("Load_Complete") ?? string.Empty;
     internal static string InvoiceLine_InvalidQuantity => _rm.GetString("InvoiceLine_InvalidQuantity") ?? string.Empty;
     internal static string InvoiceLine_InvalidPrice => _rm.GetString("InvoiceLine_InvalidPrice") ?? string.Empty;

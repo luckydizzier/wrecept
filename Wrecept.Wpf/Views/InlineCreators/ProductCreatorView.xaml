@@ -23,6 +23,10 @@
                 <ComboBox Width="120" ItemsSource="{Binding Units}" SelectedValuePath="Id" DisplayMemberPath="Name" SelectedValue="{Binding UnitId}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                <TextBlock Text="Csoport" Width="60" />
+                <ComboBox Width="120" ItemsSource="{Binding ProductGroups}" SelectedValuePath="Id" DisplayMemberPath="Name" SelectedValue="{Binding ProductGroupId}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                 <TextBlock Text="ÁFA" Width="60" />
                 <ComboBox Width="120" ItemsSource="{Binding TaxRates}" SelectedValuePath="Id" DisplayMemberPath="Name" SelectedValue="{Binding TaxRateId}" />
             </StackPanel>

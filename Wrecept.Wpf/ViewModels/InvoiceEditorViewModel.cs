@@ -126,6 +126,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public ObservableCollection<Supplier> Suppliers { get; } = new();
     public ObservableCollection<Product> Products { get; } = new();
     public ObservableCollection<Unit> Units { get; } = new();
+    public ObservableCollection<ProductGroup> ProductGroups { get; } = new();
 
     internal bool IsLoading { get; private set; }
 
@@ -202,6 +203,7 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
     private readonly ISupplierService _suppliers;
     private readonly IProductService _productsService;
     private readonly IUnitService _unitsService;
+    private readonly IProductGroupService _groupsService;
     private readonly IInvoiceService _invoiceService;
     private readonly IInvoiceExportService _exporter;
 private readonly ILogService _log;
@@ -269,6 +271,7 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
         ISupplierService suppliers,
         IProductService products,
         IUnitService units,
+        IProductGroupService groups,
         IInvoiceService invoiceService,
         IInvoiceExportService exporter,
         ILogService logService,
@@ -282,6 +285,7 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
         _suppliers = suppliers;
         _productsService = products;
         _unitsService = units;
+        _groupsService = groups;
         _invoiceService = invoiceService;
         _exporter = exporter;
         _log = logService;
@@ -301,7 +305,7 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
 
     public async Task LoadAsync(IProgress<ProgressReport>? progress = null)
     {
-        const int total = 5;
+        const int total = 6;
         var step = 0;
 
         IsLoading = true;
@@ -311,14 +315,16 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
         var taxTask = _taxRates.GetActiveAsync(DateTime.UtcNow);
         var productTask = _productsService.GetActiveAsync();
         var unitTask = _unitsService.GetActiveAsync();
+        var groupTask = _groupsService.GetActiveAsync();
 
-        await Task.WhenAll(paymentTask, supplierTask, taxTask, productTask, unitTask);
+        await Task.WhenAll(paymentTask, supplierTask, taxTask, productTask, unitTask, groupTask);
 
         FillCollection(PaymentMethods, paymentTask.Result, Resources.Strings.Load_PaymentMethods, step++, total, progress);
         FillCollection(Suppliers, supplierTask.Result, Resources.Strings.Load_Suppliers, step++, total, progress);
         FillCollection(TaxRates, taxTask.Result, Resources.Strings.Load_TaxRates, step++, total, progress);
         FillCollection(Products, productTask.Result, Resources.Strings.Load_Products, step++, total, progress);
         FillCollection(Units, unitTask.Result, Resources.Strings.Load_Units, step++, total, progress);
+        FillCollection(ProductGroups, groupTask.Result, Resources.Strings.Load_ProductGroups, step++, total, progress);
 
         progress?.Report(new ProgressReport { GlobalPercent = 100, SubtaskPercent = 100, Message = Resources.Strings.Load_Complete });
         IsLoading = false;

@@ -16,6 +16,9 @@ public partial class TaxRateCreatorViewModel : ObservableObject
     private string name = string.Empty;
 
     [ObservableProperty]
+    private string code = string.Empty;
+
+    [ObservableProperty]
     private decimal percentage;
 
     public TaxRateCreatorViewModel(InvoiceEditorViewModel parent, ITaxRateService taxRates)
@@ -27,7 +30,13 @@ public partial class TaxRateCreatorViewModel : ObservableObject
     [RelayCommand]
     private async Task ConfirmAsync()
     {
-        var rate = new TaxRate { Name = Name, Percentage = Percentage, EffectiveFrom = DateTime.UtcNow };
+        var rate = new TaxRate
+        {
+            Name = Name,
+            Percentage = Percentage,
+            Code = Code,
+            EffectiveFrom = DateTime.UtcNow
+        };
         var id = await _taxRates.AddAsync(rate);
         rate.Id = id;
         _parent.TaxRates.Add(rate);
