@@ -278,6 +278,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
+- **Wrecept.Core/Services/NullNumberingService.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: Core
+  - Type: C#
+  - Responsibility: Fallback sorszám generálás
+  - Interaction: ViewModels
+  - Special Notes: Csak hiba esetén használatos
 - **Wrecept.Core/Services/PaymentMethodService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
