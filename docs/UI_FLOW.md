@@ -67,6 +67,8 @@ Confirm entry prompt: Save line? (Enter=Yes, Esc=No)
 
 Insert new line, repeat
 
+Escape megnyomásakor a program felteszi a kérdést: "Végeztél a szerkesztéssel? (Enter/Escape)". Enterrel a számla mentésre kerül, Escape visszalép az utolsó szerkesztett mezőre.
+
 Quantity < 0 indicates return (visszáru), highlighted red via converter
 Quantity = 0 is rejected with inline error message
 
