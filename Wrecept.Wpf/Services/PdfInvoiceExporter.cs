@@ -4,6 +4,8 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Wrecept.Wpf.Services;
 
