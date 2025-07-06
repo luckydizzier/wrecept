@@ -101,6 +101,10 @@ public class SettingsSessionLogServiceTests
         finally
         {
             Environment.SetEnvironmentVariable("HOME", oldHome);
+            if (Directory.Exists(tempHome))
+            {
+                Directory.Delete(tempHome, recursive: true);
+            }
         }
     }
 }
