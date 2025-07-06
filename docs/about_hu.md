@@ -14,7 +14,7 @@ A Wrecept program az alábbi adatokkal rendelkezik:
 - **Build dátuma:** 2025-06-29 (UTC)
 - **Fejlesztő:** Tankó Ferenc & ChatGPT Codex Agents (<tankoferenc@icloud.com>)
 - **Rövid leírás:** Offline módon használható, billentyűzetközpontú számlázó rendszer.
-  A fókusz és a billentyűk kezelését központi szolgáltatások biztosítják.
+- A fókusz és a billentyűk kezelését központi szolgáltatások biztosítják.
 - **Licenc:** Free, OpenSource program és kód.
 - **Felhasznált technológiák:** .NET 8, WPF, SQLite, Dapper, MVVM architektúra.
 - **Előzmények:** Tácsi Egon (HA3MN) készítette az eredeti DOS-os, Clipper-es RECEPT.EXE programot.
