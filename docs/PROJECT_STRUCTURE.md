@@ -341,6 +341,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: 
   - Interaction: Repositories, ViewModels
   - Special Notes: -
+- **Wrecept.Core/Utilities/SimpleMath.cs**
+  - Purpose: Fájl
+  - Layer: Core
+  - Type: C#
+  - Responsibility:
+  - Interaction: Repositories, ViewModels
+  - Special Notes: -
 - **Wrecept.Core/Wrecept.Core.csproj**
   - Purpose: Projektfájl
   - Layer: Core
