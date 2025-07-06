@@ -829,6 +829,7 @@ private void UpdateSupplierId(string name)
         _state.CurrentInvoiceId = null;
         await _state.SaveAsync();
         await Lookup.LoadAsync();
+        Lookup.SelectedInvoice = null;
     }
 
     private async void LookupLoadSelected()
