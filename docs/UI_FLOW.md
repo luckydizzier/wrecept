@@ -19,12 +19,15 @@ Enter: Activates the selected submenu view and focuses the first control
 Escape: Returns to menu with last selected item focused
 
 AccessKey jelek (aláhúzás) segítik az Alt+betű kombinációkat a főmenüben és a
-számlafejléc mezőknél.
+számlafejléc mezőknél. A fókusz és a billentyűk útját központi
+`FocusManager` és `KeyboardManager` szolgáltatások rendezik, így a nézetek csak
+a kezdő elemüket regisztrálják.
 
 - Fókuszkezdő pontok nézetenként:
   - **StageView** – a főmenüsor első eleme
   - **InvoiceLookupView** – `InvoiceList` `ListBox`
-    - A lista betöltése után az `OnLoaded` esemény hívja meg az `InvoiceList.Focus()` metódust, így a kurzor rögtön a listára kerül.
+    - Betöltés után a `FocusManager.RequestFocus(InvoiceList)` hívás helyezi a
+      kurzort a listára.
   - **InvoiceEditorLayout** – bal oldali `InvoiceList`
   - **ProductMasterView** – a táblázat (Grid)
   - **SupplierMasterView** – a táblázat (Grid)
