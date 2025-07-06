@@ -31,6 +31,7 @@ A kitöltött űrlap mentése azonnal létrehozza az entitást és a szerkesztet
 * Az `InlineCreatorTarget` property az adott vezérlőre mutat, amelyhez a `Popup` igazodik.
 * A háttérszín `#F5F5DC`, ezzel emeljük ki az inline űrlapot.
 * Az entitások validálását a megfelelő szolgáltatások (`IProductService`, stb.) végzik.
+* Az űrlapok már minden fő tulajdonságot bekérnek (pl. terméknél egység, termékcsoport és ÁFA; szállítónál név és adószám).
 
 ## Jövőbeli bővítések
 
