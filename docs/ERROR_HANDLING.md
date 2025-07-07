@@ -1,11 +1,11 @@
 ---
-title: "Error Handling"
-purpose: "Runtime and compile-time defense rules"
+title: "Hibakezelés"
+purpose: "Futásidejű és fordítási védelmi szabályok"
 author: "docs_agent"
 date: "2025-06-27"
 ---
 
-# 🚨 Error Management Plan
+# 🚨 Hibakezelési terv
 
 Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkalmazás összeomlás nélkül, jól nyomon követhetően működjön.
 

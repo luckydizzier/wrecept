@@ -1,11 +1,11 @@
 ---
-title: "WPF Themes"
-purpose: "Style guide for RetroTheme"
+title: "WPF témák"
+purpose: "Stílus útmutató a RetroTheme-hez"
 author: "docs_agent"
 date: "2025-06-27"
 ---
 
-# 🎨 Retro Theme Overview
+# 🎨 Retro téma áttekintés
 
 A Retro UI hangs on a 16 színű DOS-palettán. A XAML erőforrás szótár egységesíti a vezérlők megjelenését. A fő színek: háttér `#9b8b20`, mezők `#c7bb4f`, gombok `#0000aa` fehér felirattal és kiemelés `#000055`.
 
