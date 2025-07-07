@@ -17,6 +17,8 @@ public class PdfInvoiceExporter : IInvoiceExportService
         QuestPDF.Settings.License = LicenseType.Community;
     }
 
+    internal static Func<ProcessStartInfo, Process?> ProcessStarter { get; set; } = Process.Start;
+
     public Task SavePdfAsync(Invoice invoice, string filePath, CancellationToken ct = default)
     {
         ArgumentNullException.ThrowIfNull(invoice);
@@ -37,7 +39,7 @@ public class PdfInvoiceExporter : IInvoiceExportService
             UseShellExecute = true,
             Verb = "print"
         };
-        Process.Start(psi);
+        ProcessStarter(psi);
     }
 
     private static Document CreateDocument(Invoice invoice)
