@@ -26,6 +26,19 @@ public class NumberingServiceTests : IDisposable
         Assert.Equal("INV2", second);
     }
 
+    [Fact]
+    public async Task ReturnsInv1_WhenFileCorrupted()
+    {
+        await File.WriteAllTextAsync(_file, "abc");
+        var svc = new NumberingService(_file);
+
+        var result = await svc.GetNextInvoiceNumberAsync();
+
+        Assert.Equal("INV1", result);
+        var text = await File.ReadAllTextAsync(_file);
+        Assert.Equal("1", text);
+    }
+
     public void Dispose()
     {
         if (File.Exists(_file))

@@ -49,6 +49,42 @@ public class InvoiceServiceTests
     }
 
     [Fact]
+    public async Task CreateAsync_ReturnsFalse_WhenNumberEmpty()
+    {
+        var repo = new FakeInvoiceRepository();
+        var service = new InvoiceService(repo, new InvoiceCalculator());
+        var invoice = new Invoice { Number = "", SupplierId = 1 };
+        invoice.Items.Add(new InvoiceItem { ProductId = 1, Quantity = 1, UnitPrice = 10, TaxRate = new TaxRate { Id = Guid.NewGuid(), Percentage = 27 } });
+
+        var result = await service.CreateAsync(invoice);
+
+        Assert.False(result);
+    }
+
+    [Fact]
+    public async Task CreateAsync_ReturnsFalse_WhenItemMissingProductOrTax()
+    {
+        var repo = new FakeInvoiceRepository();
+        var service = new InvoiceService(repo, new InvoiceCalculator());
+        var invoice = new Invoice { Number = "INV1", SupplierId = 1 };
+        invoice.Items.Add(new InvoiceItem { Quantity = 1, UnitPrice = 10 });
+
+        var result = await service.CreateAsync(invoice);
+
+        Assert.False(result);
+    }
+
+    [Fact]
+    public async Task AddItemAsync_Throws_OnInvalidIds()
+    {
+        var repo = new FakeInvoiceRepository();
+        var service = new InvoiceService(repo, new InvoiceCalculator());
+        var item = new InvoiceItem { InvoiceId = 0, ProductId = 0, Quantity = 1, UnitPrice = 10 };
+
+        await Assert.ThrowsAsync<ArgumentException>(() => service.AddItemAsync(item));
+    }
+
+    [Fact]
     public async Task CreateAsync_Allows_Negative_Quantity()
     {
         var repo = new FakeInvoiceRepository();
