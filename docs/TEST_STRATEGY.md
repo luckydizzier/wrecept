@@ -2,7 +2,7 @@
 title: "Testing Strategy"
 purpose: "Unit, integration and UI testing principles"
 author: "docs_agent"
-date: "2025-06-27"
+date: "2025-07-07"
 ---
 
 # 🧪 Testing Strategy
@@ -27,6 +27,9 @@ A Wrecept stabilitását több szinten biztosítjuk.
 
 * Minimum 100% kódfedettségre törekszünk. A Core és ViewModel rétegek kritikus útvonalait teljesen lefedjük.
 * A tesztek minden commit után futnak GitHub Actions alatt (`dotnet test`). Ha bármely teszt megbukik, a build elutasításra kerül.
+* Kódfedettséget a `dotnet test --collect:"XPlat Code Coverage"` paranccsal mérünk.
+  A CI szintén ezt használja, és a projektfájlokban szereplő `<Threshold>100</Threshold>`
+  beállítás miatt bármilyen visszaesés hibát eredményez.
 
 *Megjegyzés: a `wrecept.db` néven szereplő adatbázis csak a migrációk tervezési szakaszában használatos.*
 

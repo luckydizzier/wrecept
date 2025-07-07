@@ -20,5 +20,6 @@ jobs:
         run: dotnet build Wrecept.sln --no-restore
       - name: Test
         run: |
-          dotnet test Wrecept.Core.Tests/Wrecept.Core.Tests.csproj --no-build
-          dotnet test tests/Wrecept.Tests/Wrecept.Tests.csproj --no-build
+          dotnet test Wrecept.Core.Tests/Wrecept.Core.Tests.csproj --no-build --collect:"XPlat Code Coverage"
+          dotnet test tests/Wrecept.Tests/Wrecept.Tests.csproj --no-build --collect:"XPlat Code Coverage"
+          dotnet test tests/Wrecept.Storage.Tests/Wrecept.Storage.Tests.csproj --no-build --collect:"XPlat Code Coverage"
