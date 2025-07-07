@@ -33,6 +33,15 @@ public class InvoiceRepository : IInvoiceRepository
         return item.Id;
     }
 
+    public async Task RemoveItemAsync(int id, CancellationToken ct = default)
+    {
+        var item = await _db.InvoiceItems.FindAsync(new object?[] { id }, ct);
+        if (item == null)
+            return;
+        _db.InvoiceItems.Remove(item);
+        await _db.SaveChangesAsync(ct);
+    }
+
     public async Task UpdateHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
     {
         var invoice = await _db.Invoices.FindAsync(new object?[] { id }, ct);
