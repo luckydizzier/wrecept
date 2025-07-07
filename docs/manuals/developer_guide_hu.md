@@ -48,6 +48,7 @@ Ez a dokumentum a projekt fejlesztéséhez szükséges alapvető lépéseket tar
    dotnet ef database update
    ```
 3. **Haladás naplózása**: minden változtatás után készíts bejegyzést a `docs/progress` mappában a dátum és az agent nevének feltüntetésével.
+4. **Új szolgáltatás**: az `InvoiceService` `RemoveItemAsync` metódusa törli a kijelölt tételt. A ViewModel ezt hívja meg a sorok törlésekor.
 
 
 

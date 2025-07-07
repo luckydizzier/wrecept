@@ -65,6 +65,13 @@ public class InvoiceService : IInvoiceService
         return await _invoices.AddItemAsync(item, ct);
     }
 
+    public Task RemoveItemAsync(int id, CancellationToken ct = default)
+    {
+        if (id <= 0)
+            throw new ArgumentException("Invalid id", nameof(id));
+        return _invoices.RemoveItemAsync(id, ct);
+    }
+
     public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
     {
         if (id <= 0)
