@@ -81,6 +81,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         {
             Current.Shutdown();
             EnvironmentService.Exit(0);
+            return;
         }
 
         var setup = await setupFlow.RunAsync(defaultDb, defaultCfg, EnvironmentService);
