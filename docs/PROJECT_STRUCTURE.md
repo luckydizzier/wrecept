@@ -803,6 +803,20 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Dialógusok megjelenítése
   - Interaction: Views
   - Special Notes: -
+- **Wrecept.Wpf/Services/IEnvironmentService.cs**
+  - Purpose: Környezeti vezérlő
+  - Layer: UI
+  - Type: C#
+  - Responsibility: Processz leállítás absztrakció
+  - Interaction: SetupFlow, App
+  - Special Notes: Mockolható
+- **Wrecept.Wpf/Services/EnvironmentService.cs**
+  - Purpose: Környezeti vezérlő
+  - Layer: UI
+  - Type: C#
+  - Responsibility: Environment.Exit hívása
+  - Interaction: SetupFlow, App
+  - Special Notes: -
 - **Wrecept.Wpf/Services/NavigationService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI

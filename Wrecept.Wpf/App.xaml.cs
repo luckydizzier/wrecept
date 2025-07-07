@@ -27,6 +27,8 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
     public static string UserInfoPath { get; private set; } = string.Empty;
     public static string SettingsPath { get; private set; } = string.Empty;
     public static string StatePath { get; private set; } = string.Empty;
+    public static IEnvironmentService EnvironmentService { get; set; } = new EnvironmentService();
+    public static Func<string, bool>? ConfirmOverride { get; set; }
 
     public App()
     {
@@ -74,13 +76,15 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         notifications ??= new MessageBoxNotificationService();
         setupFlow ??= new SetupFlow();
 
-        if (!notifications.Confirm("Biztos, hogy elölrõl kezded?"))
+        var confirm = ConfirmOverride ?? notifications.Confirm;
+        if (!confirm("Biztos, hogy elölrõl kezded?"))
         {
             Current.Shutdown();
-            Environment.Exit(0);
+            EnvironmentService.Exit(0);
+            return;
         }
 
-        var setup = await setupFlow.RunAsync(defaultDb, defaultCfg);
+        var setup = await setupFlow.RunAsync(defaultDb, defaultCfg, EnvironmentService);
 
         var userInfoService = new Wrecept.Storage.Services.UserInfoService(setup.ConfigPath);
         await userInfoService.SaveAsync(setup.Info);

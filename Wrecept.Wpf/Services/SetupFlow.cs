@@ -9,14 +9,15 @@ namespace Wrecept.Wpf.Services;
 
 public class SetupFlow : ISetupFlow
 {
-    public Task<SetupData> RunAsync(string defaultDb, string defaultCfg)
+    public Task<SetupData> RunAsync(string defaultDb, string defaultCfg, IEnvironmentService? env = null)
     {
+        env ??= App.EnvironmentService;
         var vm = new SetupViewModel(defaultDb, defaultCfg);
         var win = new SetupWindow { DataContext = vm };
         if (win.ShowDialog() != true)
         {
             Application.Current.Shutdown();
-            Environment.Exit(0);
+            env.Exit(0);
         }
 
         var infoVm = new UserInfoEditorViewModel();
@@ -26,7 +27,7 @@ public class SetupFlow : ISetupFlow
         if (infoWin.ShowDialog() != true)
         {
             Application.Current.Shutdown();
-            Environment.Exit(0);
+            env.Exit(0);
         }
 
         var info = new UserInfo
