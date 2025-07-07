@@ -64,4 +64,21 @@ public class ScreenModeManagerTests
         Assert.Equal(1080d, window.Height);
         Assert.Equal(ScreenMode.ExtraLarge, settings.Saved.ScreenMode);
     }
+
+    [StaFact]
+    public async Task ChangeModeAsync_SameMode_NoOp()
+    {
+        EnsureApp();
+        var settings = new FakeSettingsService { LoadValue = new AppSettings { ScreenMode = ScreenMode.Small } };
+        var manager = new ScreenModeManager(settings);
+        var window = CreateWindow();
+
+        await manager.ApplySavedAsync(window);
+        await manager.ChangeModeAsync(window, ScreenMode.Small);
+
+        Assert.Equal(ScreenMode.Small, manager.CurrentMode);
+        Assert.Equal(ScreenMode.Large, settings.Saved.ScreenMode);
+        Assert.Equal(800d, window.Width);
+        Assert.Equal(600d, window.Height);
+    }
 }

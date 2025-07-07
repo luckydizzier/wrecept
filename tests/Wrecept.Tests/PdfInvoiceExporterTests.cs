@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Wrecept.Core.Models;
 using Wrecept.Wpf.Services;
@@ -25,5 +26,43 @@ public class PdfInvoiceExporterTests
         await exporter.SavePdfAsync(invoice, file);
         Assert.True(File.Exists(file));
         File.Delete(file);
+    }
+
+    [Fact]
+    public async Task PrintAsync_CreatesFile_UsesPrintVerb()
+    {
+        var invoice = new Invoice { Number = "P1", Date = DateOnly.FromDateTime(DateTime.Today) };
+        var exporter = new PdfInvoiceExporter();
+        ProcessStartInfo? captured = null;
+        PdfInvoiceExporter.ProcessStarter = psi => { captured = psi; return null; };
+
+        await exporter.PrintAsync(invoice);
+
+        Assert.NotNull(captured);
+        Assert.Equal("print", captured!.Verb);
+        Assert.True(File.Exists(captured!.FileName));
+        File.Delete(captured!.FileName);
+        PdfInvoiceExporter.ProcessStarter = Process.Start;
+    }
+
+    [Fact]
+    public async Task SavePdfAsync_NullInvoice_Throws()
+    {
+        var exporter = new PdfInvoiceExporter();
+        await Assert.ThrowsAsync<ArgumentNullException>(() => exporter.SavePdfAsync(null!, "a"));
+    }
+
+    [Fact]
+    public async Task SavePdfAsync_NullPath_Throws()
+    {
+        var exporter = new PdfInvoiceExporter();
+        await Assert.ThrowsAsync<ArgumentNullException>(() => exporter.SavePdfAsync(new Invoice(), null!));
+    }
+
+    [Fact]
+    public async Task PrintAsync_NullInvoice_Throws()
+    {
+        var exporter = new PdfInvoiceExporter();
+        await Assert.ThrowsAsync<ArgumentNullException>(() => exporter.PrintAsync(null!));
     }
 }
