@@ -1,5 +1,5 @@
 ---
-title: "Project Structure"
+title: "Projektstruktúra"
 purpose: "Fájlok rétegenkénti szerepe és kapcsolatai"
 author: "docs_agent"
 date: "2025-07-05"
@@ -13,12 +13,12 @@ Ez a dokumentum fájlonként rögzíti a Wrecept megvalósításában szereplő 
 
 Minden fájl leírása az alábbi mezőket tartalmazza:
 
-- **Purpose** – a fájl célja
-- **Layer** – melyik réteghez tartozik
-- **Type** – kód, XAML, konfiguráció stb.
-- **Responsibility** – rövid feladatkör
-- **Interaction** – kapcsolódó komponensek
-- **Special Notes** – egyedi megjegyzések
+- **Cél** – a fájl célja
+- **Réteg** – melyik réteghez tartozik
+- **Típus** – kód, XAML, konfiguráció stb.
+- **Felelősség** – rövid feladatkör
+- **Kapcsolat** – kapcsolódó komponensek
+- **Megjegyzés** – egyedi megjegyzések
 - **Wrecept.Core/Entities/AppSettings.cs**
   - Purpose: Konfigurációs entitás
   - Layer: Core

@@ -7,7 +7,7 @@ date: "2025-06-27"
 
 # 🎨 Retro téma áttekintés
 
-A Retro UI hangs on a 16 színű DOS-palettán. A XAML erőforrás szótár egységesíti a vezérlők megjelenését. A fő színek: háttér `#9b8b20`, mezők `#c7bb4f`, gombok `#0000aa` fehér felirattal és kiemelés `#000055`.
+A Retro felület 16 színű DOS-palettára épül. A XAML erőforrás szótár egységesíti a vezérlők megjelenését. A fő színek: háttér `#9b8b20`, mezők `#c7bb4f`, gombok `#0000aa` fehér felirattal és kiemelés `#000055`.
 
 2025 júliusától a `RetroTheme.xaml` két változatban érhető el: világos és sötét. A váltást a `ThemeManager.ApplyDarkTheme(bool)` hívással lehet vezérelni, ami a megfelelő `ResourceDictionary` betöltését végzi.
 
@@ -29,7 +29,7 @@ Betűméretek:
 
 DataGrid sorok fekete háttérrel és arany kiemeléssel jelennek meg a DOS-hatást erősítve. A mennyiségi vagy ár mezők címkéi piros színt kapnak, hogy gyorsabban felismerhetők legyenek.
 
-- The StatusBar uses `ControlBackgroundBrush` with subtle text to avoid distraction while conveying state.
+- A StatusBar a `ControlBackgroundBrush` színt használja visszafogott felirattal, hogy jelezze az állapotot anélkül, hogy elvonná a figyelmet.
 
 ## Screen Modes
 
