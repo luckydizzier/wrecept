@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Storage;
 using Wrecept.Storage.Data;
+using Wrecept.Core.Repositories;
 using Xunit;
 using System;
 using System.IO;
@@ -29,5 +30,27 @@ public class WalPragmaTests
         await ctx.Database.CloseConnectionAsync();
 
         Assert.Equal("wal", mode.ToLowerInvariant());
+    }
+
+    [Fact]
+    public async Task EmptyDbPath_ResolvesServicesAndCreatesFile()
+    {
+        var userPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".json");
+        var settingsPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".json");
+
+        var services = new ServiceCollection();
+        await services.AddStorageAsync(string.Empty, userPath, settingsPath);
+        using var provider = services.BuildServiceProvider();
+
+        var interceptor = provider.GetRequiredService<WalPragmaInterceptor>();
+        var repo = provider.GetRequiredService<IInvoiceRepository>();
+
+        var expected = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "Wrecept", "app.db");
+
+        Assert.True(File.Exists(expected));
+
+        File.Delete(expected);
     }
 }
