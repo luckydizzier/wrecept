@@ -15,7 +15,7 @@ date: "2025-06-27"
 
 ## 📦 Project Purpose
 
-Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform MAUI kitérő után ismét WPF-re építjük a felületet, megőrizve a Clipper + dBase IV rendszerek sebességét. A cél továbbra is a kiszámítható működés, akár áramszünet után is.
+Wrecept originally started as a Windows-only WPF application. After a brief MAUI detour we returned to WPF while keeping the speed of the Clipper + dBase IV systems. The goal remains predictable operation, even after a power outage.
 
 ---
 
@@ -38,18 +38,18 @@ Wrecept eredetileg Windowson futó WPF alkalmazásként indult. A multiplatform 
 
 * **No mouse. No clutter.**
 * All screens mimic DOS layouts — with color-coded panels and full-screen efficiency.
-* Menük nagy része még helykitöltő, de a termékek kezelése már működik.
+* Most of the menus are still placeholders, but product management already works.
 
 ---
 
 ## 📁 Folder Structure
 
 ```
-Wrecept.Core/          # Domain modellek és szolgáltatások
-Wrecept.Storage/       # EF Core adatkezelés és repositoryk
-Wrecept.Wpf/           # WPF UI projekt
-docs/                  # Dokumentációk
-tools/                 # Segédszkriptek
+Wrecept.Core/          # Domain models and services
+Wrecept.Storage/       # EF Core data access and repositories
+Wrecept.Wpf/           # WPF UI project
+docs/                  # Documentation
+tools/                 # Helper scripts
 CHANGELOG.md
 Wrecept.sln
 ```
@@ -69,24 +69,24 @@ Wrecept.sln
 1. Build out invoice editor UI (inspired by screenshot #3)
 2. Integrate fake data into product and supplier modules
 3. Discuss minimal database model based on real .dbf structure
-4. Kötelező induló tennivalók a [DEV_SPECS.md](DEV_SPECS.md) "Kick OFF" szakaszában
+4. Mandatory startup tasks can be found in the "Kick OFF" section of [DEV_SPECS.md](DEV_SPECS.md)
 
 ## ✅ Kick OFF
 
-A WPF projekt `Wrecept.Wpf` néven jött létre, és az alábbi alapelemeket tartalmazza:
+The WPF project was created as `Wrecept.Wpf` and contains the following basics:
 
-* `App.xaml` és `App.xaml.cs` – alkalmazásbeállítások
-* `MainWindow.xaml` – főablak
-* `App.xaml.cs` tartalmazza a DI és indítási logikát
-* A `MainWindow` betölti a `StageView` felületet
+* `App.xaml` and `App.xaml.cs` – application configuration
+* `MainWindow.xaml` – main window
+* `App.xaml.cs` holds DI and startup logic
+* `MainWindow` loads the `StageView` layout
 
-Ezek garantálják, hogy a program Windows környezetben azonnal futtatható legyen.
+These ensure the program runs immediately in a Windows environment.
 
 ---
 
 ## ✅ Running Tests
 
-A tesztek a következő paranccsal futtathatók:
+Tests can be run with the following command:
 
 ```bash
 dotnet test tests/Wrecept.Tests/Wrecept.Tests.csproj
@@ -99,7 +99,7 @@ dotnet test tests/Wrecept.Tests/Wrecept.Tests.csproj
 Original layout, logic and color schema: \[Egon’s legacy Clipper app]
 Reconstruction by: \[ChatGPT-Dev Agent – 2025 Edition]
 
-> "A színpad áll, a keverő bekészítve. Most jöhet a kábelezés."
+> "The stage is set, the mixer is ready. Time to wire things up."
 
 ---
 
@@ -107,16 +107,16 @@ Reconstruction by: \[ChatGPT-Dev Agent – 2025 Edition]
 
 ---
 
-## 📚 Dokumentációk
+## 📚 Documentation
 
-- [ARCHITECTURE.md](ARCHITECTURE.md) – Rétegek és adatútvonalak
-- [AGENTS.md](AGENTS.md) – Agent feladatkiosztás
-- [CODE_STANDARDS.md](CODE_STANDARDS.md) – Kódolási irányelvek
-- [DEV_SPECS.md](DEV_SPECS.md) – Fejlesztési specifikáció
-- [ERROR_HANDLING.md](ERROR_HANDLING.md) – Hibatűrés
-- [FAULT_PLAN.md](FAULT_PLAN.md) – Hibabefecskendezési terv
-- [TEST_STRATEGY.md](TEST_STRATEGY.md) – Tesztstratégia
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) – Fájlszintű áttekintés
-- [../.git-branch-policy.md](../.git-branch-policy.md) – Git ágkezelési szabályzat
-- [manuals/developer_guide_hu.md](manuals/developer_guide_hu.md) – Fejlesztői útmutató
-- [manuals/user_manual_hu.md](manuals/user_manual_hu.md) – Felhasználói kézikönyv
+- [ARCHITECTURE.md](ARCHITECTURE.md) – Layers and data flow
+- [AGENTS.md](AGENTS.md) – Agent responsibilities
+- [CODE_STANDARDS.md](CODE_STANDARDS.md) – Coding guidelines
+- [DEV_SPECS.md](DEV_SPECS.md) – Development specification
+- [ERROR_HANDLING.md](ERROR_HANDLING.md) – Fault tolerance
+- [FAULT_PLAN.md](FAULT_PLAN.md) – Fault injection plan
+- [TEST_STRATEGY.md](TEST_STRATEGY.md) – Test strategy
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) – File-level overview
+- [../.git-branch-policy.md](../.git-branch-policy.md) – Git branch policy
+- [manuals/developer_guide_hu.md](manuals/developer_guide_hu.md) – Developer guide (HU)
+- [manuals/user_manual_hu.md](manuals/user_manual_hu.md) – User manual (HU)

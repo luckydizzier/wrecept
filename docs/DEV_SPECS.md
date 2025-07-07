@@ -39,7 +39,7 @@ The design must be:
 | Backups     | Manual + optional autosave-based copy            |
 | Permissions | No admin required. Writes to `%AppData%\Wrecept` |
 
-Az alkalmazás minden adatbázis-kapcsolat nyitásakor lefuttatja a `PRAGMA journal_mode=WAL` parancsot, így a naplózási mód mindig visszaáll WAL értékre.
+The application executes `PRAGMA journal_mode=WAL` every time it opens a database connection so the journaling mode always resets to WAL.
 
 ---
 
@@ -72,9 +72,7 @@ Az alkalmazás minden adatbázis-kapcsolat nyitásakor lefuttatja a `PRAGMA jour
 
 ## 🔍 View Utilities
 
-`VisualTreeExtensions.FindAncestor<T>` segít a vizuális fa bejárásában, ha a
-szükséges szülő vezérlőt XAML-ben szeretnénk elérni. Így a nézetekben nem kell
-kóddal keresni az ős elemeket, a logika tisztán a ViewModelben marad.
+`VisualTreeExtensions.FindAncestor<T>` helps traverse the visual tree when a parent control must be found from XAML. This keeps the search logic out of the views and inside the ViewModel layer.
 
 
 ---
@@ -112,8 +110,8 @@ kóddal keresni az ős elemeket, a logika tisztán a ViewModelben marad.
 ├── Themes\              # Application Themes
 └── version.txt          # Last known app version
 ```
-Fejlesztéskor a `wrecept.db` nevű adatbázis kizárólag a migrációk generálásához használatos.
-Ha az adatbázis elérési útja hiányzik, a program automatikusan a fenti `%AppData%/Wrecept/app.db` fájlt hozza létre.
+During development the `wrecept.db` database is used only for generating migrations.
+If the database path is missing the program automatically creates the `%AppData%/Wrecept/app.db` file.
 
 ---
 

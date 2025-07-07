@@ -76,6 +76,6 @@ Automatically recalculate invoice totals when line items are added/removed.
 
 ---
 
-*2025-07-08:* Utolsó kódlefedettségi mérés 100% eredménnyel.*
+*2025-07-08:* Last code coverage run reported 100%.*
 
 *Maintained by `root_agent`. Update before major feature execution.*
