@@ -789,6 +789,20 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
+- **Wrecept.Wpf/Services/ISetupFlow.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: UI
+  - Type: C#
+  - Responsibility: Első indítás adatbekérés
+  - Interaction: ViewModels
+  - Special Notes: Mockolható
+- **Wrecept.Wpf/Services/SetupFlow.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: UI
+  - Type: C#
+  - Responsibility: Dialógusok megjelenítése
+  - Interaction: Views
+  - Special Notes: -
 - **Wrecept.Wpf/Services/NavigationService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI

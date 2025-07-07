@@ -45,7 +45,9 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         ThemeManager.ApplyDarkTheme(false);
     }
 
-    private static async Task<AppSettings> LoadSettingsAsync()
+    private static async Task<AppSettings> LoadSettingsAsync(
+        INotificationService? notifications = null,
+        ISetupFlow? setupFlow = null)
     {
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         var dataDir = Path.Combine(appData, "Wrecept");
@@ -69,48 +71,24 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         var defaultDb = Path.Combine(Environment.CurrentDirectory, "app.db");
         var defaultCfg = Path.Combine(Environment.CurrentDirectory, "wrecept.json");
 
-        if (MessageBox.Show(
-                "Biztos, hogy elölrõl kezded?",
-                "Első indítás",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question) != MessageBoxResult.Yes)
+        notifications ??= new MessageBoxNotificationService();
+        setupFlow ??= new SetupFlow();
+
+        if (!notifications.Confirm("Biztos, hogy elölrõl kezded?"))
         {
             Current.Shutdown();
             Environment.Exit(0);
         }
 
-        var vm = new SetupViewModel(defaultDb, defaultCfg);
-        var win = new SetupWindow { DataContext = vm };
-        if (win.ShowDialog() != true)
-        {
-            Current.Shutdown();
-            Environment.Exit(0);
-        }
+        var setup = await setupFlow.RunAsync(defaultDb, defaultCfg);
 
-        var infoVm = new UserInfoEditorViewModel();
-        var infoWin = new UserInfoWindow { DataContext = infoVm };
-        infoVm.OnOk = _ => { infoWin.DialogResult = true; infoWin.Close(); };
-        infoVm.OnCancel = () => { infoWin.DialogResult = false; infoWin.Close(); };
-        if (infoWin.ShowDialog() != true)
-        {
-            Current.Shutdown();
-            Environment.Exit(0);
-        }
-        var userInfoService = new Wrecept.Storage.Services.UserInfoService(vm.ConfigPath);
-        await userInfoService.SaveAsync(new UserInfo
-        {
-            CompanyName = infoVm.CompanyName,
-            Address = infoVm.Address,
-            Phone = infoVm.Phone,
-            Email = infoVm.Email,
-            TaxNumber = infoVm.TaxNumber,
-            BankAccount = infoVm.BankAccount
-        });
+        var userInfoService = new Wrecept.Storage.Services.UserInfoService(setup.ConfigPath);
+        await userInfoService.SaveAsync(setup.Info);
 
         var settings = new AppSettings
         {
-            DatabasePath = vm.DatabasePath,
-            UserInfoPath = vm.ConfigPath
+            DatabasePath = setup.DatabasePath,
+            UserInfoPath = setup.ConfigPath
         };
         try
         {

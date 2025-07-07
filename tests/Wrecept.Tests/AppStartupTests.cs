@@ -11,10 +11,10 @@ namespace Wrecept.Tests;
 
 public class AppStartupTests
 {
-    private static async Task<AppSettings> InvokeLoadAsync()
+    private static async Task<AppSettings> InvokeLoadAsync(INotificationService? n = null, ISetupFlow? f = null)
     {
         var method = typeof(App).GetMethod("LoadSettingsAsync", BindingFlags.NonPublic | BindingFlags.Static)!;
-        return await (Task<AppSettings>)method.Invoke(null, null)!;
+        return await (Task<AppSettings>)method.Invoke(null, new object?[] { n, f })!;
     }
 
     [StaFact]
