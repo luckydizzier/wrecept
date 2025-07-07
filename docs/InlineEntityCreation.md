@@ -1,11 +1,11 @@
 ---
-title: "Inline Entity Creation"
+title: "Belső entitás létrehozása"
 purpose: "Rövid technikai leírás az inline entitás létrehozásáról"
 author: "docs_agent"
 date: "2025-07-03"
 ---
 
-# Inline Entity Creation
+# Belső entitás létrehozása
 
 Az InvoiceEditor nézetben lehetőség nyílik a hiányzó törzsadatok azonnali felvételére. Ha a felhasználó olyan terméket, szállítót, ÁFA-kulcsot vagy mértékegységet ír be, amely nem található az adatbázisban, a program a beviteli mezőben felugró űrlapot jelenít meg.
 

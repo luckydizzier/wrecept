@@ -1,6 +1,6 @@
-# Codex Audit Report – 2025-06-30
+# Codex audit jelentés – 2025-06-30
 
-## ✅ Passed Checks
+## ✅ Sikeres ellenőrzések
 
 - Modellek megfelelnek a RefactorPlan előírásainak (`Invoice`, `InvoiceItem`, `Product`, `Supplier`, `TaxRate`, `PaymentMethod`, `Unit`, `ProductGroup`).
 - A viewmodel-ek tartalmazzák a szükséges bindolható tulajdonságokat (pl. `InvoiceEditorViewModel` már kezeli a dátumot, szállítót, fizetési módot és bruttó/nettó állapotot).
@@ -8,11 +8,11 @@
 - A negatív mennyiségek vizuális jelzése `NegativeValueForegroundConverter` segítségével működik.
 - A start folyamatban a `StartupWindow` két ProgressBaron jelzi az előrehaladást.
 
-## ⚠️ Issues Detected
+## ⚠️ Észlelt problémák
 
 - `PaymentMethodMasterViewModel` és `ProductGroupMasterViewModel` még `GetAllAsync` hívást használnak, így az archivált elemek is megjelennek.
 
-## 💡 Suggested Fixes
+## 💡 Javasolt javítások
 
 - Cseréljük `GetActiveAsync` hívásra a fenti viewmodelleket, hogy az archivált rekordok kiszűrve legyenek.
 
