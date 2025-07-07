@@ -15,7 +15,7 @@ This document defines planned features for the **Wrecept** application. Each fea
 
 ## 🆕 Feature: Add Payment Method Entity
 
-**Status:** PLANNED
+**Status:** DONE
 
 ### 🎯 Goal
 
@@ -71,7 +71,7 @@ Automatically recalculate invoice totals when line items are added/removed.
 
 | Feature Name                  | Status      | Last Agent Triggered |
 | ----------------------------- | ----------- | -------------------- |
-| Add Payment Method Entity     | PLANNED     | -                    |
+| Add Payment Method Entity     | DONE        | test_agent           |
 | Implement Auto-Totals         | DONE        | docs_agent           |
 
 ---
