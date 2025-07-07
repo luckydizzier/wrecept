@@ -13,6 +13,7 @@ using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Views;
 using Wrecept.Wpf.Views.Controls;
 using Wrecept.Wpf.Services;
+using Wrecept.Core.Enums;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.Input;
 using Wrecept.Core.Utilities;
@@ -173,6 +174,11 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
 
             await EnsureServicesInitializedAsync();
             await Provider.GetRequiredService<AppStateService>().LoadAsync();
+
+            var km = Provider.GetRequiredService<KeyboardManager>();
+            var lookupVm = Provider.GetRequiredService<InvoiceLookupViewModel>();
+            var handler = new InvoiceLookupKeyboardHandler(lookupVm);
+            km.Register(AppInteractionState.BrowsingInvoices, handler);
 
             var orchestrator = Provider.GetRequiredService<StartupOrchestrator>();
             cts = new CancellationTokenSource();

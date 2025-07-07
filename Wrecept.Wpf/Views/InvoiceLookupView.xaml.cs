@@ -5,24 +5,28 @@ using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core.Services;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Services;
+using Wrecept.Core.Enums;
 
 namespace Wrecept.Wpf.Views;
 
 public partial class InvoiceLookupView : UserControl
 {
     private readonly FocusManager _focus;
+    private readonly AppStateService _state;
 
     public InvoiceLookupView() : this(
         App.Provider.GetRequiredService<InvoiceLookupViewModel>(),
-        App.Provider.GetRequiredService<FocusManager>())
+        App.Provider.GetRequiredService<FocusManager>(),
+        App.Provider.GetRequiredService<AppStateService>())
     {
     }
 
-    public InvoiceLookupView(InvoiceLookupViewModel viewModel, FocusManager focus)
+    public InvoiceLookupView(InvoiceLookupViewModel viewModel, FocusManager focus, AppStateService state)
     {
         InitializeComponent();
         DataContext = viewModel;
         _focus = focus;
+        _state = state;
         Loaded += OnLoaded;
     }
 
@@ -32,6 +36,7 @@ public partial class InvoiceLookupView : UserControl
         {
             if (DataContext is InvoiceLookupViewModel vm)
                 await vm.LoadAsync();
+            _state.InteractionState = AppInteractionState.BrowsingInvoices;
             _focus.RequestFocus(InvoiceList);
         }
         catch (Exception ex)
