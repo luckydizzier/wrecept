@@ -81,7 +81,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         {
             Current.Shutdown();
             EnvironmentService.Exit(0);
-            return;
+            return new AppSettings(); // alkalmazás kilép, de fordítás miatt értéket adunk
         }
 
         var setup = await setupFlow.RunAsync(defaultDb, defaultCfg, EnvironmentService);
