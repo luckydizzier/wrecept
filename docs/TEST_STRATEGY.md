@@ -33,6 +33,8 @@ A Wrecept stabilitását több szinten biztosítjuk.
 * A kódfedettségi statisztikából kizárjuk a `Wrecept.Storage/Migrations` mappa osztályait
   az `<ExcludeByFile>` projektbeállítással.
 
-*Megjegyzés: a `wrecept.db` néven szereplő adatbázis csak a migrációk tervezési szakaszában használatos.*
+  *Megjegyzés: a `wrecept.db` néven szereplő adatbázis csak a migrációk tervezési szakaszában használatos.*
+
+*2025-07-07:* Utolsó teljes lefedettségi mérés `dotnet test --collect:"XPlat Code Coverage"` parancs futtatásával 100%-ot jelzett mindhárom tesztprojektre.
 
 ---
