@@ -30,6 +30,8 @@ A Wrecept stabilitását több szinten biztosítjuk.
 * Kódfedettséget a `dotnet test --collect:"XPlat Code Coverage"` paranccsal mérünk.
   A CI szintén ezt használja, és a projektfájlokban szereplő `<Threshold>100</Threshold>`
   beállítás miatt bármilyen visszaesés hibát eredményez.
+  A WPF-projektekhez szükséges `Microsoft.NET.Sdk.WindowsDesktop` csomagot a CI
+  a `dotnet workload install windows` lépéssel telepíti.
 * A kódfedettségi statisztikából kizárjuk a `Wrecept.Storage/Migrations` mappa osztályait
   az `<ExcludeByFile>` projektbeállítással.
 

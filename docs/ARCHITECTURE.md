@@ -82,6 +82,7 @@ Ha a második adatlekérdezés is hibát jelez, a részleteket az `ILogService` 
 Az alkalmazás betöltésekor a `StartupOrchestrator` fut le, amely két szintű előrehaladási értéket jelent az UI felé. A `ProgressViewModel` által kötött nézet két `ProgressBar`-on keresztül mutatja a globális és részfeladatok százalékos állását, így a felhasználó valós időben látja a migráció és a mintaadatok betöltésének állapotát.
 
 Az első indításkor a `LoadSettingsAsync` metódus a `ISetupFlow` szolgáltatás segítségével kéri be az adatbázis- és cégadatok elérési útvonalát. A `SetupFlow` alapértelmezett implementáció WPF dialógusokat használ, de tesztben könnyen helyettesíthető.
+A folyamat megszakításakor az `IEnvironmentService` hívódik, így a kilépés tesztkörnyezetben is ellenőrizhető.
 
 Az `InvoiceEditorLayout` megnyitásakor hasonló ablak jelenik meg. A törzsadatok (fizetési módok, szállítók, ÁFA‑kulcsok, termékek, mértékegységek) betöltése lépésenként történik, a második sáv pedig az adott lista elemeinek betöltési arányát írja ki.
 
