@@ -2,7 +2,7 @@
 title: "Testing Strategy"
 purpose: "Unit, integration and UI testing principles"
 author: "docs_agent"
-date: "2025-07-07"
+date: "2025-07-08"
 ---
 
 # 🧪 Testing Strategy
@@ -37,6 +37,6 @@ A Wrecept stabilitását több szinten biztosítjuk.
 
   *Megjegyzés: a `wrecept.db` néven szereplő adatbázis csak a migrációk tervezési szakaszában használatos.*
 
-*2025-07-07:* Utolsó teljes lefedettségi mérés `dotnet test --collect:"XPlat Code Coverage"` parancs futtatásával 100%-ot jelzett mindhárom tesztprojektre.
+*2025-07-08:* Utolsó teljes lefedettségi mérés `dotnet test --collect:"XPlat Code Coverage"` parancs futtatásával 100%-ot jelzett mindhárom tesztprojektre.
 
 ---
