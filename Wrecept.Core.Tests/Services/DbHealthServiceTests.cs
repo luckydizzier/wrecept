@@ -27,6 +27,91 @@ public class DbHealthServiceTests
         }
     }
 
+    private class FailResultFactory : IDbContextFactory<AppDbContext>
+    {
+        public AppDbContext CreateDbContext() => new FakeContext();
+        public ValueTask<AppDbContext> CreateDbContextAsync(CancellationToken cancellationToken = default)
+            => ValueTask.FromResult<AppDbContext>(new FakeContext());
+
+        private class FakeContext : AppDbContext
+        {
+            private readonly DatabaseFacade _facade;
+            public FakeContext() : base(new DbContextOptions<AppDbContext>())
+            {
+                _facade = new FakeFacade(this);
+            }
+
+            public override DatabaseFacade Database => _facade;
+        }
+
+        private class FakeFacade : DatabaseFacade
+        {
+            public FakeFacade(DbContext context) : base(context) { }
+
+            public override DbConnection GetDbConnection() => new FakeConnection();
+            public override Task OpenConnectionAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+            public override Task CloseConnectionAsync() => Task.CompletedTask;
+        }
+
+        private class FakeConnection : DbConnection
+        {
+            public override string ConnectionString { get; set; } = string.Empty;
+            public override string Database => string.Empty;
+            public override string DataSource => string.Empty;
+            public override string ServerVersion => string.Empty;
+            public override ConnectionState State => ConnectionState.Open;
+            public override void ChangeDatabase(string databaseName) { }
+            public override void Close() { }
+            public override void Open() { }
+            public override Task OpenAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+            protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel) => throw new NotImplementedException();
+            protected override DbCommand CreateDbCommand() => new FakeCommand();
+        }
+
+        private class FakeCommand : DbCommand
+        {
+            public override string CommandText { get; set; } = string.Empty;
+            public override int CommandTimeout { get; set; }
+            public override CommandType CommandType { get; set; }
+            protected override DbConnection DbConnection { get; set; } = new FakeConnection();
+            protected override DbParameterCollection DbParameterCollection { get; } = new FakeParameterCollection();
+            protected override DbTransaction DbTransaction { get; set; } = null!;
+            public override bool DesignTimeVisible { get; set; }
+            public override UpdateRowSource UpdatedRowSource { get; set; }
+            public override void Cancel() { }
+            public override int ExecuteNonQuery() => 0;
+            public override object ExecuteScalar() => "failed";
+            public override Task<object?> ExecuteScalarAsync(CancellationToken cancellationToken) => Task.FromResult<object?>("failed");
+            protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior) => throw new NotImplementedException();
+        }
+
+        private class FakeParameterCollection : DbParameterCollection
+        {
+            public override int Count => 0;
+            public override object SyncRoot { get; } = new();
+            public override int Add(object value) => 0;
+            public override void AddRange(Array values) { }
+            public override void Clear() { }
+            public override bool Contains(object value) => false;
+            public override bool Contains(string value) => false;
+            public override void CopyTo(Array array, int index) { }
+            public override IEnumerator GetEnumerator() => Array.Empty<object>().GetEnumerator();
+            public override int IndexOf(object value) => -1;
+            public override int IndexOf(string parameterName) => -1;
+            public override void Insert(int index, object value) { }
+            public override bool IsFixedSize => false;
+            public override bool IsReadOnly => false;
+            public override bool IsSynchronized => false;
+            public override void Remove(object value) { }
+            public override void RemoveAt(int index) { }
+            public override void RemoveAt(string parameterName) { }
+            protected override DbParameter GetParameter(int index) => throw new NotImplementedException();
+            protected override DbParameter GetParameter(string parameterName) => throw new NotImplementedException();
+            protected override void SetParameter(int index, DbParameter value) { }
+            protected override void SetParameter(string parameterName, DbParameter value) { }
+        }
+    }
+
     [Fact]
     public async Task CheckAsync_ReturnsTrue_ForValidDb()
     {
@@ -51,5 +136,15 @@ public class DbHealthServiceTests
         var ok = await svc.CheckAsync();
         Assert.False(ok);
         Assert.NotNull(log.Last);
+    }
+
+    [Fact]
+    public async Task CheckAsync_LogsAndReturnsFalse_WhenResultNotOk()
+    {
+        var log = new LogSpy();
+        var svc = new DbHealthService(new FailResultFactory(), log);
+        var ok = await svc.CheckAsync();
+        Assert.False(ok);
+        Assert.Equal("failed", log.Last?.Message);
     }
 }

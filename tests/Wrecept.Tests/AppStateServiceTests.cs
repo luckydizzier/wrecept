@@ -26,4 +26,29 @@ public class AppStateServiceTests
         Assert.Equal(StageMenuAction.EditProducts, svc2.LastView);
         Assert.Equal(5, svc2.CurrentInvoiceId);
     }
+
+    [Fact]
+    public async Task LoadAsync_IgnoresMissingFile()
+    {
+        var path = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        var svc = new AppStateService(path);
+
+        await svc.LoadAsync();
+
+        Assert.Equal(StageMenuAction.InboundDeliveryNotes, svc.LastView);
+        Assert.Null(svc.CurrentInvoiceId);
+    }
+
+    [Fact]
+    public async Task LoadAsync_IgnoresInvalidJson()
+    {
+        var path = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        await File.WriteAllTextAsync(path, "{invalid json}");
+        var svc = new AppStateService(path);
+
+        await svc.LoadAsync();
+
+        Assert.Equal(StageMenuAction.InboundDeliveryNotes, svc.LastView);
+        Assert.Null(svc.CurrentInvoiceId);
+    }
 }
