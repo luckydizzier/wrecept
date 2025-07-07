@@ -1,11 +1,11 @@
 ---
-title: "Testing Strategy"
-purpose: "Unit, integration and UI testing principles"
+title: "Tesztelési stratégia"
+purpose: "Egység-, integráció- és UI-tesztelési elvek"
 author: "docs_agent"
 date: "2025-07-08"
 ---
 
-# 🧪 Testing Strategy
+# 🧪 Tesztelési stratégia
 
 A Wrecept stabilitását több szinten biztosítjuk.
 

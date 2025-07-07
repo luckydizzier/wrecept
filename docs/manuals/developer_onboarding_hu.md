@@ -1,11 +1,11 @@
 ---
-title: "Developer Onboarding"
+title: "Fejlesztői belépés"
 purpose: "Új fejlesztők belépési útmutatója"
 author: "docs_agent"
 date: "2025-06-27"
 ---
 
-# 🚀 Developer Onboarding
+# 🚀 Fejlesztői belépés
 
 Az alábbi lépések segítenek a projekt gyors megismerésében:
 

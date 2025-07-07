@@ -1,11 +1,11 @@
 ---
-title: "Fault Injection Plan"
-purpose: "Scenarios and recovery steps for reliability testing"
+title: "Hibabefecskendezési terv"
+purpose: "Forgatókönyvek és helyreállítási lépések megbízhatósági teszthez"
 author: "root_agent"
 date: "2025-06-27"
 ---
 
-# 🐞 Fault Injection Plan
+# 🐞 Hibabefecskendezési terv
 
 Ez a dokumentum meghatározza, hogyan vizsgáljuk az alkalmazás hibával szembeni ellenállását.
 
