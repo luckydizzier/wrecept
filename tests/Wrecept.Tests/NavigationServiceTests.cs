@@ -1,5 +1,6 @@
 using System.Windows;
 using Wrecept.Wpf.Services;
+using Wrecept.Core.Enums;
 using Xunit;
 
 namespace Wrecept.Tests;
