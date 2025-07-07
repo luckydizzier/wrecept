@@ -1132,14 +1132,14 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/Controls/EditLookup.xaml**
+- **Wrecept.Wpf/Views/Controls/LookUpEdit.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/Controls/EditLookup.xaml.cs**
+- **Wrecept.Wpf/Views/Controls/LookUpEdit.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
