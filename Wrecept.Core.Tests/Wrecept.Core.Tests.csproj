@@ -6,6 +6,9 @@
     <Nullable>enable</Nullable>
     <Threshold>100</Threshold>
   </PropertyGroup>
+  <PropertyGroup>
+    <ExcludeByFile>../Wrecept.Storage/Migrations/*</ExcludeByFile>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit" Version="2.5.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.0" />
