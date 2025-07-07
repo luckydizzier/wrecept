@@ -446,7 +446,7 @@ private void UpdateSupplierId(string name)
         if (parameter is UIElement target)
         {
             InlineCreatorTarget = target;
-            var name = (target as Controls.EditLookup)?.Box.Text ?? (target as Controls.SmartLookup)?.Text ?? string.Empty;
+            var name = (target as Controls.LookUpEdit)?.Box.Text ?? (target as Controls.SmartLookup)?.Text ?? string.Empty;
             InlineCreator = new TaxRateCreatorViewModel(this, _taxRates)
             {
                 Name = name
