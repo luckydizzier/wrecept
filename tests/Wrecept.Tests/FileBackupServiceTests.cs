@@ -40,4 +40,20 @@ public class FileBackupServiceTests
 
         Directory.Delete(dir, true);
     }
+
+    [Fact]
+    public async Task RestoreAsync_ThrowsIfZipMissing()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(dir);
+        var db = Path.Combine(dir, "app.db");
+        var user = Path.Combine(dir, "user.json");
+        var settings = Path.Combine(dir, "settings.json");
+        var svc = new FileBackupService(db, user, settings);
+        var zip = Path.Combine(dir, "missing.zip");
+
+        await Assert.ThrowsAsync<FileNotFoundException>(() => svc.RestoreAsync(zip));
+
+        Directory.Delete(dir, true);
+    }
 }
