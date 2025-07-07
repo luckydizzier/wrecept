@@ -1,8 +1,8 @@
 <UserControl x:Class="Wrecept.Wpf.Views.InvoiceLookupView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:prompt="clr-namespace:Wrecept.Wpf.Views.InlinePrompts"
-             xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
+            xmlns:prompt="clr-namespace:Wrecept.Wpf.Views.InlinePrompts;assembly=Wrecept.Wpf"
+             xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels;assembly=Wrecept.Wpf"
             >
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type vm:InvoiceCreatePromptViewModel}">
