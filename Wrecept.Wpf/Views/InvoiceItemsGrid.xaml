@@ -16,7 +16,7 @@
             <TextBlock Text="{Binding Product}" VerticalAlignment="Center" />
         </DataTemplate>
         <DataTemplate x:Key="ProductEditTemplate">
-            <c:LookUpEdit ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+            <c:LookupBox ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                          DisplayMemberPath="Name"
                          SelectedValuePath="Name"
                          SelectedValue="{Binding Product, Mode=TwoWay}" />
@@ -35,7 +35,7 @@
             <TextBlock Text="{Binding UnitName}" />
         </DataTemplate>
         <DataTemplate x:Key="UnitEditTemplate">
-            <c:LookUpEdit ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+            <c:LookupBox ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                          DisplayMemberPath="Name"
                          SelectedValuePath="Id"
                          SelectedValue="{Binding UnitId, Mode=TwoWay}" />
@@ -52,7 +52,7 @@
             <TextBlock Text="{Binding TaxRateName}" />
         </DataTemplate>
         <DataTemplate x:Key="VatEditTemplate">
-            <c:LookUpEdit ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+            <c:LookupBox ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                          DisplayMemberPath="Name"
                          SelectedValuePath="Id"
                          SelectedValue="{Binding TaxRateId, Mode=TwoWay}" />

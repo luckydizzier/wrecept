@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Wrecept.Tests;
 
-public class SmartLookupTests
+public class LookupBoxTests
 {
     private static void EnsureApp()
     {
@@ -17,9 +17,9 @@ public class SmartLookupTests
             new Application();
     }
 
-    private static Task InvokeFilterAsync(SmartLookup lookup)
+    private static Task InvokeFilterAsync(LookupBox lookup)
     {
-        var m = typeof(SmartLookup).GetMethod("FilterAsync", BindingFlags.Instance | BindingFlags.NonPublic)!;
+        var m = typeof(LookupBox).GetMethod("FilterAsync", BindingFlags.Instance | BindingFlags.NonPublic)!;
         return (Task)m.Invoke(lookup, null)!;
     }
 
@@ -29,7 +29,7 @@ public class SmartLookupTests
         EnsureApp();
         var apple = new { Name = "alma" };
         var banana = new { Name = "banán" };
-        var lookup = new SmartLookup
+        var lookup = new LookupBox
         {
             ItemsSource = new[] { apple, banana },
             DisplayMemberPath = "Name",
@@ -46,7 +46,7 @@ public class SmartLookupTests
         await InvokeFilterAsync(lookup);
 
         Assert.Empty(lookup.FilteredItems);
-        var prompt = (TextBlock)typeof(SmartLookup).GetField("PART_CreatePrompt", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(lookup)!;
+        var prompt = (TextBlock)typeof(LookupBox).GetField("PART_CreatePrompt", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(lookup)!;
         Assert.Equal(Visibility.Visible, prompt.Visibility);
     }
 
@@ -54,7 +54,7 @@ public class SmartLookupTests
     public void Match_ReturnsExpected()
     {
         var item = new { Name = "citrom" };
-        var m = typeof(SmartLookup).GetMethod("Match", BindingFlags.Static | BindingFlags.NonPublic)!;
+        var m = typeof(LookupBox).GetMethod("Match", BindingFlags.Static | BindingFlags.NonPublic)!;
         Assert.True((bool)m.Invoke(null, new object[] { item, "tro", "Name" })!);
         Assert.False((bool)m.Invoke(null, new object[] { item, "xyz", "Name" })!);
     }
@@ -63,7 +63,7 @@ public class SmartLookupTests
     public void GetProperty_ReturnsValue()
     {
         var item = new { Name = "dinnye" };
-        var m = typeof(SmartLookup).GetMethod("GetProperty", BindingFlags.Static | BindingFlags.NonPublic)!;
+        var m = typeof(LookupBox).GetMethod("GetProperty", BindingFlags.Static | BindingFlags.NonPublic)!;
         var value = m.Invoke(null, new object[] { item, "Name" });
         Assert.Equal("dinnye", value);
     }
