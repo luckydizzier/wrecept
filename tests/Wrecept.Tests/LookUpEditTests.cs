@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using Xceed.Wpf.Toolkit;
 using Xunit;
 using Wrecept.Wpf.Views.Controls;
 
 namespace Wrecept.Tests;
 
-public class EditLookupTests
+public class LookUpEditTests
 {
     private static void EnsureApp()
     {
@@ -17,11 +16,11 @@ public class EditLookupTests
     }
 
     [Fact]
-    public void AutoCompleteBox_HasContainsFilter()
+    public void ComboBox_IsEditable()
     {
         EnsureApp();
-        var lookup = new EditLookup();
-        var box = (AutoCompleteBox)typeof(EditLookup).GetField("Box", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(lookup)!;
-        Assert.Equal(AutoCompleteFilterMode.Contains, box.FilterMode);
+        var lookup = new LookUpEdit();
+        var box = (ComboBox)typeof(LookUpEdit).GetField("Box", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(lookup)!;
+        Assert.True(box.IsEditable);
     }
 }

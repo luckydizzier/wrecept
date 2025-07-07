@@ -7,26 +7,26 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Wrecept.Wpf.Views.Controls;
 
-public partial class EditLookup : UserControl
+public partial class LookUpEdit : UserControl
 {
     public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
-        nameof(ItemsSource), typeof(IEnumerable), typeof(EditLookup));
+        nameof(ItemsSource), typeof(IEnumerable), typeof(LookUpEdit));
 
     public static readonly DependencyProperty SelectedValueProperty = DependencyProperty.Register(
-        nameof(SelectedValue), typeof(object), typeof(EditLookup),
+        nameof(SelectedValue), typeof(object), typeof(LookUpEdit),
         new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
     public static readonly DependencyProperty SelectedValuePathProperty = DependencyProperty.Register(
-        nameof(SelectedValuePath), typeof(string), typeof(EditLookup));
+        nameof(SelectedValuePath), typeof(string), typeof(LookUpEdit));
 
     public static readonly DependencyProperty DisplayMemberPathProperty = DependencyProperty.Register(
-        nameof(DisplayMemberPath), typeof(string), typeof(EditLookup));
+        nameof(DisplayMemberPath), typeof(string), typeof(LookUpEdit));
 
     public static readonly DependencyProperty CreateCommandProperty = DependencyProperty.Register(
-        nameof(CreateCommand), typeof(ICommand), typeof(EditLookup));
+        nameof(CreateCommand), typeof(ICommand), typeof(LookUpEdit));
 
     public static readonly DependencyProperty CreateCommandParameterProperty = DependencyProperty.Register(
-        nameof(CreateCommandParameter), typeof(object), typeof(EditLookup));
+        nameof(CreateCommandParameter), typeof(object), typeof(LookUpEdit));
 
     public IEnumerable? ItemsSource
     {
@@ -64,7 +64,7 @@ public partial class EditLookup : UserControl
         set => SetValue(CreateCommandProperty, value);
     }
 
-    public EditLookup()
+    public LookUpEdit()
     {
         InitializeComponent();
     }
