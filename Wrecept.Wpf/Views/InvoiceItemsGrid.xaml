@@ -1,9 +1,8 @@
 <UserControl x:Class="Wrecept.Wpf.Views.InvoiceItemsGrid"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:c="clr-namespace:Wrecept.Wpf.Views.Controls"
-             xmlns:local="clr-namespace:Wrecept.Wpf.Converters"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+            xmlns:c="clr-namespace:Wrecept.Wpf.Views.Controls"
+            xmlns:local="clr-namespace:Wrecept.Wpf.Converters">
     <UserControl.Resources>
         <local:QuantityToStyleConverter x:Key="QuantityToStyleConverter" />
         <local:NegativeValueForegroundConverter x:Key="NegativeForegroundConverter" />
@@ -17,10 +16,10 @@
             <TextBlock Text="{Binding Product}" VerticalAlignment="Center" />
         </DataTemplate>
         <DataTemplate x:Key="ProductEditTemplate">
-            <xctk:AutoCompleteBox ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                  ValueMemberPath="Name"
-                                  FilterMode="Contains"
-                                  SelectedItem="{Binding Product, Mode=TwoWay}" />
+            <c:LookUpEdit ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                         DisplayMemberPath="Name"
+                         SelectedValuePath="Name"
+                         SelectedValue="{Binding Product, Mode=TwoWay}" />
         </DataTemplate>
 
         <DataTemplate x:Key="QuantityDisplayTemplate">
@@ -36,10 +35,10 @@
             <TextBlock Text="{Binding UnitName}" />
         </DataTemplate>
         <DataTemplate x:Key="UnitEditTemplate">
-            <xctk:AutoCompleteBox ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                  ValueMemberPath="Id"
-                                  FilterMode="Contains"
-                                  SelectedItem="{Binding UnitId, Mode=TwoWay}" />
+            <c:LookUpEdit ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                         DisplayMemberPath="Name"
+                         SelectedValuePath="Id"
+                         SelectedValue="{Binding UnitId, Mode=TwoWay}" />
         </DataTemplate>
 
         <DataTemplate x:Key="PriceDisplayTemplate">
@@ -53,10 +52,10 @@
             <TextBlock Text="{Binding TaxRateName}" />
         </DataTemplate>
         <DataTemplate x:Key="VatEditTemplate">
-            <xctk:AutoCompleteBox ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                  ValueMemberPath="Id"
-                                  FilterMode="Contains"
-                                  SelectedItem="{Binding TaxRateId, Mode=TwoWay}" />
+            <c:LookUpEdit ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                         DisplayMemberPath="Name"
+                         SelectedValuePath="Id"
+                         SelectedValue="{Binding TaxRateId, Mode=TwoWay}" />
         </DataTemplate>
 
         <local:InvoiceLineTotalsConverter x:Key="NetConverter" Mode="Net" />
