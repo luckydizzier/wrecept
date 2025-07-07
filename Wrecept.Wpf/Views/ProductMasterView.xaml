@@ -4,6 +4,7 @@
                               xmlns:views="clr-namespace:Wrecept.Wpf.Views"
                               xmlns:viewsControls="clr-namespace:Wrecept.Wpf.Views.Controls"
                               xmlns:vm="clr-namespace:Wrecept.Wpf.ViewModels"
+                              xmlns:c="clr-namespace:Wrecept.Wpf.Views.Controls"
                               x:TypeArguments="vm:ProductMasterViewModel">
     <viewsControls:BaseMasterView.Columns>
         <DataGridTextColumn Header="Név" Binding="{Binding Name}" Width="*" />
@@ -28,11 +29,11 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                     <TextBlock Width="80" Text="ÁFA"/>
-                    <ComboBox Width="120"
-                              ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                              SelectedValuePath="Id"
-                              DisplayMemberPath="Name"
-                              SelectedValue="{Binding TaxRateId, Mode=TwoWay}" />
+                    <c:LookUpEdit Width="120"
+                                 ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                 SelectedValuePath="Id"
+                                 DisplayMemberPath="Name"
+                                 SelectedValue="{Binding TaxRateId, Mode=TwoWay}" />
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
