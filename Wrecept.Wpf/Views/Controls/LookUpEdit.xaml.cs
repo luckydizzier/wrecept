@@ -4,6 +4,7 @@ using System.Collections;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Wrecept.Wpf.Views.Controls;
 
@@ -31,6 +32,7 @@ public partial class LookUpEdit : UserControl
     public IEnumerable? ItemsSource
     {
         get => (IEnumerable?)GetValue(ItemsSourceProperty);
+
         set => SetValue(ItemsSourceProperty, value);
     }
 
