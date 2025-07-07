@@ -1797,6 +1797,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility:
   - Interaction:
   - Special Notes: -
+- **tests/Wrecept.Storage.Tests/AppDbContextFactoryTests.cs**
+  - Purpose: Fájl
+  - Layer: Tests
+  - Type: C#
+  - Responsibility:
+  - Interaction:
+  - Special Notes: -
 - **tests/Wrecept.Storage.Tests/Wrecept.Storage.Tests.csproj**
   - Purpose: Projektfájl
   - Layer: Tests
