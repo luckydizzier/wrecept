@@ -24,6 +24,9 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 {
     private readonly InvoiceEditorViewModel _parent;
 
+    [ObservableProperty]
+    private int id;
+
     public InvoiceItemRowViewModel(InvoiceEditorViewModel parent)
     {
         _parent = parent;
@@ -85,6 +88,7 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     internal void SetInitialValues(InvoiceItem item)
     {
+        Id = item.Id;
         Product = item.Product?.Name ?? string.Empty;
         Quantity = item.Quantity;
         UnitPrice = item.UnitPrice;
@@ -673,7 +677,8 @@ private void UpdateSupplierId(string name)
             try
             {
                 item.InvoiceId = InvoiceId;
-                await _invoiceService.AddItemAsync(item);
+                var newId = await _invoiceService.AddItemAsync(item);
+                item.Id = newId;
             }
             catch (Exception ex)
             {
@@ -685,6 +690,7 @@ private void UpdateSupplierId(string name)
 
         var row = new InvoiceItemRowViewModel(this)
         {
+            Id = item.Id,
             Product = product.Name,
             Quantity = edit.Quantity,
             UnitPrice = edit.UnitPrice,
@@ -787,6 +793,8 @@ private void UpdateSupplierId(string name)
                 if (ok)
                 {
                     var newId = _draft.Id;
+                    for (int i = 0; i < _draft.Items.Count && i + 1 < Items.Count; i++)
+                        Items[i + 1].Id = _draft.Items[i].Id;
                     InvoiceId = newId;
                     IsNew = false;
                     _draft = new Invoice();
@@ -831,6 +839,10 @@ private void UpdateSupplierId(string name)
         {
             var domainItem = _draft.Items.ElementAt(index - 1);
             _draft.Items.Remove(domainItem);
+        }
+        else if (!IsNew && row.Id > 0)
+        {
+            _ = _invoiceService.RemoveItemAsync(row.Id);
         }
         RecalculateTotals();
     }

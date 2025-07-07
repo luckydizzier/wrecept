@@ -16,6 +16,7 @@ public class InvoiceServiceTests
     {
         public Invoice? AddedInvoice;
         public InvoiceItem? AddedItem;
+        public int RemovedId;
         public Task<int> AddAsync(Invoice invoice, CancellationToken ct = default) { AddedInvoice = invoice; return Task.FromResult(1); }
         public Task<int> AddItemAsync(InvoiceItem item, CancellationToken ct = default) { AddedItem = item; return Task.FromResult(1); }
         public Task UpdateHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default) => Task.CompletedTask;
@@ -24,6 +25,7 @@ public class InvoiceServiceTests
         public Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default) => Task.FromResult(new List<Invoice>());
         public Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default) => Task.FromResult<LastUsageData?>(null);
         public Task<Dictionary<int, LastUsageData>> GetLastUsageDataBatchAsync(int supplierId, IEnumerable<int> productIds, CancellationToken ct = default) => Task.FromResult(new Dictionary<int, LastUsageData>());
+        public Task RemoveItemAsync(int id, CancellationToken ct = default) { RemovedId = id; return Task.CompletedTask; }
     }
 
     [Fact]
@@ -86,5 +88,16 @@ public class InvoiceServiceTests
         var svc = new InvoiceService(new FakeRepo(), new InvoiceCalculator());
         var item = new InvoiceItem { InvoiceId = 0, ProductId = 0 };
         await Assert.ThrowsAsync<ArgumentException>(() => svc.AddItemAsync(item));
+    }
+
+    [Fact]
+    public async Task RemoveItemAsync_CallsRepository()
+    {
+        var repo = new FakeRepo();
+        var svc = new InvoiceService(repo, new InvoiceCalculator());
+
+        await svc.RemoveItemAsync(10);
+
+        Assert.Equal(10, repo.RemovedId);
     }
 }
