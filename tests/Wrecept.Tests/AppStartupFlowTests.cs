@@ -118,4 +118,44 @@ public class AppStartupFlowTests
 
         Assert.True(log.Called);
     }
+
+    private class DeclineNotification : INotificationService
+    {
+        public bool Confirm(string message) => false;
+        public void ShowError(string message) { }
+        public void ShowInfo(string message) { }
+    }
+
+    private class RecordingEnv : IEnvironmentService
+    {
+        public bool Called;
+        public void Exit(int exitCode) => Called = true;
+    }
+
+    [StaFact]
+    public void OnStartup_Aborts_WhenUserDeclines()
+    {
+        EnsureApp();
+        var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(dir);
+        App.DbPath = Path.Combine(dir, "app.db");
+        App.UserInfoPath = Path.Combine(dir, "user.json");
+        App.SettingsPath = Path.Combine(dir, "settings.json");
+        App.StatePath = Path.Combine(dir, "state.json");
+        var provider = BuildProvider(dir, includeOptionsVm: false);
+        var env = new RecordingEnv();
+        App.Services = provider;
+        App.EnvironmentService = env;
+        App.ConfirmOverride = _ => false;
+        var app = new App();
+
+        InvokeStartup(app);
+
+        Assert.True(env.Called);
+        Assert.Equal(ShutdownMode.OnExplicitShutdown, app.ShutdownMode);
+        Assert.Null(Application.Current!.MainWindow);
+
+        App.ConfirmOverride = null;
+        App.EnvironmentService = new EnvironmentService();
+    }
 }
