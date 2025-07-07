@@ -100,7 +100,6 @@
                             <Label Content="_Fizetési mód" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=PaymentLookup}" />
                             <c:EditLookup x:Name="PaymentLookup" Width="220"
                                           ItemsSource="{Binding PaymentMethods}"
-                                          DisplayMemberPath="Name"
                                           SelectedValuePath="Id"
                                           SelectedValue="{Binding PaymentMethodId}"
                                           CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
@@ -159,7 +158,6 @@
                     <TextBox x:Name="EntryPrice" Grid.Column="3" Margin="4,0" Text="{Binding UnitPrice, Mode=TwoWay}" />
                     <c:EditLookup x:Name="EntryTax" Grid.Column="4" Tag="LastEntry"
                                   ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                  DisplayMemberPath="Name"
                                   SelectedValuePath="Id"
                                   SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
                                   CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"

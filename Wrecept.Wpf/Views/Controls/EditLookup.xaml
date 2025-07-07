@@ -3,14 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
             mc:Ignorable="d">
-    <ComboBox x:Name="Box"
-              ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType=UserControl}}"
-              SelectedValuePath="{Binding SelectedValuePath, RelativeSource={RelativeSource AncestorType=UserControl}}"
-              DisplayMemberPath="{Binding DisplayMemberPath, RelativeSource={RelativeSource AncestorType=UserControl}}"
-              SelectedValue="{Binding SelectedValue, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}"
-              IsEditable="True"
-              StaysOpenOnEdit="True"
-              IsTextSearchEnabled="False"
-              IsSynchronizedWithCurrentItem="True"/>
+    <xctk:AutoCompleteBox x:Name="Box"
+                          ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                          ValueMemberPath="{Binding SelectedValuePath, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                          FilterMode="Contains"
+                          SelectedItem="{Binding SelectedValue, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}" />
 </UserControl>
