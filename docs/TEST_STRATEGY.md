@@ -30,6 +30,8 @@ A Wrecept stabilitását több szinten biztosítjuk.
 * Kódfedettséget a `dotnet test --collect:"XPlat Code Coverage"` paranccsal mérünk.
   A CI szintén ezt használja, és a projektfájlokban szereplő `<Threshold>100</Threshold>`
   beállítás miatt bármilyen visszaesés hibát eredményez.
+* A kódfedettségi statisztikából kizárjuk a `Wrecept.Storage/Migrations` mappa osztályait
+  az `<ExcludeByFile>` projektbeállítással.
 
 *Megjegyzés: a `wrecept.db` néven szereplő adatbázis csak a migrációk tervezési szakaszában használatos.*
 
