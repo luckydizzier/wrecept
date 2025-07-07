@@ -419,7 +419,7 @@ private void UpdateSupplierId(string name)
         if (parameter is UIElement target)
         {
             InlineCreatorTarget = target;
-            var text = (target as Views.Controls.SmartLookup)?.Text ?? string.Empty;
+            var text = (target as Views.Controls.LookupBox)?.Text ?? string.Empty;
             InlineCreator = new SupplierCreatorViewModel(this, _suppliers)
             {
                 Name = text
@@ -432,7 +432,7 @@ private void UpdateSupplierId(string name)
         if (parameter is UIElement target && target is FrameworkElement fe && fe.DataContext is InvoiceItemRowViewModel row)
         {
             InlineCreatorTarget = target;
-            var name = (target as Views.Controls.SmartLookup)?.Text ?? row.Product;
+            var name = (target as Views.Controls.LookupBox)?.Text ?? row.Product;
             InlineCreator = new ProductCreatorViewModel(this, row, _productsService)
             {
                 Name = name
@@ -446,7 +446,7 @@ private void UpdateSupplierId(string name)
         if (parameter is UIElement target)
         {
             InlineCreatorTarget = target;
-            var name = (target as Controls.LookUpEdit)?.Box.Text ?? (target as Controls.SmartLookup)?.Text ?? string.Empty;
+            var name = (target as Controls.LookupBox)?.Text ?? string.Empty;
             InlineCreator = new TaxRateCreatorViewModel(this, _taxRates)
             {
                 Name = name

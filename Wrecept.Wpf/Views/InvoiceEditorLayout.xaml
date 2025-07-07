@@ -77,7 +77,7 @@
                         <!-- Supplier -->
                         <StackPanel Margin="0,0,6,0">
                             <Label Content="_Szállító" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=SupplierLookup}" />
-                            <c:SmartLookup x:Name="SupplierLookup" Width="220"
+                            <c:LookupBox x:Name="SupplierLookup" Width="220"
                                            AutomationProperties.Name="Supplier Lookup"
                                            ItemsSource="{Binding Suppliers}"
                                            DisplayMemberPath="Name"
@@ -98,7 +98,7 @@
                         <!-- Payment method -->
                         <StackPanel Margin="0,6,6,0">
                             <Label Content="_Fizetési mód" Style="{StaticResource FormLabelStyle}" Target="{Binding ElementName=PaymentLookup}" />
-                            <c:LookUpEdit x:Name="PaymentLookup" Width="220"
+                            <c:LookupBox x:Name="PaymentLookup" Width="220"
                                           ItemsSource="{Binding PaymentMethods}"
                                           SelectedValuePath="Id"
                                           SelectedValue="{Binding PaymentMethodId}"
@@ -138,7 +138,7 @@
                         <ColumnDefinition Width="150" />
                     </Grid.ColumnDefinitions>
 
-                    <c:SmartLookup x:Name="EntryProduct" Grid.Column="0"
+                    <c:LookupBox x:Name="EntryProduct" Grid.Column="0"
                                    ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                    DisplayMemberPath="Name"
                                    SelectedValuePath="Name"
@@ -147,7 +147,7 @@
                                    CreateCommand="{Binding DataContext.ShowProductCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
                     <TextBox x:Name="EntryQuantity" Grid.Column="1" Margin="4,0" Text="{Binding Quantity, Mode=TwoWay}" />
-                    <c:SmartLookup x:Name="EntryUnit" Grid.Column="2"
+                    <c:LookupBox x:Name="EntryUnit" Grid.Column="2"
                                    ItemsSource="{Binding DataContext.Units, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                    DisplayMemberPath="Name"
                                    SelectedValuePath="Id"
@@ -156,7 +156,7 @@
                                    CreateCommand="{Binding DataContext.ShowUnitCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
                     <TextBox x:Name="EntryPrice" Grid.Column="3" Margin="4,0" Text="{Binding UnitPrice, Mode=TwoWay}" />
-                    <c:LookUpEdit x:Name="EntryTax" Grid.Column="4" Tag="LastEntry"
+                    <c:LookupBox x:Name="EntryTax" Grid.Column="4" Tag="LastEntry"
                                   ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                   SelectedValuePath="Id"
                                   SelectedValue="{Binding TaxRateId, Mode=TwoWay}"

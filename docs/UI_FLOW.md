@@ -47,14 +47,14 @@ A javasolt értéket Enterrel elfogadhatjuk, Escape megszakítja. Ez akkor is m�
 
 A számlaszám megerősítése után:
 
-- Szállító kiválasztása (SmartLookup)
+- Szállító kiválasztása (LookupBox)
 - Dátum megadása (alapértelmezett = mai nap)
-- Fizetési mód (SmartLookup)
+- Fizetési mód (LookupBox)
 - Bruttó jelölőnégyzet a számlaszám mellett, csak szerkeszthető számlánál aktív.
 
 3. Tételsorok bevitele
 
-- SmartLookup valós idejű szűréssel
+- LookupBox valós idejű szűréssel
 - Ha nincs találat, felugró űrlappal vehető fel új entitás
 - Mennyiség, ár és ÁFA a legutóbbi használatból előtöltve
 - Szabad szöveges megjegyzés mező soronként
@@ -76,9 +76,9 @@ Archivált számlák:
 
 Archiválás gomb csak nem archivált számlánál jelenik meg. Jóváhagyáskor figyelmeztető üzenet: "Véglegesíti a számlát, később nem módosítható."
 
-📊 SmartLookup működés
+📊 LookupBox működés
 
-Minden törzsadat mező (Szállító, Termék, ÁFA, Mértékegység) egységes SmartLookup komponenst használ.
+Minden törzsadat mező (Szállító, Termék, ÁFA, Mértékegység) egységes LookupBox komponenst használ.
 
 Gépelés közben valós időben szűri a listát.
 
@@ -113,10 +113,10 @@ Példa:
 🧾 Számlaszerkesztő nézet
 
 ┌───── Lista ────┬──────── Számla szerkesztő ────────────────┐
-│ [Számlaszám]   │ Szállító: [SmartLookup   ]               │
+│ [Számlaszám]   │ Szállító: [LookupBox   ]               │
 │ [Dátum]        │ Dátum:    [2025-06-30  ]                │
 │ [Szállító]     │ Szám:     [XXXXX1231   ]                │
-│                │ Fiz. mód: [SmartLookup   ]   [ ] Bruttó │
+│                │ Fiz. mód: [LookupBox   ]   [ ] Bruttó │
 │                ├──────────────────────────────────────────┤
 │                │ Termék  Menny. Csop. Me.e. Ár  ÁFA       │
 │                │ [Edit] [  1] ...                         │

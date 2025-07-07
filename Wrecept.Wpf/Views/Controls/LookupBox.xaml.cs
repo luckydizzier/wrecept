@@ -12,36 +12,36 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Wrecept.Wpf.Views.Controls;
 
-public partial class SmartLookup : UserControl
+public partial class LookupBox : UserControl
 {
     public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
-        nameof(ItemsSource), typeof(IEnumerable), typeof(SmartLookup));
+        nameof(ItemsSource), typeof(IEnumerable), typeof(LookupBox));
 
     public static readonly DependencyProperty SelectedValueProperty = DependencyProperty.Register(
-        nameof(SelectedValue), typeof(object), typeof(SmartLookup),
+        nameof(SelectedValue), typeof(object), typeof(LookupBox),
         new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
     public static readonly DependencyProperty SelectedValuePathProperty = DependencyProperty.Register(
-        nameof(SelectedValuePath), typeof(string), typeof(SmartLookup));
+        nameof(SelectedValuePath), typeof(string), typeof(LookupBox));
 
     public static readonly DependencyProperty DisplayMemberPathProperty = DependencyProperty.Register(
-        nameof(DisplayMemberPath), typeof(string), typeof(SmartLookup));
+        nameof(DisplayMemberPath), typeof(string), typeof(LookupBox));
 
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-        nameof(Text), typeof(string), typeof(SmartLookup),
+        nameof(Text), typeof(string), typeof(LookupBox),
         new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged));
 
     public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register(
-        nameof(Watermark), typeof(string), typeof(SmartLookup));
+        nameof(Watermark), typeof(string), typeof(LookupBox));
 
     public static readonly DependencyProperty CreateCommandProperty = DependencyProperty.Register(
-        nameof(CreateCommand), typeof(ICommand), typeof(SmartLookup));
+        nameof(CreateCommand), typeof(ICommand), typeof(LookupBox));
 
     public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
-        nameof(CommandParameter), typeof(object), typeof(SmartLookup));
+        nameof(CommandParameter), typeof(object), typeof(LookupBox));
 
     public static readonly DependencyProperty MaxSuggestionsProperty = DependencyProperty.Register(
-        nameof(MaxSuggestions), typeof(int), typeof(SmartLookup), new PropertyMetadata(10));
+        nameof(MaxSuggestions), typeof(int), typeof(LookupBox), new PropertyMetadata(10));
 
     public IEnumerable? ItemsSource
     {
@@ -100,15 +100,20 @@ public partial class SmartLookup : UserControl
     private CancellationTokenSource? _cts;
     public ObservableCollection<object> FilteredItems { get; } = new();
 
-    public SmartLookup()
+    public LookupBox()
     {
         InitializeComponent();
+    }
+
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        Text = PART_TextBox.Text;
     }
 
 
     private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is SmartLookup lookup)
+        if (d is LookupBox lookup)
             _ = lookup.FilterAsync();
     }
 
@@ -135,6 +140,19 @@ public partial class SmartLookup : UserControl
         FilteredItems.Clear();
         foreach (var item in results)
             FilteredItems.Add(item);
+
+        if (FilteredItems.Count > 0 && !string.IsNullOrWhiteSpace(text))
+        {
+            var first = GetProperty(FilteredItems[0], display)?.ToString();
+            if (first != null && first.StartsWith(text, StringComparison.OrdinalIgnoreCase) && first.Length > text.Length)
+            {
+                PART_TextBox.TextChanged -= TextBox_TextChanged;
+                PART_TextBox.Text = first;
+                PART_TextBox.SelectionStart = text.Length;
+                PART_TextBox.SelectionLength = first.Length - text.Length;
+                PART_TextBox.TextChanged += TextBox_TextChanged;
+            }
+        }
 
         if (FilteredItems.Count == 0 && !string.IsNullOrWhiteSpace(text))
         {

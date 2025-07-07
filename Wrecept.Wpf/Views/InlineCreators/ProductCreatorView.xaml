@@ -20,7 +20,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                 <TextBlock Text="Egység" Width="60" />
-                <c:LookUpEdit Width="120"
+                <c:LookupBox Width="120"
                              ItemsSource="{Binding Units}"
                              SelectedValuePath="Id"
                              DisplayMemberPath="Name"
@@ -28,7 +28,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                 <TextBlock Text="Csoport" Width="60" />
-                <c:LookUpEdit Width="120"
+                <c:LookupBox Width="120"
                              ItemsSource="{Binding ProductGroups}"
                              SelectedValuePath="Id"
                              DisplayMemberPath="Name"
@@ -36,7 +36,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                 <TextBlock Text="ÁFA" Width="60" />
-                <c:LookUpEdit Width="120"
+                <c:LookupBox Width="120"
                              ItemsSource="{Binding TaxRates}"
                              SelectedValuePath="Id"
                              DisplayMemberPath="Name"
