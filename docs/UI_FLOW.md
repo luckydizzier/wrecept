@@ -37,7 +37,7 @@ a kezdő elemüket regisztrálják.
 
 1. Számlaszám mező (keresés és létrehozás)
 
-A felső ComboBox időrendben mutatja a meglévő számlaszámokat.
+A felső AutoCompleteBox időrendben mutatja a meglévő számlaszámokat.
 
 Insert lenyomására vagy a lista tetejére lépve az `INumberingService` új számot ajánl fel egy kis megerősítő ablakban.
 

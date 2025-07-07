@@ -1,7 +1,7 @@
 using System;
 using System.Windows;
+using System.Collections;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +10,7 @@ namespace Wrecept.Wpf.Views.Controls;
 public partial class EditLookup : UserControl
 {
     public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
-        nameof(ItemsSource), typeof(object), typeof(EditLookup));
+        nameof(ItemsSource), typeof(IEnumerable), typeof(EditLookup));
 
     public static readonly DependencyProperty SelectedValueProperty = DependencyProperty.Register(
         nameof(SelectedValue), typeof(object), typeof(EditLookup),
@@ -28,7 +28,7 @@ public partial class EditLookup : UserControl
     public static readonly DependencyProperty CreateCommandParameterProperty = DependencyProperty.Register(
         nameof(CreateCommandParameter), typeof(object), typeof(EditLookup));
 
-    public object? ItemsSource
+    public IEnumerable? ItemsSource
     {
         get => GetValue(ItemsSourceProperty);
         set => SetValue(ItemsSourceProperty, value);
@@ -64,41 +64,9 @@ public partial class EditLookup : UserControl
         set => SetValue(CreateCommandProperty, value);
     }
 
-    private TextBox? _textBox;
-
     public EditLookup()
     {
         InitializeComponent();
-        Loaded += OnLoaded;
-    }
-
-    private void OnLoaded(object sender, RoutedEventArgs e)
-    {
-        _textBox = (TextBox)Box.Template.FindName("PART_EditableTextBox", Box);
-        if (_textBox != null)
-            _textBox.TextChanged += OnTextChanged;
-    }
-
-    private void OnTextChanged(object sender, TextChangedEventArgs e)
-    {
-        if (ItemsSource == null)
-            return;
-        var view = CollectionViewSource.GetDefaultView(ItemsSource);
-        var text = _textBox?.Text ?? string.Empty;
-        view.Filter = o => Matches(o, text);
-        Box.IsDropDownOpen = true;
-        view.Refresh();
-    }
-
-    private bool Matches(object? item, string text)
-    {
-        if (string.IsNullOrWhiteSpace(text))
-            return true;
-        if (item is null)
-            return false;
-        var prop = item.GetType().GetProperty(DisplayMemberPath ?? "Name");
-        var value = prop?.GetValue(item)?.ToString() ?? item.ToString();
-        return value != null && value.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
 }

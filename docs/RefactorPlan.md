@@ -42,13 +42,13 @@ Each step includes updates for:
 ### ViewModel Changes
 
 * Bind `IsGross` to a Toggle or Checkbox in the invoice editor.
-* Bind `PaymentMethodId` using a ComboBox of active payment methods.
+* Bind `PaymentMethodId` using an AutoCompleteBox of active payment methods.
 * Add `IsArchived` flag to support filtering/archive logic.
 
 ### View (XAML)
 
 * Add gross/net toggle.
-* Replace payment method TextBox with ComboBox.
+* Replace payment method TextBox with AutoCompleteBox.
 * Disable editing if `IsArchived` is true.
 
 ---
@@ -140,7 +140,7 @@ No changes beyond current `DueInDays`, `IsArchived`, etc.
 ### ViewModel & View
 
 * Make `DueInDays` editable.
-* Filter out archived values from Invoice editor ComboBox.
+* Filter out archived values from Invoice editor AutoCompleteBox.
 
 ---
 
@@ -167,7 +167,7 @@ Already conformant. Just ensure dropdown bindings and filtering work consistentl
 
 ## 🔁 Change Propagation Notes
 
-* Ensure all ComboBox elements bind to filtered observable collections (only non-archived items).
+* Ensure all AutoCompleteBox elements bind to filtered observable collections (only non-archived items).
 * All new IDs must be saved and loaded in ViewModel → Model mapping.
 * `InvoiceCalculator` must read `IsGross` and `TaxRate.Percentage` per item.
 * Negative `Quantity` must affect all totals.

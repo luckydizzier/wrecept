@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
     <PackageReference Include="QuestPDF" Version="2024.3.0" />
+    <PackageReference Include="Xceed.Wpf.Toolkit" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>
