@@ -63,4 +63,28 @@ public class SetupFlowTests
         Assert.Equal("T", result.Info.TaxNumber);
         Assert.Equal("B", result.Info.BankAccount);
     }
+
+    private class RecordingEnv : IEnvironmentService
+    {
+        public bool Called;
+        public void Exit(int exitCode) => Called = true;
+    }
+
+    [StaFact]
+    public async Task RunAsync_CallsExit_OnCancel()
+    {
+        EnsureApp();
+        var env = new RecordingEnv();
+
+        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+        {
+            var setup = Application.Current.Windows.OfType<SetupWindow>().First();
+            setup.DialogResult = false;
+        }), DispatcherPriority.Background);
+
+        var flow = new SetupFlow();
+        await flow.RunAsync("db", "cfg", env);
+
+        Assert.True(env.Called);
+    }
 }
