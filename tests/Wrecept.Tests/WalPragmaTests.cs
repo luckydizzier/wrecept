@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Storage;
 using Wrecept.Storage.Data;
 using Wrecept.Core.Repositories;
+using Wrecept.Core.Services;
 using Xunit;
 using System;
 using System.IO;
@@ -21,6 +22,8 @@ public class WalPragmaTests
         var services = new ServiceCollection();
         await services.AddStorageAsync(dbPath, userPath, settingsPath);
         using var provider = services.BuildServiceProvider();
+        var init = provider.GetRequiredService<IDatabaseInitializer>();
+        await init.InitializeAsync();
         var factory = provider.GetRequiredService<IDbContextFactory<AppDbContext>>();
         await using var ctx = await factory.CreateDbContextAsync();
         await ctx.Database.OpenConnectionAsync();
@@ -41,6 +44,8 @@ public class WalPragmaTests
         var services = new ServiceCollection();
         await services.AddStorageAsync(string.Empty, userPath, settingsPath);
         using var provider = services.BuildServiceProvider();
+        var init = provider.GetRequiredService<IDatabaseInitializer>();
+        await init.InitializeAsync();
 
         var interceptor = provider.GetRequiredService<WalPragmaInterceptor>();
         var repo = provider.GetRequiredService<IInvoiceRepository>();

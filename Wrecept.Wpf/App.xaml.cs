@@ -177,6 +177,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
             await EnsureServicesInitializedAsync();
+            await Provider.GetRequiredService<IDatabaseInitializer>().InitializeAsync();
             await Provider.GetRequiredService<AppStateService>().LoadAsync();
 
             var km = Provider.GetRequiredService<KeyboardManager>();
