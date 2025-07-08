@@ -806,8 +806,9 @@ private void UpdateSupplierId(string name)
                 if (ok)
                 {
                     var newId = _draft.Id;
-                    for (int i = 0; i < _draft.Items.Count && i + 1 < Items.Count; i++)
-                        Items[i + 1].Id = _draft.Items[i].Id;
+                    var draftItems = _draft.Items.ToList();
+                    for (int i = 0; i < draftItems.Count && i + 1 < Items.Count; i++)
+                        Items[i + 1].Id = draftItems[i].Id;
                     InvoiceId = newId;
                     IsNew = false;
                     _draft = new Invoice();
