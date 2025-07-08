@@ -31,14 +31,26 @@ public class InvoiceEditorKeyboardHandler : IKeyboardHandler
                 }
                 return true;
             case Key.Delete:
-                _vm.ShowArchivePromptCommand.Execute(null);
-                return true;
+                if (Keyboard.FocusedElement is DependencyObject del && IsEntryOrGrid(del))
+                {
+                    _vm.ShowArchivePromptCommand.Execute(null);
+                    return true;
+                }
+                return false;
             case Key.Enter or Key.Return:
-                _vm.SaveEditedItemCommand.Execute(null);
-                return true;
+                if (Keyboard.FocusedElement is DependencyObject enter && IsEntryOrGrid(enter))
+                {
+                    _vm.SaveEditedItemCommand.Execute(null);
+                    return true;
+                }
+                return false;
             case Key.Escape:
-                _vm.CloseCommand.Execute(null);
-                return true;
+                if (Keyboard.FocusedElement is DependencyObject esc && IsEntryOrGrid(esc))
+                {
+                    _vm.CloseCommand.Execute(null);
+                    return true;
+                }
+                return false;
         }
         return false;
     }
@@ -56,5 +68,13 @@ public class InvoiceEditorKeyboardHandler : IKeyboardHandler
         }
 
         return null;
+    }
+
+    private static bool IsEntryOrGrid(DependencyObject element)
+    {
+        if (element is FrameworkElement fe && fe.Name.StartsWith("Entry"))
+            return true;
+
+        return element.FindAncestor<InvoiceItemsGrid>() != null;
     }
 }

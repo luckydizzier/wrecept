@@ -37,6 +37,8 @@ Ez a dokumentum a projekt fejlesztéséhez szükséges alapvető lépéseket tar
 - A felhasználói felület billentyűs működését a [UI_FLOW.md](../UI_FLOW.md) dokumentum részletezi.
 - A billentyűparancsokat a `KeyboardManager` delegálja az egyes
   `*KeyboardHandler` osztályoknak az alkalmazás állapotától függően.
+  Az `InvoiceEditorKeyboardHandler` csak akkor reagál az Enter/Esc/Delete
+  billentyűkre, ha a fókusz a sorbeviteli mezőknél vagy a terméktáblán van.
 
 ## Karbantartási teendők
 

@@ -189,6 +189,8 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
 
             var editorHandler = Provider.GetRequiredService<InvoiceEditorKeyboardHandler>();
             km.Register(AppInteractionState.EditingInvoice, editorHandler);
+            km.Register(AppInteractionState.InlineCreatorActive, editorHandler);
+            km.Register(AppInteractionState.InlinePromptActive, editorHandler);
 
             var masterHandler = Provider.GetRequiredService<MasterDataKeyboardHandler>();
             km.Register(AppInteractionState.EditingMasterData, masterHandler);
