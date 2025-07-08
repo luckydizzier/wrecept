@@ -27,7 +27,7 @@ public static class PluginLoader
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, $"Failed to load plugin {dll}");
+                Console.Error.WriteLine($"Failed to load plugin {dll}: {ex}");
             }
         }
     }
