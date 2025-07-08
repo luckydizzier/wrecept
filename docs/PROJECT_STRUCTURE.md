@@ -257,6 +257,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
+- **Wrecept.Core/Services/IDatabaseInitializer.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: Core
+  - Type: C#
+  - Responsibility: Adatbázis migrálása indításkor
+  - Interaction: Storage
+  - Special Notes: -
 - **Wrecept.Core/Services/InvoiceCalculator.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
@@ -529,6 +536,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
+  - Special Notes: -
+- **Wrecept.Storage/Services/DatabaseInitializer.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: Storage
+  - Type: C#
+  - Responsibility: Adatbázis migrálás és PRAGMA futtatás
+  - Interaction: DbContext
   - Special Notes: -
 - **Wrecept.Storage/Wrecept.Storage.csproj**
   - Purpose: Projektfájl

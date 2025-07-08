@@ -48,12 +48,6 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<INumberingService>(_ => new NumberingService(numberPath));
         services.AddScoped<IBackupService>(_ => new FileBackupService(dbPath, userInfoPath, settingsPath));
         services.AddScoped<IDbHealthService, DbHealthService>();
-
-        using var provider = services.BuildServiceProvider();
-        var factory = provider.GetRequiredService<IDbContextFactory<AppDbContext>>();
-        var logger = provider.GetRequiredService<ILogService>();
-        await using var ctx = factory.CreateDbContext();
-        await DbInitializer.EnsureCreatedAndMigratedAsync(ctx, logger);
-        await ctx.Database.ExecuteSqlRawAsync("PRAGMA journal_mode=WAL");
+        services.AddSingleton<IDatabaseInitializer, DatabaseInitializer>();
     }
 }

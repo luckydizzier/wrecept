@@ -42,6 +42,7 @@ public class AddStorageRegistrationTests
             typeof(INumberingService),
             typeof(IBackupService),
             typeof(IDbHealthService),
+            typeof(IDatabaseInitializer),
             typeof(WalPragmaInterceptor)
         };
 
