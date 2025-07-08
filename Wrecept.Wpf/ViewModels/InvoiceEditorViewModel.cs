@@ -819,6 +819,7 @@ private void UpdateSupplierId(string name)
             {
                 await _invoiceService.UpdateInvoiceHeaderAsync(InvoiceId, Number, date, dueDate, SupplierId, PaymentMethodId, IsGross);
                 await Lookup.LoadAsync();
+                Lookup.SelectedInvoice = Lookup.Invoices.FirstOrDefault(i => i.Id == InvoiceId);
             }
         }
         catch (Exception ex)

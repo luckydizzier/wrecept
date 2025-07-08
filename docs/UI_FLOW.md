@@ -59,6 +59,8 @@ A számlaszám megerősítése után:
 - Dátum megadása (alapértelmezett = mai nap)
 - Fizetési mód (LookupBox)
 - Bruttó jelölőnégyzet a számlaszám mellett, csak szerkeszthető számlánál aktív.
+- Mentéskor a fejléc módosítása frissíti a bal oldali listát, és a szerkesztett
+  számla marad kijelölve.
 
 3. Tételsorok bevitele
 
