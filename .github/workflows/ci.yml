@@ -14,8 +14,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
-      - name: Install WindowsDesktop
-        run: dotnet workload install windows --skip-sign-check
       - name: Restore
         run: dotnet restore Wrecept.sln
       - name: Test
