@@ -36,7 +36,7 @@ public class AppServicesRegistrationTests
             typeof(UserInfoViewModel), typeof(UserInfoEditorViewModel), typeof(ScreenModeViewModel),
             typeof(AboutViewModel), typeof(PlaceholderViewModel), typeof(StatusBarViewModel),
             typeof(AppStateService), typeof(INotificationService), typeof(IInvoiceExportService),
-            typeof(ScreenModeManager), typeof(FocusManager), typeof(KeyboardManager), typeof(ProgressViewModel),
+            typeof(ScreenModeManager), typeof(FocusManager), typeof(KeyboardManager), typeof(StageMenuHandler), typeof(ProgressViewModel),
             typeof(SeedOptionsViewModel), typeof(SeedOptionsWindow), typeof(StartupWindow), typeof(ScreenModeWindow),
             typeof(StartupOrchestrator), typeof(StageView), typeof(InvoiceLookupView), typeof(ProductMasterView),
             typeof(ProductGroupMasterView), typeof(SupplierMasterView), typeof(TaxRateMasterView), typeof(PaymentMethodMasterView),

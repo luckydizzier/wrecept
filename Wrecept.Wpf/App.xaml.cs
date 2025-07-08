@@ -138,6 +138,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddSingleton<ScreenModeManager>();
         services.AddSingleton<FocusManager>();
         services.AddSingleton<KeyboardManager>();
+        services.AddTransient<StageMenuHandler>();
         services.AddTransient<StageMenuKeyboardHandler>();
         services.AddTransient<InvoiceEditorKeyboardHandler>();
         services.AddTransient<MasterDataKeyboardHandler>();
