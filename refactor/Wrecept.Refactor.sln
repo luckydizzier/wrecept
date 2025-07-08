@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Core", "..\Wrecept.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Storage", "..\Wrecept.Storage\Wrecept.Storage.csproj", "{CCA4BD76-C221-45ED-A961-EE250FA4550F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Wpf", "..\Wrecept.Wpf\Wrecept.Wpf.csproj", "{E30A4B3D-A6BD-4A4B-922C-85B7A6AF2F87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.InvoiceModule", "Wrecept.InvoiceModule\Wrecept.InvoiceModule.csproj", "{0E11B311-33B2-436A-A734-8999123DD537}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.MasterDataModule", "Wrecept.MasterDataModule\Wrecept.MasterDataModule.csproj", "{709099C9-B1B7-42CC-8DCB-992D3CB83DE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +35,18 @@ Global
 		{CCA4BD76-C221-45ED-A961-EE250FA4550F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCA4BD76-C221-45ED-A961-EE250FA4550F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCA4BD76-C221-45ED-A961-EE250FA4550F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCA4BD76-C221-45ED-A961-EE250FA4550F}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
+                {CCA4BD76-C221-45ED-A961-EE250FA4550F}.Release|Any CPU.Build.0 = Release|Any CPU
+                {E30A4B3D-A6BD-4A4B-922C-85B7A6AF2F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {E30A4B3D-A6BD-4A4B-922C-85B7A6AF2F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {E30A4B3D-A6BD-4A4B-922C-85B7A6AF2F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {E30A4B3D-A6BD-4A4B-922C-85B7A6AF2F87}.Release|Any CPU.Build.0 = Release|Any CPU
+                {0E11B311-33B2-436A-A734-8999123DD537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {0E11B311-33B2-436A-A734-8999123DD537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {0E11B311-33B2-436A-A734-8999123DD537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {0E11B311-33B2-436A-A734-8999123DD537}.Release|Any CPU.Build.0 = Release|Any CPU
+                {709099C9-B1B7-42CC-8DCB-992D3CB83DE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {709099C9-B1B7-42CC-8DCB-992D3CB83DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {709099C9-B1B7-42CC-8DCB-992D3CB83DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {709099C9-B1B7-42CC-8DCB-992D3CB83DE9}.Release|Any CPU.Build.0 = Release|Any CPU
+        EndGlobalSection
 EndGlobal
