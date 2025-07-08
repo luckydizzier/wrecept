@@ -23,7 +23,7 @@ public class InvoiceEditorKeyboardHandler : IKeyboardHandler
                 if (Keyboard.FocusedElement is DependencyObject element &&
                     GetInvoiceList(element) is not null)
                 {
-                    _vm.Lookup.CreateNewInvoiceAsyncCommand.Execute(null);
+                    _vm.Lookup.CreateNewInvoiceCommand.Execute(null);
                 }
                 else
                 {
