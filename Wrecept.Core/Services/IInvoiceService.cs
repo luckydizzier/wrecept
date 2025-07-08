@@ -9,7 +9,7 @@ public interface IInvoiceService
     Task<int> CreateHeaderAsync(Invoice invoice, CancellationToken ct = default);
     Task<int> AddItemAsync(InvoiceItem item, CancellationToken ct = default);
     Task RemoveItemAsync(int id, CancellationToken ct = default);
-    Task UpdateInvoiceHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default);
+    Task UpdateInvoiceHeaderAsync(int id, string number, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default);
     Task ArchiveAsync(int id, CancellationToken ct = default);
     Task<Invoice?> GetAsync(int id, CancellationToken ct = default);
     Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default);
