@@ -14,8 +14,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
-      - name: Restore
-        run: dotnet restore Wrecept.sln
       - name: Test
         run: |
           dotnet test Wrecept.Core.Tests/Wrecept.Core.Tests.csproj --no-build --collect:"XPlat Code Coverage"
