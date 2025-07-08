@@ -102,27 +102,9 @@ public partial class InvoiceItemRowViewModel : ObservableObject
     }
 }
 
-public partial class VatSummaryRowViewModel : ObservableObject
-{
-    [ObservableProperty]
-    private string rate = string.Empty;
-
-    [ObservableProperty]
-    private decimal net;
-
-    [ObservableProperty]
-    private decimal vat;
-
-    [ObservableProperty]
-    private decimal gross;
-}
-
 public partial class InvoiceEditorViewModel : ObservableObject
 {
     public ObservableCollection<InvoiceItemRowViewModel> Items { get; }
-
-    [ObservableProperty]
-    private EditableItemViewModel editableItem = null!;
 
     public InvoiceLookupViewModel Lookup { get; }
 
@@ -189,19 +171,6 @@ partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
 
     partial void OnIsArchivedChanged(bool value) => OnPropertyChanged(nameof(IsEditable));
 
-    [ObservableProperty]
-    private decimal netTotal;
-
-    [ObservableProperty]
-    private decimal vatTotal;
-
-    [ObservableProperty]
-    private decimal grossTotal;
-
-    public ObservableCollection<VatSummaryRowViewModel> VatSummaries { get; } = new();
-
-    [ObservableProperty]
-    private string amountInWords = string.Empty;
 
     private readonly IPaymentMethodService _paymentMethods;
     private readonly ITaxRateService _taxRates;
@@ -215,7 +184,9 @@ private readonly ILogService _log;
     private readonly INotificationService _notifications;
     private readonly ISessionService _session;
     private readonly AppStateService _state;
-private Invoice _draft = new();
+    public TotalsViewModel Totals { get; } = new();
+    public InvoiceItemEditorViewModel ItemsEditor { get; }
+    private Invoice _draft = new();
 private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
 
     [ObservableProperty]
@@ -261,12 +232,6 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
 
     [ObservableProperty]
     private string lastFocusedField = string.Empty;
-
-    partial void OnEditableItemChanged(EditableItemViewModel value)
-    {
-        if (Items.Count > 0)
-            Items[0] = value;
-    }
 
     partial void OnSavePromptChanged(object? value)
     {
@@ -329,8 +294,7 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
             await LoadInvoice(0, number);
         };
         Items = new ObservableCollection<InvoiceItemRowViewModel>();
-        EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
-        Items.Add(EditableItem);
+        ItemsEditor = new InvoiceItemEditorViewModel(this, _invoiceService, _log, _notifications);
     }
 
     public async Task LoadAsync(IProgress<ProgressReport>? progress = null)
@@ -501,9 +465,9 @@ private void UpdateSupplierId(string name)
             IsGross = false;
             IsArchived = false;
             Items.Clear();
-            EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
-            Items.Add(EditableItem);
-            RecalculateTotals();
+            ItemsEditor.EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
+            Items.Add(ItemsEditor.EditableItem);
+            Totals.Recalculate(Items.Skip(1), TaxRates, IsGross);
             await Task.Yield();
             IsLoading = false;
             await _session.SaveLastInvoiceIdAsync(null);
@@ -531,15 +495,15 @@ private void UpdateSupplierId(string name)
         IsArchived = invoice.IsArchived;
 
         Items.Clear();
-        EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
-        Items.Add(EditableItem);
+        ItemsEditor.EditableItem = new NewLineItemViewModel(this) { IsFirstRow = true };
+        Items.Add(ItemsEditor.EditableItem);
         foreach (var item in invoice.Items)
         {
             var row = new InvoiceItemRowViewModel(this);
             row.SetInitialValues(item);
             Items.Add(row);
         }
-        RecalculateTotals();
+        Totals.Recalculate(Items.Skip(1), TaxRates, IsGross);
         await Task.Yield();
         IsLoading = false;
         await _session.SaveLastInvoiceIdAsync(InvoiceId);
@@ -586,198 +550,13 @@ private void UpdateSupplierId(string name)
     }
 
     public void EditLineFromSelection(InvoiceItemRowViewModel selected)
-    {
-        if (!IsEditable)
-        {
-            NotifyReadOnly();
-            return;
-        }
+        => ItemsEditor.EditLineFromSelection(selected);
 
-        if (Items.IndexOf(selected) <= 0) return;
-        var edit = EditableItem;
-        edit.Product = selected.Product;
-        edit.Quantity = selected.Quantity;
-        edit.UnitPrice = selected.UnitPrice;
-        edit.TaxRateId = selected.TaxRateId;
-        edit.UnitId = selected.UnitId;
-        edit.UnitName = selected.UnitName;
-        edit.TaxRateName = selected.TaxRateName;
-        edit.ProductGroup = selected.ProductGroup;
-    }
 
-    private bool ValidateLineItem(InvoiceItemRowViewModel line, out string error)
-    {
-        if (line.Quantity == 0)
-        {
-            error = Resources.Strings.InvoiceLine_InvalidQuantity;
-            return false;
-        }
-
-        if (line.UnitPrice < 0)
-        {
-            error = Resources.Strings.InvoiceLine_InvalidPrice;
-            return false;
-        }
-
-        if (line.TaxRateId == Guid.Empty)
-        {
-            error = Resources.Strings.InvoiceLine_TaxRequired;
-            return false;
-        }
-
-        error = string.Empty;
-        return true;
-    }
-
-    private void NotifyReadOnly()
-    {
-        if (Items.Count > 0)
-        {
-            var edit = EditableItem;
-            edit.HasError = true;
-            edit.ErrorMessage = Resources.Strings.InvoiceEditor_ReadOnly;
-        }
-    }
-
-    [RelayCommand]
     private void ShowSavePrompt()
     {
         if (SavePrompt is null)
             SavePrompt = new SaveLinePromptViewModel(this);
-    }
-
-    [RelayCommand]
-    internal async Task AddLineItemAsync()
-    {
-        if (!IsEditable)
-        {
-            NotifyReadOnly();
-            return;
-        }
-
-        var edit = EditableItem;
-        if (string.IsNullOrWhiteSpace(edit.Product)) return;
-
-        if (!ValidateLineItem(edit, out var error))
-        {
-            edit.HasError = true;
-            edit.ErrorMessage = error;
-            return;
-        }
-
-        edit.HasError = false;
-        edit.ErrorMessage = string.Empty;
-
-        var product = Products.FirstOrDefault(p => p.Name.Equals(edit.Product, StringComparison.OrdinalIgnoreCase));
-        if (product == null) return;
-
-        var item = new InvoiceItem
-        {
-            ProductId = product.Id,
-            TaxRateId = edit.TaxRateId != Guid.Empty ? edit.TaxRateId : product.TaxRateId,
-            Quantity = edit.Quantity,
-            UnitPrice = edit.UnitPrice,
-            Description = edit.Description
-        };
-
-        if (IsNew)
-        {
-            _draft.Items.Add(item);
-        }
-        else
-        {
-            try
-            {
-                item.InvoiceId = InvoiceId;
-                var newId = await _invoiceService.AddItemAsync(item);
-                item.Id = newId;
-            }
-            catch (Exception ex)
-            {
-                await _log.LogError("AddLineItemAsync", ex);
-                _notifications.ShowError("A sor mentése nem sikerült: " + ex.Message);
-                return;
-            }
-        }
-
-        var row = new InvoiceItemRowViewModel(this)
-        {
-            Id = item.Id,
-            Product = product.Name,
-            Quantity = edit.Quantity,
-            UnitPrice = edit.UnitPrice,
-            TaxRateId = item.TaxRateId,
-            UnitId = edit.UnitId,
-            UnitName = edit.UnitName,
-            TaxRateName = TaxRates.FirstOrDefault(t => t.Id == item.TaxRateId)?.Name ?? string.Empty,
-            ProductGroup = edit.ProductGroup,
-            Description = edit.Description,
-            IsEditable = false
-        };
-
-        Items.Insert(1, row);
-        RecalculateTotals();
-        edit.Product = string.Empty;
-        edit.Quantity = 0;
-        edit.UnitPrice = 0;
-        edit.TaxRateId = Guid.Empty;
-        edit.UnitId = Guid.Empty;
-        edit.UnitName = string.Empty;
-        edit.TaxRateName = string.Empty;
-        edit.ProductGroup = string.Empty;
-        edit.Description = string.Empty;
-        edit.IsAutofilled = false;
-        edit.IsEditingExisting = false;
-        edit.TargetRow = null;
-    }
-
-    [RelayCommand]
-    internal void SaveEditedItem()
-    {
-        if (EditableItem is not ExistingLineItemEditViewModel edit || edit.TargetRow is null)
-            return;
-
-        if (!IsEditable)
-        {
-            NotifyReadOnly();
-            return;
-        }
-
-        if (!ValidateLineItem(edit, out var error))
-        {
-            edit.HasError = true;
-            edit.ErrorMessage = error;
-            return;
-        }
-
-        var target = edit.TargetRow;
-        target.Product = edit.Product;
-        target.Quantity = edit.Quantity;
-        target.UnitPrice = edit.UnitPrice;
-        target.TaxRateId = edit.TaxRateId;
-        target.UnitId = edit.UnitId;
-        target.UnitName = edit.UnitName;
-        target.TaxRateName = edit.TaxRateName;
-        target.ProductGroup = edit.ProductGroup;
-        target.Description = edit.Description;
-
-        edit.HasError = false;
-        edit.ErrorMessage = string.Empty;
-
-        RecalculateTotals();
-
-        edit.Product = string.Empty;
-        edit.Quantity = 0;
-        edit.UnitPrice = 0;
-        edit.TaxRateId = Guid.Empty;
-        edit.UnitId = Guid.Empty;
-        edit.UnitName = string.Empty;
-        edit.TaxRateName = string.Empty;
-        edit.ProductGroup = string.Empty;
-        edit.Description = string.Empty;
-        edit.IsEditingExisting = false;
-        edit.TargetRow = null;
-        // focus removed
     }
 
     [RelayCommand]
@@ -859,7 +638,7 @@ private void UpdateSupplierId(string name)
         {
             _ = _invoiceService.RemoveItemAsync(row.Id);
         }
-        RecalculateTotals();
+        Totals.Recalculate(Items.Skip(1), TaxRates, IsGross);
     }
 
     [RelayCommand]
@@ -895,58 +674,6 @@ private void UpdateSupplierId(string name)
         {
             await _log.LogError("LookupLoadSelected", ex);
         }
-    }
-
-    private void RecalculateTotals()
-    {
-        decimal net = 0;
-        decimal vat = 0;
-        decimal gross = 0;
-        VatSummaries.Clear();
-        var byTax = new Dictionary<Guid, InvoiceTotals>();
-
-        foreach (var row in Items.Skip(1))
-        {
-            var tax = TaxRates.FirstOrDefault(t => t.Id == row.TaxRateId);
-            if (tax is null) continue;
-
-            decimal netUnit = IsGross
-                ? row.UnitPrice / (1 + tax.Percentage / 100m)
-                : row.UnitPrice;
-
-            decimal netAmount = row.Quantity * netUnit;
-            decimal vatAmount = netAmount * (tax.Percentage / 100m);
-            decimal grossAmount = netAmount + vatAmount;
-
-            net += netAmount;
-            vat += vatAmount;
-            gross += grossAmount;
-
-            if (!byTax.TryGetValue(tax.Id, out var totals))
-            {
-                totals = new InvoiceTotals();
-                byTax[tax.Id] = totals;
-            }
-            totals.Net += netAmount;
-            totals.Tax += vatAmount;
-            totals.Gross += grossAmount;
-        }
-
-        NetTotal = Math.Round(net, 2, MidpointRounding.AwayFromZero);
-        VatTotal = Math.Round(vat, 2, MidpointRounding.AwayFromZero);
-        GrossTotal = Math.Round(gross, 2, MidpointRounding.AwayFromZero);
-        foreach (var kv in byTax)
-        {
-            var name = TaxRates.FirstOrDefault(t => t.Id == kv.Key)?.Name ?? string.Empty;
-            VatSummaries.Add(new VatSummaryRowViewModel
-            {
-                Rate = name,
-                Net = Math.Round(kv.Value.Net, 2, MidpointRounding.AwayFromZero),
-                Vat = Math.Round(kv.Value.Tax, 2, MidpointRounding.AwayFromZero),
-                Gross = Math.Round(kv.Value.Gross, 2, MidpointRounding.AwayFromZero)
-            });
-        }
-        AmountInWords = NumberToWordsConverter.Convert((long)GrossTotal) + " Ft";
     }
 
     private void RecalculateDueDate()

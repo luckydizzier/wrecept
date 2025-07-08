@@ -122,13 +122,13 @@
 
                 <!-- Summary totals -->
                 <Border Grid.Column="1" Padding="6" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
-                    <c:TotalsPanel />
+                    <c:TotalsPanel DataContext="{Binding Totals}" />
                 </Border>
             </Grid>
 
             <!-- Line input editor -->
             <Border Grid.Row="1" Padding="6" Margin="0,0,0,6" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
-                <Grid DataContext="{Binding EditableItem}">
+                <Grid DataContext="{Binding ItemsEditor.EditableItem}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200" />
                         <ColumnDefinition Width="60" />
@@ -169,7 +169,7 @@
 
             <!-- Product line list -->
             <Border Grid.Row="2" Padding="0" Margin="0,0,0,6" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
-                <view:InvoiceItemsGrid x:Name="ItemsGrid" />
+                <view:InvoiceItemsGrid x:Name="ItemsGrid" DataContext="{Binding ItemsEditor}" />
             </Border>
 
             <!-- Hint text -->
