@@ -79,4 +79,36 @@ public class InvoiceRepositoryTests
 
         Assert.True(stored!.IsArchived);
     }
+
+    [Fact]
+    public async Task UpdateHeaderAsync_UpdatesNumberAndFields()
+    {
+        var db = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".db");
+        await using var ctx = await CreateContextAsync(db);
+        var repo = new InvoiceRepository(ctx);
+        var supplier = new Supplier { Name = "Test" };
+        var payment1 = new PaymentMethod { Id = Guid.NewGuid(), Name = "Cash" };
+        var payment2 = new PaymentMethod { Id = Guid.NewGuid(), Name = "Card" };
+        ctx.Suppliers.Add(supplier);
+        ctx.PaymentMethods.AddRange(payment1, payment2);
+        var invoice = new Invoice
+        {
+            Number = "INV1",
+            Date = new DateOnly(2024, 1, 1),
+            Supplier = supplier,
+            PaymentMethod = payment1,
+            DueDate = new DateOnly(2024,1,10)
+        };
+        ctx.Invoices.Add(invoice);
+        await ctx.SaveChangesAsync();
+
+        await repo.UpdateHeaderAsync(invoice.Id, "INV2", new DateOnly(2024,2,2), new DateOnly(2024,2,12), supplier.Id, payment2.Id, true);
+        var stored = await ctx.Invoices.FindAsync(invoice.Id);
+
+        Assert.Equal("INV2", stored!.Number);
+        Assert.Equal(new DateOnly(2024,2,2), stored.Date);
+        Assert.Equal(new DateOnly(2024,2,12), stored.DueDate);
+        Assert.Equal(payment2.Id, stored.PaymentMethodId);
+        Assert.True(stored.IsGross);
+    }
 }

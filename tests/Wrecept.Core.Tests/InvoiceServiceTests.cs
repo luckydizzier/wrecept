@@ -19,13 +19,31 @@ public class InvoiceServiceTests
         public int RemovedId;
         public Task<int> AddAsync(Invoice invoice, CancellationToken ct = default) { AddedInvoice = invoice; return Task.FromResult(1); }
         public Task<int> AddItemAsync(InvoiceItem item, CancellationToken ct = default) { AddedItem = item; return Task.FromResult(1); }
-        public Task UpdateHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default) => Task.CompletedTask;
+        public Task UpdateHeaderAsync(int id, string number, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
+        {
+            UpdatedId = id;
+            Number = number;
+            HeaderDate = date;
+            HeaderDueDate = dueDate;
+            SupplierIdValue = supplierId;
+            PaymentMethod = paymentMethodId;
+            IsGrossValue = isGross;
+            return Task.CompletedTask;
+        }
         public Task SetArchivedAsync(int id, bool isArchived, CancellationToken ct = default) => Task.CompletedTask;
         public Task<Invoice?> GetAsync(int id, CancellationToken ct = default) => Task.FromResult<Invoice?>(null);
         public Task<List<Invoice>> GetRecentAsync(int count, CancellationToken ct = default) => Task.FromResult(new List<Invoice>());
         public Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default) => Task.FromResult<LastUsageData?>(null);
         public Task<Dictionary<int, LastUsageData>> GetLastUsageDataBatchAsync(int supplierId, IEnumerable<int> productIds, CancellationToken ct = default) => Task.FromResult(new Dictionary<int, LastUsageData>());
         public Task RemoveItemAsync(int id, CancellationToken ct = default) { RemovedId = id; return Task.CompletedTask; }
+
+        public int UpdatedId;
+        public string? Number;
+        public DateOnly HeaderDate;
+        public DateOnly HeaderDueDate;
+        public int SupplierIdValue;
+        public Guid PaymentMethod;
+        public bool IsGrossValue;
     }
 
     [Fact]
@@ -99,5 +117,26 @@ public class InvoiceServiceTests
         await svc.RemoveItemAsync(10);
 
         Assert.Equal(10, repo.RemovedId);
+    }
+
+    [Fact]
+    public async Task UpdateInvoiceHeaderAsync_CallsRepositoryWithValues()
+    {
+        var repo = new FakeRepo();
+        var svc = new InvoiceService(repo, new InvoiceCalculator());
+
+        var date = new DateOnly(2024, 1, 2);
+        var due = new DateOnly(2024, 1, 12);
+        var pm = Guid.NewGuid();
+
+        await svc.UpdateInvoiceHeaderAsync(5, "INV2", date, due, 3, pm, true);
+
+        Assert.Equal(5, repo.UpdatedId);
+        Assert.Equal("INV2", repo.Number);
+        Assert.Equal(date, repo.HeaderDate);
+        Assert.Equal(due, repo.HeaderDueDate);
+        Assert.Equal(3, repo.SupplierIdValue);
+        Assert.Equal(pm, repo.PaymentMethod);
+        Assert.True(repo.IsGrossValue);
     }
 }
