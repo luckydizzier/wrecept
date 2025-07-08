@@ -138,6 +138,9 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         services.AddSingleton<ScreenModeManager>();
         services.AddSingleton<FocusManager>();
         services.AddSingleton<KeyboardManager>();
+        services.AddTransient<StageMenuKeyboardHandler>();
+        services.AddTransient<InvoiceEditorKeyboardHandler>();
+        services.AddTransient<MasterDataKeyboardHandler>();
         services.AddTransient<ProgressViewModel>();
         services.AddTransient<SeedOptionsViewModel>();
         services.AddTransient<SeedOptionsWindow>();
@@ -177,8 +180,17 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
 
             var km = Provider.GetRequiredService<KeyboardManager>();
             var lookupVm = Provider.GetRequiredService<InvoiceLookupViewModel>();
-            var handler = new InvoiceLookupKeyboardHandler(lookupVm);
-            km.Register(AppInteractionState.BrowsingInvoices, handler);
+            var lookupHandler = new InvoiceLookupKeyboardHandler(lookupVm);
+            km.Register(AppInteractionState.BrowsingInvoices, lookupHandler);
+
+            var stageHandler = Provider.GetRequiredService<StageMenuKeyboardHandler>();
+            km.Register(AppInteractionState.MainMenu, stageHandler);
+
+            var editorHandler = Provider.GetRequiredService<InvoiceEditorKeyboardHandler>();
+            km.Register(AppInteractionState.EditingInvoice, editorHandler);
+
+            var masterHandler = Provider.GetRequiredService<MasterDataKeyboardHandler>();
+            km.Register(AppInteractionState.EditingMasterData, masterHandler);
 
             var orchestrator = Provider.GetRequiredService<StartupOrchestrator>();
             cts = new CancellationTokenSource();

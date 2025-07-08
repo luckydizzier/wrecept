@@ -23,6 +23,14 @@ számlafejléc mezőknél. A fókusz és a billentyűk útját központi
 `FocusManager` és `KeyboardManager` szolgáltatások rendezik, így a nézetek csak
 a kezdő elemüket regisztrálják.
 
+A billentyűk feldolgozását állapottól függő handlerek végzik:
+- **StageMenuKeyboardHandler** – a főmenüben Up/Down mozgatja a menüpontokat,
+  Insert vagy Enter aktiválja a kijelölt műveletet.
+- **InvoiceEditorKeyboardHandler** – számlaszerkesztéskor az Insert új sort hoz
+  létre, Delete archiválást kér, Enter menti a sort, Escape kilép a szerkesztésből.
+- **MasterDataKeyboardHandler** – törzsadat nézeteknél Insert/Enter szerkeszt,
+  Delete töröl, Escape bezárja a részleteket.
+
 - Fókuszkezdő pontok nézetenként:
   - **StageView** – a főmenüsor első eleme
   - **InvoiceLookupView** – `InvoiceList` `ListBox`
