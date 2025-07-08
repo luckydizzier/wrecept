@@ -31,6 +31,7 @@ A billentyűk feldolgozását állapottól függő handlerek végzik:
 - **MasterDataKeyboardHandler** – a `StageViewModel.CurrentViewModel` értékét
   `IEditableMasterDataViewModel`-ként kezeli. Insert/Enter a szerkesztést,
   Delete a törlést, Escape a részletek bezárását indítja.
+  A handler példányok DI-n keresztül ugyanazt a ViewModel objektumot kapják, mint a hozzá tartozó nézetek.
 
 - Fókuszkezdő pontok nézetenként:
   - **StageView** – a főmenüsor első eleme

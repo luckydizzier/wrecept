@@ -55,6 +55,7 @@ Az adatbázis integritását az `IDbHealthService` ellenőrzi `PRAGMA integrity_
 Az utolsó megnyitott számla azonosítóját a `SessionService` jegyzi meg a `session.json` fájlban.
 Az `AppStateService` az aktuális nézetet és az `AppInteractionState` értékét tárolja, amit a nézetek és a billentyűkezelés figyel a kiszámítható átmenetek érdekében.
 Ezt a változást a `FocusManager` automatikus fókuszváltással, a `KeyboardManager` pedig állapottól függő billentyűkezeléssel követi.
+Az `StageViewModel`, `InvoiceEditorViewModel` és `InvoiceLookupViewModel` `AddSingleton` élettartammal kerülnek a DI-konténerbe, így a billentyűkezelők és a nézetek ugyanazon példányokkal dolgoznak.
 Az állapot szolgáltatás a `state.json` fájlba menti az utolsó aktív menüpontot és a szerkesztett számla azonosítóját, amit indításkor visszatöltünk.
 
 ### Törzsadatok szerkesztése

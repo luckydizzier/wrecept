@@ -117,9 +117,9 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         await services.AddStorageAsync(DbPath, UserInfoPath, SettingsPath);
 
 
-        services.AddTransient<StageViewModel>();
-        services.AddTransient<InvoiceEditorViewModel>();
-        services.AddTransient<InvoiceLookupViewModel>();
+        services.AddSingleton<StageViewModel>();
+        services.AddSingleton<InvoiceEditorViewModel>();
+        services.AddSingleton<InvoiceLookupViewModel>();
         services.AddTransient<ProductMasterViewModel>();
         services.AddTransient<ProductGroupMasterViewModel>();
         services.AddTransient<SupplierMasterViewModel>();
