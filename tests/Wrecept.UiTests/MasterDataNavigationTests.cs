@@ -24,8 +24,8 @@ public class MasterDataNavigationTests
     {
         using var driver = LaunchApp();
 
-        driver.FindElementByName("Törzsek").Click();
-        driver.FindElementByName(item).Click();
+        driver.FindElement(By.Name("Törzsek")).Click();
+        driver.FindElement(By.Name(item)).Click();
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
         var grid = wait.Until(d => ((WindowsDriver<WindowsElement>)d)

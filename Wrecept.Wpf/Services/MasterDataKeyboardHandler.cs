@@ -18,8 +18,7 @@ public class MasterDataKeyboardHandler : IKeyboardHandler
         switch (e.Key)
         {
             case Key.Insert:
-            case Key.Enter:
-            case Key.Return:
+            case Key.Enter or Key.Return:
                 if (_stage.CurrentViewModel is IEditableMasterDataViewModel vmEdit)
                     vmEdit.EditSelectedCommand.Execute(null);
                 return true;

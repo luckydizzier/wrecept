@@ -36,9 +36,9 @@ public class InvoiceEditorTests
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
 
-        var options = driver.FindElementsByName("Mintaszámok");
+        var options = driver.FindElements(By.Name("Mintaszámok"));
         if (options.Count > 0)
-            options[0].FindElementByName("Mégse").Click();
+            options[0].FindElement(By.Name("Mégse")).Click();
 
         var list = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
             .FindElementByAccessibilityId("InvoiceList"));
@@ -70,9 +70,9 @@ public class InvoiceEditorTests
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
 
-        var options = driver.FindElementsByName("Mintaszámok");
+        var options = driver.FindElements(By.Name("Mintaszámok"));
         if (options.Count > 0)
-            options[0].FindElementByName("Mégse").Click();
+            options[0].FindElement(By.Name("Mégse")).Click();
 
         var list = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
             .FindElementByAccessibilityId("InvoiceList"));

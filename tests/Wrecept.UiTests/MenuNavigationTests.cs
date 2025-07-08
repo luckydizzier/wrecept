@@ -21,8 +21,8 @@ public class MenuNavigationTests
     {
         using var driver = LaunchApp();
 
-        driver.FindElementByName("Névjegy").Click();
-        driver.FindElementByName("A program felhasználójának adatai").Click();
+        driver.FindElement(By.Name("Névjegy")).Click();
+        driver.FindElement(By.Name("A program felhasználójának adatai")).Click();
 
         Assert.IsTrue(driver.PageSource.Contains("Program neve"));
         driver.Close();
@@ -33,8 +33,8 @@ public class MenuNavigationTests
     {
         using var driver = LaunchApp();
 
-        driver.FindElementByName("Vége").Click();
-        driver.FindElementByName("Kilépés").Click();
+        driver.FindElement(By.Name("Vége")).Click();
+        driver.FindElement(By.Name("Kilépés")).Click();
         Thread.Sleep(1000);
 
         Assert.ThrowsException<WebDriverException>(() => _ = driver.Title);

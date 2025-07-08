@@ -19,15 +19,15 @@ public class ScreenModeTests
     {
         using var driver = LaunchApp();
 
-        driver.FindElementByName("Szerviz").Click();
-        driver.FindElementByName("Képernyő beállítása").Click();
+        driver.FindElement(By.Name("Szerviz")).Click();
+        driver.FindElement(By.Name("Képernyő beállítása")).Click();
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
         var window = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Képernyőbeállítás"));
-        window.FindElementByName("Mégse").Click();
+            .FindElement(By.Name("Képernyőbeállítás")));
+        window.FindElement(By.Name("Mégse")).Click();
 
-        Assert.ThrowsException<OpenQA.Selenium.WebDriverException>(() => driver.FindElementByName("Képernyőbeállítás"));
+        Assert.ThrowsException<OpenQA.Selenium.WebDriverException>(() => driver.FindElement(By.Name("Képernyőbeállítás")));
         driver.Close();
     }
 }

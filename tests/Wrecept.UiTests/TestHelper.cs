@@ -107,12 +107,12 @@ internal static class TestHelper
     {
         foreach (var title in new[] { "Első indítás", "Megerősítés" })
         {
-            var dialogs = driver.FindElementsByName(title);
+            var dialogs = driver.FindElements(By.Name(title));
             if (dialogs.Count > 0)
             {
                 try
                 {
-                    dialogs[0].FindElementByName("Igen").Click();
+                    dialogs[0].FindElement(By.Name("Igen")).Click();
                 }
                 catch (WebDriverException)
                 {
@@ -144,16 +144,16 @@ internal static class TestHelper
     {
         if (driver.PageSource.Contains("Megerősítés"))
         {
-            var dialog = driver.FindElementByName("Megerősítés");
-            dialog.FindElementByName("Igen").Click();
+            var dialog = driver.FindElement(By.Name("Megerősítés"));
+            dialog.FindElement(By.Name("Igen")).Click();
         }
     }
 
     internal static void RunFirstLaunchSetup(WindowsDriver<WindowsElement> driver)
     {
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-        var setupWindow = wait.Until(_ => driver.FindElementByName("Első indítás"));
-        setupWindow.FindElementByName("OK").Click();
+        var setupWindow = wait.Until(_ => driver.FindElement(By.Name("Első indítás")));
+        setupWindow.FindElement(By.Name("OK")).Click();
 
         var companyBox = WaitForElementById(driver, "CompanyNameBox");
         companyBox.SendKeys("Teszt Kft.");
@@ -163,7 +163,7 @@ internal static class TestHelper
         driver.FindElementByAccessibilityId("TaxNumberBox").SendKeys("1111");
         driver.FindElementByAccessibilityId("BankAccountBox").SendKeys("0000");
 
-        driver.FindElementByName("OK").Click();
+        driver.FindElement(By.Name("OK")).Click();
         HandleConfirmationDialog(driver);
     }
 
