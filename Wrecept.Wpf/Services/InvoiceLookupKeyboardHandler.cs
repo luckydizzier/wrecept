@@ -18,7 +18,7 @@ public class InvoiceLookupKeyboardHandler : IKeyboardHandler
         if (e.Key != Key.Insert && e.Key != Key.Up)
             return false;
 
-        if (Keyboard.FocusedElement is not DependencyObject element)
+        if (Keyboard.FocusedElement is not System.Windows.DependencyObject element)
             return false;
 
         var list = GetInvoiceList(element);
@@ -34,7 +34,7 @@ public class InvoiceLookupKeyboardHandler : IKeyboardHandler
         return false;
     }
 
-    private static ListBox? GetInvoiceList(DependencyObject element)
+    private static ListBox? GetInvoiceList(System.Windows.DependencyObject element)
     {
         if (element is ListBox list && list.Name == "InvoiceList")
             return list;
