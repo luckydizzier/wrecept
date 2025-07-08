@@ -84,10 +84,5 @@ public partial class InvoiceLookupViewModel : ObservableObject
         return Task.FromResult(0);
     }
 
-    public async Task PromptNewInvoiceAsync()
-    {
-        var number = await _numbering.GetNextInvoiceNumberAsync();
-        InlinePrompt = new InvoiceCreatePromptViewModel(this, number);
-    }
 
 }
