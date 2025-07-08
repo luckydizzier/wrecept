@@ -1,8 +1,8 @@
-# 🤖 AGENTS.md (Optimized)
+# 🤖 AGENTS.md
 title: "AGENTS"
 purpose: "Defines agent workflow and execution constraints"
 author: "root\_agent"
-date: "2025-07-01"
+date: "2025-07-08"
 ## Overview
 This document defines the modular agent-based development workflow for the **Wrecept** desktop application. Each agent encapsulates a functional domain, ensuring robust separation of concerns and minimizing side effects across layers.
 > **Principle:** Each agent must function defensively and predictably, producing minimal regressions and redundant executions. Inputs, outputs, dependencies, and invariants must be explicit.
