@@ -35,6 +35,8 @@ Ez a dokumentum a projekt fejlesztéséhez szükséges alapvető lépéseket tar
 - A megoldás három fő projektet tartalmaz: `Wrecept.Core`, `Wrecept.Storage` és `Wrecept.Wpf`.
 - A nézetmodellek és szolgáltatások elrendezését a [PROJECT_STRUCTURE.md](../PROJECT_STRUCTURE.md) ismerteti.
 - A felhasználói felület billentyűs működését a [UI_FLOW.md](../UI_FLOW.md) dokumentum részletezi.
+- A billentyűparancsokat a `KeyboardManager` delegálja az egyes
+  `*KeyboardHandler` osztályoknak az alkalmazás állapotától függően.
 
 ## Karbantartási teendők
 
