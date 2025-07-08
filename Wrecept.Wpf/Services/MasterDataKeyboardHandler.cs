@@ -6,11 +6,11 @@ namespace Wrecept.Wpf.Services;
 
 public class MasterDataKeyboardHandler : IKeyboardHandler
 {
-    private readonly IEditableMasterDataViewModel _vm;
+    private readonly StageViewModel _stage;
 
-    public MasterDataKeyboardHandler(IEditableMasterDataViewModel vm)
+    public MasterDataKeyboardHandler(StageViewModel stage)
     {
-        _vm = vm;
+        _stage = stage;
     }
 
     public bool HandleKey(KeyEventArgs e)
@@ -19,13 +19,16 @@ public class MasterDataKeyboardHandler : IKeyboardHandler
         {
             case Key.Insert:
             case Key.Enter:
-                _vm.EditSelectedCommand.Execute(null);
+                if (_stage.CurrentViewModel is IEditableMasterDataViewModel vmEdit)
+                    vmEdit.EditSelectedCommand.Execute(null);
                 return true;
             case Key.Delete:
-                _vm.DeleteSelectedCommand.Execute(null);
+                if (_stage.CurrentViewModel is IEditableMasterDataViewModel vmDel)
+                    vmDel.DeleteSelectedCommand.Execute(null);
                 return true;
             case Key.Escape:
-                _vm.CloseDetailsCommand.Execute(null);
+                if (_stage.CurrentViewModel is IEditableMasterDataViewModel vmClose)
+                    vmClose.CloseDetailsCommand.Execute(null);
                 return true;
         }
         return false;
