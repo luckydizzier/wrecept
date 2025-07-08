@@ -18,8 +18,6 @@ jobs:
         run: dotnet workload install windows --skip-sign-check
       - name: Restore
         run: dotnet restore Wrecept.sln
-      - name: Build
-        run: dotnet build Wrecept.sln --no-restore
       - name: Test
         run: |
           dotnet test Wrecept.Core.Tests/Wrecept.Core.Tests.csproj --no-build --collect:"XPlat Code Coverage"
