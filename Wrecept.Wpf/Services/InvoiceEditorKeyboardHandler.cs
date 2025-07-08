@@ -33,8 +33,7 @@ public class InvoiceEditorKeyboardHandler : IKeyboardHandler
             case Key.Delete:
                 _vm.ShowArchivePromptCommand.Execute(null);
                 return true;
-            case Key.Enter:
-            case Key.Return:
+            case Key.Enter or Key.Return:
                 _vm.SaveEditedItemCommand.Execute(null);
                 return true;
             case Key.Escape:

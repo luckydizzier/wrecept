@@ -30,8 +30,7 @@ public class StageMenuKeyboardHandler : IKeyboardHandler
                 _stage.StatusBar.ActiveMenu = _actions[_index].ToString();
                 return true;
             case Key.Insert:
-            case Key.Enter:
-            case Key.Return:
+            case Key.Enter or Key.Return:
                 var action = _actions[_index];
                 _stage.HandleMenuCommand.Execute(action);
                 return true;

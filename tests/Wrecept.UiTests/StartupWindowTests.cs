@@ -36,11 +36,11 @@ public class StartupWindowTests
 
         var wait = new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(5));
         var optionsWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Mintaszámok"));
-        optionsWindow.FindElementByName("Mégse").Click();
+            .FindElement(By.Name("Mintaszámok")));
+        optionsWindow.FindElement(By.Name("Mégse")).Click();
 
         var mainWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Wrecept"));
+            .FindElement(By.Name("Wrecept")));
         Assert.IsNotNull(mainWindow);
         driver.Close();
     }
@@ -53,11 +53,11 @@ public class StartupWindowTests
 
         var wait = new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(5));
         var optionsWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Mintaszámok"));
-        optionsWindow.FindElementByName("OK").Click();
+            .FindElement(By.Name("Mintaszámok")));
+        optionsWindow.FindElement(By.Name("OK")).Click();
 
         var startupWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Indulás"));
+            .FindElement(By.Name("Indulás")));
         Assert.IsNotNull(startupWindow);
 
         driver.Close();
@@ -71,22 +71,22 @@ public class StartupWindowTests
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
         var setupWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Első indítás"));
-        setupWindow.FindElementByName("OK").Click();
+            .FindElement(By.Name("Első indítás")));
+        setupWindow.FindElement(By.Name("OK")).Click();
 
         var editorWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Tulajdonosi adatok"));
+            .FindElement(By.Name("Tulajdonosi adatok")));
         wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByAccessibilityId("CompanyNameBox")).SendKeys("Teszt Kft.");
-        driver.FindElementByAccessibilityId("AddressBox").SendKeys("Siklós, Fő utca 1.");
-        driver.FindElementByAccessibilityId("PhoneBox").SendKeys("1111");
-        driver.FindElementByAccessibilityId("EmailBox").SendKeys("teszt@example.hu");
-        driver.FindElementByAccessibilityId("TaxNumberBox").SendKeys("123");
-        driver.FindElementByAccessibilityId("BankAccountBox").SendKeys("111");
+            .FindElement(By.Id("CompanyNameBox"))).SendKeys("Teszt Kft.");
+        driver.FindElement(By.Id("AddressBox")).SendKeys("Siklós, Fő utca 1.");
+        driver.FindElement(By.Id("PhoneBox")).SendKeys("1111");
+        driver.FindElement(By.Id("EmailBox")).SendKeys("teszt@example.hu");
+        driver.FindElement(By.Id("TaxNumberBox")).SendKeys("123");
+        driver.FindElement(By.Id("BankAccountBox")).SendKeys("111");
         new Actions(driver).SendKeys(OpenQA.Selenium.Keys.Enter).Perform();
 
         wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Wrecept"));
+            .FindElement(By.Name("Wrecept")));
         driver.Close();
     }
 
@@ -98,8 +98,8 @@ public class StartupWindowTests
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
         var setupWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Első indítás"));
-        setupWindow.FindElementByName("Mégse").Click();
+            .FindElement(By.Name("Első indítás")));
+        setupWindow.FindElement(By.Name("Mégse")).Click();
 
         Assert.ThrowsException<WebDriverException>(() => _ = driver.Title);
     }
@@ -112,12 +112,12 @@ public class StartupWindowTests
 
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
         var setupWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Első indítás"));
-        setupWindow.FindElementByName("OK").Click();
+            .FindElement(By.Name("Első indítás")));
+        setupWindow.FindElement(By.Name("OK")).Click();
 
         var editorWindow = wait.Until(d => ((WindowsDriver<WindowsElement>)d)
-            .FindElementByName("Tulajdonosi adatok"));
-        editorWindow.FindElementByName("Mégse").Click();
+            .FindElement(By.Name("Tulajdonosi adatok")));
+        editorWindow.FindElement(By.Name("Mégse")).Click();
 
         Assert.ThrowsException<WebDriverException>(() => _ = driver.Title);
     }
