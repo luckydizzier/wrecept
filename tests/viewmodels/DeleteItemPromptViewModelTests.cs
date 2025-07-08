@@ -62,7 +62,7 @@ public class DeleteItemPromptViewModelTests
     private static InvoiceEditorViewModel CreateEditor()
     {
         var invoice = new FakeInvoiceService();
-        var lookup = new InvoiceLookupViewModel(invoice, new FakeNumberingService(), new AppStateService(Path.GetTempFileName()));
+        var lookup = new InvoiceLookupViewModel(invoice, new FakeNumberingService());
         var state = new AppStateService(Path.GetTempFileName());
         return new InvoiceEditorViewModel(new DummyService<object>(), new DummyService<object>(), new DummyService<object>(), new FakeProductService(), new DummyService<object>(), new DummyService<object>(), invoice, new DummyLogService(), new DummyNotificationService(), state, lookup);
     }

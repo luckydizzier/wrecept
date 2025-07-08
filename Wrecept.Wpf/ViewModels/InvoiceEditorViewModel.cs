@@ -322,8 +322,7 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
         Lookup = lookup;
         Lookup.InvoiceSelected += async item =>
         {
-            if (Lookup.InlinePrompt is null)
-                await LoadInvoice(item.Id, item.Number);
+            await LoadInvoice(item.Id, item.Number);
         };
         Lookup.InvoiceCreated += async number =>
         {

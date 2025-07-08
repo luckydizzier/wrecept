@@ -131,20 +131,6 @@ public class InvoiceEditorViewModelTests
     }
 
     [Fact]
-    public async Task InlinePrompt_CreatesInvoice()
-    {
-        var invoiceSvc = new FakeInvoiceService();
-        var lookupState = new AppStateService(Path.GetTempFileName());
-        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService(), lookupState);
-        var prompt = new InvoiceCreatePromptViewModel(lookup, "INV1");
-
-        await prompt.ConfirmAsyncCommand.ExecuteAsync(null);
-
-        Assert.Empty(invoiceSvc.Invoices);
-        Assert.Null(lookup.InlinePrompt);
-    }
-
-    [Fact]
     public async Task AddLineItem_InvalidQuantity_Rejected()
     {
         var invoiceSvc = new FakeInvoiceService();
@@ -158,8 +144,7 @@ public class InvoiceEditorViewModelTests
         var groups = new DummyService<object>();
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
-        var lookupState = new AppStateService(Path.GetTempFileName());
-        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService(), lookupState);
+        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService());
         var state = new AppStateService(Path.GetTempFileName());
         var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, groups, invoiceSvc, log, notify, state, lookup);
 
@@ -187,7 +172,7 @@ public class InvoiceEditorViewModelTests
         var unit = new DummyService<object>();
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
-        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService(), new AppStateService(Path.GetTempFileName()));
+        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService());
         var state = new AppStateService(Path.GetTempFileName());
         var vm = new InvoiceEditorViewModel(payment, tax, supplier, productSvc, unit, groups, invoiceSvc, log, notify, state, lookup);
 
@@ -214,7 +199,7 @@ public class InvoiceEditorViewModelTests
         var dummy = new DummyService<object>();
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
-        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService(), new AppStateService(Path.GetTempFileName()));
+        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService());
         var state = new AppStateService(Path.GetTempFileName());
         var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, dummy, invoiceSvc, log, notify, state, lookup)
         {
@@ -242,7 +227,7 @@ public class InvoiceEditorViewModelTests
         var dummy = new DummyService<object>();
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
-        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService(), new AppStateService(Path.GetTempFileName()));
+        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService());
         var state = new AppStateService(Path.GetTempFileName());
         var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, dummy, invoiceSvc, log, notify, state, lookup);
 
@@ -268,7 +253,7 @@ public class InvoiceEditorViewModelTests
         var dummy = new DummyService<object>();
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
-        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService(), new AppStateService(Path.GetTempFileName()));
+        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService());
         var state = new AppStateService(Path.GetTempFileName());
         var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, dummy, invoiceSvc, log, notify, state, lookup)
         {
@@ -301,7 +286,7 @@ public class InvoiceEditorViewModelTests
         var dummy = new DummyService<object>();
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
-        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService(), new AppStateService(Path.GetTempFileName()));
+        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService());
         var state = new AppStateService(Path.GetTempFileName());
         var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, dummy, invoiceSvc, log, notify, state, lookup)
         {
@@ -333,7 +318,7 @@ public class InvoiceEditorViewModelTests
         var productSvc = new FakeProductService();
         var log = new DummyLogService();
         var notify = new DummyNotificationService();
-        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService(), new AppStateService(Path.GetTempFileName()));
+        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService());
         var state = new AppStateService(Path.GetTempFileName());
         var vm = new InvoiceEditorViewModel(dummy, dummy, dummy, productSvc, dummy, dummy, invoiceSvc, log, notify, state, lookup);
 
@@ -348,7 +333,7 @@ public class InvoiceEditorViewModelTests
     public void InlineCreator_SetsInteractionState()
     {
         var invoiceSvc = new FakeInvoiceService();
-        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService(), new AppStateService(Path.GetTempFileName()));
+        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService());
         var state = new AppStateService(Path.GetTempFileName());
         var vm = new InvoiceEditorViewModel(new DummyService<object>(), new DummyService<object>(), new DummyService<object>(), new FakeProductService(), new DummyService<object>(), new DummyService<object>(), invoiceSvc, new DummyLogService(), new DummyNotificationService(), state, lookup);
 

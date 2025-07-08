@@ -76,7 +76,7 @@ public class SaveLinePromptViewModelTests
     private static InvoiceEditorViewModel CreateEditor(FakeInvoiceService invoice, FakeProductService products)
     {
         var numberSvc = new FakeNumberingService();
-        var lookup = new InvoiceLookupViewModel(invoice, numberSvc, new AppStateService(Path.GetTempFileName()));
+        var lookup = new InvoiceLookupViewModel(invoice, numberSvc);
         var state = new AppStateService(Path.GetTempFileName());
         return new InvoiceEditorViewModel(new DummyService<object>(), new DummyService<object>(), new DummyService<object>(), products, new DummyService<object>(), new DummyService<object>(), invoice, new DummyLogService(), new DummyNotificationService(), state, lookup);
     }

@@ -1,12 +1,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
-using Wrecept.Core.Enums;
-using Wrecept.Wpf.Services;
 
 namespace Wrecept.Wpf.ViewModels;
 
@@ -22,7 +21,6 @@ public partial class InvoiceLookupViewModel : ObservableObject
 {
     private readonly IInvoiceService _invoices;
     private readonly INumberingService _numbering;
-    private readonly AppStateService _state;
 
     public event Action<InvoiceLookupItem>? InvoiceSelected;
     public event Action<string>? InvoiceCreated;
@@ -38,19 +36,17 @@ public partial class InvoiceLookupViewModel : ObservableObject
             InvoiceSelected?.Invoke(value);
     }
 
-    [ObservableProperty]
-    private object? inlinePrompt;
+    [RelayCommand]
+    private async Task CreateNewInvoiceAsync()
+    {
+        var number = await _numbering.GetNextInvoiceNumberAsync();
+        await CreateInvoiceAsync(number);
+    }
 
-    partial void OnInlinePromptChanged(object? value)
-        => _state.InteractionState = value == null
-            ? AppInteractionState.BrowsingInvoices
-            : AppInteractionState.InlinePromptActive;
-
-    public InvoiceLookupViewModel(IInvoiceService invoices, INumberingService numbering, AppStateService state)
+    public InvoiceLookupViewModel(IInvoiceService invoices, INumberingService numbering)
     {
         _invoices = invoices;
         _numbering = numbering;
-        _state = state;
     }
 
     public async Task LoadAsync()

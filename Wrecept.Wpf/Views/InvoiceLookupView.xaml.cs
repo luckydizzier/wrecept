@@ -12,21 +12,18 @@ namespace Wrecept.Wpf.Views;
 public partial class InvoiceLookupView : UserControl
 {
     private readonly FocusManager _focus;
-    private readonly AppStateService _state;
 
     public InvoiceLookupView() : this(
         App.Provider.GetRequiredService<InvoiceLookupViewModel>(),
-        App.Provider.GetRequiredService<FocusManager>(),
-        App.Provider.GetRequiredService<AppStateService>())
+        App.Provider.GetRequiredService<FocusManager>())
     {
     }
 
-    public InvoiceLookupView(InvoiceLookupViewModel viewModel, FocusManager focus, AppStateService state)
+    public InvoiceLookupView(InvoiceLookupViewModel viewModel, FocusManager focus)
     {
         InitializeComponent();
         DataContext = viewModel;
         _focus = focus;
-        _state = state;
         Loaded += OnLoaded;
     }
 
@@ -36,7 +33,7 @@ public partial class InvoiceLookupView : UserControl
         {
             if (DataContext is InvoiceLookupViewModel vm)
                 await vm.LoadAsync();
-            _state.InteractionState = AppInteractionState.BrowsingInvoices;
+            App.Provider.GetRequiredService<AppStateService>().InteractionState = AppInteractionState.BrowsingInvoices;
             _focus.RequestFocus(InvoiceList);
         }
         catch (Exception ex)
