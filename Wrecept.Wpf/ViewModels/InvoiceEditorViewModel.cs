@@ -573,6 +573,19 @@ private void UpdateSupplierId(string name)
             await _exporter.PrintAsync(invoice);
     }
 
+    [RelayCommand]
+    private void Close()
+    {
+        if (IsInLineFinalizationPrompt || SavePrompt != null)
+            return;
+
+        IsInLineFinalizationPrompt = true;
+        SavePrompt = new SaveLinePromptViewModel(
+            this,
+            "Végeztél a szerkesztéssel? (Enter=Mentés, Esc=Mégsem)",
+            finalize: true);
+    }
+
     public void EditLineFromSelection(InvoiceItemRowViewModel selected)
     {
         if (!IsEditable)
