@@ -103,7 +103,7 @@
                                           SelectedValuePath="Id"
                                           SelectedValue="{Binding PaymentMethodId}"
                                           CreateCommand="{Binding ShowPaymentMethodCreatorCommand}"
-                                          CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                          CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                           IsEnabled="{Binding IsEditable}" />
                         </StackPanel>
 
@@ -161,7 +161,7 @@
                                   SelectedValuePath="Id"
                                   SelectedValue="{Binding TaxRateId, Mode=TwoWay}"
                                   CreateCommand="{Binding DataContext.ShowTaxRateCreatorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                  CreateCommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                                  CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
                     <TextBox x:Name="EntryDesc" Grid.Column="5" Text="{Binding Description, Mode=TwoWay}" Margin="4,0"
                              />
                 </Grid>
