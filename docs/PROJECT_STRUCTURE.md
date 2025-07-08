@@ -831,6 +831,13 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Számlák PDF exportja és nyomtatása
   - Interaction: ViewModels
   - Special Notes: QuestPDF alapú
+- **Wrecept.Wpf/Services/StageMenuHandler.cs**
+  - Purpose: Üzleti szolgáltatás
+  - Layer: UI
+  - Type: C#
+  - Responsibility: Főmenü műveletek végrehajtása
+  - Interaction: ViewModels, AppStateService
+  - Special Notes: -
 - **Wrecept.Wpf/Services/ScreenModeManager.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI

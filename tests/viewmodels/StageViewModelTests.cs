@@ -65,8 +65,9 @@ public class StageViewModelTests
         var status = new StatusBarViewModel();
         var db = new FakeDbHealth();
         var session = new FakeSession();
+        var menu = new StageMenuHandler(invoice, product, group, supplier, tax, payment, unit, user, about, placeholder, status, db, session, state);
 
-        return new StageViewModel(invoice, product, group, supplier, tax, payment, unit, user, about, placeholder, status, db, session, state);
+        return new StageViewModel(invoice, product, group, supplier, tax, payment, unit, user, about, placeholder, status, db, session, state, menu);
     }
 
     private class FakeProductService : IProductService
@@ -136,21 +137,21 @@ public class StageViewModelTests
         var state = new AppStateService(Path.GetTempFileName());
         NavigationService.State = state;
         var invoice = new InvoiceEditorViewModel();
-        var vm = new StageViewModel(
-            invoice,
-            new ProductMasterViewModel(new FakeProductService(), new FakeTaxRateService(), state),
-            new ProductGroupMasterViewModel(new FakeProductGroupService(), state),
-            new SupplierMasterViewModel(new FakeSupplierService(), state),
-            new TaxRateMasterViewModel(new FakeTaxRateService(), state),
-            new PaymentMethodMasterViewModel(new FakePaymentMethodService(), state),
-            new UnitMasterViewModel(new FakeUnitService(), state),
-            new UserInfoViewModel(new FakeUserInfoService()),
-            new AboutViewModel(new FakeUserInfoService()),
-            new PlaceholderViewModel(),
-            new StatusBarViewModel(),
-            new FakeDbHealth(),
-            new FakeSession(),
-            state);
+        var product = new ProductMasterViewModel(new FakeProductService(), new FakeTaxRateService(), state);
+        var group = new ProductGroupMasterViewModel(new FakeProductGroupService(), state);
+        var supplier = new SupplierMasterViewModel(new FakeSupplierService(), state);
+        var tax = new TaxRateMasterViewModel(new FakeTaxRateService(), state);
+        var payment = new PaymentMethodMasterViewModel(new FakePaymentMethodService(), state);
+        var unit = new UnitMasterViewModel(new FakeUnitService(), state);
+        var user = new UserInfoViewModel(new FakeUserInfoService());
+        var about = new AboutViewModel(new FakeUserInfoService());
+        var placeholder = new PlaceholderViewModel();
+        var status = new StatusBarViewModel();
+        var db = new FakeDbHealth();
+        var session = new FakeSession();
+        var menu = new StageMenuHandler(invoice, product, group, supplier, tax, payment, unit, user, about, placeholder, status, db, session, state);
+
+        var vm = new StageViewModel(invoice, product, group, supplier, tax, payment, unit, user, about, placeholder, status, db, session, state, menu);
 
         await vm.HandleMenuCommand.ExecuteAsync(StageMenuAction.EditUnits);
         Assert.IsType<UnitMasterViewModel>(vm.CurrentViewModel);
@@ -165,21 +166,21 @@ public class StageViewModelTests
         var invoice = new InvoiceEditorViewModel();
         var changes = new List<AppInteractionState>();
         state.InteractionStateChanged += s => changes.Add(s);
-        var vm = new StageViewModel(
-            invoice,
-            new ProductMasterViewModel(new FakeProductService(), new FakeTaxRateService(), state),
-            new ProductGroupMasterViewModel(new FakeProductGroupService(), state),
-            new SupplierMasterViewModel(new FakeSupplierService(), state),
-            new TaxRateMasterViewModel(new FakeTaxRateService(), state),
-            new PaymentMethodMasterViewModel(new FakePaymentMethodService(), state),
-            new UnitMasterViewModel(new FakeUnitService(), state),
-            new UserInfoViewModel(new FakeUserInfoService()),
-            new AboutViewModel(new FakeUserInfoService()),
-            new PlaceholderViewModel(),
-            new StatusBarViewModel(),
-            new FakeDbHealth(),
-            new FakeSession(),
-            state);
+        var product = new ProductMasterViewModel(new FakeProductService(), new FakeTaxRateService(), state);
+        var group = new ProductGroupMasterViewModel(new FakeProductGroupService(), state);
+        var supplier = new SupplierMasterViewModel(new FakeSupplierService(), state);
+        var tax = new TaxRateMasterViewModel(new FakeTaxRateService(), state);
+        var payment = new PaymentMethodMasterViewModel(new FakePaymentMethodService(), state);
+        var unit = new UnitMasterViewModel(new FakeUnitService(), state);
+        var user = new UserInfoViewModel(new FakeUserInfoService());
+        var about = new AboutViewModel(new FakeUserInfoService());
+        var placeholder = new PlaceholderViewModel();
+        var status = new StatusBarViewModel();
+        var db = new FakeDbHealth();
+        var session = new FakeSession();
+        var menu = new StageMenuHandler(invoice, product, group, supplier, tax, payment, unit, user, about, placeholder, status, db, session, state);
+
+        var vm = new StageViewModel(invoice, product, group, supplier, tax, payment, unit, user, about, placeholder, status, db, session, state, menu);
 
         await vm.HandleMenuCommand.ExecuteAsync(StageMenuAction.UserInfo);
 
