@@ -28,8 +28,9 @@ A billentyűk feldolgozását állapottól függő handlerek végzik:
   Insert vagy Enter aktiválja a kijelölt műveletet.
 - **InvoiceEditorKeyboardHandler** – számlaszerkesztéskor az Insert új sort hoz
   létre, Delete archiválást kér, Enter menti a sort, Escape kilép a szerkesztésből.
-- **MasterDataKeyboardHandler** – törzsadat nézeteknél Insert/Enter szerkeszt,
-  Delete töröl, Escape bezárja a részleteket.
+- **MasterDataKeyboardHandler** – a `StageViewModel.CurrentViewModel` értékét
+  `IEditableMasterDataViewModel`-ként kezeli. Insert/Enter a szerkesztést,
+  Delete a törlést, Escape a részletek bezárását indítja.
 
 - Fókuszkezdő pontok nézetenként:
   - **StageView** – a főmenüsor első eleme
