@@ -92,6 +92,7 @@ Az első indításkor a `LoadSettingsAsync` metódus a `ISetupFlow` szolgáltat�
 A folyamat megszakításakor az `IEnvironmentService` hívódik, így a kilépés tesztkörnyezetben is ellenőrizhető.
 
 Az `InvoiceEditorLayout` megnyitásakor hasonló ablak jelenik meg. A törzsadatok (fizetési módok, szállítók, ÁFA‑kulcsok, termékek, mértékegységek) betöltése lépésenként történik, a második sáv pedig az adott lista elemeinek betöltési arányát írja ki.
+Az összesítő mezők kiszámítását a `TotalsViewModel`, míg a sorok kezelését az `InvoiceItemEditorViewModel` végzi.
 
 ## Dialóguskezelés
 

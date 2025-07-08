@@ -163,7 +163,7 @@ public class InvoiceEditorViewModelTests
         row.Quantity = 0;
         row.TaxRateId = productSvc.Products[0].TaxRateId;
 
-        await vm.AddLineItemAsync();
+        await vm.ItemsEditor.AddLineItemAsync();
 
         Assert.Equal(0, invoiceSvc.Items.Count);
         Assert.True(row.HasError);
@@ -192,7 +192,7 @@ public class InvoiceEditorViewModelTests
         row.UnitPrice = 100;
         row.TaxRateId = taxId;
 
-        await vm.AddLineItemAsync();
+        await vm.ItemsEditor.AddLineItemAsync();
 
         Assert.Equal(0, invoiceSvc.Items.Count);
         Assert.False(row.HasError);
@@ -221,11 +221,11 @@ public class InvoiceEditorViewModelTests
         row.Quantity = 1;
         row.TaxRateId = productSvc.Products[0].TaxRateId;
 
-        await vm.AddLineItemAsync();
+        await vm.ItemsEditor.AddLineItemAsync();
         Assert.Empty(invoiceSvc.Items);
         Assert.True(row.HasError);
 
-        vm.EditLineFromSelection(new InvoiceItemRowViewModel(vm) { Product = "X" });
+        vm.ItemsEditor.EditLineFromSelection(new InvoiceItemRowViewModel(vm) { Product = "X" });
         Assert.Equal(string.Empty, vm.Items[0].Product);
     }
 
@@ -281,7 +281,7 @@ public class InvoiceEditorViewModelTests
         row.Quantity = 1;
         row.TaxRateId = Guid.NewGuid();
 
-        await vm.AddLineItemAsync();
+        await vm.ItemsEditor.AddLineItemAsync();
 
         Assert.Empty(invoiceSvc.Items);
     }
@@ -312,11 +312,11 @@ public class InvoiceEditorViewModelTests
         row.UnitPrice = 100;
         row.TaxRateId = taxId;
 
-        await vm.AddLineItemAsync();
+        await vm.ItemsEditor.AddLineItemAsync();
 
-        Assert.Equal(200, vm.NetTotal);
-        Assert.Equal(54, vm.VatTotal);
-        Assert.Equal(254, vm.GrossTotal);
+        Assert.Equal(200, vm.Totals.NetTotal);
+        Assert.Equal(54, vm.Totals.VatTotal);
+        Assert.Equal(254, vm.Totals.GrossTotal);
     }
 
     [Fact]
