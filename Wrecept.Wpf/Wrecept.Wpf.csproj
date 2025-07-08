@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Wrecept.Core\Wrecept.Core.csproj" />
     <ProjectReference Include="..\Wrecept.Storage\Wrecept.Storage.csproj" />
+    <ProjectReference Include="..\refactor\Wrecept.Plugins.Abstractions\Wrecept.Plugins.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

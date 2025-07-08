@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Core;
 using Wrecept.Core.Services;
@@ -18,6 +19,7 @@ using System.Text.Json;
 using CommunityToolkit.Mvvm.Input;
 using Wrecept.Core.Utilities;
 using Wrecept.Storage.Data;
+using Wrecept.Plugins.Abstractions;
 namespace Wrecept.Wpf;
 
 public partial class App : Application
@@ -113,56 +115,18 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         DbPath = settings.DatabasePath;
         UserInfoPath = settings.UserInfoPath;
 
-        services.AddCore();
-        await services.AddStorageAsync(DbPath, UserInfoPath, SettingsPath);
+        var context = new Dictionary<string, object>
+        {
+            ["DbPath"] = DbPath,
+            ["UserInfoPath"] = UserInfoPath,
+            ["SettingsPath"] = SettingsPath
+        };
 
+        var module = new WpfModule();
+        await module.ConfigureServicesAsync(services, context);
 
-        services.AddSingleton<StageViewModel>();
-        services.AddSingleton<InvoiceEditorViewModel>();
-        services.AddSingleton<InvoiceLookupViewModel>();
-        services.AddTransient<ProductMasterViewModel>();
-        services.AddTransient<ProductGroupMasterViewModel>();
-        services.AddTransient<SupplierMasterViewModel>();
-        services.AddTransient<TaxRateMasterViewModel>();
-        services.AddTransient<PaymentMethodMasterViewModel>();
-        services.AddTransient<UnitMasterViewModel>();
-        services.AddTransient<UserInfoViewModel>();
-        services.AddTransient<UserInfoEditorViewModel>();
-        services.AddTransient<ScreenModeViewModel>();
-        services.AddTransient<AboutViewModel>();
-        services.AddTransient<PlaceholderViewModel>();
-        services.AddSingleton<StatusBarViewModel>();
-        services.AddSingleton<AppStateService>(_ => new AppStateService(StatePath));
-        services.AddSingleton<INotificationService, MessageBoxNotificationService>();
-        services.AddTransient<IInvoiceExportService, PdfInvoiceExporter>();
-        services.AddSingleton<ScreenModeManager>();
-        services.AddSingleton<FocusManager>();
-        services.AddSingleton<KeyboardManager>();
-        services.AddTransient<StageMenuHandler>();
-        services.AddTransient<StageMenuKeyboardHandler>();
-        services.AddTransient<InvoiceEditorKeyboardHandler>();
-        services.AddTransient<MasterDataKeyboardHandler>();
-        services.AddTransient<ProgressViewModel>();
-        services.AddTransient<SeedOptionsViewModel>();
-        services.AddTransient<SeedOptionsWindow>();
-        services.AddTransient<StartupWindow>();
-        services.AddTransient<ScreenModeWindow>();
-        services.AddTransient<StartupOrchestrator>();
-        services.AddTransient<StageView>();
-        services.AddTransient<InvoiceLookupView>();
-        services.AddTransient<ProductMasterView>();
-        services.AddTransient<ProductGroupMasterView>();
-        services.AddTransient<SupplierMasterView>();
-        services.AddTransient<TaxRateMasterView>();
-        services.AddTransient<PaymentMethodMasterView>();
-        services.AddTransient<UnitMasterView>();
-        services.AddTransient<UserInfoView>();
-        services.AddTransient<UserInfoWindow>();
-        services.AddTransient<AboutView>();
-        services.AddTransient<PlaceholderView>();
-        services.AddTransient<Views.Controls.StatusBar>();
-
-        services.AddSingleton<MainWindow>();
+        var pluginsPath = Path.Combine(AppContext.BaseDirectory, "plugins");
+        await PluginLoader.LoadPluginsAsync(services, pluginsPath, context);
     }
 
     protected override async void OnStartup(StartupEventArgs e)
