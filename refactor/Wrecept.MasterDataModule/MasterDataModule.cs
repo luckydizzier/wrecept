@@ -9,11 +9,15 @@ namespace Wrecept.MasterDataModule;
 
 public class MasterDataModule : IPlugin
 {
+    private const string DbPathKey = "DbPath";
+    private const string UserInfoPathKey = "UserInfoPath";
+    private const string SettingsPathKey = "SettingsPath";
+
     public async Task ConfigureServicesAsync(IServiceCollection services, IDictionary<string, object>? context = null)
     {
-        var dbPath = context?["DbPath"] as string ?? string.Empty;
-        var userInfoPath = context?["UserInfoPath"] as string ?? string.Empty;
-        var settingsPath = context?["SettingsPath"] as string ?? string.Empty;
+        var dbPath = context?[DbPathKey] as string ?? string.Empty;
+        var userInfoPath = context?[UserInfoPathKey] as string ?? string.Empty;
+        var settingsPath = context?[SettingsPathKey] as string ?? string.Empty;
 
         services.AddCore();
         await services.AddStorageAsync(dbPath, userInfoPath, settingsPath);
