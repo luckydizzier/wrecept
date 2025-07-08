@@ -7,6 +7,7 @@
             IsEnabled="{Binding DataContext.IsEditable, RelativeSource={RelativeSource AncestorType=view:InvoiceEditorLayout}}">
     <UserControl.InputBindings>
         <KeyBinding Key="Enter" Command="{Binding ConfirmAsyncCommand}" />
+        <KeyBinding Key="Return" Command="{Binding ConfirmAsyncCommand}" />
         <KeyBinding Key="Escape" Command="{Binding CancelCommand}" />
     </UserControl.InputBindings>
     <Border Background="#F5F5DC" Padding="4" Margin="0,4,0,0">
