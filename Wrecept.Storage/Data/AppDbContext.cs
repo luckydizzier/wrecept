@@ -30,5 +30,13 @@ public class AppDbContext : DbContext
             .HasIndex(u => new { u.Name, u.IsArchived });
         modelBuilder.Entity<Unit>()
             .HasIndex(u => new { u.Code, u.IsArchived });
+
+        modelBuilder.Entity<Invoice>()
+            .HasIndex(i => i.Date);
+        modelBuilder.Entity<Invoice>()
+            .HasIndex(i => i.SupplierId);
+
+        modelBuilder.Entity<Product>()
+            .HasIndex(p => p.Name);
     }
 }
