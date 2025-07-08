@@ -44,6 +44,7 @@ Az `DbContext` példányai a Storage rétegben élnek. A migrációk és a séma
 Az adatlekérést repositoryk végzik, amelyek `IInvoiceRepository`, `IProductRepository` és `ISupplierRepository` interfészeket valósítanak meg. Ezek felelősek a hibák naplózásáért és az üres listákkal való visszatérésért hiba esetén.
 Ezek fölött `InvoiceService`, `ProductService` és mostantól `SupplierService` gondoskodik a validálásról és a ViewModel réteg kiszolgálásáról.
 Az `InvoiceService` kezeli a fejléc frissítését (`UpdateInvoiceHeaderAsync`) és az archiválást.
+Fejléc mentésekor az `InvoiceLookupViewModel` újratölti a listát és a módosított számlát jelöli ki.
 Az új `RemoveItemAsync` metódus lehetővé teszi egy meglévő tétel törlését adatbázisból.
 Az `IInvoiceExportService` felülete biztosít PDF mentést és nyomtatást, a `PdfInvoiceExporter` a WPF rétegben valósítja meg.
 

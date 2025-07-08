@@ -38,9 +38,19 @@ public class InvoiceEditorViewModelTests
             Items.Add(item);
             return Task.FromResult(item.Id);
         }
-        public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, System.Threading.CancellationToken ct = default)
+        public Task UpdateInvoiceHeaderAsync(int id, string number, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, System.Threading.CancellationToken ct = default)
         {
             UpdatedId = id;
+            var inv = Invoices.FirstOrDefault(i => i.Id == id);
+            if (inv != null)
+            {
+                inv.Number = number;
+                inv.Date = date;
+                inv.DueDate = dueDate;
+                inv.SupplierId = supplierId;
+                inv.PaymentMethodId = paymentMethodId;
+                inv.IsGross = isGross;
+            }
             return Task.CompletedTask;
         }
         public Task ArchiveAsync(int id, System.Threading.CancellationToken ct = default)
@@ -361,6 +371,46 @@ public class InvoiceEditorViewModelTests
 
         Assert.Equal(AppInteractionState.DialogOpen, during);
         Assert.Equal(AppInteractionState.EditingInvoice, state.InteractionState);
+    }
+
+    [Fact]
+    public async Task SaveCommand_RefreshesLookupAndReselectsEditedInvoice()
+    {
+        var invoiceSvc = new FakeInvoiceService();
+        var paymentId = Guid.NewGuid();
+        var invoice = new Invoice
+        {
+            Id = 1,
+            Number = "INV1",
+            Date = DateOnly.FromDateTime(DateTime.Today),
+            DueDate = DateOnly.FromDateTime(DateTime.Today.AddDays(5)),
+            SupplierId = 1,
+            PaymentMethodId = paymentId,
+            IsGross = false
+        };
+        invoiceSvc.Invoices.Add(invoice);
+
+        var lookup = new InvoiceLookupViewModel(invoiceSvc, new FakeNumberingService());
+        await lookup.LoadAsync();
+        var state = new AppStateService(Path.GetTempFileName());
+        var vm = new InvoiceEditorViewModel(new DummyService<object>(), new DummyService<object>(), new DummyService<object>(), new FakeProductService(), new DummyService<object>(), new DummyService<object>(), invoiceSvc, new DummyLogService(), new DummyNotificationService(), state, lookup);
+
+        lookup.SelectedInvoice = lookup.Invoices[0];
+
+        var newPaymentId = Guid.NewGuid();
+        vm.PaymentMethods.Add(new PaymentMethod { Id = newPaymentId, DueInDays = 0 });
+        vm.Number = "NEW1";
+        vm.SupplierId = 2;
+        vm.PaymentMethodId = newPaymentId;
+        vm.InvoiceDate = DateTime.Today;
+
+        await vm.SaveCommand.ExecuteAsync(null);
+
+        Assert.Equal("NEW1", lookup.SelectedInvoice?.Number);
+        Assert.Equal(1, lookup.SelectedInvoice?.Id);
+        var stored = invoiceSvc.Invoices.First(i => i.Id == 1);
+        Assert.Equal(2, stored.SupplierId);
+        Assert.Equal("NEW1", stored.Number);
     }
 
 }
