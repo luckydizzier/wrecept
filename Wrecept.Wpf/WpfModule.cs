@@ -15,9 +15,9 @@ public class WpfModule : IPlugin
 {
     public async Task ConfigureServicesAsync(IServiceCollection services, IDictionary<string, object>? context = null)
     {
-        var dbPath = context?[("DbPath")] as string ?? string.Empty;
-        var userInfoPath = context?[("UserInfoPath")] as string ?? string.Empty;
-        var settingsPath = context?[("SettingsPath")] as string ?? string.Empty;
+        var dbPath = context?["DbPath"] as string ?? string.Empty;
+        var userInfoPath = context?["UserInfoPath"] as string ?? string.Empty;
+        var settingsPath = context?["SettingsPath"] as string ?? string.Empty;
 
         services.AddCore();
         await services.AddStorageAsync(dbPath, userInfoPath, settingsPath);
