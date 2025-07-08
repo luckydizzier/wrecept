@@ -1,13 +1,9 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.Plugins.Abstractions;
-using Wrecept.Core;
 using Wrecept.Storage;
 using Wrecept.Wpf.ViewModels;
 using Wrecept.Wpf.Views;
 using Wrecept.Wpf.Services;
-using Wrecept.Core.Services;
+
 
 namespace Wrecept.Wpf;
 
