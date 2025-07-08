@@ -2075,7 +2075,56 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Layer: Tooling
   - Type: YAML
   - Responsibility: Build script
-  - Interaction: 
+  - Interaction:
+  - Special Notes: -
+- **refactor/Wrecept.Plugins.Abstractions/IPlugin.cs**
+  - Purpose: Plug-in interfész
+  - Layer: Plugin
+  - Type: C#
+  - Responsibility: Szerződés
+  - Interaction: Plug-ins
+  - Special Notes: -
+- **refactor/Wrecept.Plugins.Abstractions/PluginLoader.cs**
+  - Purpose: Plug-in betöltő
+  - Layer: Plugin
+  - Type: C#
+  - Responsibility: Betöltés
+  - Interaction: DI, plug-ins
+  - Special Notes: -
+- **refactor/Wrecept.Plugins.Abstractions/Wrecept.Plugins.Abstractions.csproj**
+  - Purpose: Projekfájl
+  - Layer: Plugin
+  - Type: C#
+  - Responsibility: Build
+  - Interaction:
+  - Special Notes: -
+- **refactor/Wrecept.InvoiceModule/InvoiceModule.cs**
+  - Purpose: Számla plug-in modul
+  - Layer: Plugin
+  - Type: C#
+  - Responsibility: Szolgáltatások regisztrálása
+  - Interaction: Core, Storage
+  - Special Notes: -
+- **refactor/Wrecept.InvoiceModule/Wrecept.InvoiceModule.csproj**
+  - Purpose: Projekfájl
+  - Layer: Plugin
+  - Type: C#
+  - Responsibility: Build
+  - Interaction:
+  - Special Notes: -
+- **refactor/Wrecept.MasterDataModule/MasterDataModule.cs**
+  - Purpose: Törzsadat plug-in modul
+  - Layer: Plugin
+  - Type: C#
+  - Responsibility: Szolgáltatások regisztrálása
+  - Interaction: Core, Storage
+  - Special Notes: -
+- **refactor/Wrecept.MasterDataModule/Wrecept.MasterDataModule.csproj**
+  - Purpose: Projekfájl
+  - Layer: Plugin
+  - Type: C#
+  - Responsibility: Build
+  - Interaction:
   - Special Notes: -
 
 ## Dokumentációs mappák összefoglalója
