@@ -12,9 +12,15 @@ public class InvoiceServiceTests
     {
         public Task<int> AddAsync(Invoice invoice, CancellationToken ct = default) => Task.FromResult(1);
         public Task<int> AddItemAsync(InvoiceItem item, CancellationToken ct = default) => Task.FromResult(1);
-        public Task UpdateHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
+        public Task UpdateHeaderAsync(int id, string number, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
         {
             UpdatedId = id;
+            Number = number;
+            HeaderDate = date;
+            HeaderDueDate = dueDate;
+            Supplier = supplierId;
+            Payment = paymentMethodId;
+            Gross = isGross;
             return Task.CompletedTask;
         }
         public Task SetArchivedAsync(int id, bool isArchived, CancellationToken ct = default)
@@ -33,6 +39,12 @@ public class InvoiceServiceTests
 
         public int UpdatedId;
         public bool Archived;
+        public string? Number;
+        public DateOnly HeaderDate;
+        public DateOnly HeaderDueDate;
+        public int Supplier;
+        public Guid Payment;
+        public bool Gross;
     }
 
     [Fact]
@@ -122,6 +134,27 @@ public class InvoiceServiceTests
 
         await Assert.ThrowsAsync<ArgumentException>(() =>
             service.UpdateInvoiceHeaderAsync(0, DateOnly.FromDateTime(DateTime.Today), DateOnly.FromDateTime(DateTime.Today), 1, Guid.NewGuid(), true));
+    }
+
+    [Fact]
+    public async Task UpdateInvoiceHeaderAsync_UpdatesRepository()
+    {
+        var repo = new FakeInvoiceRepository();
+        var service = new InvoiceService(repo, new InvoiceCalculator());
+
+        var date = new DateOnly(2024, 2, 2);
+        var due = new DateOnly(2024, 2, 12);
+        var pm = Guid.NewGuid();
+
+        await service.UpdateInvoiceHeaderAsync(7, "INV3", date, due, 4, pm, false);
+
+        Assert.Equal(7, repo.UpdatedId);
+        Assert.Equal("INV3", repo.Number);
+        Assert.Equal(date, repo.HeaderDate);
+        Assert.Equal(due, repo.HeaderDueDate);
+        Assert.Equal(4, repo.Supplier);
+        Assert.Equal(pm, repo.Payment);
+        Assert.False(repo.Gross);
     }
 
     [Fact]

@@ -72,10 +72,12 @@ public class InvoiceService : IInvoiceService
         return _invoices.RemoveItemAsync(id, ct);
     }
 
-    public Task UpdateInvoiceHeaderAsync(int id, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
+    public Task UpdateInvoiceHeaderAsync(int id, string number, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
     {
         if (id <= 0)
             throw new ArgumentException("Invalid id", nameof(id));
+        if (string.IsNullOrWhiteSpace(number))
+            throw new ArgumentException("Number required", nameof(number));
         if (supplierId <= 0)
             throw new ArgumentException("Supplier required", nameof(supplierId));
         if (paymentMethodId == Guid.Empty)
@@ -83,7 +85,7 @@ public class InvoiceService : IInvoiceService
         if (date == default)
             throw new ArgumentException("Date required", nameof(date));
 
-        return _invoices.UpdateHeaderAsync(id, date, dueDate, supplierId, paymentMethodId, isGross, ct);
+        return _invoices.UpdateHeaderAsync(id, number, date, dueDate, supplierId, paymentMethodId, isGross, ct);
     }
 
     public Task ArchiveAsync(int id, CancellationToken ct = default)

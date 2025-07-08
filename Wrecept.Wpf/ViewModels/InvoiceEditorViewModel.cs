@@ -817,7 +817,8 @@ private void UpdateSupplierId(string name)
             }
             else
             {
-                await _invoiceService.UpdateInvoiceHeaderAsync(InvoiceId, date, dueDate, SupplierId, PaymentMethodId, IsGross);
+                await _invoiceService.UpdateInvoiceHeaderAsync(InvoiceId, Number, date, dueDate, SupplierId, PaymentMethodId, IsGross);
+                await Lookup.LoadAsync();
             }
         }
         catch (Exception ex)
