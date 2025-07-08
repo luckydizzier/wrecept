@@ -98,7 +98,7 @@ public class InvoiceEditorLayoutTests
         EnsureApp();
         var svc = new CountingService();
         var invoice = new DummyInvoiceService();
-        var lookup = new InvoiceLookupViewModel(invoice, new FakeNumberingService(), new AppStateService(System.IO.Path.GetTempFileName()));
+        var lookup = new InvoiceLookupViewModel(invoice, new FakeNumberingService());
         var vm = new InvoiceEditorViewModel(svc, svc, svc, svc, svc, svc, invoice, new DummyLogService(), new DummyNotificationService(), new DummySessionService(), new AppStateService(System.IO.Path.GetTempFileName()), lookup);
         var layout = new InvoiceEditorLayout(vm);
 

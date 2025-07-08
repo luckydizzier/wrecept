@@ -27,7 +27,7 @@ public class InvoiceLookupKeyboardHandler : IKeyboardHandler
 
         if (list.Items.Count == 0 || list.SelectedIndex <= 0)
         {
-            _ = _viewModel.PromptNewInvoiceAsync();
+            _viewModel.CreateNewInvoiceAsyncCommand.Execute(null);
             return true;
         }
 

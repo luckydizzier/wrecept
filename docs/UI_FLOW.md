@@ -49,9 +49,7 @@ A billentyűk feldolgozását állapottól függő handlerek végzik:
 
 A felső AutoCompleteBox időrendben mutatja a meglévő számlaszámokat.
 
-Insert lenyomására vagy a lista tetejére lépve az `INumberingService` új számot ajánl fel egy kis megerősítő ablakban.
-
-A javasolt értéket Enterrel elfogadhatjuk, Escape megszakítja. Ez akkor is működik, ha a kurzor a mezőben áll.
+Insert lenyomására vagy a lista tetejére lépve az `INumberingService` automatikusan új számlaszámot ad, majd a szerkesztő nézetre vált.
 
 2. Számlafejléc adatok
 
