@@ -47,6 +47,11 @@ Az `InvoiceService` kezeli a fejléc frissítését (`UpdateInvoiceHeaderAsync`)
 Az új `RemoveItemAsync` metódus lehetővé teszi egy meglévő tétel törlését adatbázisból.
 Az `IInvoiceExportService` felülete biztosít PDF mentést és nyomtatást, a `PdfInvoiceExporter` a WPF rétegben valósítja meg.
 
+Az `OnModelCreating` metódus indexeket készít a gyakran szűrt mezőkre:
+`Invoices.Date`, `Invoices.SupplierId` és `Products.Name`. A korábbi
+`TaxRate` és `Unit` indexekhez hasonlóan ezek is a lekérdezések gyorsítását
+segítik.
+
 Minden hibát az `ILogService` rögzít, amelyet a Storage réteg `LogService` implementációja valósít meg. A naplók a `%AppData%/Wrecept/logs` mappában napi bontású fájlokba kerülnek.
 Felhasználói üzenetekhez az `INotificationService` ad egységes felületet. WPF alatt a `MessageBoxNotificationService` jeleníti meg a dialógusokat, míg a tesztekben egy csonk "MockNotificationService" működik.
 Az alapvető cégadatokat a `UserInfoService` kezeli. Az adatok a `%AppData%/Wrecept/wrecept.json` fájlban tárolódnak, betöltésük az alkalmazás futása közben történik.

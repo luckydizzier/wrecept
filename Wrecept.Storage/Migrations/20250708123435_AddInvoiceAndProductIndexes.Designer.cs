@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wrecept.Storage.Data;
 
@@ -10,9 +11,11 @@ using Wrecept.Storage.Data;
 namespace Wrecept.Storage.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250708123435_AddInvoiceAndProductIndexes")]
+    partial class AddInvoiceAndProductIndexes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
@@ -53,11 +56,11 @@ namespace Wrecept.Storage.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Date");
+
                     b.HasIndex("PaymentMethodId");
 
                     b.HasIndex("SupplierId");
-
-                    b.HasIndex("Date");
 
                     b.ToTable("Invoices");
                 });
@@ -167,13 +170,13 @@ namespace Wrecept.Storage.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name");
+
                     b.HasIndex("ProductGroupId");
 
                     b.HasIndex("TaxRateId");
 
                     b.HasIndex("UnitId");
-
-                    b.HasIndex("Name");
 
                     b.ToTable("Products");
                 });
@@ -236,7 +239,6 @@ namespace Wrecept.Storage.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
@@ -277,7 +279,6 @@ namespace Wrecept.Storage.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
