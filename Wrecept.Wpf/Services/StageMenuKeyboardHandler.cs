@@ -31,6 +31,7 @@ public class StageMenuKeyboardHandler : IKeyboardHandler
                 return true;
             case Key.Insert:
             case Key.Enter:
+            case Key.Return:
                 var action = _actions[_index];
                 _stage.HandleMenuCommand.Execute(action);
                 return true;
