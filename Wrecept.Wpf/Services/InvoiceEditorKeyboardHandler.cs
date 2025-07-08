@@ -1,3 +1,5 @@
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Wrecept.Wpf.ViewModels;
@@ -18,7 +20,15 @@ public class InvoiceEditorKeyboardHandler : IKeyboardHandler
         switch (e.Key)
         {
             case Key.Insert:
-                _vm.AddLineItemCommand.Execute(null);
+                if (Keyboard.FocusedElement is DependencyObject element &&
+                    GetInvoiceList(element) is not null)
+                {
+                    _ = _vm.Lookup.PromptNewInvoiceAsync();
+                }
+                else
+                {
+                    _vm.AddLineItemCommand.Execute(null);
+                }
                 return true;
             case Key.Delete:
                 _vm.ShowArchivePromptCommand.Execute(null);
@@ -31,5 +41,20 @@ public class InvoiceEditorKeyboardHandler : IKeyboardHandler
                 return true;
         }
         return false;
+    }
+
+    private static ListBox? GetInvoiceList(DependencyObject element)
+    {
+        if (element is ListBox list && list.Name == "InvoiceList")
+            return list;
+
+        if (element is ListBoxItem item)
+        {
+            var parent = ItemsControl.ItemsControlFromItemContainer(item) as ListBox;
+            if (parent?.Name == "InvoiceList")
+                return parent;
+        }
+
+        return null;
     }
 }
