@@ -52,7 +52,7 @@ public class StageViewModelTests
             LastView = last,
             CurrentInvoiceId = null
         };
-        var invoice = new InvoiceEditorViewModel(); // Replace with proper instantiation logic.
+        var invoice = CreateUninitialized<InvoiceEditorViewModel>();
         var product = new ProductMasterViewModel(new FakeProductService(), new FakeTaxRateService());
         var group = new ProductGroupMasterViewModel(new FakeProductGroupService());
         var supplier = new SupplierMasterViewModel(new FakeSupplierService());
@@ -136,7 +136,7 @@ public class StageViewModelTests
     {
         var state = new AppStateService(Path.GetTempFileName());
         NavigationService.State = state;
-        var invoice = new InvoiceEditorViewModel();
+        var invoice = CreateUninitialized<InvoiceEditorViewModel>();
         var product = new ProductMasterViewModel(new FakeProductService(), new FakeTaxRateService(), state);
         var group = new ProductGroupMasterViewModel(new FakeProductGroupService(), state);
         var supplier = new SupplierMasterViewModel(new FakeSupplierService(), state);
@@ -163,7 +163,7 @@ public class StageViewModelTests
     {
         var state = new AppStateService(Path.GetTempFileName());
         NavigationService.State = state;
-        var invoice = new InvoiceEditorViewModel();
+        var invoice = CreateUninitialized<InvoiceEditorViewModel>();
         var changes = new List<AppInteractionState>();
         state.InteractionStateChanged += s => changes.Add(s);
         var product = new ProductMasterViewModel(new FakeProductService(), new FakeTaxRateService(), state);

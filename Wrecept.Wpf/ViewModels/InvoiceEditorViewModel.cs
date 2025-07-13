@@ -117,6 +117,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
     internal bool IsLoading { get; private set; }
 
+    private readonly INumberingService _numbering;
+
     private static int StepPercent(int step, int total) => step * 100 / total;
 
     private static void FillCollection<T>(ObservableCollection<T> target, List<T> items, string message, int step, int totalSteps, IProgress<ProgressReport>? progress)
@@ -137,7 +139,11 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
     [ObservableProperty]
     private string supplier = string.Empty;
-partial void OnSupplierChanged(string value) => UpdateSupplierId(value);
+    partial void OnSupplierChanged(string value)
+    {
+        if (!IsLoading)
+            _ = UpdateSupplierIdAsync(value);
+    }
 
     [ObservableProperty]
     private int supplierId;
@@ -270,7 +276,8 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
         INotificationService notificationService,
         ISessionService sessionService,
         AppStateService state,
-        InvoiceLookupViewModel lookup)
+        InvoiceLookupViewModel lookup,
+        INumberingService numbering)
     {
         _paymentMethods = paymentMethods;
         _taxRates = taxRates;
@@ -285,6 +292,7 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
         _session = sessionService;
         _state = state;
         Lookup = lookup;
+        _numbering = numbering;
         Lookup.InvoiceSelected += async item =>
         {
             await LoadInvoice(item.Id, item.Number);
@@ -363,11 +371,15 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
             }
         }
     }
-private void UpdateSupplierId(string name)
+private async Task UpdateSupplierIdAsync(string name)
 {
     var match = Suppliers.FirstOrDefault(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
     if (match != null)
+    {
         SupplierId = match.Id;
+        if (IsNew)
+            Number = await _numbering.GetNextInvoiceNumberAsync(SupplierId);
+    }
 }
 
     private async Task<LastUsageData?> GetUsageDataAsync(int supplierId, int productId)

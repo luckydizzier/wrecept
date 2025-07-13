@@ -14,7 +14,7 @@ public class TotalsViewModelTests
         var vm = new TotalsViewModel();
         var rows = new ObservableCollection<InvoiceItemRowViewModel>
         {
-            new(new InvoiceEditorViewModel(null!, null!, null!, null!, null!, null!, null!, null!, null!, null!, null!, null!))
+            new(new InvoiceEditorViewModel(null!, null!, null!, null!, null!, null!, null!, null!, null!, null!, null!, null!, null!))
             {
                 Quantity = 2,
                 UnitPrice = 100,

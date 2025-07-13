@@ -66,9 +66,10 @@ public class ArchivePromptViewModelTests
 
     private static InvoiceEditorViewModel CreateEditor(FakeInvoiceService invoice)
     {
-        var lookup = new InvoiceLookupViewModel(invoice, new FakeNumberingService());
+        var numberSvc = new FakeNumberingService();
+        var lookup = new InvoiceLookupViewModel(invoice, numberSvc);
         var state = new AppStateService(Path.GetTempFileName());
-        return new InvoiceEditorViewModel(new DummyService<object>(), new DummyService<object>(), new DummyService<object>(), new FakeProductService(), new DummyService<object>(), new DummyService<object>(), invoice, new DummyLogService(), new DummyNotificationService(), state, lookup);
+        return new InvoiceEditorViewModel(new DummyService<object>(), new DummyService<object>(), new DummyService<object>(), new FakeProductService(), new DummyService<object>(), new DummyService<object>(), invoice, new DummyLogService(), new DummyNotificationService(), state, lookup, numberSvc);
     }
 
     [Fact]

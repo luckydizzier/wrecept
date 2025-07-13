@@ -5,5 +5,5 @@ namespace Wrecept.Core.Services;
 
 public interface INumberingService
 {
-    Task<string> GetNextInvoiceNumberAsync(CancellationToken ct = default);
+    Task<string> GetNextInvoiceNumberAsync(int supplierId, CancellationToken ct = default);
 }
