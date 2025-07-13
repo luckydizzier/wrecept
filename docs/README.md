@@ -117,6 +117,7 @@ Reconstruction by: \[ChatGPT-Dev Agent – 2025 Edition]
 - [FAULT_PLAN.md](FAULT_PLAN.md) – Fault injection plan
 - [TEST_STRATEGY.md](TEST_STRATEGY.md) – Test strategy
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) – File-level overview
+- [MAUI_PORT_PREP.md](MAUI_PORT_PREP.md) – WPF audit and MAUI migration notes
 - [../.git-branch-policy.md](../.git-branch-policy.md) – Git branch policy
 - [about.md](about.md) – Program information (EN)
 - [release_notes_0_0_1.md](release_notes_0_0_1.md) – Initial MVP release notes
