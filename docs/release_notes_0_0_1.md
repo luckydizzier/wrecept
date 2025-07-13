@@ -32,7 +32,7 @@ Wrecept 0.0.1 delivers the first minimal viable product for offline invoice reco
 ## 🏗️ Architecture Overview
 
 ```
-Views (WPF/XAML) ──> ViewModels ──> Services ──> Repositories ──> Models
+Views (MAUI/XAML) ──> ViewModels ──> Services ──> Repositories ──> Models
 ```
 
 * The View layer contains only UI definitions.

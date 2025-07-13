@@ -1161,70 +1161,70 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Interaction: Services, Storage
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/AboutView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/AboutView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/Controls/BaseMasterView.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/Controls/BaseMasterView.generic.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/Controls/LookupBox.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/Controls/LookupBox.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/Controls/StatusBar.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/Controls/StatusBar.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/Controls/TotalsPanel.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/Controls/TotalsPanel.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
@@ -1259,336 +1259,336 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlineCreators/PaymentMethodCreatorView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlineCreators/PaymentMethodCreatorView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlineCreators/ProductCreatorView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlineCreators/ProductCreatorView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlineCreators/SupplierCreatorView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlineCreators/SupplierCreatorView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlineCreators/TaxRateCreatorView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlineCreators/TaxRateCreatorView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlineCreators/UnitCreatorView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlineCreators/UnitCreatorView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlinePrompts/ArchivePromptView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlinePrompts/ArchivePromptView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlinePrompts/DeleteItemPromptView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlinePrompts/DeleteItemPromptView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlinePrompts/SaveLinePromptView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InlinePrompts/SaveLinePromptView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InvoiceEditorLayout.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Modern billentyűzet-fókuszú elrendezés
   - Interaction: ViewModels, FocusManager
   - Special Notes: StageView alapértelmezett nézete
 - **InvoiceApp.MAUI/Views/InvoiceItemsGrid.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InvoiceItemsGrid.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InvoiceLookupView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/InvoiceLookupView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/PaymentMethodMasterView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/PaymentMethodMasterView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/PlaceholderView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/PlaceholderView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/ProductGroupMasterView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/ProductGroupMasterView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/ProductMasterView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/ProductMasterView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/ScreenModeWindow.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/ScreenModeWindow.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/SeedOptionsWindow.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/SeedOptionsWindow.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/SetupWindow.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/SetupWindow.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/StageView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/StageView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/StartupWindow.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/StartupWindow.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/SupplierMasterView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/SupplierMasterView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/TaxRateMasterView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/TaxRateMasterView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/UnitMasterView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/UnitMasterView.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/UserInfoView.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/UserInfoWindow.xaml**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
 - **InvoiceApp.MAUI/Views/UserInfoWindow.xaml.cs**
-  - Purpose: WPF nézet
+  - Purpose: MAUI nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület

@@ -1,5 +1,5 @@
 ---
-title: "WPF témák"
+title: "MAUI témák"
 purpose: "Stílus útmutató a RetroTheme-hez"
 author: "docs_agent"
 date: "2025-06-27"
