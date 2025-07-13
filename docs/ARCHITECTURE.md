@@ -11,11 +11,11 @@ Az alkalmazás rétegei tisztán el vannak választva, hogy a karbantarthatósá
 
 ## Rétegzett felépítés
 
-1. **UI (Views / Themes)** – XAML nézetek és stílusfájlok a `Wrecept.Wpf` projektben. Csak vizuális elemeket tartalmaz, logikát nem.
+1. **UI (Views / Themes)** – XAML nézetek és stílusfájlok az `InvoiceApp.MAUI` projektben. Csak vizuális elemeket tartalmaznak, platformfüggő logika nélkül.
    *A globális RetroTheme.xaml minden vezérlőre egységes stílust ad.*
 2. **ViewModel** – A CommunityToolkit.Mvvm segítségével kezeli a felhasználói interakciókat és az adatkötéseket.
-3. **Core** – Domain modellek, szolgáltatás interfészek és belső számítások.
-4. **Storage** – SQLite + Entity Framework Core konténer, migrációk, repositoryk.
+3. **Core** – Domain modellek, szolgáltatás interfészek és belső számítások az `InvoiceApp.Core` projektben.
+4. **Storage** – SQLite + Entity Framework Core konténer, migrációk és repositoryk az `InvoiceApp.Data` projektben.
 
 Minden réteg csak az alatta lévőt éri el, közvetlen átjárás nem megengedett.
 Az elsődleges ablak a `MainWindow`, amely a `StageView` kontrollt jeleníti meg.
