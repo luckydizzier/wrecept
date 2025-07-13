@@ -23,7 +23,8 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 ## Naplózás
 
 * A `ILogService` a `%AppData%/Wrecept/logs` könyvtárba ír naplóbejegyzéseket.
-* A Storage réteg hibáit a `LogService` rögzíti napi bontású fájlokba.
+* A Storage réteg hibáit a `SerilogLogService` rögzíti gördülő JSON fájlokba
+  (5 × 5 MB).
 * Kritikus hiba esetén a felhasználó dönthet a folytatásról vagy kilépésről.
 
 ## Konkrét példák

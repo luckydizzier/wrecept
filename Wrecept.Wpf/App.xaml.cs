@@ -68,7 +68,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
             }
             catch (Exception ex) when (ex is IOException || ex is JsonException)
             {
-                var logger = new Wrecept.Storage.Services.LogService();
+                var logger = new Wrecept.Storage.Services.SerilogLogService();
                 await logger.LogError("LoadSettings", ex);
             }
         }
@@ -104,7 +104,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         }
         catch (Exception ex) when (ex is IOException || ex is JsonException)
         {
-            var logger = new Wrecept.Storage.Services.LogService();
+            var logger = new Wrecept.Storage.Services.SerilogLogService();
             await logger.LogError("SaveSettings", ex);
         }
         return settings;
@@ -222,7 +222,7 @@ public static IServiceProvider Provider => Services ?? throw new InvalidOperatio
         {
             ILogService log = Services != null
                 ? Provider.GetRequiredService<ILogService>()
-                : new Wrecept.Storage.Services.LogService();
+                : new Wrecept.Storage.Services.SerilogLogService();
             await log.LogError("App.OnStartup", ex);
             MessageBox.Show(
                 "Váratlan hiba indításkor. Részletek a logs/startup.log fájlban.",

@@ -88,7 +88,7 @@ public class SettingsSessionLogServiceTests
 
         try
         {
-            var svc = new LogService();
+            var svc = new SerilogLogService();
             await svc.LogError("test", new InvalidOperationException());
 
             var logDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
