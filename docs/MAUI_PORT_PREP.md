@@ -1,3 +1,10 @@
+---
+title: "MAUI Port Preparation"
+purpose: "Audit notes for moving Wrecept to .NET MAUI"
+author: "docs_agent"
+date: "2025-07-13"
+---
+
 # MAUI Port Preparation
 
 This document summarizes the first assessment steps toward moving the Wrecept application to .NET MAUI. The focus is on locating WPF‑specific usage and verifying how portable the Core and Storage projects are.
