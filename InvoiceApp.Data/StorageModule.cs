@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.Plugins.Abstractions;
+using InvoiceApp.Plugins.Abstractions;
 
 namespace InvoiceApp.Data;
 

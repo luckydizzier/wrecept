@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Wrecept.Plugins.Abstractions;
+namespace InvoiceApp.Plugins.Abstractions;
 
 public static class PluginLoader
 {

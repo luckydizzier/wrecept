@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.Plugins.Abstractions;
-using Wrecept.Core;
-using Wrecept.Storage;
+using InvoiceApp.Plugins.Abstractions;
+using InvoiceApp.Core;
+using InvoiceApp.Data;
 
-namespace Wrecept.InvoiceModule;
+namespace InvoiceApp.InvoiceModule;
 
 public class InvoiceModule : IPlugin
 {
