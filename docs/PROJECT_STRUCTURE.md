@@ -460,6 +460,34 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: Adatbázis frissítés
   - Interaction: DbContext
   - Special Notes: -
+- **InvoiceApp.Data/Migrations/20250706000000_AddInvoiceDueDate.cs**
+  - Purpose: EF migráció
+  - Layer: Storage
+  - Type: C#
+  - Responsibility: Adatbázis frissítés
+  - Interaction: DbContext
+  - Special Notes: -
+- **InvoiceApp.Data/Migrations/20250708123435_AddInvoiceAndProductIndexes.Designer.cs**
+  - Purpose: EF migráció
+  - Layer: Storage
+  - Type: C#
+  - Responsibility: Adatbázis frissítés
+  - Interaction: DbContext
+  - Special Notes: -
+- **InvoiceApp.Data/Migrations/20250708123435_AddInvoiceAndProductIndexes.cs**
+  - Purpose: EF migráció
+  - Layer: Storage
+  - Type: C#
+  - Responsibility: Adatbázis frissítés
+  - Interaction: DbContext
+  - Special Notes: -
+- **InvoiceApp.Data/Migrations/20250709120000_AddChangeLog.cs**
+  - Purpose: EF migráció
+  - Layer: Storage
+  - Type: C#
+  - Responsibility: Adatbázis frissítés
+  - Interaction: DbContext
+  - Special Notes: -
 - **InvoiceApp.Data/Migrations/AppDbContextModelSnapshot.cs**
   - Purpose: EF migráció
   - Layer: Storage
