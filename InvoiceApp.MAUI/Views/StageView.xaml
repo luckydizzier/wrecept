@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:InvoiceApp.MAUI.ViewModels"
+             xmlns:views="clr-namespace:InvoiceApp.MAUI.Views.Controls"
+             x:Class="InvoiceApp.MAUI.Views.StageView"
+             x:DataType="vm:StageViewModel">
+    <Grid Background="{StaticResource StageBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <HorizontalStackLayout x:Name="Menu" Spacing="6">
+            <!-- TODO: convert menu items -->
+            <Label Text="Menu" />
+        </HorizontalStackLayout>
+        <ContentPresenter Grid.Row="1" Content="{Binding CurrentViewModel}" />
+        <views:StatusBar Grid.Row="2" BindingContext="{Binding StatusBar}" />
+    </Grid>
+</ContentView>
