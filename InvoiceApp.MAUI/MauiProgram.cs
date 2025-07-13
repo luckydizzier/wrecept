@@ -6,6 +6,7 @@ using InvoiceApp.Core;
 using InvoiceApp.MAUI.ViewModels;
 using InvoiceApp.MAUI.Views;
 using InvoiceApp.MAUI.Services;
+using InvoiceApp.MAUI.Views.Dialogs;
 
 namespace InvoiceApp.MAUI;
 
@@ -31,6 +32,12 @@ public static class MauiProgram
         var settingsPath = Path.Combine(appDir, "settings.json");
         services.AddCore();
         services.AddStorageAsync(Path.Combine(appDir, "app.db"), Path.Combine(appDir, "user.json"), settingsPath).GetAwaiter().GetResult();
+        services.AddTransient<ISetupFlow, SetupFlow>();
+        services.AddTransient<Dialogs.SetupPage>();
+        services.AddTransient<Dialogs.UserInfoEditorPage>();
+        services.AddTransient<Dialogs.SeedOptionsPage>();
+        services.AddTransient<SeedOptionsViewModel>();
+        services.AddTransient<UserInfoEditorViewModel>();
         services.AddSingleton<AppStateService>(_ => new AppStateService(Path.Combine(appDir, "state.json")));
         services.AddSingleton<KeyboardManager>();
         services.AddSingleton<FocusManager>();

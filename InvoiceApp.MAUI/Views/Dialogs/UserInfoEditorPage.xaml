@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InvoiceApp.MAUI.Views.Dialogs.UserInfoEditorPage"
+             x:DataType="vm:UserInfoEditorViewModel"
+             xmlns:vm="clr-namespace:InvoiceApp.MAUI.ViewModels">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <Label Text="Cégnév" />
+            <Entry Text="{Binding CompanyName}" />
+            <Label Text="Cím" />
+            <Entry Text="{Binding Address}" />
+            <Label Text="Telefonszám" />
+            <Entry Text="{Binding Phone}" />
+            <Label Text="E-mail" />
+            <Entry Text="{Binding Email}" />
+            <Label Text="Adószám" />
+            <Entry Text="{Binding TaxNumber}" />
+            <Label Text="Bankszámla" />
+            <Entry Text="{Binding BankAccount}" />
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10" Padding="0,20,0,0">
+                <Button Text="OK" Command="{Binding OkCommand}" />
+                <Button Text="Mégse" Command="{Binding CancelCommand}" />
+            </HorizontalStackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
