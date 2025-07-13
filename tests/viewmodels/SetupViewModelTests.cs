@@ -1,4 +1,3 @@
-using System.Windows;
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
 

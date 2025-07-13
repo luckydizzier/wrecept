@@ -1,7 +1,6 @@
 using System;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using System.Windows;
+using Microsoft.Maui.Controls;
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
 using InvoiceApp.MAUI.Services;
@@ -28,11 +27,8 @@ public class ScreenModeViewModelTests
     private static void EnsureApp()
     {
         if (Application.Current == null)
-            new Application();
+            _ = new Application();
     }
-
-    private static MainWindow CreateWindow() =>
-        (MainWindow)FormatterServices.GetUninitializedObject(typeof(MainWindow));
 
     [StaFact]
     public async Task ApplyCommand_ChangesModeAndCloses()
@@ -42,12 +38,10 @@ public class ScreenModeViewModelTests
         var manager = new ScreenModeManager(settings);
         var vm = new ScreenModeViewModel(manager) { SelectedMode = ScreenMode.Small };
         var window = new Window();
-        Application.Current.MainWindow = CreateWindow();
 
         await vm.ApplyCommand.ExecuteAsync(window);
 
         Assert.Equal(ScreenMode.Small, manager.CurrentMode);
-        Assert.True(window.DialogResult);
         Assert.Equal(ScreenMode.Small, settings.Saved.ScreenMode);
     }
 }

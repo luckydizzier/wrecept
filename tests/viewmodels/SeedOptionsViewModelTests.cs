@@ -1,4 +1,4 @@
-using System.Windows;
+using Microsoft.Maui.Controls;
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
 
@@ -9,7 +9,7 @@ public class SeedOptionsViewModelTests
     private static void EnsureApp()
     {
         if (Application.Current == null)
-            new Application();
+            _ = new Application();
     }
 
     [StaFact]
@@ -17,10 +17,10 @@ public class SeedOptionsViewModelTests
     {
         EnsureApp();
         var vm = new SeedOptionsViewModel();
-        var window = new Window();
-        vm.OkCommand.Execute(window);
-        Assert.False(window.IsVisible);
-        Assert.True(window.DialogResult);
+        bool? result = null;
+        vm.DialogResult += r => result = r;
+        vm.OkCommand.Execute(null);
+        Assert.True(result);
     }
 
     [StaFact]
@@ -28,9 +28,9 @@ public class SeedOptionsViewModelTests
     {
         EnsureApp();
         var vm = new SeedOptionsViewModel();
-        var window = new Window();
-        vm.CancelCommand.Execute(window);
-        Assert.False(window.IsVisible);
-        Assert.False(window.DialogResult);
+        bool? result = null;
+        vm.DialogResult += r => result = r;
+        vm.CancelCommand.Execute(null);
+        Assert.False(result);
     }
 }
