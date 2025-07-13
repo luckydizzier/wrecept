@@ -1,13 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>
-    <Nullable>enable</Nullable>
+    <TargetFramework>net8.0</TargetFramework>
     <UseMaui>true</UseMaui>
-    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <MauiXaml Include="Resources\Styles\RetroTheme.xaml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InvoiceApp.Core\InvoiceApp.Core.csproj" />
