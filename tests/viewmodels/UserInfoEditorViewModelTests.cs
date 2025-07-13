@@ -1,4 +1,4 @@
-using Wrecept.Wpf.ViewModels;
+using InvoiceApp.MAUI.ViewModels;
 using Xunit;
 
 namespace Wrecept.Tests.ViewModels;

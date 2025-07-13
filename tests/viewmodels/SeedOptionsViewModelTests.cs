@@ -1,6 +1,6 @@
 using System.Windows;
 using Xunit;
-using Wrecept.Wpf.ViewModels;
+using InvoiceApp.MAUI.ViewModels;
 
 namespace Wrecept.Tests.ViewModels;
 

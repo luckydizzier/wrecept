@@ -17,7 +17,7 @@ Invariants:
 Postcondition:
 - All agents remain in defined responsibility domains
 ## 🎨 ui\_agent
-**Role:** Designs and maintains XAML-based user interface components.
+**Role:** Designs and maintains MAUI XAML user interface components.
 Inputs:
 - ViewModel structures
 - Themes (RetroTheme.xaml)

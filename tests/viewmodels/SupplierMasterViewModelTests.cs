@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
-using Wrecept.Wpf.ViewModels;
+using InvoiceApp.MAUI.ViewModels;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 

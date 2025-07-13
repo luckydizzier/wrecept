@@ -15,7 +15,7 @@ date: "2025-06-27"
 
 ## 📦 Project Purpose
 
-Wrecept originally started as a Windows-only WPF application. After a brief MAUI detour we returned to WPF while keeping the speed of the Clipper + dBase IV systems. The goal remains predictable operation, even after a power outage.
+Wrecept originally started as a Windows-only WPF application. The project has since moved to **.NET MAUI** to enable cross-platform use while keeping the retro look and predictable behavior.
 
 ---
 
@@ -45,9 +45,9 @@ Wrecept originally started as a Windows-only WPF application. After a brief MAUI
 ## 📁 Folder Structure
 
 ```
-Wrecept.Core/          # Domain models and services
-Wrecept.Storage/       # EF Core data access and repositories
-Wrecept.Wpf/           # WPF UI project
+InvoiceApp.Core/       # Domain models and service interfaces
+InvoiceApp.Data/       # EF Core data access and repositories
+InvoiceApp.MAUI/       # MAUI UI project
 docs/                  # Documentation
 tools/                 # Helper scripts
 CHANGELOG.md
@@ -59,8 +59,8 @@ Wrecept.sln
 ## 🛠 Technologies
 
 * Language: **C#** (.NET 8)
-* UI: **WPF (.NET 8)**
-* Platform: **Windows**
+* UI: **.NET MAUI**
+* Platform: **Windows/Linux/macOS**
 
 ---
 
@@ -73,7 +73,7 @@ Wrecept.sln
 
 ## ✅ Kick OFF
 
-The WPF project was created as `Wrecept.Wpf` and contains the following basics:
+The MAUI project lives in `InvoiceApp.MAUI` and contains the following basics:
 
 * `App.xaml` and `App.xaml.cs` – application configuration
 * `MainWindow.xaml` – main window

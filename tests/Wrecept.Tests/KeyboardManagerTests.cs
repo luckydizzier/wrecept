@@ -1,23 +1,25 @@
-using System.Windows.Input;
-using System.Windows;
-using Wrecept.Core.Enums;
-using Wrecept.Wpf.Services;
+using InvoiceApp.Core.Enums;
+using InvoiceApp.MAUI.Services;
+using Microsoft.Maui.Input;
+
+namespace Microsoft.Maui.Input;
+
+public enum Keys { Enter, A, B }
+
+public class KeyEventArgs(Keys key, bool isRepeat) : EventArgs
+{
+    public Keys Key { get; } = key;
+    public bool IsRepeat { get; } = isRepeat;
+}
+
 using Xunit;
 
 namespace Wrecept.Tests;
 
 public class KeyboardManagerTests
 {
-    private class FakeSource : PresentationSource
-    {
-        public override Visual RootVisual { get; set; } = new UIElement();
-        public override bool IsDisposed => false;
-        protected override CompositionTarget GetCompositionTargetCore() => null!;
-    }
-
-    private static KeyEventArgs CreateArgs(Key key)
-        => new KeyEventArgs(Keyboard.PrimaryDevice, new FakeSource(), 0, key)
-        { RoutedEvent = Keyboard.KeyDownEvent };
+    private static KeyEventArgs CreateArgs(Keys key)
+        => new(key, false);
 
     private class TrueHandler : IKeyboardHandler
     {
@@ -39,7 +41,7 @@ public class KeyboardManagerTests
         var handler = new TrueHandler();
         manager.Register(AppInteractionState.MainMenu, handler);
 
-        var result = manager.Process(CreateArgs(Key.Enter));
+        var result = manager.Process(CreateArgs(Keys.Enter));
 
         Assert.True(result);
         Assert.True(handler.Called);
@@ -51,7 +53,7 @@ public class KeyboardManagerTests
         var state = new AppStateService("x") { InteractionState = AppInteractionState.None };
         var manager = new KeyboardManager(state);
 
-        var result = manager.Process(CreateArgs(Key.Enter));
+        var result = manager.Process(CreateArgs(Keys.Enter));
 
         Assert.False(result);
     }
@@ -66,9 +68,9 @@ public class KeyboardManagerTests
         manager.Register(AppInteractionState.MainMenu, trueHandler);
         manager.Register(AppInteractionState.EditingInvoice, falseHandler);
 
-        var result1 = manager.Process(CreateArgs(Key.A));
+        var result1 = manager.Process(CreateArgs(Keys.A));
         state.InteractionState = AppInteractionState.EditingInvoice;
-        var result2 = manager.Process(CreateArgs(Key.B));
+        var result2 = manager.Process(CreateArgs(Keys.B));
 
         Assert.True(result1);
         Assert.True(trueHandler.Called);

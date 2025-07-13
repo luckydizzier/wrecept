@@ -1,7 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Wrecept.Core.Models;
-using Wrecept.Wpf.ViewModels;
+using InvoiceApp.MAUI.ViewModels;
 using Xunit;
 
 namespace Wrecept.Tests.ViewModels;
