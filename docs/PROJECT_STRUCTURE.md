@@ -29,1610 +29,1610 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
 - **Felelősség** – rövid feladatkör
 - **Kapcsolat** – kapcsolódó komponensek
 - **Megjegyzés** – egyedi megjegyzések
-- **Wrecept.Core/Entities/AppSettings.cs**
+- **InvoiceApp.Core/Entities/AppSettings.cs**
   - Purpose: Konfigurációs entitás
   - Layer: Core
   - Type: C#
   - Responsibility: Alkalmazásadat
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Entities/UserInfo.cs**
+- **InvoiceApp.Core/Entities/UserInfo.cs**
   - Purpose: Konfigurációs entitás
   - Layer: Core
   - Type: C#
   - Responsibility: Alkalmazásadat
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Enums/AppInteractionState.cs**
+- **InvoiceApp.Core/Enums/AppInteractionState.cs**
   - Purpose: Enum típus a felhasználói interakciókhoz
   - Layer: Core
   - Type: C#
   - Responsibility: Állapotjelzés
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Core/Models/Invoice.cs**
+- **InvoiceApp.Core/Models/Invoice.cs**
   - Purpose: Domain model
   - Layer: Core
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: Tartalmazza a `DueDate` mezőt a fizetési határidőhöz
-- **Wrecept.Core/Models/InvoiceItem.cs**
+- **InvoiceApp.Core/Models/InvoiceItem.cs**
   - Purpose: Domain model
   - Layer: Core
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Core/Models/LastUsageData.cs**
+- **InvoiceApp.Core/Models/LastUsageData.cs**
   - Purpose: Domain model
   - Layer: Core
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Core/Models/PaymentMethod.cs**
+- **InvoiceApp.Core/Models/PaymentMethod.cs**
   - Purpose: Domain model
   - Layer: Core
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Core/Models/Product.cs**
+- **InvoiceApp.Core/Models/Product.cs**
   - Purpose: Domain model
   - Layer: Core
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Core/Models/ProductGroup.cs**
+- **InvoiceApp.Core/Models/ProductGroup.cs**
   - Purpose: Domain model
   - Layer: Core
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Core/Models/Supplier.cs**
+- **InvoiceApp.Core/Models/Supplier.cs**
   - Purpose: Domain model
   - Layer: Core
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Core/Models/TaxRate.cs**
+- **InvoiceApp.Core/Models/TaxRate.cs**
   - Purpose: Domain model
   - Layer: Core
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Core/Models/Unit.cs**
+- **InvoiceApp.Core/Models/Unit.cs**
   - Purpose: Domain model
   - Layer: Core
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Core/Repositories/IInvoiceRepository.cs**
+- **InvoiceApp.Core/Repositories/IInvoiceRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Core
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: Tartalmaz `GetLastUsageDataBatchAsync` metódust a tömeges lekérdezéshez
-- **Wrecept.Core/Repositories/IPaymentMethodRepository.cs**
+- **InvoiceApp.Core/Repositories/IPaymentMethodRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Core
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Repositories/IProductGroupRepository.cs**
+- **InvoiceApp.Core/Repositories/IProductGroupRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Core
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Repositories/IProductRepository.cs**
+- **InvoiceApp.Core/Repositories/IProductRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Core
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Repositories/ISupplierRepository.cs**
+- **InvoiceApp.Core/Repositories/ISupplierRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Core
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Repositories/ITaxRateRepository.cs**
+- **InvoiceApp.Core/Repositories/ITaxRateRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Core
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Repositories/IUnitRepository.cs**
+- **InvoiceApp.Core/Repositories/IUnitRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Core
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/ScreenMode.cs**
+- **InvoiceApp.Core/ScreenMode.cs**
   - Purpose: Fájl
   - Layer: Core
   - Type: C#
   - Responsibility: 
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/ServiceCollectionExtensions.cs**
+- **InvoiceApp.Core/ServiceCollectionExtensions.cs**
   - Purpose: Fájl
   - Layer: Core
   - Type: C#
   - Responsibility: 
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Services/IInvoiceService.cs**
+- **InvoiceApp.Core/Services/IInvoiceService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: Tömeges használati adatokhoz `GetLastUsageDataBatchAsync` metódust kínál
-- **Wrecept.Core/Services/IInvoiceExportService.cs**
+- **InvoiceApp.Core/Services/IInvoiceExportService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Számlák PDF exportja és nyomtatása
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/ILogService.cs**
+- **InvoiceApp.Core/Services/ILogService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/INotificationService.cs**
+- **InvoiceApp.Core/Services/INotificationService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/INumberingService.cs**
+- **InvoiceApp.Core/Services/INumberingService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Sorszám generálás
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Services/IPaymentMethodService.cs**
+- **InvoiceApp.Core/Services/IPaymentMethodService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/IProductGroupService.cs**
+- **InvoiceApp.Core/Services/IProductGroupService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/IProductService.cs**
+- **InvoiceApp.Core/Services/IProductService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/ISettingsService.cs**
+- **InvoiceApp.Core/Services/ISettingsService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/ISupplierService.cs**
+- **InvoiceApp.Core/Services/ISupplierService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/ITaxRateService.cs**
+- **InvoiceApp.Core/Services/ITaxRateService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/IUnitService.cs**
+- **InvoiceApp.Core/Services/IUnitService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/IUserInfoService.cs**
+- **InvoiceApp.Core/Services/IUserInfoService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/IDatabaseInitializer.cs**
+- **InvoiceApp.Core/Services/IDatabaseInitializer.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Adatbázis migrálása indításkor
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Core/Services/InvoiceCalculator.cs**
+- **InvoiceApp.Core/Services/InvoiceCalculator.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/InvoiceService.cs**
+- **InvoiceApp.Core/Services/InvoiceService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/NullLogService.cs**
+- **InvoiceApp.Core/Services/NullLogService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/NullNumberingService.cs**
+- **InvoiceApp.Core/Services/NullNumberingService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Fallback sorszám generálás
   - Interaction: ViewModels
   - Special Notes: Csak hiba esetén használatos
-- **Wrecept.Core/Services/PaymentMethodService.cs**
+- **InvoiceApp.Core/Services/PaymentMethodService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/ProductGroupService.cs**
+- **InvoiceApp.Core/Services/ProductGroupService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/ProductService.cs**
+- **InvoiceApp.Core/Services/ProductService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/SupplierService.cs**
+- **InvoiceApp.Core/Services/SupplierService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/TaxRateService.cs**
+- **InvoiceApp.Core/Services/TaxRateService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Services/UnitService.cs**
+- **InvoiceApp.Core/Services/UnitService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Core
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Utilities/NumberToWordsConverter.cs**
+- **InvoiceApp.Core/Utilities/NumberToWordsConverter.cs**
   - Purpose: Fájl
   - Layer: Core
   - Type: C#
   - Responsibility: 
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Utilities/ProgressReport.cs**
+- **InvoiceApp.Core/Utilities/ProgressReport.cs**
   - Purpose: Fájl
   - Layer: Core
   - Type: C#
   - Responsibility: 
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Utilities/SimpleMath.cs**
+- **InvoiceApp.Core/Utilities/SimpleMath.cs**
   - Purpose: Fájl
   - Layer: Core
   - Type: C#
   - Responsibility:
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core/Wrecept.Core.csproj**
+- **InvoiceApp.Core/InvoiceApp.Core.csproj**
   - Purpose: Projektfájl
   - Layer: Core
   - Type: Project
   - Responsibility: Build konfiguráció
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Storage/Data/AppDbContext.cs**
+- **InvoiceApp.Data/Data/AppDbContext.cs**
   - Purpose: DbContext vagy Seeder
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis kezdeti adatok
   - Interaction: Models
   - Special Notes: -
-- **Wrecept.Storage/Data/AppDbContextFactory.cs**
+- **InvoiceApp.Data/Data/AppDbContextFactory.cs**
   - Purpose: DbContext vagy Seeder
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis kezdeti adatok
   - Interaction: Models
   - Special Notes: -
-- **Wrecept.Storage/Data/DataSeeder.cs**
+- **InvoiceApp.Data/Data/DataSeeder.cs**
   - Purpose: DbContext vagy Seeder
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis kezdeti adatok
   - Interaction: Models
   - Special Notes: -
-- **Wrecept.Storage/Data/DbInitializer.cs**
+- **InvoiceApp.Data/Data/DbInitializer.cs**
   - Purpose: DbContext vagy Seeder
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis kezdeti adatok
   - Interaction: Models
   - Special Notes: -
-- **Wrecept.Storage/Data/SeedStatus.cs**
+- **InvoiceApp.Data/Data/SeedStatus.cs**
   - Purpose: DbContext vagy Seeder
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis kezdeti adatok
   - Interaction: Models
   - Special Notes: -
-- **Wrecept.Storage/Migrations/20250630090000_InitialCreate.cs**
+- **InvoiceApp.Data/Migrations/20250630090000_InitialCreate.cs**
   - Purpose: EF migráció
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis frissítés
   - Interaction: DbContext
   - Special Notes: -
-- **Wrecept.Storage/Migrations/20250630110858_AddTaxRateVersioningFields.cs**
+- **InvoiceApp.Data/Migrations/20250630110858_AddTaxRateVersioningFields.cs**
   - Purpose: EF migráció
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis frissítés
   - Interaction: DbContext
   - Special Notes: -
-- **Wrecept.Storage/Migrations/20250630120000_AddProductGroupArchivalSupport.cs**
+- **InvoiceApp.Data/Migrations/20250630120000_AddProductGroupArchivalSupport.cs**
   - Purpose: EF migráció
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis frissítés
   - Interaction: DbContext
   - Special Notes: -
-- **Wrecept.Storage/Migrations/20250630121000_AddPaymentMethodFieldsAndArchivalSupport.cs**
+- **InvoiceApp.Data/Migrations/20250630121000_AddPaymentMethodFieldsAndArchivalSupport.cs**
   - Purpose: EF migráció
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis frissítés
   - Interaction: DbContext
   - Special Notes: -
-- **Wrecept.Storage/Migrations/20250630122000_AddUnitArchivalSupport.cs**
+- **InvoiceApp.Data/Migrations/20250630122000_AddUnitArchivalSupport.cs**
   - Purpose: EF migráció
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis frissítés
   - Interaction: DbContext
   - Special Notes: -
-- **Wrecept.Storage/Migrations/20250630203037_ExpandDomainProps.Designer.cs**
+- **InvoiceApp.Data/Migrations/20250630203037_ExpandDomainProps.Designer.cs**
   - Purpose: EF migráció
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis frissítés
   - Interaction: DbContext
   - Special Notes: -
-- **Wrecept.Storage/Migrations/20250630203037_ExpandDomainProps.cs**
+- **InvoiceApp.Data/Migrations/20250630203037_ExpandDomainProps.cs**
   - Purpose: EF migráció
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis frissítés
   - Interaction: DbContext
   - Special Notes: -
-- **Wrecept.Storage/Migrations/AppDbContextModelSnapshot.cs**
+- **InvoiceApp.Data/Migrations/AppDbContextModelSnapshot.cs**
   - Purpose: EF migráció
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis frissítés
   - Interaction: DbContext
   - Special Notes: -
-- **Wrecept.Storage/Repositories/InvoiceRepository.cs**
+- **InvoiceApp.Data/Repositories/InvoiceRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Storage
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Storage/Repositories/PaymentMethodRepository.cs**
+- **InvoiceApp.Data/Repositories/PaymentMethodRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Storage
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Storage/Repositories/ProductGroupRepository.cs**
+- **InvoiceApp.Data/Repositories/ProductGroupRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Storage
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Storage/Repositories/ProductRepository.cs**
+- **InvoiceApp.Data/Repositories/ProductRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Storage
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Storage/Repositories/SupplierRepository.cs**
+- **InvoiceApp.Data/Repositories/SupplierRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Storage
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Storage/Repositories/TaxRateRepository.cs**
+- **InvoiceApp.Data/Repositories/TaxRateRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Storage
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Storage/Repositories/UnitRepository.cs**
+- **InvoiceApp.Data/Repositories/UnitRepository.cs**
   - Purpose: Adat-hozzáférés interfész
   - Layer: Storage
   - Type: C#
   - Responsibility: Repozitorium minta
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Storage/ServiceCollectionExtensions.cs**
+- **InvoiceApp.Data/ServiceCollectionExtensions.cs**
   - Purpose: Fájl
   - Layer: Storage
   - Type: C#
   - Responsibility: 
   - Interaction: Storage
   - Special Notes: -
-- **Wrecept.Storage/Services/LogService.cs**
+- **InvoiceApp.Data/Services/LogService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Storage
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Storage/Services/NumberingService.cs**
+- **InvoiceApp.Data/Services/NumberingService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Storage
   - Type: C#
   - Responsibility: Sorszám generálás
   - Interaction: File
   - Special Notes: -
-- **Wrecept.Storage/Services/SettingsService.cs**
+- **InvoiceApp.Data/Services/SettingsService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Storage
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Storage/Services/UserInfoService.cs**
+- **InvoiceApp.Data/Services/UserInfoService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Storage
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Storage/Services/DatabaseInitializer.cs**
+- **InvoiceApp.Data/Services/DatabaseInitializer.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Storage
   - Type: C#
   - Responsibility: Adatbázis migrálás és PRAGMA futtatás
   - Interaction: DbContext
   - Special Notes: -
-- **Wrecept.Storage/Wrecept.Storage.csproj**
+- **InvoiceApp.Data/InvoiceApp.Data.csproj**
   - Purpose: Projektfájl
   - Layer: Storage
   - Type: Project
   - Responsibility: Build konfiguráció
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/App.xaml**
+- **InvoiceApp.MAUI/App.xaml**
   - Purpose: Fájl
   - Layer: UI
   - Type: XAML
   - Responsibility: 
   - Interaction: 
   - Special Notes: -
-- **Wrecept.Wpf/App.xaml.cs**
+- **InvoiceApp.MAUI/App.xaml.cs**
   - Purpose: Fájl
   - Layer: UI
   - Type: C#
   - Responsibility: 
   - Interaction: 
   - Special Notes: -
-- **Wrecept.Wpf/Converters/BooleanToRowDetailsConverter.cs**
+- **InvoiceApp.MAUI/Converters/BooleanToRowDetailsConverter.cs**
   - Purpose: Érték konverter
   - Layer: UI
   - Type: C#
   - Responsibility: Binding átalakítás
   - Interaction: View/XAML
   - Special Notes: -
-- **Wrecept.Wpf/Converters/InvoiceLineTotalsConverter.cs**
+- **InvoiceApp.MAUI/Converters/InvoiceLineTotalsConverter.cs**
   - Purpose: Érték konverter
   - Layer: UI
   - Type: C#
   - Responsibility: Binding átalakítás
   - Interaction: View/XAML
   - Special Notes: -
-- **Wrecept.Wpf/Converters/IsReadOnlyBindingConverter.cs**
+- **InvoiceApp.MAUI/Converters/IsReadOnlyBindingConverter.cs**
   - Purpose: Érték konverter
   - Layer: UI
   - Type: C#
   - Responsibility: Binding átalakítás
   - Interaction: View/XAML
   - Special Notes: -
-- **Wrecept.Wpf/Converters/NegativeValueForegroundConverter.cs**
+- **InvoiceApp.MAUI/Converters/NegativeValueForegroundConverter.cs**
   - Purpose: Érték konverter
   - Layer: UI
   - Type: C#
   - Responsibility: Binding átalakítás
   - Interaction: View/XAML
   - Special Notes: -
-- **Wrecept.Wpf/Converters/QuantityToStyleConverter.cs**
+- **InvoiceApp.MAUI/Converters/QuantityToStyleConverter.cs**
   - Purpose: Érték konverter
   - Layer: UI
   - Type: C#
   - Responsibility: Binding átalakítás
   - Interaction: View/XAML
   - Special Notes: -
-- **Wrecept.Wpf/Converters/StringNullOrEmptyToVisibilityConverter.cs**
+- **InvoiceApp.MAUI/Converters/StringNullOrEmptyToVisibilityConverter.cs**
   - Purpose: Érték konverter
   - Layer: UI
   - Type: C#
   - Responsibility: Binding átalakítás
   - Interaction: View/XAML
   - Special Notes: -
-- **Wrecept.Wpf/Dialogs/DialogHelper.cs**
+- **InvoiceApp.MAUI/Dialogs/DialogHelper.cs**
   - Purpose: Egyedi dialógus
   - Layer: UI
   - Type: C#
   - Responsibility: UI ablak
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Dialogs/EditEntityDialog.cs**
+- **InvoiceApp.MAUI/Dialogs/EditEntityDialog.cs**
   - Purpose: Egyedi dialógus
   - Layer: UI
   - Type: C#
   - Responsibility: UI ablak
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/MainWindow.xaml**
+- **InvoiceApp.MAUI/MainWindow.xaml**
   - Purpose: Fájl
   - Layer: UI
   - Type: XAML
   - Responsibility: 
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/MainWindow.xaml.cs**
+- **InvoiceApp.MAUI/MainWindow.xaml.cs**
   - Purpose: Fájl
   - Layer: UI
   - Type: C#
   - Responsibility: 
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-Bold.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-Bold.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-BoldItalic.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-BoldItalic.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-ExtraLight.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-ExtraLight.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-ExtraLightItalic.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-ExtraLightItalic.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-Italic.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-Italic.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-Light.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-Light.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-LightItalic.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-LightItalic.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-Medium.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-Medium.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-MediumItalic.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-MediumItalic.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-Regular.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-Regular.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-SemiBold.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-SemiBold.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-SemiBoldItalic.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-SemiBoldItalic.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-Text.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-Text.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-TextItalic.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-TextItalic.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-Thin.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-Thin.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/IBMPlexMono-ThinItalic.ttf**
+- **InvoiceApp.MAUI/Resources/IBMPlexMono-ThinItalic.ttf**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Font
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/Strings.Designer.cs**
+- **InvoiceApp.MAUI/Resources/Strings.Designer.cs**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: C#
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-- **Wrecept.Wpf/Resources/Strings.resx**
+- **InvoiceApp.MAUI/Resources/Strings.resx**
   - Purpose: Erőforrás
   - Layer: UI
   - Type: Resource
   - Responsibility: Betűkészlet vagy szöveg
   - Interaction: UI
   - Special Notes: -
-  - **Wrecept.Wpf/Services/AppStateService.cs**
+  - **InvoiceApp.MAUI/Services/AppStateService.cs**
     - Purpose: Üzleti szolgáltatás
     - Layer: UI
     - Type: C#
     - Responsibility: Interakciós állapot tárolása
     - Interaction: ViewModels, FocusManager, KeyboardManager
     - Special Notes: Állapotváltozás eseményt küld
-  - **Wrecept.Wpf/Services/FocusManager.cs**
+  - **InvoiceApp.MAUI/Services/FocusManager.cs**
     - Purpose: Szolgáltatás
     - Layer: UI
     - Type: C#
     - Responsibility: Fókusz kezelése az állapotgép alapján
     - Interaction: Views, AppStateService
     - Special Notes: -
-  - **Wrecept.Wpf/Services/KeyboardManager.cs**
+  - **InvoiceApp.MAUI/Services/KeyboardManager.cs**
     - Purpose: Szolgáltatás
     - Layer: UI
     - Type: C#
     - Responsibility: Billentyűesemények delegálása
     - Interaction: AppStateService, IKeyboardHandler implementációk
     - Special Notes: -
-- **Wrecept.Wpf/Services/DialogService.cs**
+- **InvoiceApp.MAUI/Services/DialogService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Services/MessageBoxNotificationService.NonWindows.cs**
+- **InvoiceApp.MAUI/Services/MessageBoxNotificationService.NonWindows.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Services/MessageBoxNotificationService.cs**
+- **InvoiceApp.MAUI/Services/MessageBoxNotificationService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Services/ISetupFlow.cs**
+- **InvoiceApp.MAUI/Services/ISetupFlow.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
   - Type: C#
   - Responsibility: Első indítás adatbekérés
   - Interaction: ViewModels
   - Special Notes: Mockolható
-- **Wrecept.Wpf/Services/SetupFlow.cs**
+- **InvoiceApp.MAUI/Services/SetupFlow.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
   - Type: C#
   - Responsibility: Dialógusok megjelenítése
   - Interaction: Views
   - Special Notes: -
-- **Wrecept.Wpf/Services/IEnvironmentService.cs**
+- **InvoiceApp.MAUI/Services/IEnvironmentService.cs**
   - Purpose: Környezeti vezérlő
   - Layer: UI
   - Type: C#
   - Responsibility: Processz leállítás absztrakció
   - Interaction: SetupFlow, App
   - Special Notes: Mockolható
-- **Wrecept.Wpf/Services/EnvironmentService.cs**
+- **InvoiceApp.MAUI/Services/EnvironmentService.cs**
   - Purpose: Környezeti vezérlő
   - Layer: UI
   - Type: C#
   - Responsibility: Environment.Exit hívása
   - Interaction: SetupFlow, App
   - Special Notes: -
-- **Wrecept.Wpf/Services/NavigationService.cs**
+- **InvoiceApp.MAUI/Services/NavigationService.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Services/PdfInvoiceExporter.cs**
+- **InvoiceApp.MAUI/Services/PdfInvoiceExporter.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
   - Type: C#
   - Responsibility: Számlák PDF exportja és nyomtatása
   - Interaction: ViewModels
   - Special Notes: QuestPDF alapú
-- **Wrecept.Wpf/Services/StageMenuHandler.cs**
+- **InvoiceApp.MAUI/Services/StageMenuHandler.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
   - Type: C#
   - Responsibility: Főmenü műveletek végrehajtása
   - Interaction: ViewModels, AppStateService
   - Special Notes: -
-- **Wrecept.Wpf/Services/ScreenModeManager.cs**
+- **InvoiceApp.MAUI/Services/ScreenModeManager.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Services/ThemeManager.cs**
+- **InvoiceApp.MAUI/Services/ThemeManager.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: UI
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/StartupOrchestrator.cs**
+- **InvoiceApp.MAUI/StartupOrchestrator.cs**
   - Purpose: Fájl
   - Layer: UI
   - Type: C#
   - Responsibility: 
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/ThemeSizing.cs**
+- **InvoiceApp.MAUI/ThemeSizing.cs**
   - Purpose: Fájl
   - Layer: UI
   - Type: C#
   - Responsibility: 
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Themes/RetroTheme.Dark.xaml**
+- **InvoiceApp.MAUI/Themes/RetroTheme.Dark.xaml**
   - Purpose: Fájl
   - Layer: UI
   - Type: XAML
   - Responsibility: 
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Themes/RetroTheme.xaml**
+- **InvoiceApp.MAUI/Themes/RetroTheme.xaml**
   - Purpose: Fájl
   - Layer: UI
   - Type: XAML
   - Responsibility: 
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/AboutViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/AboutViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/ArchivePromptViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/ArchivePromptViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/DeleteItemPromptViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/DeleteItemPromptViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/EditableItemViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/EditableItemViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/EditableMasterDataViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/EditableMasterDataViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/IEditableMasterDataViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/IEditableMasterDataViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/IMasterDataViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/IMasterDataViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/InvoiceEditorViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/InvoiceEditorViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/InvoiceLookupViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/InvoiceLookupViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/MasterDataBaseViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/MasterDataBaseViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/PaymentMethodCreatorViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/PaymentMethodCreatorViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/PaymentMethodMasterViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/PaymentMethodMasterViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/PlaceholderViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/PlaceholderViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/ProductCreatorViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/ProductCreatorViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/ProductEditorViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/ProductEditorViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/ProductGroupMasterViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/ProductGroupMasterViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/ProductMasterViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/ProductMasterViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/ProgressViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/ProgressViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/SaveLinePromptViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/SaveLinePromptViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/ScreenModeViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/ScreenModeViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/SeedOptionsViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/SeedOptionsViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/SetupViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/SetupViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/StageViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/StageViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/StatusBarViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/StatusBarViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/SupplierCreatorViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/SupplierCreatorViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/SupplierMasterViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/SupplierMasterViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/TaxRateCreatorViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/TaxRateCreatorViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/TaxRateMasterViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/TaxRateMasterViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/UnitCreatorViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/UnitCreatorViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/UnitMasterViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/UnitMasterViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/UserInfoEditorViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/UserInfoEditorViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/ViewModels/UserInfoViewModel.cs**
+- **InvoiceApp.MAUI/ViewModels/UserInfoViewModel.cs**
   - Purpose: Domain model
   - Layer: UI
   - Type: C#
   - Responsibility: Adattípus
   - Interaction: Services, Storage
   - Special Notes: -
-- **Wrecept.Wpf/Views/AboutView.xaml**
+- **InvoiceApp.MAUI/Views/AboutView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/AboutView.xaml.cs**
+- **InvoiceApp.MAUI/Views/AboutView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/Controls/BaseMasterView.cs**
+- **InvoiceApp.MAUI/Views/Controls/BaseMasterView.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/Controls/BaseMasterView.generic.cs**
+- **InvoiceApp.MAUI/Views/Controls/BaseMasterView.generic.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/Controls/LookupBox.xaml**
+- **InvoiceApp.MAUI/Views/Controls/LookupBox.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/Controls/LookupBox.xaml.cs**
+- **InvoiceApp.MAUI/Views/Controls/LookupBox.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/Controls/StatusBar.xaml**
+- **InvoiceApp.MAUI/Views/Controls/StatusBar.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/Controls/StatusBar.xaml.cs**
+- **InvoiceApp.MAUI/Views/Controls/StatusBar.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/Controls/TotalsPanel.xaml**
+- **InvoiceApp.MAUI/Views/Controls/TotalsPanel.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/Controls/TotalsPanel.xaml.cs**
+- **InvoiceApp.MAUI/Views/Controls/TotalsPanel.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/EditDialogs/ProductEditorView.xaml**
+- **InvoiceApp.MAUI/Views/EditDialogs/ProductEditorView.xaml**
   - Purpose: Egyedi dialógus
   - Layer: UI
   - Type: XAML
   - Responsibility: UI ablak
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/EditDialogs/ProductEditorView.xaml.cs**
+- **InvoiceApp.MAUI/Views/EditDialogs/ProductEditorView.xaml.cs**
   - Purpose: Egyedi dialógus
   - Layer: UI
   - Type: C#
   - Responsibility: UI ablak
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/EditDialogs/UserInfoEditorView.xaml**
+- **InvoiceApp.MAUI/Views/EditDialogs/UserInfoEditorView.xaml**
   - Purpose: Egyedi dialógus
   - Layer: UI
   - Type: XAML
   - Responsibility: UI ablak
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/EditDialogs/UserInfoEditorView.xaml.cs**
+- **InvoiceApp.MAUI/Views/EditDialogs/UserInfoEditorView.xaml.cs**
   - Purpose: Egyedi dialógus
   - Layer: UI
   - Type: C#
   - Responsibility: UI ablak
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlineCreators/PaymentMethodCreatorView.xaml**
+- **InvoiceApp.MAUI/Views/InlineCreators/PaymentMethodCreatorView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlineCreators/PaymentMethodCreatorView.xaml.cs**
+- **InvoiceApp.MAUI/Views/InlineCreators/PaymentMethodCreatorView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlineCreators/ProductCreatorView.xaml**
+- **InvoiceApp.MAUI/Views/InlineCreators/ProductCreatorView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlineCreators/ProductCreatorView.xaml.cs**
+- **InvoiceApp.MAUI/Views/InlineCreators/ProductCreatorView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlineCreators/SupplierCreatorView.xaml**
+- **InvoiceApp.MAUI/Views/InlineCreators/SupplierCreatorView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlineCreators/SupplierCreatorView.xaml.cs**
+- **InvoiceApp.MAUI/Views/InlineCreators/SupplierCreatorView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlineCreators/TaxRateCreatorView.xaml**
+- **InvoiceApp.MAUI/Views/InlineCreators/TaxRateCreatorView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlineCreators/TaxRateCreatorView.xaml.cs**
+- **InvoiceApp.MAUI/Views/InlineCreators/TaxRateCreatorView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlineCreators/UnitCreatorView.xaml**
+- **InvoiceApp.MAUI/Views/InlineCreators/UnitCreatorView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlineCreators/UnitCreatorView.xaml.cs**
+- **InvoiceApp.MAUI/Views/InlineCreators/UnitCreatorView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlinePrompts/ArchivePromptView.xaml**
+- **InvoiceApp.MAUI/Views/InlinePrompts/ArchivePromptView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlinePrompts/ArchivePromptView.xaml.cs**
+- **InvoiceApp.MAUI/Views/InlinePrompts/ArchivePromptView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlinePrompts/DeleteItemPromptView.xaml**
+- **InvoiceApp.MAUI/Views/InlinePrompts/DeleteItemPromptView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlinePrompts/DeleteItemPromptView.xaml.cs**
+- **InvoiceApp.MAUI/Views/InlinePrompts/DeleteItemPromptView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlinePrompts/SaveLinePromptView.xaml**
+- **InvoiceApp.MAUI/Views/InlinePrompts/SaveLinePromptView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InlinePrompts/SaveLinePromptView.xaml.cs**
+- **InvoiceApp.MAUI/Views/InlinePrompts/SaveLinePromptView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InvoiceEditorLayout.xaml**
+- **InvoiceApp.MAUI/Views/InvoiceEditorLayout.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Modern billentyűzet-fókuszú elrendezés
   - Interaction: ViewModels, FocusManager
   - Special Notes: StageView alapértelmezett nézete
-- **Wrecept.Wpf/Views/InvoiceItemsGrid.xaml**
+- **InvoiceApp.MAUI/Views/InvoiceItemsGrid.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InvoiceItemsGrid.xaml.cs**
+- **InvoiceApp.MAUI/Views/InvoiceItemsGrid.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InvoiceLookupView.xaml**
+- **InvoiceApp.MAUI/Views/InvoiceLookupView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/InvoiceLookupView.xaml.cs**
+- **InvoiceApp.MAUI/Views/InvoiceLookupView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/PaymentMethodMasterView.xaml**
+- **InvoiceApp.MAUI/Views/PaymentMethodMasterView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/PaymentMethodMasterView.xaml.cs**
+- **InvoiceApp.MAUI/Views/PaymentMethodMasterView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/PlaceholderView.xaml**
+- **InvoiceApp.MAUI/Views/PlaceholderView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/PlaceholderView.xaml.cs**
+- **InvoiceApp.MAUI/Views/PlaceholderView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/ProductGroupMasterView.xaml**
+- **InvoiceApp.MAUI/Views/ProductGroupMasterView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/ProductGroupMasterView.xaml.cs**
+- **InvoiceApp.MAUI/Views/ProductGroupMasterView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/ProductMasterView.xaml**
+- **InvoiceApp.MAUI/Views/ProductMasterView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/ProductMasterView.xaml.cs**
+- **InvoiceApp.MAUI/Views/ProductMasterView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/ScreenModeWindow.xaml**
+- **InvoiceApp.MAUI/Views/ScreenModeWindow.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/ScreenModeWindow.xaml.cs**
+- **InvoiceApp.MAUI/Views/ScreenModeWindow.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/SeedOptionsWindow.xaml**
+- **InvoiceApp.MAUI/Views/SeedOptionsWindow.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/SeedOptionsWindow.xaml.cs**
+- **InvoiceApp.MAUI/Views/SeedOptionsWindow.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/SetupWindow.xaml**
+- **InvoiceApp.MAUI/Views/SetupWindow.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/SetupWindow.xaml.cs**
+- **InvoiceApp.MAUI/Views/SetupWindow.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/StageView.xaml**
+- **InvoiceApp.MAUI/Views/StageView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/StageView.xaml.cs**
+- **InvoiceApp.MAUI/Views/StageView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/StartupWindow.xaml**
+- **InvoiceApp.MAUI/Views/StartupWindow.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/StartupWindow.xaml.cs**
+- **InvoiceApp.MAUI/Views/StartupWindow.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/SupplierMasterView.xaml**
+- **InvoiceApp.MAUI/Views/SupplierMasterView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/SupplierMasterView.xaml.cs**
+- **InvoiceApp.MAUI/Views/SupplierMasterView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/TaxRateMasterView.xaml**
+- **InvoiceApp.MAUI/Views/TaxRateMasterView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/TaxRateMasterView.xaml.cs**
+- **InvoiceApp.MAUI/Views/TaxRateMasterView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/UnitMasterView.xaml**
+- **InvoiceApp.MAUI/Views/UnitMasterView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/UnitMasterView.xaml.cs**
+- **InvoiceApp.MAUI/Views/UnitMasterView.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/UserInfoView.xaml**
+- **InvoiceApp.MAUI/Views/UserInfoView.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/UserInfoWindow.xaml**
+- **InvoiceApp.MAUI/Views/UserInfoWindow.xaml**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: XAML
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Views/UserInfoWindow.xaml.cs**
+- **InvoiceApp.MAUI/Views/UserInfoWindow.xaml.cs**
   - Purpose: WPF nézet
   - Layer: UI
   - Type: C#
   - Responsibility: Felület
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/VisualTreeExtensions.cs**
+- **InvoiceApp.MAUI/VisualTreeExtensions.cs**
   - Purpose: Fájl
   - Layer: UI
   - Type: C#
   - Responsibility: 
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Wpf/Wrecept.Wpf.csproj**
+- **InvoiceApp.MAUI/InvoiceApp.MAUI.csproj**
   - Purpose: Projektfájl
   - Layer: UI
   - Type: Project
   - Responsibility: Build konfiguráció
   - Interaction: ViewModels
   - Special Notes: -
-- **Wrecept.Core.Tests/Services/InvoiceCalculatorTests.cs**
+- **InvoiceApp.Core.Tests/Services/InvoiceCalculatorTests.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Tests
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core.Tests/Services/InvoiceServiceTests.cs**
+- **InvoiceApp.Core.Tests/Services/InvoiceServiceTests.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Tests
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core.Tests/Services/PaymentMethodServiceTests.cs**
+- **InvoiceApp.Core.Tests/Services/PaymentMethodServiceTests.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Tests
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core.Tests/Services/ProductServiceTests.cs**
+- **InvoiceApp.Core.Tests/Services/ProductServiceTests.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Tests
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core.Tests/Services/ProductGroupServiceTests.cs**
+- **InvoiceApp.Core.Tests/Services/ProductGroupServiceTests.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Tests
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core.Tests/Services/SupplierServiceTests.cs**
+- **InvoiceApp.Core.Tests/Services/SupplierServiceTests.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Tests
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core.Tests/Services/UnitServiceTests.cs**
+- **InvoiceApp.Core.Tests/Services/UnitServiceTests.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Tests
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core.Tests/Services/UserInfoServiceTests.cs**
+- **InvoiceApp.Core.Tests/Services/UserInfoServiceTests.cs**
   - Purpose: Üzleti szolgáltatás
   - Layer: Tests
   - Type: C#
   - Responsibility: Funkcionális logika
   - Interaction: Repositories, ViewModels
   - Special Notes: -
-- **Wrecept.Core.Tests/Wrecept.Core.Tests.csproj**
+- **InvoiceApp.Core.Tests/InvoiceApp.Core.Tests.csproj**
   - Purpose: Projektfájl
   - Layer: Tests
   - Type: Project
@@ -1737,91 +1737,91 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: 
   - Interaction: Services, Storage
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/DataSeederTests.cs**
+- **tests/InvoiceApp.Data.Tests/DataSeederTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/DbInitializerTests.cs**
+- **tests/InvoiceApp.Data.Tests/DbInitializerTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/InvoiceRepositoryTests.cs**
+- **tests/InvoiceApp.Data.Tests/InvoiceRepositoryTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/PaymentMethodRepositoryTests.cs**
+- **tests/InvoiceApp.Data.Tests/PaymentMethodRepositoryTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/ProductGroupRepositoryTests.cs**
+- **tests/InvoiceApp.Data.Tests/ProductGroupRepositoryTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/ProductRepositoryTests.cs**
+- **tests/InvoiceApp.Data.Tests/ProductRepositoryTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/SettingsSessionLogServiceTests.cs**
+- **tests/InvoiceApp.Data.Tests/SettingsSessionLogServiceTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/SupplierRepositoryTests.cs**
+- **tests/InvoiceApp.Data.Tests/SupplierRepositoryTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/TaxRateRepositoryTests.cs**
+- **tests/InvoiceApp.Data.Tests/TaxRateRepositoryTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/UnitRepositoryTests.cs**
+- **tests/InvoiceApp.Data.Tests/UnitRepositoryTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/WalPragmaInterceptorTests.cs**
+- **tests/InvoiceApp.Data.Tests/WalPragmaInterceptorTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/AppDbContextFactoryTests.cs**
+- **tests/InvoiceApp.Data.Tests/AppDbContextFactoryTests.cs**
   - Purpose: Fájl
   - Layer: Tests
   - Type: C#
   - Responsibility:
   - Interaction:
   - Special Notes: -
-- **tests/Wrecept.Storage.Tests/Wrecept.Storage.Tests.csproj**
+- **tests/InvoiceApp.Data.Tests/InvoiceApp.Data.Tests.csproj**
   - Purpose: Projektfájl
   - Layer: Tests
   - Type: Project

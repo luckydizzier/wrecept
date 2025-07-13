@@ -40,6 +40,22 @@ Wrecept originally started as a Windows-only WPF application. The project has si
 * All screens mimic DOS layouts — with color-coded panels and full-screen efficiency.
 * Most of the menus are still placeholders, but product management already works.
 
+## ⌨️ Keyboard Navigation
+
+Keyboard input works the same across Windows, macOS and Linux. A global
+`KeyboardNavigator` class converts key presses into commands while keeping the
+focus explicit.
+
+| Shortcut | Action |
+| -------- | ------------------------------ |
+| **F1**   | Focus the sidebar |
+| **F2**   | Create a new invoice |
+| **F3**   | Edit the selected invoice |
+| **Ctrl+F** | Activate the search box |
+
+`Enter` moves to the next cell and saves on the final field. `Esc` always
+closes the current dialog or cancels editing.
+
 ---
 
 ## 📁 Folder Structure
@@ -90,6 +106,23 @@ Tests can be run with the following command:
 
 ```bash
 dotnet test tests/Wrecept.Tests/Wrecept.Tests.csproj
+```
+
+## 📦 Packaging
+
+The MAUI project can be published for multiple platforms. For Windows an MSIX
+installer is created with:
+
+```bash
+dotnet publish InvoiceApp.MAUI -f net8.0-windows10.0.19041.0 -c Release \
+  -p:WindowsPackageType=MSIX
+```
+
+macOS and Linux builds use the standard `dotnet publish` command:
+
+```bash
+dotnet publish InvoiceApp.MAUI -f net8.0-maccatalyst -c Release
+dotnet publish InvoiceApp.MAUI -f net8.0-linux -c Release
 ```
 
 ---
