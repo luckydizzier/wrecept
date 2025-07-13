@@ -11,6 +11,9 @@
   </ItemGroup>
   <ItemGroup>
     <MauiXaml Include="Resources\Styles\RetroTheme.xaml" />
+    <MauiXaml Include="Views/Dialogs/SetupPage.xaml" />
+    <MauiXaml Include="Views/Dialogs/SeedOptionsPage.xaml" />
+    <MauiXaml Include="Views/Dialogs/UserInfoEditorPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InvoiceApp.Core\InvoiceApp.Core.csproj" />
