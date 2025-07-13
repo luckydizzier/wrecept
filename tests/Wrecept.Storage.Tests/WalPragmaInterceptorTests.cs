@@ -2,10 +2,10 @@ using Microsoft.Data.Sqlite;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Wrecept.Storage.Data;
+using InvoiceApp.Data.Data;
 using Xunit;
 
-namespace Wrecept.Storage.Tests;
+namespace InvoiceApp.Data.Tests;
 
 public class WalPragmaInterceptorTests
 {

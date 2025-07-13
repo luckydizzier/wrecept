@@ -5,11 +5,11 @@ using System.Windows;
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
 using InvoiceApp.MAUI.Services;
-using Wrecept.Core;
-using Wrecept.Core.Entities;
-using Wrecept.Core.Services;
+using InvoiceApp.Core;
+using InvoiceApp.Core.Entities;
+using InvoiceApp.Core.Services;
 
-namespace Wrecept.Tests.ViewModels;
+namespace InvoiceApp.Tests.ViewModels;
 
 public class ScreenModeViewModelTests
 {

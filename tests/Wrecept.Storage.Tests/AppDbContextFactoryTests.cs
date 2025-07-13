@@ -1,9 +1,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
-using Wrecept.Storage.Data;
+using InvoiceApp.Data.Data;
 
-namespace Wrecept.Storage.Tests;
+namespace InvoiceApp.Data.Tests;
 
 public class AppDbContextFactoryTests
 {

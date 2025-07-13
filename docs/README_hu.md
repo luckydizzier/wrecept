@@ -50,7 +50,7 @@ InvoiceApp.MAUI/       # MAUI UI projekt
 docs/                  # Dokumentációk
 tools/                 # Segédszkriptek
 CHANGELOG.md
-Wrecept.sln
+InvoiceApp.sln
 ```
 
 ---

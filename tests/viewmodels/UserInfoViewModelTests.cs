@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
-using Wrecept.Core.Entities;
-using Wrecept.Core.Services;
+using InvoiceApp.Core.Entities;
+using InvoiceApp.Core.Services;
 
-namespace Wrecept.Tests.ViewModels;
+namespace InvoiceApp.Tests.ViewModels;
 
 public class UserInfoViewModelTests
 {

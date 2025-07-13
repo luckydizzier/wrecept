@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Wrecept.Storage.Services;
+using InvoiceApp.Data.Services;
 using Xunit;
 
-namespace Wrecept.Tests;
+namespace InvoiceApp.Tests;
 
 public class FileBackupServiceTests
 {

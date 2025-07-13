@@ -6,7 +6,7 @@ using InvoiceApp.MAUI.ViewModels;
 using InvoiceApp.Core.Enums;
 using Xunit;
 
-namespace Wrecept.Tests;
+namespace InvoiceApp.Tests;
 
 public class AppStateServiceTests
 {

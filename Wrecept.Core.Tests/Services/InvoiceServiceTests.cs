@@ -1,10 +1,10 @@
-using Wrecept.Core.Models;
-using Wrecept.Core.Repositories;
-using Wrecept.Core.Services;
+using InvoiceApp.Core.Models;
+using InvoiceApp.Core.Repositories;
+using InvoiceApp.Core.Services;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Wrecept.Core.Tests.Services;
+namespace InvoiceApp.Core.Tests.Services;
 
 public class InvoiceServiceTests
 {

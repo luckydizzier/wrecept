@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.Storage.Data;
-using Wrecept.Storage.Services;
-using Wrecept.Core.Services;
+using InvoiceApp.Data.Data;
+using InvoiceApp.Data.Services;
+using InvoiceApp.Core.Services;
 using Xunit;
 
-namespace Wrecept.Core.Tests.Services;
+namespace InvoiceApp.Core.Tests.Services;
 
 public class DbHealthServiceTests
 {

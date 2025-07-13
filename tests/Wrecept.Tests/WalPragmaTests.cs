@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.Storage;
-using Wrecept.Storage.Data;
-using Wrecept.Core.Repositories;
-using Wrecept.Core.Services;
+using InvoiceApp.Data;
+using InvoiceApp.Data.Data;
+using InvoiceApp.Core.Repositories;
+using InvoiceApp.Core.Services;
 using Xunit;
 using System;
 using System.IO;
 
-namespace Wrecept.Tests;
+namespace InvoiceApp.Tests;
 
 public class WalPragmaTests
 {
@@ -52,7 +52,7 @@ public class WalPragmaTests
 
         var expected = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "Wrecept", "app.db");
+            "InvoiceApp", "app.db");
 
         Assert.True(File.Exists(expected));
 

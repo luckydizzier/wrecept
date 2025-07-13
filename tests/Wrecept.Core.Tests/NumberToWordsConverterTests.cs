@@ -1,7 +1,7 @@
-using Wrecept.Core.Utilities;
+using InvoiceApp.Core.Utilities;
 using Xunit;
 
-namespace Wrecept.Core.Tests;
+namespace InvoiceApp.Core.Tests;
 
 public class NumberToWordsConverterTests
 {

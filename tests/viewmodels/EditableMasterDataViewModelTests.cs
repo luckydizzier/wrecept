@@ -5,7 +5,7 @@ using InvoiceApp.MAUI.ViewModels;
 using InvoiceApp.MAUI.Services;
 using InvoiceApp.Core.Enums;
 
-namespace Wrecept.Tests.ViewModels;
+namespace InvoiceApp.Tests.ViewModels;
 
 public class EditableMasterDataViewModelTests
 {

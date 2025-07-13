@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 using System.IO;
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
-using Wrecept.Core.Models;
-using Wrecept.Core.Services;
+using InvoiceApp.Core.Models;
+using InvoiceApp.Core.Services;
 using InvoiceApp.MAUI.Services;
 using System.Collections.ObjectModel;
 using System.Linq;
 using InvoiceApp.Core.Enums;
 
-namespace Wrecept.Tests.ViewModels;
+namespace InvoiceApp.Tests.ViewModels;
 
 public class InvoiceEditorViewModelTests
 {

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
-using Wrecept.Core.Models;
-using Wrecept.Core.Services;
+using InvoiceApp.Core.Models;
+using InvoiceApp.Core.Services;
 
-namespace Wrecept.Tests.ViewModels;
+namespace InvoiceApp.Tests.ViewModels;
 
 public class UnitMasterViewModelTests
 {

@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Wrecept.Core.Services;
+using InvoiceApp.Core.Services;
 using Xunit;
 
-namespace Wrecept.Core.Tests;
+namespace InvoiceApp.Core.Tests;
 
 public class NullLogServiceTests
 {

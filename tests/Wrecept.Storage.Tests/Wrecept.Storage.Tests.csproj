@@ -7,7 +7,7 @@
     <Threshold>100</Threshold>
   </PropertyGroup>
   <PropertyGroup>
-    <ExcludeByFile>../Wrecept.Storage/Migrations/*</ExcludeByFile>
+    <ExcludeByFile>../InvoiceApp.Data/Migrations/*</ExcludeByFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit" Version="2.5.0" />
@@ -17,7 +17,7 @@
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Wrecept.Storage\Wrecept.Storage.csproj" />
-    <ProjectReference Include="..\..\Wrecept.Core\Wrecept.Core.csproj" />
+    <ProjectReference Include="..\..\InvoiceApp.Data\InvoiceApp.Data.csproj" />
+    <ProjectReference Include="..\..\InvoiceApp.Core\InvoiceApp.Core.csproj" />
   </ItemGroup>
 </Project>

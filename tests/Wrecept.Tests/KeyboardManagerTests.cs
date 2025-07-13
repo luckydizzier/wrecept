@@ -14,7 +14,7 @@ public class KeyEventArgs(Keys key, bool isRepeat) : EventArgs
 
 using Xunit;
 
-namespace Wrecept.Tests;
+namespace InvoiceApp.Tests;
 
 public class KeyboardManagerTests
 {

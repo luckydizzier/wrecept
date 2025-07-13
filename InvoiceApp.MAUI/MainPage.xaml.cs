@@ -1,6 +1,6 @@
 using Microsoft.Maui.Controls;
 using InvoiceApp.MAUI.Services;
-using Wrecept.Core.Enums;
+using InvoiceApp.Core.Enums;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace InvoiceApp.MAUI;

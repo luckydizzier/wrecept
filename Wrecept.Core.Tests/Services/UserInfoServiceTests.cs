@@ -1,12 +1,12 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Wrecept.Core.Entities;
-using Wrecept.Core.Services;
-using Wrecept.Storage.Services;
+using InvoiceApp.Core.Entities;
+using InvoiceApp.Core.Services;
+using InvoiceApp.Data.Services;
 using Xunit;
 
-namespace Wrecept.Core.Tests.Services;
+namespace InvoiceApp.Core.Tests.Services;
 
 public class UserInfoServiceTests : IDisposable
 {
@@ -23,7 +23,7 @@ public class UserInfoServiceTests : IDisposable
     [Fact]
     public async Task LoadAsync_ReturnsDefaults_IfFileMissing()
     {
-        var path = Path.Combine(_tempDir, "Wrecept", "wrecept.json");
+        var path = Path.Combine(_tempDir, "InvoiceApp", "wrecept.json");
         var svc = new UserInfoService(path);
         var info = await svc.LoadAsync();
 
@@ -38,7 +38,7 @@ public class UserInfoServiceTests : IDisposable
     [Fact]
     public async Task SaveAsync_WritesFile()
     {
-        var path = Path.Combine(_tempDir, "Wrecept", "wrecept.json");
+        var path = Path.Combine(_tempDir, "InvoiceApp", "wrecept.json");
         var svc = new UserInfoService(path);
         var info = new UserInfo
         {
@@ -57,7 +57,7 @@ public class UserInfoServiceTests : IDisposable
     [Fact]
     public async Task LoadAsync_ReturnsSavedObject()
     {
-        var path = Path.Combine(_tempDir, "Wrecept", "wrecept.json");
+        var path = Path.Combine(_tempDir, "InvoiceApp", "wrecept.json");
         var svc = new UserInfoService(path);
         var info = new UserInfo
         {
