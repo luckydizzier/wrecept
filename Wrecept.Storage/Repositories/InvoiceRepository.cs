@@ -106,6 +106,14 @@ public class InvoiceRepository : IInvoiceRepository
             .Take(count)
             .ToListAsync(ct);
 
+    public Task<string?> GetLatestInvoiceNumberBySupplierAsync(int supplierId, CancellationToken ct = default)
+        => _db.Invoices.AsNoTracking()
+            .Where(i => i.SupplierId == supplierId)
+            .OrderByDescending(i => i.Date)
+            .ThenByDescending(i => i.Id)
+            .Select(i => i.Number)
+            .FirstOrDefaultAsync(ct);
+
     public async Task<LastUsageData?> GetLastUsageDataAsync(int supplierId, int productId, CancellationToken ct = default)
     {
         return await _db.InvoiceItems.AsNoTracking()

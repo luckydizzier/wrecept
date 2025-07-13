@@ -15,6 +15,7 @@ public partial class InvoiceLookupItem : ObservableObject
     public string Number { get; set; } = string.Empty;
     public DateOnly Date { get; set; }
     public string Supplier { get; set; } = string.Empty;
+    public int SupplierId { get; set; }
 }
 
 public partial class InvoiceLookupViewModel : ObservableObject
@@ -39,7 +40,8 @@ public partial class InvoiceLookupViewModel : ObservableObject
     [RelayCommand]
     private async Task CreateNewInvoiceAsync()
     {
-        var number = await _numbering.GetNextInvoiceNumberAsync();
+        var supplierId = SelectedInvoice?.SupplierId ?? 0;
+        var number = await _numbering.GetNextInvoiceNumberAsync(supplierId);
         await CreateInvoiceAsync(number);
     }
 
@@ -55,13 +57,14 @@ public partial class InvoiceLookupViewModel : ObservableObject
         Invoices.Clear();
         foreach (var inv in items)
         {
-            Invoices.Add(new InvoiceLookupItem
-            {
-                Id = inv.Id,
-                Number = inv.Number,
-                Date = inv.Date,
-                Supplier = inv.Supplier?.Name ?? string.Empty
-            });
+                Invoices.Add(new InvoiceLookupItem
+                {
+                    Id = inv.Id,
+                    Number = inv.Number,
+                    Date = inv.Date,
+                    Supplier = inv.Supplier?.Name ?? string.Empty,
+                    SupplierId = inv.SupplierId
+                });
         }
 
         if (Invoices.Count > 0)

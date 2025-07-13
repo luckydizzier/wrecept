@@ -11,7 +11,7 @@ public class NullNumberingServiceTests
     {
         var service = new NullNumberingService();
 
-        var result = await service.GetNextInvoiceNumberAsync();
+        var result = await service.GetNextInvoiceNumberAsync(1);
 
         Assert.Equal(string.Empty, result);
     }

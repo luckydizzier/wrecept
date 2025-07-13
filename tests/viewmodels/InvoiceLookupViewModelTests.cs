@@ -37,7 +37,7 @@ public class InvoiceLookupViewModelTests
     private class FakeNumberingService : INumberingService
     {
         private int _counter;
-        public Task<string> GetNextInvoiceNumberAsync(System.Threading.CancellationToken ct = default)
+        public Task<string> GetNextInvoiceNumberAsync(int supplierId, System.Threading.CancellationToken ct = default)
         {
             _counter++;
             return Task.FromResult($"INV{_counter}");

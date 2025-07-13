@@ -6,10 +6,11 @@ namespace Wrecept.Tests.ViewModels;
 
 public class EditableItemViewModelTests
 {
+    private static T CreateUninitialized<T>() => (T)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(T));
     [Fact]
     public void ExistingItem_CopiesProperties()
     {
-        var parent = new InvoiceEditorViewModel();
+        var parent = CreateUninitialized<InvoiceEditorViewModel>();
         var source = new InvoiceItemRowViewModel(parent)
         {
             Product = "P",
