@@ -38,3 +38,4 @@ To align with the MAUI architecture, the projects will be renamed:
 
 The namespaces will follow the new project names (e.g. `InvoiceApp.Core.Models`).
 
+Initial placeholder projects have been created under InvoiceApp.Core, InvoiceApp.Data and InvoiceApp.MAUI.
