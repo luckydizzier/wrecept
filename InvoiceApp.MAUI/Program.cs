@@ -1,20 +1,15 @@
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
+
 namespace InvoiceApp.MAUI;
+
 public class Program : MauiApplication
 {
-    public Program() : base()
-    {
-    }
     protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
-    static void Main(string[] args) => new Program().Run(args);
-}
 
-public static class MauiProgram
-{
-    public static MauiApp CreateMauiApp()
+    static void Main(string[] args)
     {
-        var builder = MauiApp.CreateBuilder();
-        return builder.Build();
+        var app = new Program();
+        app.Run(args);
     }
 }
