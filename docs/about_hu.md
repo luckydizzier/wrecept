@@ -16,6 +16,6 @@ A Wrecept program az alábbi adatokkal rendelkezik:
 - **Rövid leírás:** Offline módon használható, billentyűzetközpontú számlázó rendszer.
 - A fókusz és a billentyűk kezelését központi szolgáltatások biztosítják.
 - **Licenc:** Free, OpenSource program és kód.
-- **Felhasznált technológiák:** .NET 8, WPF, SQLite, EF Core, MVVM architektúra.
+- **Felhasznált technológiák:** .NET 8, MAUI, SQLite, EF Core, MVVM architektúra.
 - **Előzmények:** Tácsi Egon (HA3MN) készítette az eredeti DOS-os, Clipper-es RECEPT.EXE programot.
 
