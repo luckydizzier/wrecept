@@ -3,6 +3,8 @@ using Microsoft.Maui.Hosting;
 using Microsoft.Maui;
 using Microsoft.Maui.Storage;
 using InvoiceApp.Core;
+using InvoiceApp.MAUI.ViewModels;
+using InvoiceApp.MAUI.Views;
 using InvoiceApp.MAUI.Services;
 
 namespace InvoiceApp.MAUI;
@@ -31,7 +33,19 @@ public static class MauiProgram
         services.AddStorageAsync(Path.Combine(appDir, "app.db"), Path.Combine(appDir, "user.json"), settingsPath).GetAwaiter().GetResult();
         services.AddSingleton<AppStateService>(_ => new AppStateService(Path.Combine(appDir, "state.json")));
         services.AddSingleton<KeyboardManager>();
+        services.AddSingleton<FocusManager>();
+        services.AddSingleton<StageViewModel>();
+        services.AddSingleton<StatusBarViewModel>();
+        services.AddSingleton<InvoiceEditorViewModel>();
+        services.AddTransient<ProductMasterViewModel>();
+        services.AddTransient<SupplierMasterViewModel>();
+        services.AddTransient<StageMenuHandler>();
+        services.AddTransient<StageMenuKeyboardHandler>();
+        services.AddTransient<MasterDataKeyboardHandler>();
+        services.AddTransient<InvoiceEditorKeyboardHandler>();
+        services.AddTransient<InvoiceLookupKeyboardHandler>();
         services.AddTransient<StartupOrchestrator>();
         services.AddTransient<MainPage>();
+        services.AddTransient<Views.StageView>();
     }
 }
