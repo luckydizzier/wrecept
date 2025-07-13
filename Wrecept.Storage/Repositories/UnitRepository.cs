@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Wrecept.Core.Models;
 using Wrecept.Core.Repositories;
 using Wrecept.Storage.Data;
+using System.Text.Json;
 
 namespace Wrecept.Storage.Repositories;
 
@@ -14,6 +15,18 @@ public class UnitRepository : IUnitRepository
         _db = db;
     }
 
+    private void Log(string id, string op, object data)
+    {
+        _db.ChangeLogs.Add(new ChangeLog
+        {
+            Entity = nameof(Unit),
+            EntityId = id,
+            Operation = op,
+            Data = JsonSerializer.Serialize(data),
+            CreatedAt = DateTime.UtcNow
+        });
+    }
+
     public Task<List<Unit>> GetAllAsync(CancellationToken ct = default)
         => _db.Set<Unit>().AsNoTracking().ToListAsync(ct);
 
@@ -24,12 +37,16 @@ public class UnitRepository : IUnitRepository
     {
         _db.Add(unit);
         await _db.SaveChangesAsync(ct);
+        Log(unit.Id.ToString(), "Insert", unit);
+        await _db.SaveChangesAsync(ct);
         return unit.Id;
     }
 
     public async Task UpdateAsync(Unit unit, CancellationToken ct = default)
     {
         _db.Update(unit);
+        await _db.SaveChangesAsync(ct);
+        Log(unit.Id.ToString(), "Update", unit);
         await _db.SaveChangesAsync(ct);
     }
 }

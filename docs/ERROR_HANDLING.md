@@ -40,6 +40,7 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 9. **Indítási hiba** – Ha a `DataSeeder` másodszori próbálkozásra is `SqliteException`-t kap, a részleteket az `ILogService` naplózza a `logs` mappába, majd hibaüzenetet jelenítünk meg.
 10. **Egyéb inicializációs hiba** – A `DatabaseInitializer` általános kivételt is naplóz. Ha a migráció sikertelen, a program leáll.
 11. **Hiányzó tábla új modell után** – A `DataSeeder` felismeri a `no such table` hibát, ismét migrációt futtat és naplózza az eseményt.
+12. **Sérült adatbázis fájl** – A `DatabaseRecoveryService` futtatja a `PRAGMA integrity_check` parancsot. Hiba esetén az `app.db` a `backup/corrupt_YYYYMMDD.db` néven elmentésre kerül, a séma újraépül és a `ChangeLog` alapján állítjuk vissza az adatokat.
 
 *Megjegyzés: a `wrecept.db` fájlt kizárólag fejlesztés közbeni migrációkhoz használjuk.*
 

@@ -48,6 +48,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<INumberingService>(_ => new NumberingService(numberPath));
         services.AddScoped<IBackupService>(_ => new FileBackupService(dbPath, userInfoPath, settingsPath));
         services.AddScoped<IDbHealthService, DbHealthService>();
+        services.AddSingleton<IDatabaseRecoveryService>(sp =>
+            new DatabaseRecoveryService(dbPath, sp.GetRequiredService<IDbContextFactory<AppDbContext>>(), sp.GetRequiredService<ILogService>()));
         services.AddSingleton<IDatabaseInitializer, DatabaseInitializer>();
     }
 }

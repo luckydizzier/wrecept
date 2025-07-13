@@ -15,7 +15,8 @@ Ez a dokumentum meghatározza, hogyan vizsgáljuk az alkalmazás hibával szembe
 2. **Hiányzó vagy sérült konfigurációs fájl** – Indításkor ellenőrizzük, hogy a beállítások olvashatók-e; hiba esetén alapértelmezett értékeket töltünk.
 3. **Nem várt kivétel a ViewModelben** – Ellenőrizzük, hogy az Error Handling terv szerint logol-e és jelzi-e a hibát a felhasználónak.
 4. **Sérült adatbázis szerkezet** – Az `IDbHealthService` `PRAGMA integrity_check` futtatásával vizsgálja a táblák épségét. Hibát a LogService naplóz.
-5. **Áramszünet utáni helyreállítás** – A SessionService eltárolja az utoljára szerkesztett számla azonosítóját. A *Szerviz > Áramszünet után* menüpont visszatölti ezt az állapotot.
+5. **Fájl szintű korrupció** – A `DatabaseRecoveryService` a sérült `app.db` állományt átmásolja a `backup` mappába, majd újraépíti az adatbázist és a `ChangeLog` segítségével visszatölti a rekordokat.
+6. **Áramszünet utáni helyreállítás** – A SessionService eltárolja az utoljára szerkesztett számla azonosítóját. A *Szerviz > Áramszünet után* menüpont visszatölti ezt az állapotot.
 
 ## Cél
 

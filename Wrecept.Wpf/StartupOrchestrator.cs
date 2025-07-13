@@ -10,10 +10,12 @@ namespace Wrecept.Wpf;
 public class StartupOrchestrator
 {
     private readonly ILogService _log;
+    private readonly IDatabaseRecoveryService _recovery;
 
-    public StartupOrchestrator(ILogService log)
+    public StartupOrchestrator(ILogService log, IDatabaseRecoveryService recovery)
     {
         _log = log;
+        _recovery = recovery;
     }
 
     public Task<bool> DatabaseEmptyAsync(CancellationToken ct)
@@ -29,6 +31,7 @@ public class StartupOrchestrator
         int maxItems,
         bool slow)
     {
+        await _recovery.CheckAndRecoverAsync(ct);
         progress.Report(new ProgressReport { GlobalPercent = 10, Message = "Mintaszámlák létrehozása..." });
         var status = await Task.Run(
             () => DataSeeder.SeedSampleDataAsync(

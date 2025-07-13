@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Wrecept.Core.Models;
 using Wrecept.Core.Repositories;
 using Wrecept.Storage.Data;
+using System.Text.Json;
 
 namespace Wrecept.Storage.Repositories;
 
@@ -14,6 +15,18 @@ public class ProductGroupRepository : IProductGroupRepository
         _db = db;
     }
 
+    private void Log(string id, string op, object data)
+    {
+        _db.ChangeLogs.Add(new ChangeLog
+        {
+            Entity = nameof(ProductGroup),
+            EntityId = id,
+            Operation = op,
+            Data = JsonSerializer.Serialize(data),
+            CreatedAt = DateTime.UtcNow
+        });
+    }
+
     public Task<List<ProductGroup>> GetAllAsync(CancellationToken ct = default)
         => _db.Set<ProductGroup>().AsNoTracking().ToListAsync(ct);
 
@@ -24,12 +37,16 @@ public class ProductGroupRepository : IProductGroupRepository
     {
         _db.Add(group);
         await _db.SaveChangesAsync(ct);
+        Log(group.Id.ToString(), "Insert", group);
+        await _db.SaveChangesAsync(ct);
         return group.Id;
     }
 
     public async Task UpdateAsync(ProductGroup group, CancellationToken ct = default)
     {
         _db.Update(group);
+        await _db.SaveChangesAsync(ct);
+        Log(group.Id.ToString(), "Update", group);
         await _db.SaveChangesAsync(ct);
     }
 }
