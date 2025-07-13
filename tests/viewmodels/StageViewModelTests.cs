@@ -4,12 +4,12 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Xunit;
-using Wrecept.Wpf.ViewModels;
-using Wrecept.Wpf.Services;
+using InvoiceApp.MAUI.ViewModels;
+using InvoiceApp.MAUI.Services;
 using Wrecept.Core.Services;
 using Wrecept.Core.Models;
 using Wrecept.Core.Entities;
-using Wrecept.Core.Enums;
+using InvoiceApp.Core.Enums;
 
 namespace Wrecept.Tests.ViewModels;
 

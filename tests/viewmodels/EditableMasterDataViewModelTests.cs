@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
-using Wrecept.Wpf.ViewModels;
-using Wrecept.Wpf.Services;
-using Wrecept.Core.Enums;
+using InvoiceApp.MAUI.ViewModels;
+using InvoiceApp.MAUI.Services;
+using InvoiceApp.Core.Enums;
 
 namespace Wrecept.Tests.ViewModels;
 

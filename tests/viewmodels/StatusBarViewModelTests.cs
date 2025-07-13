@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Threading;
 using Xunit;
-using Wrecept.Wpf.ViewModels;
+using InvoiceApp.MAUI.ViewModels;
 
 namespace Wrecept.Tests.ViewModels;
 

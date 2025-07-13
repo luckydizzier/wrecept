@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
-using Wrecept.Wpf.ViewModels;
+using InvoiceApp.MAUI.ViewModels;
 using Wrecept.Core.Entities;
 using Wrecept.Core.Services;
 

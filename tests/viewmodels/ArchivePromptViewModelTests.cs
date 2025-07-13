@@ -2,10 +2,10 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
-using Wrecept.Wpf.ViewModels;
+using InvoiceApp.MAUI.ViewModels;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
-using Wrecept.Wpf.Services;
+using InvoiceApp.MAUI.Services;
 
 namespace Wrecept.Tests.ViewModels;
 
