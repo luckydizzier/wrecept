@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Wrecept.Core.Models;
 using Wrecept.Core.Repositories;
 using Wrecept.Storage.Data;
+using System.Text.Json;
 
 namespace Wrecept.Storage.Repositories;
 
@@ -14,6 +15,18 @@ public class PaymentMethodRepository : IPaymentMethodRepository
         _db = db;
     }
 
+    private void Log(string id, string op, object data)
+    {
+        _db.ChangeLogs.Add(new ChangeLog
+        {
+            Entity = nameof(PaymentMethod),
+            EntityId = id,
+            Operation = op,
+            Data = JsonSerializer.Serialize(data),
+            CreatedAt = DateTime.UtcNow
+        });
+    }
+
     public Task<List<PaymentMethod>> GetAllAsync(CancellationToken ct = default)
         => _db.Set<PaymentMethod>().AsNoTracking().ToListAsync(ct);
 
@@ -24,12 +37,16 @@ public class PaymentMethodRepository : IPaymentMethodRepository
     {
         _db.Add(method);
         await _db.SaveChangesAsync(ct);
+        Log(method.Id.ToString(), "Insert", method);
+        await _db.SaveChangesAsync(ct);
         return method.Id;
     }
 
     public async Task UpdateAsync(PaymentMethod method, CancellationToken ct = default)
     {
         _db.Update(method);
+        await _db.SaveChangesAsync(ct);
+        Log(method.Id.ToString(), "Update", method);
         await _db.SaveChangesAsync(ct);
     }
 }

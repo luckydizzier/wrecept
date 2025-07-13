@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using Wrecept.Core.Models;
 using Wrecept.Core.Repositories;
 using Wrecept.Storage.Data;
@@ -16,9 +17,23 @@ public class InvoiceRepository : IInvoiceRepository
         _db = db;
     }
 
+    private void Log(string entity, string id, string op, object data)
+    {
+        _db.ChangeLogs.Add(new ChangeLog
+        {
+            Entity = entity,
+            EntityId = id,
+            Operation = op,
+            Data = JsonSerializer.Serialize(data),
+            CreatedAt = DateTime.UtcNow
+        });
+    }
+
     public async Task<int> AddAsync(Invoice invoice, CancellationToken ct = default)
     {
         _db.Invoices.Add(invoice);
+        await _db.SaveChangesAsync(ct);
+        Log(nameof(Invoice), invoice.Id.ToString(), "Insert", invoice);
         await _db.SaveChangesAsync(ct);
         return invoice.Id;
     }
@@ -30,6 +45,8 @@ public class InvoiceRepository : IInvoiceRepository
     {
         _db.InvoiceItems.Add(item);
         await _db.SaveChangesAsync(ct);
+        Log(nameof(InvoiceItem), item.Id.ToString(), "Insert", item);
+        await _db.SaveChangesAsync(ct);
         return item.Id;
     }
 
@@ -38,6 +55,7 @@ public class InvoiceRepository : IInvoiceRepository
         var item = await _db.InvoiceItems.FindAsync(new object?[] { id }, ct);
         if (item == null)
             return;
+        Log(nameof(InvoiceItem), id.ToString(), "Delete", item);
         _db.InvoiceItems.Remove(item);
         await _db.SaveChangesAsync(ct);
     }
@@ -55,6 +73,8 @@ public class InvoiceRepository : IInvoiceRepository
         invoice.IsGross = isGross;
         invoice.UpdatedAt = DateTime.UtcNow;
         await _db.SaveChangesAsync(ct);
+        Log(nameof(Invoice), id.ToString(), "Update", invoice);
+        await _db.SaveChangesAsync(ct);
     }
 
     public async Task SetArchivedAsync(int id, bool isArchived, CancellationToken ct = default)
@@ -64,6 +84,8 @@ public class InvoiceRepository : IInvoiceRepository
             return;
         invoice.IsArchived = isArchived;
         invoice.UpdatedAt = DateTime.UtcNow;
+        await _db.SaveChangesAsync(ct);
+        Log(nameof(Invoice), id.ToString(), "Update", invoice);
         await _db.SaveChangesAsync(ct);
     }
 

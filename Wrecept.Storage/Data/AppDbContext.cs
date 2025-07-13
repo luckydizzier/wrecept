@@ -13,6 +13,7 @@ public class AppDbContext : DbContext
     public DbSet<TaxRate> TaxRates => Set<TaxRate>();
     public DbSet<PaymentMethod> PaymentMethods => Set<PaymentMethod>();
     public DbSet<Unit> Units => Set<Unit>();
+    public DbSet<ChangeLog> ChangeLogs => Set<ChangeLog>();
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)

@@ -302,6 +302,36 @@ namespace Wrecept.Storage.Migrations
                     b.ToTable("Units");
                 });
 
+            modelBuilder.Entity("Wrecept.Core.Models.ChangeLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Entity")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EntityId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Operation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChangeLogs");
+                });
+
             modelBuilder.Entity("Wrecept.Core.Models.Invoice", b =>
                 {
                     b.HasOne("Wrecept.Core.Models.PaymentMethod", "PaymentMethod")
