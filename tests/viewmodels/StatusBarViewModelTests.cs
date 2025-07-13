@@ -1,5 +1,5 @@
-using System.Windows;
-using System.Windows.Threading;
+using System.Threading.Tasks;
+using Microsoft.Maui.ApplicationModel;
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
 
@@ -7,18 +7,11 @@ namespace InvoiceApp.Tests.ViewModels;
 
 public class StatusBarViewModelTests
 {
-    private static void EnsureApp()
+    [Fact]
+    public async Task Constructor_StartsTimer()
     {
-        if (Application.Current == null)
-            new Application();
-    }
-
-    [StaFact]
-    public void Constructor_StartsTimer()
-    {
-        EnsureApp();
         var vm = new StatusBarViewModel();
-        Dispatcher.CurrentDispatcher.Invoke(() => { }, DispatcherPriority.ContextIdle);
+        await MainThread.InvokeOnMainThreadAsync(async () => await Task.Delay(50));
         Assert.False(string.IsNullOrWhiteSpace(vm.DateTime));
     }
 }
