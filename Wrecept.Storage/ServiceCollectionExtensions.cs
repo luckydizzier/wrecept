@@ -39,7 +39,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IProductGroupRepository, ProductGroupRepository>();
         services.AddScoped<ITaxRateRepository, TaxRateRepository>();
         services.AddScoped<IUnitRepository, UnitRepository>();
-        services.AddSingleton<ILogService, LogService>();
+        services.AddSingleton<ILogService, SerilogLogService>();
         services.AddSingleton<IUserInfoService>(_ => new UserInfoService(userInfoPath));
         services.AddSingleton<ISettingsService>(_ => new SettingsService(settingsPath));
         var sessionPath = Path.Combine(Path.GetDirectoryName(settingsPath)!, "session.json");
