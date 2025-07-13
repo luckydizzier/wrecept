@@ -9,7 +9,7 @@ date: "2025-06-27"
 
 ## 🎯 Purpose
 
-Wrecept is an offline-first, single-user application for invoice recording and procurement workflows. After evaluating multi-platform options, we return to Windows-only WPF for simplicity and speed.
+Wrecept is an offline-first, single-user application for invoice recording and procurement workflows. The codebase now targets **.NET MAUI** so the same features work on Windows, macOS and Linux desktops.
 
 The design must be:
 
@@ -33,11 +33,11 @@ The design must be:
 
 | Constraint  | Description                                      |
 | ----------- | ------------------------------------------------ |
-| OS          | Windows 10+ (x64)                                |
+| OS          | Windows 10+, macOS 12+, Linux (glibc 2.28+)      |
 | Network     | No dependency (offline-first)                    |
 | Storage     | Local SQLite file with journaling (WAL)          |
 | Backups     | Manual + optional autosave-based copy            |
-| Permissions | No admin required. Writes to `%AppData%\Wrecept` |
+| Permissions | No admin required. Writes to the user application directory |
 
 The application executes `PRAGMA journal_mode=WAL` every time it opens a database connection so the journaling mode always resets to WAL.
 
@@ -47,7 +47,7 @@ The application executes `PRAGMA journal_mode=WAL` every time it opens a databas
 
 | Area           | Decision                                             |
 | -------------- | ---------------------------------------------------- |
-| UI Framework   | WPF (.NET 8)                                  |
+| UI Framework   | .NET MAUI (.NET 8)                            |
 | Persistence    | SQLite + Entity Framework Core                       |
 | Style          | Retro terminal (green/purple on black), themeable    |
 | Input          | Only Enter, Esc, Up, Down allowed for core workflows |
@@ -77,6 +77,23 @@ The application executes `PRAGMA journal_mode=WAL` every time it opens a databas
 
 ---
 
+## ⌨️ Cross-platform Keyboard Flow
+
+Navigation is controlled by a global `KeyboardNavigator` that raises commands
+regardless of platform. Shortcuts:
+
+| Key      | Action                           |
+| -------- | -------------------------------- |
+| **F1**   | Focus sidebar                    |
+| **F2**   | Create new invoice               |
+| **F3**   | Edit selected invoice            |
+| **Ctrl+F** | Activate search box            |
+
+`Enter` moves to the next cell and saves on the last field; `Esc` cancels or
+closes the current dialog.
+
+---
+
 ## 🧠 Behavioral Constraints
 
 * **No crashes allowed.** Invalid input must be prevented or recoverable.
@@ -102,16 +119,16 @@ The application executes `PRAGMA journal_mode=WAL` every time it opens a databas
 ## 📦 Filesystem Layout
 
 ```plaintext
-%AppData%\Wrecept\
+$AppDataDirectory/
 ├── app.db               # SQLite database
-├── backup\              # Scheduled backups
+├── backup/              # Scheduled backups
 ├── settings.json        # User preferences (theme, sound)
-├── logs\                # Runtime error logs (timestamped)
-├── Themes\              # Application Themes
+├── logs/                # Runtime error logs (timestamped)
+├── Themes/              # Application Themes
 └── version.txt          # Last known app version
 ```
 During development the `wrecept.db` database is used only for generating migrations.
-If the database path is missing the program automatically creates the `%AppData%/Wrecept/app.db` file.
+If no database path is provided the program creates `app.db` inside `FileSystem.AppDataDirectory`.
 
 ---
 

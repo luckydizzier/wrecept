@@ -7,7 +7,7 @@ date: "2025-06-27"
 
 # 🎛️ Wrecept
 
-**Retro modern számlázó alkalmazás, Windowsra, WPF alapon.**
+**Retro modern számlázó alkalmazás, .NET MAUI keretrendszeren.**
 
 ## ✨ Funkciók (tervezett)
 
@@ -24,12 +24,29 @@ date: "2025-06-27"
 
 ---
 
+## ⌨️ Billentyű-navigáció
+
+A billentyűzet kezelése minden támogatott rendszeren egységes. A globális
+`KeyboardNavigator` osztály parancsokra fordítja a leütéseket és kezeli a fókuszt.
+
+| Gyorsbillentyű | Művelet |
+| -------------- | --------------------------- |
+| **F1**         | Fókusz a menüsávon |
+| **F2**         | Új számla létrehozása |
+| **F3**         | Kijelölt számla szerkesztése |
+| **Ctrl+F**     | Keresőmező aktiválása |
+
+Az `Enter` a következő mezőre lép, az utolsó mezőben pedig ment. Az `Esc`
+mindig bezárja az aktuális párbeszédet vagy megszakítja a szerkesztést.
+
+---
+
 ## 📁 Könyvtárstruktúra
 
 ```
-Wrecept.Core/          # Domain modellek és szolgáltatások
-Wrecept.Storage/       # EF Core adatkezelés és repositoryk
-Wrecept.Wpf/           # WPF UI projekt
+InvoiceApp.Core/       # Domain modellek és szolgáltatások
+InvoiceApp.Data/       # EF Core adatkezelés és repositoryk
+InvoiceApp.MAUI/       # MAUI UI projekt
 docs/                  # Dokumentációk
 tools/                 # Segédszkriptek
 CHANGELOG.md
@@ -44,6 +61,22 @@ A tesztek a következő paranccsal indíthatók:
 
 ```bash
 dotnet test tests/Wrecept.Tests/Wrecept.Tests.csproj
+```
+
+## 📦 Csomagolás
+
+Windowsra MSIX telepítő készíthető az alábbi parancssal:
+
+```bash
+dotnet publish InvoiceApp.MAUI -f net8.0-windows10.0.19041.0 -c Release \
+  -p:WindowsPackageType=MSIX
+```
+
+macOS és Linux esetén a szokásos `dotnet publish` használható:
+
+```bash
+dotnet publish InvoiceApp.MAUI -f net8.0-maccatalyst -c Release
+dotnet publish InvoiceApp.MAUI -f net8.0-linux -c Release
 ```
 
 ---
