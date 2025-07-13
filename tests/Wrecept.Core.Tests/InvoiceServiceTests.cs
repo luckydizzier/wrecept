@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Wrecept.Core.Models;
-using Wrecept.Core.Repositories;
-using Wrecept.Core.Services;
+using InvoiceApp.Core.Models;
+using InvoiceApp.Core.Repositories;
+using InvoiceApp.Core.Services;
 using Xunit;
 
-namespace Wrecept.Core.Tests;
+namespace InvoiceApp.Core.Tests;
 
 public class InvoiceServiceTests
 {

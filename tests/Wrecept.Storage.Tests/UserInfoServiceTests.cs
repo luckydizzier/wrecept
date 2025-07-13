@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Wrecept.Core.Entities;
-using Wrecept.Storage.Services;
+using InvoiceApp.Core.Entities;
+using InvoiceApp.Data.Services;
 using Xunit;
 
-namespace Wrecept.Storage.Tests;
+namespace InvoiceApp.Data.Tests;
 
 public class UserInfoServiceTests
 {

@@ -1,7 +1,7 @@
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
 
-namespace Wrecept.Tests.ViewModels;
+namespace InvoiceApp.Tests.ViewModels;
 
 public class ProgressViewModelTests
 {

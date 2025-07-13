@@ -3,11 +3,11 @@ using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
-using Wrecept.Core.Models;
-using Wrecept.Core.Services;
+using InvoiceApp.Core.Models;
+using InvoiceApp.Core.Services;
 using InvoiceApp.MAUI.Services;
 
-namespace Wrecept.Tests.ViewModels;
+namespace InvoiceApp.Tests.ViewModels;
 
 public class SaveLinePromptViewModelTests
 {

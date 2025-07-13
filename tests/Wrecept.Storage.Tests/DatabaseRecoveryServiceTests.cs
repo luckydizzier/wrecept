@@ -2,14 +2,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Wrecept.Core.Models;
-using Wrecept.Core.Services;
-using Wrecept.Storage.Data;
-using Wrecept.Storage.Repositories;
-using Wrecept.Storage.Services;
+using InvoiceApp.Core.Models;
+using InvoiceApp.Core.Services;
+using InvoiceApp.Data.Data;
+using InvoiceApp.Data.Repositories;
+using InvoiceApp.Data.Services;
 using Xunit;
 
-namespace Wrecept.Storage.Tests;
+namespace InvoiceApp.Data.Tests;
 
 public class DatabaseRecoveryServiceTests
 {

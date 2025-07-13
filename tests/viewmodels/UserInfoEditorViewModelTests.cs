@@ -1,7 +1,7 @@
 using InvoiceApp.MAUI.ViewModels;
 using Xunit;
 
-namespace Wrecept.Tests.ViewModels;
+namespace InvoiceApp.Tests.ViewModels;
 
 public class UserInfoEditorViewModelTests
 {

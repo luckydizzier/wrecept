@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Xunit;
 using InvoiceApp.MAUI.ViewModels;
 using InvoiceApp.MAUI.Services;
-using Wrecept.Core.Services;
-using Wrecept.Core.Models;
-using Wrecept.Core.Entities;
+using InvoiceApp.Core.Services;
+using InvoiceApp.Core.Models;
+using InvoiceApp.Core.Entities;
 using InvoiceApp.Core.Enums;
 
-namespace Wrecept.Tests.ViewModels;
+namespace InvoiceApp.Tests.ViewModels;
 
 public class StageViewModelTests
 {

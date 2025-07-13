@@ -23,7 +23,7 @@ Ez a dokumentum a projekt fejlesztéséhez szükséges alapvető lépéseket tar
    ```
 3. **Megoldás fordítása** a gyökérben:
    ```bash
-   dotnet build Wrecept.sln
+   dotnet build InvoiceApp.sln
    ```
 4. **Futtatás** fejlesztői módban:
    ```bash
@@ -32,7 +32,7 @@ Ez a dokumentum a projekt fejlesztéséhez szükséges alapvető lépéseket tar
 
 ## Navigáció a projektben
 
-- A megoldás három fő projektet tartalmaz: `Wrecept.Core`, `Wrecept.Storage` és `Wrecept.Wpf`.
+ - A megoldás három fő projektet tartalmaz: `InvoiceApp.Core`, `InvoiceApp.Data` és `InvoiceApp.MAUI`.
 - A nézetmodellek és szolgáltatások elrendezését a [PROJECT_STRUCTURE.md](../PROJECT_STRUCTURE.md) ismerteti.
 - A felhasználói felület billentyűs működését a [UI_FLOW.md](../UI_FLOW.md) dokumentum részletezi.
 - A billentyűparancsokat a `KeyboardManager` delegálja az egyes

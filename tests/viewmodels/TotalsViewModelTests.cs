@@ -1,10 +1,10 @@
 using System;
 using System.Collections.ObjectModel;
-using Wrecept.Core.Models;
+using InvoiceApp.Core.Models;
 using InvoiceApp.MAUI.ViewModels;
 using Xunit;
 
-namespace Wrecept.Tests.ViewModels;
+namespace InvoiceApp.Tests.ViewModels;
 
 public class TotalsViewModelTests
 {

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.Storage;
-using Wrecept.Storage.Data;
-using Wrecept.Core.Repositories;
-using Wrecept.Core.Services;
+using InvoiceApp.Data;
+using InvoiceApp.Data.Data;
+using InvoiceApp.Core.Repositories;
+using InvoiceApp.Core.Services;
 using Xunit;
 
-namespace Wrecept.Tests;
+namespace InvoiceApp.Tests;
 
 public class AddStorageRegistrationTests
 {

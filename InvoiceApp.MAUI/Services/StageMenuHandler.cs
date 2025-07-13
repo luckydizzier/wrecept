@@ -1,5 +1,5 @@
 using InvoiceApp.MAUI.ViewModels;
-using Wrecept.Core.Enums;
+using InvoiceApp.Core.Enums;
 
 namespace InvoiceApp.MAUI.Services;
 

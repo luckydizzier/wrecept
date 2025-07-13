@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Wrecept.Storage.Services;
+using InvoiceApp.Data.Services;
 using Xunit;
 
-namespace Wrecept.Storage.Tests;
+namespace InvoiceApp.Data.Tests;
 
 public class LogServiceTests
 {
@@ -21,7 +21,7 @@ public class LogServiceTests
         {
             var svc = new SerilogLogService();
             await svc.LogError("err", new InvalidOperationException());
-            var logDir = Path.Combine(tempHome, "Wrecept", "logs");
+            var logDir = Path.Combine(tempHome, "InvoiceApp", "logs");
             Assert.False(Directory.Exists(logDir));
             Assert.Contains("err", sw.ToString());
         }
@@ -46,7 +46,7 @@ public class LogServiceTests
             await svc.LogError("test", new InvalidOperationException());
 
             var logDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "Wrecept", "logs");
+                "InvoiceApp", "logs");
             Assert.True(Directory.Exists(logDir));
             var files = Directory.GetFiles(logDir);
             Assert.NotEmpty(files);

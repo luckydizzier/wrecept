@@ -1,4 +1,4 @@
-# Wrecept
+# InvoiceApp
 
 Offline-first invoicing tool built with .NET 8 and MVVM architecture. The UI now targets **.NET MAUI** for cross-platform support.
 See [docs/README.md](docs/README.md) or the Hungarian version

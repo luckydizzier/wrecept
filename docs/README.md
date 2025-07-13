@@ -1,11 +1,11 @@
 ---
-title: "Wrecept README"
+title: "InvoiceApp README"
 purpose: "Project overview"
 author: "root_agent"
 date: "2025-06-27"
 ---
 
-# 🎛️ Wrecept
+# 🎛️ InvoiceApp
 
 [![CI](https://github.com/luckydizzier/wrecept/actions/workflows/ci.yml/badge.svg)](https://github.com/luckydizzier/wrecept/actions/workflows/ci.yml)
 
@@ -15,7 +15,7 @@ date: "2025-06-27"
 
 ## 📦 Project Purpose
 
-Wrecept originally started as a Windows-only WPF application. The project has since moved to **.NET MAUI** to enable cross-platform use while keeping the retro look and predictable behavior.
+InvoiceApp originally started as a Windows-only WPF application under the name **Wrecept**. The project has since moved to **.NET MAUI** to enable cross-platform use while keeping the retro look and predictable behavior.
 
 ---
 
@@ -67,7 +67,7 @@ InvoiceApp.MAUI/       # MAUI UI project
 docs/                  # Documentation
 tools/                 # Helper scripts
 CHANGELOG.md
-Wrecept.sln
+InvoiceApp.sln
 ```
 
 ---
@@ -124,6 +124,21 @@ macOS and Linux builds use the standard `dotnet publish` command:
 dotnet publish InvoiceApp.MAUI -f net8.0-maccatalyst -c Release
 dotnet publish InvoiceApp.MAUI -f net8.0-linux -c Release
 ```
+
+---
+
+## 🛠️ Migration Notes
+
+The original projects `Wrecept.Core` and `Wrecept.Storage` have been merged into
+`InvoiceApp.Core` and `InvoiceApp.Data`. All namespaces now start with
+`InvoiceApp`. When updating an existing checkout:
+
+1. Remove the old projects from your solution.
+2. Restore dependencies and run the database migrations from `InvoiceApp.Data`.
+3. Update any custom code references from `Wrecept.*` to `InvoiceApp.*`.
+
+Application data is now stored under `%AppData%/InvoiceApp` instead of the old
+`%AppData%/Wrecept` directory.
 
 ---
 

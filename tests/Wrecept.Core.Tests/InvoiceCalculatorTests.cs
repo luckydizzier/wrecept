@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Wrecept.Core.Models;
-using Wrecept.Core.Services;
+using InvoiceApp.Core.Models;
+using InvoiceApp.Core.Services;
 using Xunit;
 
-namespace Wrecept.Core.Tests;
+namespace InvoiceApp.Core.Tests;
 
 public class InvoiceCalculatorTests
 {

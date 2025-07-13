@@ -2,11 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Wrecept.Core.Services;
-using Wrecept.Storage.Data;
+using InvoiceApp.Core.Services;
+using InvoiceApp.Data.Data;
 using Xunit;
 
-namespace Wrecept.Storage.Tests;
+namespace InvoiceApp.Data.Tests;
 
 public class DataSeederTests
 {

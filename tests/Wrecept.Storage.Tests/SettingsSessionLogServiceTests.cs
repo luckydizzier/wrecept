@@ -1,12 +1,12 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Wrecept.Core.Entities;
-using Wrecept.Core;
-using Wrecept.Storage.Services;
+using InvoiceApp.Core.Entities;
+using InvoiceApp.Core;
+using InvoiceApp.Data.Services;
 using Xunit;
 
-namespace Wrecept.Storage.Tests;
+namespace InvoiceApp.Data.Tests;
 
 public class SettingsSessionLogServiceTests
 {
@@ -92,7 +92,7 @@ public class SettingsSessionLogServiceTests
             await svc.LogError("test", new InvalidOperationException());
 
             var logDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "Wrecept", "logs");
+                "InvoiceApp", "logs");
             Assert.True(Directory.Exists(logDir));
             var files = Directory.GetFiles(logDir);
             Assert.NotEmpty(files);
