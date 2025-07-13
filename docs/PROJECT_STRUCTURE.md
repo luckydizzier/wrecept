@@ -9,6 +9,15 @@ date: "2025-07-05"
 
 Ez a dokumentum fájlonként rögzíti a Wrecept megvalósításában szereplő komponensek rétegeit és függőségeit. A listák segítik a gyors áttekintést és karbantartást.
 
+## MAUI megoldásrétegek
+
+1. **Projekt Struktúra**
+   - **InvoiceApp.MAUI** – nézetek, ViewModel-ek és indítási logika
+   - **InvoiceApp.Core** – modellek és szolgáltatás interfészek
+   - **InvoiceApp.Data** – DbContext és repositoryk
+2. **MRS (Model–Repository–Service) Réteg** – a tárolási és üzleti logika felosztása
+3. **MVVM (Model–View–ViewModel) Réteg** – felület és logika elválasztása
+
 ## Sablon
 
 Minden fájl leírása az alábbi mezőket tartalmazza:

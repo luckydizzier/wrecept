@@ -100,4 +100,23 @@ A modális ablakok megjelenítését a `NavigationService.ShowCenteredDialog` ko
 
 A progress logok szerint a `DialogService` jelenleg csak az `EditEntity` dialógust indítja el, de később ez a szolgáltatás fogja összefogni a különféle modális ablakok megnyitását és esetleges útvonalkezelését. A cél, hogy a ViewModel rétegek ne közvetlenül hozzák létre a dialógusokat, hanem a `DialogService` döntse el, miként és mely nézetekkel jelenjenek meg.
 
+## MAUI átállás előkészítése
+
+A tervek szerint a projektet többplatformos .NET MAUI megoldássá alakítjuk. Az új felépítés a következő rétegekre bontható:
+
+1. **Projekt Struktúra** – A Visual Studio megoldás három projektből áll majd:
+   - **InvoiceApp.MAUI** – a Views, ViewModels, a `StartupOrchestrator` és a lokalizációs erőforrások otthona.
+   - **InvoiceApp.Core** – .NET Standard könyvtár a modelleknek és a szolgáltatás interfészeknek.
+   - **InvoiceApp.Data** – .NET Standard könyvtár az EF Core `DbContext`-tel és a repositorykkal.
+
+2. **MRS (Model–Repository–Service) Réteg** – az adatkezelés és üzleti logika szervezése:
+   - *Models* (`InvoiceApp.Core`): `Invoice`, `InvoiceItem`, `Supplier`, `Product` stb.
+   - *Repositories* (`InvoiceApp.Data`): minden modellhez CRUD műveleteket biztosító osztály.
+   - *Services* (`InvoiceApp.Core` interfészek, `InvoiceApp.MAUI` implementációk): a ViewModel réteg által használt üzleti logika.
+
+3. **MVVM (Model–View–ViewModel) Réteg** – a felhasználói felület és a logika szétválasztására:
+   - *Views* (`InvoiceApp.MAUI`): `MainWindow.xaml`, `InvoiceEditor.xaml`, `LookupDialog.xaml`.
+   - *ViewModels* (`InvoiceApp.MAUI`): `MainViewModel`, `InvoiceEditorViewModel`, `LookupDialogViewModel` stb.
+
+
 ---
