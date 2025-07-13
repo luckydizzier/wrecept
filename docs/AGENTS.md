@@ -126,5 +126,6 @@ storage_agent MUST NOT:
 * \[2025-06-30] `code_agent`: Introduced `InvoiceCalculator`
 * \[2025-07-01] `storage_agent`: Created and applied migration for ProductGroup
 * \[2025-07-01] `ui_agent`: Fixed DataTemplate bindings for Supplier
+* \[2025-07-08] `docs_agent`: Added English release notes and about page
 → Agents should not repeat or overwrite these without explicit change triggers.
-*Maintained by `root_agent`. Last updated: 2025-07-01.*
+*Maintained by `root_agent`. Last updated: 2025-07-08.*
