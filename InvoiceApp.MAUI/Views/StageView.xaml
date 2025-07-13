@@ -11,10 +11,17 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <HorizontalStackLayout x:Name="Menu" Spacing="6">
-            <!-- TODO: convert menu items -->
-            <Label Text="Menu" />
-        </HorizontalStackLayout>
+        <VerticalStackLayout x:Name="Menu" Spacing="6">
+            <Button Text="Termékek"
+                    Command="{Binding HandleMenuCommand}"
+                    CommandParameter="{x:Static vm:StageMenuAction.EditProducts}" />
+            <Button Text="Szállítók"
+                    Command="{Binding HandleMenuCommand}"
+                    CommandParameter="{x:Static vm:StageMenuAction.EditSuppliers}" />
+            <Button Text="Kilépés"
+                    Command="{Binding HandleMenuCommand}"
+                    CommandParameter="{x:Static vm:StageMenuAction.ExitApplication}" />
+        </VerticalStackLayout>
         <ContentPresenter Grid.Row="1" Content="{Binding CurrentViewModel}" />
         <views:StatusBar Grid.Row="2" BindingContext="{Binding StatusBar}" />
     </Grid>
