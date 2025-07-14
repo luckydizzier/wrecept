@@ -5,7 +5,7 @@ author: "docs_agent"
 date: "2025-07-01"
 ---
 
-A program a felhasználó cégadatait JSON formátumban tárolja a `%AppData%/Wrecept/wrecept.json` (vagy a telepítéskor megadott) fájlban. A fájl a következő mezőket tartalmazza:
+A program a felhasználó cégadatait JSON formátumban tárolja a `%AppData%/InvoiceApp/invoiceapp.json` (vagy a telepítéskor megadott) fájlban. A fájl a következő mezőket tartalmazza:
 
 - `CompanyName` – a vállalkozás neve
 - `Address` – székhely vagy telephely címe

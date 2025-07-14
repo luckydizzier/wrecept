@@ -166,7 +166,7 @@ A `ScreenModeViewModel` tölti be az értékeket az `Enum.GetValues<ScreenMode>(
 
 📐 `ScreenModeManager` szerepe
 
-Induláskor a `ScreenModeManager.ApplySavedAsync` kiolvassa a `%AppData%/Wrecept/settings.json` fájlt a `SettingsService` segítségével. A beállított ablakméret és betűméret így visszaáll az előző állapotra. Az új mód kiválasztásakor a szolgáltatás frissíti a főablak méreteit, majd elmenti az értéket a `settings.json`-ba az `ISettingsService.SaveAsync` hívással.
+Induláskor a `ScreenModeManager.ApplySavedAsync` kiolvassa a `%AppData%/InvoiceApp/settings.json` fájlt a `SettingsService` segítségével. A beállított ablakméret és betűméret így visszaáll az előző állapotra. Az új mód kiválasztásakor a szolgáltatás frissíti a főablak méreteit, majd elmenti az értéket a `settings.json`-ba az `ISettingsService.SaveAsync` hívással.
 
 📋 Dialóguskezelés lépései
 
@@ -185,5 +185,5 @@ vissza. Minden üres mező piros keretet kap, amíg ki nem töltik.
 
 Későbbi módosításhoz a *Szerviz / Tulajdonos szerkesztése...* menüpont ugyanazt
 a `UserInfoWindow` párbeszédet nyitja meg. A mentés után a háttérben
-`UserInfoService.SaveAsync` frissíti a `wrecept.json` fájlt, majd a
+`UserInfoService.SaveAsync` frissíti a `invoiceapp.json` fájlt, majd a
 `UserInfoViewModel` értékei is aktualizálódnak.

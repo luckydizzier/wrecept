@@ -29,7 +29,7 @@ Ez a dokumentum összefoglalja a hibakezelési stratégiát. Cél, hogy az alkal
 
 ## Konkrét példák
 
-1. **Adatbázis fájl hiánya vagy hiányzó elérési út** – Ha az adatbázis helye nincs megadva vagy az `app.db` nem található, a Storage réteg a `%AppData%/Wrecept/app.db` fájlt hozza létre, majd figyelmeztető üzenetet jelenítünk meg.
+1. **Adatbázis fájl hiánya vagy hiányzó elérési út** – Ha az adatbázis helye nincs megadva vagy az `app.db` nem található, a Storage réteg a `%AppData%/InvoiceApp/app.db` fájlt hozza létre, majd figyelmeztető üzenetet jelenítünk meg.
 2. **Üres adatbázis** – Ha egyetlen táblában sincs adat, minta rekordokat szúrunk be és figyelmeztetjük a felhasználót.
 3. **Sémahibák indításkor** – A `DatabaseInitializer` a `DbInitializer` segítségével futtatja a migrációkat és `PRAGMA journal_mode=WAL` parancsot ad ki. A `DataSeeder` külön kontextust használ, így a DI-ből kapott példány nem marad használatban.
 4. **Sérült konfigurációs fájl** – A `settings.json` olvasásakor `JsonException` vagy `IOException` esetén hibaüzenetet írunk a naplóba és alapértelmezett beállításokkal folytatjuk.

@@ -9,9 +9,7 @@ date: "2025-07-05"
 
 Ez a dokumentum fájlonként rögzíti az InvoiceApp megvalósításában szereplő komponensek rétegeit és függőségeit. A listák segítik a gyors áttekintést és karbantartást.
 
-Korábban a projekt `Wrecept.Core` és `Wrecept.Storage` néven futott. A migráció
-óta minden kód az `InvoiceApp.*` névterekbe került, a régi fájlok kivezetésre
-kerültek.
+Korábban a projekt `Wrecept.Core` és `Wrecept.Storage` néven futott, de a migráció óta minden kód az `InvoiceApp.*` névterekbe került, a régi fájlok kivezetésre kerültek.
 
 ## MAUI megoldásrétegek
 
@@ -663,14 +661,14 @@ Minden fájl leírása az alábbi mezőket tartalmazza:
   - Responsibility: UI ablak
   - Interaction: ViewModels
   - Special Notes: -
-- **InvoiceApp.MAUI/MainWindow.xaml**
+- **InvoiceApp.MAUI/MainPage.xaml**
   - Purpose: Fájl
   - Layer: UI
   - Type: XAML
   - Responsibility: 
   - Interaction: ViewModels
   - Special Notes: -
-- **InvoiceApp.MAUI/MainWindow.xaml.cs**
+- **InvoiceApp.MAUI/MainPage.xaml.cs**
   - Purpose: Fájl
   - Layer: UI
   - Type: C#
