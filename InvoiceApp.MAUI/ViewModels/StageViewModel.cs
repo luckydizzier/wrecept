@@ -13,31 +13,6 @@ using InvoiceApp.MAUI.Services;
 
 namespace InvoiceApp.MAUI.ViewModels;
 
-public enum StageMenuAction
-{
-    InboundDeliveryNotes,
-    UpdateInboundInvoices,
-    EditProducts,
-    EditProductGroups,
-    EditSuppliers,
-    EditVatKeys,
-    EditPaymentMethods,
-    EditUnits,
-    ListProducts,
-    ListSuppliers,
-    ListInvoices,
-    InventoryCard,
-    CheckFiles,
-    AfterPowerOutage,
-    BackupData,
-    RestoreData,
-    ScreenSettings,
-    PrinterSettings,
-    EditUserInfo,
-    UserInfo,
-    ExitApplication
-}
-
 public partial class StageViewModel : ObservableObject
 {
     [ObservableProperty]

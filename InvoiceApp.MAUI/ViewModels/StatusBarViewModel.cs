@@ -8,7 +8,7 @@ namespace InvoiceApp.MAUI.ViewModels;
 
 public partial class StatusBarViewModel : ObservableObject
 {
-    private readonly Timer _timer;
+    private readonly System.Timers.Timer _timer;
 
     [ObservableProperty]
     private string dateTime = string.Empty;
