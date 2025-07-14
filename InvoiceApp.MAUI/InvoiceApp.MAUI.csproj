@@ -18,12 +18,6 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <MauiXaml Include="Resources\Styles\RetroTheme.xaml" />
-    <MauiXaml Include="Views/Dialogs/SetupPage.xaml" />
-    <MauiXaml Include="Views/Dialogs/SeedOptionsPage.xaml" />
-    <MauiXaml Include="Views/Dialogs/UserInfoEditorPage.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\InvoiceApp.Core\InvoiceApp.Core.csproj" />
     <ProjectReference Include="..\InvoiceApp.Data\InvoiceApp.Data.csproj" />
   </ItemGroup>
