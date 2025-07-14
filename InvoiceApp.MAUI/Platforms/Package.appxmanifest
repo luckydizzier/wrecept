@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+    xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+    xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+    xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
+    <Identity
+        Name="00000000-0000-0000-0000-000000000000"
+        Publisher="CN=User Name"
+        Version="1.0.0.0" />
+    <Properties>
+        <DisplayName>InvoiceApp</DisplayName>
+        <PublisherDisplayName>User Name</PublisherDisplayName>
+        <Logo>Images\logo.png</Logo>
+    </Properties>
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+    </Dependencies>
+    <Resources>
+        <Resource Language="x-generate"/>
+    </Resources>
+    <Applications>
+        <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
+            <uap:VisualElements
+                DisplayName="InvoiceApp"
+                Square150x150Logo="Images\appicon.png"
+                Square44x44Logo="Images\appiconfg.png"
+                Description="InvoiceApp"
+                BackgroundColor="transparent">
+                <uap:DefaultTile Wide310x150Logo="Images\appicon.png" Square310x310Logo="Images\appicon.png" Square71x71Logo="Images\appicon.png" />
+                <uap:SplashScreen Image="Images\splashscreen.png" />
+            </uap:VisualElements>
+        </Application>
+    </Applications>
+    <Capabilities>
+        <rescap:Capability Name="runFullTrust" />
+    </Capabilities>
+</Package>
