@@ -3,7 +3,7 @@ using Microsoft.Maui.Hosting;
 
 namespace InvoiceApp.MAUI;
 
-public class Program : MauiWinUIApplication
+public class Program : MauiApplication
 {
     protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 
