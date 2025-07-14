@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using InvoiceApp.Core.Models;
 using InvoiceApp.Core.Utilities;
-using InvoiceApp.MAUI.Resources.Strings;
+using static InvoiceApp.MAUI.Resources.Strings;
 using InvoiceApp.Core.Services;
 using InvoiceApp.Core.Enums;
 using Microsoft.Maui.Controls;

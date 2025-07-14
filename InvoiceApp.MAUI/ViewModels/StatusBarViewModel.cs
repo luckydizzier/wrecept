@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Timers;
 using Microsoft.Maui.ApplicationModel;
-using InvoiceApp.MAUI.Resources.Strings;
+using static InvoiceApp.MAUI.Resources.Strings;
 
 namespace InvoiceApp.MAUI.ViewModels;
 
