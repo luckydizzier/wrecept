@@ -7,6 +7,12 @@
     <Nullable>enable</Nullable>
     <Threshold>100</Threshold>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <UseMaui>true</UseMaui>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+    <UseMaui>false</UseMaui>
+  </PropertyGroup>
   <PropertyGroup>
     <ExcludeByFile>../InvoiceApp.Data/Migrations/*</ExcludeByFile>
   </PropertyGroup>
