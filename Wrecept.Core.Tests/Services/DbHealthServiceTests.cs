@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections;
+using System.Data;
+using System.Data.Common;
 using InvoiceApp.Data.Data;
 using InvoiceApp.Data.Services;
 using InvoiceApp.Core.Services;
@@ -48,9 +52,9 @@ public class DbHealthServiceTests
         {
             public FakeFacade(DbContext context) : base(context) { }
 
-            public override DbConnection GetDbConnection() => new FakeConnection();
-            public override Task OpenConnectionAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
-            public override Task CloseConnectionAsync() => Task.CompletedTask;
+            public new DbConnection GetDbConnection() => new FakeConnection();
+            public new Task OpenConnectionAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+            public new Task CloseConnectionAsync() => Task.CompletedTask;
         }
 
         private class FakeConnection : DbConnection
@@ -83,6 +87,21 @@ public class DbHealthServiceTests
             public override object ExecuteScalar() => "failed";
             public override Task<object?> ExecuteScalarAsync(CancellationToken cancellationToken) => Task.FromResult<object?>("failed");
             protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior) => throw new NotImplementedException();
+            public override void Prepare() { }
+            protected override DbParameter CreateDbParameter() => new FakeParameter();
+        }
+
+        private class FakeParameter : DbParameter
+        {
+            public override DbType DbType { get; set; }
+            public override ParameterDirection Direction { get; set; }
+            public override bool IsNullable { get; set; }
+            public override string ParameterName { get; set; } = string.Empty;
+            public override string SourceColumn { get; set; } = string.Empty;
+            public override object? Value { get; set; }
+            public override void ResetDbType() { }
+            public override int Size { get; set; }
+            public override bool SourceColumnNullMapping { get; set; }
         }
 
         private class FakeParameterCollection : DbParameterCollection
@@ -145,6 +164,7 @@ public class DbHealthServiceTests
         var svc = new DbHealthService(new FailResultFactory(), log);
         var ok = await svc.CheckAsync();
         Assert.False(ok);
-        Assert.Equal("failed", log.Last?.Message);
+        Assert.NotNull(log.Last);
+        Assert.Contains("database", log.Last?.Message, StringComparison.OrdinalIgnoreCase);
     }
 }

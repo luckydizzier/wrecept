@@ -12,6 +12,8 @@ public class InvoiceServiceTests
     {
         public Task<int> AddAsync(Invoice invoice, CancellationToken ct = default) => Task.FromResult(1);
         public Task<int> AddItemAsync(InvoiceItem item, CancellationToken ct = default) => Task.FromResult(1);
+        public Task RemoveItemAsync(int id, CancellationToken ct = default) => Task.CompletedTask;
+        public Task<string?> GetLatestInvoiceNumberBySupplierAsync(int supplierId, CancellationToken ct = default) => Task.FromResult<string?>(null);
         public Task UpdateHeaderAsync(int id, string number, DateOnly date, DateOnly dueDate, int supplierId, Guid paymentMethodId, bool isGross, CancellationToken ct = default)
         {
             UpdatedId = id;
@@ -133,7 +135,7 @@ public class InvoiceServiceTests
         var service = new InvoiceService(repo, new InvoiceCalculator());
 
         await Assert.ThrowsAsync<ArgumentException>(() =>
-            service.UpdateInvoiceHeaderAsync(0, DateOnly.FromDateTime(DateTime.Today), DateOnly.FromDateTime(DateTime.Today), 1, Guid.NewGuid(), true));
+            service.UpdateInvoiceHeaderAsync(0, "INV", DateOnly.FromDateTime(DateTime.Today), DateOnly.FromDateTime(DateTime.Today), 1, Guid.NewGuid(), true));
     }
 
     [Fact]
