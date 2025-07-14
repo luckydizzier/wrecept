@@ -17,6 +17,13 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
   </ItemGroup>
+  <!-- Exclude stub implementations when building with the real MAUI workload -->
+  <ItemGroup Condition="'$(UseMaui)'=='true'">
+    <Compile Remove="Stubs\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseMaui)'!='true'">
+    <Compile Include="Stubs\**\*.cs" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InvoiceApp.Core\InvoiceApp.Core.csproj" />
     <ProjectReference Include="..\InvoiceApp.Data\InvoiceApp.Data.csproj" />
