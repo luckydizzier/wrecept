@@ -19,8 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\InvoiceApp.Core\InvoiceApp.Core.csproj" />
     <ProjectReference Include="..\..\InvoiceApp.Data\InvoiceApp.Data.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\viewmodels\*.cs" />
+    <ProjectReference Include="..\..\InvoiceApp.MAUI\InvoiceApp.MAUI.csproj" />
   </ItemGroup>
 </Project>

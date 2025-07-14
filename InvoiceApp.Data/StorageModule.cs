@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using InvoiceApp.Plugins.Abstractions;
-
 namespace InvoiceApp.Data;
 
-public class StorageModule : IPlugin
+public static class StorageModule
 {
-    public async Task ConfigureServicesAsync(IServiceCollection services, IDictionary<string, object>? context = null)
+    public static async Task ConfigureServicesAsync(IServiceCollection services, IDictionary<string, object>? context = null)
     {
         var dbPath = context?[("DbPath")] as string ?? string.Empty;
         var userInfoPath = context?[("UserInfoPath")] as string ?? string.Empty;

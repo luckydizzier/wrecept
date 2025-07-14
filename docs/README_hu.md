@@ -60,7 +60,8 @@ InvoiceApp.sln
 A tesztek a következő paranccsal indíthatók:
 
 ```bash
-dotnet test tests/Wrecept.Tests/Wrecept.Tests.csproj
+dotnet test tests/InvoiceApp.Core.Tests/InvoiceApp.Core.Tests.csproj
+dotnet test tests/InvoiceApp.MAUI.Tests/InvoiceApp.MAUI.Tests.csproj
 ```
 
 ## 📦 Csomagolás

@@ -105,7 +105,8 @@ These ensure the program runs immediately in a Windows environment.
 Tests can be run with the following command:
 
 ```bash
-dotnet test tests/Wrecept.Tests/Wrecept.Tests.csproj
+dotnet test tests/InvoiceApp.Core.Tests/InvoiceApp.Core.Tests.csproj
+dotnet test tests/InvoiceApp.MAUI.Tests/InvoiceApp.MAUI.Tests.csproj
 ```
 
 ## 📦 Packaging

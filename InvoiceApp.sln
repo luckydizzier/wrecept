@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceApp.Data", "InvoiceA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceApp.MAUI", "InvoiceApp.MAUI\InvoiceApp.MAUI.csproj", "{1463BE2E-1707-4491-9BEE-34220E47AF7F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1A8A39E0-04BE-467B-8489-E2B55BB3AD1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceApp.Core.Tests", "tests\InvoiceApp.Core.Tests\InvoiceApp.Core.Tests.csproj", "{388A4E4E-EA88-4BA0-8D33-D252D63BA342}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceApp.MAUI.Tests", "tests\InvoiceApp.MAUI.Tests\InvoiceApp.MAUI.Tests.csproj", "{050CAD3D-B2E8-49F9-94F5-E600C664092A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +33,20 @@ Global
 		{1463BE2E-1707-4491-9BEE-34220E47AF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1463BE2E-1707-4491-9BEE-34220E47AF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1463BE2E-1707-4491-9BEE-34220E47AF7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{388A4E4E-EA88-4BA0-8D33-D252D63BA342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{388A4E4E-EA88-4BA0-8D33-D252D63BA342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{388A4E4E-EA88-4BA0-8D33-D252D63BA342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{388A4E4E-EA88-4BA0-8D33-D252D63BA342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{050CAD3D-B2E8-49F9-94F5-E600C664092A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050CAD3D-B2E8-49F9-94F5-E600C664092A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050CAD3D-B2E8-49F9-94F5-E600C664092A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050CAD3D-B2E8-49F9-94F5-E600C664092A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{388A4E4E-EA88-4BA0-8D33-D252D63BA342} = {1A8A39E0-04BE-467B-8489-E2B55BB3AD1B}
+		{050CAD3D-B2E8-49F9-94F5-E600C664092A} = {1A8A39E0-04BE-467B-8489-E2B55BB3AD1B}
 	EndGlobalSection
 EndGlobal

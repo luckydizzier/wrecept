@@ -7,7 +7,4 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\refactor\InvoiceApp.Plugins.Abstractions\InvoiceApp.Plugins.Abstractions.csproj" />
-  </ItemGroup>
 </Project>
