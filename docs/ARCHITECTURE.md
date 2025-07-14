@@ -18,7 +18,7 @@ Az alkalmazás rétegei tisztán el vannak választva, hogy a karbantarthatósá
 4. **Storage** – SQLite + Entity Framework Core konténer, migrációk és repositoryk az `InvoiceApp.Data` projektben.
 
 Minden réteg csak az alatta lévőt éri el, közvetlen átjárás nem megengedett.
-Az elsődleges ablak a `MainWindow`, amely a `StageView` kontrollt jeleníti meg.
+Az elsődleges ablak a `MainPage`, amely a `StageView` kontrollt jeleníti meg.
 `StageView` a menük és az állapotsáv kerete, `StageViewModel` cseréli a tartalmat
  (`InvoiceEditor`, `ProductMaster`, `SupplierMaster`).
 
@@ -96,7 +96,7 @@ Az összesítő mezők kiszámítását a `TotalsViewModel`, míg a sorok kezel�
 
 ## Dialóguskezelés
 
-A modális ablakok megjelenítését a `NavigationService.ShowCenteredDialog` koordinálja. A metódus a `MainWindow` példányát állítja be tulajdonosnak, majd a `DialogHelper.CenterToOwner` hívással középre igazítja a párbeszédablakot, mielőtt meghívja a `ShowDialog` függvényt. Így minden dialógus egységesen, ismétlődő pozicionálási kód nélkül jelenik meg.
+A modális ablakok megjelenítését a `NavigationService.ShowCenteredDialog` koordinálja. A metódus a `MainPage` példányát állítja be tulajdonosnak, majd a `DialogHelper.CenterToOwner` hívással középre igazítja a párbeszédablakot, mielőtt meghívja a `ShowDialog` függvényt. Így minden dialógus egységesen, ismétlődő pozicionálási kód nélkül jelenik meg.
 
 A progress logok szerint a `DialogService` jelenleg csak az `EditEntity` dialógust indítja el, de később ez a szolgáltatás fogja összefogni a különféle modális ablakok megnyitását és esetleges útvonalkezelését. A cél, hogy a ViewModel rétegek ne közvetlenül hozzák létre a dialógusokat, hanem a `DialogService` döntse el, miként és mely nézetekkel jelenjenek meg.
 
@@ -115,7 +115,7 @@ A tervek szerint a projektet többplatformos .NET MAUI megoldássá alakítjuk. 
    - *Services* (`InvoiceApp.Core` interfészek, `InvoiceApp.MAUI` implementációk): a ViewModel réteg által használt üzleti logika.
 
 3. **MVVM (Model–View–ViewModel) Réteg** – a felhasználói felület és a logika szétválasztására:
-   - *Views* (`InvoiceApp.MAUI`): `MainWindow.xaml`, `InvoiceEditor.xaml`, `LookupDialog.xaml`.
+  - *Views* (`InvoiceApp.MAUI`): `MainPage.xaml`, `InvoiceEditor.xaml`, `LookupDialog.xaml`.
    - *ViewModels* (`InvoiceApp.MAUI`): `MainViewModel`, `InvoiceEditorViewModel`, `LookupDialogViewModel` stb.
 
 

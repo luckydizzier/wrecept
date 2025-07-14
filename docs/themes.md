@@ -36,7 +36,7 @@ DataGrid sorok fekete háttérrel és arany kiemeléssel jelennek meg a DOS-hat�
 A `ScreenModeManager` négy előre definiált profil közül választ:
 Small (800x600), Medium (1024x768), Large (1280x1024) és ExtraLarge (1920x1080).
 Az ablakméret és a betűméret a kiválasztott mód szerint frissül, az értékek a
-`%AppData%/Wrecept/settings.json` fájlban tárolódnak.
+`%AppData%/InvoiceApp/settings.json` fájlban tárolódnak.
 
 Az aktuális betűméreteket a `ThemeSizing` osztály állítja be a képernyőmérethez
 rendelve:

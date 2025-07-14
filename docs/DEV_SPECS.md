@@ -60,7 +60,7 @@ The application executes `PRAGMA journal_mode=WAL` every time it opens a databas
 
 | Module            | Description                                      |
 | ----------------- | ------------------------------------------------ |
-| `MainWindow`      | Shell container with top menu and dynamic status bar |
+| `MainPage`      | Shell container with top menu and dynamic status bar |
 | `InvoiceEditor`   | Header + item rows UI with streamlined control |
 | `ProductMaster`   | Searchable product registry and editor           |
 | `SupplierMaster`  | Simple list-and-edit view of vendors             |
@@ -127,7 +127,7 @@ $AppDataDirectory/
 ├── Themes/              # Application Themes
 └── version.txt          # Last known app version
 ```
-During development the `wrecept.db` database is used only for generating migrations.
+During development the `invoiceapp.db` database is used only for generating migrations.
 If no database path is provided the program creates `app.db` inside `FileSystem.AppDataDirectory`.
 
 ---
