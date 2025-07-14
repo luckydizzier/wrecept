@@ -1,6 +1,6 @@
 using InvoiceApp.Core.Enums;
 using InvoiceApp.MAUI.Services;
-using InvoiceApp.MAUI.Input;
+using Microsoft.Maui.Input;
 using Xunit;
 
 namespace InvoiceApp.Tests;
