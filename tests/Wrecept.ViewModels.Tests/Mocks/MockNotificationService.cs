@@ -1,7 +1,7 @@
 using System;
-using Wrecept.Core.Services;
+using InvoiceApp.Core.Services;
 
-namespace Wrecept.ViewModels.Tests.Mocks;
+namespace InvoiceApp.ViewModels.Tests.Mocks;
 
 public class MockNotificationService : INotificationService
 {
