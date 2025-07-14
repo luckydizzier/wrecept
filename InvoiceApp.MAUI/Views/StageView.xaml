@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:InvoiceApp.MAUI.ViewModels"
-             xmlns:views="clr-namespace:InvoiceApp.MAUI.Views.Controls"
+            xmlns:vm="clr-namespace:InvoiceApp.MAUI.ViewModels"
+            xmlns:core="clr-namespace:InvoiceApp.Core.Enums;assembly=InvoiceApp.Core"
+            xmlns:views="clr-namespace:InvoiceApp.MAUI.Views.Controls"
              x:Class="InvoiceApp.MAUI.Views.StageView"
              x:DataType="vm:StageViewModel">
     <Grid Background="{StaticResource StageBackground}">
@@ -14,13 +15,13 @@
         <VerticalStackLayout x:Name="Menu" Spacing="6">
             <Button Text="Termékek"
                     Command="{Binding HandleMenuCommand}"
-                    CommandParameter="{x:Static vm:StageMenuAction.EditProducts}" />
+                    CommandParameter="{x:Static core:StageMenuAction.EditProducts}" />
             <Button Text="Szállítók"
                     Command="{Binding HandleMenuCommand}"
-                    CommandParameter="{x:Static vm:StageMenuAction.EditSuppliers}" />
+                    CommandParameter="{x:Static core:StageMenuAction.EditSuppliers}" />
             <Button Text="Kilépés"
                     Command="{Binding HandleMenuCommand}"
-                    CommandParameter="{x:Static vm:StageMenuAction.ExitApplication}" />
+                    CommandParameter="{x:Static core:StageMenuAction.ExitApplication}" />
         </VerticalStackLayout>
         <ContentPresenter Grid.Row="1" Content="{Binding CurrentViewModel}" />
         <views:StatusBar Grid.Row="2" BindingContext="{Binding StatusBar}" />
