@@ -119,12 +119,14 @@ dotnet publish InvoiceApp.MAUI -f net8.0-windows10.0.19041.0 -c Release \
   -p:WindowsPackageType=MSIX
 ```
 
-macOS and Linux builds use the standard `dotnet publish` command:
+macOS builds use the standard `dotnet publish` command:
 
 ```bash
 dotnet publish InvoiceApp.MAUI -f net8.0-maccatalyst -c Release
-dotnet publish InvoiceApp.MAUI -f net8.0-linux -c Release
 ```
+
+> **Note:** Linux is not an officially supported MAUI target. Attempting to
+> publish with `net8.0-linux` results in `NETSDK1139`.
 
 ---
 

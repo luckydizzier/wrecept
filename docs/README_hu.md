@@ -73,12 +73,14 @@ dotnet publish InvoiceApp.MAUI -f net8.0-windows10.0.19041.0 -c Release \
   -p:WindowsPackageType=MSIX
 ```
 
-macOS és Linux esetén a szokásos `dotnet publish` használható:
+macOS esetén a szokásos `dotnet publish` használható:
 
 ```bash
 dotnet publish InvoiceApp.MAUI -f net8.0-maccatalyst -c Release
-dotnet publish InvoiceApp.MAUI -f net8.0-linux -c Release
 ```
+
+> **Megjegyzés:** A Linux célzás (`net8.0-linux`) jelenleg nem támogatott,
+> használata `NETSDK1139` hibát eredményez.
 
 ---
 
