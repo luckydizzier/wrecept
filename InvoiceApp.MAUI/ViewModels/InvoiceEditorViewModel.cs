@@ -11,9 +11,7 @@ using InvoiceApp.MAUI.Resources;
 using InvoiceApp.Core.Services;
 using InvoiceApp.Core.Enums;
 using Microsoft.Maui.Controls;
-using InvoiceApp.MAUI.Views.Controls;
 using InvoiceApp.MAUI.Views;
-using Controls = InvoiceApp.MAUI.Views.Controls;
 using InvoiceApp.MAUI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Storage;
@@ -193,6 +191,7 @@ private readonly ILogService _log;
     public TotalsViewModel Totals { get; } = new();
     public InvoiceItemEditorViewModel ItemsEditor { get; }
     private Invoice _draft = new();
+    internal Invoice Draft => _draft;
 private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
 
     [ObservableProperty]
@@ -398,7 +397,7 @@ private async Task UpdateSupplierIdAsync(string name)
         if (parameter is VisualElement target)
         {
             InlineCreatorTarget = target;
-            var text = (target as Views.Controls.LookupBox)?.Text ?? string.Empty;
+            var text = (target as Entry)?.Text ?? string.Empty;
             InlineCreator = new SupplierCreatorViewModel(this, _suppliers)
             {
                 Name = text
@@ -411,7 +410,7 @@ private async Task UpdateSupplierIdAsync(string name)
         if (parameter is VisualElement target && target.BindingContext is InvoiceItemRowViewModel row)
         {
             InlineCreatorTarget = target;
-            var name = (target as Views.Controls.LookupBox)?.Text ?? row.Product;
+            var name = (target as Entry)?.Text ?? row.Product;
             InlineCreator = new ProductCreatorViewModel(this, row, _productsService)
             {
                 Name = name
@@ -425,7 +424,7 @@ private async Task UpdateSupplierIdAsync(string name)
         if (parameter is VisualElement target)
         {
             InlineCreatorTarget = target;
-            var name = (target as Controls.LookupBox)?.Text ?? string.Empty;
+            var name = (target as Entry)?.Text ?? string.Empty;
             InlineCreator = new TaxRateCreatorViewModel(this, _taxRates)
             {
                 Name = name

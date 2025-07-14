@@ -76,12 +76,11 @@ public ProductMasterViewModel(IProductService service, ITaxRateService taxRates,
                 await LoadAsync();
             };
 
-            DialogService.EditEntity<Views.EditDialogs.ProductEditorView, ProductEditorViewModel>(
-                vm, vm.OkCommand, vm.CancelCommand);
+            // TODO: implement modal editor for MAUI version
         }
         catch (Exception ex)
         {
-            var log = App.Provider.GetRequiredService<ILogService>();
+            var log = MauiProgram.Services?.GetRequiredService<ILogService>();
             await log.LogError("ProductMasterViewModel.EditSelected", ex);
         }
     }

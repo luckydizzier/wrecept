@@ -72,7 +72,7 @@ public partial class ProductCreatorViewModel : ObservableObject
         _row.ProductGroup = _parent.ProductGroups.FirstOrDefault(g => g.Id == ProductGroupId)?.Name ?? string.Empty;
         _parent.InlineCreator = null;
         if (_parent.IsEditable)
-            await _parent.AddLineItemCommand.ExecuteAsync(null);
+            await _parent.ItemsEditor.AddLineItemCommand.ExecuteAsync(null);
     }
 
     [RelayCommand]

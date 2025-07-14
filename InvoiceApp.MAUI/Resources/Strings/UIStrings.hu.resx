@@ -53,4 +53,16 @@
   <data name="Load_Complete" xml:space="preserve">
     <value>Betöltés kész</value>
   </data>
+  <data name="InvoiceLine_InvalidQuantity" xml:space="preserve">
+    <value>Érvénytelen mennyiség</value>
+  </data>
+  <data name="InvoiceLine_InvalidPrice" xml:space="preserve">
+    <value>Érvénytelen ár</value>
+  </data>
+  <data name="InvoiceLine_TaxRequired" xml:space="preserve">
+    <value>ÁFA kulcs megadása kötelező</value>
+  </data>
+  <data name="InvoiceEditor_ReadOnly" xml:space="preserve">
+    <value>A számla nem szerkeszthető</value>
+  </data>
 </root>

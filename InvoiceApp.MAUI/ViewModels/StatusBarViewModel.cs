@@ -23,7 +23,7 @@ public partial class StatusBarViewModel : ObservableObject
 
     public StatusBarViewModel()
     {
-        _timer = new Timer(1000)
+        _timer = new System.Timers.Timer(1000)
         {
             AutoReset = true
         };
