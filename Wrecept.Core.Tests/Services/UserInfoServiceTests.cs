@@ -23,7 +23,7 @@ public class UserInfoServiceTests : IDisposable
     [Fact]
     public async Task LoadAsync_ReturnsDefaults_IfFileMissing()
     {
-        var path = Path.Combine(_tempDir, "InvoiceApp", "wrecept.json");
+        var path = Path.Combine(_tempDir, "InvoiceApp", "invoiceapp.json");
         var svc = new UserInfoService(path);
         var info = await svc.LoadAsync();
 
@@ -38,7 +38,7 @@ public class UserInfoServiceTests : IDisposable
     [Fact]
     public async Task SaveAsync_WritesFile()
     {
-        var path = Path.Combine(_tempDir, "InvoiceApp", "wrecept.json");
+        var path = Path.Combine(_tempDir, "InvoiceApp", "invoiceapp.json");
         var svc = new UserInfoService(path);
         var info = new UserInfo
         {
@@ -57,7 +57,7 @@ public class UserInfoServiceTests : IDisposable
     [Fact]
     public async Task LoadAsync_ReturnsSavedObject()
     {
-        var path = Path.Combine(_tempDir, "InvoiceApp", "wrecept.json");
+        var path = Path.Combine(_tempDir, "InvoiceApp", "invoiceapp.json");
         var svc = new UserInfoService(path);
         var info = new UserInfo
         {
