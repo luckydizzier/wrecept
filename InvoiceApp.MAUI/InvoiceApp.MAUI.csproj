@@ -2,7 +2,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>
-    <UseMaui Condition="'$(UseMaui)'==''">true</UseMaui>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <SingleProject>true</SingleProject>
@@ -13,6 +12,12 @@
     <ApplicationId>com.example.invoiceapp</ApplicationId>
     <ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)'=='Windows_NT'">
+    <UseMaui>true</UseMaui>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)'!='Windows_NT'">
+    <UseMaui>false</UseMaui>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
