@@ -15,7 +15,7 @@ A Wrecept stabilitását több szinten biztosítjuk.
 2. **Integration tesztek** – Adatbázis műveletek és szolgáltatások együttműködését vizsgáljuk SQLite in-memory módban.
    * Egy külön teszt a fizikai `app.db` fájlon fut, hogy ellenőrizzük a tényleges mentést és betöltést.
 3. **UI tesztek** – A MAUI alkalmazást a cross-platform `MauiUITest` keretrendszerrel futtatjuk emulátorokon és fizikai eszközökön.
-   * A tesztek a `tests/Wrecept.MauiTests` projektben találhatók.
+   * A tesztek a `tests/InvoiceApp.MAUI.Tests` projektben találhatók.
 
 ## Hülyebiztos validáció
 
@@ -32,7 +32,7 @@ A Wrecept stabilitását több szinten biztosítjuk.
   beállítás miatt bármilyen visszaesés hibát eredményez.
   A MAUI projektekhez szükséges környezetet a CI a `dotnet workload install maui` paranccsal készíti elő,
   majd `dotnet build` és `dotnet test` lépéseket futtat minden támogatott platformra.
-* A kódfedettségi statisztikából kizárjuk a `Wrecept.Storage/Migrations` mappa osztályait
+* A kódfedettségi statisztikából kizárjuk az `InvoiceApp.Data/Migrations` mappa osztályait
   az `<ExcludeByFile>` projektbeállítással.
 
   *Megjegyzés: a `wrecept.db` néven szereplő adatbázis csak a migrációk tervezési szakaszában használatos.*

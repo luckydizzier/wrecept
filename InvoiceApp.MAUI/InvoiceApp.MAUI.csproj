@@ -26,6 +26,5 @@
   <ItemGroup>
     <ProjectReference Include="..\InvoiceApp.Core\InvoiceApp.Core.csproj" />
     <ProjectReference Include="..\InvoiceApp.Data\InvoiceApp.Data.csproj" />
-    <ProjectReference Include="..\refactor\InvoiceApp.Plugins.Abstractions\InvoiceApp.Plugins.Abstractions.csproj" />
   </ItemGroup>
 </Project>

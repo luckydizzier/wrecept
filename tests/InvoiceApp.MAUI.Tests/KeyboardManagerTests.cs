@@ -1,6 +1,7 @@
 using InvoiceApp.Core.Enums;
 using InvoiceApp.MAUI.Services;
 using Microsoft.Maui.Input;
+using Xunit;
 
 namespace Microsoft.Maui.Input;
 
@@ -12,7 +13,6 @@ public class KeyEventArgs(Keys key, bool isRepeat) : EventArgs
     public bool IsRepeat { get; } = isRepeat;
 }
 
-using Xunit;
 
 namespace InvoiceApp.Tests;
 
