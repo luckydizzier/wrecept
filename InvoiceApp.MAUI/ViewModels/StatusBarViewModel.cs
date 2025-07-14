@@ -18,7 +18,7 @@ public partial class StatusBarViewModel : ObservableObject
 
 
     [ObservableProperty]
-    private string message = UIStrings.StatusBar_DefaultMessage;
+    private string message = StatusBar_DefaultMessage;
 
 
     public StatusBarViewModel()

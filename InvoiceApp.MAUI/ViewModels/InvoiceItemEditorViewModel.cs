@@ -47,19 +47,19 @@ public partial class InvoiceItemEditorViewModel : ObservableObject
     {
         if (line.Quantity == 0)
         {
-            error = Strings.InvoiceLine_InvalidQuantity;
+            error = InvoiceLine_InvalidQuantity;
             return false;
         }
 
         if (line.UnitPrice < 0)
         {
-            error = Strings.InvoiceLine_InvalidPrice;
+            error = InvoiceLine_InvalidPrice;
             return false;
         }
 
         if (line.TaxRateId == Guid.Empty)
         {
-            error = Strings.InvoiceLine_TaxRequired;
+            error = InvoiceLine_TaxRequired;
             return false;
         }
 
@@ -73,7 +73,7 @@ public partial class InvoiceItemEditorViewModel : ObservableObject
         {
             var edit = EditableItem;
             edit.HasError = true;
-            edit.ErrorMessage = Strings.InvoiceEditor_ReadOnly;
+            edit.ErrorMessage = InvoiceEditor_ReadOnly;
         }
     }
 
