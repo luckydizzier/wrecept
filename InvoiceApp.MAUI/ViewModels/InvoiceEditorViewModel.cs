@@ -320,14 +320,14 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
 
         await Task.WhenAll(paymentTask, supplierTask, taxTask, productTask, unitTask, groupTask);
 
-        FillCollection(PaymentMethods, paymentTask.Result, UIStrings.Load_PaymentMethods, step++, total, progress);
-        FillCollection(Suppliers, supplierTask.Result, UIStrings.Load_Suppliers, step++, total, progress);
-        FillCollection(TaxRates, taxTask.Result, UIStrings.Load_TaxRates, step++, total, progress);
-        FillCollection(Products, productTask.Result, UIStrings.Load_Products, step++, total, progress);
-        FillCollection(Units, unitTask.Result, UIStrings.Load_Units, step++, total, progress);
-        FillCollection(ProductGroups, groupTask.Result, UIStrings.Load_ProductGroups, step++, total, progress);
+        FillCollection(PaymentMethods, paymentTask.Result, Load_PaymentMethods, step++, total, progress);
+        FillCollection(Suppliers, supplierTask.Result, Load_Suppliers, step++, total, progress);
+        FillCollection(TaxRates, taxTask.Result, Load_TaxRates, step++, total, progress);
+        FillCollection(Products, productTask.Result, Load_Products, step++, total, progress);
+        FillCollection(Units, unitTask.Result, Load_Units, step++, total, progress);
+        FillCollection(ProductGroups, groupTask.Result, Load_ProductGroups, step++, total, progress);
 
-        progress?.Report(new ProgressReport { GlobalPercent = 100, SubtaskPercent = 100, Message = UIStrings.Load_Complete });
+        progress?.Report(new ProgressReport { GlobalPercent = 100, SubtaskPercent = 100, Message = Load_Complete });
         IsLoading = false;
     }
 
