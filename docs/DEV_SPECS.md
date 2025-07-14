@@ -1,4 +1,4 @@
-# 📘 Development Specification – Wrecept
+# 📘 Development Specification – InvoiceApp
 
 ---
 title: "Development Specification"
@@ -9,7 +9,7 @@ date: "2025-06-27"
 
 ## 🎯 Purpose
 
-Wrecept is an offline-first, single-user application for invoice recording and procurement workflows. The codebase now targets **.NET MAUI** so the same features work on Windows, macOS and Linux desktops.
+InvoiceApp is an offline-first, single-user application for invoice recording and procurement workflows. The codebase now targets **.NET MAUI** so the same features work on Windows, macOS and Linux desktops.
 
 The design must be:
 

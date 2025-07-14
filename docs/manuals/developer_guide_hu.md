@@ -60,14 +60,14 @@ Ez a dokumentum a projekt fejlesztéséhez szükséges alapvető lépéseket tar
 ## Indítási UI tesztek
 
 A `StartupWindowTests` a teljes indulási folyamatot automatizálja. A tesztek a
-`tests/Wrecept.UiTests` projektben találhatók. Az alkalmazás elérési útját
+`tests/InvoiceApp.UiTests` projektben találhatók. Az alkalmazás elérési útját
 a teszt futáskor relatívan számítjuk ki,
 így nem függ a fejlesztői könyvtárstruktúrától.
 
 ### Tesztek sorrendje
 
 1. **Application_Launches_And_Closes** – egyszerűen megnyitja majd bezárja a főablakot.
-2. **SeedOptions_Cancel_OpensMainWindow** – a „Mintaszámok” ablakban a *Mégse* gombra kattint, majd ellenőrzi, hogy a *Wrecept* főablak jelenik meg.
+2. **SeedOptions_Cancel_OpensMainWindow** – a „Mintaszámok” ablakban a *Mégse* gombra kattint, majd ellenőrzi, hogy az *InvoiceApp* főablak jelenik meg.
 3. **SeedOptions_Ok_ShowsStartupWindow** – az *OK* gombbal elindítja a mintadatok feltöltését, és ellenőrzi, hogy megjelenik az *Indulás* ablak.
 4. **UserInfoEditor_FillFields_Confirms** – első indításkor kitölti a tulajdonosi adatokat, majd az *Enter* billentyűvel megerősít.
 
@@ -76,7 +76,7 @@ A tesztek a `settings.json` állomány törlésével vagy létrehozásával kül
 A fenti esetek egyenként futtathatók például:
 
 ```bash
-dotnet test tests/Wrecept.UiTests/Wrecept.UiTests.csproj --filter "Name=SeedOptions_Ok_ShowsStartupWindow"
+dotnet test tests/InvoiceApp.UiTests/InvoiceApp.UiTests.csproj --filter "Name=SeedOptions_Ok_ShowsStartupWindow"
 ```
 
 Az új tesztsegéd automatikusan kezeli az első indítási ablakokat, és hiba esetén képernyőképet ment az aktuális könyvtárba `error_YYYYMMDD_HHMMSS.png` néven.
