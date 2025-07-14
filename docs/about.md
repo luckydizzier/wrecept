@@ -16,5 +16,5 @@ The Wrecept application is built with the following attributes:
 - **Short description:** An offline capable, keyboard-focused invoice recording tool.
 - Focus and key handling is provided by central services.
 - **License:** Free, open source program and code.
-- **Technologies:** .NET 8, WPF, SQLite, EF Core, MVVM architecture.
+- **Technologies:** .NET 8, MAUI, SQLite, EF Core, MVVM.
 - **History:** Based on the original DOS Clipper RECEPT.EXE written by Tácsi Egon (HA3MN).

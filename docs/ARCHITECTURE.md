@@ -46,7 +46,7 @@ Ezek fölött `InvoiceService`, `ProductService` és mostantól `SupplierService
 Az `InvoiceService` kezeli a fejléc frissítését (`UpdateInvoiceHeaderAsync`) és az archiválást.
 Fejléc mentésekor az `InvoiceLookupViewModel` újratölti a listát és a módosított számlát jelöli ki.
 Az új `RemoveItemAsync` metódus lehetővé teszi egy meglévő tétel törlését adatbázisból.
-Az `IInvoiceExportService` felülete biztosít PDF mentést és nyomtatást, a `PdfInvoiceExporter` a WPF rétegben valósítja meg.
+Az `IInvoiceExportService` felülete biztosít PDF mentést és nyomtatást, a `PdfInvoiceExporter` a MAUI felületen keresztül jeleníti meg a dokumentumokat.
 
 Az `OnModelCreating` metódus indexeket készít a gyakran szűrt mezőkre:
 `Invoices.Date`, `Invoices.SupplierId` és `Products.Name`. A korábbi
@@ -54,7 +54,7 @@ Az `OnModelCreating` metódus indexeket készít a gyakran szűrt mezőkre:
 segítik.
 
 Minden hibát az `ILogService` rögzít, amelyet a Storage réteg `LogService` implementációja valósít meg. A naplók a `%AppData%/Wrecept/logs` mappában napi bontású fájlokba kerülnek.
-Felhasználói üzenetekhez az `INotificationService` ad egységes felületet. WPF alatt a `MessageBoxNotificationService` jeleníti meg a dialógusokat, míg a tesztekben egy csonk "MockNotificationService" működik.
+Felhasználói üzenetekhez az `INotificationService` ad egységes felületet. MAUI alatt a `MessageBoxNotificationService` jeleníti meg a dialógusokat, míg a tesztekben egy csonk "MockNotificationService" működik.
 Az alapvető cégadatokat a `UserInfoService` kezeli. Az adatok a `%AppData%/Wrecept/wrecept.json` fájlban tárolódnak, betöltésük az alkalmazás futása közben történik.
 Az aktuális képernyőmódot a `SettingsService` tartja nyilván `settings.json` fájlban, amit a `ScreenModeManager` olvas be induláskor.
 Az adatbázis integritását az `IDbHealthService` ellenőrzi `PRAGMA integrity_check` parancs futtatásával.
@@ -88,7 +88,7 @@ Ha a második adatlekérdezés is hibát jelez, a részleteket az `ILogService` 
 
 Az alkalmazás betöltésekor a `StartupOrchestrator` fut le, amely két szintű előrehaladási értéket jelent az UI felé. A `ProgressViewModel` által kötött nézet két `ProgressBar`-on keresztül mutatja a globális és részfeladatok százalékos állását, így a felhasználó valós időben látja a migráció és a mintaadatok betöltésének állapotát.
 
-Az első indításkor a `LoadSettingsAsync` metódus a `ISetupFlow` szolgáltatás segítségével kéri be az adatbázis- és cégadatok elérési útvonalát. A `SetupFlow` alapértelmezett implementáció WPF dialógusokat használ, de tesztben könnyen helyettesíthető.
+Az első indításkor a `LoadSettingsAsync` metódus a `ISetupFlow` szolgáltatás segítségével kéri be az adatbázis- és cégadatok elérési útvonalát. A `SetupFlow` alapértelmezett implementáció MAUI oldalakat használ, de tesztben könnyen helyettesíthető.
 A folyamat megszakításakor az `IEnvironmentService` hívódik, így a kilépés tesztkörnyezetben is ellenőrizhető.
 
 Az `InvoiceEditorLayout` megnyitásakor hasonló ablak jelenik meg. A törzsadatok (fizetési módok, szállítók, ÁFA‑kulcsok, termékek, mértékegységek) betöltése lépésenként történik, a második sáv pedig az adott lista elemeinek betöltési arányát írja ki.

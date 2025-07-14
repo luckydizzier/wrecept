@@ -27,7 +27,7 @@ Ez a dokumentum a projekt fejlesztéséhez szükséges alapvető lépéseket tar
    ```
 4. **Futtatás** fejlesztői módban:
    ```bash
-   dotnet run --project Wrecept.Wpf
+   dotnet run --project InvoiceApp.MAUI
    ```
 
 ## Navigáció a projektben
