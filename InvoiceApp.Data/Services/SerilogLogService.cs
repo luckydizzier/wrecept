@@ -13,7 +13,7 @@ public class SerilogLogService : ILogService
     public SerilogLogService()
     {
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        var logDir = Path.Combine(appData, "Wrecept", "logs");
+        var logDir = Path.Combine(appData, "InvoiceApp", "logs");
         try
         {
             Directory.CreateDirectory(logDir);
