@@ -3,10 +3,11 @@ using Microsoft.Maui.Hosting;
 using Microsoft.Maui;
 using Microsoft.Maui.Storage;
 using InvoiceApp.Core;
+using InvoiceApp.Data;
 using InvoiceApp.MAUI.ViewModels;
 using InvoiceApp.MAUI.Views;
 using InvoiceApp.MAUI.Services;
-using InvoiceApp.MAUI.Views.Dialogs;
+using Dialogs = InvoiceApp.MAUI.Views.Dialogs;
 
 namespace InvoiceApp.MAUI;
 

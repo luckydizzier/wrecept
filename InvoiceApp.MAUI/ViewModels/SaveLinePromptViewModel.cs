@@ -28,7 +28,7 @@ public partial class SaveLinePromptViewModel : ObservableObject
         if (_finalize)
             await _parent.FinalizeInvoiceCommand.ExecuteAsync(null);
         else
-            await _parent.AddLineItemAsync();
+            await _parent.ItemsEditor.AddLineItemCommand.ExecuteAsync(null);
         _parent.SavePrompt = null;
         _parent.IsInLineFinalizationPrompt = false;
     }

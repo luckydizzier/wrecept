@@ -43,8 +43,8 @@ public partial class UserInfoEditorViewModel : ObservableObject
 
     public UserInfoEditorViewModel(INotificationService? notifications = null)
     {
-        _notifications = notifications ?? (App.Services != null
-            ? App.Provider.GetRequiredService<INotificationService>()
+        _notifications = notifications ?? (MauiProgram.Services != null
+            ? MauiProgram.Services.GetRequiredService<INotificationService>()
             : new MessageBoxNotificationService());
         OkCommand = new RelayCommand(ExecuteOk, () => IsValid);
         CancelCommand = new RelayCommand(() => OnCancel?.Invoke());

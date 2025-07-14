@@ -19,5 +19,9 @@ public static class Strings
     public static string Load_Units => Get(nameof(Load_Units));
     public static string Load_ProductGroups => Get(nameof(Load_ProductGroups));
     public static string Load_Complete => Get(nameof(Load_Complete));
+    public static string InvoiceLine_InvalidQuantity => Get(nameof(InvoiceLine_InvalidQuantity));
+    public static string InvoiceLine_InvalidPrice => Get(nameof(InvoiceLine_InvalidPrice));
+    public static string InvoiceLine_TaxRequired => Get(nameof(InvoiceLine_TaxRequired));
+    public static string InvoiceEditor_ReadOnly => Get(nameof(InvoiceEditor_ReadOnly));
 }
 
