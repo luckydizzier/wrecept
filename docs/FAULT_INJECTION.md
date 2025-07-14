@@ -20,7 +20,7 @@ Ez a dokumentum részletezi, hogyan teszteljük a Wrecept hibákkal szembeni ell
 
 ## Elvárt viselkedés
 
-* Minden hibaeseményt naplózunk a `%AppData%/Wrecept/logs` könyvtárba.
+* Minden hibaeseményt naplózunk a `%AppData%/InvoiceApp/logs` könyvtárba.
 * A működésnek az adatbiztonság és a felhasználó tájékoztatása mellett kell folytatódnia, vagy szükség esetén biztonságosan leállnia.
 
 ---

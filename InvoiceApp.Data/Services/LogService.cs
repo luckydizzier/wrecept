@@ -11,7 +11,7 @@ public class LogService : ILogService
     public LogService()
     {
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        _logDir = Path.Combine(appData, "Wrecept", "logs");
+        _logDir = Path.Combine(appData, "InvoiceApp", "logs");
     }
 
     public async Task LogError(string message, Exception ex)
