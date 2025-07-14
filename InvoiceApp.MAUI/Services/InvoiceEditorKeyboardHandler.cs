@@ -1,6 +1,5 @@
 using System;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Xaml;
 using InvoiceApp.MAUI.ViewModels;
 
 namespace InvoiceApp.MAUI.Services;

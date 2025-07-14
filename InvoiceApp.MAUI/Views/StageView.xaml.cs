@@ -1,5 +1,6 @@
 using InvoiceApp.MAUI.ViewModels;
 using Microsoft.Maui.Controls;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace InvoiceApp.MAUI.Views;
 
