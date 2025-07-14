@@ -20,13 +20,13 @@ public class InvoiceEditorKeyboardHandler : IKeyboardHandler
         switch (e.Key)
         {
             case Key.Insert:
-                _vm.AddLineItemCommand.Execute(null);
+                _vm.ItemsEditor.AddLineItemCommand.Execute(null);
                 return true;
             case Key.Delete:
                 _vm.ShowArchivePromptCommand.Execute(null);
                 return true;
             case Key.Enter or Key.Return:
-                _vm.SaveEditedItemCommand.Execute(null);
+                _vm.ItemsEditor.SaveEditedItemCommand.Execute(null);
                 return true;
             case Key.Escape:
                 _vm.CloseCommand.Execute(null);

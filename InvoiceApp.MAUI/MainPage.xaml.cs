@@ -13,21 +13,8 @@ public partial class MainPage : ContentPage
         RegisterKeyHandlers();
     }
 
-    protected override void OnHandlerChanged()
-    {
-        base.OnHandlerChanged();
-        if (Handler?.MauiContext?.Window is IWindow window)
-        {
-            window.KeyDown += OnKeyDown;
-        }
-    }
-
-    private void OnKeyDown(object? sender, Microsoft.Maui.Input.KeyEventArgs e)
-    {
-        var km = MauiProgram.Services?.GetService<KeyboardManager>();
-        if (km != null && km.Process(e))
-            e.Handled = true;
-    }
+    // TODO: global key handling will be wired when MAUI exposes cross-platform
+    // window key events. Currently no-op to keep build clean.
 
     private static void RegisterKeyHandlers()
     {
