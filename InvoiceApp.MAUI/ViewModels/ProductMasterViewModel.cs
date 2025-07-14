@@ -80,8 +80,9 @@ public ProductMasterViewModel(IProductService service, ITaxRateService taxRates,
         }
         catch (Exception ex)
         {
-            var log = MauiProgram.Services?.GetRequiredService<ILogService>();
-            await log.LogError("ProductMasterViewModel.EditSelected", ex);
+            var log = MauiProgram.Services?.GetService<ILogService>();
+            if (log is not null)
+                await log.LogError("ProductMasterViewModel.EditSelected", ex);
         }
     }
 }
