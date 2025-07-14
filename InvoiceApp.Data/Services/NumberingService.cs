@@ -23,21 +23,21 @@ public class NumberingService : INumberingService
         var last = await _invoices.GetLatestInvoiceNumberBySupplierAsync(supplierId, ct);
         if (!string.IsNullOrWhiteSpace(last))
         {
-            int end = last.Length - 1;
-            while (end >= 0 && !char.IsDigit(last[end])) end--;
-            int digitEnd = end;
-            while (end >= 0 && char.IsDigit(last[end])) end--;
+            int start = 0;
+            while (start < last.Length && !char.IsDigit(last[start])) start++;
+            int end = start;
+            while (end < last.Length && char.IsDigit(last[end])) end++;
 
-            if (digitEnd >= 0)
+            if (start < end)
             {
-                var prefix = last.Substring(0, end + 1);
-                var digits = last.Substring(end + 1, digitEnd - end);
-                var suffix = last.Substring(digitEnd + 1);
+                var prefix = last[..start];
+                var digits = last[start..end];
+                var suffix = last[end..];
 
                 if (int.TryParse(digits, out var num))
                 {
                     var next = (num + 1).ToString().PadLeft(digits.Length, '0');
-                    return prefix + next + suffix;
+                    return string.Concat(prefix, next, suffix);
                 }
             }
         }

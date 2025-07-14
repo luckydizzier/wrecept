@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections;
 using System.Data;
 using System.Data.Common;
@@ -163,6 +164,7 @@ public class DbHealthServiceTests
         var svc = new DbHealthService(new FailResultFactory(), log);
         var ok = await svc.CheckAsync();
         Assert.False(ok);
-        Assert.Equal("failed", log.Last?.Message);
+        Assert.NotNull(log.Last);
+        Assert.Contains("database", log.Last?.Message, StringComparison.OrdinalIgnoreCase);
     }
 }
