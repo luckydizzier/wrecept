@@ -92,9 +92,9 @@ InvoiceApp.sln
 The MAUI project lives in `InvoiceApp.MAUI` and contains the following basics:
 
 * `App.xaml` and `App.xaml.cs` – application configuration
-* `MainWindow.xaml` – main window
+* `MainPage.xaml` – main window
 * `App.xaml.cs` holds DI and startup logic
-* `MainWindow` loads the `StageView` layout
+* `MainPage` loads the `StageView` layout
 
 These ensure the program runs immediately in a Windows environment.
 

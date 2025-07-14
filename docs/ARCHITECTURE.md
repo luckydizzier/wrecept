@@ -53,9 +53,9 @@ Az `OnModelCreating` metódus indexeket készít a gyakran szűrt mezőkre:
 `TaxRate` és `Unit` indexekhez hasonlóan ezek is a lekérdezések gyorsítását
 segítik.
 
-Minden hibát az `ILogService` rögzít, amelyet a Storage réteg `LogService` implementációja valósít meg. A naplók a `%AppData%/Wrecept/logs` mappában napi bontású fájlokba kerülnek.
+Minden hibát az `ILogService` rögzít, amelyet a Storage réteg `LogService` implementációja valósít meg. A naplók a `%AppData%/InvoiceApp/logs` mappában napi bontású fájlokba kerülnek.
 Felhasználói üzenetekhez az `INotificationService` ad egységes felületet. MAUI alatt a `MessageBoxNotificationService` jeleníti meg a dialógusokat, míg a tesztekben egy csonk "MockNotificationService" működik.
-Az alapvető cégadatokat a `UserInfoService` kezeli. Az adatok a `%AppData%/Wrecept/wrecept.json` fájlban tárolódnak, betöltésük az alkalmazás futása közben történik.
+Az alapvető cégadatokat a `UserInfoService` kezeli. Az adatok a `%AppData%/InvoiceApp/invoiceapp.json` fájlban tárolódnak, betöltésük az alkalmazás futása közben történik.
 Az aktuális képernyőmódot a `SettingsService` tartja nyilván `settings.json` fájlban, amit a `ScreenModeManager` olvas be induláskor.
 Az adatbázis integritását az `IDbHealthService` ellenőrzi `PRAGMA integrity_check` parancs futtatásával.
 Az utolsó megnyitott számla azonosítóját a `SessionService` jegyzi meg a `session.json` fájlban.

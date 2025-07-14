@@ -7,9 +7,9 @@ date: "2025-06-29"
 
 # ℹ️ About
 
-The Wrecept application is built with the following attributes:
+The InvoiceApp application is built with the following attributes:
 
-- **Name:** Wrecept
+- **Name:** InvoiceApp
 - **Version:** 0.1 (versioning is still being introduced)
 - **Build date:** 2025-06-29 (UTC)
 - **Developers:** Tankó Ferenc & ChatGPT Codex Agents (<tankoferenc@icloud.com>)

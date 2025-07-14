@@ -7,13 +7,13 @@ date: "2025-06-27"
 
 # 📗 Felhasználói kézikönyv
 
-Ez a dokumentum bemutatja a Wrecept telepítésének és használatának alapjait.
+Ez a dokumentum bemutatja az InvoiceApp telepítésének és használatának alapjait.
 
 ## Telepítés és első indítás
 
 1. Töltsd le a kiadott csomagot, majd csomagold ki egy tetszőleges mappába.
 2. Győződj meg róla, hogy a **.NET Desktop Runtime 8** elérhető a gépen.
-3. Indítsd el a `Wrecept.Wpf.exe` állományt. Az első indításkor megadhatod a konfigurációs fájl helyét, vagy elfogadhatod az alapértelmezést.
+3. Indítsd el az MAUI alkalmazás futtatható állományát (például `InvoiceApp.MAUI.exe`). Az első indításkor megadhatod a konfigurációs fájl helyét, vagy elfogadhatod az alapértelmezést.
 
 ## Alapvető navigáció
 

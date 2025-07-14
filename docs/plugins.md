@@ -1,10 +1,10 @@
 # Plug-in architektúra
 
-Ez a dokumentum bemutatja, hogyan bővíthető a Wrecept moduláris plug-inekkel.
+Ez a dokumentum bemutatja, hogyan bővíthető az InvoiceApp moduláris plug-inekkel.
 
 ## IPlugin interfész
 
-A `refactor/Wrecept.Plugins.Abstractions` projekt tartalmazza az `IPlugin` interfészt és a `PluginLoader` segédosztályt.
+A `refactor/InvoiceApp.Plugins.Abstractions` projekt tartalmazza az `IPlugin` interfészt és a `PluginLoader` segédosztályt.
 
 ```csharp
 public interface IPlugin
@@ -17,7 +17,7 @@ A `PluginLoader.LoadPluginsAsync` metódus betölti a megadott mappában találh
 
 ## Saját modulok
 
-Minden projekt létrehozhat egy modulosztályt, amely implementálja az `IPlugin` interfészt és regisztrálja a szükséges szolgáltatásokat. Például a `Wrecept.Wpf` projekt a `WpfModule` osztályt tartalmazza.
+Minden projekt létrehozhat egy modulosztályt, amely implementálja az `IPlugin` interfészt és regisztrálja a szükséges szolgáltatásokat. Például az `InvoiceApp.MAUI` projekt egy `MauiModule` osztályt tartalmaz.
 
 A host alkalmazás az indításkor betölti a plug-ineket:
 

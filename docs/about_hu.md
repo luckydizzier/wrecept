@@ -7,9 +7,9 @@ date: "2025-06-29"
 
 # ℹ️ Névjegy
 
-A Wrecept program az alábbi adatokkal rendelkezik:
+Az InvoiceApp program az alábbi adatokkal rendelkezik:
 
-- **Program neve:** Wrecept
+- **Program neve:** InvoiceApp
 - **Verzió:** 0.1 (a verziókezelés bevezetés alatt áll)
 - **Build dátuma:** 2025-06-29 (UTC)
 - **Fejlesztő:** Tankó Ferenc & ChatGPT Codex Agents (<tankoferenc@icloud.com>)

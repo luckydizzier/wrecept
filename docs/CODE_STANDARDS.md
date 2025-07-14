@@ -11,7 +11,7 @@ A kód minden rétegében egységes konvenciókat követünk, hogy a projekt át
 
 ## Naming
 
-* **Namespace**: `Wrecept.<Layer>.<Module>`
+* **Namespace**: `InvoiceApp.<Layer>.<Module>`
 * **Osztályok**: PascalCase
 * **Mezők**: `_camelCase`
 * **Fájlok**: az osztály nevét viselik
