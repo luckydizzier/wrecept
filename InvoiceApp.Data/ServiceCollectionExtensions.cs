@@ -13,7 +13,7 @@ namespace InvoiceApp.Data;
 
 public static class ServiceCollectionExtensions
 {
-    public static async Task AddStorageAsync(this IServiceCollection services, string dbPath, string userInfoPath, string settingsPath)
+    public static Task AddStorageAsync(this IServiceCollection services, string dbPath, string userInfoPath, string settingsPath)
     {
         if (string.IsNullOrWhiteSpace(dbPath))
         {
@@ -50,5 +50,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDatabaseRecoveryService>(sp =>
             new DatabaseRecoveryService(dbPath, sp.GetRequiredService<IDbContextFactory<AppDbContext>>(), sp.GetRequiredService<ILogService>()));
         services.AddSingleton<IDatabaseInitializer, DatabaseInitializer>();
+
+        return Task.CompletedTask;
     }
 }
