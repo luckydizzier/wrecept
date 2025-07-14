@@ -12,7 +12,7 @@ public class NullNumberingServiceTests
     {
         var service = new NullNumberingService();
 
-        var result = await service.GetNextInvoiceNumberAsync(CancellationToken.None);
+        var result = await service.GetNextInvoiceNumberAsync(0, CancellationToken.None);
 
         Assert.Equal(string.Empty, result);
     }

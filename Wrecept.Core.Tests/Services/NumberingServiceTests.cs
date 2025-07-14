@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using InvoiceApp.Core.Models;
 using InvoiceApp.Core.Repositories;
 using InvoiceApp.Data.Services;
 using Xunit;
