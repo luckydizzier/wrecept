@@ -27,9 +27,9 @@ public class WalPragmaTests
         var factory = provider.GetRequiredService<IDbContextFactory<AppDbContext>>();
         await using var ctx = await factory.CreateDbContextAsync();
         await ctx.Database.OpenConnectionAsync();
-        await using var cmd = ctx.Database.GetDbConnection().CreateCommand();
+        await using var cmd = ctx.Database.GetDbConnection()!.CreateCommand();
         cmd.CommandText = "PRAGMA journal_mode";
-        var mode = (string)await cmd.ExecuteScalarAsync();
+        var mode = (await cmd.ExecuteScalarAsync())?.ToString() ?? string.Empty;
         await ctx.Database.CloseConnectionAsync();
 
         Assert.Equal("wal", mode.ToLowerInvariant());

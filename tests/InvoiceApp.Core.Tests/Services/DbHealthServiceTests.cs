@@ -52,13 +52,14 @@ public class DbHealthServiceTests
         {
             public FakeFacade(DbContext context) : base(context) { }
 
-            public new DbConnection GetDbConnection() => new FakeConnection();
-            public new Task OpenConnectionAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
-            public new Task CloseConnectionAsync() => Task.CompletedTask;
+            public DbConnection GetDbConnection() => new FakeConnection();
+            public Task OpenConnectionAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+            public Task CloseConnectionAsync() => Task.CompletedTask;
         }
 
         private class FakeConnection : DbConnection
         {
+#pragma warning disable CS8765
             public override string ConnectionString { get; set; } = string.Empty;
             public override string Database => string.Empty;
             public override string DataSource => string.Empty;
@@ -70,10 +71,12 @@ public class DbHealthServiceTests
             public override Task OpenAsync(CancellationToken cancellationToken) => Task.CompletedTask;
             protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel) => throw new NotImplementedException();
             protected override DbCommand CreateDbCommand() => new FakeCommand();
+#pragma warning restore CS8765
         }
 
         private class FakeCommand : DbCommand
         {
+#pragma warning disable CS8765
             public override string CommandText { get; set; } = string.Empty;
             public override int CommandTimeout { get; set; }
             public override CommandType CommandType { get; set; }
@@ -89,10 +92,12 @@ public class DbHealthServiceTests
             protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior) => throw new NotImplementedException();
             public override void Prepare() { }
             protected override DbParameter CreateDbParameter() => new FakeParameter();
+#pragma warning restore CS8765
         }
 
         private class FakeParameter : DbParameter
         {
+#pragma warning disable CS8765
             public override DbType DbType { get; set; }
             public override ParameterDirection Direction { get; set; }
             public override bool IsNullable { get; set; }
@@ -102,10 +107,12 @@ public class DbHealthServiceTests
             public override void ResetDbType() { }
             public override int Size { get; set; }
             public override bool SourceColumnNullMapping { get; set; }
+#pragma warning restore CS8765
         }
 
         private class FakeParameterCollection : DbParameterCollection
         {
+#pragma warning disable CS8765 // Nullability of parameter doesn't match base member
             public override int Count => 0;
             public override object SyncRoot { get; } = new();
             public override int Add(object value) => 0;
@@ -128,6 +135,7 @@ public class DbHealthServiceTests
             protected override DbParameter GetParameter(string parameterName) => throw new NotImplementedException();
             protected override void SetParameter(int index, DbParameter value) { }
             protected override void SetParameter(string parameterName, DbParameter value) { }
+#pragma warning restore CS8765
         }
     }
 

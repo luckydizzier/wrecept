@@ -18,7 +18,7 @@ public class WalPragmaInterceptorTests
         await using (var cmd = connection.CreateCommand())
         {
             cmd.CommandText = "PRAGMA journal_mode";
-            var initial = (string)await cmd.ExecuteScalarAsync();
+            var initial = (await cmd.ExecuteScalarAsync())?.ToString() ?? string.Empty;
             Assert.NotEqual("wal", initial.ToLowerInvariant());
         }
 
@@ -28,7 +28,7 @@ public class WalPragmaInterceptorTests
         await using (var cmd = connection.CreateCommand())
         {
             cmd.CommandText = "PRAGMA journal_mode";
-            var mode = (string)await cmd.ExecuteScalarAsync();
+            var mode = (await cmd.ExecuteScalarAsync())?.ToString() ?? string.Empty;
             Assert.Equal("wal", mode.ToLowerInvariant());
         }
     }
