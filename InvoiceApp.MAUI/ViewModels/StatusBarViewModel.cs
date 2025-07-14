@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Timers;
 using Microsoft.Maui.ApplicationModel;
-using InvoiceApp.MAUI.Resources;
+using InvoiceApp.MAUI.Resources.Strings;
 
 namespace InvoiceApp.MAUI.ViewModels;
 
@@ -18,7 +18,7 @@ public partial class StatusBarViewModel : ObservableObject
 
 
     [ObservableProperty]
-    private string message = Resources.Strings.StatusBar_DefaultMessage;
+    private string message = UIStrings.StatusBar_DefaultMessage;
 
 
     public StatusBarViewModel()

@@ -7,7 +7,7 @@ using InvoiceApp.Core.Enums;
 using System.IO;
 using InvoiceApp.Core.Entities;
 using InvoiceApp.Core.Services;
-using InvoiceApp.MAUI.Resources;
+using InvoiceApp.MAUI.Resources.Strings;
 using InvoiceApp.MAUI.Views;
 using InvoiceApp.MAUI.Services;
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using InvoiceApp.Core.Models;
 using InvoiceApp.Core.Utilities;
-using InvoiceApp.MAUI.Resources;
+using InvoiceApp.MAUI.Resources.Strings;
 using InvoiceApp.Core.Services;
 using InvoiceApp.Core.Enums;
 using Microsoft.Maui.Controls;
@@ -320,14 +320,14 @@ private readonly Dictionary<(int, int), LastUsageData> _usageCache = new();
 
         await Task.WhenAll(paymentTask, supplierTask, taxTask, productTask, unitTask, groupTask);
 
-        FillCollection(PaymentMethods, paymentTask.Result, Resources.Strings.Load_PaymentMethods, step++, total, progress);
-        FillCollection(Suppliers, supplierTask.Result, Resources.Strings.Load_Suppliers, step++, total, progress);
-        FillCollection(TaxRates, taxTask.Result, Resources.Strings.Load_TaxRates, step++, total, progress);
-        FillCollection(Products, productTask.Result, Resources.Strings.Load_Products, step++, total, progress);
-        FillCollection(Units, unitTask.Result, Resources.Strings.Load_Units, step++, total, progress);
-        FillCollection(ProductGroups, groupTask.Result, Resources.Strings.Load_ProductGroups, step++, total, progress);
+        FillCollection(PaymentMethods, paymentTask.Result, UIStrings.Load_PaymentMethods, step++, total, progress);
+        FillCollection(Suppliers, supplierTask.Result, UIStrings.Load_Suppliers, step++, total, progress);
+        FillCollection(TaxRates, taxTask.Result, UIStrings.Load_TaxRates, step++, total, progress);
+        FillCollection(Products, productTask.Result, UIStrings.Load_Products, step++, total, progress);
+        FillCollection(Units, unitTask.Result, UIStrings.Load_Units, step++, total, progress);
+        FillCollection(ProductGroups, groupTask.Result, UIStrings.Load_ProductGroups, step++, total, progress);
 
-        progress?.Report(new ProgressReport { GlobalPercent = 100, SubtaskPercent = 100, Message = Resources.Strings.Load_Complete });
+        progress?.Report(new ProgressReport { GlobalPercent = 100, SubtaskPercent = 100, Message = UIStrings.Load_Complete });
         IsLoading = false;
     }
 
