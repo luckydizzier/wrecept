@@ -1,5 +1,5 @@
-using InvoiceApp.MAUI.ViewModels;
 using InvoiceApp.Core.Enums;
+using InvoiceApp.MAUI.ViewModels;
 
 namespace InvoiceApp.MAUI.Services;
 
@@ -25,7 +25,7 @@ public class StageMenuHandler
         _state = state;
     }
 
-    public Task HandleAsync(StageViewModel stage, InvoiceApp.MAUI.ViewModels.StageMenuAction action)
+    public Task HandleAsync(StageViewModel stage, StageMenuAction action)
     {
         _state.LastView = action;
         switch (action)

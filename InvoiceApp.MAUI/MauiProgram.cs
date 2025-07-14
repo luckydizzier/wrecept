@@ -46,6 +46,7 @@ public static class MauiProgram
         services.AddSingleton<InvoiceEditorViewModel>();
         services.AddTransient<ProductMasterViewModel>();
         services.AddTransient<SupplierMasterViewModel>();
+        services.AddSingleton<ScreenModeManager>();
         services.AddTransient<StageMenuHandler>();
         services.AddTransient<StageMenuKeyboardHandler>();
         services.AddTransient<MasterDataKeyboardHandler>();
