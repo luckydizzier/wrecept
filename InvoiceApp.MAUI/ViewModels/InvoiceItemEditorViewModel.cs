@@ -6,7 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using InvoiceApp.Core.Models;
 using InvoiceApp.Core.Services;
-using InvoiceApp.MAUI.Resources.Strings;
+using static InvoiceApp.MAUI.Resources.Strings;
 using InvoiceApp.MAUI.Services;
 
 namespace InvoiceApp.MAUI.ViewModels;
