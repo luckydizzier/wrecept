@@ -25,6 +25,7 @@
   <!-- Exclude stub implementations when building with the real MAUI workload -->
   <ItemGroup Condition="'$(UseMaui)'=='true'">
     <Compile Remove="Stubs\**\*.cs" />
+    <Compile Include="Platforms/WinKeyStubs.cs" />
   </ItemGroup>
   <!-- Ensure stale MAUI-generated files are not compiled when stubs are used -->
   <ItemGroup Condition="'$(UseMaui)'!='true'">
