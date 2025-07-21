@@ -4,11 +4,7 @@ using Microsoft.Maui.Hosting;
 
 namespace InvoiceApp.MAUI;
 
-#if WINDOWS
 public class Program : MauiWinUIApplication
-#else
-public class Program : MauiApplication
-#endif
 {
     protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 
