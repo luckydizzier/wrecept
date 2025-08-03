@@ -20,7 +20,7 @@ This project follows a modular, agent-driven workflow to support maintainable, k
 **Scope:** Designs and maintains the domain model and business logic.
 
 - Defines entities (Invoice, Customer, Product, TaxRate, etc.)
-- Handles validation logic (e.g. invoice total consistency)
+- Handles validation logic (e.g. invoice vat,total consistency)
 - Coordinates with `db_agent` to reflect model updates in schema.
 - Ensures domain layer remains framework-agnostic.
 
@@ -90,8 +90,6 @@ This project follows a modular, agent-driven workflow to support maintainable, k
 **Scope:** Manages data import/export and third-party integration.
 
 - Handles JSON, CSV, PDF, or XML import/export modules.
-- Integrates with tax authority endpoints (e.g. NAV online számla API).
-- Builds offline-safe sync logic for future modules.
 
 ---
 
