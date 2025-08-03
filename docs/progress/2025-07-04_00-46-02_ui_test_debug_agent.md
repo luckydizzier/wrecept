@@ -1,3 +1,0 @@
-- UserInfoEditorView mezői AutomationId-val bővítve.
-- UI tesztek frissítve: első indítási dialógusok automatikusan bezáródnak.
-- Új teszt `UserInfoEditor_FillFields_Confirms` hozzáadva.
