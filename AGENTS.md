@@ -13,6 +13,7 @@ This project follows a modular, agent-driven workflow to support maintainable, k
 - Resolves `NEEDS_HUMAN_DECISION` items.
 - Manages roadmap and milestone planning.
 - Ensures workflow protocol and styleguide compliance.
+-- List all open tasks in `TODO.md` grouped by agent. Mark those that have not been updated for 30+ mins with `NEEDS_REVIEW`. Generate a summary report in `docs/status/summary_dd-mm-yyyy.md`.
 
 ---
 
