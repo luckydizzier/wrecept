@@ -111,15 +111,3 @@ This project follows a modular, agent-driven workflow to support maintainable, k
 
 ---
 
-## 🗂 Example File Mapping
-| Agent          | Primary Files/Paths                                 |
-|----------------|-----------------------------------------------------|
-| `domain_agent` | `Domain/*.cs`, `Validation/*.cs`                    |
-| `db_agent`     | `Infrastructure/Persistence/*.cs`, `.csproj`, `Migrations/` |
-| `logic_agent`  | `Services/*.cs`, `UseCases/`                        |
-| `ui_agent`     | `Views/`, `ViewModels/`, `Resources/`, `App.xaml`   |
-| `test_agent`   | `Tests/`, `TestFixtures/`                           |
-| `doc_agent`    | `README.md`, `TODO.md`, `docs/progress/`            |
-
----
-
