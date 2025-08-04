@@ -25,6 +25,10 @@ public class AppDbContext : DbContext
                 .Build();
 
             var dbPath = configuration["DatabasePath"];
+            if (string.IsNullOrWhiteSpace(dbPath))
+            {
+                throw new InvalidOperationException("DatabasePath configuration value is missing or empty.");
+            }
             optionsBuilder.UseSqlite($"Data Source={dbPath}");
         }
     }
