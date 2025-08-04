@@ -17,6 +17,7 @@
 ## doc_agent
 - [ ] `IN_PROGRESS` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
 - [x] `DONE` First use of the `docs/progress/` logging system
+- [x] `DONE` Mention progress logs in `README.md`
 - [ ] `TODO NEEDS_REVIEW` Write installation guide (`INSTALL.md`)
 - [ ] `TODO NEEDS_REVIEW` Update README.md (feature list, screenshots)
 
