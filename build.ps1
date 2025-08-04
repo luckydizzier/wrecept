@@ -27,6 +27,9 @@ param(
 
 $project = Join-Path $PSScriptRoot "Wrecept.WpfApp/Wrecept.WpfApp.csproj"
 
+if (-not (Test-Path $project)) {
+    throw "Project file not found: $project"
+}
 $publishArgs = @(
     $project,
     '-c', $Configuration,
