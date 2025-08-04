@@ -12,7 +12,7 @@
 ## root_agent
 - [x] `DONE` Create and finalise structured `AGENTS.md`
 - [x] `DONE` Final build script (standalone, Windows .exe)
-- [ ] `TODO NEEDS_REVIEW` Licensing decision (`LICENSE`)
+- [x] `DONE` Licensing decision (`LICENSE`)
 
 ## doc_agent
 - [ ] `TODO NEEDS_REVIEW` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
