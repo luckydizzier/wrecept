@@ -15,8 +15,8 @@
 - [x] `DONE` Licensing decision (`LICENSE`)
 
 ## doc_agent
-- [ ] `TODO NEEDS_REVIEW` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
-- [ ] `TODO NEEDS_REVIEW` First use of the `docs/progress/` logging system
+- [ ] `IN_PROGRESS` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
+- [x] `DONE` First use of the `docs/progress/` logging system
 - [ ] `TODO NEEDS_REVIEW` Write installation guide (`INSTALL.md`)
 - [ ] `TODO NEEDS_REVIEW` Update README.md (feature list, screenshots)
 
