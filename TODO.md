@@ -12,7 +12,7 @@
 
 - [ ] `TODO` Create and finalise structured `AGENTS.md`
 - [ ] `TODO` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
-- [ ] `TODO` Create and initialise `TODO.md` ✅
+- [ ] `DONE` Create and initialise `TODO.md` ✅
 - [ ] `TODO` First use of the `docs/progress/` logging system 
 - [ ] `TODO` First version of `StartupOrchestrator` (DI + DB check + sample data)
 
