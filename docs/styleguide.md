@@ -9,14 +9,13 @@ All contributors must follow these conventions to ensure consistency, readabilit
 
 ```
 wrecept/
-├── App/                      # WPF UI (Views, XAML, Resources)
-├── Core/                     # Domain models, logic, service layer
-├── Data/                     # EF Core DbContext, Repositories
-├── Infrastructure/           # Logging, Configuration, DI, Startup
-├── Docs/                     # Markdown documentation
-├── Tests/                    # xUnit test projects
-├── Agents/                   # AGENTS.md files and coordination logic
-└── TODO.md                   # Task tracker (updated per workflow)
+├── Wrecept.WpfApp/           # WPF application
+├── docs/                     # Project documentation
+├── build.ps1                 # Build script
+├── wrecept.sln               # Solution file
+├── README.md                 # Project overview
+├── TODO.md                   # Task tracker (updated per workflow)
+└── AGENTS.md                 # Agent instructions
 ```
 
 ---
