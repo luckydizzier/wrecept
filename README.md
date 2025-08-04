@@ -16,7 +16,7 @@ Wrecept is an offline-first invoicing desktop application built with C# (.NET 8)
 
 ## Installation
 
-> **Note:** A detailed installation guide will be added soon. For now, ensure you have .NET 8 SDK installed and run the application by building the solution.
+See the [installation guide](docs/INSTALL.md) for prerequisites and step-by-step setup instructions. In short, ensure the .NET 8 SDK is installed and run the application by building the solution.
 
 ## Progress Logs
 
