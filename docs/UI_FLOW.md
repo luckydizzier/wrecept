@@ -1,50 +1,39 @@
-UI_FLOW.md
+# UI Flow
 
-🧱 Overview
+## Overview
 
-This document describes the workflow of the Wrecept user interface. It details the navigation model, expected behaviors, and data entry steps, in line with inline editing support.
+This document describes the workflow of the current Wrecept user interface. The application has been simplified to focus on invoice management, and currently the only screen implemented is an **Invoice Editor View**. Earlier versions mentioned a top menu and separate screens, but those features were removed during refactoring and are no longer part of the program.
 
-📌 Navigation model
+## Invoice Editor View
 
-When launched, an empty screen appears with the Accounts menu item selected in the top menu bar.
+When you launch Wrecept, the application opens directly into the Invoice Editor. The window is divided into two panes:
 
-📀 Screen layouts
+- **Invoice list (left pane)**: displays existing invoices. You can select an invoice to load its details or create a new one using the "New" command.
+- **Editor area (right pane)**: contains entry fields for supplier, date, invoice number, payment method and a table for line items (product, quantity, unit, price, VAT and total). Action buttons allow you to add or remove lines and save the invoice.
 
-🔳 Main menu flow
+```
+|--------------- List ---------------| |----------- Invoice editor -----------|
+| [Invoice number] Supplier: [____] | | Supplier:      [___________] [\u25bc] |
+| [Date]            Date:    [____] | | Date:          [_____] [\u25bc]       |
+| [Supplier]        Number:  [____] | | Payment method:[_____] [\u25bc]       |
+|-------------------------------     | |--------------------------------------|
+|                                     | | Product | Qty | Unit | Price | VAT |
+|                                     | | [Add]    [  ] [   ] [     ] [   ] |
+|                                     | | ... previously entered lines ...   |
+|-------------------------------------| |--------------------------------------|
+```
 
-┌──────────────────────────────────────────────────────┐
-│ [Accounts] [Stocks] [Lists] [Maintenance] [Contacts]│
-│                                                      │
-│ > Incoming delivery notes │
-└──────────────────────────────────────────────────────┘
+### Keyboard navigation
 
-🧾 Invoice editor view
+All actions in the Invoice Editor can be performed using the keyboard. Use the **Tab** key to move between input fields and **Enter** to confirm entries. Arrow keys navigate the invoice list on the left. The application respects standard WPF accessibility guidelines.
 
-┌───── List ────┬──────── Invoice editor ───────────────┐
-│ [Invoice number] │ Supplier: [              ] │
-│ [Date]        │ Date:    [2025-08-04  ] │
-│ [Supplier] │ Number: [              ] │
-│                │ Payment method: [            ][ ] Net invoice │
-│                ├──────────────────────────────────────────┤
-│                │ Product  Qty. Group Unit price  VAT │
-│                │ [Edit] [  1] ... │
-│                │ ... Previously entered lines ... │
-│                │                                            │
-└────────────────┴──────────────────────────────────────────┘
+### Data persistence
 
-📌 Restrictions
+Invoice data is saved to the local SQLite database when you click **Save**. Unsaved changes are highlighted in the title bar. Application settings are stored in `wrecept.json` (feature planned).
 
-- Archiving can only be done according to business rules and cannot be modified afterwards.
-- The Gross designation determines the pricing throughout.
-- The interface must always reflect which operations are available in the current state.
-### Recording owner data
+## Restrictions and future work
 
-When first launched, `UserInfoWindow` requests the company details. The fields are mandatory, after the
-last
-field the focus moves to the `OK` button and a confirmation message appears:
-"Are the details correct?". `Enter` accepts, `Escape` takes you back to the previous field
-. All required fields are highlighted in red until they are filled in.
-It then checks the database for the entry and, if it does not exist, creates it after confirmation.
+- Only the Invoice Editor is currently implemented. References to other dialogs such as a `UserInfoWindow` originate from outdated documentation and should be ignored.
+- A top-level navigation menu and additional views (e.g., user info, settings) are planned for future releases. These will be documented once implemented.
 
-For later modifications, the *Service / Edit owner...* menu item opens the same
-`UserInfoWindow` dialog.
+For a broader overview of design principles and coding style, see `docs/styleguide.md`.
