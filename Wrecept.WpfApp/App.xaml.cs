@@ -28,7 +28,7 @@ public partial class App : Application
             {
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlite($"Data Source={context.Configuration["DatabasePath"]}"));
-                services.AddSingleton<IDemoDataService, DemoDataService>();
+                services.AddScoped<IDemoDataService, DemoDataService>();
                 services.AddSingleton<StartupOrchestrator>();
                 services.AddSingleton<InvoiceEditorViewModel>();
                 services.AddTransient<InvoiceEditorView>();
