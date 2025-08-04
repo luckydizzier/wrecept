@@ -11,7 +11,7 @@
 
 ## root_agent
 - [x] `DONE` Create and finalise structured `AGENTS.md`
-- [ ] `TODO NEEDS_REVIEW` Final build script (standalone, Windows .exe)
+- [x] `DONE` Final build script (standalone, Windows .exe)
 - [ ] `TODO NEEDS_REVIEW` Licensing decision (`LICENSE`)
 
 ## doc_agent
