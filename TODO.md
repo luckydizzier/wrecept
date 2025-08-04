@@ -4,63 +4,50 @@
 - `TODO`: not started yet
 - `IN_PROGRESS`: currently in progress
 - `DONE`: completed
+- `NEEDS_REVIEW`: not updated for 30+ mins
 - `NEEDS_HUMAN_DECISION`: requires decision
 
 ---
 
-## 🎬 Kickstart phase
+## root_agent
+- [ ] `TODO NEEDS_REVIEW` Create and finalise structured `AGENTS.md`
+- [ ] `TODO NEEDS_REVIEW` Final build script (standalone, Windows .exe)
+- [ ] `TODO NEEDS_REVIEW` Licensing decision (`LICENSE`)
 
-- [ ] `TODO` Create and finalise structured `AGENTS.md`
-- [ ] `TODO` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
-- [ ] `DONE` Create and initialise `TODO.md` ✅
-- [ ] `TODO` First use of the `docs/progress/` logging system 
-- [ ] `DONE` First version of `StartupOrchestrator` (DI + DB check + sample data) ✅
+## doc_agent
+- [ ] `TODO NEEDS_REVIEW` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
+- [ ] `TODO NEEDS_REVIEW` First use of the `docs/progress/` logging system
+- [ ] `TODO NEEDS_REVIEW` Write installation guide (`INSTALL.md`)
+- [ ] `TODO NEEDS_REVIEW` Update README.md (feature list, screenshots)
 
----
+## logic_agent
+- [ ] `TODO NEEDS_REVIEW` Set up MRS structure (Model → Repository → Service)
+- [ ] `TODO NEEDS_REVIEW` Data recording and saving in a working prototype
+- [ ] `TODO NEEDS_REVIEW` Introduction and configuration of Serilog
+- [ ] `TODO NEEDS_REVIEW` Load/save application settings to file (`wrecept.json`)
 
-## 🛠 MVP – Minimum Viable Product
+## db_agent
+- [ ] `TODO NEEDS_REVIEW` Initialise SQLite database with migration
+- [ ] `TODO NEEDS_REVIEW` EF Core configuration (relationships, validation)
 
-- [ ] `TODO` Initialise SQLite database with migration
-- [ ] `TODO` Set up MRS structure (Model → Repository → Service) 
-- [ ] `TODO` EF Core configuration (relationships, validation)
- 
-- [ ] `DONE` Create `Invoice`, `InvoiceItem`, `Product`, `Supplier` entities ✅
-- [ ] `TODO` Basic `MainView` + `InvoiceEditorView` XAML layout 
-- [ ] `TODO` Implement keyboard-only navigation (Enter, Escape, arrows, Tab)
- 
-- [ ] `TODO` Data recording and saving in a working prototype
+## domain_agent
+*(no open tasks)*
 
----
+## ui_agent
+- [ ] `TODO NEEDS_REVIEW` Basic `MainView` + `InvoiceEditorView` XAML layout
+- [ ] `TODO NEEDS_REVIEW` Implement keyboard-only navigation (Enter, Escape, arrows, Tab)
+- [ ] `TODO NEEDS_REVIEW` Introduction of themes (dark/light + customisation)
+- [ ] `TODO NEEDS_REVIEW` ThemeEditorView – theme management UI editor
+- [ ] `TODO NEEDS_REVIEW` Confirmation popups for all critical actions
 
-## 🧪 Testing and stabilisation
+## test_agent
+- [ ] `TODO NEEDS_REVIEW` Unit tests for the Service layer
+- [ ] `TODO NEEDS_REVIEW` Database validations (error handling + rollback)
+- [ ] `TODO NEEDS_REVIEW` Testing keyboard navigation logic on different views
 
-- [ ] `TODO` Unit tests for the Service layer (e.g. `InvoiceService`)
-- [ ] `TODO` Database validations (error handling + rollback)
-- [ ] `TODO` Testing keyboard navigation logic on different views
-- [ ] `TODO` Introduction and configuration of Serilog 
-- [ ] `TODO` Error messages should be displayed in Hungarian
+## integration_agent
+- [ ] `TODO NEEDS_REVIEW` Database export/import function
 
----
-
-## 🎨 UX and refinement
-
-- [ ] `TODO` Introduction of themes (dark/light + customisation) 
-- [ ] `TODO` Handle audio feedback 
-- [ ] `TODO` `ThemeEditorView` – theme management UI editor
-- [ ] `TODO` Load/save application settings to file (`wrecept.json`)
- 
-- [ ] `TODO` Confirmation popups: for all critical actions (Enter/Esc control)
-
----
-
-## 🚀 Before release
-
-- [ ] `TODO` Final build script (standalone, Windows .exe)
-- [ ] `TODO` Database export/import function
-- [ ] `TODO` Write installation guide (`INSTALL.md`) 
-- [ ] `TODO` Licensing decision (`LICENSE`)
- 
-- [ ] `TODO` Update README.md (feature list, screenshots)
-
----
-
+## ux_agent
+- [ ] `TODO NEEDS_REVIEW` Handle audio feedback
+- [ ] `TODO NEEDS_REVIEW` Error messages should be displayed in Hungarian
