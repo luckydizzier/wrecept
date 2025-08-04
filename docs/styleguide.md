@@ -9,14 +9,36 @@ All contributors must follow these conventions to ensure consistency, readabilit
 
 ```
 wrecept/
-├── App/                      # WPF UI (Views, XAML, Resources)
-├── Core/                     # Domain models, logic, service layer
-├── Data/                     # EF Core DbContext, Repositories
-├── Infrastructure/           # Logging, Configuration, DI, Startup
-├── Docs/                     # Markdown documentation
-├── Tests/                    # xUnit test projects
-├── Agents/                   # AGENTS.md files and coordination logic
-└── TODO.md                   # Task tracker (updated per workflow)
+├── Wrecept.WpfApp/           # WPF application
+│   ├── App/                  # Application entry and configuration
+│   │   ├── App.xaml
+│   │   └── App.xaml.cs
+│   ├── Core/                 # Core business logic and models
+│   │   ├── Models/
+│   │   ├── Services/
+│   │   └── Core.csproj
+│   ├── Data/                 # Data access and repositories
+│   │   ├── Repositories/
+│   │   ├── Entities/
+│   │   └── Data.csproj
+│   ├── Infrastructure/       # External integrations and utilities
+│   │   ├── Logging/
+│   │   ├── Email/
+│   │   └── Infrastructure.csproj
+│   ├── Agents/               # Agent logic and instructions
+│   │   ├── InvoiceAgent.cs
+│   │   └── SupplierAgent.cs
+│   ├── Tests/                # Unit and integration tests
+│   │   ├── Core.Tests/
+│   │   ├── Data.Tests/
+│   │   └── Infrastructure.Tests/
+│   └── Wrecept.WpfApp.csproj
+├── docs/                     # Project documentation
+├── build.ps1                 # Build script
+├── wrecept.sln               # Solution file
+├── README.md                 # Project overview
+├── TODO.md                   # Task tracker (updated per workflow)
+└── AGENTS.md                 # Agent instructions
 ```
 
 ---
