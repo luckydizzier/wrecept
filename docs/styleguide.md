@@ -10,6 +10,29 @@ All contributors must follow these conventions to ensure consistency, readabilit
 ```
 wrecept/
 ├── Wrecept.WpfApp/           # WPF application
+│   ├── App/                  # Application entry and configuration
+│   │   ├── App.xaml
+│   │   └── App.xaml.cs
+│   ├── Core/                 # Core business logic and models
+│   │   ├── Models/
+│   │   ├── Services/
+│   │   └── Core.csproj
+│   ├── Data/                 # Data access and repositories
+│   │   ├── Repositories/
+│   │   ├── Entities/
+│   │   └── Data.csproj
+│   ├── Infrastructure/       # External integrations and utilities
+│   │   ├── Logging/
+│   │   ├── Email/
+│   │   └── Infrastructure.csproj
+│   ├── Agents/               # Agent logic and instructions
+│   │   ├── InvoiceAgent.cs
+│   │   └── SupplierAgent.cs
+│   ├── Tests/                # Unit and integration tests
+│   │   ├── Core.Tests/
+│   │   ├── Data.Tests/
+│   │   └── Infrastructure.Tests/
+│   └── Wrecept.WpfApp.csproj
 ├── docs/                     # Project documentation
 ├── build.ps1                 # Build script
 ├── wrecept.sln               # Solution file
