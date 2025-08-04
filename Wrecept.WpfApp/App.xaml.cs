@@ -3,8 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 using System.Windows;
-using Wrecept.WpfApp.Models;
+using Wrecept.WpfApp.Data;
 using Wrecept.WpfApp.Orchestration;
 using Wrecept.WpfApp.Services;
 using Wrecept.WpfApp.ViewModels;
@@ -27,7 +28,7 @@ public partial class App : Application
             .ConfigureServices((context, services) =>
             {
                 services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlite($"Data Source={context.Configuration["DatabasePath"]}"));
+                    options.UseSqlite($"Data Source={Path.Combine(AppContext.BaseDirectory, context.Configuration["DatabasePath"]!)}"));
                 services.AddScoped<IDemoDataService, DemoDataService>();
                 services.AddSingleton<StartupOrchestrator>();
                 services.AddSingleton<InvoiceEditorViewModel>();

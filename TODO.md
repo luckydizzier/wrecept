@@ -24,7 +24,7 @@
 - [ ] `TODO` Set up MRS structure (Model → Repository → Service) 
 - [ ] `TODO` EF Core configuration (relationships, validation)
  
-- [ ] `TODO` Create `Invoice`, `InvoiceItem`, `Product`, `Supplier` entities
+- [ ] `DONE` Create `Invoice`, `InvoiceItem`, `Product`, `Supplier` entities ✅
 - [ ] `TODO` Basic `MainView` + `InvoiceEditorView` XAML layout 
 - [ ] `TODO` Implement keyboard-only navigation (Enter, Escape, arrows, Tab)
  

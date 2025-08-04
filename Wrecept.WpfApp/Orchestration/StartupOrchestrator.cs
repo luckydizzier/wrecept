@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Wrecept.WpfApp.Models;
+using Wrecept.WpfApp.Data;
 using Wrecept.WpfApp.Services;
 
 namespace Wrecept.WpfApp.Orchestration;
