@@ -40,3 +40,6 @@ $publishArgs = @(
 )
 
 dotnet publish @publishArgs
+if ($LASTEXITCODE -ne 0) {
+    throw "dotnet publish failed with exit code $LASTEXITCODE"
+}
