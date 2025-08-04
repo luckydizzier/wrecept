@@ -10,7 +10,7 @@
 ---
 
 ## root_agent
-- [ ] `TODO NEEDS_REVIEW` Create and finalise structured `AGENTS.md`
+- [x] `DONE` Create and finalise structured `AGENTS.md`
 - [ ] `TODO NEEDS_REVIEW` Final build script (standalone, Windows .exe)
 - [ ] `TODO NEEDS_REVIEW` Licensing decision (`LICENSE`)
 
