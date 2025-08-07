@@ -17,9 +17,16 @@ public class MainViewTests : IDisposable
         Skip.IfNot(RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
             "UI tests require Windows");
 
+        // Make WinAppDriver path configurable and check if it exists
+        var winAppDriverPath = Environment.GetEnvironmentVariable("WINAPPDRIVER_PATH")
+            ?? @"C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe";
+        if (!File.Exists(winAppDriverPath))
+        {
+            throw new FileNotFoundException($"WinAppDriver.exe not found at '{winAppDriverPath}'. Set WINAPPDRIVER_PATH environment variable to the correct location.");
+        }
         _winAppDriver = Process.Start(new ProcessStartInfo
         {
-            FileName = @"C:\\Program Files (x86)\\Windows Application Driver\\WinAppDriver.exe",
+            FileName = winAppDriverPath,
             Arguments = "127.0.0.1 4723"
         });
 
