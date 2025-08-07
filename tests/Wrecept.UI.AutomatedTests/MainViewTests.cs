@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
 
 namespace Wrecept.UI.AutomatedTests;
@@ -30,7 +31,7 @@ public class MainViewTests : IDisposable
             Arguments = "127.0.0.1 4723"
         });
 
-        var options = new OpenQA.Selenium.Appium.AppiumOptions();
+        var options = new AppiumOptions();
         // Get Wrecept.exe path from environment variable or use default relative path
         var exePath = Environment.GetEnvironmentVariable("WRECEPT_EXE_PATH");
         if (string.IsNullOrWhiteSpace(exePath))
@@ -38,7 +39,7 @@ public class MainViewTests : IDisposable
             exePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\wrecept\bin\Debug\net8.0-windows\Wrecept.exe"));
         }
         options.AddAdditionalCapability("app", exePath);
-        _session = new WindowsDriver(new Uri("http://127.0.0.1:4723"), options);
+        _session = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);
     }
 
     [SkippableFact(DisplayName = "F2 új sor hozzáadása működik")]

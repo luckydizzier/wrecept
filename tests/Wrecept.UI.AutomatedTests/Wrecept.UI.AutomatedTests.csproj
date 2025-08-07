@@ -8,7 +8,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
-    <PackageReference Include="Appium.WebDriver" Version="5.2.0" />
+    <!--
+      Downgraded Appium.WebDriver from 5.2.0 to 4.4.5 due to compatibility issues with our current test infrastructure and dependencies.
+      Please review before upgrading, as newer versions may introduce breaking changes or incompatibilities.
+      Be aware that this may miss security updates or bug fixes present in later versions.
+    -->
+    <PackageReference Include="Appium.WebDriver" Version="4.4.5" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
