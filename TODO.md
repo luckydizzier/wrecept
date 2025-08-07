@@ -33,7 +33,7 @@
 - [x] `DONE` EF Core configuration (relationships, validation)
 
 ## domain_agent
-*(no open tasks)*
+- [x] `DONE` Initial core domain entities with validations
 
 ## ui_agent
 - [ ] `TODO NEEDS_REVIEW` Basic `MainView` + `InvoiceEditorView` XAML layout
