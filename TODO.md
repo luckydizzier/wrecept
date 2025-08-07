@@ -56,3 +56,6 @@
 - [x] `DONE` Invoice form grid layout and keyboard workflow analysis
 - [ ] `TODO NEEDS_REVIEW` Handle audio feedback
 - [ ] `TODO NEEDS_REVIEW` Error messages should be displayed in Hungarian
+- [ ] `TODO` Evaluate onboarding flow for first-time users
+- [ ] `TODO` Conduct user testing for invoice creation workflow with keyboard-only navigation
+- [ ] `TODO` Draft accessible color contrast and font guidelines
