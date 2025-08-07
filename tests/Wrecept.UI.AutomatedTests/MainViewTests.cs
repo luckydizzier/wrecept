@@ -30,7 +30,7 @@ public class MainViewTests : IDisposable
             Arguments = "127.0.0.1 4723"
         });
 
-        dynamic options = new OpenQA.Selenium.Appium.AppiumOptions();
+        var options = new OpenQA.Selenium.Appium.AppiumOptions();
         // Get Wrecept.exe path from environment variable or use default relative path
         var exePath = Environment.GetEnvironmentVariable("WRECEPT_EXE_PATH");
         if (string.IsNullOrWhiteSpace(exePath))
