@@ -33,7 +33,7 @@
 - [x] `DONE` EF Core configuration (relationships, validation)
 
 ## domain_agent
-*(no open tasks)*
+- [x] `DONE` Initial core domain entities with validations
 
 ## ui_agent
 - [ ] `TODO NEEDS_REVIEW` Basic `MainView` + `InvoiceEditorView` XAML layout
@@ -43,6 +43,7 @@
 - [ ] `TODO NEEDS_REVIEW` Confirmation popups for all critical actions
 
 ## test_agent
+- [x] `DONE` Unit tests for domain layer
 - [ ] `TODO NEEDS_REVIEW` Unit tests for the Service layer
 - [ ] `TODO NEEDS_REVIEW` Database validations (error handling + rollback)
 - [ ] `TODO NEEDS_REVIEW` Testing keyboard navigation logic on different views

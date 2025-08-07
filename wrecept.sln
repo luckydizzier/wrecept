@@ -15,6 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1B01EA56
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.UI.AutomatedTests", "tests\Wrecept.UI.AutomatedTests\Wrecept.UI.AutomatedTests.csproj", "{BED15137-2B71-4AD3-8A11-D7C2888DB6D2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FA2FB5A5-8369-47C7-8E73-BAA3B3F0814E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Domain", "src\Wrecept.Domain\Wrecept.Domain.csproj", "{FD9D35B1-918A-43E7-A5EC-6663C71852B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Domain.Tests", "Wrecept.Domain.Tests\Wrecept.Domain.Tests.csproj", "{6C2FFDA6-8D28-448B-98AD-359535A5398C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,8 +50,17 @@ Global
 		{BED15137-2B71-4AD3-8A11-D7C2888DB6D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BED15137-2B71-4AD3-8A11-D7C2888DB6D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BED15137-2B71-4AD3-8A11-D7C2888DB6D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD9D35B1-918A-43E7-A5EC-6663C71852B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD9D35B1-918A-43E7-A5EC-6663C71852B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD9D35B1-918A-43E7-A5EC-6663C71852B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD9D35B1-918A-43E7-A5EC-6663C71852B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C2FFDA6-8D28-448B-98AD-359535A5398C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C2FFDA6-8D28-448B-98AD-359535A5398C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C2FFDA6-8D28-448B-98AD-359535A5398C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C2FFDA6-8D28-448B-98AD-359535A5398C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BED15137-2B71-4AD3-8A11-D7C2888DB6D2} = {1B01EA56-DD75-47E7-BCF0-FAAFE4564226}
+		{FD9D35B1-918A-43E7-A5EC-6663C71852B1} = {FA2FB5A5-8369-47C7-8E73-BAA3B3F0814E}
 	EndGlobalSection
 EndGlobal
