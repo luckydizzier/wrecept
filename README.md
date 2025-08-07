@@ -2,6 +2,8 @@
 
 Wrecept is an offline-first invoicing desktop application built with C# (.NET 8) and WPF using the MVVM pattern. It focuses on efficiency and keyboard-centric operation, making it ideal for power users and point-of-sale environments.
 
+<!-- Main window screenshot omitted due to binary file restrictions -->
+
 ## Features
 
 - **Offline-first architecture** – The application works without an internet connection and synchronises data once connectivity is available.
