@@ -16,7 +16,7 @@
 - [x] `DONE` Separate WPF UI into `Wrecept.UI` and create `Wrecept.Core.sln`
 
 ## doc_agent
-- [ ] `IN_PROGRESS NEEDS_REVIEW` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
+- [x] `DONE` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
 - [x] `DONE` First use of the `docs/progress/` logging system
 - [x] `DONE` Mention progress logs in `README.md`
 - [x] `DONE` Write installation guide (`INSTALL.md`)

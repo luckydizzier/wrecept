@@ -1,50 +1,75 @@
-UI_FLOW.md
+# UI Flow
 
-🧱 Overview
+<!-- markdownlint-disable MD013 -->
 
-This document describes the workflow of the Wrecept user interface. It details the navigation model, expected behaviors, and data entry steps, in line with inline editing support.
+## 🧱 Overview
 
-📌 Navigation model
+This document describes the workflow of the Wrecept user interface. It details the
+navigation model, expected behaviors, and data entry steps, in line with inline
+editing support.
 
-When launched, an empty screen appears with the Accounts menu item selected in the top menu bar.
+## 📌 Navigation model
 
-📀 Screen layouts
+Navigation is strictly keyboard-based. Press `Enter` to move forward or confirm,
+and `Escape` to move back or cancel. Mouse input and the `Tab` key are not used.
 
-🔳 Main menu flow
+## 📀 Screen layouts
+
+### 🔳 Main menu flow
 
 ┌──────────────────────────────────────────────────────┐
-│ [Accounts] [Stocks] [Lists] [Maintenance] [Contacts]│
+│ [Accounts] [Stocks] [Lists] [Maintenance] [Contacts] │
 │                                                      │
-│ > Incoming delivery notes │
+│ > Incoming delivery notes                            │
 └──────────────────────────────────────────────────────┘
 
-🧾 Invoice editor view
+### 🧾 Invoice editor view
 
 ┌───── List ────┬──────── Invoice editor ───────────────┐
-│ [Invoice number] │ Supplier: [              ] │
-│ [Date]        │ Date:    [2025-08-04  ] │
-│ [Supplier] │ Number: [              ] │
-│                │ Payment method: [            ][ ] Net invoice │
-│                ├──────────────────────────────────────────┤
-│                │ Product  Qty. Group Unit price  VAT │
-│                │ [Edit] [  1] ... │
-│                │ ... Previously entered lines ... │
-│                │                                            │
-└────────────────┴──────────────────────────────────────────┘
+│ [Invoice number] │ Supplier: [              ]        │
+│ [Date]           │ Number:   [              ]        │
+│ [Supplier]       │ Payment method: [        ][ ] Net │
+│                  ├───────────────────────────────────┤
+│                  │ Product  Qty. Group Unit price VAT│
+│                  │ [Edit] [ 1] ...                   │
+│                  │ ... Previously entered lines ...  │
+│                  │                                   │
+└──────────────────┴───────────────────────────────────┘
 
-📌 Restrictions
+## Invoice entry workflow
 
-- Archiving can only be done according to business rules and cannot be modified afterwards.
+1. From the main menu, start a new invoice with `Enter`.
+2. `Invoice No` field is focused; type the value and press `Enter`.
+3. `Date` accepts manual input; press `Enter` to continue.
+4. In `Supplier`, type letters and press `Enter` to accept the first match.
+5. `Customer ID` auto-fills; press `Enter` to proceed to the item grid.
+6. For each item row:
+   - Enter item code and press `Enter`.
+   - Description fills automatically; press `Enter`.
+   - Enter quantity, then `Enter`.
+   - Enter unit price, then `Enter`.
+   - Tax rate is selected automatically; press `Enter` to accept.
+   - Press `Enter` at the end of the row to add a new one.
+   - Press `Escape` on an empty row to remove it.
+7. Move to `[Save]` and press `Enter` to store the invoice; `Escape` cancels.
+8. After saving, focus returns to the invoice list.
+
+## 📌 Restrictions
+
+- Archiving can only be done according to business rules and cannot be modified
+  afterwards.
 - The Gross designation determines the pricing throughout.
-- The interface must always reflect which operations are available in the current state.
+- The interface must always reflect which operations are available in the current
+  state.
+
 ### Recording owner data
 
-When first launched, `UserInfoWindow` requests the company details. The fields are mandatory, after the
-last
-field the focus moves to the `OK` button and a confirmation message appears:
-"Are the details correct?". `Enter` accepts, `Escape` takes you back to the previous field
-. All required fields are highlighted in red until they are filled in.
-It then checks the database for the entry and, if it does not exist, creates it after confirmation.
+When first launched, `UserInfoWindow` requests the company details. The fields are
+mandatory. After the last field, the focus moves to the `OK` button and a
+confirmation message appears: "Are the details correct?". `Enter` accepts,
+`Escape` returns to the previous field. All required fields are highlighted in red
+until they are filled in. The program checks the database for the entry and
+creates it after confirmation if it does not exist.
 
 For later modifications, the *Service / Edit owner...* menu item opens the same
 `UserInfoWindow` dialog.
