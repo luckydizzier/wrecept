@@ -52,5 +52,6 @@
 - [ ] `TODO NEEDS_REVIEW` Database export/import function
 
 ## ux_agent
+- [x] `DONE` Invoice form grid layout and keyboard workflow analysis
 - [ ] `TODO NEEDS_REVIEW` Handle audio feedback
 - [ ] `TODO NEEDS_REVIEW` Error messages should be displayed in Hungarian
