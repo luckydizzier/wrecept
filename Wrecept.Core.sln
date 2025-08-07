@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Core", "Wrecept.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Core.Tests", "Wrecept.Core.Tests\Wrecept.Core.Tests.csproj", "{3E7FA333-5A11-40E6-879B-FB4FF3ED9F8B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{671426C9-0B7C-4D80-BC16-79E8929B1DA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Domain", "src\Wrecept.Domain\Wrecept.Domain.csproj", "{1A3175E6-6CD3-41C0-9CA3-F1E36FDDDCED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,12 @@ Global
 		{3E7FA333-5A11-40E6-879B-FB4FF3ED9F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E7FA333-5A11-40E6-879B-FB4FF3ED9F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E7FA333-5A11-40E6-879B-FB4FF3ED9F8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A3175E6-6CD3-41C0-9CA3-F1E36FDDDCED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A3175E6-6CD3-41C0-9CA3-F1E36FDDDCED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A3175E6-6CD3-41C0-9CA3-F1E36FDDDCED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A3175E6-6CD3-41C0-9CA3-F1E36FDDDCED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A3175E6-6CD3-41C0-9CA3-F1E36FDDDCED} = {671426C9-0B7C-4D80-BC16-79E8929B1DA0}
 	EndGlobalSection
 EndGlobal
