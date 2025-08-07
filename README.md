@@ -26,9 +26,9 @@ Wrecept is an offline-first invoicing desktop application built with C# (.NET 8)
 ## Reporting & Analytics
 - **Customizable financial and inventory dashboards** -
 - **Monthly/quarterly insights with charts for:** -
-  **Sales trends**
-  **Top customers/products**
-  **Tax breakdowns**
+  - **Sales trends** -
+  - **Top customers/products** -
+  - **Tax breakdowns** -
 
 ## Menu Structure
 
