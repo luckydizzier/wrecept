@@ -13,6 +13,7 @@
 - [x] `DONE` Create and finalise structured `AGENTS.md`
 - [x] `DONE` Final build script (standalone, Windows .exe)
 - [x] `DONE` Licensing decision (`LICENSE`)
+- [x] `DONE` Separate WPF UI into `Wrecept.UI` and create `Wrecept.Core.sln`
 
 ## doc_agent
 - [ ] `IN_PROGRESS NEEDS_REVIEW` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
@@ -45,6 +46,7 @@
 - [ ] `TODO NEEDS_REVIEW` Unit tests for the Service layer
 - [ ] `TODO NEEDS_REVIEW` Database validations (error handling + rollback)
 - [ ] `TODO NEEDS_REVIEW` Testing keyboard navigation logic on different views
+- [x] `DONE` Setup `Wrecept.UI.Tests` with UI category and OS skip
 
 ## integration_agent
 - [ ] `TODO NEEDS_REVIEW` Database export/import function
