@@ -26,5 +26,7 @@ jobs:
         run: Start-Process -FilePath "C:\\Program Files (x86)\\Windows Application Driver\\WinAppDriver.exe" -ArgumentList "127.0.0.1 4723" -PassThru
       - name: Build app
         run: dotnet publish Wrecept.UI/Wrecept.UI.csproj -c Release -o build
+      - name: Build UI test project
+        run: dotnet build tests/Wrecept.UI.AutomatedTests/Wrecept.UI.AutomatedTests.csproj -c Release
       - name: Run UI tests
         run: dotnet test tests/Wrecept.UI.AutomatedTests/Wrecept.UI.AutomatedTests.csproj --no-build
