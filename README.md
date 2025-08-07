@@ -6,24 +6,26 @@ Wrecept is an offline-first invoicing desktop application built with C# (.NET 8)
 
 ## Features
 
+Features marked with *(planned)* are upcoming and not yet implemented.
+
 - **Offline-first architecture** – Works fully without internet connectivity and synchronizes data once a connection is restored.
-- **Keyboard-centric UI** – Every action is driven by keyboard shortcuts for maximum speed.
-- **Main menu navigation** – Quick-access categories (`Accounts`, `Stocks`, `Lists`, `Maintenance`, `Contacts`) streamline common tasks.
-- **Invoice editor** – Inline item entry with real-time calculations and row-by-row validation.
+- **Keyboard-centric UI** *(planned)* – Every action is driven by keyboard shortcuts for maximum speed.
+- **Main menu navigation** *(planned)* – Quick-access categories (`Accounts`, `Stocks`, `Lists`, `Maintenance`, `Contacts`) streamline common tasks.
+- **Invoice editor** *(planned)* – Inline item entry with real-time calculations and row-by-row validation.
 - **Model–Repository–Service (MRS) architecture** – Clear separation between domain models, persistence repositories, and business services.
 - **SQLite data storage** – Local persistence using a lightweight SQLite database via Entity Framework Core.
-- **Theme support** – Customisable themes with a dedicated Theme Editor.
+- **Theme support** *(planned)* – Customisable themes with a dedicated Theme Editor.
 - **Logging with Serilog** – Structured logging to help diagnose issues and maintain reliability.
-- **Localisation** – Hungarian user interface and error messages.
-- **Import/Export (planned)** – Upcoming database backup and migration support.
-## Smart Features
+- **Localisation** *(planned)* – Hungarian user interface and error messages.
+- **Import/Export** *(planned)* – Upcoming database backup and migration support.
+## Smart Features *(planned)*
 - **Auto-suggestions for recurring invoice items or frequently purchased products**
 - **Predictive text entry using local history** 
-## In-App Help & Support
+## In-App Help & Support *(planned)*
 - **Contextual tooltips** -
 - **Quick keyboard cheat sheet** -
 - **User onboarding tour** -
-## Reporting & Analytics
+## Reporting & Analytics *(planned)*
 - **Customizable financial and inventory dashboards** -
 - **Monthly/quarterly insights with charts for:** -
   - **Sales trends** -

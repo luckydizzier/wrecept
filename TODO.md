@@ -22,12 +22,16 @@
 - [x] `DONE` Write installation guide (`INSTALL.md`)
 - [x] `DONE` Update README.md (feature list, menu structure, etc...)
 - [x] `DONE` Expand README with detailed feature list and menu structure
+- [ ] `TODO` Create keyboard shortcut cheat sheet
 
 ## logic_agent
 - [x] `DONE` Set up MRS structure (Model → Repository → Service)
 - [x] `DONE` Data recording and saving in a working prototype
 - [x] `DONE` Introduction and configuration of Serilog
 - [x] `DONE` Load/save application settings to file (`wrecept.json`)
+- [ ] `TODO` Auto-suggestions for recurring invoice items or frequently purchased products
+- [ ] `TODO` Predictive text entry using local history
+- [ ] `TODO` Reporting analytics engine for sales trends, top customers/products, and tax breakdowns
 
 ## db_agent
 - [x] `DONE` Initialise SQLite database with migration
@@ -42,6 +46,10 @@
 - [ ] `TODO NEEDS_REVIEW` Introduction of themes (dark/light + customisation)
 - [ ] `TODO NEEDS_REVIEW` ThemeEditorView – theme management UI editor
 - [ ] `TODO NEEDS_REVIEW` Confirmation popups for all critical actions
+- [ ] `TODO` Implement contextual tooltips across the UI
+- [ ] `TODO` Provide quick keyboard cheat sheet within the application
+- [ ] `TODO` Display auto-suggestions and predictive text in `InvoiceEditorView`
+- [ ] `TODO` Develop customizable dashboard views for financial and inventory metrics
 
 ## test_agent
 - [ ] `TODO NEEDS_REVIEW` Unit tests for the Service layer
@@ -59,3 +67,4 @@
 - [ ] `TODO` Evaluate onboarding flow for first-time users
 - [ ] `TODO` Conduct user testing for invoice creation workflow with keyboard-only navigation
 - [ ] `TODO` Draft accessible color contrast and font guidelines
+- [ ] `TODO` Design user onboarding tour
