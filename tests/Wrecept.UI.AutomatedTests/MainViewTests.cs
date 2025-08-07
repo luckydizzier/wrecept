@@ -24,7 +24,13 @@ public class MainViewTests : IDisposable
         });
 
         dynamic options = new OpenQA.Selenium.Appium.AppiumOptions();
-        options.AddAdditionalCapability("app", @"C:\\wrecept\\bin\\Debug\\net8.0-windows\\Wrecept.exe");
+        // Get Wrecept.exe path from environment variable or use default relative path
+        var exePath = Environment.GetEnvironmentVariable("WRECEPT_EXE_PATH");
+        if (string.IsNullOrWhiteSpace(exePath))
+        {
+            exePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\wrecept\bin\Debug\net8.0-windows\Wrecept.exe"));
+        }
+        options.AddAdditionalCapability("app", exePath);
         _session = new WindowsDriver(new Uri("http://127.0.0.1:4723"), options);
     }
 
