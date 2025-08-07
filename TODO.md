@@ -15,7 +15,7 @@
 - [x] `DONE` Licensing decision (`LICENSE`)
 
 ## doc_agent
-- [ ] `IN_PROGRESS` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
+- [ ] `IN_PROGRESS NEEDS_REVIEW` Validate `styleguide.md` and `UI_FLOW.md`, fill in missing points
 - [x] `DONE` First use of the `docs/progress/` logging system
 - [x] `DONE` Mention progress logs in `README.md`
 - [x] `DONE` Write installation guide (`INSTALL.md`)
