@@ -23,14 +23,14 @@
 - [ ] `TODO NEEDS_REVIEW` Update README.md (feature list, screenshots)
 
 ## logic_agent
-- [ ] `TODO NEEDS_REVIEW` Set up MRS structure (Model → Repository → Service)
-- [ ] `TODO NEEDS_REVIEW` Data recording and saving in a working prototype
-- [ ] `TODO NEEDS_REVIEW` Introduction and configuration of Serilog
-- [ ] `TODO NEEDS_REVIEW` Load/save application settings to file (`wrecept.json`)
+- [x] `DONE` Set up MRS structure (Model → Repository → Service)
+- [x] `DONE` Data recording and saving in a working prototype
+- [x] `DONE` Introduction and configuration of Serilog
+- [x] `DONE` Load/save application settings to file (`wrecept.json`)
 
 ## db_agent
-- [ ] `TODO NEEDS_REVIEW` Initialise SQLite database with migration
-- [ ] `TODO NEEDS_REVIEW` EF Core configuration (relationships, validation)
+- [x] `DONE` Initialise SQLite database with migration
+- [x] `DONE` EF Core configuration (relationships, validation)
 
 ## domain_agent
 *(no open tasks)*
