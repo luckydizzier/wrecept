@@ -6,6 +6,60 @@ This project uses a modular, agent-driven workflow to support maintainable, keyb
 
 ---
 
+1. 🧠 Hard Skills 
+🔧 Software development
+Language skills in C#, Java, C++, Python, or Swift - adapted to the target platform.
+Desktop UI framework: WPF, WinForms, MAUI, Qt, Electron, etc.
+Database: SQLite (standalone file format, offline mode ideal)
+ORM usage: Entity Framework Core, Dapper, or own repository pattern
+Design patterns: MVVM / MVC / MRS / DDD - ensure clean architecture
+📁 Application structure and file management
+Local data file storage, encryption (e.g. passwords, settings)
+Upgrade strategy (version management, backup, migration)
+Export / import formats (PDF, Excel, NAV-XML, CSV)
+📦 Publishing and distribution
+MSI or EXE installer creation (e.g. Inno Setup, WiX)
+Version identification and changelog management
+Digital signature, possible code signing
+🔍 Testing
+Unit tests (xUnit/NUnit/GoogleTest)
+Manual regression checklist
+Error handling and logging (Serilog, NLog)
+2. 🧩 Mental and cognitive skills (Soft Skills)
+🧠 S ystems thinking
+Understanding interdependencies (data models, business logic, UI processes)
+Minimizing dependencies, preparing for scalability
+Long-term maintenance and stability considerations
+🔍 Precision and fault tolerance
+Error analysis and lessons learned
+Use of traceable code systems (version control, logging)
+🧭 Se lf-management and persistence
+Follow development plan (e.g. roadmap, milestones)
+Managing setbacks (motivation, avoiding burnout)
+Documentation discipline
+🛠️ Problem solving
+Stack overflow, GitHub, browsing documentation quickly and efficiently
+Conscious management of refactoring and technical debt
+3. 🔥 Motivational and goal-oriented factors
+🎯 Goal: working product for real life
+Not an apprenticeship project, but usable software, for real use (e.g. own restaurant, business of a friend, sole proprietorship partners)
+💡 Innovation and a desire for control
+Own decisions: not others define features, UI, technology
+Freedom and creativity: implement individual ideas immediately
+💶 Earning potential or cost reduction
+Own use = saving on monthly software fees
+Potential future sales, even on a licensing basis
+❤️ Emotional attachment, challenge
+The system is the "child" of the developer: pride in clean code, stable operation
+Experience of full competence = flow experience
+🧠 Personal profile through an example
+An ideal developer:
+Ferenc is a custom developer who wants to manage his own restaurant's billing with localized, fast, offline, keyboard-driven software. He works in C# and WPF with SQLite database. His focus is on NAV-compatible PDF printing and an intuitive, clean interface.
+He works alone, but is building a plugin-based architecture with an eye to the future and keeps his own development log. He is also building in documentation, an export module and backup functionality to allow others to try out the software.
+Motivation: self-reliance, learning, system building and financial management.
+
+---
+
 ### 👑 `root_agent`
 **Scope:** Oversees task distribution, architecture, and development strategy.
 
