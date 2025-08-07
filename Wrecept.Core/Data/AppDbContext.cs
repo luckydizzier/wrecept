@@ -41,17 +41,43 @@ public class AppDbContext : DbContext
             .HasForeignKey(ii => ii.InvoiceId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<InvoiceItem>()
-            .HasOne(ii => ii.Product)
-            .WithMany()
-            .HasForeignKey(ii => ii.ProductId)
-            .OnDelete(DeleteBehavior.Restrict);
-
         modelBuilder.Entity<Invoice>()
             .HasOne(i => i.Supplier)
             .WithMany()
             .HasForeignKey(i => i.SupplierId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Invoice>()
+            .Property(i => i.TotalNet).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Invoice>()
+            .Property(i => i.TotalVat).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Invoice>()
+            .Property(i => i.TotalGross).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Invoice>()
+            .HasIndex(i => i.Date);
+        modelBuilder.Entity<Invoice>()
+            .HasIndex(i => i.SupplierId);
+
+        modelBuilder.Entity<InvoiceItem>()
+            .HasOne(ii => ii.Product)
+            .WithMany()
+            .HasForeignKey(ii => ii.ProductId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<InvoiceItem>()
+            .Property(ii => ii.UnitPrice).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<InvoiceItem>()
+            .Property(ii => ii.VatRate).HasColumnType("decimal(5,4)");
+        modelBuilder.Entity<InvoiceItem>()
+            .Property(ii => ii.TotalNet).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<InvoiceItem>()
+            .Property(ii => ii.TotalVat).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<InvoiceItem>()
+            .Property(ii => ii.TotalGross).HasColumnType("decimal(18,2)");
+
+        modelBuilder.Entity<Product>()
+            .Property(p => p.UnitPrice).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Product>()
+            .Property(p => p.VatRate).HasColumnType("decimal(5,4)");
 
         base.OnModelCreating(modelBuilder);
     }
