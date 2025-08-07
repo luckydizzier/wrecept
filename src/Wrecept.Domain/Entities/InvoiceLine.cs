@@ -13,8 +13,6 @@ public sealed class InvoiceLine
         if (quantity <= 0)
             throw new ArgumentOutOfRangeException(nameof(quantity), "Quantity must be greater than zero.");
         UnitPrice = unitPrice ?? throw new ArgumentNullException(nameof(unitPrice));
-        if (unitPrice.Amount <= 0)
-            throw new ArgumentException("Unit price must be positive.", nameof(unitPrice));
 
         Quantity = quantity;
     }
