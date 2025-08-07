@@ -16,6 +16,13 @@ Wrecept is an offline-first invoicing desktop application built with C# (.NET 8)
 - **Logging with Serilog** – Structured logging to help diagnose issues and maintain reliability.
 - **Localisation** – Hungarian user interface and error messages.
 - **Import/Export (planned)** – Upcoming database backup and migration support.
+## Smart Features
+- **Auto-suggestions for recurring invoice items or frequently purchased products**
+- **Predictive text entry using local history** 
+## In-App Help & Support
+- **Contextual tooltips** -
+- **Quick keyboard cheat sheet** -
+- **User onboarding tour** -
 
 ## Menu Structure
 
