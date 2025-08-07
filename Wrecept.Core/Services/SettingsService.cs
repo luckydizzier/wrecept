@@ -7,6 +7,8 @@ namespace Wrecept.Core.Services;
 public class SettingsService : ISettingsService
 {
     private readonly string _settingsPath;
+    private ApplicationSettings _currentSettings = new();
+    public event EventHandler<ApplicationSettings>? SettingsChanged;
 
     public SettingsService(string? settingsPath = null)
     {
@@ -17,19 +19,34 @@ public class SettingsService : ISettingsService
     {
         if (!File.Exists(_settingsPath))
         {
-            var defaults = new ApplicationSettings();
-            await SaveAsync(defaults);
-            return defaults;
+            _currentSettings = new ApplicationSettings();
+            await SaveAsync(_currentSettings);
+            return _currentSettings;
         }
 
         await using var stream = File.OpenRead(_settingsPath);
         var settings = await JsonSerializer.DeserializeAsync<ApplicationSettings>(stream);
-        return settings ?? new ApplicationSettings();
+        _currentSettings = settings ?? new ApplicationSettings();
+        return _currentSettings;
     }
 
     public async Task SaveAsync(ApplicationSettings settings)
     {
-        var json = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
+        _currentSettings = settings;
+        var json = JsonSerializer.Serialize(_currentSettings, new JsonSerializerOptions { WriteIndented = true });
         await File.WriteAllTextAsync(_settingsPath, json);
+        SettingsChanged?.Invoke(this, _currentSettings);
+    }
+
+    public async Task UpdateThemeAsync(string theme)
+    {
+        _currentSettings.Theme = theme;
+        await SaveAsync(_currentSettings);
+    }
+
+    public async Task UpdateLanguageAsync(string language)
+    {
+        _currentSettings.Language = language;
+        await SaveAsync(_currentSettings);
     }
 }

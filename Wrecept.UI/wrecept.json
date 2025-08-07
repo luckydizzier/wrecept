@@ -1,4 +1,5 @@
 {
   "DatabasePath": "Data/wrecept.db",
-  "Theme": "Light"
+  "Theme": "Light",
+  "Language": "en"
 }

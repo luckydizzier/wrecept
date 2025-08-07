@@ -12,11 +12,12 @@ public class SettingsServiceTests
     {
         var tempFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.json");
         var service = new SettingsService(tempFile);
-        var settings = new ApplicationSettings { DatabasePath = "test.db", Theme = "Dark" };
+        var settings = new ApplicationSettings { DatabasePath = "test.db", Theme = "Dark", Language = "hu" };
         await service.SaveAsync(settings);
         var loaded = await service.LoadAsync();
         Assert.Equal(settings.DatabasePath, loaded.DatabasePath);
         Assert.Equal(settings.Theme, loaded.Theme);
+        Assert.Equal(settings.Language, loaded.Language);
         File.Delete(tempFile);
     }
 }
