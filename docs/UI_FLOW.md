@@ -41,7 +41,7 @@ and `Escape` to move back or cancel. Mouse input and the `Tab` key are not used.
 1. From the main menu, start a new invoice with `Enter`.
 2. `Invoice No` field is focused; type the value and press `Enter`.
 3. `Date` accepts manual input; press `Enter` to continue.
-4. In `Customer`, type letters and press `Enter` to accept the first match.
+4. In `Supplier`, type letters and press `Enter` to accept the first match.
 5. `Customer ID` auto-fills; press `Enter` to proceed to the item grid.
 6. For each item row:
    - Enter item code and press `Enter`.
