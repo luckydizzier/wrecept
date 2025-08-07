@@ -9,7 +9,7 @@ namespace Wrecept.UI.AutomatedTests;
 [Collection("UI")]
 public class MainViewTests : IDisposable
 {
-    private readonly dynamic? _session;
+    private readonly WindowsDriver<WindowsElement>? _session;
     private readonly Process? _winAppDriver;
 
     public MainViewTests()
