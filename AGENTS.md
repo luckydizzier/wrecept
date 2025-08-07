@@ -105,12 +105,26 @@ Motivation: self-reliance, learning, system building and financial management.
 ### 🧪 `test_agent`
 **Scope:** Creates and maintains test coverage.
 
-- Uses xUnit or NUnit to test domain logic and services.
-- Ensures CI-safe, automated tests for critical workflows.
-- Verifies keyboard navigation and input edge cases.
-- Reports coverage gaps in `docs/coverage/`.
+- **Core-logic (CI-safe):**
+- xUnit / NUnit tests for Domain, Application and Infrastructure layers. 
+- Run in Linux-based CI on `Wrecept.Core.sln` solver file.
+- Command: `dotnet test --filter "Category!=UI"`.
+
+- **UI tests (WPF specific):**
+- Separate `Wrecept.UI.Tests` project, each test with `[Trait("Category", "UI")]` attribute. 
+- `[SkippableFact]` + automatic **Skip** in non-Windows environment.
+- Can be fully executed in optional Windows runner; otherwise manual check.
+
+- **Manual feedback handling:**
+- If a UI test is run with Skip, *test_agent* will register the task in `docs/user_tests.md`: 
+"Awaiting manual feedback - <testname>".
+
+- **Coverage:**
+- Generates coverage report (`docs/coverage/Latest.md`) for core projects after each successful CI run.
+- Reports missing areas and updates the badge in `README` if necessary.
 
 ---
+
 
 ### 🎨 `ui_agent`
 **Scope:** Designs the WPF UI layer using MVVM.
