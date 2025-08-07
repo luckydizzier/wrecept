@@ -21,6 +21,7 @@
 - [x] `DONE` Mention progress logs in `README.md`
 - [x] `DONE` Write installation guide (`INSTALL.md`)
 - [x] `DONE` Update README.md (feature list, menu structure, etc...)
+- [x] `DONE` Expand README with detailed feature list and menu structure
 
 ## logic_agent
 - [x] `DONE` Set up MRS structure (Model → Repository → Service)

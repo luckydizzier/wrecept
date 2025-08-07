@@ -6,15 +6,26 @@ Wrecept is an offline-first invoicing desktop application built with C# (.NET 8)
 
 ## Features
 
-- **Offline-first architecture** – The application works without an internet connection and synchronises data once connectivity is available.
-- **Keyboard-centric UI** – All operations can be performed via keyboard shortcuts, streamlining workflows.
-- **Invoice Editor** – A dynamic invoice editor allows adding items, modifying quantities, and calculating totals in real time.
-- **Model–Repository–Service (MRS) architecture** – A clear separation of concerns between domain models, repositories for persistence, and services for business logic.
-- **SQLite data storage** – Invoices and settings are persisted locally using a lightweight SQLite database with Entity Framework Core.
+- **Offline-first architecture** – Works fully without internet connectivity and synchronises data once a connection is restored.
+- **Keyboard-centric UI** – Every action is driven by keyboard shortcuts for maximum speed.
+- **Main menu navigation** – Quick-access categories (`Accounts`, `Stocks`, `Lists`, `Maintenance`, `Contacts`) streamline common tasks.
+- **Invoice editor** – Inline item entry with real-time calculations and row-by-row validation.
+- **Model–Repository–Service (MRS) architecture** – Clear separation between domain models, persistence repositories, and business services.
+- **SQLite data storage** – Local persistence using a lightweight SQLite database via Entity Framework Core.
 - **Theme support** – Customisable themes with a dedicated Theme Editor.
 - **Logging with Serilog** – Structured logging to help diagnose issues and maintain reliability.
-- **Localisation** – Support for Hungarian user interface and error messages.
-- **Import/Export** – Planned support for importing and exporting database data for backups or migrations.
+- **Localisation** – Hungarian user interface and error messages.
+- **Import/Export (planned)** – Upcoming database backup and migration support.
+
+## Menu Structure
+
+The main menu provides the following sections:
+
+- **Accounts** – Manage invoices and financial records.
+- **Stocks** – Record incoming delivery notes and track inventory.
+- **Lists** – Access reference tables like products or tax rates.
+- **Maintenance** – Application settings, theme editing, and database utilities.
+- **Contacts** – Manage supplier and customer information.
 
 ## Installation
 
