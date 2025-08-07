@@ -32,4 +32,27 @@ public class AppDbContext : DbContext
             optionsBuilder.UseSqlite($"Data Source={dbPath}");
         }
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Invoice>()
+            .HasMany(i => i.Items)
+            .WithOne(ii => ii.Invoice)
+            .HasForeignKey(ii => ii.InvoiceId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<InvoiceItem>()
+            .HasOne(ii => ii.Product)
+            .WithMany()
+            .HasForeignKey(ii => ii.ProductId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Invoice>()
+            .HasOne(i => i.Supplier)
+            .WithMany()
+            .HasForeignKey(i => i.SupplierId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        base.OnModelCreating(modelBuilder);
+    }
 }

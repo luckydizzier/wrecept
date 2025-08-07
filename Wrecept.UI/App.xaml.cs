@@ -2,11 +2,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using System;
 using System.IO;
 using System.Windows;
 using Wrecept.Core.Data;
 using Wrecept.Core.Orchestration;
+using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.UI.ViewModels;
 using Wrecept.UI.Views;
@@ -25,10 +27,20 @@ public partial class App : Application
                 config.SetBasePath(AppContext.BaseDirectory);
                 config.AddJsonFile("wrecept.json", optional: false, reloadOnChange: true);
             })
+            .UseSerilog((context, services, configuration) =>
+            {
+                configuration
+                    .ReadFrom.Configuration(context.Configuration)
+                    .Enrich.FromLogContext()
+                    .WriteTo.File(Path.Combine(AppContext.BaseDirectory, "logs", "wrecept-.log"), rollingInterval: RollingInterval.Day);
+            })
             .ConfigureServices((context, services) =>
             {
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlite($"Data Source={Path.Combine(AppContext.BaseDirectory, context.Configuration["DatabasePath"]!)}"));
+                services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+                services.AddScoped<IInvoiceService, InvoiceService>();
+                services.AddSingleton<ISettingsService, SettingsService>();
                 services.AddScoped<IDemoDataService, DemoDataService>();
                 services.AddSingleton<StartupOrchestrator>();
                 services.AddSingleton<InvoiceEditorViewModel>();
@@ -56,6 +68,7 @@ public partial class App : Application
     {
         await _host.StopAsync();
         _host.Dispose();
+        Log.CloseAndFlush();
         base.OnExit(e);
     }
 }
