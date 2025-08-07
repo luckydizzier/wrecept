@@ -20,7 +20,7 @@
 - [x] `DONE` First use of the `docs/progress/` logging system
 - [x] `DONE` Mention progress logs in `README.md`
 - [x] `DONE` Write installation guide (`INSTALL.md`)
-- [x] `DONE` Update README.md (feature list, screenshots)
+- [x] `DONE` Update README.md (feature list, menu structure, etc...)
 
 ## logic_agent
 - [x] `DONE` Set up MRS structure (Model → Repository → Service)
