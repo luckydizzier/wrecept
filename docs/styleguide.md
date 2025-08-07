@@ -1,13 +1,16 @@
 ﻿# Style Guide for `wrecept`
 
-This style guide defines the standards for code, documentation, and UI design used throughout the `wrecept` project.
-All contributors must follow these conventions to ensure consistency, readability, and maintainability across the codebase.
+<!-- markdownlint-disable MD013 -->
+
+This style guide defines the standards for code, documentation, and UI design used
+throughout the `wrecept` project. All contributors must follow these conventions to
+ensure consistency, readability, and maintainability across the codebase.
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 wrecept/
 ├── Wrecept.WpfApp/           # WPF application
 │   ├── App/                  # Application entry and configuration
@@ -39,7 +42,7 @@ wrecept/
 ├── README.md                 # Project overview
 ├── TODO.md                   # Task tracker (updated per workflow)
 └── AGENTS.md                 # Agent instructions
-```
+```text
 
 ---
 
@@ -161,7 +164,7 @@ wrecept/
 
 **Example:**
 
-```
+```text
 [core] Implemented invoice total recalculation logic
 Ref: TODO #42, Milestone: stage-3
 ```
@@ -170,10 +173,11 @@ Ref: TODO #42, Milestone: stage-3
 
 ## 📋 UI/UX Workflow Rules
 
-* No console output allowed in production builds
-* All messages must be in **Hungarian**, and shown in dialog if user-facing
-* Use Enter/Esc navigation for confirmation dialogs
-* Do not block UI thread (use async where needed)
+* Interaction is strictly keyboard-based; mouse input is not used.
+* `Enter` confirms and advances; `Escape` cancels or moves back. `Tab` is disabled.
+* No console output allowed in production builds.
+* All messages must be in **Hungarian**, and shown in dialog if user-facing.
+* Do not block UI thread (use async where needed).
 
 ---
 
