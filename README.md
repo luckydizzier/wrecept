@@ -6,7 +6,7 @@ Wrecept is an offline-first invoicing desktop application built with C# (.NET 8)
 
 ## Features
 
-- **Offline-first architecture** – Works fully without internet connectivity and synchronises data once a connection is restored.
+- **Offline-first architecture** – Works fully without internet connectivity and synchronizes data once a connection is restored.
 - **Keyboard-centric UI** – Every action is driven by keyboard shortcuts for maximum speed.
 - **Main menu navigation** – Quick-access categories (`Accounts`, `Stocks`, `Lists`, `Maintenance`, `Contacts`) streamline common tasks.
 - **Invoice editor** – Inline item entry with real-time calculations and row-by-row validation.
