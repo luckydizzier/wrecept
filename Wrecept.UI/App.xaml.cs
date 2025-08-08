@@ -65,6 +65,7 @@ public partial class App : Application
                 services.AddTransient<MaintenanceView>();
                 services.AddSingleton<ThemeEditorViewModel>();
                 services.AddTransient<ThemeEditorView>();
+                services.AddTransient<ThemeEditorWindow>();
                 services.AddSingleton<IExportService, ExportService>();
                 services.AddSingleton<MainViewModel>();
                 services.AddTransient<MainView>();
