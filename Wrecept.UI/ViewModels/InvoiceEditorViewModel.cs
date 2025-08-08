@@ -59,8 +59,8 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     private async void SaveInvoice()
     {
         var confirm = MessageBox.Show(
-            "Biztosan menti a számlát?",
-            "Megerősítés",
+            Resources.ConfirmSaveInvoice,
+            Resources.Confirmation,
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
         if (confirm != MessageBoxResult.Yes) return;
