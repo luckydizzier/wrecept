@@ -13,9 +13,13 @@ public partial class MainWindow : Window
 
     private void OnClosing(object? sender, CancelEventArgs e)
     {
+        string msg = Application.Current.TryFindResource("ConfirmExitMessage") as string
+                      ?? "Biztosan kilépsz az alkalmazásból?";
+        string title = Application.Current.TryFindResource("ConfirmExitTitle") as string
+                        ?? "Kilépés megerősítése";
         var confirm = MessageBox.Show(
-            (string)FindResource("ConfirmExitMessage"),
-            (string)FindResource("ConfirmationTitle"),
+            msg,
+            title,
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
         if (confirm != MessageBoxResult.Yes)

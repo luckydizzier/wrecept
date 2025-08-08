@@ -1,0 +1,10 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <!-- Alap magyar sztringek -->
+  <sys:String x:Key="ConfirmExitTitle">Kilépés megerősítése</sys:String>
+  <sys:String x:Key="ConfirmExitMessage">Biztosan kilépsz az alkalmazásból?</sys:String>
+  <sys:String x:Key="BiztosanTorliATetelt">Biztosan törli a tételt?</sys:String>
+  <sys:String x:Key="ConfirmSaveInvoice">Biztosan el szeretné menteni a számlát?</sys:String>
+  <sys:String x:Key="Confirmation">Megerősítés</sys:String>
+</ResourceDictionary>
