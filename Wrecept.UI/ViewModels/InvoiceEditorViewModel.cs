@@ -47,7 +47,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         if (SelectedItem != null)
         {
             var confirm = _dialogService.ShowConfirmation(
-                "Biztosan törli a tételt?",
+                Resources.BiztosanTorliATetelt,
                 "Megerősítés");
             if (!confirm) return;
 
