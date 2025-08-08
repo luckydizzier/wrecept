@@ -29,9 +29,9 @@
 - [x] `DONE` Data recording and saving in a working prototype
 - [x] `DONE` Introduction and configuration of Serilog
 - [x] `DONE` Load/save application settings to file (`wrecept.json`)
-- [ ] `TODO` Auto-suggestions for recurring invoice items or frequently purchased products
-- [ ] `TODO` Predictive text entry using local history
-- [ ] `TODO` Reporting analytics engine for sales trends, top customers/products, and tax breakdowns
+- [ ] `IN_PROGRESS` Auto-suggestions for recurring invoice items or frequently purchased products
+- [ ] `IN_PROGRESS` Predictive text entry using local history
+- [ ] `IN_PROGRESS` Reporting analytics engine for sales trends, top customers/products, and tax breakdowns
 
 ## db_agent
 - [x] `DONE` Initialise SQLite database with migration

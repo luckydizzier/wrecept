@@ -12,7 +12,11 @@ public class InvoiceService : IInvoiceService
         _invoiceRepository = invoiceRepository;
     }
 
-    public async Task AddInvoiceAsync(Invoice invoice) => await _invoiceRepository.AddAsync(invoice);
+    public async Task AddInvoiceAsync(Invoice invoice)
+    {
+        invoice.RecalculateTotals();
+        await _invoiceRepository.AddAsync(invoice);
+    }
 
     public async Task<IEnumerable<Invoice>> GetInvoicesAsync() => await _invoiceRepository.GetAllAsync();
 }

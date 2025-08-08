@@ -14,6 +14,7 @@ public class AppDbContext : DbContext
     public DbSet<InvoiceItem> InvoiceItems => Set<InvoiceItem>();
     public DbSet<Product> Products => Set<Product>();
     public DbSet<Supplier> Suppliers => Set<Supplier>();
+    public DbSet<SuggestionTerm> SuggestionTerms => Set<SuggestionTerm>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -78,6 +79,15 @@ public class AppDbContext : DbContext
             .Property(p => p.UnitPrice).HasColumnType("decimal(18,2)");
         modelBuilder.Entity<Product>()
             .Property(p => p.VatRate).HasColumnType("decimal(5,4)");
+
+        modelBuilder.Entity<SuggestionTerm>()
+            .Property(s => s.Term)
+            .UseCollation("NOCASE");
+        modelBuilder.Entity<SuggestionTerm>()
+            .HasIndex(s => s.Term)
+            .IsUnique();
+        modelBuilder.Entity<SuggestionTerm>()
+            .HasIndex(s => s.LastUsedUtc);
 
         base.OnModelCreating(modelBuilder);
     }
