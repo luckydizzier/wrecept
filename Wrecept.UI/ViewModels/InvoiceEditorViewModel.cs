@@ -64,9 +64,13 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
 
     private async void SaveInvoice()
     {
+        string saveMsg = Application.Current.TryFindResource("ConfirmSaveInvoice") as string
+                          ?? "Biztosan menti a számlát?";
+        string caption = Application.Current.TryFindResource("Confirmation") as string
+                          ?? "Megerősítés";
         var confirm = MessageBox.Show(
-            (string)Application.Current.FindResource("ConfirmSaveInvoice"),
-            (string)(Application.Current.TryFindResource("Confirmation") ?? "Confirmation"),
+            saveMsg,
+            caption,
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
         if (confirm != MessageBoxResult.Yes) return;
