@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Interactions;
 
 namespace Wrecept.UI.AutomatedTests;
 
@@ -72,7 +73,7 @@ public class MainViewTests : IDisposable
     public void AddInvoiceLine_WithF2_AddsEmptyRow()
     {
         Skip.If(_session is null, "Application session failed to start");
-        _session.Keyboard.PressKey(Keys.F2);
+        new Actions(_session).SendKeys(Keys.F2).Perform();
         var rows = _session.FindElementsByAccessibilityId("InvoiceLineRow");
         Assert.True(rows.Count > 0);
     }
