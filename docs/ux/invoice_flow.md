@@ -24,7 +24,7 @@ To minimize eye movement and support rapid data entry, the invoice form uses a t
 └───────────────────────┴────────────────────────────────────────┘
 ```
 
-The left panel lists existing invoices while the right panel hosts the editor. At the top of the editor a two-column grid aligns related header fields horizontally. Below, an item grid behaves like a spreadsheet for fast keyboard entry. A dedicated action bar at the bottom separates data entry from commands such as **Elem hozzáadása**, **Elem eltávolítása**, and **Mentés**. Pressing `Enter` after the last item row moves focus to this bar; `Enter` cycles forward through its buttons while `Escape` steps back or returns to the grid.
+The left panel lists existing invoices. The right panel hosts the editor. At the top of the editor, a two-column grid aligns related header fields horizontally. Below this, an item grid behaves like a spreadsheet for fast keyboard entry. A dedicated action bar at the bottom separates data entry from commands such as **Elem hozzáadása**, **Elem eltávolítása**, and **Mentés**. Pressing `Enter` after the last item row moves focus to this bar. `Enter` cycles forward through its buttons, while `Escape` steps back or returns to the grid.
 
 ## Keyboard-Only Workflow Simulation
 1. **Start new invoice**: `Ctrl+N`
