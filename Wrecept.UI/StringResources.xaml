@@ -5,5 +5,4 @@
     <sys:String x:Key="ConfirmationTitle">Confirmation</sys:String>
     <sys:String x:Key="BiztosanTorliATetelt">Are you sure you want to delete the item?</sys:String>
     <sys:String x:Key="ConfirmSaveInvoice">Are you sure you want to save the invoice?</sys:String>
-    <sys:String x:Key="Confirmation">Confirmation</sys:String>
 </ResourceDictionary>
