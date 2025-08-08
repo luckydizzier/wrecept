@@ -100,7 +100,10 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
             if (confirm != MessageBoxResult.Yes) return;
 
             Items.Remove(SelectedItem);
-@@ -66,28 +108,64 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
+        }
+    }
+
+    private async void SaveInvoice()
     {
         string saveMsg = Application.Current.TryFindResource("ConfirmSaveInvoice") as string
                           ?? "Biztosan menti a számlát?";
@@ -163,5 +166,6 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string? name = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    protected void OnPropertyChanged([CallerMemberName] string? name = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }
