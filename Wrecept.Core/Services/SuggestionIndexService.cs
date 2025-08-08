@@ -80,7 +80,7 @@ public class SuggestionIndexService : ISuggestionIndexService
             .ToListAsync();
 
         var distinct = combined
-            .GroupBy(x => x.Name.ToUpper())
+            .GroupBy(x => x.Name, StringComparer.OrdinalIgnoreCase)
             .Select(g => g
                 .OrderByDescending(x => x.IsPrefix)
                 .ThenByDescending(x => x.Freq)
