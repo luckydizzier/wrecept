@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -23,9 +24,35 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
 
     public Invoice Invoice { get; } = new();
 
+    public ObservableCollection<string> Suggestions { get; } = new();
+    private string _searchTerm = string.Empty;
+    public string SearchTerm
+    {
+        get => _searchTerm;
+        set
+        {
+            if (_searchTerm != value)
+            {
+                _searchTerm = value;
+                OnPropertyChanged();
+                UpdateSuggestions();
+            }
+        }
+    }
+
+    private string? _selectedSuggestion;
+    public string? SelectedSuggestion
+    {
+        get => _selectedSuggestion;
+        set { _selectedSuggestion = value; OnPropertyChanged(); }
+    }
+
+    public bool HasSuggestions => Suggestions.Any();
+
     public ICommand AddItemCommand { get; }
     public ICommand DeleteItemCommand { get; }
     public ICommand SaveCommand { get; }
+    public ICommand SelectSuggestionCommand { get; }
 
     public InvoiceEditorViewModel(IInvoiceService invoiceService)
     {
@@ -33,6 +60,8 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         AddItemCommand = new RelayCommand(_ => AddItem());
         DeleteItemCommand = new RelayCommand(_ => DeleteItem(), _ => SelectedItem != null);
         SaveCommand = new RelayCommand(_ => SaveInvoice());
+        SelectSuggestionCommand = new RelayCommand(p => SelectSuggestion(p as string));
+        Suggestions.CollectionChanged += (_, __) => OnPropertyChanged(nameof(HasSuggestions));
     }
 
     private void AddItem()
@@ -86,6 +115,23 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         {
             MessageBox.Show($"Mentési hiba: {ex.Message}");
         }
+    }
+
+    private void SelectSuggestion(string? suggestion)
+    {
+        if (suggestion == null) return;
+        SearchTerm = suggestion;
+        Suggestions.Clear();
+    }
+
+    private void UpdateSuggestions()
+    {
+        Suggestions.Clear();
+        if (string.IsNullOrWhiteSpace(SearchTerm)) return;
+
+        // Placeholder suggestion logic
+        Suggestions.Add(SearchTerm + " 1");
+        Suggestions.Add(SearchTerm + " 2");
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
