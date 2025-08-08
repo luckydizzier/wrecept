@@ -6,14 +6,28 @@
              KeyboardNavigation.TabNavigation="None"
              mc:Ignorable="d">
     <UserControl.InputBindings>
-        <KeyBinding Key="Enter" Command="{Binding EnterCommand}" />
-        <KeyBinding Key="Escape" Command="{Binding EscapeCommand}" />
-        <KeyBinding Key="Left" Command="{Binding LeftCommand}" />
-        <KeyBinding Key="Right" Command="{Binding RightCommand}" />
-        <KeyBinding Key="Up" Command="{Binding UpCommand}" />
-        <KeyBinding Key="Down" Command="{Binding DownCommand}" />
+        <KeyBinding Key="F2" Command="{Binding AddItemCommand}" />
     </UserControl.InputBindings>
-    <Grid>
-        <TextBlock Text="Invoice Editor" />
-    </Grid>
+    <DockPanel>
+        <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" AutoGenerateColumns="True"/>
+        <Grid DockPanel.Dock="Bottom" Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="5,0,0,0">
+                <TextBlock Text="Nettó:" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding Invoice.TotalNet}" Margin="0,0,10,0"/>
+                <TextBlock Text="ÁFA:" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding Invoice.TotalVat}" Margin="0,0,10,0"/>
+                <TextBlock Text="Bruttó:" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding Invoice.TotalGross}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                <Button Content="Új sor" Command="{Binding AddItemCommand}" Margin="0,0,5,0"/>
+                <Button Content="Törlés" Command="{Binding DeleteItemCommand}" Margin="0,0,5,0"/>
+                <Button Content="Mentés" Command="{Binding SaveCommand}"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
 </UserControl>

@@ -6,14 +6,19 @@
              KeyboardNavigation.TabNavigation="None"
              mc:Ignorable="d">
     <UserControl.InputBindings>
-        <KeyBinding Key="Enter" Command="{Binding EnterCommand}" />
-        <KeyBinding Key="Escape" Command="{Binding EscapeCommand}" />
-        <KeyBinding Key="Left" Command="{Binding LeftCommand}" />
-        <KeyBinding Key="Right" Command="{Binding RightCommand}" />
-        <KeyBinding Key="Up" Command="{Binding UpCommand}" />
-        <KeyBinding Key="Down" Command="{Binding DownCommand}" />
+        <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
     </UserControl.InputBindings>
-    <Grid>
-        <TextBlock Text="Stocks" HorizontalAlignment="Center" VerticalAlignment="Center" />
-    </Grid>
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,0,0,5">
+            <Button Content="Frissítés" Command="{Binding RefreshCommand}" Width="80"/>
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Név" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Egységár" Binding="{Binding UnitPrice}" />
+                <DataGridTextColumn Header="ÁFA" Binding="{Binding VatRate}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
 </UserControl>

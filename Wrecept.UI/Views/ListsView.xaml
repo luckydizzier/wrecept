@@ -6,14 +6,21 @@
              KeyboardNavigation.TabNavigation="None"
              mc:Ignorable="d">
     <UserControl.InputBindings>
-        <KeyBinding Key="Enter" Command="{Binding EnterCommand}" />
-        <KeyBinding Key="Escape" Command="{Binding EscapeCommand}" />
-        <KeyBinding Key="Left" Command="{Binding LeftCommand}" />
-        <KeyBinding Key="Right" Command="{Binding RightCommand}" />
-        <KeyBinding Key="Up" Command="{Binding UpCommand}" />
-        <KeyBinding Key="Down" Command="{Binding DownCommand}" />
+        <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
     </UserControl.InputBindings>
-    <Grid>
-        <TextBlock Text="Lists" HorizontalAlignment="Center" VerticalAlignment="Center" />
-    </Grid>
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,0,0,5">
+            <Button Content="Frissítés" Command="{Binding RefreshCommand}" Width="80"/>
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding Invoices}" SelectedItem="{Binding SelectedInvoice}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Beszállító" Binding="{Binding Supplier.Name}" />
+                <DataGridTextColumn Header="Dátum" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Nettó" Binding="{Binding TotalNet}" />
+                <DataGridTextColumn Header="ÁFA" Binding="{Binding TotalVat}" />
+                <DataGridTextColumn Header="Bruttó" Binding="{Binding TotalGross}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
 </UserControl>
