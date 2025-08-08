@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:Wrecept.UI.Views"
         mc:Ignorable="d"
-        Title="Wrecept" Height="450" Width="800">
-    <views:InvoiceEditorView />
+        Title="Wrecept" Height="450" Width="800"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        Foreground="{DynamicResource WindowForegroundBrush}">
+    <views:MainView />
 </Window>

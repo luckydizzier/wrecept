@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace Wrecept.UI.ViewModels;
 
-public class InvoiceEditorViewModel : INotifyPropertyChanged
+public class ThemeEditorViewModel : INotifyPropertyChanged
 {
     public ICommand EnterCommand { get; }
     public ICommand EscapeCommand { get; }
@@ -12,8 +12,9 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     public ICommand RightCommand { get; }
     public ICommand UpCommand { get; }
     public ICommand DownCommand { get; }
+    public ICommand SaveCommand { get; }
 
-    public InvoiceEditorViewModel()
+    public ThemeEditorViewModel()
     {
         EnterCommand = new RelayCommand(_ => { });
         EscapeCommand = new RelayCommand(_ => { });
@@ -21,10 +22,10 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         RightCommand = new RelayCommand(_ => { });
         UpCommand = new RelayCommand(_ => { });
         DownCommand = new RelayCommand(_ => { });
+        SaveCommand = new RelayCommand(_ => { });
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-
     protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

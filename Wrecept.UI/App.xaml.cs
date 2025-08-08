@@ -45,6 +45,8 @@ public partial class App : Application
                 services.AddSingleton<StartupOrchestrator>();
                 services.AddSingleton<InvoiceEditorViewModel>();
                 services.AddTransient<InvoiceEditorView>();
+                services.AddSingleton<MainViewModel>();
+                services.AddTransient<MainView>();
                 services.AddSingleton<MainWindow>();
             })
             .Build();
@@ -57,11 +59,25 @@ public partial class App : Application
         var orchestrator = _host.Services.GetRequiredService<StartupOrchestrator>();
         await orchestrator.InitializeAsync();
 
+        var settingsService = _host.Services.GetRequiredService<ISettingsService>();
+        var settings = await settingsService.LoadAsync();
+        ApplyTheme(settings.Theme);
+        settingsService.SettingsChanged += (_, s) => ApplyTheme(s.Theme);
+
         var mainWindow = _host.Services.GetRequiredService<MainWindow>();
-        mainWindow.DataContext = _host.Services.GetRequiredService<InvoiceEditorViewModel>();
+        mainWindow.DataContext = _host.Services.GetRequiredService<MainViewModel>();
         mainWindow.Show();
 
         base.OnStartup(e);
+    }
+
+    private void ApplyTheme(string theme)
+    {
+        Resources.MergedDictionaries.Clear();
+        Resources.MergedDictionaries.Add(new ResourceDictionary
+        {
+            Source = new Uri($"Themes/{theme}Theme.xaml", UriKind.Relative)
+        });
     }
 
     protected override async void OnExit(ExitEventArgs e)
