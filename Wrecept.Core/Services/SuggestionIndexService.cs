@@ -17,7 +17,7 @@ public class SuggestionIndexService : ISuggestionIndexService
     {
         if (string.IsNullOrWhiteSpace(term)) return;
         var existing = await _ctx.SuggestionTerms
-            .FirstOrDefaultAsync(t => EF.Functions.Collate(t.Term, "NOCASE") == term);
+            .FirstOrDefaultAsync(t => t.Term == term);
         if (existing == null)
         {
             _ctx.SuggestionTerms.Add(new SuggestionTerm
