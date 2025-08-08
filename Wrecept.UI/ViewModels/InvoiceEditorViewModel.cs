@@ -46,6 +46,13 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     {
         if (SelectedItem != null)
         {
+            var confirm = MessageBox.Show(
+                "Biztosan törli a tételt?",
+                "Megerősítés",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (confirm != MessageBoxResult.Yes) return;
+
             Items.Remove(SelectedItem);
             SelectedItem = null;
         }
@@ -53,6 +60,13 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
 
     private async void SaveInvoice()
     {
+        var confirm = MessageBox.Show(
+            "Biztosan menti a számlát?",
+            "Megerősítés",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Question);
+        if (confirm != MessageBoxResult.Yes) return;
+
         Invoice.Items = Items.ToList();
         Invoice.RecalculateTotals();
         try
