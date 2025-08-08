@@ -55,8 +55,7 @@ public class MaintenanceViewModel
 
     private void OpenThemeEditor()
     {
-        var view = App.ServiceProvider.GetRequiredService<ThemeEditorView>();
-        view.DataContext = App.ServiceProvider.GetRequiredService<ThemeEditorViewModel>();
-        view.ShowDialog();
+        var window = App.ServiceProvider.GetRequiredService<ThemeEditorWindow>();
+        window.ShowDialog();
     }
 }
