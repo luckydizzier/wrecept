@@ -1,5 +1,5 @@
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -47,12 +47,25 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         set { _selectedSuggestion = value; OnPropertyChanged(); }
     }
 
-    public bool HasSuggestions => _hasSuggestions;
+    private bool _hasSuggestions;
+    public bool HasSuggestions
+    {
+        get => _hasSuggestions;
+        private set
+        {
+            if (_hasSuggestions != value)
+            {
+                _hasSuggestions = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public ICommand AddItemCommand { get; }
     public ICommand DeleteItemCommand { get; }
     public ICommand SaveCommand { get; }
     public ICommand SelectSuggestionCommand { get; }
+    public ICommand CloseSuggestionsCommand { get; }
 
     public InvoiceEditorViewModel(IInvoiceService invoiceService)
     {
@@ -61,7 +74,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         DeleteItemCommand = new RelayCommand(_ => DeleteItem(), _ => SelectedItem != null);
         SaveCommand = new RelayCommand(_ => SaveInvoice());
         SelectSuggestionCommand = new RelayCommand(p => SelectSuggestion(p as string));
-        Suggestions.CollectionChanged += (_, __) => OnPropertyChanged(nameof(HasSuggestions));
+        CloseSuggestionsCommand = new RelayCommand(_ => CloseSuggestions());
     }
 
     private void AddItem()
@@ -87,11 +100,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
             if (confirm != MessageBoxResult.Yes) return;
 
             Items.Remove(SelectedItem);
-            SelectedItem = null;
-        }
-    }
-
-    private async void SaveInvoice()
+@@ -66,28 +108,64 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     {
         string saveMsg = Application.Current.TryFindResource("ConfirmSaveInvoice") as string
                           ?? "Biztosan menti a számlát?";
@@ -121,24 +130,36 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     {
         if (suggestion == null) return;
         SearchTerm = suggestion;
-        Suggestions.Clear();
+        CloseSuggestions();
     }
 
     private void UpdateSuggestions()
     {
         Suggestions.Clear();
-        if (string.IsNullOrWhiteSpace(SearchTerm)) return;
-
-        // Suggest items from existing invoice data that match the search term
-        var matchingItems = Items
-            .Where(item => !string.IsNullOrWhiteSpace(item.Name) && item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            .Select(item => item.Name)
-            .Distinct()
-            .ToList();
-        foreach (var suggestion in matchingItems)
+        if (string.IsNullOrWhiteSpace(SearchTerm))
         {
-            Suggestions.Add(suggestion);
+            HasSuggestions = false;
+            return;
         }
+
+        var matches = Items
+            .Select(i => i.Product?.Name ?? string.Empty)
+            .Where(n => n.Contains(SearchTerm, StringComparison.InvariantCultureIgnoreCase))
+            .Distinct();
+
+        foreach (var match in matches)
+        {
+            Suggestions.Add(match);
+        }
+
+        HasSuggestions = Suggestions.Any();
+    }
+
+    private void CloseSuggestions()
+    {
+        Suggestions.Clear();
+        SelectedSuggestion = null;
+        HasSuggestions = false;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
