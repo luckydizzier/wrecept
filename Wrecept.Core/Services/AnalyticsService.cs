@@ -31,6 +31,7 @@ public class AnalyticsService : IAnalyticsService
     public async Task<IReadOnlyList<TopSupplierDto>> GetTopSuppliersAsync(int topN)
     {
         var query = await _ctx.Invoices
+            .Include(i => i.Supplier)
             .GroupBy(i => i.Supplier.Name)
             .Select(g => new TopSupplierDto(g.Key, g.Sum(i => i.TotalGross)))
             .OrderByDescending(r => r.TotalGross)
