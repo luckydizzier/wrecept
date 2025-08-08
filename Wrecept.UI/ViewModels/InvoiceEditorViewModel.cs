@@ -129,9 +129,16 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         Suggestions.Clear();
         if (string.IsNullOrWhiteSpace(SearchTerm)) return;
 
-        // Placeholder suggestion logic
-        Suggestions.Add(SearchTerm + " 1");
-        Suggestions.Add(SearchTerm + " 2");
+        // Suggest items from existing invoice data that match the search term
+        var matchingItems = Items
+            .Where(item => !string.IsNullOrWhiteSpace(item.Name) && item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+            .Select(item => item.Name)
+            .Distinct()
+            .ToList();
+        foreach (var suggestion in matchingItems)
+        {
+            Suggestions.Add(suggestion);
+        }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
