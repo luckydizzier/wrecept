@@ -45,7 +45,7 @@ guidance where necessary.
 │                       │                         [Mentés]       │
 └───────────────────────┴────────────────────────────────────────┘
 ┌────────────────────────────────────────────────────────────────┐
-│ Ctrl+S: Mentés  Ctrl+N: Új elem  Ctrl+Del: Elem törlése  Esc: Törlés │
+│ Ctrl+S: Mentés  Ctrl+N: Új elem  Ctrl+Del: Elem törlése  Esc: Vissza / Mégse │
 └────────────────────────────────────────────────────────────────┘
 ```
 
