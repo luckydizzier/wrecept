@@ -1,4 +1,4 @@
-<UserControl x:Class="Wrecept.UI.Views.InvoiceEditorView"
+<UserControl x:Class="Wrecept.UI.Views.ContactsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,6 +14,6 @@
         <KeyBinding Key="Down" Command="{Binding DownCommand}" />
     </UserControl.InputBindings>
     <Grid>
-        <TextBlock Text="Invoice Editor" />
+        <TextBlock Text="Contacts" HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </UserControl>
