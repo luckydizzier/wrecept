@@ -32,6 +32,7 @@
                      PreviewKeyDown="LstSuggestions_PreviewKeyDown" />
         </StackPanel>
         <DataGrid x:Name="dgInvoiceItems"
+                  Grid.Row="0"
                   Grid.Row="1"
                   ItemsSource="{Binding Items}"
                   SelectedItem="{Binding SelectedItem}"
@@ -44,6 +45,7 @@
                 <DataGridTextColumn Header="Összesen" Binding="{Binding TotalGross}" Width="*" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
+        <Grid Grid.Row="1" Margin="0,5,0,0">
         <Grid Grid.Row="2" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />

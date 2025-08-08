@@ -100,11 +100,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
             if (confirm != MessageBoxResult.Yes) return;
 
             Items.Remove(SelectedItem);
-            SelectedItem = null;
-        }
-    }
-
-    private async void SaveInvoice()
+@@ -66,28 +108,64 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     {
         string saveMsg = Application.Current.TryFindResource("ConfirmSaveInvoice") as string
                           ?? "Biztosan menti a számlát?";
