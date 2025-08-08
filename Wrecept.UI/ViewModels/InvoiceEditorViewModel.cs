@@ -47,7 +47,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         set { _selectedSuggestion = value; OnPropertyChanged(); }
     }
 
-    public bool HasSuggestions => Suggestions.Any();
+    public bool HasSuggestions => _hasSuggestions;
 
     public ICommand AddItemCommand { get; }
     public ICommand DeleteItemCommand { get; }
