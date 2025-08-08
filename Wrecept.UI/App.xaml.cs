@@ -50,6 +50,8 @@ public partial class App : Application
                 });
                 services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
                 services.AddScoped<IInvoiceService, InvoiceService>();
+                services.AddScoped<ISuggestionIndexService, SuggestionIndexService>();
+                services.AddScoped<IAnalyticsService, AnalyticsService>();
                 services.AddSingleton<ISettingsService, SettingsService>();
                 services.AddScoped<IDemoDataService, DemoDataService>();
                 services.AddSingleton<StartupOrchestrator>();
