@@ -14,8 +14,8 @@ public partial class MainWindow : Window
     private void OnClosing(object? sender, CancelEventArgs e)
     {
         var confirm = MessageBox.Show(
-            "Biztosan kilép a programból?",
-            "Megerősítés",
+            Resources.ConfirmExitMessage,
+            Resources.ConfirmationTitle,
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
         if (confirm != MessageBoxResult.Yes)
