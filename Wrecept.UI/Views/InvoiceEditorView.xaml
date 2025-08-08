@@ -24,7 +24,8 @@
         <StackPanel Grid.Row="0" Margin="0,0,0,5">
             <TextBox x:Name="tbSearch"
                      Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"
-                     PreviewKeyDown="TbSearch_PreviewKeyDown" />
+                     PreviewKeyDown="TbSearch_PreviewKeyDown"
+                     ToolTipService.ToolTip="Írd be a termék nevét vagy előtagját, majd válassz javaslatot (kijelölés után Enter)." />
             <ListBox x:Name="lstSuggestions"
                      ItemsSource="{Binding Suggestions}"
                      SelectedItem="{Binding SelectedSuggestion}"
@@ -35,7 +36,8 @@
                   Grid.Row="1"
                   ItemsSource="{Binding Items}"
                   SelectedItem="{Binding SelectedItem}"
-                  AutoGenerateColumns="False">
+                  AutoGenerateColumns="False"
+                  ToolTipService.ToolTip="A tételsorok között a nyilakkal navigálhatsz. Új sor: Insert, törlés: Delete.">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Kód" Binding="{Binding ProductId}" Width="*" />
                 <DataGridTextColumn Header="Leírás" Binding="{Binding Product.Name}" Width="2*" />
