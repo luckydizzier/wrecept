@@ -26,9 +26,10 @@
             <ListBox x:Name="lstSuggestions"
                      ItemsSource="{Binding Suggestions}"
                      SelectedItem="{Binding SelectedSuggestion}"
+                     DisplayMemberPath="Name"
                      Visibility="{Binding HasSuggestions, Converter={StaticResource BoolToVisibility}}">
                 <ListBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding SelectSuggestionCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                    <KeyBinding Key="Enter" Command="{Binding SelectSuggestionCommand}" CommandParameter="{Binding SelectedSuggestion.Name}" />
                 </ListBox.InputBindings>
             </ListBox>
         </StackPanel>
