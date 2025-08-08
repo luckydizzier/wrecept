@@ -66,7 +66,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     {
         var confirm = MessageBox.Show(
             (string)Application.Current.FindResource("ConfirmSaveInvoice"),
-            (string)Application.Current.FindResource("Confirmation"),
+            (string)(Application.Current.TryFindResource("Confirmation") ?? "Confirmation"),
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
         if (confirm != MessageBoxResult.Yes) return;
