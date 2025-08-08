@@ -5,18 +5,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              KeyboardNavigation.TabNavigation="None"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Key="I" Modifiers="Control" Command="{Binding AddItemCommand}" />
+        <KeyBinding Key="Insert" Command="{Binding AddItemCommand}" />
+        <KeyBinding Key="Enter" Command="{Binding AddItemCommand}" />
         <KeyBinding Key="Delete" Command="{Binding DeleteItemCommand}" />
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="0,0,0,5">
+            <TextBox x:Name="tbSearch" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}" />
+            <ListBox x:Name="lstSuggestions"
+                     ItemsSource="{Binding Suggestions}"
+                     SelectedItem="{Binding SelectedSuggestion}"
+                     DisplayMemberPath="Name"
+                     Visibility="{Binding HasSuggestions, Converter={StaticResource BoolToVisibility}}">
+                <ListBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SelectSuggestionCommand}" CommandParameter="{Binding SelectedSuggestion.Name}" />
+                </ListBox.InputBindings>
+            </ListBox>
+        </StackPanel>
         <DataGrid x:Name="dgInvoiceItems"
-                  Grid.Row="0"
+                  Grid.Row="1"
                   ItemsSource="{Binding Items}"
                   SelectedItem="{Binding SelectedItem}"
                   AutoGenerateColumns="False">
@@ -28,7 +46,7 @@
                 <DataGridTextColumn Header="Összesen" Binding="{Binding TotalGross}" Width="*" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="1" Margin="0,5,0,0">
+        <Grid Grid.Row="2" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
