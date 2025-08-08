@@ -46,12 +46,10 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     {
         if (SelectedItem != null)
         {
-            var confirm = MessageBox.Show(
+            var confirm = _dialogService.ShowConfirmation(
                 "Biztosan törli a tételt?",
-                "Megerősítés",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question);
-            if (confirm != MessageBoxResult.Yes) return;
+                "Megerősítés");
+            if (!confirm) return;
 
             Items.Remove(SelectedItem);
             SelectedItem = null;
