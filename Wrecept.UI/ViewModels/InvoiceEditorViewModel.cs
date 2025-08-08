@@ -46,10 +46,12 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     {
         if (SelectedItem != null)
         {
-            var confirm = _dialogService.ShowConfirmation(
-                Resources.BiztosanTorliATetelt,
-                "Megerősítés");
-            if (!confirm) return;
+            var confirm = MessageBox.Show(
+                (string)Application.Current.FindResource("BiztosanTorliATetelt"),
+                (string)Application.Current.FindResource("Confirmation"),
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (confirm != MessageBoxResult.Yes) return;
 
             Items.Remove(SelectedItem);
             SelectedItem = null;
@@ -59,8 +61,8 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     private async void SaveInvoice()
     {
         var confirm = MessageBox.Show(
-            Resources.ConfirmSaveInvoice,
-            Resources.Confirmation,
+            (string)Application.Current.FindResource("ConfirmSaveInvoice"),
+            (string)Application.Current.FindResource("Confirmation"),
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
         if (confirm != MessageBoxResult.Yes) return;

@@ -14,8 +14,8 @@ public partial class MainWindow : Window
     private void OnClosing(object? sender, CancelEventArgs e)
     {
         var confirm = MessageBox.Show(
-            Resources.ConfirmExitMessage,
-            Resources.ConfirmationTitle,
+            (string)FindResource("ConfirmExitMessage"),
+            (string)FindResource("ConfirmationTitle"),
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
         if (confirm != MessageBoxResult.Yes)
