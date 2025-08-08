@@ -46,9 +46,13 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     {
         if (SelectedItem != null)
         {
+            var messageObj = Application.Current.TryFindResource("BiztosanTorliATetelt");
+            var captionObj = Application.Current.TryFindResource("Confirmation");
+            var message = messageObj as string ?? "Biztosan törli a tételt?";
+            var caption = captionObj as string ?? "Megerősítés";
             var confirm = MessageBox.Show(
-                (string)Application.Current.FindResource("BiztosanTorliATetelt"),
-                (string)Application.Current.FindResource("Confirmation"),
+                message,
+                caption,
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question);
             if (confirm != MessageBoxResult.Yes) return;
