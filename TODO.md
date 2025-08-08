@@ -41,7 +41,7 @@
 - [x] `DONE` Initial core domain entities with validations
 
 ## ui_agent
-- [ ] `TODO NEEDS_REVIEW` Basic `MainView` + `InvoiceEditorView` XAML layout
+ - [ ] `IN_PROGRESS` Basic `MainView` + `InvoiceEditorView` XAML layout
 - [ ] `TODO NEEDS_REVIEW` Implement keyboard-only navigation (Enter, Escape, arrows, Tab)
 - [ ] `TODO NEEDS_REVIEW` Introduction of themes (dark/light + customisation)
  - [ ] `IN_PROGRESS` ThemeEditorView – theme management UI editor
