@@ -4,7 +4,7 @@
   <!-- Alap magyar sztringek -->
   <sys:String x:Key="ConfirmExitTitle">Kilépés megerősítése</sys:String>
   <sys:String x:Key="ConfirmExitMessage">Biztosan kilépsz az alkalmazásból?</sys:String>
-  <sys:String x:Key="BiztosanTorliATetelt">Are you sure you want to delete the item?</sys:String>
+  <sys:String x:Key="BiztosanTorliATetelt">Biztosan törli a tételt?</sys:String>
   <sys:String x:Key="ConfirmSaveInvoice">Are you sure you want to save the invoice?</sys:String>
   <sys:String x:Key="Confirmation">Megerősítés</sys:String>
 </ResourceDictionary>
