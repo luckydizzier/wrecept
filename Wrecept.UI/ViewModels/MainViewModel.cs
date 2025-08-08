@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using Wrecept.UI.Views;
 
 namespace Wrecept.UI.ViewModels;
@@ -68,17 +69,26 @@ public class MainViewModel : INotifyPropertyChanged
         SetSection(MainSection.Accounts);
     }
 
+    private UserControl CreateView<TView, TViewModel>()
+        where TView : UserControl
+        where TViewModel : class
+    {
+        var view = App.ServiceProvider.GetRequiredService<TView>();
+        view.DataContext = App.ServiceProvider.GetRequiredService<TViewModel>();
+        return view;
+    }
+
     private void SetSection(MainSection section)
     {
         SelectedSection = section;
         CurrentView = section switch
         {
-            MainSection.Accounts => new InvoiceEditorView(),
-            MainSection.Stocks => new StocksView(),
-            MainSection.Lists => new ListsView(),
-            MainSection.Maintenance => new MaintenanceView(),
-            MainSection.Contacts => new ContactsView(),
-            _ => null
+            MainSection.Accounts => CreateView<InvoiceEditorView, InvoiceEditorViewModel>(),
+            MainSection.Stocks => CreateView<StocksView, StocksViewModel>(),
+            MainSection.Lists => CreateView<ListsView, ListsViewModel>(),
+            MainSection.Maintenance => CreateView<MaintenanceView, MaintenanceViewModel>(),
+            MainSection.Contacts => CreateView<ContactsView, ContactsViewModel>(),
+            _ => new UserControl()
         };
     }
 

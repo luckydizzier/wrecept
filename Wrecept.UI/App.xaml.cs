@@ -19,6 +19,8 @@ public partial class App : Application
 {
     private readonly IHost _host;
 
+    public static IServiceProvider ServiceProvider => ((App)Current)._host.Services;
+
     public App()
     {
         _host = Host.CreateDefaultBuilder()
@@ -27,17 +29,25 @@ public partial class App : Application
                 config.SetBasePath(AppContext.BaseDirectory);
                 config.AddJsonFile("wrecept.json", optional: false, reloadOnChange: true);
             })
-            .UseSerilog((context, services, configuration) =>
+            .UseSerilog((context, services, loggerConfiguration) =>
             {
-                configuration
+                var logPath = Path.Combine(AppContext.BaseDirectory, "logs", "wrecept-.log");
+                loggerConfiguration
                     .ReadFrom.Configuration(context.Configuration)
+                    .ReadFrom.Services(services)
                     .Enrich.FromLogContext()
-                    .WriteTo.File(Path.Combine(AppContext.BaseDirectory, "logs", "wrecept-.log"), rollingInterval: RollingInterval.Day);
+                    .WriteTo.File(logPath, rollingInterval: RollingInterval.Day);
             })
             .ConfigureServices((context, services) =>
             {
                 services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlite($"Data Source={Path.Combine(AppContext.BaseDirectory, context.Configuration["DatabasePath"]!)}"));
+                {
+                    var dbRelativePath = context.Configuration["DatabasePath"] ?? "Data/wrecept.db";
+                    var dbFullPath = Path.Combine(AppContext.BaseDirectory, dbRelativePath);
+                    var dir = Path.GetDirectoryName(dbFullPath);
+                    if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                    options.UseSqlite($"Data Source={dbFullPath}");
+                });
                 services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
                 services.AddScoped<IInvoiceService, InvoiceService>();
                 services.AddSingleton<ISettingsService, SettingsService>();
@@ -45,6 +55,17 @@ public partial class App : Application
                 services.AddSingleton<StartupOrchestrator>();
                 services.AddSingleton<InvoiceEditorViewModel>();
                 services.AddTransient<InvoiceEditorView>();
+                services.AddSingleton<StocksViewModel>();
+                services.AddTransient<StocksView>();
+                services.AddSingleton<ContactsViewModel>();
+                services.AddTransient<ContactsView>();
+                services.AddSingleton<ListsViewModel>();
+                services.AddTransient<ListsView>();
+                services.AddSingleton<MaintenanceViewModel>();
+                services.AddTransient<MaintenanceView>();
+                services.AddSingleton<ThemeEditorViewModel>();
+                services.AddTransient<ThemeEditorView>();
+                services.AddSingleton<IExportService, ExportService>();
                 services.AddSingleton<MainViewModel>();
                 services.AddTransient<MainView>();
                 services.AddSingleton<MainWindow>();

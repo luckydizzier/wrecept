@@ -5,15 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              KeyboardNavigation.TabNavigation="None"
              mc:Ignorable="d">
-    <UserControl.InputBindings>
-        <KeyBinding Key="Enter" Command="{Binding EnterCommand}" />
-        <KeyBinding Key="Escape" Command="{Binding EscapeCommand}" />
-        <KeyBinding Key="Left" Command="{Binding LeftCommand}" />
-        <KeyBinding Key="Right" Command="{Binding RightCommand}" />
-        <KeyBinding Key="Up" Command="{Binding UpCommand}" />
-        <KeyBinding Key="Down" Command="{Binding DownCommand}" />
-    </UserControl.InputBindings>
-    <Grid>
-        <TextBlock Text="Maintenance" HorizontalAlignment="Center" VerticalAlignment="Center" />
-    </Grid>
+    <StackPanel Margin="10">
+        <Button Content="Export" Command="{Binding ExportCommand}" Margin="0,0,0,5" Width="100"/>
+        <Button Content="Import" Command="{Binding ImportCommand}" Margin="0,0,0,5" Width="100"/>
+        <Button Content="Theme Editor" Command="{Binding OpenThemeEditorCommand}" Width="100"/>
+    </StackPanel>
 </UserControl>
