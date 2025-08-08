@@ -11,7 +11,10 @@ editing support.
 ## 📌 Navigation model
 
 Navigation is strictly keyboard-based. Press `Enter` to move forward or confirm,
-and `Escape` to move back or cancel. Mouse input and the `Tab` key are not used.
+and `Escape` to move back or cancel. `Enter` at the end of an item row appends a
+new one, while `Escape` on an empty row removes it. Mouse input and the `Tab`
+key are not used. Contextual tooltips appear beside fields to provide inline
+guidance where necessary.
 
 ## 📀 Screen layouts
 
@@ -25,16 +28,26 @@ and `Escape` to move back or cancel. Mouse input and the `Tab` key are not used.
 
 ### 🧾 Invoice editor view
 
-┌───── List ────┬──────── Invoice editor ───────────────┐
-│ [Invoice number] │ Supplier: [              ]        │
-│ [Date]           │ Number:   [              ]        │
-│ [Supplier]       │ Payment method: [        ][ ] Net │
-│                  ├───────────────────────────────────┤
-│                  │ Product  Qty. Group Unit price VAT│
-│                  │ [Edit] [ 1] ...                   │
-│                  │ ... Previously entered lines ...  │
-│                  │                                   │
-└──────────────────┴───────────────────────────────────┘
+```
+┌───────────────────────┬────────────────────────────────────────┐
+│ Számlák               │ Számlaszerkesztő                       │
+│ > INV-2025-101        │ Szállító:      [            ]          │
+│ INV-2025-102          │ Dátum:         [ 2025-08-15 ]          │
+│ INV-2025-103          │ Számlaszám:    [ INV-2025-101 ]        │
+│ [Új számla]           │ Esedékesség:   [ 2025-09-14 ]          │
+│                       │ Fizetési mód:  [ Banki átutalás ]      │
+│                       ├────────────────────────────────────────┤
+│                       │ Kód  Leírás     Mennyiség  Ár   Összesen│
+│                       │ > [ ] [ ]       [ ]        [ ]  [ ]     │
+│                       │   [ ] [ ]       [ ]        [ ]  [ ]     │
+│                       ├────────────────────────────────────────┤
+│                       │ [Elem hozzáadása] [Elem eltávolítása]  │
+│                       │                         [Mentés]       │
+└───────────────────────┴────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────┐
+│ Ctrl+S: Mentés  Ctrl+N: Új elem  Ctrl+Del: Elem törlése  Esc: Törlés │
+└────────────────────────────────────────────────────────────────┘
+```
 
 ## Invoice entry workflow
 
@@ -51,8 +64,10 @@ and `Escape` to move back or cancel. Mouse input and the `Tab` key are not used.
    - Tax rate is selected automatically; press `Enter` to accept.
    - Press `Enter` at the end of the row to add a new one.
    - Press `Escape` on an empty row to remove it.
-7. Move to `[Save]` and press `Enter` to store the invoice; `Escape` cancels.
-8. After saving, focus returns to the invoice list.
+7. After the last item row, press `Enter` to move focus to the action bar.
+8. Within the action bar, `Enter` advances `[Add item] → [Remove item] → [Save]` while `Escape` moves backward or returns to the grid.
+9. Press `Enter` on `[Save]` to store the invoice; `Escape` cancels and returns to the grid.
+10. After saving, focus returns to the invoice list.
 
 ## 📌 Restrictions
 
