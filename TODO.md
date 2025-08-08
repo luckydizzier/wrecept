@@ -48,7 +48,7 @@
 - [x] `DONE` Confirmation popups for all critical actions
 - [ ] `TODO` Implement contextual tooltips across the UI
 - [ ] `TODO` Provide quick keyboard cheat sheet within the application
-- [ ] `TODO` Display auto-suggestions and predictive text in `InvoiceEditorView`
+- [ ] `IN_PROGRESS` Display auto-suggestions and predictive text in `InvoiceEditorView`
 - [ ] `TODO` Develop customizable dashboard views for financial and inventory metrics
 
 ## test_agent

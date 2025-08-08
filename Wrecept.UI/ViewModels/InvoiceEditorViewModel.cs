@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -23,9 +24,48 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
 
     public Invoice Invoice { get; } = new();
 
+    public ObservableCollection<string> Suggestions { get; } = new();
+    private string _searchTerm = string.Empty;
+    public string SearchTerm
+    {
+        get => _searchTerm;
+        set
+        {
+            if (_searchTerm != value)
+            {
+                _searchTerm = value;
+                OnPropertyChanged();
+                UpdateSuggestions();
+            }
+        }
+    }
+
+    private string? _selectedSuggestion;
+    public string? SelectedSuggestion
+    {
+        get => _selectedSuggestion;
+        set { _selectedSuggestion = value; OnPropertyChanged(); }
+    }
+
+    private bool _hasSuggestions;
+    public bool HasSuggestions
+    {
+        get => _hasSuggestions;
+        private set
+        {
+            if (_hasSuggestions != value)
+            {
+                _hasSuggestions = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public ICommand AddItemCommand { get; }
     public ICommand DeleteItemCommand { get; }
     public ICommand SaveCommand { get; }
+    public ICommand SelectSuggestionCommand { get; }
+    public ICommand CloseSuggestionsCommand { get; }
 
     public InvoiceEditorViewModel(IInvoiceService invoiceService)
     {
@@ -33,6 +73,8 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         AddItemCommand = new RelayCommand(_ => AddItem());
         DeleteItemCommand = new RelayCommand(_ => DeleteItem(), _ => SelectedItem != null);
         SaveCommand = new RelayCommand(_ => SaveInvoice());
+        SelectSuggestionCommand = new RelayCommand(p => SelectSuggestion(p as string));
+        CloseSuggestionsCommand = new RelayCommand(_ => CloseSuggestions());
     }
 
     private void AddItem()
@@ -86,6 +128,42 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         {
             MessageBox.Show($"Mentési hiba: {ex.Message}");
         }
+    }
+
+    private void SelectSuggestion(string? suggestion)
+    {
+        if (suggestion == null) return;
+        SearchTerm = suggestion;
+        CloseSuggestions();
+    }
+
+    private void UpdateSuggestions()
+    {
+        Suggestions.Clear();
+        if (string.IsNullOrWhiteSpace(SearchTerm))
+        {
+            HasSuggestions = false;
+            return;
+        }
+
+        var matches = Items
+            .Select(i => i.Product?.Name ?? string.Empty)
+            .Where(n => n.Contains(SearchTerm, StringComparison.InvariantCultureIgnoreCase))
+            .Distinct();
+
+        foreach (var match in matches)
+        {
+            Suggestions.Add(match);
+        }
+
+        HasSuggestions = Suggestions.Any();
+    }
+
+    private void CloseSuggestions()
+    {
+        Suggestions.Clear();
+        SelectedSuggestion = null;
+        HasSuggestions = false;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
