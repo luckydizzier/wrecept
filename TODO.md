@@ -45,7 +45,7 @@
 - [ ] `TODO NEEDS_REVIEW` Implement keyboard-only navigation (Enter, Escape, arrows, Tab)
 - [ ] `TODO NEEDS_REVIEW` Introduction of themes (dark/light + customisation)
  - [ ] `IN_PROGRESS` ThemeEditorView – theme management UI editor
-- [ ] `TODO NEEDS_REVIEW` Confirmation popups for all critical actions
+- [x] `DONE` Confirmation popups for all critical actions
 - [ ] `TODO` Implement contextual tooltips across the UI
 - [ ] `TODO` Provide quick keyboard cheat sheet within the application
 - [ ] `TODO` Display auto-suggestions and predictive text in `InvoiceEditorView`
