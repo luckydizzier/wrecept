@@ -6,7 +6,7 @@
              KeyboardNavigation.TabNavigation="None"
              mc:Ignorable="d">
     <UserControl.InputBindings>
-        <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddItemCommand}" />
+        <KeyBinding Key="I" Modifiers="Control" Command="{Binding AddItemCommand}" />
         <KeyBinding Key="Delete" Command="{Binding DeleteItemCommand}" />
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}" />
     </UserControl.InputBindings>
