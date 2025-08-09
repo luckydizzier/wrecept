@@ -68,6 +68,8 @@ public partial class App : Application
                 services.AddSingleton<ThemeEditorViewModel>();
                 services.AddTransient<ThemeEditorView>();
                 services.AddTransient<ThemeEditorWindow>();
+                services.AddSingleton<DashboardViewModel>();
+                services.AddTransient<DashboardView>();
                 services.AddSingleton<IExportService, ExportService>();
                 services.AddSingleton<MainViewModel>();
                 services.AddTransient<MainView>();
@@ -101,6 +103,10 @@ public partial class App : Application
         Resources.MergedDictionaries.Add(new ResourceDictionary
         {
             Source = new Uri($"Themes/{theme}Theme.xaml", UriKind.Relative)
+        });
+        Resources.MergedDictionaries.Add(new ResourceDictionary
+        {
+            Source = new Uri("Resources/Strings.xaml", UriKind.Relative)
         });
     }
 

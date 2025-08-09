@@ -60,9 +60,12 @@
                 <TextBlock Text="{Binding Invoice.TotalGross}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                <Button x:Name="btnAddItem" Content="Elem hozzáadása" Command="{Binding AddItemCommand}" Margin="0,0,5,0" />
-                <Button x:Name="btnDeleteItem" Content="Elem eltávolítása" Command="{Binding DeleteItemCommand}" Margin="0,0,5,0" />
-                <Button x:Name="btnSave" Content="Mentés" Command="{Binding SaveCommand}" />
+                <Button x:Name="btnAddItem" Content="Elem hozzáadása" Command="{Binding AddItemCommand}" Margin="0,0,5,0"
+                        ToolTipService.ToolTip="Új tétel hozzáadása (Insert)" />
+                <Button x:Name="btnDeleteItem" Content="Elem eltávolítása" Command="{Binding DeleteItemCommand}" Margin="0,0,5,0"
+                        ToolTipService.ToolTip="Kijelölt tétel törlése (Delete)" />
+                <Button x:Name="btnSave" Content="Mentés" Command="{Binding SaveCommand}"
+                        ToolTipService.ToolTip="Számla mentése (Ctrl+S)" />
             </StackPanel>
         </Grid>
     </Grid>
