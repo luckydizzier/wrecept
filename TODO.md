@@ -34,6 +34,7 @@
 - [x] `DONE` Auto-suggestions for recurring invoice items or frequently purchased products
 - [x] `DONE` Predictive text entry using local history
 - [x] `DONE` Reporting analytics engine for sales trends, top customers/products, and tax breakdowns
+- [x] `DONE` Handle corrupted settings file gracefully
 
 ## db_agent
 - [x] `DONE` Initialise SQLite database with migration

@@ -16,6 +16,7 @@ Features marked with *(planned)* are upcoming and not yet implemented.
 - **SQLite data storage** – Local persistence using a lightweight SQLite database via Entity Framework Core.
 - **Theme support** – Customisable themes with a dedicated Theme Editor.
 - **Logging with Serilog** – Structured logging to help diagnose issues and maintain reliability.
+- **Self-healing configuration** – Settings file is automatically created and reset if corrupted.
 - **Localisation** *(planned)* – Hungarian user interface and error messages.
 - **Import/Export** – Database backup and migration support.
 ## Smart Features
