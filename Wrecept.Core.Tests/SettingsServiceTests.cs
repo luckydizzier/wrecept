@@ -37,4 +37,26 @@ public class SettingsServiceTests
         Assert.Equal("Dark", reloaded.Theme);
         File.Delete(tempFile);
     }
+
+    [Fact]
+    public async Task LoadAsync_InvalidJson_ReturnsDefaults()
+    {
+        var tempFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.json");
+        await File.WriteAllTextAsync(tempFile, "{ invalid json }");
+        var service = new SettingsService(tempFile);
+        var loaded = await service.LoadAsync();
+        Assert.Equal("Data/wrecept.db", loaded.DatabasePath);
+        File.Delete(tempFile);
+    }
+
+    [Fact]
+    public async Task SaveAsync_CreatesDirectory()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        var tempFile = Path.Combine(dir, "settings.json");
+        var service = new SettingsService(tempFile);
+        await service.SaveAsync(new ApplicationSettings());
+        Assert.True(File.Exists(tempFile));
+        Directory.Delete(dir, true);
+    }
 }

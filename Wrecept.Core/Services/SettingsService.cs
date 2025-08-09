@@ -24,9 +24,18 @@ public class SettingsService : ISettingsService
             return _currentSettings;
         }
 
-        await using var stream = File.OpenRead(_settingsPath);
-        var settings = await JsonSerializer.DeserializeAsync<ApplicationSettings>(stream);
-        _currentSettings = settings ?? new ApplicationSettings();
+        try
+        {
+            await using var stream = File.OpenRead(_settingsPath);
+            var settings = await JsonSerializer.DeserializeAsync<ApplicationSettings>(stream);
+            _currentSettings = settings ?? new ApplicationSettings();
+        }
+        catch (JsonException)
+        {
+            _currentSettings = new ApplicationSettings();
+            await SaveAsync(_currentSettings);
+        }
+
         return _currentSettings;
     }
 
@@ -34,6 +43,11 @@ public class SettingsService : ISettingsService
     {
         _currentSettings = settings;
         var json = JsonSerializer.Serialize(_currentSettings, new JsonSerializerOptions { WriteIndented = true });
+        var directory = Path.GetDirectoryName(_settingsPath);
+        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
         await File.WriteAllTextAsync(_settingsPath, json);
         SettingsChanged?.Invoke(this, _currentSettings);
     }
