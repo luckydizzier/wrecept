@@ -6,8 +6,19 @@
              KeyboardNavigation.TabNavigation="None"
              mc:Ignorable="d">
     <StackPanel Margin="10">
-        <Button Content="Export" Command="{Binding ExportCommand}" Margin="0,0,0,5" Width="100"/>
-        <Button Content="Import" Command="{Binding ImportCommand}" Margin="0,0,0,5" Width="100"/>
-        <Button Content="Theme Editor" Command="{Binding OpenThemeEditorCommand}" Width="100"/>
+        <Button Content="Export"
+                Command="{Binding ExportCommand}"
+                Margin="0,0,0,5"
+                Width="100"
+                ToolTipService.ToolTip="Adatok exportálása" />
+        <Button Content="Import"
+                Command="{Binding ImportCommand}"
+                Margin="0,0,0,5"
+                Width="100"
+                ToolTipService.ToolTip="Adatok importálása" />
+        <Button Content="Theme Editor"
+                Command="{Binding OpenThemeEditorCommand}"
+                Width="100"
+                ToolTipService.ToolTip="Téma beállításainak szerkesztése" />
     </StackPanel>
 </UserControl>

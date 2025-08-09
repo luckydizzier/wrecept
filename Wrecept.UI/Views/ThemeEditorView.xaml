@@ -13,7 +13,24 @@
         <KeyBinding Key="Up" Command="{Binding UpCommand}" />
         <KeyBinding Key="Down" Command="{Binding DownCommand}" />
     </UserControl.InputBindings>
-    <Grid>
-        <Button Content="Save" Command="{Binding SaveCommand}" ToolTip="Mentés" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Téma:" VerticalAlignment="Center" Margin="0,0,5,0" />
+            <ComboBox ItemsSource="{Binding AvailableThemes}"
+                      SelectedItem="{Binding SelectedTheme}"
+                      Width="150"
+                      ToolTipService.ToolTip="Válassz témát (Light/Dark)" />
+        </StackPanel>
+        <Button Grid.Row="1"
+                Content="Mentés"
+                Command="{Binding SaveCommand}"
+                ToolTipService.ToolTip="Téma mentése (Enter)"
+                Width="80"
+                Height="30"
+                HorizontalAlignment="Center" />
     </Grid>
 </UserControl>

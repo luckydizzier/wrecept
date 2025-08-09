@@ -27,6 +27,13 @@ public class MaintenanceViewModel
 
     private async Task ExportAsync()
     {
+        var confirmMsg = Application.Current.TryFindResource("ConfirmExport") as string
+                         ?? "Biztosan exportálja az adatokat?";
+        var caption = Application.Current.TryFindResource("Confirmation") as string
+                      ?? "Megerősítés";
+        if (MessageBox.Show(confirmMsg, caption, MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
+            return;
+
         var path = Path.Combine(AppContext.BaseDirectory, "Data", "export.json");
         try
         {
@@ -41,6 +48,13 @@ public class MaintenanceViewModel
 
     private async Task ImportAsync()
     {
+        var confirmMsg = Application.Current.TryFindResource("ConfirmImport") as string
+                         ?? "Biztosan importálja az adatokat?";
+        var caption = Application.Current.TryFindResource("Confirmation") as string
+                      ?? "Megerősítés";
+        if (MessageBox.Show(confirmMsg, caption, MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
+            return;
+
         var path = Path.Combine(AppContext.BaseDirectory, "Data", "export.json");
         try
         {

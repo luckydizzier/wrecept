@@ -41,15 +41,15 @@
 - [x] `DONE` Initial core domain entities with validations
 
 ## ui_agent
- - [ ] `IN_PROGRESS` Basic `MainView` + `InvoiceEditorView` XAML layout
- - [ ] `IN_PROGRESS` Implement keyboard-only navigation (Enter, Escape, arrows,Insert, Delete (no Tab))
- - [ ] `IN_PROGRESS` Introduction of themes (dark/light + customisation)
- - [ ] `IN_PROGRESS` ThemeEditorView – theme management UI editor
+- [x] `DONE` Basic `MainView` + `InvoiceEditorView` XAML layout
+- [x] `DONE` Implement keyboard-only navigation (Enter, Escape, arrows,Insert, Delete (no Tab))
+- [x] `DONE` Introduction of themes (dark/light + customisation)
+- [x] `DONE` ThemeEditorView – theme management UI editor
 - [x] `DONE` Confirmation popups for all critical actions
-- [ ] `IN_PROGRESS` Implement contextual tooltips across the UI
+- [x] `DONE` Implement contextual tooltips across the UI
 - [ ] `TODO` Provide quick keyboard cheat sheet within the application
-- [ ] `IN_PROGRESS` Display auto-suggestions and predictive text in `InvoiceEditorView`
- - [ ] `IN_PROGRESS` Develop customizable dashboard views for financial and inventory metrics
+- [x] `DONE` Display auto-suggestions and predictive text in `InvoiceEditorView`
+- [ ] `IN_PROGRESS` Develop customizable dashboard views for financial and inventory metrics
 
 ## test_agent
 - [ ] `TODO NEEDS_REVIEW` Unit tests for the Service layer
