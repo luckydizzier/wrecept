@@ -24,7 +24,7 @@ public class ContactsViewModel : INotifyPropertyChanged
     public ContactsViewModel(IRepository<Supplier> repo)
     {
         _repo = repo;
-        RefreshCommand = new RelayCommand(async _ => await RefreshAsync());
+        RefreshCommand = new AsyncRelayCommand(_ => RefreshAsync());
         _ = RefreshAsync();
     }
 

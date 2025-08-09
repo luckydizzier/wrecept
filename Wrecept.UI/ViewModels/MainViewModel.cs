@@ -85,10 +85,10 @@ public class MainViewModel : INotifyPropertyChanged
         RightCommand = new RelayCommand(_ => Navigate(1));
         UpCommand = new RelayCommand(_ => Navigate(-1));
         DownCommand = new RelayCommand(_ => Navigate(1));
-        ToggleThemeCommand = new RelayCommand(_ =>
+        ToggleThemeCommand = new AsyncRelayCommand(async _ =>
         {
             _currentTheme = _currentTheme == "Light" ? "Dark" : "Light";
-            _ = _settingsService.UpdateThemeAsync(_currentTheme);
+            await _settingsService.UpdateThemeAsync(_currentTheme);
         });
 
         SetSection(MainSection.Dashboard);

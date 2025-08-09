@@ -23,7 +23,8 @@
 - [x] `DONE` Update README.md (feature list, menu structure, etc...)
 - [x] `DONE` Expand README with detailed feature list and menu structure
 - [ ] `TODO` Create keyboard shortcut cheat sheet
-- [x] `DONE` Update README to reflect implemented features
+ - [x] `DONE` Update README to reflect implemented features
+- [x] `DONE` Document AsyncRelayCommand usage in style guide
 
 ## logic_agent
 - [x] `DONE` Set up MRS structure (Model → Repository → Service)
@@ -52,6 +53,7 @@
 - [x] `DONE` Display auto-suggestions and predictive text in `InvoiceEditorView`
 - [ ] `IN_PROGRESS` Develop customizable dashboard views for financial and inventory metrics
 - [x] `DONE` Replace blocking call in `ThemeEditorViewModel` with async initialization
+- [x] `DONE` Replace async void commands with `AsyncRelayCommand`
 
 ## test_agent
 - [x] `DONE` Unit tests for the Service layer

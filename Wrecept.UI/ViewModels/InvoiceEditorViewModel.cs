@@ -75,7 +75,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged, IKeyboardNavigable
         _suggestionIndexService = suggestionIndexService;
         AddItemCommand = new RelayCommand(_ => AddItem());
         DeleteItemCommand = new RelayCommand(_ => DeleteItem(), _ => SelectedItem != null);
-        SaveCommand = new RelayCommand(_ => SaveInvoice());
+        SaveCommand = new AsyncRelayCommand(_ => SaveInvoiceAsync());
         SelectSuggestionCommand = new RelayCommand(p => SelectSuggestion(p as string));
         CloseSuggestionsCommand = new RelayCommand(_ => CloseSuggestions());
     }
@@ -106,7 +106,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged, IKeyboardNavigable
         }
     }
 
-    private async void SaveInvoice()
+    private async Task SaveInvoiceAsync()
     {
         string saveMsg = Application.Current.TryFindResource("ConfirmSaveInvoice") as string
                           ?? "Biztosan menti a számlát?";

@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Wrecept.Core.Services;
@@ -33,13 +34,13 @@ public class ThemeEditorViewModel : INotifyPropertyChanged
         _settingsService = settingsService;
         _ = LoadThemeAsync();
 
-        EnterCommand = new RelayCommand(_ => SaveAsync());
+        EnterCommand = new AsyncRelayCommand(_ => SaveAsync());
         EscapeCommand = new RelayCommand(_ => { });
         LeftCommand = new RelayCommand(_ => { });
         RightCommand = new RelayCommand(_ => { });
         UpCommand = new RelayCommand(_ => { });
         DownCommand = new RelayCommand(_ => { });
-        SaveCommand = new RelayCommand(_ => SaveAsync());
+        SaveCommand = new AsyncRelayCommand(_ => SaveAsync());
     }
 
     private async Task LoadThemeAsync()
@@ -48,7 +49,7 @@ public class ThemeEditorViewModel : INotifyPropertyChanged
         SelectedTheme = settings.Theme;
     }
 
-    private async void SaveAsync()
+    private async Task SaveAsync()
     {
         await _settingsService.UpdateThemeAsync(SelectedTheme);
         MessageBox.Show("Téma elmentve.");

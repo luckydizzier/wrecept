@@ -24,7 +24,7 @@ public class StocksViewModel : INotifyPropertyChanged
     public StocksViewModel(IRepository<Product> repo)
     {
         _repo = repo;
-        RefreshCommand = new RelayCommand(async _ => await RefreshAsync());
+        RefreshCommand = new AsyncRelayCommand(_ => RefreshAsync());
         _ = RefreshAsync();
     }
 
