@@ -4,8 +4,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
-    <Grid>
-        <TextBlock Text="Dashboard coming soon..."
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Havi bevétel">
+            <DataGrid x:Name="dgMonthlyRevenue"
+                      ItemsSource="{Binding MonthlyRevenue}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Hónap" Binding="{Binding Month}" />
+                    <DataGridTextColumn Header="Nettó" Binding="{Binding TotalNet}" />
+                    <DataGridTextColumn Header="ÁFA" Binding="{Binding TotalVat}" />
+                    <DataGridTextColumn Header="Bruttó" Binding="{Binding TotalGross}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Header="Top beszállítók">
+            <DataGrid x:Name="dgTopSuppliers"
+                      ItemsSource="{Binding TopSuppliers}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Beszállító" Binding="{Binding SupplierName}" />
+                    <DataGridTextColumn Header="Bruttó összeg" Binding="{Binding TotalGross}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
     </Grid>
 </UserControl>
