@@ -20,4 +20,21 @@ public class SettingsServiceTests
         Assert.Equal(settings.Language, loaded.Language);
         File.Delete(tempFile);
     }
+
+    [Fact]
+    public async Task UpdateThemeAsync_Persists_And_RaisesEvent()
+    {
+        var tempFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.json");
+        var service = new SettingsService(tempFile);
+        await service.LoadAsync();
+        string? changedTheme = null;
+        service.SettingsChanged += (_, s) => changedTheme = s.Theme;
+
+        await service.UpdateThemeAsync("Dark");
+
+        Assert.Equal("Dark", changedTheme);
+        var reloaded = await service.LoadAsync();
+        Assert.Equal("Dark", reloaded.Theme);
+        File.Delete(tempFile);
+    }
 }

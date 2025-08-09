@@ -23,6 +23,7 @@
 - [x] `DONE` Update README.md (feature list, menu structure, etc...)
 - [x] `DONE` Expand README with detailed feature list and menu structure
 - [ ] `TODO` Create keyboard shortcut cheat sheet
+- [x] `DONE` Update README to reflect implemented features
 
 ## logic_agent
 - [x] `DONE` Set up MRS structure (Model → Repository → Service)
@@ -50,12 +51,15 @@
 - [ ] `TODO` Provide quick keyboard cheat sheet within the application
 - [x] `DONE` Display auto-suggestions and predictive text in `InvoiceEditorView`
 - [ ] `IN_PROGRESS` Develop customizable dashboard views for financial and inventory metrics
+- [x] `DONE` Replace blocking call in `ThemeEditorViewModel` with async initialization
 
 ## test_agent
 - [x] `DONE` Unit tests for the Service layer
 - [x] `DONE` Database validations (error handling + rollback)
 - [ ] `TODO NEEDS_REVIEW` Testing keyboard navigation logic on different views
 - [x] `DONE` Setup `Wrecept.UI.Tests` with UI category and OS skip
+- [x] `DONE` Add unit test for settings theme update
+- [ ] `TODO` Add unit test for `ThemeEditorViewModel` initialization
 
 ## integration_agent
 - [x] `DONE` Database export/import function
