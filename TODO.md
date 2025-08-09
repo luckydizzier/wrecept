@@ -59,6 +59,7 @@
 - [x] `DONE` Replace blocking call in `ThemeEditorViewModel` with async initialization
 - [x] `DONE` Replace async void commands with `AsyncRelayCommand`
 - [x] `DONE` Consolidate invoice view by removing `InvoiceEditorView`
+- [x] `DONE` Fix product search popup binding error
 
 ## test_agent
 - [x] `DONE` Unit tests for the Service layer
