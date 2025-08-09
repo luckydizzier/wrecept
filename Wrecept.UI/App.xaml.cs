@@ -51,7 +51,6 @@ public partial class App : Application
                 });
                 services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
                 services.AddScoped<IInvoiceService, InvoiceService>();
-                services.AddScoped<ISuggestionIndexService, SuggestionIndexService>();
                 services.AddScoped<IAnalyticsService, AnalyticsService>();
                 services.AddSingleton<ISettingsService, SettingsService>();
                 services.AddScoped<IDemoDataService, DemoDataService>();
@@ -62,8 +61,6 @@ public partial class App : Application
                 services.AddSingleton<InvoiceViewModel>();
                 services.AddTransient<InvoiceView>();
                 services.AddSingleton<StartupOrchestrator>();
-                services.AddSingleton<InvoiceEditorViewModel>();
-                services.AddTransient<InvoiceEditorView>();
                 services.AddSingleton<StocksViewModel>();
                 services.AddTransient<StocksView>();
                 services.AddSingleton<ContactsViewModel>();

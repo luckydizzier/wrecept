@@ -115,7 +115,7 @@ public class MainViewModel : INotifyPropertyChanged
         CurrentView = section switch
         {
             MainSection.Dashboard => CreateView<DashboardView, DashboardViewModel>(),
-            MainSection.Accounts => CreateView<InvoiceEditorView, InvoiceEditorViewModel>(),
+            MainSection.Accounts => CreateView<InvoiceView, InvoiceViewModel>(),
             MainSection.Stocks => CreateView<StocksView, StocksViewModel>(),
             MainSection.Lists => CreateView<ListsView, ListsViewModel>(),
             MainSection.Maintenance => CreateView<MaintenanceView, MaintenanceViewModel>(),
