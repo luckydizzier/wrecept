@@ -177,7 +177,7 @@ Ref: TODO #42, Milestone: stage-3
 * `Enter` confirms and advances; `Escape` cancels or moves back. `Tab` is disabled.
 * No console output allowed in production builds.
 * All messages must be in **Hungarian**, and shown in dialog if user-facing.
-* Use `IMessageService` for user dialogs; avoid direct `MessageBox` calls in view models.
+* Use `IMessageService` for user dialogs; avoid direct `MessageBox` calls in view models and code-behind.
 * Do not block UI thread (use async where needed).
 * Use `AsyncRelayCommand` for asynchronous operations in commands; avoid `async void`.
 
