@@ -31,18 +31,24 @@ public class ThemeEditorViewModel : INotifyPropertyChanged
     public ThemeEditorViewModel(ISettingsService settingsService)
     {
         _settingsService = settingsService;
-        SelectedTheme = _settingsService.LoadAsync().Result.Theme;
+        _ = LoadThemeAsync();
 
-        EnterCommand = new RelayCommand(_ => Save());
+        EnterCommand = new RelayCommand(_ => SaveAsync());
         EscapeCommand = new RelayCommand(_ => { });
         LeftCommand = new RelayCommand(_ => { });
         RightCommand = new RelayCommand(_ => { });
         UpCommand = new RelayCommand(_ => { });
         DownCommand = new RelayCommand(_ => { });
-        SaveCommand = new RelayCommand(_ => Save());
+        SaveCommand = new RelayCommand(_ => SaveAsync());
     }
 
-    private async void Save()
+    private async Task LoadThemeAsync()
+    {
+        var settings = await _settingsService.LoadAsync();
+        SelectedTheme = settings.Theme;
+    }
+
+    private async void SaveAsync()
     {
         await _settingsService.UpdateThemeAsync(SelectedTheme);
         MessageBox.Show("Téma elmentve.");
