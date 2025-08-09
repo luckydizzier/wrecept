@@ -42,7 +42,7 @@
 
 ## ui_agent
  - [ ] `IN_PROGRESS` Basic `MainView` + `InvoiceEditorView` XAML layout
- - [ ] `IN_PROGRESS` Implement keyboard-only navigation (Enter, Escape, arrows, Tab)
+ - [ ] `IN_PROGRESS` Implement keyboard-only navigation (Enter, Escape, arrows,Insert, Delete (no Tab))
  - [ ] `IN_PROGRESS` Introduction of themes (dark/light + customisation)
  - [ ] `IN_PROGRESS` ThemeEditorView – theme management UI editor
 - [x] `DONE` Confirmation popups for all critical actions
