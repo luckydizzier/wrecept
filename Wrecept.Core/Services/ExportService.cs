@@ -35,14 +35,24 @@ public class ExportService : IExportService
         var json = await File.ReadAllTextAsync(path);
         var data = JsonSerializer.Deserialize<ExportData>(json);
         if (data is null) return;
-        _db.Products.RemoveRange(_db.Products);
-        _db.Suppliers.RemoveRange(_db.Suppliers);
-        _db.Invoices.RemoveRange(_db.Invoices);
-        await _db.SaveChangesAsync();
-        if (data.Products != null) _db.Products.AddRange(data.Products);
-        if (data.Suppliers != null) _db.Suppliers.AddRange(data.Suppliers);
-        if (data.Invoices != null) _db.Invoices.AddRange(data.Invoices);
-        await _db.SaveChangesAsync();
+        await using var transaction = await _db.Database.BeginTransactionAsync();
+        try
+        {
+            _db.Products.RemoveRange(_db.Products);
+            _db.Suppliers.RemoveRange(_db.Suppliers);
+            _db.Invoices.RemoveRange(_db.Invoices);
+            await _db.SaveChangesAsync();
+            if (data.Products != null) _db.Products.AddRange(data.Products);
+            if (data.Suppliers != null) _db.Suppliers.AddRange(data.Suppliers);
+            if (data.Invoices != null) _db.Invoices.AddRange(data.Invoices);
+            await _db.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 
     private class ExportData
