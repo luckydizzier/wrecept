@@ -24,7 +24,7 @@ public class ListsViewModel : INotifyPropertyChanged
     public ListsViewModel(IInvoiceService invoiceService)
     {
         _invoiceService = invoiceService;
-        RefreshCommand = new RelayCommand(async _ => await RefreshAsync());
+        RefreshCommand = new AsyncRelayCommand(_ => RefreshAsync());
         _ = RefreshAsync();
     }
 

@@ -20,8 +20,8 @@ public class MaintenanceViewModel
     public MaintenanceViewModel(IExportService exportService)
     {
         _exportService = exportService;
-        ExportCommand = new RelayCommand(async _ => await ExportAsync());
-        ImportCommand = new RelayCommand(async _ => await ImportAsync());
+        ExportCommand = new AsyncRelayCommand(_ => ExportAsync());
+        ImportCommand = new AsyncRelayCommand(_ => ImportAsync());
         OpenThemeEditorCommand = new RelayCommand(_ => OpenThemeEditor());
     }
 

@@ -178,6 +178,7 @@ Ref: TODO #42, Milestone: stage-3
 * No console output allowed in production builds.
 * All messages must be in **Hungarian**, and shown in dialog if user-facing.
 * Do not block UI thread (use async where needed).
+* Use `AsyncRelayCommand` for asynchronous operations in commands; avoid `async void`.
 
 ---
 
