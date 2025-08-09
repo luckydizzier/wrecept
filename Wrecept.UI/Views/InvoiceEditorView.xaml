@@ -11,7 +11,6 @@
     <UserControl.InputBindings>
         <KeyBinding Key="I" Modifiers="Control" Command="{Binding AddItemCommand}" />
         <KeyBinding Key="Insert" Command="{Binding AddItemCommand}" />
-        <KeyBinding Key="Enter" Command="{Binding AddItemCommand}" />
         <KeyBinding Key="Delete" Command="{Binding DeleteItemCommand}" />
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}" />
     </UserControl.InputBindings>
