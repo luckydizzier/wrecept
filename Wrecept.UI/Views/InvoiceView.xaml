@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             Foreground="{DynamicResource WindowForegroundBrush}">
     <UserControl.InputBindings>
         <KeyBinding Key="Insert" Command="{Binding AddItemCommand}"/>
         <KeyBinding Key="Delete" Command="{Binding RemoveItemCommand}"/>
         <KeyBinding Key="Enter" Command="{Binding SaveInvoiceCommand}"/>
         <KeyBinding Key="Escape" Command="{Binding CancelCommand}"/>
     </UserControl.InputBindings>
-    <Grid Background="{DynamicResource WindowBackgroundBrush}" Foreground="{DynamicResource WindowForegroundBrush}">
+    <Grid Background="{DynamicResource WindowBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -47,7 +48,7 @@
                 <DataGridTextColumn Header="Menny." Binding="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Egység" Binding="{Binding Unit}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Egységár" Binding="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridComboBoxColumn Header="ÁFA%" ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=DataGrid}}" SelectedItem="{Binding TaxRate}"/>
+                <DataGridComboBoxColumn Header="ÁFA%" ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=DataGrid}}" SelectedItemBinding="{Binding TaxRate}"/>
                 <DataGridTextColumn Header="Nettó" Binding="{Binding LineNet}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="ÁFA" Binding="{Binding LineVat}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Bruttó" Binding="{Binding LineGross}" IsReadOnly="True"/>
