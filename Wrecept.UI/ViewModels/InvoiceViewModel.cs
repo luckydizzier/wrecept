@@ -85,6 +85,9 @@ public class InvoiceViewModel : INotifyPropertyChanged
     private string _statusMessage = "Ready";
     public string StatusMessage { get => _statusMessage; private set { _statusMessage = value; OnPropertyChanged(); } }
 
+    private string _validationSummary = string.Empty;
+    public string ValidationSummary { get => _validationSummary; private set { _validationSummary = value; OnPropertyChanged(); } }
+
     private bool _isBusy;
     public bool IsBusy { get => _isBusy; private set { _isBusy = value; OnPropertyChanged(); } }
 
@@ -269,7 +272,8 @@ public class InvoiceViewModel : INotifyPropertyChanged
     private void UpdateValidation()
     {
         var errors = Items.SelectMany(i => i.HasErrors ? new[] { i } : Array.Empty<InvoiceItemVM>()).Count();
-        StatusMessage = errors > 0 ? $"{errors} validation error(s)" : "Ready";
+        ValidationSummary = errors > 0 ? $"{errors} validation error(s)" : string.Empty;
+        StatusMessage = string.IsNullOrEmpty(ValidationSummary) ? "Ready" : ValidationSummary;
         SaveInvoiceCommand.RaiseCanExecuteChanged();
     }
 

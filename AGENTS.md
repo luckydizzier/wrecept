@@ -179,3 +179,13 @@ Motivation: self-reliance, learning, system building and financial management.
 
 ---
 
+### Keyboard Map
+Ins Add • Del Remove • Enter Save • Esc Cancel • Typing Search
+
+### Acceptance Checklist
+- [ ] Inline item editing with keyboard navigation
+- [ ] Totals update automatically
+- [ ] Invalid fields prevent saving
+- [ ] Product lookup fills item data
+- [ ] Status bar shows hotkeys and errors
+
