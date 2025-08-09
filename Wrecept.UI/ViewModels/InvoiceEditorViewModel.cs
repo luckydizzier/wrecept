@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
+using Wrecept.UI.Services;
 using System.Threading.Tasks;
 
 namespace Wrecept.UI.ViewModels;
@@ -15,6 +16,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged, IKeyboardNavigable
 {
     private readonly IInvoiceService _invoiceService;
     private readonly ISuggestionIndexService _suggestionIndexService;
+    private readonly IMessageService _messageService;
 
     public ObservableCollection<InvoiceItem> Items { get; } = new();
     private InvoiceItem? _selectedItem;
@@ -69,10 +71,13 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged, IKeyboardNavigable
     public ICommand SelectSuggestionCommand { get; }
     public ICommand CloseSuggestionsCommand { get; }
 
-    public InvoiceEditorViewModel(IInvoiceService invoiceService, ISuggestionIndexService suggestionIndexService)
+    public InvoiceEditorViewModel(IInvoiceService invoiceService,
+                                  ISuggestionIndexService suggestionIndexService,
+                                  IMessageService messageService)
     {
         _invoiceService = invoiceService;
         _suggestionIndexService = suggestionIndexService;
+        _messageService = messageService;
         AddItemCommand = new RelayCommand(_ => AddItem());
         DeleteItemCommand = new RelayCommand(_ => DeleteItem(), _ => SelectedItem != null);
         SaveCommand = new AsyncRelayCommand(_ => SaveInvoiceAsync());
@@ -95,12 +100,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged, IKeyboardNavigable
             var captionObj = Application.Current.TryFindResource("Confirmation");
             var message = messageObj as string ?? "Biztosan törli a tételt?";
             var caption = captionObj as string ?? "Megerősítés";
-            var confirm = MessageBox.Show(
-                message,
-                caption,
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question);
-            if (confirm != MessageBoxResult.Yes) return;
+            if (!_messageService.Confirm(message, caption)) return;
 
             Items.Remove(SelectedItem);
         }
@@ -112,12 +112,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged, IKeyboardNavigable
                           ?? "Biztosan menti a számlát?";
         string caption = Application.Current.TryFindResource("Confirmation") as string
                           ?? "Megerősítés";
-        var confirm = MessageBox.Show(
-            saveMsg,
-            caption,
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Question);
-        if (confirm != MessageBoxResult.Yes) return;
+        if (!_messageService.Confirm(saveMsg, caption)) return;
 
         Invoice.Items = Items.ToList();
         Invoice.RecalculateTotals();
@@ -128,11 +123,11 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged, IKeyboardNavigable
             {
                 await _suggestionIndexService.AddHistoryEntryAsync(item.Product?.Name ?? string.Empty);
             }
-            MessageBox.Show("Számla elmentve.");
+            _messageService.Show("Számla elmentve.");
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Mentési hiba: {ex.Message}");
+            _messageService.Show($"Mentési hiba: {ex.Message}");
         }
     }
 

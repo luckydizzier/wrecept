@@ -2,15 +2,16 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using Wrecept.Core.Services;
+using Wrecept.UI.Services;
 
 namespace Wrecept.UI.ViewModels;
 
 public class ThemeEditorViewModel : INotifyPropertyChanged
 {
     private readonly ISettingsService _settingsService;
+    private readonly IMessageService _messageService;
 
     public ObservableCollection<string> AvailableThemes { get; } = new() { "Light", "Dark" };
 
@@ -29,10 +30,10 @@ public class ThemeEditorViewModel : INotifyPropertyChanged
     public ICommand DownCommand { get; }
     public ICommand SaveCommand { get; }
 
-    public ThemeEditorViewModel(ISettingsService settingsService)
+    public ThemeEditorViewModel(ISettingsService settingsService, IMessageService messageService)
     {
         _settingsService = settingsService;
-        _ = LoadThemeAsync();
+        _messageService = messageService;
 
         EnterCommand = new AsyncRelayCommand(_ => SaveAsync());
         EscapeCommand = new RelayCommand(_ => { });
@@ -43,7 +44,7 @@ public class ThemeEditorViewModel : INotifyPropertyChanged
         SaveCommand = new AsyncRelayCommand(_ => SaveAsync());
     }
 
-    private async Task LoadThemeAsync()
+    public async Task InitializeAsync()
     {
         var settings = await _settingsService.LoadAsync();
         SelectedTheme = settings.Theme;
@@ -52,7 +53,7 @@ public class ThemeEditorViewModel : INotifyPropertyChanged
     private async Task SaveAsync()
     {
         await _settingsService.UpdateThemeAsync(SelectedTheme);
-        MessageBox.Show("Téma elmentve.");
+        _messageService.Show("Téma elmentve.");
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

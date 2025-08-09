@@ -1,12 +1,16 @@
 using System.ComponentModel;
 using System.Windows;
+using Wrecept.UI.Services;
 
 namespace Wrecept.UI;
 
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    private readonly IMessageService _messageService;
+
+    public MainWindow(IMessageService messageService)
     {
+        _messageService = messageService;
         InitializeComponent();
         Closing += OnClosing;
     }
@@ -17,12 +21,7 @@ public partial class MainWindow : Window
                       ?? "Biztosan kilépsz az alkalmazásból?";
         string title = Application.Current.TryFindResource("ConfirmExitTitle") as string
                         ?? "Kilépés megerősítése";
-        var confirm = MessageBox.Show(
-            msg,
-            title,
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Question);
-        if (confirm != MessageBoxResult.Yes)
+        if (!_messageService.Confirm(msg, title))
         {
             e.Cancel = true;
         }
