@@ -33,11 +33,14 @@ public class AnalyticsService : IAnalyticsService
         var query = await _ctx.Invoices
             .Include(i => i.Supplier)
             .GroupBy(i => i.Supplier.Name)
-            .Select(g => new TopSupplierDto(g.Key, g.Sum(i => i.TotalGross)))
-            .OrderByDescending(r => r.TotalGross)
+            .Select(g => new { Name = g.Key, Total = g.Sum(i => (double)i.TotalGross) })
+            .OrderByDescending(r => r.Total)
             .Take(topN)
             .ToListAsync();
-        return query;
+
+        return query
+            .Select(x => new TopSupplierDto(x.Name, (decimal)x.Total))
+            .ToList();
     }
 
     public async Task<IReadOnlyList<TopProductDto>> GetTopProductsAsync(int topN)
