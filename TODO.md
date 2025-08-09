@@ -61,7 +61,7 @@
 - [ ] `TODO NEEDS_REVIEW` Testing keyboard navigation logic on different views
 - [x] `DONE` Setup `Wrecept.UI.Tests` with UI category and OS skip
 - [x] `DONE` Add unit test for settings theme update
-- [ ] `TODO` Add unit test for `ThemeEditorViewModel` initialization
+- [x] `DONE` Add unit test for `ThemeEditorViewModel` initialization
 
 ## integration_agent
 - [x] `DONE` Database export/import function
