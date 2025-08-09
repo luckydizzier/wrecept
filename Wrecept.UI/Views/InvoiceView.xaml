@@ -34,21 +34,33 @@
                 <DataGridTemplateColumn Header="Kód">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Text="{Binding Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Megnevezés">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Menny." Binding="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTemplateColumn Header="Menny.">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Egység" Binding="{Binding Unit}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Egységár" Binding="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridComboBoxColumn Header="ÁFA%" ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=DataGrid}}" SelectedItemBinding="{Binding TaxRate}"/>
+                <DataGridTemplateColumn Header="Egységár">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridComboBoxColumn Header="ÁFA%" ItemsSource="{Binding DataContext.TaxRates, RelativeSource={RelativeSource AncestorType=DataGrid}}" SelectedItemBinding="{Binding TaxRate, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Nettó" Binding="{Binding LineNet}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="ÁFA" Binding="{Binding LineVat}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Bruttó" Binding="{Binding LineGross}" IsReadOnly="True"/>
@@ -62,6 +74,18 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right">
                 <TextBlock Text="{Binding TotalNet, StringFormat=N2}"/>
+                <ItemsControl ItemsSource="{Binding VatTotals}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="ÁFA "/>
+                                <Run Text="{Binding Rate, StringFormat={}{0:P0}}"/>
+                                <Run Text=": "/>
+                                <Run Text="{Binding Vat, StringFormat=N2}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
                 <TextBlock Text="{Binding TotalVat, StringFormat=N2}"/>
                 <TextBlock Text="{Binding TotalGross, StringFormat=N2}" FontWeight="Bold"/>
             </StackPanel>

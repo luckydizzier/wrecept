@@ -22,7 +22,7 @@
 - [x] `DONE` Write installation guide (`INSTALL.md`)
 - [x] `DONE` Update README.md (feature list, menu structure, etc...)
 - [x] `DONE` Expand README with detailed feature list and menu structure
-- [ ] `TODO` Create keyboard shortcut cheat sheet
+ - [x] `DONE` Create keyboard shortcut cheat sheet
  - [x] `DONE` Update README to reflect implemented features
 - [x] `DONE` Document AsyncRelayCommand usage in style guide
 

@@ -55,7 +55,7 @@ See the [installation guide](docs/INSTALL.md) for prerequisites and step-by-step
 | Del | Remove item |
 | Enter | Save invoice |
 | Esc | Cancel |
-| Ctrl+K / typing | Product search |
+| Typing | Product search |
 
 ### Acceptance Checklist
 - [ ] Inline item editing with keyboard navigation
