@@ -52,13 +52,13 @@
 - [ ] `IN_PROGRESS` Develop customizable dashboard views for financial and inventory metrics
 
 ## test_agent
-- [ ] `TODO NEEDS_REVIEW` Unit tests for the Service layer
-- [ ] `TODO NEEDS_REVIEW` Database validations (error handling + rollback)
+- [x] `DONE` Unit tests for the Service layer
+- [x] `DONE` Database validations (error handling + rollback)
 - [ ] `TODO NEEDS_REVIEW` Testing keyboard navigation logic on different views
 - [x] `DONE` Setup `Wrecept.UI.Tests` with UI category and OS skip
 
 ## integration_agent
-- [ ] `TODO NEEDS_REVIEW` Database export/import function
+- [x] `DONE` Database export/import function
 
 ## ux_agent
 - [x] `DONE` Invoice form grid layout and keyboard workflow analysis
