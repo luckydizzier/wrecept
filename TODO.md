@@ -25,6 +25,7 @@
  - [x] `DONE` Create keyboard shortcut cheat sheet
  - [x] `DONE` Update README to reflect implemented features
 - [x] `DONE` Document AsyncRelayCommand usage in style guide
+- [x] `DONE` Document case-insensitive product search in README
 
 ## logic_agent
 - [x] `DONE` Set up MRS structure (Model → Repository → Service)
@@ -35,10 +36,12 @@
 - [x] `DONE` Predictive text entry using local history
 - [x] `DONE` Reporting analytics engine for sales trends, top customers/products, and tax breakdowns
 - [x] `DONE` Handle corrupted settings file gracefully
+- [x] `DONE` Make product lookup case-insensitive using EF.Functions.Like
 
 ## db_agent
 - [x] `DONE` Initialise SQLite database with migration
 - [x] `DONE` EF Core configuration (relationships, validation)
+- [x] `DONE` Add NOCASE collation and indexes for product and supplier names
 
 ## domain_agent
 - [x] `DONE` Initial core domain entities with validations
@@ -63,6 +66,7 @@
 - [x] `DONE` Setup `Wrecept.UI.Tests` with UI category and OS skip
 - [x] `DONE` Add unit test for settings theme update
 - [x] `DONE` Add unit test for `ThemeEditorViewModel` initialization
+- [x] `DONE` Add unit test for case-insensitive product lookup
 
 ## integration_agent
 - [x] `DONE` Database export/import function

@@ -79,6 +79,17 @@ public class AppDbContext : DbContext
             .Property(p => p.UnitPrice).HasColumnType("decimal(18,2)");
         modelBuilder.Entity<Product>()
             .Property(p => p.VatRate).HasColumnType("decimal(5,4)");
+        modelBuilder.Entity<Product>()
+            .Property(p => p.Name)
+            .UseCollation("NOCASE");
+        modelBuilder.Entity<Product>()
+            .HasIndex(p => p.Name);
+
+        modelBuilder.Entity<Supplier>()
+            .Property(s => s.Name)
+            .UseCollation("NOCASE");
+        modelBuilder.Entity<Supplier>()
+            .HasIndex(s => s.Name);
 
         modelBuilder.Entity<SuggestionTerm>()
             .Property(s => s.Term)
