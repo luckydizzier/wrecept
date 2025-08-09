@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -9,6 +8,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
+using Wrecept.UI.Services;
 
 namespace Wrecept.UI.ViewModels;
 
@@ -18,6 +18,7 @@ public class InvoiceViewModel : INotifyPropertyChanged
     private readonly IProductLookupService _productLookupService;
     private readonly ITaxService _taxService;
     private readonly ISettingsService _settingsService;
+    private readonly IMessageService _messageService;
 
     private readonly ObservableCollection<InvoiceItemVM> _items = new();
     public ObservableCollection<InvoiceItemVM> Items => _items;
@@ -97,12 +98,14 @@ public class InvoiceViewModel : INotifyPropertyChanged
     public InvoiceViewModel(IInvoiceService invoiceService,
                             IProductLookupService productLookupService,
                             ITaxService taxService,
-                            ISettingsService settingsService)
+                            ISettingsService settingsService,
+                            IMessageService messageService)
     {
         _invoiceService = invoiceService;
         _productLookupService = productLookupService;
         _taxService = taxService;
         _settingsService = settingsService;
+        _messageService = messageService;
 
         AddItemCommand = new RelayCommand(_ => AddItem());
         RemoveItemCommand = new RelayCommand(_ => RemoveItem(), _ => SelectedItem != null);
@@ -202,8 +205,7 @@ public class InvoiceViewModel : INotifyPropertyChanged
             StatusMessage = "Validation errors";
             return;
         }
-        var confirm = MessageBox.Show("Mented a számlát?", "Megerősítés", MessageBoxButton.YesNo);
-        if (confirm != MessageBoxResult.Yes) return;
+        if (!_messageService.Confirm("Mented a számlát?", "Megerősítés")) return;
 
         IsBusy = true;
         try
@@ -240,7 +242,7 @@ public class InvoiceViewModel : INotifyPropertyChanged
     private void ShowVatBreakdown()
     {
         var msg = string.Join("\n", VatTotals.Select(v => $"{v.Rate:P0}: {v.Vat:N2}"));
-        MessageBox.Show(msg.Length == 0 ? "Nincs ÁFA" : msg, "ÁFA összesítés");
+        _messageService.Show(msg.Length == 0 ? "Nincs ÁFA" : msg, "ÁFA összesítés");
     }
 
     private void ApplyDiscount(decimal percent)
