@@ -71,12 +71,20 @@ public class MainViewModel : INotifyPropertyChanged
             view.Show();
         });
 
-        EnterCommand = new RelayCommand(_ => { });
-        EscapeCommand = new RelayCommand(_ => { });
+        EnterCommand = new RelayCommand(_ =>
+        {
+            if (CurrentView?.DataContext is IKeyboardNavigable nav)
+                nav.OnEnter();
+        });
+        EscapeCommand = new RelayCommand(_ =>
+        {
+            if (CurrentView?.DataContext is IKeyboardNavigable nav)
+                nav.OnEscape();
+        });
         LeftCommand = new RelayCommand(_ => Navigate(-1));
         RightCommand = new RelayCommand(_ => Navigate(1));
-        UpCommand = new RelayCommand(_ => { });
-        DownCommand = new RelayCommand(_ => { });
+        UpCommand = new RelayCommand(_ => Navigate(-1));
+        DownCommand = new RelayCommand(_ => Navigate(1));
         ToggleThemeCommand = new RelayCommand(_ =>
         {
             _currentTheme = _currentTheme == "Light" ? "Dark" : "Light";

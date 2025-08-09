@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Wrecept.UI.ViewModels;
 
-public class InvoiceEditorViewModel : INotifyPropertyChanged
+public class InvoiceEditorViewModel : INotifyPropertyChanged, IKeyboardNavigable
 {
     private readonly IInvoiceService _invoiceService;
     private readonly ISuggestionIndexService _suggestionIndexService;
@@ -167,6 +167,10 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         SelectedSuggestion = null;
         HasSuggestions = false;
     }
+
+    public void OnEnter() => AddItem();
+
+    public void OnEscape() => CloseSuggestions();
 
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string? name = null)
