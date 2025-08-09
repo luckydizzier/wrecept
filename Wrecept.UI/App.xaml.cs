@@ -12,6 +12,7 @@ using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.UI.ViewModels;
 using Wrecept.UI.Views;
+using Wrecept.UI.Services;
 
 namespace Wrecept.UI;
 
@@ -57,6 +58,7 @@ public partial class App : Application
                 services.AddScoped<IProductLookupService, ProductLookupService>();
                 services.AddScoped<ITaxService, TaxService>();
                 services.AddScoped<IInvoiceTotalsService, InvoiceTotalsService>();
+                services.AddSingleton<IMessageService, MessageService>();
                 services.AddSingleton<InvoiceViewModel>();
                 services.AddTransient<InvoiceView>();
                 services.AddSingleton<StartupOrchestrator>();

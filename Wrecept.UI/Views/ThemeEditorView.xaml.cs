@@ -9,6 +9,8 @@ public partial class ThemeEditorView : UserControl
     public ThemeEditorView()
     {
         InitializeComponent();
-        DataContext = App.ServiceProvider.GetRequiredService<ThemeEditorViewModel>();
+        var vm = App.ServiceProvider.GetRequiredService<ThemeEditorViewModel>();
+        DataContext = vm;
+        Loaded += async (_, __) => await vm.InitializeAsync();
     }
 }
