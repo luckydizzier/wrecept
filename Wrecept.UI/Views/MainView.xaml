@@ -16,7 +16,7 @@
         <KeyBinding Key="F2" Command="{Binding ToggleThemeCommand}" />
     </UserControl.InputBindings>
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top" FontSize="14" FontFamily="Segoe UI">
             <MenuItem Header="_Dashboard" ToolTip="Áttekintés" Command="{Binding DashboardCommand}" InputGestureText="Ctrl+0"/>
             <MenuItem Header="_Accounts" ToolTip="Fiókok" Command="{Binding AccountsCommand}" InputGestureText="Ctrl+1"/>
             <MenuItem Header="_Stocks" ToolTip="Készletek" Command="{Binding StocksCommand}" InputGestureText="Ctrl+2"/>
@@ -24,6 +24,11 @@
             <MenuItem Header="_Maintenance" ToolTip="Karbantartás" Command="{Binding MaintenanceCommand}" InputGestureText="Ctrl+4"/>
             <MenuItem Header="_Contacts" ToolTip="Kapcsolatok" Command="{Binding ContactsCommand}" InputGestureText="Ctrl+5"/>
         </Menu>
-        <ContentControl Content="{Binding CurrentView}"/>
+        <StatusBar DockPanel.Dock="Bottom" FontSize="12" FontFamily="Segoe UI">
+            <StatusBarItem Content="Ready" />
+        </StatusBar>
+        <Border Padding="10" Background="{DynamicResource WindowBackgroundBrush}">
+            <ContentControl Content="{Binding CurrentView}"/>
+        </Border>
     </DockPanel>
 </UserControl>
