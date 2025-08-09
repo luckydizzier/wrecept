@@ -58,6 +58,7 @@
 - [ ] `IN_PROGRESS` Develop customizable dashboard views for financial and inventory metrics
 - [x] `DONE` Replace blocking call in `ThemeEditorViewModel` with async initialization
 - [x] `DONE` Replace async void commands with `AsyncRelayCommand`
+- [x] `DONE` Consolidate invoice view by removing `InvoiceEditorView`
 
 ## test_agent
 - [x] `DONE` Unit tests for the Service layer
