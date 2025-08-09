@@ -7,12 +7,14 @@ using System.Windows;
 using System.Windows.Input;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
+using System.Threading.Tasks;
 
 namespace Wrecept.UI.ViewModels;
 
 public class InvoiceEditorViewModel : INotifyPropertyChanged
 {
     private readonly IInvoiceService _invoiceService;
+    private readonly ISuggestionIndexService _suggestionIndexService;
 
     public ObservableCollection<InvoiceItem> Items { get; } = new();
     private InvoiceItem? _selectedItem;
@@ -35,7 +37,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
             {
                 _searchTerm = value;
                 OnPropertyChanged();
-                UpdateSuggestions();
+                _ = UpdateSuggestionsAsync();
             }
         }
     }
@@ -67,9 +69,10 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
     public ICommand SelectSuggestionCommand { get; }
     public ICommand CloseSuggestionsCommand { get; }
 
-    public InvoiceEditorViewModel(IInvoiceService invoiceService)
+    public InvoiceEditorViewModel(IInvoiceService invoiceService, ISuggestionIndexService suggestionIndexService)
     {
         _invoiceService = invoiceService;
+        _suggestionIndexService = suggestionIndexService;
         AddItemCommand = new RelayCommand(_ => AddItem());
         DeleteItemCommand = new RelayCommand(_ => DeleteItem(), _ => SelectedItem != null);
         SaveCommand = new RelayCommand(_ => SaveInvoice());
@@ -121,6 +124,10 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         try
         {
             await _invoiceService.AddInvoiceAsync(Invoice);
+            foreach (var item in Invoice.Items)
+            {
+                await _suggestionIndexService.AddHistoryEntryAsync(item.Product?.Name ?? string.Empty);
+            }
             MessageBox.Show("Számla elmentve.");
         }
         catch (Exception ex)
@@ -136,7 +143,7 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
         CloseSuggestions();
     }
 
-    private void UpdateSuggestions()
+    private async Task UpdateSuggestionsAsync()
     {
         Suggestions.Clear();
         if (string.IsNullOrWhiteSpace(SearchTerm))
@@ -145,14 +152,10 @@ public class InvoiceEditorViewModel : INotifyPropertyChanged
             return;
         }
 
-        var matches = Items
-            .Select(i => i.Product?.Name ?? string.Empty)
-            .Where(n => n.Contains(SearchTerm, StringComparison.InvariantCultureIgnoreCase))
-            .Distinct();
-
-        foreach (var match in matches)
+        var predictions = await _suggestionIndexService.GetPredictionsAsync(SearchTerm);
+        foreach (var p in predictions)
         {
-            Suggestions.Add(match);
+            Suggestions.Add(p);
         }
 
         HasSuggestions = Suggestions.Any();

@@ -18,16 +18,16 @@ Features marked with *(planned)* are upcoming and not yet implemented.
 - **Logging with Serilog** – Structured logging to help diagnose issues and maintain reliability.
 - **Localisation** *(planned)* – Hungarian user interface and error messages.
 - **Import/Export** *(planned)* – Upcoming database backup and migration support.
-## Smart Features *(planned)*
+## Smart Features
 - **Auto-suggestions for recurring invoice items or frequently purchased products**
-- **Predictive text entry using local history** 
+- **Predictive text entry using local history**
 ## In-App Help & Support *(planned)*
 - **Contextual tooltips** -
 - **Quick keyboard cheat sheet** -
 - **User onboarding tour** -
-## Reporting & Analytics *(planned)*
-- **Customizable financial and inventory dashboards** -
-- **Monthly/quarterly insights with charts for:** -
+## Reporting & Analytics
+- **Customizable financial and inventory dashboards** *(partial)* -
+- **Monthly insights with charts for:** -
   - **Sales trends** -
   - **Top customers/products** -
   - **Tax breakdowns** -
