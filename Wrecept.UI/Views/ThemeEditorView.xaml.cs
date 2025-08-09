@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Controls;
 using Wrecept.UI.ViewModels;
 
@@ -8,6 +9,6 @@ public partial class ThemeEditorView : UserControl
     public ThemeEditorView()
     {
         InitializeComponent();
-        DataContext = new ThemeEditorViewModel();
+        DataContext = App.ServiceProvider.GetRequiredService<ThemeEditorViewModel>();
     }
 }

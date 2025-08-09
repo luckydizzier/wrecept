@@ -7,4 +7,6 @@
   <sys:String x:Key="BiztosanTorliATetelt">Biztosan törli a tételt?</sys:String>
   <sys:String x:Key="ConfirmSaveInvoice">Biztosan el szeretné menteni a számlát?</sys:String>
   <sys:String x:Key="Confirmation">Megerősítés</sys:String>
+  <sys:String x:Key="ConfirmExport">Biztosan exportálja az adatokat?</sys:String>
+  <sys:String x:Key="ConfirmImport">Biztosan importálja az adatokat?</sys:String>
 </ResourceDictionary>
