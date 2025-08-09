@@ -14,6 +14,7 @@ public class DashboardViewModel : INotifyPropertyChanged
 
     public ObservableCollection<MonthlyRevenueDto> MonthlyRevenue { get; } = new();
     public ObservableCollection<TopSupplierDto> TopSuppliers { get; } = new();
+    public ObservableCollection<TopProductDto> TopProducts { get; } = new();
 
     public DashboardViewModel(IAnalyticsService analyticsService)
     {
@@ -34,6 +35,11 @@ public class DashboardViewModel : INotifyPropertyChanged
         TopSuppliers.Clear();
         foreach (var s in suppliers)
             TopSuppliers.Add(s);
+
+        var products = await _analyticsService.GetTopProductsAsync(5);
+        TopProducts.Clear();
+        foreach (var p in products)
+            TopProducts.Add(p);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

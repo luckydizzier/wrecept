@@ -8,6 +8,7 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <GroupBox Header="Havi bevétel">
@@ -31,6 +32,18 @@
                       IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Beszállító" Binding="{Binding SupplierName}" />
+                    <DataGridTextColumn Header="Bruttó összeg" Binding="{Binding TotalGross}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Header="Top termékek">
+            <DataGrid x:Name="dgTopProducts"
+                      ItemsSource="{Binding TopProducts}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Termék" Binding="{Binding ProductName}" />
                     <DataGridTextColumn Header="Bruttó összeg" Binding="{Binding TotalGross}" />
                 </DataGrid.Columns>
             </DataGrid>

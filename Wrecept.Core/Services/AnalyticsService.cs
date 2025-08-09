@@ -40,6 +40,21 @@ public class AnalyticsService : IAnalyticsService
         return query;
     }
 
+    public async Task<IReadOnlyList<TopProductDto>> GetTopProductsAsync(int topN)
+    {
+        var query = await _ctx.InvoiceItems
+            .Include(i => i.Product)
+            .GroupBy(i => i.Product.Name)
+            .Select(g => new { Name = g.Key, Total = g.Sum(i => (double)i.TotalGross) })
+            .OrderByDescending(r => r.Total)
+            .Take(topN)
+            .ToListAsync();
+
+        return query
+            .Select(x => new TopProductDto(x.Name, (decimal)x.Total))
+            .ToList();
+    }
+
     public async Task<TaxBreakdownDto> GetTaxBreakdownAsync()
     {
         var items = await _ctx.InvoiceItems
