@@ -68,7 +68,14 @@ public class InvoiceViewModel : INotifyPropertyChanged
     public bool IsProductSearchOpen
     {
         get => _isProductSearchOpen;
-        private set { _isProductSearchOpen = value; OnPropertyChanged(); }
+        set
+        {
+            if (_isProductSearchOpen != value)
+            {
+                _isProductSearchOpen = value;
+                OnPropertyChanged();
+            }
+        }
     }
 
     private CancellationTokenSource? _searchCts;
