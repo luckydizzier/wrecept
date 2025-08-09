@@ -42,14 +42,14 @@
 
 ## ui_agent
  - [ ] `IN_PROGRESS` Basic `MainView` + `InvoiceEditorView` XAML layout
-- [ ] `TODO NEEDS_REVIEW` Implement keyboard-only navigation (Enter, Escape, arrows, Tab)
-- [ ] `TODO NEEDS_REVIEW` Introduction of themes (dark/light + customisation)
+ - [ ] `IN_PROGRESS` Implement keyboard-only navigation (Enter, Escape, arrows, Tab)
+ - [ ] `IN_PROGRESS` Introduction of themes (dark/light + customisation)
  - [ ] `IN_PROGRESS` ThemeEditorView – theme management UI editor
 - [x] `DONE` Confirmation popups for all critical actions
 - [ ] `IN_PROGRESS` Implement contextual tooltips across the UI
 - [ ] `TODO` Provide quick keyboard cheat sheet within the application
 - [ ] `IN_PROGRESS` Display auto-suggestions and predictive text in `InvoiceEditorView`
-- [ ] `TODO` Develop customizable dashboard views for financial and inventory metrics
+ - [ ] `IN_PROGRESS` Develop customizable dashboard views for financial and inventory metrics
 
 ## test_agent
 - [ ] `TODO NEEDS_REVIEW` Unit tests for the Service layer

@@ -13,9 +13,11 @@
         <KeyBinding Key="Up" Command="{Binding UpCommand}" />
         <KeyBinding Key="Down" Command="{Binding DownCommand}" />
         <KeyBinding Key="F1" Command="{Binding ShowShortcutHelpCommand}" />
+        <KeyBinding Key="F2" Command="{Binding ToggleThemeCommand}" />
     </UserControl.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Dashboard" ToolTip="Áttekintés" Command="{Binding DashboardCommand}" InputGestureText="Ctrl+0"/>
             <MenuItem Header="_Accounts" ToolTip="Fiókok" Command="{Binding AccountsCommand}" InputGestureText="Ctrl+1"/>
             <MenuItem Header="_Stocks" ToolTip="Készletek" Command="{Binding StocksCommand}" InputGestureText="Ctrl+2"/>
             <MenuItem Header="_Lists" ToolTip="Listák" Command="{Binding ListsCommand}" InputGestureText="Ctrl+3"/>

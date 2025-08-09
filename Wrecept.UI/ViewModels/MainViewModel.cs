@@ -3,12 +3,14 @@ using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using Wrecept.Core.Services;
 using Wrecept.UI.Views;
 
 namespace Wrecept.UI.ViewModels;
 
 public enum MainSection
 {
+    Dashboard,
     Accounts,
     Stocks,
     Lists,
@@ -18,6 +20,7 @@ public enum MainSection
 
 public class MainViewModel : INotifyPropertyChanged
 {
+    public ICommand DashboardCommand { get; }
     public ICommand AccountsCommand { get; }
     public ICommand StocksCommand { get; }
     public ICommand ListsCommand { get; }
@@ -31,6 +34,7 @@ public class MainViewModel : INotifyPropertyChanged
     public ICommand RightCommand { get; }
     public ICommand UpCommand { get; }
     public ICommand DownCommand { get; }
+    public ICommand ToggleThemeCommand { get; }
 
     private MainSection _selectedSection;
     public MainSection SelectedSection
@@ -46,8 +50,15 @@ public class MainViewModel : INotifyPropertyChanged
         set { _currentView = value; OnPropertyChanged(); }
     }
 
-    public MainViewModel()
+    private readonly ISettingsService _settingsService;
+    private string _currentTheme;
+
+    public MainViewModel(ISettingsService settingsService)
     {
+        _settingsService = settingsService;
+        _currentTheme = _settingsService.LoadAsync().Result.Theme;
+
+        DashboardCommand = new RelayCommand(_ => SetSection(MainSection.Dashboard));
         AccountsCommand = new RelayCommand(_ => SetSection(MainSection.Accounts));
         StocksCommand = new RelayCommand(_ => SetSection(MainSection.Stocks));
         ListsCommand = new RelayCommand(_ => SetSection(MainSection.Lists));
@@ -61,12 +72,17 @@ public class MainViewModel : INotifyPropertyChanged
 
         EnterCommand = new RelayCommand(_ => { });
         EscapeCommand = new RelayCommand(_ => { });
-        LeftCommand = new RelayCommand(_ => { });
-        RightCommand = new RelayCommand(_ => { });
+        LeftCommand = new RelayCommand(_ => Navigate(-1));
+        RightCommand = new RelayCommand(_ => Navigate(1));
         UpCommand = new RelayCommand(_ => { });
         DownCommand = new RelayCommand(_ => { });
+        ToggleThemeCommand = new RelayCommand(_ =>
+        {
+            _currentTheme = _currentTheme == "Light" ? "Dark" : "Light";
+            _ = _settingsService.UpdateThemeAsync(_currentTheme);
+        });
 
-        SetSection(MainSection.Accounts);
+        SetSection(MainSection.Dashboard);
     }
 
     private UserControl CreateView<TView, TViewModel>()
@@ -83,6 +99,7 @@ public class MainViewModel : INotifyPropertyChanged
         SelectedSection = section;
         CurrentView = section switch
         {
+            MainSection.Dashboard => CreateView<DashboardView, DashboardViewModel>(),
             MainSection.Accounts => CreateView<InvoiceEditorView, InvoiceEditorViewModel>(),
             MainSection.Stocks => CreateView<StocksView, StocksViewModel>(),
             MainSection.Lists => CreateView<ListsView, ListsViewModel>(),
@@ -90,6 +107,22 @@ public class MainViewModel : INotifyPropertyChanged
             MainSection.Contacts => CreateView<ContactsView, ContactsViewModel>(),
             _ => new UserControl()
         };
+    }
+
+    private void Navigate(int direction)
+    {
+        var order = new[]
+        {
+            MainSection.Dashboard,
+            MainSection.Accounts,
+            MainSection.Stocks,
+            MainSection.Lists,
+            MainSection.Maintenance,
+            MainSection.Contacts
+        };
+        var index = Array.IndexOf(order, SelectedSection);
+        index = (index + direction + order.Length) % order.Length;
+        SetSection(order[index]);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
