@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,12 +52,12 @@ public class MainViewModel : INotifyPropertyChanged
     }
 
     private readonly ISettingsService _settingsService;
-    private string _currentTheme;
+    private string _currentTheme = "Light";
 
     public MainViewModel(ISettingsService settingsService)
     {
         _settingsService = settingsService;
-        _currentTheme = _settingsService.LoadAsync().Result.Theme;
+        _ = LoadThemeAsync();
 
         DashboardCommand = new RelayCommand(_ => SetSection(MainSection.Dashboard));
         AccountsCommand = new RelayCommand(_ => SetSection(MainSection.Accounts));
@@ -83,6 +84,12 @@ public class MainViewModel : INotifyPropertyChanged
         });
 
         SetSection(MainSection.Dashboard);
+    }
+
+    private async Task LoadThemeAsync()
+    {
+        var settings = await _settingsService.LoadAsync();
+        _currentTheme = string.IsNullOrEmpty(settings.Theme) ? "Light" : settings.Theme;
     }
 
     private UserControl CreateView<TView, TViewModel>()
