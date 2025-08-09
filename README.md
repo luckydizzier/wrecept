@@ -15,6 +15,7 @@ Features marked with *(planned)* are upcoming and not yet implemented.
 - **Model–Repository–Service (MRS) architecture** – Clear separation between domain models, persistence repositories, and business services.
 - **SQLite data storage** – Local persistence using a lightweight SQLite database via Entity Framework Core.
 - **Theme support** – Customisable themes with a dedicated Theme Editor.
+- **Case-insensitive product lookup** – Faster searches regardless of text casing.
 - **Logging with Serilog** – Structured logging to help diagnose issues and maintain reliability.
 - **Self-healing configuration** – Settings file is automatically created and reset if corrupted.
 - **Localisation** *(planned)* – Hungarian user interface and error messages.

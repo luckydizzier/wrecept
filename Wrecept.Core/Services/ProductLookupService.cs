@@ -19,7 +19,7 @@ public class ProductLookupService : IProductLookupService
             return Array.Empty<Product>();
 
         return await _context.Products
-            .Where(p => p.Name.Contains(term))
+            .Where(p => EF.Functions.Like(p.Name, $"%{term}%"))
             .OrderBy(p => p.Name)
             .Take(20)
             .ToListAsync();
