@@ -54,6 +54,11 @@ public partial class App : Application
                 services.AddScoped<IAnalyticsService, AnalyticsService>();
                 services.AddSingleton<ISettingsService, SettingsService>();
                 services.AddScoped<IDemoDataService, DemoDataService>();
+                services.AddScoped<IProductLookupService, ProductLookupService>();
+                services.AddScoped<ITaxService, TaxService>();
+                services.AddScoped<IInvoiceTotalsService, InvoiceTotalsService>();
+                services.AddSingleton<InvoiceViewModel>();
+                services.AddTransient<InvoiceView>();
                 services.AddSingleton<StartupOrchestrator>();
                 services.AddSingleton<InvoiceEditorViewModel>();
                 services.AddTransient<InvoiceEditorView>();

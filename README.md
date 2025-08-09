@@ -46,6 +46,23 @@ The main menu provides the following sections:
 
 See the [installation guide](docs/INSTALL.md) for prerequisites and step-by-step setup instructions. In short, ensure the .NET 8 SDK is installed and run the application by building the solution.
 
+## Invoice View Keyboard Map
+
+| Key | Action |
+|-----|--------|
+| Ins | Add item |
+| Del | Remove item |
+| Enter | Save invoice |
+| Esc | Cancel |
+| Ctrl+K / typing | Product search |
+
+### Acceptance Checklist
+- [ ] Inline item editing with keyboard navigation
+- [ ] Totals update automatically
+- [ ] Invalid fields prevent saving
+- [ ] Product lookup fills item data
+- [ ] Status bar shows hotkeys and errors
+
 ## Progress Logs
 
 Ongoing development milestones are recorded in [`docs/progress/`](docs/progress/).
