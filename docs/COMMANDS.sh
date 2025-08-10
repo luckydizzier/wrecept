@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+dotnet --info
+dotnet workload list
+
 # Build core project always
 if dotnet workload list | grep -q windowsdesktop; then
   echo "windowsdesktop workload present - building full solution"
