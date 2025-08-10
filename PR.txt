@@ -1,0 +1,9 @@
+Title: <scope>: <concise change>
+
+Body:
+- Problem:
+- Approach:
+- Alternatives considered:
+- Risk & mitigations:
+- Affected files:
+- Test results (paste from COMMANDS.sh):
