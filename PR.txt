@@ -1,27 +1,29 @@
-Title: ci/docs: conditional build & tests script
+Title: docs: document .NET environment checks
 
 Body:
 
 Problem:
-Root build/test script failed when WindowsDesktop SDK was missing.
+Needed to verify .NET installation and ensure `COMMANDS.sh` resides under `docs/`.
 
 Approach:
-Move build/test logic to `docs/COMMANDS.sh` and skip UI steps if `windowsdesktop` workload is absent.
+Ran `dotnet --info`, `dotnet workload list`, and executed `docs/COMMANDS.sh`; recorded outcomes in `docs/CHECKLIST.md`.
 
 Alternatives considered:
-Keep root `COMMANDS.sh` and instruct users to install WindowsDesktop.
+None.
 
 Risk & mitigations:
-UI coverage skipped on non-Windows environments; Windows CI required.
+UI tests remain skipped without the `windowsdesktop` workload; rely on Windows CI.
 
 Affected files:
 - docs/COMMANDS.sh
+- docs/CHECKLIST.md
 - SUMMARY.md
 - PR.txt
 - LIMITS.txt
-- COMMANDS.sh (removed)
 
 Test results (from COMMANDS.sh):
+- dotnet --info
+- dotnet workload list
 - bash docs/COMMANDS.sh
 
 Refs: N/A

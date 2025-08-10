@@ -1,6 +1,6 @@
-- **Problem statement**: Root `COMMANDS.sh` did not handle missing WindowsDesktop SDK, causing builds to fail on non-Windows environments.
-- **Approach taken**: Moved the script to `docs/COMMANDS.sh` with a workload check that skips UI build/tests when `windowsdesktop` is absent; updated project docs.
-- **Files changed**: `docs/COMMANDS.sh`, `COMMANDS.sh` (removed), `PR.txt`, `SUMMARY.md`, `LIMITS.txt`.
+- **Problem statement**: Needed to validate .NET setup and ensure command script resides under `docs/`.
+- **Approach taken**: Ran `dotnet --info`, listed installed workloads, executed `docs/COMMANDS.sh`, and captured outcomes in `docs/CHECKLIST.md`.
+- **Files changed**: `docs/COMMANDS.sh`, `docs/CHECKLIST.md`, `SUMMARY.md`, `PR.txt`, `LIMITS.txt`.
 - **Risks & mitigations**:
-  - Skipped UI tests may hide platform-specific issues; flag for Windows CI.
-- **Assumptions made**: Root-level file removal permitted despite AGENTS.md allowed paths.
+  - UI tests remain skipped when `windowsdesktop` workload is missing; Windows CI recommended.
+- **Assumptions made**: Root-level reporting files (`SUMMARY.md`, `PR.txt`, `LIMITS.txt`) allowed despite path restrictions.

@@ -1,2 +1,2 @@
-token limit: 5 files touched; build/test ~20s on linux without windowsdesktop workload
-intentionally not changed: source code, UI tests (skipped when workload missing)
+token limit: 5 files touched; command run time ~40s
+intentionally not changed: source code, test logic, docs/REPAIR_PLAN.md (unused)

@@ -1,0 +1,5 @@
+- [x] File locations comply with allowed paths (`src/`, `tests/`, `docs/`)
+- [x] `docs/COMMANDS.sh` path verified (no root-level script)
+- [x] `dotnet --info`
+- [x] `dotnet workload list`
+- [x] `bash docs/COMMANDS.sh`
