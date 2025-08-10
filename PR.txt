@@ -1,9 +1,28 @@
-Title: <scope>: <concise change>
+Title: docs: add repository audit
 
 Body:
-- Problem:
-- Approach:
-- Alternatives considered:
-- Risk & mitigations:
-- Affected files:
-- Test results (paste from COMMANDS.sh):
+
+Problem:
+Lack of a centralized overview of codebase structure, testing state, and dependency health.
+
+Approach:
+Compiled AUDIT.md summarizing architecture, test coverage, documentation, dependencies, and risks.
+
+Alternatives considered:
+Direct code fixes without audit—rejected to maintain scope.
+
+Risk & mitigations:
+Audit reflects environment lacking WindowsDesktop SDK; recommend configuring Windows tooling to validate UI layers.
+
+Affected files:
+- AUDIT.md
+
+Test results (from COMMANDS.sh):
+- dotnet build wrecept.sln (failed – WindowsDesktop SDK missing)
+- dotnet test Wrecept.Core.Tests/Wrecept.Core.Tests.csproj (passed)
+- dotnet test tests/Wrecept.Domain.Tests/Wrecept.Domain.Tests.csproj (passed)
+- dotnet test Wrecept.UI.Tests/Wrecept.UI.Tests.csproj (failed – missing WindowsDesktop targets)
+- dotnet test tests/Wrecept.UI.AutomatedTests/Wrecept.UI.AutomatedTests.csproj (no tests discovered)
+- dotnet list Wrecept.Core/Wrecept.Core.csproj package --outdated (reported available updates)
+
+Refs: N/A
