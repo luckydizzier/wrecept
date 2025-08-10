@@ -1,28 +1,24 @@
-Title: docs: add repository audit
+Title: docs: add next actions to audit progress
 
 Body:
 
 Problem:
-Lack of a centralized overview of codebase structure, testing state, and dependency health.
+Milestones in `docs/AUDIT_PROGRESS.md` lacked guidance on next steps.
 
 Approach:
-Compiled AUDIT.md summarizing architecture, test coverage, documentation, dependencies, and risks.
+Inserted a `Next Action:` line after each milestone entry.
 
 Alternatives considered:
-Direct code fixes without audit—rejected to maintain scope.
+Leaving progress log unchanged.
 
 Risk & mitigations:
-Audit reflects environment lacking WindowsDesktop SDK; recommend configuring Windows tooling to validate UI layers.
+Build failed due to missing WindowsDesktop SDK; note dependency in documentation.
 
 Affected files:
-- AUDIT.md
+- docs/AUDIT_PROGRESS.md
 
 Test results (from COMMANDS.sh):
 - dotnet build wrecept.sln (failed – WindowsDesktop SDK missing)
-- dotnet test Wrecept.Core.Tests/Wrecept.Core.Tests.csproj (passed)
-- dotnet test tests/Wrecept.Domain.Tests/Wrecept.Domain.Tests.csproj (passed)
-- dotnet test Wrecept.UI.Tests/Wrecept.UI.Tests.csproj (failed – missing WindowsDesktop targets)
-- dotnet test tests/Wrecept.UI.AutomatedTests/Wrecept.UI.AutomatedTests.csproj (no tests discovered)
-- dotnet list Wrecept.Core/Wrecept.Core.csproj package --outdated (reported available updates)
+- dotnet test wrecept.sln (passed for Domain/Core; UI tests skipped)
 
 Refs: N/A
