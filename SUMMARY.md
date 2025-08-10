@@ -1,0 +1,6 @@
+- **Problem statement**: Produce a comprehensive audit of the repository without modifying existing files.
+- **Approach taken**: Reviewed AGENTS.md, README.md, docs/styleguide.md; enumerated folder structure; analyzed code quality, tests, documentation, dependencies, security; executed build and test commands.
+- **Files changed**: `AUDIT.md`, `COMMANDS.sh`, `PR.txt`, `SUMMARY.md`, `LIMITS.txt`.
+- **Risks & mitigations**:
+  - Build and UI tests fail due to missing WindowsDesktop SDK; documented the issue and recommended configuring Windows tooling.
+- **Assumptions made**: Root-level documentation files are permissible; no secrets are present beyond search scope.

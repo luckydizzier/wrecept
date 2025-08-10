@@ -1,0 +1,2 @@
+token limit: single-pass audit, ~8s build/test per command
+intentionally not changed: source code, test implementations, CI configs, dependency versions
