@@ -1,2 +1,2 @@
-token limit: single-pass audit, ~8s build/test per command
-intentionally not changed: source code, test implementations, CI configs, dependency versions
+token limit: single-file doc update; build/test ~22s due to missing WindowsDesktop SDK
+intentionally not changed: source code, tests, configuration
