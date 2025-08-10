@@ -69,6 +69,11 @@ See the [installation guide](docs/INSTALL.md) for prerequisites and step-by-step
 
 Ongoing development milestones are recorded in [`docs/progress/`](docs/progress/).
 
+## Contributing
+
+See [docs/contributing.md](docs/contributing.md) for workflow and commit guidelines. All contributors are expected to follow the
+[Code of Conduct](docs/code-of-conduct.md).
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
