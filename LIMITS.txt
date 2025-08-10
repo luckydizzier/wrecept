@@ -1,2 +1,2 @@
-token limit: single-file doc update; build/test ~22s due to missing WindowsDesktop SDK
-intentionally not changed: source code, tests, configuration
+token limit: 5 files touched; build/test ~20s on linux without windowsdesktop workload
+intentionally not changed: source code, UI tests (skipped when workload missing)

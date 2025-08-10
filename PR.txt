@@ -1,24 +1,27 @@
-Title: docs: add next actions to audit progress
+Title: ci/docs: conditional build & tests script
 
 Body:
 
 Problem:
-Milestones in `docs/AUDIT_PROGRESS.md` lacked guidance on next steps.
+Root build/test script failed when WindowsDesktop SDK was missing.
 
 Approach:
-Inserted a `Next Action:` line after each milestone entry.
+Move build/test logic to `docs/COMMANDS.sh` and skip UI steps if `windowsdesktop` workload is absent.
 
 Alternatives considered:
-Leaving progress log unchanged.
+Keep root `COMMANDS.sh` and instruct users to install WindowsDesktop.
 
 Risk & mitigations:
-Build failed due to missing WindowsDesktop SDK; note dependency in documentation.
+UI coverage skipped on non-Windows environments; Windows CI required.
 
 Affected files:
-- docs/AUDIT_PROGRESS.md
+- docs/COMMANDS.sh
+- SUMMARY.md
+- PR.txt
+- LIMITS.txt
+- COMMANDS.sh (removed)
 
 Test results (from COMMANDS.sh):
-- dotnet build wrecept.sln (failed – WindowsDesktop SDK missing)
-- dotnet test wrecept.sln (passed for Domain/Core; UI tests skipped)
+- bash docs/COMMANDS.sh
 
 Refs: N/A
