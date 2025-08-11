@@ -25,6 +25,12 @@ These decisions aim to keep the codebase modular, testable, and maintainable whi
 - xUnit test projects mirror production modules.
 - Core and domain tests run cross-platform; UI tests require Windows.
 
+## Error Handling Strategy
+- Services validate inputs and throw domain-specific exceptions.
+- A central service captures unhandled exceptions and logs them via Serilog.
+- UI components display errors through `IMessageService` for consistency.
+- Background tasks return structured error results instead of throwing.
+
 ## Cross-platform Build Strategy
 To keep builds portable, only the core libraries and domain tests run on non-Windows hosts. WPF UI projects depend on the WindowsDesktop SDK and are skipped outside Windows environments.
 

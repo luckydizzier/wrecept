@@ -1,2 +1,2 @@
-token limit: assumed contract files exempt from 5-file cap; command run time ~60s
-intentionally not changed: src code, tests, existing docs/COMMANDS.sh
+token/time: ~2000 tokens processed; build and tests ~60s
+intentionally not changed: source code, prior progress logs, `COMMANDS.sh`
