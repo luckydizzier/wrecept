@@ -10,3 +10,4 @@
   Next Action: Enable code quality tooling then resolve flagged issues.
 - [x] Milestone 5 – Documentation
   Next Action: None – Completed
+  Notes: 2025-08-11 – architecture decisions expanded; progress log recorded.

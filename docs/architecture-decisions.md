@@ -11,3 +11,16 @@ This document records key architectural choices for the **wrecept** application.
 
 ## Rationale
 These decisions aim to keep the codebase modular, testable, and maintainable while supporting the project's keyboard-centric workflow.
+
+## Domain Boundaries
+- `Wrecept.Domain` encapsulates shared entities and value objects.
+- `Wrecept.Core` implements services and repositories operating on those types.
+- `Wrecept.UI` provides view models and views that consume core services.
+
+## Data Persistence
+- Entity Framework Core with SQLite enables offline storage.
+- Migrations are versioned under `docs/migrations` to trace schema changes.
+
+## Testing Strategy
+- xUnit test projects mirror production modules.
+- Core and domain tests run cross-platform; UI tests require Windows.
