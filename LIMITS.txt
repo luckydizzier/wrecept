@@ -1,2 +1,2 @@
-token/time: ~1800 tokens processed; build and tests ~25s
-intentionally not changed: application source code, test projects, COMMANDS.sh
+- Assumed sufficient tokens (<5k) and time (<10m) to edit documentation and run tests.
+- Did not modify source or test code outside docs.

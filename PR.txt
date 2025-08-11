@@ -1,26 +1,24 @@
-Title: docs: require task references in progress logs
+Title: docs: add localization strategy
 
 Problem:
-Progress logs did not explicitly link entries to their related tasks or milestones.
+Documentation missed localization guidance and progress log for Milestone 5.
 
 Approach:
-Added an architecture decision mandating task references in progress logs and recorded a corresponding progress entry.
+Added localization strategy section and logged related progress.
 
 Alternatives considered:
 None.
 
 Risk & mitigations:
-Documentation practices may still be overlooked → treat missing references as bugs during review.
+Documentation may fall out of sync with code; keep docs updated during feature work.
 
 Affected files:
 - docs/architecture-decisions.md
-- docs/progress/2025-08-11_13-35-14_master_orchestrator.md
-- SUMMARY.md
-- PR.txt
-- LIMITS.txt
+- docs/progress/2025-08-11_13-42-06_master_orchestrator.md
 
 Test results (from COMMANDS.sh):
 - `dotnet build Wrecept.Core.sln`
 - `dotnet test Wrecept.Core.Tests`
 - `dotnet test tests/Wrecept.Domain.Tests`
+
 Refs: AUDIT Milestone 5

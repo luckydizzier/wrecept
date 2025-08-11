@@ -46,6 +46,12 @@ This approach relies on:
 - A dedicated solution (`Wrecept.Core.sln`) and solution filter (`wrecept-core.slnf`) that contain only cross-platform projects.
 - CI and local scripts invoking `dotnet build Wrecept.Core.sln` on non-Windows hosts.
 - Conditional project configurations that ignore WPF projects when the `WindowsDesktop` SDK is unavailable.
+## Localization Strategy
+- The primary user interface language is **Hungarian**.
+- Text resources are stored in `.resx` files under `Resources/` to enable translation.
+- A default resource set provides fallback strings when a translation is missing.
+- Date, number, and currency formats follow the current culture at runtime.
+- New features must include resource entries for all user-facing text. User-facing text includes any text visible to end users, such as UI labels, error messages, tooltips, dialog titles, and notifications. For consistency, always add resource entries for these types of text.
 
 ## Documentation Strategy
 - Progress logs under `docs/progress/` capture timestamped updates for traceability and use the naming convention `YYYY-MM-DD_HH-MM-SS_agentname.md`.
