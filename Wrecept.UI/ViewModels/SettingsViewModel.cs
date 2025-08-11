@@ -2,21 +2,29 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
+using Wrecept.UI.Services;
 
 namespace Wrecept.UI.ViewModels;
 
 public class SettingsViewModel : INotifyPropertyChanged
 {
     private readonly ISettingsService _settingsService;
+    private readonly IMessageService _messageService;
     private ApplicationSettings _settings;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public SettingsViewModel(ISettingsService settingsService)
+    public SettingsViewModel(ISettingsService settingsService, IMessageService messageService)
     {
         _settingsService = settingsService;
+        _messageService = messageService;
         _settings = new ApplicationSettings();
-        _settingsService.SettingsChanged += (_, s) => { _settings = s; OnPropertyChanged(nameof(Theme)); OnPropertyChanged(nameof(Language)); };
+        _settingsService.SettingsChanged += (_, s) =>
+        {
+            _settings = s;
+            OnPropertyChanged(nameof(Theme));
+            OnPropertyChanged(nameof(Language));
+        };
     }
 
     public string Theme
@@ -28,7 +36,7 @@ public class SettingsViewModel : INotifyPropertyChanged
             {
                 _settings.Theme = value;
                 OnPropertyChanged();
-                _ = _settingsService.UpdateThemeAsync(value);
+                _ = SafeUpdateThemeAsync(value);
             }
         }
     }
@@ -42,11 +50,35 @@ public class SettingsViewModel : INotifyPropertyChanged
             {
                 _settings.Language = value;
                 OnPropertyChanged();
-                _ = _settingsService.UpdateLanguageAsync(value);
+                _ = SafeUpdateLanguageAsync(value);
             }
         }
     }
 
     protected void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+    private async Task SafeUpdateThemeAsync(string theme)
+    {
+        try
+        {
+            await _settingsService.UpdateThemeAsync(theme);
+        }
+        catch (Exception ex)
+        {
+            _messageService.Show($"Téma mentése sikertelen: {ex.Message}", "Hiba");
+        }
+    }
+
+    private async Task SafeUpdateLanguageAsync(string language)
+    {
+        try
+        {
+            await _settingsService.UpdateLanguageAsync(language);
+        }
+        catch (Exception ex)
+        {
+            _messageService.Show($"Nyelv mentése sikertelen: {ex.Message}", "Hiba");
+        }
+    }
 }

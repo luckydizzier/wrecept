@@ -59,4 +59,41 @@ public class SettingsServiceTests
         Assert.True(File.Exists(tempFile));
         Directory.Delete(dir, true);
     }
+
+    [Fact]
+    public async Task SaveAsync_NullSettings_Throws()
+    {
+        var service = new SettingsService(Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.json"));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => service.SaveAsync(null!));
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    public async Task UpdateThemeAsync_InvalidInput_Throws(string? theme)
+    {
+        var service = new SettingsService(Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.json"));
+        await service.LoadAsync();
+        await Assert.ThrowsAsync<ArgumentException>(() => service.UpdateThemeAsync(theme!));
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    public async Task UpdateLanguageAsync_InvalidInput_Throws(string? language)
+    {
+        var service = new SettingsService(Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.json"));
+        await service.LoadAsync();
+        await Assert.ThrowsAsync<ArgumentException>(() => service.UpdateLanguageAsync(language!));
+    }
+
+    [Fact]
+    public async Task SaveAsync_InvalidPath_Throws()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(dir);
+        var service = new SettingsService(dir);
+        await Assert.ThrowsAsync<InvalidOperationException>(() => service.SaveAsync(new ApplicationSettings()));
+        Directory.Delete(dir, true);
+    }
 }
