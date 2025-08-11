@@ -1,5 +1,7 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Abstractions;
+using Moq;
 using Wrecept.Core.Data;
 using Wrecept.Core.Models;
 using Wrecept.Core.Repositories;
@@ -31,7 +33,7 @@ public class InvoiceServiceTests
         await context.SaveChangesAsync();
 
         var repo = new Repository<Invoice>(context);
-        var service = new InvoiceService(repo);
+        var service = new InvoiceService(repo, NullLogger<InvoiceService>.Instance);
 
         var invoice = new Invoice { SupplierId = 1 };
         invoice.Items.Add(new InvoiceItem { ProductId = product.Id, Quantity = 2, UnitPrice = product.UnitPrice, VatRate = product.VatRate });
@@ -42,5 +44,28 @@ public class InvoiceServiceTests
         Assert.Equal(20m, saved.TotalNet);
         Assert.Equal(5.4m, saved.TotalVat);
         Assert.Equal(25.4m, saved.TotalGross);
+    }
+
+    [Fact]
+    public async Task AddInvoiceAsync_NullInvoice_Throws()
+    {
+        var repo = new Mock<IRepository<Invoice>>();
+        var service = new InvoiceService(repo.Object, NullLogger<InvoiceService>.Instance);
+
+        await Assert.ThrowsAsync<ArgumentNullException>(() => service.AddInvoiceAsync(null!));
+    }
+
+    [Fact]
+    public async Task AddInvoiceAsync_RepositoryFailure_ThrowsInvalidOperationException()
+    {
+        var repo = new Mock<IRepository<Invoice>>();
+        var ex = new Exception("fail");
+        repo.Setup(r => r.AddAsync(It.IsAny<Invoice>())).ThrowsAsync(ex);
+
+        var service = new InvoiceService(repo.Object, NullLogger<InvoiceService>.Instance);
+        var invoice = new Invoice();
+
+        var thrown = await Assert.ThrowsAsync<InvalidOperationException>(() => service.AddInvoiceAsync(invoice));
+        Assert.Same(ex, thrown.InnerException);
     }
 }
