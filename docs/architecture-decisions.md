@@ -51,7 +51,7 @@ This approach relies on:
 - Text resources are stored in `.resx` files under `Resources/` to enable translation.
 - A default resource set provides fallback strings when a translation is missing.
 - Date, number, and currency formats follow the current culture at runtime.
-- New features must include resource entries for all user-facing text.
+- New features must include resource entries for all user-facing text. User-facing text includes any text visible to end users, such as UI labels, error messages, tooltips, dialog titles, and notifications. For consistency, always add resource entries for these types of text.
 
 ## Documentation Strategy
 - Progress logs under `docs/progress/` capture timestamped updates for traceability and use the naming convention `YYYY-MM-DD_HH-MM-SS_agentname.md`.
