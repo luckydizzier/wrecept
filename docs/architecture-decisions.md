@@ -58,3 +58,9 @@ This approach relies on:
 - Each progress log entry references its related task or milestone.
 - Architecture decision records are revised alongside progress logs to preserve context.
 - Documentation updates are logged to help future contributors understand project history.
+
+## Dependency Management Strategy
+- Packages are pinned to explicit versions in each project file to ensure reproducible builds.
+- Outdated dependencies are reviewed at the start of each milestone using `dotnet list package --outdated`.
+- Security and bug-fix releases are applied promptly; other updates are scheduled after impact assessment.
+- Transitive dependencies are monitored during restores and updated when necessary to prevent drift.
