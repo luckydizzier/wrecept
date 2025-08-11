@@ -1,2 +1,2 @@
-token limit: 5 files touched; command run time ~40s
-intentionally not changed: source code, test logic, docs/REPAIR_PLAN.md (unused)
+token limit: assumed contract files exempt from 5-file cap; command run time ~60s
+intentionally not changed: src code, tests, existing docs/COMMANDS.sh

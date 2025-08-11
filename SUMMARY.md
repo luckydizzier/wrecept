@@ -1,6 +1,6 @@
-- **Problem statement**: Needed to validate .NET setup and ensure command script resides under `docs/`.
-- **Approach taken**: Ran `dotnet --info`, listed installed workloads, executed `docs/COMMANDS.sh`, and captured outcomes in `docs/CHECKLIST.md`.
-- **Files changed**: `docs/COMMANDS.sh`, `docs/CHECKLIST.md`, `SUMMARY.md`, `PR.txt`, `LIMITS.txt`.
+- **Problem statement**: Architecture decisions lacked a documentation strategy and progress logs needed an entry for this update.
+- **Approach taken**: Added a "Documentation Strategy" section, created a timestamped progress log, and ran build and test commands.
+- **Files changed**: `docs/architecture-decisions.md`, `docs/progress/2025-08-11_00-31-27_master_orchestrator.md`, `COMMANDS.sh`, `SUMMARY.md`, `PR.txt`, `LIMITS.txt`.
 - **Risks & mitigations**:
-  - UI tests remain skipped when `windowsdesktop` workload is missing; Windows CI recommended.
-- **Assumptions made**: Root-level reporting files (`SUMMARY.md`, `PR.txt`, `LIMITS.txt`) allowed despite path restrictions.
+  - Progress log naming mistakes could break chronology; verified timestamp format before commit.
+- **Assumptions made**: Output contract files are permitted at repository root and excluded from file-count limits.
