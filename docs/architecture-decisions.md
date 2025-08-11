@@ -41,6 +41,6 @@ This approach relies on:
 - Conditional project configurations that ignore WPF projects when the `WindowsDesktop` SDK is unavailable.
 
 ## Documentation Strategy
-- Progress logs under `docs/progress/` capture timestamped updates for traceability.
+- Progress logs under `docs/progress/` capture timestamped updates for traceability and use the naming convention `YYYY-MM-DD_HH-MM-SS_agentname.md`.
 - Architecture decision records are revised alongside progress logs to preserve context.
 - Documentation updates are logged to help future contributors understand project history.
