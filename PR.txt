@@ -1,29 +1,29 @@
-Title: docs: document error handling strategy
+Title: docs: document progress log naming pattern
 
 Body:
 
 Problem:
-New error handling documentation and progress log required style alignment.
+Progress logs lacked a documented naming convention and corresponding progress entry for Milestone 5.
 
 Approach:
-Added an "Error Handling Strategy" section with present-tense bullet points and logged the update.
+Added the naming pattern to `docs/architecture-decisions.md` and created a matching progress log.
 
 Alternatives considered:
 None.
 
 Risk & mitigations:
-Misinterpreting documentation style; cross-checked against `docs/styleguide.md`.
+Potential divergence from style guidelines; cross-checked with `docs/styleguide.md`.
 
 Affected files:
 - docs/architecture-decisions.md
-- docs/progress/2025-08-11_00-47-40_master_orchestrator.md
+- docs/progress/2025-08-11_01-00-00_master_orchestrator.md
 - SUMMARY.md
 - PR.txt
 - LIMITS.txt
 
 Test results (from COMMANDS.sh):
 - dotnet build Wrecept.Core.sln
-- dotnet test Wrecept.Core.Tests
-- dotnet test tests/Wrecept.Domain.Tests
+- dotnet test Wrecept.Core.Tests/Wrecept.Core.Tests.csproj
+- dotnet test tests/Wrecept.Domain.Tests/Wrecept.Domain.Tests.csproj
 
 Refs: Milestone 5

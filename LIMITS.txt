@@ -1,2 +1,2 @@
-token/time: ~2000 tokens processed; build and tests ~60s
-intentionally not changed: source code, prior progress logs, `COMMANDS.sh`
+token/time: ~1500 tokens processed; build and tests ~30s
+intentionally not changed: application source code, existing progress logs, COMMANDS.sh
