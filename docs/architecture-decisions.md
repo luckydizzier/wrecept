@@ -49,5 +49,6 @@ This approach relies on:
 
 ## Documentation Strategy
 - Progress logs under `docs/progress/` capture timestamped updates for traceability and use the naming convention `YYYY-MM-DD_HH-MM-SS_agentname.md`.
+- Each progress log entry references its related task or milestone.
 - Architecture decision records are revised alongside progress logs to preserve context.
 - Documentation updates are logged to help future contributors understand project history.
