@@ -1,29 +1,30 @@
-Title: docs: document .NET environment checks
+Title: docs: add documentation strategy and log entry
 
 Body:
 
 Problem:
-Needed to verify .NET installation and ensure `COMMANDS.sh` resides under `docs/`.
+Architecture decisions lacked a documentation strategy and the progress log required an update.
 
 Approach:
-Ran `dotnet --info`, `dotnet workload list`, and executed `docs/COMMANDS.sh`; recorded outcomes in `docs/CHECKLIST.md`.
+Appended a documentation strategy section, created a timestamped progress log, and verified build and tests.
 
 Alternatives considered:
 None.
 
 Risk & mitigations:
-UI tests remain skipped without the `windowsdesktop` workload; rely on Windows CI.
+Progress log naming could be inconsistent; timestamp verified before commit.
 
 Affected files:
-- docs/COMMANDS.sh
-- docs/CHECKLIST.md
+- docs/architecture-decisions.md
+- docs/progress/2025-08-11_00-31-27_master_orchestrator.md
+- COMMANDS.sh
 - SUMMARY.md
 - PR.txt
 - LIMITS.txt
 
 Test results (from COMMANDS.sh):
-- dotnet --info
-- dotnet workload list
-- bash docs/COMMANDS.sh
+- dotnet build Wrecept.Core.sln
+- dotnet test Wrecept.Core.Tests
+- dotnet test tests/Wrecept.Domain.Tests
 
-Refs: N/A
+Refs: Milestone 5

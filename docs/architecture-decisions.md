@@ -33,3 +33,8 @@ This approach relies on:
 - A dedicated solution (`Wrecept.Core.sln`) and solution filter (`wrecept-core.slnf`) that contain only cross-platform projects.
 - CI and local scripts invoking `dotnet build Wrecept.Core.sln`, which omits Windows-only projects.
 - Conditional project configurations that ignore WPF projects when the `WindowsDesktop` SDK is unavailable.
+
+## Documentation Strategy
+- Progress logs under `docs/progress/` capture timestamped updates for traceability.
+- Architecture decision records are revised alongside progress logs to preserve context.
+- Documentation updates are logged to help future contributors understand project history.
