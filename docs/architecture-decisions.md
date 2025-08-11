@@ -36,7 +36,7 @@ To keep builds portable across operating systems, only the core libraries and do
 
 Developers on Linux or macOS should:
 
-- build with `dotnet build Wrecept.Core.sln` or the `wrecept-core.slnf` solution filter to compile cross-platform projects only.
+- build with `dotnet build Wrecept.Core.sln` or the `wrecept-core.slnf` solution filter to compile cross-platform projects only. Both files contain only cross-platform projects; you may use either for this purpose.
 - run tests via `dotnet test Wrecept.Core.Tests` and `dotnet test tests/Wrecept.Domain.Tests`.
 
 Windows developers can compile the entire application with `dotnet build wrecept.sln`.
