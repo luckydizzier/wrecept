@@ -1,6 +1,9 @@
-- **Problem statement**: Progress logs lacked explicit references to their related tasks or milestones.
-- **Approach taken**: Added an architecture decision requiring task references in progress logs and logged the update.
-- **Files changed**: `docs/architecture-decisions.md`, `docs/progress/2025-08-11_13-35-14_master_orchestrator.md`, `SUMMARY.md`, `PR.txt`, `LIMITS.txt`.
-- **Risks & mitigations**:
-  - Future logs might omit task references → treat missing references as documentation bugs during review.
-- **Assumptions made**: Existing progress log format remains acceptable.
+- Problem: Documentation lacked localization strategy and recent progress entry.
+- Approach: Added localization strategy section to architecture decisions and logged progress for Milestone 5.
+- Files changed:
+  - docs/architecture-decisions.md
+  - docs/progress/2025-08-11_13-42-06_master_orchestrator.md
+- Risks & mitigations:
+  - Localization guidelines may require refinement as implementation evolves; keep documentation synced with code.
+- Assumptions:
+  - Output contract files are exempt from file-count limits.
