@@ -32,12 +32,19 @@ These decisions aim to keep the codebase modular, testable, and maintainable whi
 - Background tasks return structured error results instead of throwing.
 
 ## Cross-platform Build Strategy
-To keep builds portable, only the core libraries and domain tests run on non-Windows hosts. WPF UI projects depend on the WindowsDesktop SDK and are skipped outside Windows environments.
+To keep builds portable across operating systems, only the core libraries and domain tests run on non-Windows hosts. WPF UI projects depend on the `WindowsDesktop` SDK and are skipped outside Windows environments.
+
+Developers on Linux or macOS should:
+
+- build with `dotnet build Wrecept.Core.sln` or the `wrecept-core.slnf` solution filter to compile cross-platform projects only. Both files contain only cross-platform projects; you may use either for this purpose.
+- run tests via `dotnet test Wrecept.Core.Tests` and `dotnet test tests/Wrecept.Domain.Tests`.
+
+Windows developers can compile the entire application with `dotnet build wrecept.sln`.
 
 This approach relies on:
 
 - A dedicated solution (`Wrecept.Core.sln`) and solution filter (`wrecept-core.slnf`) that contain only cross-platform projects.
-- CI and local scripts invoking `dotnet build Wrecept.Core.sln`, which omits Windows-only projects.
+- CI and local scripts invoking `dotnet build Wrecept.Core.sln` on non-Windows hosts.
 - Conditional project configurations that ignore WPF projects when the `WindowsDesktop` SDK is unavailable.
 
 ## Documentation Strategy

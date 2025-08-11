@@ -1,6 +1,6 @@
-- **Problem statement**: Milestone 5 requires documenting progress log naming and recording the update.
-- **Approach taken**: Added the required naming pattern to `docs/architecture-decisions.md` and logged the change in a new progress entry. Verified build and tests.
-- **Files changed**: `docs/architecture-decisions.md`, `docs/progress/2025-08-11_01-00-00_master_orchestrator.md`, `SUMMARY.md`, `PR.txt`, `LIMITS.txt`.
+- **Problem statement**: Cross-platform build guidance lacked clear instructions for non-Windows hosts.
+- **Approach taken**: Expanded the build strategy in `docs/architecture-decisions.md` and logged the change in a new progress entry. Verified build and tests.
+- **Files changed**: `docs/architecture-decisions.md`, `docs/progress/2025-08-11_13-15-14_master_orchestrator.md`, `SUMMARY.md`, `PR.txt`, `LIMITS.txt`.
 - **Risks & mitigations**:
-  - Possible deviation from future naming policies → referenced style guide for consistency.
-- **Assumptions made**: Timestamp `01-00-00` chosen to satisfy naming convention.
+  - Guidance may become outdated as build tooling evolves → periodically review documentation.
+- **Assumptions made**: Existing build commands remain valid across environments.
