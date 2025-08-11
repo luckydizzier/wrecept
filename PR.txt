@@ -1,29 +1,26 @@
-Title: docs: clarify cross-platform build strategy
-
-Body:
+Title: docs: require task references in progress logs
 
 Problem:
-Cross-platform build guidance did not clearly state how to build on non-Windows hosts.
+Progress logs did not explicitly link entries to their related tasks or milestones.
 
 Approach:
-Refined the build strategy in `docs/architecture-decisions.md` and recorded the update in a progress log.
+Added an architecture decision mandating task references in progress logs and recorded a corresponding progress entry.
 
 Alternatives considered:
 None.
 
 Risk & mitigations:
-Instructions may become outdated; review periodically as tooling evolves.
+Documentation practices may still be overlooked → treat missing references as bugs during review.
 
 Affected files:
 - docs/architecture-decisions.md
-- docs/progress/2025-08-11_13-15-14_master_orchestrator.md
+- docs/progress/2025-08-11_13-35-14_master_orchestrator.md
 - SUMMARY.md
 - PR.txt
 - LIMITS.txt
 
 Test results (from COMMANDS.sh):
-- dotnet build Wrecept.Core.sln
-- dotnet test Wrecept.Core.Tests/Wrecept.Core.Tests.csproj
-- dotnet test tests/Wrecept.Domain.Tests/Wrecept.Domain.Tests.csproj
-
-Refs: Milestone 5
+- `dotnet build Wrecept.Core.sln`
+- `dotnet test Wrecept.Core.Tests`
+- `dotnet test tests/Wrecept.Domain.Tests`
+Refs: AUDIT Milestone 5

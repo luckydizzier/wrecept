@@ -1,6 +1,6 @@
-- **Problem statement**: Cross-platform build guidance lacked clear instructions for non-Windows hosts.
-- **Approach taken**: Expanded the build strategy in `docs/architecture-decisions.md` and logged the change in a new progress entry. Verified build and tests.
-- **Files changed**: `docs/architecture-decisions.md`, `docs/progress/2025-08-11_13-15-14_master_orchestrator.md`, `SUMMARY.md`, `PR.txt`, `LIMITS.txt`.
+- **Problem statement**: Progress logs lacked explicit references to their related tasks or milestones.
+- **Approach taken**: Added an architecture decision requiring task references in progress logs and logged the update.
+- **Files changed**: `docs/architecture-decisions.md`, `docs/progress/2025-08-11_13-35-14_master_orchestrator.md`, `SUMMARY.md`, `PR.txt`, `LIMITS.txt`.
 - **Risks & mitigations**:
-  - Guidance may become outdated as build tooling evolves → periodically review documentation.
-- **Assumptions made**: Existing build commands remain valid across environments.
+  - Future logs might omit task references → treat missing references as documentation bugs during review.
+- **Assumptions made**: Existing progress log format remains acceptable.
