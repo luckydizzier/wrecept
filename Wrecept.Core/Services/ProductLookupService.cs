@@ -16,12 +16,19 @@ public class ProductLookupService : IProductLookupService
     public async Task<IReadOnlyList<Product>> SearchAsync(string term)
     {
         if (string.IsNullOrWhiteSpace(term))
-            return Array.Empty<Product>();
+            throw new ArgumentException("A keresési kifejezés nem lehet üres.", nameof(term));
 
-        return await _context.Products
-            .Where(p => EF.Functions.Like(p.Name, $"%{term}%"))
-            .OrderBy(p => p.Name)
-            .Take(20)
-            .ToListAsync();
+        try
+        {
+            return await _context.Products
+                .Where(p => EF.Functions.Like(p.Name, $"%{term}%"))
+                .OrderBy(p => p.Name)
+                .Take(20)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException("Nem sikerült lekérdezni a termékeket.", ex);
+        }
     }
 }

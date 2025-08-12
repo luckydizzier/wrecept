@@ -33,4 +33,26 @@ public class ProductLookupServiceTests
         Assert.Single(results);
         Assert.Equal("Coffee", results[0].Name);
     }
+
+    [Fact]
+    public async Task SearchAsync_ThrowsArgumentException_WhenTermEmpty()
+    {
+        using var ctx = CreateContext();
+        var svc = new ProductLookupService(ctx);
+
+        var ex = await Assert.ThrowsAsync<ArgumentException>(() => svc.SearchAsync(""));
+        Assert.Equal("term", ex.ParamName);
+        Assert.Contains("A keresési kifejezés nem lehet üres.", ex.Message);
+    }
+
+    [Fact]
+    public async Task SearchAsync_WrapsExceptions()
+    {
+        var ctx = CreateContext();
+        var svc = new ProductLookupService(ctx);
+        ctx.Dispose();
+
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => svc.SearchAsync("x"));
+        Assert.Contains("Nem sikerült lekérdezni a termékeket.", ex.Message);
+    }
 }
