@@ -46,6 +46,10 @@ This approach relies on:
 - A dedicated solution (`Wrecept.Core.sln`) and solution filter (`wrecept-core.slnf`) that contain only cross-platform projects.
 - CI and local scripts invoking `dotnet build Wrecept.Core.sln` on non-Windows hosts.
 - Conditional project configurations that ignore WPF projects when the `WindowsDesktop` SDK is unavailable.
+## Continuous Integration Strategy
+- CI pipelines build cross-platform components with `dotnet build Wrecept.Core.sln`.
+- Tests execute via `dotnet test Wrecept.Core.Tests` and `dotnet test tests/Wrecept.Domain.Tests`.
+- UI projects are skipped when the `WindowsDesktop` SDK is missing to ensure portable builds.
 ## Localization Strategy
 - The primary user interface language is **Hungarian**.
 - Text resources are stored in `.resx` files under `Resources/` to enable translation.
