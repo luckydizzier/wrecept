@@ -1,2 +1,3 @@
-- Assumed sufficient tokens (<5k) and time (<10m) to edit documentation and run tests.
+- Assumed <5k tokens and <10m runtime for documentation updates and tests.
 - Did not modify source or test code outside docs.
+- Left COMMANDS.sh unchanged to keep file count within limits.
