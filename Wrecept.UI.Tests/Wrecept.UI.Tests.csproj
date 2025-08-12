@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-    <IsTestProject>true</IsTestProject>
+    <IsTestProject Condition="'$(OS)' == 'Windows_NT'">true</IsTestProject>
     <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
