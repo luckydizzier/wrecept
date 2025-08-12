@@ -1,24 +1,24 @@
-Title: docs: add localization strategy
+Title: docs: document validation strategy
 
 Problem:
-Documentation missed localization guidance and progress log for Milestone 5.
+Architecture decisions lacked guidance on input validation and progress logs were outdated.
 
 Approach:
-Added localization strategy section and logged related progress.
+Added a validation strategy section and recorded milestone progress.
 
 Alternatives considered:
 None.
 
 Risk & mitigations:
-Documentation may fall out of sync with code; keep docs updated during feature work.
+Validation details could overlap with error handling; section kept concise and focused.
 
 Affected files:
 - docs/architecture-decisions.md
-- docs/progress/2025-08-11_13-42-06_master_orchestrator.md
+- docs/progress/2025-08-12_06-37-55_master-orchestrator.md
 
 Test results (from COMMANDS.sh):
 - `dotnet build Wrecept.Core.sln`
 - `dotnet test Wrecept.Core.Tests`
 - `dotnet test tests/Wrecept.Domain.Tests`
 
-Refs: AUDIT Milestone 5
+Refs: Milestone 5

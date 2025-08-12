@@ -25,6 +25,12 @@ These decisions aim to keep the codebase modular, testable, and maintainable whi
 - xUnit test projects mirror production modules.
 - Core and domain tests run cross-platform; UI tests require Windows.
 
+## Validation Strategy
+- Domain models and services enforce business rules through guard clauses and return structured validation results.
+- View models implement `INotifyDataErrorInfo` to surface property-level issues.
+- User-facing validation messages are delivered via `IMessageService`.
+- Commands remain disabled until associated property errors are resolved.
+
 ## Error Handling Strategy
 - Services validate inputs and throw domain-specific exceptions.
 - A central service captures unhandled exceptions and logs them via Serilog.
