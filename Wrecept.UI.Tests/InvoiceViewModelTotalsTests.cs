@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Wrecept.Core.Models;
 using Wrecept.Core.Services;
 using Wrecept.UI.Services;
@@ -71,6 +73,30 @@ public class InvoiceViewModelTotalsTests
 
         Assert.Equal(40.5m, rate27.Vat);
         Assert.Equal(1m, rate5.Vat);
+    }
+
+    private class FailingLookupService : IProductLookupService
+    {
+        public Task<IReadOnlyList<Product>> SearchAsync(string term) => throw new Exception("db");
+    }
+
+    private class RecordingMessageService : IMessageService
+    {
+        public List<string> Messages { get; } = new();
+        public void Show(string message, string? title = null) => Messages.Add(message);
+        public bool Confirm(string message, string? title = null) => true;
+    }
+
+    [Fact]
+    public async Task OpenProductSearchAsync_ShowsError_OnFailure()
+    {
+        var msg = new RecordingMessageService();
+        var vm = new InvoiceViewModel(new StubInvoiceService(), new FailingLookupService(), new StubTaxService(), new StubSettingsService(), msg);
+
+        await vm.OpenProductSearchAsync("tea");
+
+        Assert.Single(msg.Messages);
+        Assert.Contains("Hiba a keresés során", msg.Messages[0]);
     }
 }
 

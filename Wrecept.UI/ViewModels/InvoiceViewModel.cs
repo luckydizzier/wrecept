@@ -190,6 +190,10 @@ public class InvoiceViewModel : INotifyPropertyChanged
             IsProductSearchOpen = ProductResults.Any();
         }
         catch (TaskCanceledException) { }
+        catch (Exception ex)
+        {
+            _messageService.Show($"Hiba a keresés során: {ex.Message}", "Hiba");
+        }
     }
 
     private void AddItem()
