@@ -15,8 +15,8 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-      - run: dotnet build wrecept.sln -c NoWpf
-      - run: dotnet test wrecept.sln -c NoWpf --filter "Category!=UI"
+      - run: dotnet build wrecept.sln -c NoUI
+      - run: dotnet test wrecept.sln -c NoUI --filter "Category!=UI"
 
   ui-tests:
     runs-on: windows-latest

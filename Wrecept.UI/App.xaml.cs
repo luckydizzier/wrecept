@@ -1,3 +1,4 @@
+#if WINDOWS
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -122,3 +123,13 @@ public partial class App : Application
         base.OnExit(e);
     }
 }
+#else
+namespace Wrecept.UI;
+
+public static class App
+{
+    public static void Main()
+    {
+    }
+}
+#endif
