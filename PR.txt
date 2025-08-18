@@ -1,29 +1,28 @@
-Title: ui: confirm discard on Esc
+Title: ui: confirm and audit active toggle
 
 Body:
 
 Problem:
-- Esc key exited edit forms without confirming unsaved changes.
+- Active status could be flipped without warning or trace.
 
 Approach:
-- Added EditFormController with dirty tracking and modal confirmation.
-- Covered confirm/decline flows with unit tests.
+- Added confirmation dialog and audit logging when toggling active.
+- Introduced undo via Ctrl+Z with audit entry.
 
 Alternatives considered:
-- Implementing confirmation directly in view layer (deferred for now).
+- Persistent audit database (postponed for MVP).
 
 Risk & mitigations:
-- Prompt could interrupt automation; confirm callable allows tests to bypass UI.
+- Undo stack limited to recent toggle; further enhancements may be needed.
 
 Affected files:
-- src/facturon_py/ui_tui/__init__.py
-- src/facturon_py/ui_tui/edit_views/__init__.py
+- src/facturon_py/repo/audit_log.py
 - src/facturon_py/ui_tui/edit_views/edit_form.py
 - tests/test_edit_form_controller.py
 
 Test results (from COMMANDS.sh):
-- ruff check src/facturon_py tests
 - black src/facturon_py tests
+- ruff check src/facturon_py tests
 - pytest
 
 Refs: #2
