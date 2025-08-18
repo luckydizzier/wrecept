@@ -60,6 +60,23 @@ public class InvoiceViewModel : INotifyPropertyChanged
     public string Customer { get; set; } = string.Empty;
     public string InvoiceNumber { get; set; } = string.Empty;
     public DateTime InvoiceDate { get; set; } = DateTime.Today;
+    private InvoiceStatus _status = InvoiceStatus.Active;
+    public InvoiceStatus Status
+    {
+        get => _status;
+        set
+        {
+            if (_status != value)
+            {
+                _status = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(StatusMarker));
+                OnPropertyChanged(nameof(StatusDescription));
+            }
+        }
+    }
+    public string StatusMarker => Status == InvoiceStatus.Active ? "A" : "I";
+    public string StatusDescription => Status == InvoiceStatus.Active ? "Active invoice" : "Inactive invoice";
     public ObservableCollection<string> PaymentMethods { get; } = new() { "Cash", "Card" };
     private string? _selectedPaymentMethod;
     public string? SelectedPaymentMethod { get => _selectedPaymentMethod; set { _selectedPaymentMethod = value; OnPropertyChanged(); } }
@@ -226,6 +243,7 @@ public class InvoiceViewModel : INotifyPropertyChanged
         {
             var invoice = new Invoice
             {
+                Status = Status,
                 Items = Items.Select(i => new InvoiceItem
                 {
                     Quantity = (int)i.Quantity,
