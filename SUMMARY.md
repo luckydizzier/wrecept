@@ -1,12 +1,11 @@
-Problem: The repository lacked a Python scaffold for the Facturon-Py MVP.
-Approach: Added base package, requirements, and a smoke test to establish tooling.
+Problem: Exiting edit mode with unsaved changes provided no confirmation, risking accidental data loss.
+Approach: Introduced an EditFormController that tracks dirty fields and prompts on Esc, with tests exercising confirm and decline flows.
 Files changed:
-  - src/facturon_py/__init__.py
-  - src/facturon_py/AGENTS.md
-  - src/facturon_py/README.md
-  - src/facturon_py/requirements.txt
-  - tests/test_environment.py
+  - src/facturon_py/ui_tui/__init__.py
+  - src/facturon_py/ui_tui/edit_views/__init__.py
+  - src/facturon_py/ui_tui/edit_views/edit_form.py
+  - tests/test_edit_form_controller.py
 Risks & mitigations:
-  - Mixing Python and .NET projects could confuse tooling; kept files in isolated paths.
+  - Prompt logic could block automation; injectable confirm callable allows headless tests.
 Assumptions:
-  - Output contract files are exempt from the 5-file limit.
+  - Esc should exit immediately when no fields are dirty.

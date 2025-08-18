@@ -1,29 +1,29 @@
-Title: facturon_py: scaffold package
+Title: ui: confirm discard on Esc
 
 Body:
 
 Problem:
-- No Python package existed for Facturon-Py MVP.
+- Esc key exited edit forms without confirming unsaved changes.
 
 Approach:
-- Created base package with README, requirements, and smoke test.
+- Added EditFormController with dirty tracking and modal confirmation.
+- Covered confirm/decline flows with unit tests.
 
 Alternatives considered:
-- Scaffold full module tree in one step (deferred to stay within limits).
+- Implementing confirmation directly in view layer (deferred for now).
 
 Risk & mitigations:
-- Python and .NET overlap; isolated new code under src/facturon_py.
+- Prompt could interrupt automation; confirm callable allows tests to bypass UI.
 
 Affected files:
-- src/facturon_py/__init__.py
-- src/facturon_py/AGENTS.md
-- src/facturon_py/README.md
-- src/facturon_py/requirements.txt
-- tests/test_environment.py
+- src/facturon_py/ui_tui/__init__.py
+- src/facturon_py/ui_tui/edit_views/__init__.py
+- src/facturon_py/ui_tui/edit_views/edit_form.py
+- tests/test_edit_form_controller.py
 
 Test results (from COMMANDS.sh):
 - ruff check src/facturon_py tests
-- black src/facturon_py tests/test_environment.py
-- pytest tests/test_environment.py
+- black src/facturon_py tests
+- pytest
 
-Refs: #1
+Refs: #2
