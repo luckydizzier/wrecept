@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-dotnet build Wrecept.Core.sln
-dotnet test Wrecept.Core.Tests
-dotnet test tests/Wrecept.Domain.Tests
+ruff check src/facturon_py tests
+black src/facturon_py tests/test_environment.py
+pytest tests/test_environment.py

@@ -1,24 +1,29 @@
-Title: docs: document validation strategy
+Title: facturon_py: scaffold package
+
+Body:
 
 Problem:
-Architecture decisions lacked guidance on input validation and progress logs were outdated.
+- No Python package existed for Facturon-Py MVP.
 
 Approach:
-Added a validation strategy section and recorded milestone progress.
+- Created base package with README, requirements, and smoke test.
 
 Alternatives considered:
-None.
+- Scaffold full module tree in one step (deferred to stay within limits).
 
 Risk & mitigations:
-Validation details could overlap with error handling; section kept concise and focused.
+- Python and .NET overlap; isolated new code under src/facturon_py.
 
 Affected files:
-- docs/architecture-decisions.md
-- docs/progress/2025-08-12_06-37-55_master-orchestrator.md
+- src/facturon_py/__init__.py
+- src/facturon_py/AGENTS.md
+- src/facturon_py/README.md
+- src/facturon_py/requirements.txt
+- tests/test_environment.py
 
 Test results (from COMMANDS.sh):
-- `dotnet build Wrecept.Core.sln`
-- `dotnet test Wrecept.Core.Tests`
-- `dotnet test tests/Wrecept.Domain.Tests`
+- ruff check src/facturon_py tests
+- black src/facturon_py tests/test_environment.py
+- pytest tests/test_environment.py
 
-Refs: Milestone 5
+Refs: #1

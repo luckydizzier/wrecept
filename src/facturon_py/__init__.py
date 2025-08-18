@@ -1,0 +1,1 @@
+"""Facturon-Py package root."""

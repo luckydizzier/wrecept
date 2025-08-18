@@ -1,9 +1,12 @@
-Problem: Architecture decisions lacked a validation strategy and progress logs were outdated.
-Approach: Added a dedicated validation strategy section and recorded a milestone progress entry.
+Problem: The repository lacked a Python scaffold for the Facturon-Py MVP.
+Approach: Added base package, requirements, and a smoke test to establish tooling.
 Files changed:
-  - docs/architecture-decisions.md
-  - docs/progress/2025-08-12_06-37-55_master-orchestrator.md
+  - src/facturon_py/__init__.py
+  - src/facturon_py/AGENTS.md
+  - src/facturon_py/README.md
+  - src/facturon_py/requirements.txt
+  - tests/test_environment.py
 Risks & mitigations:
-  - Potential overlap with error handling guidance; kept validation notes concise to avoid duplication.
+  - Mixing Python and .NET projects could confuse tooling; kept files in isolated paths.
 Assumptions:
-  - Existing validation mechanisms match documented strategy.
+  - Output contract files are exempt from the 5-file limit.
