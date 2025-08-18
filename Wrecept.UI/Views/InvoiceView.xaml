@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:models="clr-namespace:Wrecept.Core.Models;assembly=Wrecept.Core"
              mc:Ignorable="d"
              Foreground="{DynamicResource WindowForegroundBrush}">
     <UserControl.InputBindings>
@@ -25,6 +26,20 @@
             <TextBox Width="120" Margin="0,0,5,0" Text="{Binding InvoiceNumber}"/>
             <DatePicker Width="120" SelectedDate="{Binding InvoiceDate}"/>
             <ComboBox Width="120" Margin="5,0,0,0" ItemsSource="{Binding PaymentMethods}" SelectedItem="{Binding SelectedPaymentMethod}"/>
+            <TextBlock Width="20" TextAlignment="Center" Margin="5,0,0,0"
+                       Text="{Binding StatusMarker}"
+                       AutomationProperties.Name="{Binding StatusDescription}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Background" Value="LightGreen" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="{x:Static models:InvoiceStatus.Inactive}">
+                                <Setter Property="Background" Value="LightGray" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
         </StackPanel>
         <!-- DataGrid -->
         <DataGrid x:Name="InvoiceGrid" Grid.Row="1" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"

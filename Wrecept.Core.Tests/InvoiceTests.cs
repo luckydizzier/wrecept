@@ -10,4 +10,13 @@ public class InvoiceTests
         var invoice = new Invoice();
         Assert.NotNull(invoice.Items);
     }
+
+    [Fact]
+    public void Invoice_HasActiveStatusByDefault()
+    {
+        var invoice = new Invoice();
+        Assert.Equal(InvoiceStatus.Active, invoice.Status);
+        Assert.Equal("A", invoice.StatusMarker);
+        Assert.Equal("Active invoice", invoice.StatusDescription);
+    }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Wrecept.Core.Models;assembly=Wrecept.Core"
              KeyboardNavigation.TabNavigation="None"
              mc:Ignorable="d">
     <UserControl.InputBindings>
@@ -15,6 +16,25 @@
         <DataGrid ItemsSource="{Binding Invoices}" SelectedItem="{Binding SelectedInvoice}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" />
+                <DataGridTemplateColumn Header="Státusz">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StatusMarker}" Width="20" TextAlignment="Center"
+                                       AutomationProperties.Name="{Binding StatusDescription}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Background" Value="LightGreen" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Status}" Value="{x:Static models:InvoiceStatus.Inactive}">
+                                                <Setter Property="Background" Value="LightGray" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Beszállító" Binding="{Binding Supplier.Name}" />
                 <DataGridTextColumn Header="Dátum" Binding="{Binding Date}" />
                 <DataGridTextColumn Header="Nettó" Binding="{Binding TotalNet}" />

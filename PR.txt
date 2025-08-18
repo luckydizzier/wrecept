@@ -1,28 +1,29 @@
-Title: ui: confirm and audit active toggle
+Title: ui: add accessible status markers
 
 Body:
 
 Problem:
-- Active status could be flipped without warning or trace.
+- Invoice status relied on color alone, excluding screen readers and color-blind users.
 
 Approach:
-- Added confirmation dialog and audit logging when toggling active.
-- Introduced undo via Ctrl+Z with audit entry.
+- Added InvoiceStatus enum with marker/description helpers.
+- Bound status markers in list and detail views with accessible text.
 
 Alternatives considered:
-- Persistent audit database (postponed for MVP).
+- Dedicated value converters (deferred).
 
 Risk & mitigations:
-- Undo stack limited to recent toggle; further enhancements may be needed.
+- Colors are hard-coded; future theming may require refactor.
 
 Affected files:
-- src/facturon_py/repo/audit_log.py
-- src/facturon_py/ui_tui/edit_views/edit_form.py
-- tests/test_edit_form_controller.py
+- Wrecept.Core/Models/Invoice.cs
+- Wrecept.UI/ViewModels/InvoiceViewModel.cs
+- Wrecept.UI/Views/ListsView.xaml
+- Wrecept.UI/Views/InvoiceView.xaml
+- Wrecept.Core.Tests/InvoiceTests.cs
 
 Test results (from COMMANDS.sh):
-- black src/facturon_py tests
-- ruff check src/facturon_py tests
-- pytest
+- dotnet build wrecept.sln
+- dotnet test wrecept.sln
 
-Refs: #2
+Refs: #3
