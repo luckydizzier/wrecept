@@ -11,7 +11,7 @@ pip install -r requirements.txt
 
 ## Tests
 ```bash
-ruff src/facturon_py tests
+ruff check src/facturon_py tests
 black src/facturon_py tests
 pytest
 ```
