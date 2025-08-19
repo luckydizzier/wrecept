@@ -1,22 +1,26 @@
 ## Problem
-No main menu existed, so users couldn't navigate via keyboard or view shortcut hints.
+No service existed to create invoices and compute VAT totals, and the TUI lacked a flow for entering new invoices.
 
 ## Approach
-- Added prompt_toolkit main menu with Alt+number navigation.
-- Registered F1 in shortcut registry to display available keys.
-- Exposed `run_main_menu()` and covered selection/exit via simulated key presses.
+- Added `InvoiceService` with VAT snapshot and total calculations.
+- Introduced `new_invoice` wizard using `DateField` and `EditFormController`.
+- Exported the wizard from the TUI package.
+- Verified totals for a single invoice line with a unit test.
 
 ## Files Changed
-- `src/facturon_py/ui_tui/main_menu.py`
+- `src/facturon_py/services/__init__.py`
+- `src/facturon_py/services/invoice_service.py`
+- `src/facturon_py/ui_tui/invoice_flow.py`
 - `src/facturon_py/ui_tui/__init__.py`
-- `tests/test_main_menu.py`
+- `tests/test_invoice_service.py`
 - `COMMANDS.sh`
 - `PR.txt`
 - `LIMITS.txt`
 - `SUMMARY.md`
 
 ## Risks & Mitigations
-- Menu texts hardcoded in Hungarian → refactor for localization later.
+- Wizard uses simple text prompts; richer UI will come later.
 
 ## Assumptions
-- Alt+digit mapping is adequate for initial navigation.
+- VAT rates supplied via an in-memory table; persistence postponed.
+
