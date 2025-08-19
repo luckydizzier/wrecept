@@ -1,28 +1,28 @@
-Title: ui: add F1 help popup and shortcut registry
+Title: ui: implement main menu navigation
 
 Body:
 
 Problem:
-No global shortcut registry and F1 didn't provide help dialogs, leading to inconsistent key hints.
+No TUI main menu existed; users lacked keyboard navigation and help for available keys.
 
 Approach:
-Created central `shortcuts` module and registered edit-form keys. Mapped F1 to display them in a dialog.
+Implemented prompt_toolkit main menu with Alt+digit shortcuts and F1 help via shortcut registry. Added tests for navigation and exit.
 
 Alternatives considered:
-Keeping per-view definitions risked duplicated descriptions.
+A simple text prompt without key bindings was rejected due to poor UX.
 
 Risk & mitigations:
-Hungarian text is hardcoded; future localization might require registry updates.
+Hardcoded Hungarian labels may require localization later.
 
 Affected files:
-- src/facturon_py/ui_tui/shortcuts.py
-- src/facturon_py/ui_tui/edit_views/edit_form.py
-- tests/test_edit_form_controller.py
-- tests/test_shortcuts.py
+- src/facturon_py/ui_tui/main_menu.py
+- src/facturon_py/ui_tui/__init__.py
+- tests/test_main_menu.py
 
 Test results (from COMMANDS.sh):
+- `pip install -r src/facturon_py/requirements.txt`
 - `ruff check src/facturon_py tests`
 - `black src/facturon_py tests`
 - `pytest`
 
-Refs: #3
+Refs: #0
