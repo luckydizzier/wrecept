@@ -44,6 +44,33 @@ class Invoice:
     gross_total: Decimal = Decimal("0")
 
 
+def _build_line_items(
+    items: Iterable[Mapping[str, Decimal | str]],
+    tax_rates: Mapping[str, Decimal],
+) -> list[InvoiceItem]:
+    line_items: list[InvoiceItem] = []
+    for data in items:
+        vat_code = str(data["vat_code"])
+        vat_rate = tax_rates[vat_code]
+        item = InvoiceItem(
+            description=str(data["description"]),
+            quantity=Decimal(str(data["quantity"])),
+            unit_price=Decimal(str(data["unit_price"])),
+            vat_rate=vat_rate,
+        )
+        line_items.append(item)
+    return line_items
+
+
+def _summarize_totals(
+    line_items: Iterable[InvoiceItem],
+) -> tuple[Decimal, Decimal, Decimal]:
+    net_total = _q(sum((item.net for item in line_items), Decimal("0")))
+    vat_total = _q(sum((item.vat for item in line_items), Decimal("0")))
+    gross_total = _q(sum((item.gross for item in line_items), Decimal("0")))
+    return net_total, vat_total, gross_total
+
+
 class InvoiceService:
     """Create invoices with VAT snapshot and totals."""
 
@@ -59,21 +86,8 @@ class InvoiceService:
         due_date: str,
         items: Iterable[Mapping[str, Decimal | str]],
     ) -> Invoice:
-        line_items: list[InvoiceItem] = []
-        for data in items:
-            vat_code = str(data["vat_code"])
-            vat_rate = self._tax_rates[vat_code]
-            item = InvoiceItem(
-                description=str(data["description"]),
-                quantity=Decimal(str(data["quantity"])),
-                unit_price=Decimal(str(data["unit_price"])),
-                vat_rate=vat_rate,
-            )
-            line_items.append(item)
-
-        net_total = _q(sum((item.net for item in line_items), Decimal("0")))
-        vat_total = _q(sum((item.vat for item in line_items), Decimal("0")))
-        gross_total = _q(sum((item.gross for item in line_items), Decimal("0")))
+        line_items = _build_line_items(items, self._tax_rates)
+        net_total, vat_total, gross_total = _summarize_totals(line_items)
 
         return Invoice(
             customer=customer,
