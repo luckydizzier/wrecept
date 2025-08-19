@@ -1,22 +1,22 @@
 ## Problem
-No centralized shortcut registry and F1 key lacked help popup, making keyboard hints inconsistent.
+No main menu existed, so users couldn't navigate via keyboard or view shortcut hints.
 
 ## Approach
-- Introduced `shortcuts` registry with dialog helper.
-- Registered edit-form shortcuts and mapped F1 to show them.
-- Covered registry and F1 handler with tests.
+- Added prompt_toolkit main menu with Alt+number navigation.
+- Registered F1 in shortcut registry to display available keys.
+- Exposed `run_main_menu()` and covered selection/exit via simulated key presses.
 
 ## Files Changed
-- `src/facturon_py/ui_tui/shortcuts.py`
-- `src/facturon_py/ui_tui/edit_views/edit_form.py`
-- `tests/test_edit_form_controller.py`
-- `tests/test_shortcuts.py`
+- `src/facturon_py/ui_tui/main_menu.py`
+- `src/facturon_py/ui_tui/__init__.py`
+- `tests/test_main_menu.py`
+- `COMMANDS.sh`
 - `PR.txt`
 - `LIMITS.txt`
 - `SUMMARY.md`
 
 ## Risks & Mitigations
-- Dialog text hardcoded in Hungarian → adjust in registry if localization changes.
+- Menu texts hardcoded in Hungarian → refactor for localization later.
 
 ## Assumptions
-- Displayed key names (e.g., "Esc") are sufficient for user understanding.
+- Alt+digit mapping is adequate for initial navigation.
