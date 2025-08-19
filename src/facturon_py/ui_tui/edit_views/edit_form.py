@@ -5,6 +5,17 @@ from typing import Any, Callable, Dict, List, Tuple
 from prompt_toolkit.shortcuts import confirm
 
 from facturon_py.repo import audit_log
+from facturon_py.ui_tui import shortcuts
+
+
+shortcuts.register(
+    "edit_form",
+    [
+        ("Esc", "Kilépés"),
+        ("Ctrl+Z", "Visszavonás"),
+        ("F1", "Gyorsbillentyűk"),
+    ],
+)
 
 
 class EditFormController:
@@ -55,6 +66,9 @@ class EditFormController:
         """
         if key == "c-z":
             self.undo_last()
+            return False
+        if key == "f1":
+            shortcuts.show("edit_form")
             return False
         if key != "escape":
             return False

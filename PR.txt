@@ -1,23 +1,24 @@
-Title: ui: add localized date input widget
+Title: ui: add F1 help popup and shortcut registry
 
 Body:
 
 Problem:
-Date editors accepted free-form strings without locale awareness.
+No global shortcut registry and F1 didn't provide help dialogs, leading to inconsistent key hints.
 
 Approach:
-Added `DateField` with locale-based masks, validation, and ISO normalization.
+Created central `shortcuts` module and registered edit-form keys. Mapped F1 to display them in a dialog.
 
 Alternatives considered:
-Using external libraries like Babel was deemed unnecessary for MVP.
+Keeping per-view definitions risked duplicated descriptions.
 
 Risk & mitigations:
-Limited locale support; ISO fallback ensures consistent storage.
+Hungarian text is hardcoded; future localization might require registry updates.
 
 Affected files:
-- src/facturon_py/ui_tui/widgets/date_field.py
-- src/facturon_py/ui_tui/widgets/__init__.py
-- tests/test_date_field.py
+- src/facturon_py/ui_tui/shortcuts.py
+- src/facturon_py/ui_tui/edit_views/edit_form.py
+- tests/test_edit_form_controller.py
+- tests/test_shortcuts.py
 
 Test results (from COMMANDS.sh):
 - `ruff check src/facturon_py tests`
