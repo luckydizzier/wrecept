@@ -1,23 +1,25 @@
-Title: ui: implement main menu navigation
+Title: services: add invoice creation and TUI flow
 
 Body:
 
 Problem:
-No TUI main menu existed; users lacked keyboard navigation and help for available keys.
+No invoice creation logic or wizard existed, so VAT totals couldn't be computed.
 
 Approach:
-Implemented prompt_toolkit main menu with Alt+digit shortcuts and F1 help via shortcut registry. Added tests for navigation and exit.
+Implemented `InvoiceService` for VAT snapshot and totals, added `new_invoice` wizard leveraging `DateField` and `EditFormController`, and covered totals with a unit test.
 
 Alternatives considered:
-A simple text prompt without key bindings was rejected due to poor UX.
+Deferring the TUI until full persistence was rejected to keep vertical slice progress.
 
 Risk & mitigations:
-Hardcoded Hungarian labels may require localization later.
+Wizard currently lacks advanced validation; future iterations will refine UX.
 
 Affected files:
-- src/facturon_py/ui_tui/main_menu.py
+- src/facturon_py/services/__init__.py
+- src/facturon_py/services/invoice_service.py
+- src/facturon_py/ui_tui/invoice_flow.py
 - src/facturon_py/ui_tui/__init__.py
-- tests/test_main_menu.py
+- tests/test_invoice_service.py
 
 Test results (from COMMANDS.sh):
 - `pip install -r src/facturon_py/requirements.txt`
@@ -26,3 +28,4 @@ Test results (from COMMANDS.sh):
 - `pytest`
 
 Refs: #0
+

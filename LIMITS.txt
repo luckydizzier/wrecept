@@ -1,3 +1,3 @@
-- Assumed <5k tokens and <10m runtime.
-- Alt+digit navigation implemented for 8 options only.
-- Hungarian labels fixed; no localization yet.
+- Assumed <5k tokens and <15m runtime.
+- TUI flow uses simple prompts without advanced navigation.
+- VAT rates provided via in-memory mapping only.
