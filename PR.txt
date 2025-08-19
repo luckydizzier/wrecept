@@ -1,29 +1,27 @@
-Title: ui: add accessible status markers
+Title: ui: add localized date input widget
 
 Body:
 
 Problem:
-- Invoice status relied on color alone, excluding screen readers and color-blind users.
+Date editors accepted free-form strings without locale awareness.
 
 Approach:
-- Added InvoiceStatus enum with marker/description helpers.
-- Bound status markers in list and detail views with accessible text.
+Added `DateField` with locale-based masks, validation, and ISO normalization.
 
 Alternatives considered:
-- Dedicated value converters (deferred).
+Using external libraries like Babel was deemed unnecessary for MVP.
 
 Risk & mitigations:
-- Colors are hard-coded; future theming may require refactor.
+Limited locale support; ISO fallback ensures consistent storage.
 
 Affected files:
-- Wrecept.Core/Models/Invoice.cs
-- Wrecept.UI/ViewModels/InvoiceViewModel.cs
-- Wrecept.UI/Views/ListsView.xaml
-- Wrecept.UI/Views/InvoiceView.xaml
-- Wrecept.Core.Tests/InvoiceTests.cs
+- src/facturon_py/ui_tui/widgets/date_field.py
+- src/facturon_py/ui_tui/widgets/__init__.py
+- tests/test_date_field.py
 
 Test results (from COMMANDS.sh):
-- dotnet build wrecept.sln
-- dotnet test wrecept.sln
+- `ruff check src/facturon_py tests`
+- `black src/facturon_py tests`
+- `pytest`
 
 Refs: #3
