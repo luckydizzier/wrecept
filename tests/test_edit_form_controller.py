@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from facturon_py.repo import audit_log
+from facturon_py.ui_tui import shortcuts
 from facturon_py.ui_tui.edit_views.edit_form import EditFormController
 
 
@@ -60,3 +61,16 @@ def test_toggle_active_decline_does_nothing():
     controller.toggle_active()
     assert controller.data["active"] is False
     assert audit_log.get_log() == []
+
+
+def test_f1_shows_shortcuts(monkeypatch):
+    shown: dict[str, str] = {}
+
+    def fake_show(view: str) -> None:
+        shown["view"] = view
+
+    monkeypatch.setattr(shortcuts, "show", fake_show)
+
+    controller = EditFormController({})
+    assert controller.handle_key("f1") is False
+    assert shown["view"] == "edit_form"

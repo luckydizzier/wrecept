@@ -1,22 +1,22 @@
 ## Problem
-Date inputs lacked validation and locale-aware prompts, allowing invalid or ambiguous entries.
+No centralized shortcut registry and F1 key lacked help popup, making keyboard hints inconsistent.
 
 ## Approach
-- Added `DateField` widget with locale-based masks and normalization.
-- Provided validator for prompt_toolkit editors.
-- Covered parsing and prompts in unit tests.
+- Introduced `shortcuts` registry with dialog helper.
+- Registered edit-form shortcuts and mapped F1 to show them.
+- Covered registry and F1 handler with tests.
 
 ## Files Changed
-- `src/facturon_py/ui_tui/widgets/date_field.py`
-- `src/facturon_py/ui_tui/widgets/__init__.py`
-- `tests/test_date_field.py`
-- `COMMANDS.sh`
+- `src/facturon_py/ui_tui/shortcuts.py`
+- `src/facturon_py/ui_tui/edit_views/edit_form.py`
+- `tests/test_edit_form_controller.py`
+- `tests/test_shortcuts.py`
 - `PR.txt`
 - `LIMITS.txt`
 - `SUMMARY.md`
 
 ## Risks & Mitigations
-- **Locale coverage** limited to few locales → fallback to ISO format.
+- Dialog text hardcoded in Hungarian → adjust in registry if localization changes.
 
 ## Assumptions
-- Using regex + strptime is sufficient for mask enforcement.
+- Displayed key names (e.g., "Esc") are sufficient for user understanding.
